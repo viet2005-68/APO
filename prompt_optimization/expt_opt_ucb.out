@@ -1,0 +1,21 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "expt_opt_ucb.out", "max_threads": 1, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 2, "n_test_exs": 2, "minibatch_size": 2, "n_gradients": 1, "errors_per_gradient": 1, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 1, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 2, "eval_prompts_per_round": 2, "samples_per_eval": 1, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "eval_budget": 4}
+======== ROUND 0
+0.00016498565673828125
+('# Task\nDetermine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:',)
+(1.0,)
+[0.5]
+======== ROUND 1
+18.114845752716064
+('# Task\nAssess if the Statement is false (Yes) or true (No) by considering the Context and additional details.\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Examine the Statement in connection with the given Context. Assess whether the Statement represents a factual assertion that can be confirmed as true or false in light of the Context. Reply with \'Yes\' if it is false and \'No\' if it is true."\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:')
+(0.5, 0.5)
+[0.5, 0.5]
+======== ROUND 2
+34.47568869590759
+('# Task\n"Evaluate the following Statement for its truthfulness based on the provided Context and details. Consider historical facts and relevant information to determine if the Statement is true (No) or false (Yes). \nStatement: {Statement}\nContext: {Context}\nYour answer should clearly reflect whether the Statement aligns with the historical context and facts."\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Assess the Statement concerning the provided Context. Ascertain if the Statement can be categorically established as true or false using factual evidence. If the Statement can be objectively proven to be false, reply with \'Yes.\' If it is verifiable as true or cannot be conclusively validated or refuted, reply with \'No.\'"\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:')
+(0.5, 0.5)
+[0.5, 0.5]
+======== ROUND 3
+34.41463804244995
+('# Task\n"Evaluate the Statement in relation to the provided Context. Determine whether the Statement can be definitively proven false based on factual evidence. If the Statement can be shown to be false, respond with \'Yes.\' If the Statement cannot be proven false or it is true, respond with \'No.\'"\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Assess the Statement concerning the provided Context. Ascertain if the Statement can be categorically established as true or false using factual evidence. If the Statement can be objectively proven to be false, reply with \'Yes.\' If it is verifiable as true or cannot be conclusively validated or refuted, reply with \'No.\'"\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:')
+(1.0, 1.0)
+[0.5, 0.5]
