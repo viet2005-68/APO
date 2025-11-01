@@ -5,6 +5,7 @@ clausa gpt4
 
 import time
 import requests
+import json
 import config
 import string
 
@@ -45,7 +46,7 @@ def chatgpt(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "gpt-4o-mini",
+        "model": "openai/gpt-oss-20b",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,
@@ -63,7 +64,7 @@ def chatgpt(
                 headers={
                     "Content-Type": "application/json",
                 },
-                json=payload,
+                data=json.dumps(payload),
                 timeout=timeout,
             )
             if r.status_code != 200:
@@ -94,7 +95,7 @@ def instructGPT_logprobs(prompt, temperature=0.7):
                 headers={
                     "Content-Type": "application/json",
                 },
-                json=payload,
+                data=json.dumps(payload),
                 timeout=10,
             )
             if r.status_code != 200:
