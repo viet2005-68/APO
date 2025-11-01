@@ -59,9 +59,8 @@ def chatgpt(
     while True:
         try:
             r = requests.post(
-                "https://api.openai.com/v1/chat/completions",
+                f"{config.BASE_URL}/chat/completions",
                 headers={
-                    "Authorization": f"Bearer {config.OPENAI_KEY}",
                     "Content-Type": "application/json",
                 },
                 json=payload,
@@ -82,7 +81,7 @@ def chatgpt(
 def instructGPT_logprobs(prompt, temperature=0.7):
     payload = {
         "prompt": prompt,
-        "model": "gpt-4o-mini",  # 🔹 rẻ hơn nhiều so với text-davinci-003
+        "model": "openai/gpt-oss-20b",  # 🔹 rẻ hơn nhiều so với text-davinci-003
         "temperature": temperature,
         "max_tokens": 1,
         "logprobs": 1,
@@ -91,9 +90,8 @@ def instructGPT_logprobs(prompt, temperature=0.7):
     while True:
         try:
             r = requests.post(
-                "https://api.openai.com/v1/completions",
+                f"{config.BASE_URL}/completions",
                 headers={
-                    "Authorization": f"Bearer {config.OPENAI_KEY}",
                     "Content-Type": "application/json",
                 },
                 json=payload,
