@@ -70,13 +70,31 @@ def chatgpt(
             if r.status_code != 200:
                 retries += 1
                 time.sleep(1)
+                if retries > 10:
+                    raise Exception(
+                        f"API request failed with status {r.status_code}: {r.text}"
+                    )
             else:
                 break
         except requests.exceptions.ReadTimeout:
             time.sleep(1)
             retries += 1
+            if retries > 10:
+                raise Exception("API request timeout after 10 retries")
     r = r.json()
-    return [choice["message"]["content"] for choice in r["choices"]]
+    if "choices" not in r or not r["choices"]:
+        raise Exception(f"Invalid API response: {r}")
+    results = []
+    for choice in r["choices"]:
+        if "message" in choice and "content" in choice["message"]:
+            content = choice["message"]["content"]
+            if content is not None:
+                results.append(content)
+            else:
+                results.append("")
+        else:
+            results.append("")
+    return results if results else [""]
 
 
 def instructGPT_logprobs(prompt, temperature=0.7):
