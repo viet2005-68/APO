@@ -1,7 +1,7 @@
+import json
 import numpy as np
 from tqdm import tqdm
 import random
-import re
 from abc import ABC, abstractmethod
 import utils
 
@@ -82,86 +82,117 @@ class ProTeGi(PromptOptimizer):
             feedbacks += self.parse_tagged_text(r, "<START>", "<END>")
         return feedbacks
 
-    def reflect_feedbacks(self, feedback_tuples):
-        """Optionally reflect on gradient feedback and clean it up."""
+    def reflect_feedbacks(self, prompt_section, feedback_tuples):
+        """Use reflection to make each feedback actionable and precise."""
         improved = []
         reflection_temp = self.opt.get("reflection_temperature", 0.0)
         for feedback, error_string in feedback_tuples:
             improved_feedback = feedback
             try:
                 reflection_prompt = (
-                    "You are validating feedback for improving a prompt used in a text classifier.\n"
-                    f"Feedback: {feedback}\n\n"
-                    "If this feedback is relevant, actionable, and factually correct, respond with EXACTLY the word YES.\n"
-                    "Otherwise, rewrite the feedback so that it becomes clear, relevant, and actionable.\n"
-                    "Output only YES or the rewritten feedback."
+                    "You are an expert prompt engineer reviewing feedback for improving a binary"
+                    " text-classification prompt.\n\n"
+                    "Prompt section under improvement:\n"
+                    f"{prompt_section}\n\n"
+                    "Examples the prompt handled incorrectly:\n"
+                    f"{error_string}\n\n"
+                    "Original feedback:\n"
+                    f"{feedback}\n\n"
+                    "Rewrite the feedback so that it clearly identifies the problems in the prompt and"
+                    " gives concrete, actionable guidance to fix them."
+                    " If the feedback is already strong, restate it succinctly."
+                    " Output only the improved feedback without commentary."
                 )
                 responses = utils.chatgpt(
                     reflection_prompt,
                     temperature=reflection_temp,
-                    max_tokens=128,
+                    max_tokens=256,
                     n=1,
                 )
                 response = responses[0].strip() if responses else ""
-                if response and response.upper().startswith("YES"):
-                    improved_feedback = feedback
-                elif response:
+                if response:
                     improved_feedback = response
             except Exception:
                 improved_feedback = feedback
             improved.append((improved_feedback, error_string))
         return improved
 
-    def score_prompt_improvement(self, original_prompt, candidate_prompt):
-        """Score whether the candidate prompt improves over the original."""
+    def refine_prompt_with_reflection(self, original_prompt, candidate_prompt):
+        """Let the LLM reflect on a candidate and return refined prompt plus score."""
         reflection_temp = self.opt.get("reflection_temperature", 0.0)
-        reflection_prompt = (
-            "You compare two prompts for a binary text classification task.\n"
-            "Old prompt:\n"
-            f"{original_prompt}\n\n"
-            "New prompt:\n"
-            f"{candidate_prompt}\n\n"
-            "Does the new prompt address the issues of the old prompt and seem strictly better?"
-            " Respond with a number between 0 and 1 inclusive, where 0 means worse, 0.5 means similar, and 1 means clearly better."
-            " Output only the number."
-        )
-        responses = utils.chatgpt(
-            reflection_prompt,
-            temperature=reflection_temp,
-            max_tokens=8,
-            n=1,
-        )
-        response = responses[0].strip() if responses else ""
-        match = re.search(r"([01](?:\.\d+)?)", response)
-        if match:
-            try:
-                score = float(match.group(1))
-                return max(0.0, min(1.0, score))
-            except ValueError:
-                return None
-        return None
+        try:
+            reflection_prompt = (
+                "You are refining a prompt for a binary text-classification task.\n"
+                "Maintain the original structure, headings, and intent, but fix weaknesses.\n"
+                "Return a JSON object with the keys 'score' (0 to 1, indicating how much better the"
+                " refined prompt is than the candidate) and 'prompt' (the improved prompt text).\n\n"
+                "Original prompt:\n"
+                f"{original_prompt}\n\n"
+                "Candidate prompt generated after an improvement step:\n"
+                f"{candidate_prompt}\n\n"
+                "Identify any mistakes or missing instructions and produce an improved prompt that"
+                " addresses them while preserving the formatting (including section headers such as"
+                " '# Task', '# Output format', etc.). Output only the JSON object."
+            )
+            responses = utils.chatgpt(
+                reflection_prompt,
+                temperature=reflection_temp,
+                max_tokens=512,
+                n=1,
+            )
+            response = responses[0].strip() if responses else ""
+            if response:
+                try:
+                    data = json.loads(response)
+                except json.JSONDecodeError:
+                    data = None
+                if isinstance(data, dict):
+                    refined_prompt = data.get("prompt", "").strip()
+                    score = data.get("score")
+                    try:
+                        score = float(score)
+                    except (TypeError, ValueError):
+                        score = None
+                    if refined_prompt:
+                        return refined_prompt, score
+                else:
+                    # fallback: treat raw text as prompt, no score available
+                    return response, None
+        except Exception:
+            pass
+        return candidate_prompt, None
 
-    def filter_candidates_with_reflection(self, original_prompt, candidates):
-        """Filter candidate prompts using reflection scores."""
+    def apply_candidate_reflection(self, original_prompt, candidates, passes):
+        """Iteratively refine candidate prompts via reflection passes."""
         if not candidates:
             return candidates
-        threshold = self.opt.get("reflection_candidate_threshold", 0.5)
-        filtered = []
-        for candidate in candidates:
-            if candidate.strip() == original_prompt.strip():
-                filtered.append(candidate)
-                continue
-            try:
-                score = self.score_prompt_improvement(original_prompt, candidate)
-            except Exception:
-                score = None
-            if score is None:
-                continue
-            if score >= threshold:
-                filtered.append(candidate)
-        if filtered:
-            return filtered
-        return candidates
+
+        refined = candidates[:]
+        threshold = float(self.opt.get("reflection_candidate_threshold", 0.5))
+        for _ in range(passes):
+            next_candidates = []
+            for candidate in refined:
+                refined_candidate, score = self.refine_prompt_with_reflection(
+                    original_prompt, candidate
+                )
+                if not refined_candidate.strip():
+                    refined_candidate = candidate
+                if "# " in original_prompt and "# " not in refined_candidate:
+                    refined_candidate = candidate
+                if score is not None and score < threshold:
+                    refined_candidate = candidate
+                next_candidates.append(refined_candidate)
+            refined = next_candidates
+
+        # deduplicate while preserving order
+        seen = set()
+        unique_refined = []
+        for candidate in refined:
+            if candidate not in seen:
+                seen.add(candidate)
+                unique_refined.append(candidate)
+
+        return unique_refined
 
     def apply_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, n=1):
         """Incorporate feedback gradient into a prompt."""
@@ -239,7 +270,7 @@ class ProTeGi(PromptOptimizer):
                         1, int(self.opt.get("reflection_gradient_passes", 1))
                     )
                     for _ in range(gradient_passes):
-                        gradients = self.reflect_feedbacks(gradients)
+                        gradients = self.reflect_feedbacks(task_section, gradients)
                 new_task_sections = []
                 for feedback, error_string in tqdm(
                     gradients, desc="applying gradients"
@@ -272,12 +303,9 @@ class ProTeGi(PromptOptimizer):
                 candidate_passes = max(
                     1, int(self.opt.get("reflection_candidate_passes", 1))
                 )
-                for _ in range(candidate_passes):
-                    tmp_new_prompts = self.filter_candidates_with_reflection(
-                        prompt, tmp_new_prompts
-                    )
-                    if not tmp_new_prompts:
-                        break
+                tmp_new_prompts = self.apply_candidate_reflection(
+                    prompt, tmp_new_prompts, candidate_passes
+                )
 
             # filter a little
             if len(new_sections) > self.opt["max_expansion_factor"]:
