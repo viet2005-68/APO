@@ -86,7 +86,11 @@ class ProTeGi(PromptOptimizer):
         """Use reflection to make each feedback actionable and precise."""
         improved = []
         reflection_temp = self.opt.get("reflection_temperature", 0.0)
-        for feedback, error_string in feedback_tuples:
+        for feedback, error_string in tqdm(
+            feedback_tuples,
+            desc="reflect gradients",
+            leave=False,
+        ):
             improved_feedback = feedback
             try:
                 reflection_prompt = (
@@ -169,9 +173,16 @@ class ProTeGi(PromptOptimizer):
 
         refined = candidates[:]
         threshold = float(self.opt.get("reflection_candidate_threshold", 0.5))
-        for _ in range(passes):
+        for pass_idx in range(passes):
+            refined_with_progress = list(
+                tqdm(
+                    refined,
+                    desc=f"reflect prompts pass {pass_idx + 1}/{passes}",
+                    leave=False,
+                )
+            )
             next_candidates = []
-            for candidate in refined:
+            for candidate in refined_with_progress:
                 refined_candidate, score = self.refine_prompt_with_reflection(
                     original_prompt, candidate
                 )
