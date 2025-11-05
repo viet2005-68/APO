@@ -85,10 +85,10 @@ python main.py --help
 
 The program generates results including:
 
-- 🎯 Optimized candidate prompts
-- 📊 Associated performance scores
-- 📈 Optimization progress metrics
-- 💾 Detailed logs and statistics
+- Optimized candidate prompts
+- Associated performance scores
+- Optimization progress metrics
+- Detailed logs and statistics
 
 ## Examples
 
@@ -138,7 +138,7 @@ If you use this code in your research, please cite:
 
 [Add any acknowledgments here]
 
-## Running Reflection-based Optimization
+## Running Reflection-based Optimization (But not optimization huhuhu)
 
 ### Basic Usage with Reflection
 
