@@ -219,7 +219,6 @@ class ProTeGi(PromptOptimizer):
         Based on these examples the problem with this prompt is that {feedback_str}
 
         Based on the above information, I wrote {steps_per_gradient} different improved prompts.
-        I am allowed to change up to {step_size} words in the current prompt.
         Each prompt is wrapped with <START> and <END>.
 
         The {steps_per_gradient} new prompts are:
@@ -291,8 +290,8 @@ class ProTeGi(PromptOptimizer):
                         task_section,
                         error_string,
                         feedback,
-                        step_size,
                         self.opt["steps_per_gradient"],
+                        step_size
                     )
                     new_task_sections += tmp
 

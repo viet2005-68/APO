@@ -159,8 +159,8 @@ if __name__ == "__main__":
         outf.write(json.dumps(config) + "\n")
 
     candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
-    initial_step_size = 100
-    final_step_size = 20
+    initial_step_size = 50
+    final_step_size = 5
     for round in tqdm(range(config["rounds"] + 1)):
         print("STARTING ROUND ", round)
         start = time.time()

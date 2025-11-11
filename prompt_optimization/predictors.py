@@ -19,7 +19,7 @@ class BinaryPredictor(GPT4Predictor):
     def inference(self, ex, prompt):
         prompt = Template(prompt).render(text=ex['text'])
         responses = utils.chatgpt(
-            prompt, max_tokens=4, n=1, timeout=2, 
+            prompt, max_tokens=102400, n=1, timeout=30, 
             temperature=self.opt['temperature'])
         if not responses or len(responses) == 0:
             return 0  # Default to 0 if no response

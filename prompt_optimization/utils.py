@@ -37,11 +37,11 @@ def chatgpt(
     n=1,
     top_p=1,
     stop=None,
-    max_tokens=1024,
+    max_tokens=102400,
     presence_penalty=0,
     frequency_penalty=0,
     logit_bias={},
-    timeout=10,
+    timeout=30,
 ):
     messages = [{"role": "user", "content": prompt}]
     payload = {
@@ -55,6 +55,7 @@ def chatgpt(
         "presence_penalty": presence_penalty,
         "frequency_penalty": frequency_penalty,
         "logit_bias": logit_bias,
+        "reasoning_effort": "low"
     }
     retries = 0
     while True:
@@ -68,8 +69,9 @@ def chatgpt(
                 timeout=timeout,
             )
             if r.status_code != 200:
+                print("FAILED HERE: ", r.json())
                 retries += 1
-                time.sleep(1)
+                time.sleep(5)
                 if retries > 10:
                     raise Exception(
                         f"API request failed with status {r.status_code}: {r.text}"
