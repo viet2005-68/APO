@@ -1,6 +1,0 @@
-{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "expt_small_bf.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 1, "beam_size": 2, "n_test_exs": 2, "minibatch_size": 2, "n_gradients": 1, "errors_per_gradient": 1, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 1, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 2, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "eval_budget": 128}
-======== ROUND 0
-0.00013446807861328125
-('# Task\nDetermine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.\n\n# Output format\nAnswer Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:',)
-(1.0,)
-[0.5]

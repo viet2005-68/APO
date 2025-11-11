@@ -10,6 +10,7 @@ import scorers
 import tasks
 import predictors
 import optimizers
+import numpy as np
 
 
 def get_task_class(task_name):
@@ -158,14 +159,15 @@ if __name__ == "__main__":
         outf.write(json.dumps(config) + "\n")
 
     candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
-
+    initial_step_size = 100
+    final_step_size = 20
     for round in tqdm(range(config["rounds"] + 1)):
         print("STARTING ROUND ", round)
         start = time.time()
-
         # expand candidates
         if round > 0:
-            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs)
+            current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
+            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, current_step_size)
 
         # score candidates
         scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)

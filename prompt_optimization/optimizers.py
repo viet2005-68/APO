@@ -205,7 +205,7 @@ class ProTeGi(PromptOptimizer):
 
         return unique_refined
 
-    def apply_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, n=1):
+    def apply_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, step_size, n=1):
         """Incorporate feedback gradient into a prompt."""
         transformation_prompt = f"""
         I'm trying to write a zero-shot classifier.
@@ -219,6 +219,7 @@ class ProTeGi(PromptOptimizer):
         Based on these examples the problem with this prompt is that {feedback_str}
 
         Based on the above information, I wrote {steps_per_gradient} different improved prompts.
+        I am allowed to change up to {step_size} words in the current prompt.
         Each prompt is wrapped with <START> and <END>.
 
         The {steps_per_gradient} new prompts are:
@@ -256,7 +257,7 @@ class ProTeGi(PromptOptimizer):
             prompt_feedbacks += [(t, error_string) for t in gradients]
         return prompt_feedbacks
 
-    def expand_candidates(self, prompts, task, gpt4, train_exs):
+    def expand_candidates(self, prompts, task, gpt4, train_exs, step_size):
         """Expand a list of prompts by generating gradient-based successors and
         synonyms for each section.
         """
@@ -290,6 +291,7 @@ class ProTeGi(PromptOptimizer):
                         task_section,
                         error_string,
                         feedback,
+                        step_size,
                         self.opt["steps_per_gradient"],
                     )
                     new_task_sections += tmp
