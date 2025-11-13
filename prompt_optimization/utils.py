@@ -33,11 +33,11 @@ def parse_sectioned_prompt(s):
 
 def chatgpt(
     prompt,
-    temperature=0.7,
+    temperature=0.1,
     n=1,
     top_p=1,
     stop=None,
-    max_tokens=102400,
+    max_tokens=1024,
     presence_penalty=0,
     frequency_penalty=0,
     logit_bias={},
@@ -46,7 +46,7 @@ def chatgpt(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "openai/gpt-oss-20b",
+        "model": "Qwen/Qwen2.5-7B-Instruct",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,

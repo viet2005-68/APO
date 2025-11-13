@@ -22,6 +22,36 @@ class PromptOptimizer(ABC):
 class ProTeGi(PromptOptimizer):
     """ProTeGi: Prompt Optimization with Textual Gradients"""
 
+    def init_prompt_generation(self, original_prompt, examples):
+        instruction = f"""
+                        You are given an instruction on a certain task and some example inputs, outputs. Here is the current instruction: 
+                        {original_prompt}
+                        And here are some correct input-output pairs:
+                        {examples}
+                        Generate new instruction contains the following parts. Based on the input-output pairs provided,
+                        give me the final complete instruction in English without any explanation:
+                        # Task
+                        Task: This is a <...> task.
+                        Task detailed description: <Task detailed description>
+                        You should follow the reasoning process: <add several reasoning steps if it's necessary>
+                        Tips: <add several useful tips from a professional point of view to accomplish this task better>
+                    """
+        instruction = "\n".join(
+            [line.lstrip() for line in instruction.split("\n")]
+        )
+        init_prompt = utils.chatgpt(instruction)[0]
+        init_prompt += """
+                        # Output format
+                        Answer ONLY Yes or No as labels
+                        # Prediction
+                        Text: {{ text }}
+                        Label:
+                       """
+        init_prompt = "\n".join(
+            [line.lstrip() for line in init_prompt.split("\n")]
+        )
+        return init_prompt
+
     def _sample_error_str(self, texts, labels, preds, task, n=4):
         """Sample n error strings from the given texts, labels, and preds"""
         error_idxs = []
@@ -207,6 +237,7 @@ class ProTeGi(PromptOptimizer):
 
     def apply_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, step_size, n=1):
         """Incorporate feedback gradient into a prompt."""
+        # I am allowed to change up to {step_size} words in the current prompt.
         transformation_prompt = f"""
         I'm trying to write a zero-shot classifier.
         
@@ -261,6 +292,7 @@ class ProTeGi(PromptOptimizer):
         synonyms for each section.
         """
         minibatch = random.sample(train_exs, k=self.opt["minibatch_size"])
+        # minibatch = train_exs
 
         new_prompts = []
         for prompt in tqdm(prompts, desc=f"expanding {len(prompts)} prompts"):

@@ -11,7 +11,8 @@ import tasks
 import predictors
 import optimizers
 import numpy as np
-
+import sys
+import random
 
 def get_task_class(task_name):
     if task_name == "ethos":
@@ -148,6 +149,12 @@ if __name__ == "__main__":
     optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
+    random.shuffle(train_exs)
+    batch_train_exs = [
+        train_exs[i:i + config["minibatch_size"]]
+        for i in range(0, len(train_exs), config["minibatch_size"])
+    ]
+    num_batches = len(batch_train_exs)
     test_exs = task.get_test_examples()
 
     if os.path.exists(args.out):
@@ -157,13 +164,16 @@ if __name__ == "__main__":
 
     with open(args.out, "a") as outf:
         outf.write(json.dumps(config) + "\n")
-
+  
     candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
-    initial_step_size = 50
-    final_step_size = 5
+    sampled_examples = random.sample(train_exs, 5)
+    # candidates = [optimizer.init_prompt_generation(i, sampled_examples) for i in candidates]
+    initial_step_size = 200
+    final_step_size = 20
     for round in tqdm(range(config["rounds"] + 1)):
         print("STARTING ROUND ", round)
         start = time.time()
+        current_batch = batch_train_exs[round % num_batches]
         # expand candidates
         if round > 0:
             current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
