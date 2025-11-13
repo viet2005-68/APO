@@ -52,7 +52,7 @@ class ClassificationTask(DataProcessor):
 
         accuracy = accuracy_score(labels, preds)
         f1 = f1_score(labels, preds, average='micro')
-        return f1, texts, labels, preds
+        return accuracy, texts, labels, preds
 
     def evaluate(self, predictor, prompt, test_exs, n=100):
         while True:

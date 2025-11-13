@@ -15,7 +15,7 @@ import numpy as np
 
 def get_task_class(task_name):
     if task_name == "ethos":
-        return tasks.EthosBinaryTask
+        return tasks.DefaultHFBinaryTask
     elif task_name == "jailbreak":
         return tasks.JailbreakBinaryTask
     elif task_name == "liar":
