@@ -4,7 +4,9 @@ from tqdm import tqdm
 import random
 from abc import ABC, abstractmethod
 import utils
-
+from sklearn.cluster import KMeans
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 
 class PromptOptimizer(ABC):
     def __init__(self, args, evaluator_fn, scorer, max_threads=1, bf_eval=None):
@@ -13,6 +15,8 @@ class PromptOptimizer(ABC):
         self.scorer = scorer
         self.max_threads = max_threads
         self.bf_eval = bf_eval
+        self.model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
+        self.n_clusters = 5
 
     @abstractmethod
     def expand_candidates(self, prompts, task, gpt4, train_exs):
@@ -22,6 +26,70 @@ class PromptOptimizer(ABC):
 class ProTeGi(PromptOptimizer):
     """ProTeGi: Prompt Optimization with Textual Gradients"""
 
+    def get_ngrams(self, text, n=3):
+        tokens = text.split()
+        return set(tuple(tokens[i:i+n]) for i in range(len(tokens)-n+1))
+
+    def ngram_overlap(self, a, b, n=3):
+        A = self.get_ngrams(a, n)
+        B = self.get_ngrams(b, n)
+        if not A or not B:
+            return 0.0
+        return len(A & B) / len(A | B)
+
+    def token_overlap(self, a, b):
+        A = set(a.split())
+        B = set(b.split())
+        if not A or not B:
+            return 0.0
+        return len(A & B) / len(A | B)
+
+    def embed_prompts(self, prompts):
+        embeddings = self.model.encode(prompts, show_progress_bar=True)
+        return embeddings
+    
+    def cluster_embeddings(self, embeddings):
+        kmeans = KMeans(n_clusters=self.n_clusters, random_state=42)
+        clusters = kmeans.fit_predict(embeddings)
+        return clusters, kmeans.cluster_centers_
+    
+    def cluster_prompts(self, prompts):
+        if not prompts:
+            return []
+
+        embeddings = self.embed_prompts(prompts)
+        n_clusters = min(self.n_clusters, len(prompts))  # tránh số cluster > số prompt
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+        labels = kmeans.fit_predict(embeddings)
+
+        clustered = {i: [] for i in range(n_clusters)}
+        for label, prompt in zip(labels, prompts):
+            clustered[label].append(prompt)
+
+        # lấy 1 prompt từ mỗi cluster nếu không rỗng
+        clustered_candidates = []
+        for cluster_list in clustered.values():
+            if cluster_list:  # chỉ thêm nếu cluster không rỗng
+                clustered_candidates.append(cluster_list[0])
+
+        return clustered_candidates
+
+    def compute_diversity_penalty(self, prompt, other_prompts, w_ngram=0.3, w_token=0.3, w_sem=0.4):
+        """Compute diversity penalty for a prompt relative to other prompts."""
+        if not other_prompts:
+            return 0.0
+
+        # ngram & token overlaps
+        ngram_sims = [self.ngram_overlap(prompt, p) for p in other_prompts]
+        token_sims = [self.token_overlap(prompt, p) for p in other_prompts]
+
+        # semantic similarity
+        embeddings = self.model.encode([prompt] + other_prompts)
+        sem_sims = cosine_similarity([embeddings[0]], embeddings[1:])[0]
+
+        penalty = w_ngram * np.mean(ngram_sims) + w_token * np.mean(token_sims) + w_sem * np.mean(sem_sims)
+        return penalty
+    
     def _sample_error_str(self, texts, labels, preds, task, n=4):
         """Sample n error strings from the given texts, labels, and preds"""
         error_idxs = []
@@ -380,3 +448,79 @@ class ProTeGi(PromptOptimizer):
             max_threads=self.max_threads,
         )
         return evals
+
+    def apo_iteration(self, beams, task, gpt4, train_exs, top_k=5):
+        """One iteration of APO: expand, cluster, score, penalize, select top-k."""
+        print(f"Starting APO iteration with {len(beams)} beams")
+        
+        # 1. Expand candidates
+        new_candidates = []
+        for prompt in beams:
+            expanded = self.expand_candidates([prompt], task, gpt4, train_exs)
+            new_candidates.extend(expanded)
+            print(f"Expanded beam -> {len(expanded)} candidates")
+        
+        new_candidates = list(set(new_candidates))
+        print(f"Total unique candidates after expansion: {len(new_candidates)}")
+        
+        if not new_candidates:
+            print("No new candidates generated, returning original beams")
+            return beams
+
+        # 2. Cluster embeddings
+        try:
+            embeddings = self.embed_prompts(new_candidates)
+            
+            # Xử lý clustering an toàn
+            if len(new_candidates) <= 1:
+                cluster_labels = [0] * len(new_candidates)
+            else:
+                n_clusters = min(self.n_clusters, len(new_candidates))
+                print(f"Clustering {len(new_candidates)} candidates into {n_clusters} clusters")
+                cluster_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(embeddings)
+                
+            # Thống kê cluster
+            from collections import Counter
+            cluster_counts = Counter(cluster_labels)
+            print(f"Cluster distribution: {dict(cluster_counts)}")
+            
+        except Exception as e:
+            print(f"Error in clustering: {e}")
+            # Fallback: không clustering
+            cluster_labels = [0] * len(new_candidates)
+
+        # 3. Calculate rewards
+        print("Scoring candidates...")
+        rewards = self.score_candidates(new_candidates, task, gpt4, train_exs)
+        print(f"Reward range: {min(rewards):.3f} - {max(rewards):.3f}")
+
+        # 4. Diversity penalty within cluster
+        print("Calculating diversity penalties...")
+        penalties = []
+        for i, cand in enumerate(new_candidates):
+            cluster = cluster_labels[i]
+            # Lấy các candidate khác trong cùng cluster
+            other_prompts = [p for j, p in enumerate(new_candidates) 
+                            if cluster_labels[j] == cluster and j != i]
+            
+            if not other_prompts:
+                # Nếu là candidate duy nhất trong cluster, penalty = 0
+                penalty = 0.0
+            else:
+                penalty = self.compute_diversity_penalty(cand, other_prompts)
+            
+            penalties.append(penalty)
+
+        # 5. Final score = reward - penalty
+        scores = [max(0.0, r - p) for r, p in zip(rewards, penalties)]
+        print(f"Final score range: {min(scores):.3f} - {max(scores):.3f}")
+
+        # 6. Top-k selection
+        actual_top_k = min(top_k, len(scores))
+        top_idxs = np.argsort(scores)[-actual_top_k:]
+        top_beams = [new_candidates[i] for i in top_idxs]
+        top_scores = [scores[i] for i in top_idxs]
+
+        print(f"Selected top {actual_top_k} beams with scores: {[f'{s:.3f}' for s in top_scores]}")
+        
+        return top_beams
