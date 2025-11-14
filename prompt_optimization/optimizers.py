@@ -73,6 +73,27 @@ class ProTeGi(PromptOptimizer):
             error_idx += 1
         return error_string.strip()
 
+    def _sample_correct_str(self, texts, labels, preds, task, n=4):
+        """Sample n correct strings from the given texts, labels and preds"""
+        correct_idxs = []
+        for i, (l, p) in enumerate(zip(labels, preds)):
+            if l == p:
+                correct_idxs.append(i)
+
+        sample_idxs = random.sample(correct_idxs, min(len(correct_idxs), n))
+
+        sample_texts = [texts[i] for i in sample_idxs]
+        sample_labels = [labels[i] for i in sample_idxs]
+        sample_preds = [preds[i] for i in sample_idxs]
+        correct_string = ""
+        num_errors = 0
+        correct_idx = 0
+        for i, (t, l, p) in enumerate(zip(sample_texts, sample_labels, sample_preds)):
+            correct_string += f"## Example {correct_idx+1}\n"
+            correct_string += f'Text: "{t.strip()}"\nLabel: {task.stringify_prediction(l)}\nPrediction: {task.stringify_prediction(p)}\n\n'
+            correct_idx += 1
+        return correct_string.strip()
+
     def parse_tagged_text(self, text, start_tag, end_tag):
         """Parse text that is tagged with start and end tags."""
         texts = []
@@ -111,6 +132,31 @@ class ProTeGi(PromptOptimizer):
         for r in res:
             feedbacks += self.parse_tagged_text(r, "<START>", "<END>")
         return feedbacks
+
+    def _get_positive_feedback(self, prompt, correct_string, num_feedbacks=5, n=1):
+        """Get "gradients" for a prompt based on the correct string."""
+        gradient_prompt = f"""
+        I'm trying to write a zero-shot classifier prompt.
+    
+        My current prompt is:
+        "{prompt}"
+
+        And this prompt gets the following examples correct:
+        {correct_string}
+
+        give {num_feedbacks} most valuable key points to improve the accuracy in solving this type of task.
+        Wrap each reason with <START> and <END>
+        """
+        gradient_prompt = "\n".join(
+            [line.lstrip() for line in gradient_prompt.split("\n")]
+        )
+        res = utils.chatgpt(gradient_prompt, n=n)
+        feedbacks = []
+        new_prompts = []
+        for r in res:
+            feedbacks += self.parse_tagged_text(r, "<START>", "<END>")
+        return feedbacks
+
 
     def reflect_feedbacks(self, prompt_section, feedback_tuples):
         """Use reflection to make each feedback actionable and precise."""
@@ -235,6 +281,83 @@ class ProTeGi(PromptOptimizer):
 
         return unique_refined
 
+    def generate_strategy(self, prompt, example, experience):
+        transformation_prompt = f"""
+        As an expert in prompt engineer, your task is to create a step-by-step strategy guide on how to use specific
+        experience based on provided prompt.
+        # Begin Demos
+        <demo>
+        <prompt>read the given paragraph and identify the most logical answer among the options.</prompt>
+        <example>
+        question: The following paragraphs each describe a set of five objects arranged in a fixed order. The
+        statements are logically consistent within each paragraph. In a golf tournament, there were five golfers:
+        Eve, Amy, Ada, Rob, and Joe. Amy finished second-to-last. Rob finished below Eve. Ada finished above
+        Joe. Joe finished second.
+        Options:
+        (A) Eve finished last
+        (B) Amy finished last
+        (C) Ada finished last
+        (D) Rob finished last
+        (E) Joe finished last
+        Answer: (B) Amy finished last
+        Target: (D) Rob finished last
+        </example>
+        <experience> One primary reason mistakes occur in this task is due to misunderstanding or
+        misinterpretation of the logical order and relationships presented in the paragraphs </experience>
+        <strategy>
+        Here is a strategy guide how to achieve "understanding or interpretation of the logical order and
+        relationships":
+        1. Carefully read the entire paragraph to understand the context and the objects or individuals involved.
+        2. Identify the logical relationships or orderings described in the paragraph.
+        3. Create a visual aid such as a list or a diagram. Place the objects or individuals from left to right based
+        on the logical relationships. The leftmost object or individual would be the first in the order and the
+        rightmost would be the last.
+        4. As you read each relationship, adjust the positions of the objects or individuals in your visual aid
+        accordingly.
+        5. Once all relationships have been considered, your visual aid should represent the correct order of the
+        objects or individuals.
+        </strategy>
+        </demo>
+        # End Demos
+        My current prompt is:
+        <prompt>{prompt}</prompt>
+        And here is the task data:
+        <example>{example}</example>
+        Through comprehensive analysis of the data, I've gained an experience that can improve the prompt:
+        <experience>{experience}</experience>
+        Based on my current prompt, please generate a strategy to address the above experience.
+        The strategy is:
+        """
+        transformation_prompt = "\n".join(
+            [line.lstrip() for line in transformation_prompt.split("\n")]
+        )
+        res = utils.chatgpt(transformation_prompt, n=1)
+        return res
+
+    def prompt_rewriter(self, prompt, example, steps_per_gradient, strategy, n=1):
+        transformation_prompt = f"""
+        My current instruction is:
+        <prompt>{prompt}</prompt>
+        And Here are some task data:
+        <example>{example}</example>
+        Through comprehensive analysis of the data, I get a experience and corresponding strategy:
+        # Experience
+        <experience>experience</experience>
+        # Strategy
+        <strategy>{strategy}</strategy>
+        Based on my current prompt, refer to this experience and the strategy, write {steps_per_gradient} different improved prompt.
+        Each prompt is wrapped with <START> and <END>.
+        The {steps_per_gradient} improved prompts are:
+        """
+        transformation_prompt = "\n".join(
+            [line.lstrip() for line in transformation_prompt.split("\n")]
+        )
+        res = utils.chatgpt(transformation_prompt, n=n)
+        new_prompts = []
+        for r in res:
+            new_prompts += self.parse_tagged_text(r, "<START>", "<END>")
+        return new_prompts
+        
     def apply_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, step_size, n=1):
         """Incorporate feedback gradient into a prompt."""
         # I am allowed to change up to {step_size} words in the current prompt.
@@ -263,6 +386,39 @@ class ProTeGi(PromptOptimizer):
             new_prompts += self.parse_tagged_text(r, "<START>", "<END>")
         return new_prompts
 
+    def apply_gradient_v2(self, prompt, error_str, correct_str, error_feedback_str, correct_feedback_str, steps_per_gradient, step_size, n=1):
+        """Incorporate feedback gradient into a prompt."""
+        # I am allowed to change up to {step_size} words in the current prompt.
+        transformation_prompt = f"""
+        I'm trying to write a zero-shot classifier.
+        
+        My current prompt is:
+        "{prompt}"
+
+
+        But it gets the following examples wrong:
+        {error_str}
+
+        And it gets the following examples rght:
+        {correct_str}
+
+        Based on these examples the problem with this prompt is that {error_feedback_str}
+        and the key points why this prompt predict those examples right is that {correct_feedback_str}
+
+        Based on the above information, I wrote {steps_per_gradient} different improved prompts.
+        Each prompt is wrapped with <START> and <END>.
+
+        The {steps_per_gradient} new prompts are:
+        """
+        transformation_prompt = "\n".join(
+            [line.lstrip() for line in transformation_prompt.split("\n")]
+        )
+        res = utils.chatgpt(transformation_prompt, n=n)
+        new_prompts = []
+        for r in res:
+            new_prompts += self.parse_tagged_text(r, "<START>", "<END>")
+        return new_prompts
+
     def generate_synonyms(self, prompt_section, n=3):
         """Generate synonyms for a prompt section."""
         rewriter_prompt = f"Generate a variation of the following instruction while keeping the semantic meaning.\n\nInput: {prompt_section}\n\nOutput:"
@@ -276,7 +432,7 @@ class ProTeGi(PromptOptimizer):
         for _ in tqdm(
             range(self.opt["n_gradients"]),
             total=self.opt["n_gradients"],
-            desc="gradients..",
+            desc="gradients (negative feedback)..",
         ):
             error_string = self._sample_error_str(
                 texts, labels, preds, task, n=self.opt["errors_per_gradient"]
@@ -286,6 +442,55 @@ class ProTeGi(PromptOptimizer):
             )
             prompt_feedbacks += [(t, error_string) for t in gradients]
         return prompt_feedbacks
+
+    def get_gradients_v2(self, prompt, task_section, task, gpt4, texts, labels, preds):
+        """Get "gradients" for a prompt based on sampled error strings."""
+        prompt_feedbacks = []
+        for _ in tqdm(
+            range(self.opt["n_gradients"]),
+            total=self.opt["n_gradients"],
+            desc="gradients (negative feedback)..",
+        ):
+            error_string = self._sample_error_str(
+                texts, labels, preds, task, n=self.opt["errors_per_gradient"]
+            )
+            gradients = self._get_gradients(
+                task_section, error_string, self.opt["gradients_per_error"], n=1
+            )
+            prompt_feedbacks += ", ".join(gradients)
+        return prompt_feedbacks, error_string
+
+    def get_positive_feedback(self, prompt, task_section, task, gpt4, texts, labels, preds):
+        prompt_feedbacks = []
+        for _ in tqdm(
+            range(self.opt["n_gradients"]),
+            total=self.opt["n_gradients"],
+            desc="gradients (positive feedback)..",
+        ):
+            correct_string = self._sample_correct_str(
+                texts, labels, preds, task, n=self.opt["errors_per_gradient"]
+            )
+            gradients = self._get_positive_feedback(
+                task_section, correct_string, self.opt["gradients_per_error"], n=1
+            )
+            prompt_feedbacks += [(t, correct_string) for t in gradients]
+        return prompt_feedbacks
+
+    def get_positive_feedback_v2(self, prompt, task_section, task, gpt4, texts, labels, preds):
+        prompt_feedbacks = []
+        for _ in tqdm(
+            range(self.opt["n_gradients"]),
+            total=self.opt["n_gradients"],
+            desc="gradients (positive feedback)..",
+        ):
+            correct_string = self._sample_correct_str(
+                texts, labels, preds, task, n=self.opt["errors_per_gradient"]
+            )
+            gradients = self._get_positive_feedback(
+                task_section, correct_string, self.opt["gradients_per_error"], n=1
+            )
+            prompt_feedbacks += ", ".join(gradients)
+        return prompt_feedbacks, correct_string
 
     def expand_candidates(self, prompts, task, gpt4, train_exs, step_size):
         """Expand a list of prompts by generating gradient-based successors and
@@ -301,11 +506,13 @@ class ProTeGi(PromptOptimizer):
 
             # evaluate prompt on minibatch
             _, texts, labels, preds = task.evaluate(gpt4, prompt, minibatch)
-
             # get gradients
             new_task_sections = []
             if self.opt["n_gradients"] > 0:
-                gradients = self.get_gradients(
+                gradients, error_string = self.get_gradients_v2(
+                    prompt, task_section, task, gpt4, texts, labels, preds
+                )
+                rev_gradients, correct_string = self.get_positive_feedback_v2(
                     prompt, task_section, task, gpt4, texts, labels, preds
                 )
                 if self.opt.get("reflect_gradients"):
@@ -315,13 +522,25 @@ class ProTeGi(PromptOptimizer):
                     for _ in range(gradient_passes):
                         gradients = self.reflect_feedbacks(task_section, gradients)
                 new_task_sections = []
-                for feedback, error_string in tqdm(
-                    gradients, desc="applying gradients"
-                ):
-                    tmp = self.apply_gradient(
+                # for feedback, error_string in tqdm(
+                #     gradients, desc="applying gradients"
+                # ):
+                #     tmp = self.apply_gradient(
+                #         task_section,
+                #         error_string,
+                #         feedback,
+                #         self.opt["steps_per_gradient"],
+                #         step_size
+                #     )
+                #     new_task_sections += tmp
+
+                for i in tqdm([1], desc="applying gradients"):
+                    tmp = self.apply_gradient_v2(
                         task_section,
                         error_string,
-                        feedback,
+                        correct_string,
+                        gradients,
+                        rev_gradients,
                         self.opt["steps_per_gradient"],
                         step_size
                     )

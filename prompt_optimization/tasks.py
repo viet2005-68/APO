@@ -49,7 +49,6 @@ class ClassificationTask(DataProcessor):
                 texts.append(ex['text'])
                 labels.append(ex['label'])
                 preds.append(pred)
-
         accuracy = accuracy_score(labels, preds)
         f1 = f1_score(labels, preds, average='micro')
         return accuracy, texts, labels, preds

@@ -26,3 +26,12 @@ For usage instructions. Some of the arguments include:
 * `--out`: Output file name.
 * `--max_threads`: Maximum number of threads to be used.
 * `...`: Various other parameters related to optimization and evaluation.
+
+python main.py \
+  --task liar \
+  --prompts prompts/liar.md \
+  --data_dir data/liar \
+  --beam_size 4 \
+  --steps_per_gradient 6 \
+  --minibatch_size 64 \
+  --out liar.out
