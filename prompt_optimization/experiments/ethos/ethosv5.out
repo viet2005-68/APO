@@ -1,6 +1,6 @@
 {"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "ethosv5.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 6, "mc_samples_per_step": 2, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "eval_budget": 2048}
 
-======== INIT BATCH GRADIENT UPDATE (UPDATE ON BOTH RIGHT AND WRONG EXAMPLE) STRATEGY
+======== BATCH GRADIENT UPDATE (UPDATE ON BOTH RIGHT AND WRONG EXAMPLE) STRATEGY
 ======== MODEL: QWEN2.5-7B-INSTRUCT
 
 ======== ROUND 0

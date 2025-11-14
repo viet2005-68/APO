@@ -149,7 +149,7 @@ if __name__ == "__main__":
     optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
-    random.shuffle(train_exs)
+    # random.shuffle(train_exs)
     batch_train_exs = [
         train_exs[i:i + config["minibatch_size"]]
         for i in range(0, len(train_exs), config["minibatch_size"])
@@ -177,7 +177,7 @@ if __name__ == "__main__":
         # expand candidates
         if round > 0:
             current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
-            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, current_step_size)
+            candidates = optimizer.expand_candidates_original(candidates, task, gpt4, train_exs, current_step_size)
 
         # score candidates
         scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
