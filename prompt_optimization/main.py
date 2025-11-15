@@ -10,6 +10,7 @@ import scorers
 import tasks
 import predictors
 import optimizers
+import my_optimizers
 import numpy as np
 import sys
 import random
@@ -69,7 +70,7 @@ def get_args():
     parser.add_argument("--errors_per_gradient", default=4, type=int)
     parser.add_argument("--gradients_per_error", default=1, type=int)
     parser.add_argument("--steps_per_gradient", default=1, type=int)
-    parser.add_argument("--mc_samples_per_step", default=2, type=int)
+    parser.add_argument("--mc_samples_per_step", default=4, type=int)
     parser.add_argument("--max_expansion_factor", default=8, type=int)
 
     parser.add_argument("--engine", default="chatgpt", type=str)
@@ -123,6 +124,7 @@ def get_args():
         type=float,
         help="temperature used for reflection LLM calls",
     )
+    parser.add_argument("--ea-samples-per-step", default=4, type=int)
 
     args = parser.parse_args()
 
@@ -146,15 +148,18 @@ if __name__ == "__main__":
     bf_eval = get_evaluator("bf")(config)
     gpt4 = predictors.BinaryPredictor(config)
 
-    optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    optimizer = my_optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+#    optimizer = my_optimizers.(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
-    random.shuffle(train_exs)
+    # random.shuffle(train_exs)
     batch_train_exs = [
         train_exs[i:i + config["minibatch_size"]]
         for i in range(0, len(train_exs), config["minibatch_size"])
     ]
     num_batches = len(batch_train_exs)
+
+    validation_exs = task.get_validation_examples()
     test_exs = task.get_test_examples()
 
     if os.path.exists(args.out):
@@ -192,16 +197,24 @@ if __name__ == "__main__":
         # record candidates, estimated scores, and true scores
         with open(args.out, "a") as outf:
             outf.write(f"======== ROUND {round}\n")
-            outf.write(f"{time.time() - start}\n")
-            outf.write(f"{candidates}\n")
-            outf.write(f"{scores}\n")
-        metrics = []
+            outf.write(f"Time: {time.time() - start}\n")
+            outf.write(f"Prompt: {candidates}\n")
+            outf.write(f"Training accuracy: {scores}\n")
+        val_metrics = []
+        test_metrics = []
+        for candidate, score in zip(candidates, scores):
+            f1, texts, labels, preds = task.evaluate(
+                gpt4, candidate, validation_exs, n=args.n_test_exs
+            )
+            val_metrics.append(f1)
+        with open(args.out, "a") as outf:
+            outf.write(f"Validation accuracy: {val_metrics}\n")
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
                 gpt4, candidate, test_exs, n=args.n_test_exs
             )
-            metrics.append(f1)
+            test_metrics.append(f1)
         with open(args.out, "a") as outf:
-            outf.write(f"{metrics}\n")
+            outf.write(f"Test accuracy: {test_metrics}\n")
 
     print("DONE!")
