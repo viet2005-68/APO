@@ -123,7 +123,7 @@ def get_args():
         type=float,
         help="temperature used for reflection LLM calls",
     )
-    parser.add_argument("--ea_samples_per_step", default=4, type=int)
+    parser.add_argument("--ea-samples-per-step", default=4, type=int)
 
     args = parser.parse_args()
 
@@ -180,7 +180,7 @@ if __name__ == "__main__":
         # expand candidates
         if round > 0:
             current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
-            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, current_step_size)
+            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs)
 
         # score candidates
         scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
