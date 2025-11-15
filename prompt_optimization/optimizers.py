@@ -461,16 +461,16 @@ class ProTeGi(PromptOptimizer):
         and the key points why this prompt predict those examples right is that {correct_feedback_str}
 
         Based on the above information, I wrote {steps_per_gradient} different improved prompts.
-        Each prompt is wrapped with <START> and <END>.
+        ONLY return the prompts as the answer, no additional information. Each prompt is wrapped with <START> and <END>.
 
         The {steps_per_gradient} new prompts are:
         """
-        print("REWRITE PROMPT: ", transformation_prompt)
         transformation_prompt = "\n".join(
             [line.lstrip() for line in transformation_prompt.split("\n")]
         )
         res = utils.chatgpt(transformation_prompt, n=n)
         new_prompts = []
+        print("APPLY GRADIENT: ", res)
         for r in res:
             new_prompts += self.parse_tagged_text(r, "<START>", "<END>")
         return new_prompts
@@ -492,6 +492,23 @@ class ProTeGi(PromptOptimizer):
         ):
             error_string = self._sample_error_str(
                 texts, labels, preds, task, n=self.opt["errors_per_gradient"]
+            )
+            gradients = self._get_gradients(
+                task_section, error_string, self.opt["gradients_per_error"], n=1
+            )
+            prompt_feedbacks += [(t, error_string) for t in gradients]
+        return prompt_feedbacks
+
+    def get_gradients_with_confs(self, prompt, task_section, task, gpt4, texts, labels, preds, confs):
+        """Get "gradients" for a prompt based on sampled error strings."""
+        prompt_feedbacks = []
+        for _ in tqdm(
+            range(self.opt["n_gradients"]),
+            total=self.opt["n_gradients"],
+            desc="gradients (negative feedback)..",
+        ):
+            error_string = self._sample_error_str_with_confs(
+                texts, labels, preds, confs, task, n=self.opt["errors_per_gradient"]
             )
             gradients = self._get_gradients(
                 task_section, error_string, self.opt["gradients_per_error"], n=1
@@ -581,6 +598,24 @@ class ProTeGi(PromptOptimizer):
             )
             prompt_feedbacks += ", ".join(gradients)
         return prompt_feedbacks, correct_string
+
+    def genetic_algorithm_expansion(self, prompt1, prompt2):
+        instrucion = f"""
+                    Please follow the instruction step-by-step to generate a better prompt.
+                    1. Crossover the following prompts and generate a new prompt:
+                    Prompt 1: {prompt1}
+                    Prompt 2: {prompt2}
+                    2. Mutate the prompt generated in Step 1 and generate a final promp.
+                    ONLY return the prompt as the answer, no additional information. The prompt is wrapped with <START> and <END>.
+                    """
+        transformation_prompt = "\n".join(
+            [line.lstrip() for line in instrucion.split("\n")]
+        )
+        res = utils.chatgpt(transformation_prompt, n=1)
+        new_prompts = []
+        for r in res:
+            new_prompts += self.parse_tagged_text(r, "<START>", "<END>")
+        return new_prompts
 
     def expand_candidates_original(self, prompts, task, gpt4, train_exs, step_size):
         """Expand a list of prompts by generating gradient-based successors and
@@ -724,6 +759,8 @@ class ProTeGi(PromptOptimizer):
                         self.opt["steps_per_gradient"],
                         step_size
                     )
+                    print("new prompt after grads: ", tmp)
+                    print("new prompt size: ", len(tmp))
                     new_task_sections += tmp
 
             # generate synonyms
@@ -734,9 +771,19 @@ class ProTeGi(PromptOptimizer):
                         sect, n=self.opt["mc_samples_per_step"]
                     )
                     mc_sampled_task_sections += mc_sects
+            
+            # Genetic algorithm
+            ea_sampled_task_sections = []
+            if self.opt["ea_samples_per_step"] > 0:
+                for i in tqdm(range(self.opt["ea_samples_per_step"]), desc="evolution algorithm"):
+                    parents = random.sample(new_task_sections + [task_section], 2)
+                    prompt1 = parents[0]
+                    prompt2 = parents[1]
+                    ea_prompt = self.genetic_algorithm_expansion(prompt1, prompt2)
+                    ea_sampled_task_sections += ea_prompt
 
             # combine
-            new_sections = new_task_sections + mc_sampled_task_sections
+            new_sections = new_task_sections + mc_sampled_task_sections + ea_sampled_task_sections
             new_sections = list(set(new_sections))  # dedup
             tmp_new_prompts = [
                 prompt.replace(task_section, tmp) for tmp in new_sections
@@ -905,7 +952,8 @@ class ProTeGi(PromptOptimizer):
     def score_candidates(self, prompts, task, gpt4, train_exs):
         """Score a list of prompts."""
         if len(prompts) == 1:
-            return [1.0]
+            scores = self.scorer(gpt4, prompts, train_exs, max_threads=self.max_threads)
+            return scores
 
         evals = self.evaluator_fn(
             prompts,

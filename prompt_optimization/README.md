@@ -27,11 +27,24 @@ For usage instructions. Some of the arguments include:
 * `--max_threads`: Maximum number of threads to be used.
 * `...`: Various other parameters related to optimization and evaluation.
 
+# Liar Task
 python main.py \
   --task liar \
   --prompts prompts/liar.md \
   --data_dir data/liar \
   --beam_size 4 \
   --steps_per_gradient 6 \
+  --errors_per_gradient 8 \
   --minibatch_size 64 \
-  --out liar.out
+  --out experiments/liar.out
+
+# Ethos Task
+python main.py \
+  --task ethos \
+  --prompts prompts/ethos.md \
+  --data_dir data/ethos \
+  --beam_size 4 \
+  --steps_per_gradient 6 \
+  --errors_per_gradient 8 \
+  --minibatch_size 64 \
+  --out experiments/ethos.out

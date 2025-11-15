@@ -17,6 +17,10 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
+    def get_validation_examples(self):
+        pass
+
+    @abstractmethod
     def get_test_examples(self):
         pass
 
@@ -147,6 +151,13 @@ class DefaultHFBinaryTask(BinaryClassificationTask):
         for i, row in enumerate(open(self.data_dir + '/train.jsonl')):
             row = json.loads(row.strip())
             exs.append({'id': f'train-{i}', 'label': row['label'], 'text': row['text']})
+        return exs
+    
+    def get_validation_examples(self):
+        exs = []
+        for i, row in enumerate(open(self.data_dir + '/validation.jsonl')):
+            row = json.loads(row.strip())
+            exs.append({'id': f'val-{i}', 'label': row['label'], 'text': row['text']})
         return exs
     
     def get_test_examples(self):

@@ -69,7 +69,7 @@ def get_args():
     parser.add_argument("--errors_per_gradient", default=4, type=int)
     parser.add_argument("--gradients_per_error", default=1, type=int)
     parser.add_argument("--steps_per_gradient", default=1, type=int)
-    parser.add_argument("--mc_samples_per_step", default=2, type=int)
+    parser.add_argument("--mc_samples_per_step", default=4, type=int)
     parser.add_argument("--max_expansion_factor", default=8, type=int)
 
     parser.add_argument("--engine", default="chatgpt", type=str)
@@ -123,6 +123,7 @@ def get_args():
         type=float,
         help="temperature used for reflection LLM calls",
     )
+    parser.add_argument("--ea_samples_per_step", default=4, type=int)
 
     args = parser.parse_args()
 
@@ -155,6 +156,8 @@ if __name__ == "__main__":
         for i in range(0, len(train_exs), config["minibatch_size"])
     ]
     num_batches = len(batch_train_exs)
+
+    validation_exs = task.get_validation_examples()
     test_exs = task.get_test_examples()
 
     if os.path.exists(args.out):
@@ -177,7 +180,7 @@ if __name__ == "__main__":
         # expand candidates
         if round > 0:
             current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
-            candidates = optimizer.expand_candidates_original(candidates, task, gpt4, train_exs, current_step_size)
+            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, current_step_size)
 
         # score candidates
         scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
@@ -192,16 +195,24 @@ if __name__ == "__main__":
         # record candidates, estimated scores, and true scores
         with open(args.out, "a") as outf:
             outf.write(f"======== ROUND {round}\n")
-            outf.write(f"{time.time() - start}\n")
-            outf.write(f"{candidates}\n")
-            outf.write(f"{scores}\n")
-        metrics = []
+            outf.write(f"Time: {time.time() - start}\n")
+            outf.write(f"Prompt: {candidates}\n")
+            outf.write(f"Training accuracy: {scores}\n")
+        val_metrics = []
+        test_metrics = []
+        for candidate, score in zip(candidates, scores):
+            f1, texts, labels, preds = task.evaluate(
+                gpt4, candidate, validation_exs, n=args.n_test_exs
+            )
+            val_metrics.append(f1)
+        with open(args.out, "a") as outf:
+            outf.write(f"Validation accuracy: {val_metrics}\n")
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
                 gpt4, candidate, test_exs, n=args.n_test_exs
             )
-            metrics.append(f1)
+            test_metrics.append(f1)
         with open(args.out, "a") as outf:
-            outf.write(f"{metrics}\n")
+            outf.write(f"Test accuracy: {test_metrics}\n")
 
     print("DONE!")

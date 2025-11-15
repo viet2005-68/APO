@@ -34,7 +34,7 @@ def parse_sectioned_prompt(s):
 
 def chatgpt(
     prompt,
-    temperature=0.1,
+    temperature=0.7,
     n=1,
     top_p=1,
     stop=None,
@@ -56,7 +56,7 @@ def chatgpt(
         "presence_penalty": presence_penalty,
         "frequency_penalty": frequency_penalty,
         "logit_bias": logit_bias,
-        "reasoning_effort": "low"
+        # "reasoning_effort": "low"
     }
     retries = 0
     while True:
@@ -101,7 +101,7 @@ def chatgpt(
 
 def chatgpt_with_confidence(
     prompt,
-    temperature=0.1,
+    temperature=0.7,
     n=1,
     top_p=1,
     stop=None,
@@ -123,7 +123,7 @@ def chatgpt_with_confidence(
         "presence_penalty": presence_penalty,
         "frequency_penalty": frequency_penalty,
         "logit_bias": logit_bias,
-        "reasoning_effort": "low",
+        # "reasoning_effort": "low",
         "logprobs": "true",
     }
     retries = 0
