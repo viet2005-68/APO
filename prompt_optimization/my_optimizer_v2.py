@@ -19,7 +19,7 @@ class PromptOptimizer(ABC):
         pass
 
 
-class ProTeGi(PromptOptimizer):
+class MyOptimizer(PromptOptimizer):
     """ProTeGi: Prompt Optimization with Textual Gradients"""
 
     def _sample_error_str(self, texts, labels, preds, task, n=4):
@@ -148,6 +148,27 @@ class ProTeGi(PromptOptimizer):
             prompt_feedbacks += [(t, error_string) for t in gradients]
         return prompt_feedbacks
 
+    def genetic_algorithm_expansion(self, prompt1, prompt2):
+        instrucion = f"""
+                    Please follow the instruction step-by-step to generate a better prompt.
+                    1. Crossover the following prompts and generate a new prompt:
+                    Prompt 1: {prompt1}
+                    Prompt 2: {prompt2}
+                    2. Mutate the prompt generated in Step 1 and generate a final promp.
+                    ONLY return the prompt as the answer, no additional information. The prompt is wrapped with <START> and </END>.
+                    """
+        transformation_prompt = "\n".join(
+            [line.lstrip() for line in instrucion.split("\n")]
+        )
+        res = utils.chatgpt(transformation_prompt, n=1)
+        new_prompts = []
+        for r in res:
+            new_prompts += self.parse_tagged_text(r, "<START>", "</END>")
+        print("GA llm raw prompt: ", res)
+        print("GA llm prompt: ", feedbacks)
+        print("GA llm prompt len: ", len(feedbacks))
+        return new_prompts
+
     def expand_candidates(self, prompts, task, gpt4, train_exs):
         """Expand a list of prompts by generating gradient-based successors and
         synonyms for each section.
@@ -191,6 +212,18 @@ class ProTeGi(PromptOptimizer):
                         sect, n=self.opt["mc_samples_per_step"]
                     )
                     mc_sampled_task_sections += mc_sects
+
+            # Genetic algorithm
+            ea_sampled_task_sections = []
+            if self.opt["ea_samples_per_step"] > 0:
+                for i in tqdm(range(self.opt["ea_samples_per_step"]), desc="evolution algorithm"):
+                    if len(new_task_sections + [task_section]) < 2:
+                        break
+                    parents = random.sample(new_task_sections + [task_section], 2)
+                    prompt1 = parents[0]
+                    prompt2 = parents[1]
+                    ea_prompt = self.genetic_algorithm_expansion(prompt1, prompt2)
+                    ea_sampled_task_sections += ea_prompt
 
             # combine
             new_sections = new_task_sections + mc_sampled_task_sections

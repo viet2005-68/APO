@@ -10,6 +10,7 @@ import scorers
 import tasks
 import predictors
 import optimizers
+import my_optimizer_v2
 import numpy as np
 import sys
 import random
@@ -147,7 +148,8 @@ if __name__ == "__main__":
     bf_eval = get_evaluator("bf")(config)
     gpt4 = predictors.BinaryPredictor(config)
 
-    optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    # optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    optimizer = my_optimizer_v2.MyOptimizer(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
     # random.shuffle(train_exs)
