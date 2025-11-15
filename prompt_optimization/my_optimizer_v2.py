@@ -4,7 +4,6 @@ from tqdm import tqdm
 import random
 from abc import ABC, abstractmethod
 import utils
-random.seed(42)
 
 class PromptOptimizer(ABC):
     def __init__(self, args, evaluator_fn, scorer, max_threads=1, bf_eval=None):
@@ -149,25 +148,59 @@ class MyOptimizer(PromptOptimizer):
         return prompt_feedbacks
 
     def genetic_algorithm_expansion(self, prompt1, prompt2):
-        instrucion = f"""
-                    Please follow the instruction step-by-step to generate a better prompt.
-                    1. Crossover the following prompts and generate a new prompt:
-                    Prompt 1: {prompt1}
-                    Prompt 2: {prompt2}
-                    2. Mutate the prompt generated in Step 1 and generate a final promp.
-                    ONLY return the prompt as the answer, no additional information. The prompt is wrapped with <START> and </END>.
+        instruction = f"""
+                    You are performing genetic algorithm evolution on classifier prompts.
+
+                    PARENT A:
+                    {prompt1}
+
+                    PARENT B:
+                    {prompt2}
+
+                    Your task:
+
+                    1. **CROSSOVER**
+                    - Combine only the *useful mechanisms* from both parents.
+                    - DO NOT copy entire sentences or templates.
+                    - Merge conceptual rules, not wording.
+
+                    2. **MUTATE**
+                    Apply at least **two high-impact structural mutations**, such as:
+                    - Add a multi-step reasoning procedure
+                    - Add an explicit scoring method
+                    - Add constraints or banned behaviors
+                    - Add a verification or calibration step
+                    - Change label definitions or output format
+                    - Add an uncertainty threshold
+                    - Introduce consistency checks
+                    - Add chain-of-thought *format rules* without revealing chain-of-thought
+
+                    3. **ANTI-COLLAPSE REQUIREMENTS**
+                    - The child MUST be less than 40% similar in wording to either parent.
+                    - The child MUST introduce at least one conceptual mechanism **not present** in either parent.
+                    - The child MUST NOT follow the common template used in the parents 
+                    - The child MUST NOT reuse wording like "evaluate the Statement", "consider the context", etc.
+
+                    4. **OUTPUT FORMAT**
+                    Return EXACTLY one offspring prompt, wrapped:
+
+                    <ANSWER>
+                    [offspring prompt]
+                    </ANSWER>
+
+                    No other text.
                     """
-        transformation_prompt = "\n".join(
-            [line.lstrip() for line in instrucion.split("\n")]
-        )
-        res = utils.chatgpt(transformation_prompt, n=1)
+
+        instruction = "\n".join([line.lstrip() for line in instruction.split("\n")])
+        res = utils.chatgpt(instruction, n=1)
         new_prompts = []
         for r in res:
-            new_prompts += self.parse_tagged_text(r, "<START>", "</END>")
+            new_prompts += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
         print("GA llm raw prompt: ", res)
-        print("GA llm prompt: ", feedbacks)
-        print("GA llm prompt len: ", len(feedbacks))
+        print("GA llm prompt: ", new_prompts)
+        print("GA llm prompt len: ", len(new_prompts))
         return new_prompts
+
 
     def expand_candidates(self, prompts, task, gpt4, train_exs):
         """Expand a list of prompts by generating gradient-based successors and
