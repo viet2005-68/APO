@@ -51,7 +51,7 @@ class FeedbackMemory():
             print("SIMILAR FEEDBACK ALREADY OCCUR WITH SIMILARITY ", np.max(sims)) 
         return np.max(sims) >= self.similarity_threshold
 
-    def add_feedback(self, feedback, error_string, score=1):
+    def add_feedback(self, feedback, error_string, score=0.5):
         new_emb = self._encode(feedback)
 
         if self._is_duplicate(new_emb):
@@ -70,7 +70,7 @@ class FeedbackMemory():
         retrieved_idx = np.random.choice(len(self.feedbacks), size=min(num, len(self.feedbacks)), replace=False, p=probs)
         return [(i, self.feedbacks[i], self.error_string[i]) for i in retrieved_idx]
     
-    def update_feedback(self, feedback_idx, score_gain, beta=1, theta=0.7):
+    def update_feedback(self, feedback_idx, score_gain, beta=1, theta=0.1):
         current_score = self.scores[feedback_idx]
         new_score = current_score + score_gain * beta
         self.scores[feedback_idx] = new_score
@@ -109,10 +109,11 @@ class ExemplarMemory():
 
         idx = np.argmax(sims)
         if sims[idx] >= self.similarity_threshold:
+            print("SIMILAR EXAMPLER ALREADY OCCUR WITH SIMILARITY ", sims[idx]) 
             return idx
         return None
     
-    def add_exemplar(self, text, priority_score=1.0):
+    def add_exemplar(self, text, priority_score=0.5):
         new_emb = self._encode(text)
         dup_idx = self._find_duplicate(new_emb)
 
@@ -146,7 +147,7 @@ class ExemplarMemory():
 
         return [(i, self.exemplars[i]) for i in top_indices]
 
-    def update_exemplar(self, exemplar_idx, prompt_score, beta=1, theta=0.7):
+    def update_exemplar(self, exemplar_idx, prompt_score, beta=1, theta=0.1):
         current_score = self.scores[exemplar_idx]
         new_score = current_score + prompt_score * beta
         self.scores[exemplar_idx] = new_score
@@ -278,6 +279,7 @@ class MyOptimizer(PromptOptimizer):
     
     def get_examplers(self, task_section, task, gpt4, texts, labels, preds):
         """Get "gradients" for a prompt based on sampled error strings."""
+        examplers_feedbacks = []
         for _ in tqdm(
             range(self.opt["n_gradients"]),
             total=self.opt["n_gradients"],
@@ -289,7 +291,8 @@ class MyOptimizer(PromptOptimizer):
             examplers = self._get_examplers(
                 task_section, error_string, self.opt["gradients_per_error"]
             )
-        return examplers 
+            examplers_feedbacks += examplers
+        return examplers_feedbacks 
     
     def optimize_prompt(self, prompt, error_samples, feedback, n=1):
         # Here are some examples of issues and their labels:

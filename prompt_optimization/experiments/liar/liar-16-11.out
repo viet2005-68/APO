@@ -1,0 +1,1247 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 6, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY STRATEGY
+======== MODEL: QWEN2.5-7B-INSTRUCT
+
+======== ROUND 0
+Time: 21.317156314849854
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.54541015625),)
+Training accuracy: (np.float64(0.54541015625),)
+Validation accuracy: [0.5176151761517616]
+Test accuracy: [0.4880694143167028]
+======== ROUND 1
+Time: 97.63838505744934
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, their expertise in the relevant field, and the context in which the statement was made. Account for the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Recognize the potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(4), np.int64(10), np.int64(11), np.int64(12)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  parent_score: 0.54541015625,
+  score: 0.6075268817204301), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the role and authority of the Speaker, the complexity of the issue, and the potential for simplification, exaggeration, or partial truth. Consider the possibility that the statement might be a simplification or exaggeration of a complex issue, and account for the likelihood that the statement could be partially true or partially false. Recognize the potential for misunderstanding or misinterpretation, especially in informal settings, and factor in the specific context and role of the speaker.
+
+# Exemplar
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(4), np.int64(5), np.int64(8), np.int64(13)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  parent_score: 0.54541015625,
+  score: 0.5752688172043011), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the speaker's role and authority, potential for misunderstanding or misinterpretation, and the likelihood of satire or hyperbole. Consider the complexity of the issue and any additional context that might affect the accuracy of the statement.
+
+# Exemplar
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(11)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  parent_score: 0.54541015625,
+  score: 0.543010752688172), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, Source Type (e.g., debate, interview, politician's website), and other information. Consider the reliability of the source, potential for misunderstanding or misinterpretation, and whether the statement is a literal falsehood or an opinion/interpretation. Additionally, be aware of the possibility of satire or hyperbole in the statement.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(4), np.int64(7), np.int64(14)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  parent_score: 0.54541015625,
+  score: 0.543010752688172))
+Training accuracy: (np.float64(0.6075268817204301), np.float64(0.5752688172043011), np.float64(0.543010752688172), np.float64(0.543010752688172))
+Validation accuracy: [0.6043360433604336, 0.5392953929539296, 0.5582655826558266, 0.5013550135501355]
+Test accuracy: [0.6225596529284165, 0.5574837310195228, 0.5726681127982647, 0.5466377440347071]
+======== ROUND 2
+Time: 284.92185735702515
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the speaker's role and authority, potential for misunderstanding or misinterpretation, and the likelihood of satire or hyperbole. Directly evaluate the factual accuracy of the statement while considering the complexity of the issue and any additional context that might affect its veracity. Pay particular attention to the specific context and reliability of the speaker's claims. For statements involving clear factual errors, such as those in Examples 1 through 5, ensure they are identified accurately. For issues with legal or geopolitical complexities, such as Examples 3 and 8, consider the nuances and potential for misinformation but do not let this overshadow the direct assessment of factual accuracy. Account for the speaker's role or authority in making the statement, as the Governor of New Jersey would likely have accurate information about tenure laws in their own state, and similarly, the Senate Democratic Leader would have the authority to comment on seating new senators. Avoid overcomplicating straightforward factual claims, as seen in Example 1, where the statement about Slim Jims' price increase can be verified through recent retail data.
+
+# Exemplar
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(51), np.int64(23), np.int64(29), np.int64(30)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(12), np.int64(14)},
+  parent_score: 0.543010752688172,
+  score: 0.6521739130434783), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, Source Type (e.g., debate, interview, politician's website), and other information. Consider the reliability of the source, potential for misunderstanding or misinterpretation, and whether the statement is a literal falsehood or an opinion/interpretation. Additionally, take into account the speaker's role or authority in making the statement. For example, a Governor of New Jersey would likely have accurate information about tenure laws in their own state, while the Senate Democratic Leader would have the authority to comment on seating new senators. Verify the context and factual accuracy of the statement, such as checking against factual records or known events. Differentiate between statements that are literally false and those that are based on opinion or interpretation. For instance, a statement about tax contributions might be true based on statistical data but could still be an opinion. Finally, for statements related to public records and legislative actions, ensure they are verifiable through available data and records.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(7), np.int64(9), np.int64(23), np.int64(25)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(7), np.int64(13), np.int64(16)},
+  parent_score: 0.543010752688172,
+  score: 0.6521739130434783), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(10), np.int64(11), np.int64(20), np.int64(22)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0.6075268817204301,
+  score: 0.6304347826086957), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the role and authority of the Speaker, the complexity of the issue, the potential for simplification, exaggeration, or partial truth, the type of source where the statement was made (e.g., debate, interview), and the actual financial or factual conditions described in the statement. Consider the possibility that the statement might be a simplification or exaggeration of a complex issue, and account for the likelihood that the statement could be partially true or partially false. Recognize the potential for misunderstanding or misinterpretation, especially in informal settings, and factor in the specific context and role of the speaker. Additionally, evaluate the speaker’s credibility or expertise related to the topic at hand; a statement from someone without relevant expertise may be less reliable, even if the statement seems plausible.
+
+# Exemplar
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(37), np.int64(14), np.int64(17), np.int64(27)},
+  examplers_idx_used: {np.int64(0), np.int64(3), np.int64(5), np.int64(9), np.int64(10)},
+  parent_score: 0.5752688172043011,
+  score: 0.6304347826086957))
+Training accuracy: (np.float64(0.6521739130434783), np.float64(0.6521739130434783), np.float64(0.6304347826086957), np.float64(0.6304347826086957))
+Validation accuracy: [0.5013550135501355, 0.4905149051490515, 0.6043360433604336, 0.5311653116531165]
+Test accuracy: [0.5574837310195228, 0.544468546637744, 0.6182212581344902, 0.5704989154013015]
+======== ROUND 3
+Time: 356.6333451271057
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the speaker's role and authority, potential for misunderstanding or misinterpretation, and the likelihood of satire or hyperbole. Directly evaluate the factual accuracy of the statement while considering the complexity of the issue and any additional context that might affect its veracity. Pay particular attention to the specific context and reliability of the speaker's claims. For statements involving clear factual errors, ensure they are identified accurately. For issues with legal or geopolitical complexities, consider the nuances and potential for misinformation but prioritize the direct assessment of factual accuracy. Account for the speaker's role or authority in making the statement, recognizing that a Governor of New Jersey would likely have accurate information about tenure laws in their own state, and a Senate Democratic Leader would have the authority to comment on seating new senators. Avoid overcomplicating straightforward factual claims but also avoid dismissing complex issues without proper consideration. For statements that may be opinions or subjective interpretations, assess them accordingly without assuming they are false. Incorporate the type of source where the statement was made (e.g., debate, interview), as different sources may have different levels of scrutiny and fact-checking, which could influence the accuracy of the statement. Accurately balance the speaker’s authority and the factual content of the statement to provide a precise evaluation.
+
+# Exemplar
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(37), np.int64(71), np.int64(14), np.int64(61), np.int64(30)},
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(6), np.int64(10), np.int64(14)},
+  parent_score: 0.6521739130434783,
+  score: 0.6595744680851063), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the role and authority of the Speaker, the complexity of the issue, the potential for simplification, exaggeration, or partial truth, the type of source where the statement was made (e.g., debate, interview), and the actual financial or factual conditions described in the statement. Consider the possibility that the statement might be a simplification or exaggeration of a complex issue, and account for the likelihood that the statement could be partially true or partially false. Recognize the potential for misunderstanding or misinterpretation, especially in informal settings, and factor in the specific context and role of the speaker. Evaluate the speaker’s credibility or expertise related to the topic at hand; a statement from someone without relevant expertise may be less reliable, even if the statement seems plausible. Additionally, ensure that the evaluation takes into account any available specific data or evidence that could validate or refute the statement, especially when dealing with complex issues or opinions. Be cautious of statements that align with the speaker's known biases or interests, but also consider the possibility that the statement might reflect a genuine belief or perspective, even if it differs from widely accepted facts.
+
+# Exemplar
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(39), np.int64(19), np.int64(87), np.int64(26)},
+  examplers_idx_used: {np.int64(0), np.int64(33), np.int64(13), np.int64(14), np.int64(21)},
+  parent_score: 0.6304347826086957,
+  score: 0.6595744680851063), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. 
+
+When evaluating historical facts, ensure a nuanced understanding of legal and ethical contexts to avoid overlooking complexities. For straightforward and direct statements, such as expressing intent or desire, avoid overthinking and base your judgment on the clarity and simplicity of the statement. 
+
+Consider the nature of the context, such as whether the statement is from a guest column, opinion piece, or another type of content, which may imply subjectivity or personal belief. 
+
+Allow for the possibility that a speaker with a specific job title and state affiliation might have accurate, non-public information that is not easily verifiable through public sources. 
+
+Provide a mechanism to verify claims based on available data and legal precedents. Do not dismiss statements as false simply because they cannot be verified immediately; instead, consider the possibility that they may be true based on reliable sources or legal contexts.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(33), np.int64(66), np.int64(6), np.int64(91), np.int64(94)},
+  examplers_idx_used: {np.int64(3), np.int64(5), np.int64(10), np.int64(23), np.int64(25)},
+  parent_score: 0.6304347826086957,
+  score: 0.6382978723404256), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. However, avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(38), np.int64(42), np.int64(85), np.int64(29), np.int64(94)},
+  examplers_idx_used: {np.int64(0), np.int64(15), np.int64(24), np.int64(26), np.int64(28)},
+  parent_score: 0.6304347826086957,
+  score: 0.6382978723404256))
+Training accuracy: (np.float64(0.6595744680851063), np.float64(0.6595744680851063), np.float64(0.6382978723404256), np.float64(0.6382978723404256))
+Validation accuracy: [0.5067750677506775, 0.5203252032520326, 0.5338753387533876, 0.5609756097560976]
+Test accuracy: [0.5509761388286334, 0.5639913232104121, 0.5661605206073753, 0.5856832971800434]
+======== ROUND 4
+Time: 395.71693420410156
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the speaker's role and authority, potential for misunderstanding or misinterpretation, and the likelihood of satire or hyperbole. Directly evaluate the factual accuracy of the statement while considering the complexity of the issue and any additional context that might affect its veracity. Pay particular attention to the specific context and reliability of the speaker's claims. For statements involving clear factual errors, ensure they are identified accurately. For issues with legal or geopolitical complexities, consider the nuances and potential for misinformation but prioritize the direct assessment of factual accuracy. Account for the speaker’s role or authority in making the statement, recognizing that a Governor of New Jersey would likely have accurate information about tenure laws in their own state, and a Senate Democratic Leader would have the authority to comment on seating new senators. Avoid overcomplicating straightforward factual claims but also avoid dismissing complex issues without proper consideration. For statements that may be opinions or subjective interpretations, assess them accordingly without assuming they are false. Incorporate the type of source where the statement was made (e.g., debate, interview), as different sources may have different levels of scrutiny and fact-checking, which could influence the accuracy of the statement. Accurately balance the speaker’s authority and the factual content of the statement to provide a precise evaluation. Be flexible in your interpretation, allowing for the possibility that statements made in the context of political rhetoric or debates may contain elements of opinion or hyperbole, especially when the speaker holds a relevant position or has access to non-public information. Consider the nature of the context, such as whether it is a formal or informal setting, and the intention behind the statement when making evaluations.
+
+# Exemplar
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(66), np.int64(102), np.int64(105), np.int64(106), np.int64(61)},
+  examplers_idx_used: {np.int64(1), np.int64(5), np.int64(11), np.int64(12), np.int64(24)},
+  parent_score: 0.6595744680851063,
+  score: 0.6086956521739131), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context, the speaker's role and authority, potential for misunderstanding or misinterpretation, and the likelihood of satire or hyperbole. Directly evaluate the factual accuracy of the statement while considering the complexity of the issue and any additional context that might affect its veracity. Pay particular attention to the specific context and reliability of the speaker's claims. For statements involving clear factual errors, ensure they are identified accurately. For issues with legal or geopolitical complexities, consider the nuances and potential for misinformation but prioritize the direct assessment of factual accuracy. Account for the speaker’s role or authority in making the statement, recognizing that a Governor of New Jersey would likely have accurate information about tenure laws in their own state, and a Senate Democratic Leader would have the authority to comment on seating new senators. Avoid overcomplicating straightforward factual claims but also avoid dismissing complex issues without proper consideration. For statements that may be opinions or subjective interpretations, assess them accordingly without assuming they are false. Incorporate the type of source where the statement was made (e.g., debate, interview), as different sources may have different levels of scrutiny and fact-checking, which could influence the accuracy of the statement. Accurately balance the speaker’s authority and the factual content of the statement to provide a precise evaluation. Ensure that claims about specific attributes (like credit ratings) are verified against reliable sources. Be mindful of the possibility of satire or hyperbole; if a statement seems exaggerated or humorous, consider the context and intent behind it. Evaluate informal settings with lower expectations of factual rigor, but still consider the potential impact on public perception or policy decisions. Recognize the complexity and nuance of legal claims and journalistic practices, ensuring that claims about media practices and legal standards are evaluated thoroughly and accurately. Account for the source’s reliability and the potential for misinformation, especially in legal and political contexts.
+
+# Exemplar
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(3), np.int64(42), np.int64(51), np.int64(84), np.int64(31)},
+  examplers_idx_used: {np.int64(34), np.int64(4), np.int64(5), np.int64(36), np.int64(37)},
+  parent_score: 0.6595744680851063,
+  score: 0.6086956521739131), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. However, avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. Furthermore, consider the possibility of factual errors in statements made by experts, especially in technical or engineering fields like transportation infrastructure, where professionals can sometimes make claims based on their expertise that may contain errors. Differentiate between statements that are literally false and those that are based on opinion or interpretation, recognizing that statements like the one discussing tax contributions can be true based on statistical data but might still be an opinion or interpretation rather than a literal falsehood. Account for the potential complexity and nuance in healthcare policy discussions, particularly regarding high-level government officials' statements on controversial and complex topics like healthcare reform. Recognize the complexity of political narratives and the potential for accurate but complex statements, such as those about specific historical events like the Bush administration's actions regarding General Motors. Include a more thorough consideration of the legal and journalistic integrity involved in claims about media practices and legal standards, such as the New York Times' reporting practices. Focus on the core elements of the statement while also considering the broader context and potential influences on the speaker.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(69), np.int64(70), np.int64(7), np.int64(51), np.int64(60)},
+  examplers_idx_used: {np.int64(32), np.int64(3), np.int64(5), np.int64(47), np.int64(24)},
+  parent_score: 0.6382978723404256,
+  score: 0.6086956521739131), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. However, avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. When evaluating the verifiability of a statement, consider the availability of reliable sources and the likelihood of the statement being confirmed or refuted with time. In cases where immediate verification is not possible, assume the statement is true until proven otherwise, particularly when dealing with statements made by high-ranking officials or experts in their fields. Recognize that statements made in satirical contexts or with clear intent to provoke or entertain should not be evaluated solely based on their factual content but also on the speaker's intent and the context in which they were made.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(128), np.int64(99), np.int64(139), np.int64(23), np.int64(57)},
+  examplers_idx_used: {np.int64(36), np.int64(37), np.int64(8), np.int64(13), np.int64(47)},
+  parent_score: 0.6382978723404256,
+  score: 0.6086956521739131))
+Training accuracy: (np.float64(0.6086956521739131), np.float64(0.6086956521739131), np.float64(0.6086956521739131), np.float64(0.6086956521739131))
+Validation accuracy: [0.5013550135501355, 0.5040650406504065, 0.5284552845528455, 0.5311653116531165]
+Test accuracy: [0.5661605206073753, 0.5661605206073753, 0.579175704989154, 0.579175704989154]
+======== ROUND 5
+Time: 435.2230427265167
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. Avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. When evaluating the verifiability of a statement, consider the availability of reliable sources and the likelihood of the statement being confirmed or refuted with time. Prioritize factual accuracy over the authority of the speaker unless the statement is clearly supported by credible and verifiable sources. Statements made in satirical contexts or with clear intent to provoke or entertain should not be evaluated solely based on their factual content but also on the speaker's intent and the context in which they were made.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(128), np.int64(132), np.int64(107), np.int64(108), np.int64(22)},
+  examplers_idx_used: {np.int64(37), np.int64(6), np.int64(39), np.int64(59), np.int64(28)},
+  parent_score: 0.6086956521739131,
+  score: 0.717391304347826), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. However, avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. When evaluating the verifiability of a statement, consider the availability of reliable sources and the likelihood of the statement being confirmed or refuted with time. In cases where immediate verification is not possible, assume the statement is true until proven otherwise, particularly when dealing with statements made by high-ranking officials or experts in their fields. Recognize that statements made in satirical contexts or with clear intent to provoke or entertain should not be evaluated solely based on their factual content but also on the speaker's intent and the context in which they were made. For scientific or technical statements, evaluate them based on the current scientific knowledge available, and avoid overemphasizing the speaker's expertise unless it directly impacts the statement's accuracy. For factual claims that can be verified with available data, such as the rising cost of college or tax increases, focus on the verifiability and accuracy of the specific claim rather than the speaker's role or the informal context. For statements involving legal or constitutional matters, carefully consider the context and the exact wording of the relevant documents to ensure accurate assessment.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(167), np.int64(140), np.int64(115), np.int64(152), np.int64(95)},
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(37), np.int64(10), np.int64(58)},
+  parent_score: 0.6086956521739131,
+  score: 0.717391304347826), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. However, avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. When evaluating the verifiability of a statement, consider the availability of reliable sources and the likelihood of the statement being confirmed or refuted with time. In cases where immediate verification is not possible, assume the statement is true until proven otherwise, particularly when dealing with statements made by high-ranking officials or experts in their fields. Recognize that statements made in satirical contexts or with clear intent to provoke or entertain should not be evaluated solely based on their factual content but also on the speaker's intent and the context in which they were made.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(128), np.int64(99), np.int64(139), np.int64(23), np.int64(57)},
+  examplers_idx_used: {np.int64(36), np.int64(37), np.int64(8), np.int64(13), np.int64(47)},
+  parent_score: 0.6382978723404256,
+  score: 0.717391304347826), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. Avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. Differentiate between statements that are literally false and those that are based on opinion or interpretation. Statements like those regarding tax contributions can be true based on statistical data but might still be an opinion or interpretation rather than a literal falsehood. Account for the potential complexity and nuance in healthcare policy discussions, particularly regarding high-level government officials' statements on controversial and complex topics like healthcare reform. Recognize the complexity of political narratives and the potential for accurate but complex statements, such as those about specific historical events like the Bush administration's actions regarding General Motors. Include a more thorough consideration of the legal and journalistic integrity involved in claims about media practices and legal standards, such as the New York Times' reporting practices. Prioritize factual accuracy over the authority of the speaker when evaluating the veracity of a statement, ensuring that the core elements are rigorously assessed. Consider the possibility of factual errors in statements made by experts, especially in technical or engineering fields like transportation infrastructure, where professionals can sometimes make claims based on their expertise that may contain errors. Weigh the credibility and expertise of the speaker more carefully, especially when the statement pertains to global rankings or complex issues that require independent verification. Account for the potential for statements to be opinions or generalizations rather than literal falsehoods, and adjust the evaluation accordingly.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(108), np.int64(87), np.int64(28), np.int64(61), np.int64(30)},
+  examplers_idx_used: {np.int64(39), np.int64(13), np.int64(16), np.int64(20), np.int64(53)},
+  parent_score: 0.6086956521739131,
+  score: 0.6956521739130435))
+Training accuracy: (np.float64(0.717391304347826), np.float64(0.717391304347826), np.float64(0.717391304347826), np.float64(0.6956521739130435))
+Validation accuracy: [0.5420054200542005, 0.5420054200542005, 0.5284552845528455, 0.5284552845528455]
+Test accuracy: [0.5835140997830802, 0.5748373101952278, 0.5726681127982647, 0.5639913232104121]
+======== ROUND 6
+Time: 432.7309989929199
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. Avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. When evaluating the verifiability of a statement, consider the availability of reliable sources and the likelihood of the statement being confirmed or refuted with time. Prioritize factual accuracy over the authority of the speaker unless the statement is clearly supported by credible and verifiable sources. Statements made in satirical contexts or with clear intent to provoke or entertain should be evaluated based on both the speaker's intent and the context in which the statement was made, rather than focusing solely on the factual content. Account for the complexity and historical context of historical facts and events, recognizing that public discourse often reflects a range of perspectives and interpretations. Ensure that the evaluation process considers the multifaceted nature of political and economic narratives, and the potential for accurate but complex statements to be made.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(109), np.int64(21), np.int64(60), np.int64(157), np.int64(30)},
+  examplers_idx_used: {np.int64(34), np.int64(11), np.int64(12), np.int64(48), np.int64(60)},
+  parent_score: 0.717391304347826,
+  score: 0.7391304347826086), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. Avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. When evaluating the verifiability of a statement, consider the availability of reliable sources and the likelihood of the statement being confirmed or refuted with time. Prioritize factual accuracy over the authority of the speaker unless the statement is clearly supported by credible and verifiable sources. Statements made in satirical contexts or with clear intent to provoke or entertain should not be evaluated solely based on their factual content but also on the speaker's intent and the context in which they were made. Be mindful of hyperbole and exaggeration; such dramatic statements often serve to grab attention rather than convey factual information. In informal settings, statements might be made without the intention of misleading but still contain inaccuracies due to misinterpretation. Different sources where the statement was made (e.g., debate, interview, social media post) may have different levels of scrutiny and fact-checking, which could influence the accuracy of the statement. Properly account for the specific context provided, such as a campaign email or a debate, as these contexts can significantly influence the accuracy and reliability of the statements. Finally, weigh the speaker's authority in relation to the topic; for instance, a college professor discussing K-12 education would likely have specialized knowledge in the field, and this expertise should be considered when evaluating the statement’s accuracy.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(162), np.int64(133), np.int64(41), np.int64(14), np.int64(116)},
+  examplers_idx_used: {np.int64(0), np.int64(36), np.int64(45), np.int64(14), np.int64(50)},
+  parent_score: 0.717391304347826,
+  score: 0.7391304347826086), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. However, avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. When evaluating the verifiability of a statement, consider the availability of reliable sources and the likelihood of the statement being confirmed or refuted with time. In cases where immediate verification is not possible, assume the statement is true until proven otherwise, particularly when dealing with statements made by high-ranking officials or experts in their fields. Recognize that statements made in satirical contexts or with clear intent to provoke or entertain should be evaluated based on both their factual content and the speaker's intent and the context in which they were made. Account for the possibility that a statement might be an opinion or a subjective assessment rather than a factual claim, especially in political or social contexts.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(194), np.int64(42), np.int64(147), np.int64(87), np.int64(187)},
+  examplers_idx_used: {np.int64(66), np.int64(10), np.int64(12), np.int64(46), np.int64(51)},
+  parent_score: 0.717391304347826,
+  score: 0.7391304347826086), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the credibility of the speaker, including their expertise in the relevant field and any potential biases. Assess the context in which the statement was made, including any potential for misunderstanding or misinterpretation, especially in informal settings. Evaluate the reliability and verifiability of the statement based on the given information, taking into account the complexity of the issue at hand and whether the statement requires additional context to fully assess its accuracy. Additionally, consider the potential for the statement to be partially true or requiring nuance, and evaluate the credibility of the source providing the statement. Recognize that the job title, state, and party affiliation alone do not guarantee the truthfulness of the statement, and account for the multifaceted nature of political and economic issues that may involve multiple factors and perspectives. Avoid overcomplicating straightforward statements and ensure that factual inaccuracies are identified and addressed appropriately. Focus on the core elements of the statement to determine its veracity, while also considering the broader context and potential influences on the speaker. Differentiate between statements that are literally false and those that are based on opinion or interpretation. Statements like those regarding tax contributions can be true based on statistical data but might still be an opinion or interpretation rather than a literal falsehood. Account for the potential complexity and nuance in healthcare policy discussions, particularly regarding high-level government officials' statements on controversial and complex topics like healthcare reform. Recognize the complexity of political narratives and the potential for accurate but complex statements, such as those about specific historical events like the Bush administration's actions regarding General Motors. Include a more thorough consideration of the legal and journalistic integrity involved in claims about media practices and legal standards, such as the New York Times' reporting practices. Prioritize factual accuracy over the authority of the speaker when evaluating the veracity of a statement, ensuring that the core elements are rigorously assessed. Consider the possibility of factual errors in statements made by experts, especially in technical or engineering fields like transportation infrastructure, where professionals can sometimes make claims based on their expertise that may contain errors. Weigh the credibility and expertise of the speaker more carefully, especially when the statement pertains to global rankings or complex issues that require independent verification. Account for the dynamic nature of situations, such as judicial workloads, which can fluctuate over time and the context in which such claims are made. Treat statements as potentially true unless proven otherwise, and evaluate them based on available data and evidence rather than dismissing them outright. Distinguish between statements that are primarily opinion-based and those that require a more critical factual evaluation, ensuring that both types of statements are assessed appropriately. Account for the potential for statements to be opinions or generalizations rather than literal falsehoods, and adjust the evaluation accordingly.
+
+# Exemplar
+Text: "Statement: Says New Jerseys tenure law has now been reformed to say that if teachers get two years of partially effective or ineffective ratings they lose tenure.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: a speech at the Brookings Institution"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: With those first principles, it allowed a fellow like me to get in his truck and go from one end of the state to the other; started 20 points down and wound up 20 points ahead on election night.
+Job title: Actor
+State: Tennessee
+Party: republican
+Context: Washington, D.C."
+Label: No
+
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: Says the government wants to require farm tractor drivers to hold commercial drivers licenses even if theyre just crossing a single public road.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a speech."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(135), np.int64(169), np.int64(85), np.int64(154), np.int64(126)},
+  examplers_idx_used: {np.int64(5), np.int64(78), np.int64(48), np.int64(59), np.int64(62)},
+  parent_score: 0.6956521739130435,
+  score: 0.7391304347826086))
+Training accuracy: (np.float64(0.7391304347826086), np.float64(0.7391304347826086), np.float64(0.7391304347826086), np.float64(0.7391304347826086))
+Validation accuracy: [0.5447154471544715, 0.5203252032520326, 0.5121951219512195, 0.5474254742547425]
+Test accuracy: [0.5748373101952278, 0.5639913232104121, 0.5639913232104121, 0.5574837310195228]

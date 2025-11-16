@@ -1,0 +1,810 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 6, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY STRATEGY
+======== MODEL: QWEN2.5-7B-INSTRUCT
+
+======== ROUND 0
+Time: 21.427202224731445
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.54443359375),)
+Training accuracy: (np.float64(0.54443359375),)
+Validation accuracy: [0.5230352303523035]
+Test accuracy: [0.4880694143167028]
+======== ROUND 1
+Time: 95.23773121833801
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect. Provide your judgment while taking into account the broader implications and the credibility of the information presented.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(4), np.int64(7), np.int64(10), np.int64(11), np.int64(12)},
+  examplers_idx_used: {np.int64(2), np.int64(5), np.int64(6), np.int64(8), np.int64(13)},
+  parent_score: 0.54443359375,
+  score: 0.5645161290322581), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information. Consider the source of the statement, the nature of the context, and any potential misleading or hyperbolic language. Do not assume the statement is false just because it contradicts common knowledge or your personal beliefs. Evaluate the statement for factual correctness, taking into account the possible influence of the speaker's role, political affiliation, or the medium through which the statement was made. Recognize that statements might be simplified, exaggerated, or used for rhetorical effect.
+
+# Exemplar
+Text: "Statement: McCain opposes a woman's right to choose.
+Job title: 
+State: 
+Party: democrat
+Context: an e-mail message"
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: Over the last four years, the deficit has gone up, but 90 percent of that is as a consequence of President George W. Bushs policies and the recession.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on CBS' "60 Minutes""
+Label: Yes
+
+Text: "Statement: If black America were a country, itd be the 15th wealthiest nation in the world.
+Job title: Radio talk show host
+State: 
+Party: talk-show-host
+Context: comments on CNN
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(7), np.int64(8), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(0), np.int64(8), np.int64(11), np.int64(12), np.int64(14)},
+  parent_score: 0.54443359375,
+  score: 0.543010752688172), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.510752688172043), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the provided Context, the reliability of the Source, and the Accuracy of the Information within the given context. Consider the statement's alignment with commonly accepted facts, the relevance of the context, and any potential political biases. Provide your judgment with reasoning when prompted.
+
+# Exemplar
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: If black America were a country, itd be the 15th wealthiest nation in the world.
+Job title: Radio talk show host
+State: 
+Party: talk-show-host
+Context: comments on CNN
+Label: Yes
+
+Text: "Statement: The top 1 percent of income earners pay 40 percent of all state income taxes, and those at the bottom pay little or nothing.
+Job title: 
+State: 
+Party: republican
+Context: an opinion piece
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(4), np.int64(12), np.int64(14)},
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(10), np.int64(11), np.int64(13)},
+  parent_score: 0.54443359375,
+  score: 0.5))
+Training accuracy: (np.float64(0.5645161290322581), np.float64(0.543010752688172), np.float64(0.510752688172043), np.float64(0.5))
+Validation accuracy: [0.5663956639566395, 0.5474254742547425, 0.5230352303523035, 0.4959349593495935]
+Test accuracy: [0.5943600867678959, 0.5401301518438177, 0.48590021691973967, 0.4880694143167028]
+======== ROUND 2
+Time: 313.2565531730652
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the speaker's expertise or role, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect. Evaluate the broader implications and the credibility of the information presented, taking into account the potential influence of political campaigns, the type of publication or platform where the statement is made, and the availability of verifiable facts. Provide your judgment carefully, ensuring that the reliability of the source and the context are thoroughly considered.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(3), np.int64(5), np.int64(6), np.int64(22), np.int64(25)},
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(15), np.int64(24), np.int64(28)},
+  parent_score: 0.5645161290322581,
+  score: 0.717391304347826), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect. Provide your judgment while taking into account the broader implications and the credibility of the information presented.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(4), np.int64(7), np.int64(10), np.int64(11), np.int64(12)},
+  examplers_idx_used: {np.int64(2), np.int64(5), np.int64(6), np.int64(8), np.int64(13)},
+  parent_score: 0.54443359375,
+  score: 0.6956521739130435), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect, especially in contexts that suggest a lighter tone or entertainment value. Take into account the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Provide your judgment with due consideration to all these factors.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(17), np.int64(18), np.int64(21)},
+  examplers_idx_used: {np.int64(5), np.int64(10), np.int64(19), np.int64(20), np.int64(26)},
+  parent_score: 0.5645161290322581,
+  score: 0.6739130434782609), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the role and expertise of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect. Verify factual claims through independent sources when possible. Account for potential political biases and the speaker's position. Analyze the broader implications and the credibility of the information presented, taking into account the complexity and nuances of the situation.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(10), np.int64(12), np.int64(22), np.int64(24)},
+  examplers_idx_used: {np.int64(16), np.int64(17), np.int64(22), np.int64(27), np.int64(28)},
+  parent_score: 0.5645161290322581,
+  score: 0.6739130434782609))
+Training accuracy: (np.float64(0.717391304347826), np.float64(0.6956521739130435), np.float64(0.6739130434782609), np.float64(0.6739130434782609))
+Validation accuracy: [0.5718157181571816, 0.5663956639566395, 0.5691056910569106, 0.5501355013550135]
+Test accuracy: [0.6052060737527115, 0.5943600867678959, 0.6030368763557483, 0.5704989154013015]
+======== ROUND 3
+Time: 306.18876338005066
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect, especially in contexts that suggest a lighter tone or entertainment value. Take into account the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Additionally, assess the potential bias of the source and how it might influence the statement. Prioritize the credibility of the source based on their position and the context of the statement, and verify the veracity of specific claims against known facts and reputable sources. Provide your judgment with due consideration to all these factors.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(40), np.int64(82), np.int64(83), np.int64(90), np.int64(94)},
+  examplers_idx_used: {np.int64(64), np.int64(36), np.int64(7), np.int64(9), np.int64(24)},
+  parent_score: 0.6739130434782609,
+  score: 0.6956521739130435), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, and whether the statement is a factual claim, an opinion, or a recommendation. Be cautious of hyperbole or exaggeration used for rhetorical effect or comedic purposes. Recognize the specific field or domain in which the statement is made, as the level of scrutiny required can vary significantly between different fields. For example, statements about economic data, such as job creation numbers, require a different level of detail and expert analysis compared to statements about military or political actions. Historical anecdotes, personal opinions, and recommendations should be distinguished from verifiable claims. In cases where the context suggests a lighter tone or entertainment value, such as in satirical media, consider the potential for hyperbole or exaggeration. Provide your judgment while taking into account the broader implications and the credibility of the information presented.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(67), np.int64(45), np.int64(18), np.int64(62), np.int64(31)},
+  examplers_idx_used: {np.int64(33), np.int64(6), np.int64(8), np.int64(14), np.int64(55)},
+  parent_score: 0.6956521739130435,
+  score: 0.6739130434782609), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect, especially in contexts that suggest a lighter tone or entertainment value. Take into account the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Differentiate clearly between factual claims that can be verified against reliable data or sources and statements of opinion or policy stances. When evaluating the expertise of the speaker, consider their relevant background and knowledge in the subject matter. Provide your judgment with due consideration to all these factors.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(64), np.int64(51), np.int64(21), np.int64(59), np.int64(63)},
+  examplers_idx_used: {np.int64(67), np.int64(9), np.int64(21), np.int64(54), np.int64(22)},
+  parent_score: 0.6739130434782609,
+  score: 0.6739130434782609), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the provided Context and other information. Consider the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration, especially in contexts suggesting a lighter tone or entertainment value. Analyze the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Additionally, verify specific factual claims using available data or expert opinions when necessary. Provide your judgment with due consideration to all these factors.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(41), np.int64(19), np.int64(86), np.int64(94), np.int64(31)},
+  examplers_idx_used: {np.int64(68), np.int64(36), np.int64(9), np.int64(22), np.int64(27)},
+  parent_score: 0.6739130434782609,
+  score: 0.6739130434782609))
+Training accuracy: (np.float64(0.6956521739130435), np.float64(0.6739130434782609), np.float64(0.6739130434782609), np.float64(0.6739130434782609))
+Validation accuracy: [0.5582655826558266, 0.5826558265582655, 0.5636856368563685, 0.5528455284552846]
+Test accuracy: [0.5856832971800434, 0.6052060737527115, 0.5943600867678959, 0.5704989154013015]
+======== ROUND 4
+Time: 350.89391827583313
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect, especially in contexts that suggest a lighter tone or entertainment value. Take into account the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Additionally, assess the potential bias of the source and how it might influence the statement. Prioritize the credibility of the source based on their position and the context of the statement, and verify the veracity of specific claims against known facts and reputable sources. 
+
+Be mindful of the dynamic nature of information and consider how it might change over time. Some statements may be accurate at the moment they are made but become outdated due to new developments or research. 
+
+Recognize that the expertise and professional background of the speaker can significantly influence the truthfulness of their statement. For example, a lawyer's opinion on legal matters should be evaluated based on legal expertise rather than general context alone.
+
+When evaluating factual claims, verify them independently using reliable sources. For instance, a politician's claim about property taxes can be checked against public records to ensure accuracy.
+
+Provide your judgment with due consideration to all these factors, keeping in mind the potential biases and the evolving nature of information.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(33), np.int64(49), np.int64(83), np.int64(51), np.int64(22)},
+  examplers_idx_used: {np.int64(64), np.int64(69), np.int64(9), np.int64(74), np.int64(77)},
+  parent_score: 0.6956521739130435,
+  score: 0.6739130434782609), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect, especially in contexts that suggest a lighter tone or entertainment value. Take into account the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Differentiate clearly between factual claims that can be verified against reliable data or sources and statements of opinion or policy stances. When evaluating the expertise of the speaker, consider their relevant background and knowledge in the subject matter. Account for the dynamic nature of political statements and the context in which they are made. For instance, statements made by a candidate during a campaign may be hyperbolic and intended to inspire support rather than present literal facts. Recognize the nuance required to distinguish between different types of claims; for example, a statement about a specific voting record should be evaluated based on verifiable data rather than the speaker's job title alone. Provide your judgment with due consideration to all these factors.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(106), np.int64(14), np.int64(115), np.int64(122), np.int64(93)},
+  examplers_idx_used: {np.int64(33), np.int64(5), np.int64(72), np.int64(94), np.int64(62)},
+  parent_score: 0.6739130434782609,
+  score: 0.6521739130434783), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Begin by considering the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect, especially in contexts that suggest a lighter tone or entertainment value. Take into account the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Assess the potential bias of the source and how it might influence the statement. Prioritize the credibility of the source based on their position and the context of the statement, and verify the veracity of specific claims against known facts and reputable sources. Ensure to research and fact-check the statement, even if it involves historical actions or policy positions, as these can often be verified against historical records or official documents. Distinguish between literal and figurative language when evaluating the statement; if the statement is clearly meant as a figure of speech, note that it is not intended to be taken literally. Consider the broader historical context and any relevant data when assessing claims related to known facts or events. For complex or context-dependent statements, prioritize the credibility of the source and the verifiability of the claim over other factors. Provide your judgment with due consideration to all these factors.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(108), np.int64(54), np.int64(89), np.int64(29), np.int64(30)},
+  examplers_idx_used: {np.int64(72), np.int64(13), np.int64(45), np.int64(49), np.int64(58)},
+  parent_score: 0.6956521739130435,
+  score: 0.6304347826086957), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the reliability of the source, the nature of the context, the expertise or role of the speaker, and whether the statement is a factual claim or an opinion. Be cautious of hyperbole or exaggeration used for rhetorical effect, especially in contexts that suggest a lighter tone or entertainment value. Take into account the broader implications and the credibility of the information presented, including the timing and manner of the disclosure or the sources cited. Evaluate the type of publication or platform where the statement is made to better gauge its veracity. Additionally, assess the potential bias of the source and how it might influence the statement. Prioritize the credibility of the source based on their position and the context of the statement, and verify the veracity of specific claims against known facts and reputable sources. When dealing with factual claims, ensure they are supported by credible evidence or data. For statements based on subjective opinions or personal experiences, consider the context and the speaker's position. For statements involving complex topics or roles, such as budget management or legislative matters, consider the expertise and influence of the speaker. Provide your judgment with due consideration to all these factors.
+
+# Exemplar
+Text: "Statement: Every time we raise the minimum wage, the number of jobless people increases.
+Job title: 
+State: 
+Party: republican
+Context: the Republican debate in Milwaukee, Wis."
+Label: Yes
+
+Text: "Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column"
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: After how hard you work and how much you pay in taxes, New York City ends up getting the money. Im Chris Jacobs. I think its time we have someone in Albany thats making sure our region gets our fair share
+Job title: Erie County Clerk
+State: New York
+Party: republican
+Context: a campaign ad"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(35), np.int64(6), np.int64(24), np.int64(25), np.int64(59)},
+  examplers_idx_used: {np.int64(35), np.int64(72), np.int64(9), np.int64(83), np.int64(58)},
+  parent_score: 0.6956521739130435,
+  score: 0.6086956521739131))
+Training accuracy: (np.float64(0.6739130434782609), np.float64(0.6521739130434783), np.float64(0.6304347826086957), np.float64(0.6086956521739131))
+Validation accuracy: [0.4986449864498645, 0.5311653116531165, 0.4905149051490515, 0.5365853658536586]
+Test accuracy: [0.5509761388286334, 0.5488069414316703, 0.5292841648590022, 0.5574837310195228]

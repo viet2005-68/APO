@@ -1,0 +1,954 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos/ethos-16-11.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 6, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY STRATEGY
+======== MODEL: QWEN2.5-7B-INSTRUCT
+
+======== ROUND 0
+Time: 1.5900623798370361
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.8),)
+Training accuracy: (np.float64(0.8),)
+Validation accuracy: [0.8]
+Test accuracy: [0.77]
+======== ROUND 1
+Time: 71.10794067382812
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text likely to be considered hate speech, taking into account the severity, intent, and context of the statement? Please provide a detailed analysis of why the text is or is not hate speech, including any potential offensive language, derogatory terms, and the overall tone and implications.
+
+# Exemplar
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "i like dead refugees on my shore√Ø¬ª¬ø"
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(4), np.int64(9), np.int64(10)},
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(3), np.int64(4), np.int64(8)},
+  parent_score: 0.8,
+  score: 0.89), Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic.
+
+Example 1: "They should have beat his ass. He deserves it."
+- Context: Personal opinion about someone's actions.
+- Idiomatic Expression: "beat his ass" is a colloquial phrase meaning to defeat or punish someone.
+- Targeted Group: Specific individual.
+- Perceived in Different Regions: May vary based on local norms and tolerance for such language.
+
+Example 2: "They are a cult and should be shut down."
+- Context: Criticism of a religious or non-religious group.
+- Idiomatic Expression: "cult" can be used pejoratively.
+- Targeted Group: Non-specific group (could be religious or cult-like organization).
+- Perceived in Different Regions: May be seen as an opinion rather than hate speech depending on cultural context.
+
+Example 3: "Why the fuck would you ask Trump?"
+- Context: Question directed at a public figure.
+- Idiomatic Expression: "fuck" is a vulgar term.
+- Targeted Group: Specific individual (President Trump).
+- Perceived in Different Regions: Vulgarity might be interpreted differently based on regional sensibilities.
+
+Example 4: "We should expel them from our community."
+- Context: Suggestion for removing a group from a community.
+- Idiomatic Expression: None.
+- Targeted Group: Non-specific group.
+- Perceived in Different Regions: May be seen as a recommendation or a call for action depending on the community's values.
+
+Example 5: "Israeli treatment of Palestinians is unjust."
+- Context: Political critique of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Non-specific group (Palestinians).
+- Perceived in Different Regions: Might be seen as a political stance rather than hate speech.
+
+Example 6: "All Muslims are terrorists."
+- Context: Generalization about a religious group.
+- Idiomatic Expression: None.
+- Targeted Group: Muslims.
+- Perceived in Different Regions: Likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+
+Example 7: "The Palestinians are being brutalized by the Israelis."
+- Context: Description of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Palestinians.
+- Perceived in Different Regions: Might be seen as a factual report rather than hate speech, especially if the context is provided.
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "I wonder why they didn' throw the fire booms in that cult when those Muslims were inside. That would have been one hell of a BBQ."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(10)},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0.8,
+  score: 0.88), Prompt(
+  prompt: # Task
+Is the following text likely to be considered hate speech, taking into account regional and linguistic differences, cultural context, and the potential for coded language? Please provide your analysis considering the subtleties in the text, the intent behind the statements, and the specific context in which they are made.
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+Text: "I wonder why they didn' throw the fire booms in that cult when those Muslims were inside. That would have been one hell of a BBQ."
+Label: Yes
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "i like dead refugees on my shore√Ø¬ª¬ø"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(4), np.int64(5), np.int64(8), np.int64(9), np.int64(10)},
+  examplers_idx_used: {np.int64(1), np.int64(3), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0.8,
+  score: 0.88), Prompt(
+  prompt: # Task
+Is the following text likely to be considered hate speech, taking into account the context, idiomatic expressions, regional dialects, and potential sarcasm or irony? Please provide a detailed explanation for your classification.
+
+# Exemplar
+Text: "Id beat the fuck out of his ass if he wasnt an actor"
+Label: No
+
+Text: "i like dead refugees on my shore√Ø¬ª¬ø"
+Label: Yes
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+Text: "I would love to watch tearing apart every christian or muslim"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(3), np.int64(4), np.int64(10)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(6), np.int64(8), np.int64(9)},
+  parent_score: 0.8,
+  score: 0.87))
+Training accuracy: (np.float64(0.89), np.float64(0.88), np.float64(0.88), np.float64(0.87))
+Validation accuracy: [0.86, 0.86, 0.88, 0.84]
+Test accuracy: [0.88, 0.9, 0.92, 0.83]
+======== ROUND 2
+Time: 352.9039454460144
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text likely to be considered hate speech, taking into account the context, idiomatic expressions, regional dialects, potential sarcasm or irony, and the directness and severity of the statements? Please provide a detailed explanation for your classification, including an assessment of any coded language, verbal aggression, and the potential for harm. Consider the specific cultural and linguistic nuances that might influence the interpretation of the text.
+
+# Exemplar
+Text: "i don't blame texas, trans should be looked down upon"
+Label: Yes
+
+Text: "Id beat the fuck out of his ass if he wasnt an actor"
+Label: No
+
+Text: "Those people are nothing but parasites, draining resources and spreading their culture everywhere. We should get rid of them."
+Label: Yes
+
+Text: "Why do we keep letting these people in? They don't integrate and just want to live off our system. It's time to stop this madness."
+Label: Yes
+
+Text: "This neighborhood is infested with illegals who bring crime and disease. We need to clean it up."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(35), np.int64(4), np.int64(38), np.int64(8), np.int64(10)},
+  examplers_idx_used: {np.int64(9), np.int64(10), np.int64(12), np.int64(13), np.int64(22)},
+  parent_score: 0.87,
+  score: 0.9591836734693877), Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Specifically, classify the text based on the following criteria:
+1. **Context**: Understand the broader situation or setting in which the text is used.
+2. **Idiomatic Expressions**: Identify any phrases or terms that may have a different connotation or cultural significance.
+3. **Targeted Groups**: Determine who or what the text is directed at and whether it involves a protected characteristic.
+4. **Perception Across Cultures**: Analyze how the text might be interpreted differently in various regions or cultures.
+5. **Call for Harm or Hatred**: Assess whether the text explicitly or implicitly promotes violence, discrimination, or contempt towards a specific group.
+
+For example:
+- **Example 1**: "They should have beat his ass. He deserves it."
+  - **Context**: Personal opinion about someone's actions.
+  - **Idiomatic Expression**: "beat his ass" is a colloquial phrase meaning to defeat or punish someone.
+  - **Targeted Group**: Specific individual.
+  - **Perception Across Cultures**: May vary based on local norms and tolerance for such language.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a personal opinion.
+
+- **Example 2**: "They are a cult and should be shut down."
+  - **Context**: Criticism of a religious or non-religious group.
+  - **Idiomatic Expression**: "cult" can be used pejoratively.
+  - **Targeted Group**: Non-specific group (could be religious or cult-like organization).
+  - **Perception Across Cultures**: May be seen as an opinion rather than hate speech depending on cultural context.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a criticism.
+
+- **Example 3**: "Why the fuck would you ask Trump?"
+  - **Context**: Question directed at a public figure.
+  - **Idiomatic Expression**: "fuck" is a vulgar term.
+  - **Targeted Group**: Specific individual (President Trump).
+  - **Perception Across Cultures**: Vulgarity might be interpreted differently based on regional sensibilities.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a question with a vulgar term.
+
+- **Example 4**: "We should expel them from our community."
+  - **Context**: Suggestion for removing a group from a community.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Non-specific group.
+  - **Perception Across Cultures**: May be seen as a recommendation or a call for action depending on the community's values.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a suggestion.
+
+- **Example 5**: "Israeli treatment of Palestinians is unjust."
+  - **Context**: Political critique of actions by one ethnic group towards another.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Non-specific group (Palestinians).
+  - **Perception Across Cultures**: Might be seen as a political stance rather than hate speech, especially if the context is provided.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a political critique.
+
+- **Example 6**: "All Muslims are terrorists."
+  - **Context**: Generalization about a religious group.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Muslims.
+  - **Perception Across Cultures**: Likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+  - **Call for Harm or Hatred**: Directly expresses hatred and calls for harm towards a protected characteristic.
+
+- **Example 7**: "The Palestinians are being brutalized by the Israelis."
+  - **Context**: Description of actions by one ethnic group towards another.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Palestinians.
+  - **Perception Across Cultures**: Might be seen as a factual report rather than hate speech, especially if the context is provided.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a description of actions.
+
+By addressing these criteria, we ensure a more accurate classification of hate speech.
+
+# Exemplar
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: Yes
+
+Text: "Why do we even need to have diversity in our community? They just bring problems and shouldn't be here."
+Label: Yes
+
+Text: "Id beat the fuck out of his ass if he wasnt an actor"
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(9), np.int64(14), np.int64(21), np.int64(22)},
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(9), np.int64(11), np.int64(16)},
+  parent_score: 0.88,
+  score: 0.9387755102040817), Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Your response should include an analysis of the historical, social, and cultural context of any terms or phrases used, as well as an evaluation of the potential psychological and social impacts of the text on the targeted group.
+
+Example 1: "They should have beat his ass. He deserves it."
+- Context: Personal opinion about someone's actions.
+- Idiomatic Expression: "beat his ass" is a colloquial phrase meaning to defeat or punish someone.
+- Targeted Group: Specific individual.
+- Perceived in Different Regions: May vary based on local norms and tolerance for such language.
+
+Example 2: "They are a poo composition and should be shut down."
+- Context: Criticism of a social group.
+- Idiomatic Expression: "poo composition" is a derogatory term historically used to refer to Dalits in India, which is highly offensive.
+- Targeted Group: Dalits.
+- Perceived in Different Regions: Likely to be seen as hate speech due to its derogatory and historically insensitive nature.
+
+Example 3: "Easter is the most silly holiday ever existed."
+- Context: Critique of a holiday.
+- Idiomatic Expression: None.
+- Targeted Group: Christians.
+- Perceived in Different Regions: Might be seen as a personal opinion rather than hate speech, especially if the context indicates a lack of hostility towards Christians.
+
+Example 4: "We should expel them from our community."
+- Context: Suggestion for removing a group from a community.
+- Idiomatic Expression: None.
+- Targeted Group: Non-specific group.
+- Perceived in Different Regions: May be seen as a recommendation or a call for action depending on the community's values, potentially leading to xenophobia and discrimination.
+
+Example 5: "The Palestinians are being brutalized by the Israelis."
+- Context: Description of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Palestinians.
+- Perceived in Different Regions: Might be seen as a factual report rather than hate speech, especially if the context provides balanced information.
+
+Example 6: "All Muslims are terrorists."
+- Context: Generalization about a religious group.
+- Idiomatic Expression: None.
+- Targeted Group: Muslims.
+- Perceived in Different Regions: Likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+
+Example 7: "The Palestinians are being brutalized by the Israelis."
+- Context: Description of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Palestinians.
+- Perceived in Different Regions: Might be seen as a factual report rather than hate speech, especially if the context is provided.
+
+In your response, ensure that you analyze the text with respect to the following criteria:
+- **Context**: The circumstances under which the text was written or said.
+- **Idiomatic Expressions**: Any phrases or words that may carry different meanings in various contexts.
+- **Targeted Group**: Who or what the text is directed at.
+- **Perception in Different Regions**: How the text might be perceived in various cultural and social settings.
+- **Direct Call for Harm or Hatred**: Whether the text explicitly calls for harm or expresses hatred towards a protected characteristic.
+
+By providing a detailed explanation, you will help ensure that the classification of hate speech is accurate and nuanced.
+
+# Exemplar
+Text: "I would love to watch tearing apart every christian or muslim"
+Label: Yes
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "Why do we even need to have diversity in our community? They just bring problems and shouldn't be here."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(13), np.int64(16), np.int64(17), np.int64(21)},
+  examplers_idx_used: {np.int64(3), np.int64(6), np.int64(8), np.int64(11), np.int64(16)},
+  parent_score: 0.88,
+  score: 0.9387755102040817), Prompt(
+  prompt: # Task
+Is the following text likely to be considered hate speech, taking into account regional and linguistic differences, cultural context, and the potential for coded language? Please provide your analysis considering the subtleties in the text, the intent behind the statements, and the specific context in which they are made. Additionally, ensure to account for the historical and social significance of terms and phrases, the potential for dehumanization and marginalization, and the impact on protected characteristics. The response should include a detailed explanation of how various factors contribute to the classification, including any cultural, religious, or social sensitivities that may influence the interpretation of the text.
+
+# Exemplar
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: Yes
+
+Text: "Why do we keep letting these people in? They don't integrate and just want to live off our system. It's time to stop this madness."
+Label: Yes
+
+Text: "I would love to watch tearing apart every christian or muslim"
+Label: Yes
+
+Text: "Those people are nothing but parasites, draining resources and spreading their culture everywhere. We should get rid of them."
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(7), np.int64(17), np.int64(21), np.int64(22)},
+  examplers_idx_used: {np.int64(0), np.int64(6), np.int64(12), np.int64(13), np.int64(16)},
+  parent_score: 0.88,
+  score: 0.9387755102040817))
+Training accuracy: (np.float64(0.9591836734693877), np.float64(0.9387755102040817), np.float64(0.9387755102040817), np.float64(0.9387755102040817))
+Validation accuracy: [0.88, 0.88, 0.86, 0.86]
+Test accuracy: [0.86, 0.9, 0.91, 0.86]
+======== ROUND 3
+Time: 515.6409311294556
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Specifically, classify the text based on the following criteria:
+1. **Context**: Understand the broader situation or setting in which the text is used.
+2. **Idiomatic Expressions**: Identify any phrases or terms that may have a different connotation or cultural significance.
+3. **Targeted Groups**: Determine who or what the text is directed at and whether it involves a protected characteristic.
+4. **Perception Across Cultures**: Analyze how the text might be interpreted differently in various regions or cultures.
+5. **Call for Harm or Hatred**: Assess whether the text explicitly or implicitly promotes violence, discrimination, or contempt towards a specific group.
+
+For example:
+- **Example 1**: "They should have beat his ass. He deserves it."
+  - **Context**: Personal opinion about someone's actions.
+  - **Idiomatic Expression**: "beat his ass" is a colloquial phrase meaning to defeat or punish someone.
+  - **Targeted Group**: Specific individual.
+  - **Perception Across Cultures**: May vary based on local norms and tolerance for such language.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a personal opinion.
+
+- **Example 2**: "They are a cult and should be shut down."
+  - **Context**: Criticism of a religious or non-religious group.
+  - **Idiomatic Expression**: "cult" can be used pejoratively.
+  - **Targeted Group**: Non-specific group (could be religious or cult-like organization).
+  - **Perception Across Cultures**: May be seen as an opinion rather than hate speech depending on cultural context.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a criticism.
+
+- **Example 3**: "Why the fuck would you ask Trump?"
+  - **Context**: Question directed at a public figure.
+  - **Idiomatic Expression**: "fuck" is a vulgar term.
+  - **Targeted Group**: Specific individual (President Trump).
+  - **Perception Across Cultures**: Vulgarity might be interpreted differently based on regional sensibilities.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a question with a vulgar term.
+
+- **Example 4**: "We should expel them from our community."
+  - **Context**: Suggestion for removing a group from a community.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Non-specific group.
+  - **Perception Across Cultures**: May be seen as a recommendation or a call for action depending on the community's values.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a suggestion.
+
+- **Example 5**: "Israeli treatment of Palestinians is unjust."
+  - **Context**: Political critique of actions by one ethnic group towards another.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Non-specific group (Palestinians).
+  - **Perception Across Cultures**: Might be seen as a political stance rather than hate speech, especially if the context is provided.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a political critique.
+
+- **Example 6**: "All Muslims are terrorists."
+  - **Context**: Generalization about a religious group.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Muslims.
+  - **Perception Across Cultures**: Likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+  - **Call for Harm or Hatred**: Directly expresses hatred and calls for harm towards a protected characteristic.
+
+- **Example 7**: "The Palestinians are being brutalized by the Israelis."
+  - **Context**: Description of actions by one ethnic group towards another.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Palestinians.
+  - **Perception Across Cultures**: Might be seen as a factual report rather than hate speech, especially if the context is provided.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a description of actions.
+
+By addressing these criteria, we ensure a more accurate classification of hate speech.
+
+# Exemplar
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: Yes
+
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: No
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "Tell me now "Whose the terrorists again "???"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(10), np.int64(49), np.int64(30), np.int64(31)},
+  examplers_idx_used: {np.int64(3), np.int64(16), np.int64(19), np.int64(25), np.int64(26)},
+  parent_score: 0.9387755102040817,
+  score: 0.9166666666666666), Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Your response should include an analysis of the historical, social, and cultural context of any terms or phrases used, as well as an evaluation of the potential psychological and social impacts of the text on the targeted group.
+
+Example 1: "They should have beat his ass. He deserves it."
+- Context: Personal opinion about someone's actions.
+- Idiomatic Expression: "beat his ass" is a colloquial phrase meaning to defeat or punish someone.
+- Targeted Group: Specific individual.
+- Perceived in Different Regions: May vary based on local norms and tolerance for such language.
+
+Example 2: "They are a poo composition and should be shut down."
+- Context: Criticism of a social group.
+- Idiomatic Expression: "poo composition" is a derogatory term historically used to refer to Dalits in India, which is highly offensive.
+- Targeted Group: Dalits.
+- Perceived in Different Regions: Likely to be seen as hate speech due to its derogatory and historically insensitive nature.
+
+Example 3: "Easter is the most silly holiday ever existed."
+- Context: Critique of a holiday.
+- Idiomatic Expression: None.
+- Targeted Group: Christians.
+- Perceived in Different Regions: Might be seen as a personal opinion rather than hate speech, especially if the context indicates a lack of hostility towards Christians.
+
+Example 4: "We should expel them from our community."
+- Context: Suggestion for removing a group from a community.
+- Idiomatic Expression: None.
+- Targeted Group: Non-specific group.
+- Perceived in Different Regions: May be seen as a recommendation or a call for action depending on the community's values, potentially leading to xenophobia and discrimination.
+
+Example 5: "The Palestinians are being brutalized by the Israelis."
+- Context: Description of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Palestinians.
+- Perceived in Different Regions: Might be seen as a factual report rather than hate speech, especially if the context provides balanced information.
+
+Example 6: "All Muslims are terrorists."
+- Context: Generalization about a religious group.
+- Idiomatic Expression: None.
+- Targeted Group: Muslims.
+- Perceived in Different Regions: Likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+
+Example 7: "The Palestinians are being brutalized by the Israelis."
+- Context: Description of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Palestinians.
+- Perceived in Different Regions: Might be seen as a factual report rather than hate speech, especially if the context is provided.
+
+In your response, ensure that you analyze the text with respect to the following criteria:
+- **Context**: The circumstances under which the text was written or said.
+- **Idiomatic Expressions**: Any phrases or words that may carry different meanings in various contexts.
+- **Targeted Group**: Who or what the text is directed at.
+- **Perception in Different Regions**: How the text might be perceived in various cultural and social settings.
+- **Direct Call for Harm or Hatred**: Whether the text explicitly calls for harm or expresses hatred towards a protected characteristic.
+
+By providing a detailed explanation, you will help ensure that the classification of hate speech is accurate and nuanced.
+
+# Exemplar
+Text: "I would love to watch tearing apart every christian or muslim"
+Label: Yes
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "Why do we even need to have diversity in our community? They just bring problems and shouldn't be here."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(13), np.int64(16), np.int64(17), np.int64(21)},
+  examplers_idx_used: {np.int64(3), np.int64(6), np.int64(8), np.int64(11), np.int64(16)},
+  parent_score: 0.88,
+  score: 0.9), Prompt(
+  prompt: # Task
+Is the following text likely to be considered hate speech, taking into account regional and linguistic differences, cultural context, and the potential for coded language? Please provide your analysis considering the subtleties in the text, the intent behind the statements, and the specific context in which they are made. Additionally, ensure to account for the historical and social significance of terms and phrases, the potential for dehumanization and marginalization, and the impact on protected characteristics. The response should include a detailed explanation of how various factors contribute to the classification, including any cultural, religious, or social sensitivities that may influence the interpretation of the text.
+
+# Exemplar
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: Yes
+
+Text: "Why do we keep letting these people in? They don't integrate and just want to live off our system. It's time to stop this madness."
+Label: Yes
+
+Text: "I would love to watch tearing apart every christian or muslim"
+Label: Yes
+
+Text: "Those people are nothing but parasites, draining resources and spreading their culture everywhere. We should get rid of them."
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(7), np.int64(17), np.int64(21), np.int64(22)},
+  examplers_idx_used: {np.int64(0), np.int64(6), np.int64(12), np.int64(13), np.int64(16)},
+  parent_score: 0.88,
+  score: 0.9), Prompt(
+  prompt: # Task
+Is the following text likely to be considered hate speech, taking into account regional and linguistic differences, cultural context, and the potential for coded language? Please provide your analysis considering the subtleties in the text, the intent behind the statements, and the specific context in which they are made. Additionally, ensure to account for the historical and social significance of terms and phrases, the potential for dehumanization and marginalization, and the impact on protected characteristics. The response should include a detailed explanation of how various factors contribute to the classification, including any cultural, religious, or social sensitivities that may influence the interpretation of the text. Specifically, consider the following:
+
+- **Regional and Linguistic Differences**: Account for variations in language and dialect that may change the meaning or perception of the text. For example, "shitted coloured" might be interpreted differently in regions where Ebonics or other local dialects are prevalent.
+- **Cultural Context**: Examine the cultural background of the speaker and the audience, as well as any historical or social context that may influence the interpretation of the text. For instance, the use of "leeches" in a European context might imply a xenophobic sentiment.
+- **Idiomatic Expressions and Nuances**: Recognize idiomatic expressions and their context-specific meanings. For example, "tearing apart" might be used figuratively and not literally, while "fuck" in "Why the fuck would you ask Trump?" indicates potential offense.
+- **Protected Characteristics**: Evaluate whether the text targets or dehumanizes individuals based on protected characteristics such as race, religion, gender, or sexual orientation.
+- **Historical and Social Significance**: Consider the historical and social significance of terms and phrases, such as the use of "expel these leeches" which could imply xenophobia or anti-immigrant sentiment.
+- **Explicit and Implicit Meanings**: Analyze both explicit and implicit meanings within the text, as some forms of hate speech may not be immediately obvious.
+
+For example, the statement "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches" is likely to be classified as hate speech due to the use of "leeches," which implies a xenophobic sentiment. The detailed explanation should highlight the xenophobic undertones and the context in which the term is used.
+
+Another example, "They should have beat his ass. He deserves it," is a personal opinion and not necessarily hate speech, as it targets an individual rather than a protected group. The detailed explanation should clarify why this statement does not meet the criteria for hate speech.
+
+In summary, the analysis should provide a comprehensive breakdown of how each factor contributes to the classification, ensuring that the model accurately identifies hate speech while avoiding false positives or negatives.
+
+# Exemplar
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: No
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "Why do we even need to have diversity in our community? They just bring problems and shouldn't be here."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+Text: "Why do we even need to accommodate these people? They just take all our jobs and don't even speak English properly."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(37), np.int64(10), np.int64(48)},
+  examplers_idx_used: {np.int64(3), np.int64(8), np.int64(11), np.int64(16), np.int64(29)},
+  parent_score: 0.9387755102040817,
+  score: 0.8833333333333333))
+Training accuracy: (np.float64(0.9166666666666666), np.float64(0.9), np.float64(0.9), np.float64(0.8833333333333333))
+Validation accuracy: [0.86, 0.86, 0.86, 0.9]
+Test accuracy: [0.92, 0.91, 0.86, 0.9]
+======== ROUND 4
+Time: 546.4421525001526
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Specifically, classify the text based on the following criteria:
+1. **Context**: Understand the broader situation or setting in which the text is used.
+2. **Idiomatic Expressions**: Identify any phrases or terms that may have a different connotation or cultural significance.
+3. **Targeted Groups**: Determine who or what the text is directed at and whether it involves a protected characteristic.
+4. **Perception Across Cultures**: Analyze how the text might be interpreted differently in various regions or cultures.
+5. **Call for Harm or Hatred**: Assess whether the text explicitly or implicitly promotes violence, discrimination, or contempt towards a specific group.
+
+For example:
+- **Example 1**: "They should have beat his ass. He deserves it."
+  - **Context**: Personal opinion about someone's actions.
+  - **Idiomatic Expression**: "beat his ass" is a colloquial phrase meaning to defeat or punish someone.
+  - **Targeted Group**: Specific individual.
+  - **Perception Across Cultures**: May vary based on local norms and tolerance for such language.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a personal opinion.
+
+- **Example 2**: "They are a cult and should be shut down."
+  - **Context**: Criticism of a religious or non-religious group.
+  - **Idiomatic Expression**: "cult" can be used pejoratively.
+  - **Targeted Group**: Non-specific group (could be religious or cult-like organization).
+  - **Perception Across Cultures**: May be seen as an opinion rather than hate speech depending on cultural context.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a criticism.
+
+- **Example 3**: "Why the fuck would you ask Trump?"
+  - **Context**: Question directed at a public figure.
+  - **Idiomatic Expression**: "fuck" is a vulgar term.
+  - **Targeted Group**: Specific individual (President Trump).
+  - **Perception Across Cultures**: Vulgarity might be interpreted differently based on regional sensibilities.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a question with a vulgar term.
+
+- **Example 4**: "We should expel them from our community."
+  - **Context**: Suggestion for removing a group from a community.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Non-specific group.
+  - **Perception Across Cultures**: May be seen as a recommendation or a call for action depending on the community's values.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a suggestion.
+
+- **Example 5**: "Israeli treatment of Palestinians is unjust."
+  - **Context**: Political critique of actions by one ethnic group towards another.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Non-specific group (Palestinians).
+  - **Perception Across Cultures**: Might be seen as a political stance rather than hate speech, especially if the context is provided.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a political critique.
+
+- **Example 6**: "All Muslims are terrorists."
+  - **Context**: Generalization about a religious group.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Muslims.
+  - **Perception Across Cultures**: Likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+  - **Call for Harm or Hatred**: Directly expresses hatred and calls for harm towards a protected characteristic.
+
+- **Example 7**: "The Palestinians are being brutalized by the Israelis."
+  - **Context**: Description of actions by one ethnic group towards another.
+  - **Idiomatic Expression**: None.
+  - **Targeted Group**: Palestinians.
+  - **Perception Across Cultures**: Might be seen as a factual report rather than hate speech, especially if the context is provided.
+  - **Call for Harm or Hatred**: No direct call for harm; it’s a description of actions.
+
+By addressing these criteria, we ensure a more accurate classification of hate speech.
+
+# Exemplar
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: Yes
+
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: No
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "Tell me now "Whose the terrorists again "???"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(10), np.int64(49), np.int64(30), np.int64(31)},
+  examplers_idx_used: {np.int64(3), np.int64(16), np.int64(19), np.int64(25), np.int64(26)},
+  parent_score: 0.9387755102040817,
+  score: 0.8833333333333333), Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Your response should include an analysis of the historical, social, and cultural context of any terms or phrases used, as well as an evaluation of the potential psychological and social impacts of the text on the targeted group.
+
+Example 1: "They should have beat his ass. He deserves it."
+- Context: Personal opinion about someone's actions.
+- Idiomatic Expression: "beat his ass" is a colloquial phrase meaning to defeat or punish someone.
+- Targeted Group: Specific individual.
+- Perceived in Different Regions: May vary based on local norms and tolerance for such language.
+
+Example 2: "They are a poo composition and should be shut down."
+- Context: Criticism of a social group.
+- Idiomatic Expression: "poo composition" is a derogatory term historically used to refer to Dalits in India, which is highly offensive.
+- Targeted Group: Dalits.
+- Perceived in Different Regions: Likely to be seen as hate speech due to its derogatory and historically insensitive nature.
+
+Example 3: "Easter is the most silly holiday ever existed."
+- Context: Critique of a holiday.
+- Idiomatic Expression: None.
+- Targeted Group: Christians.
+- Perceived in Different Regions: Might be seen as a personal opinion rather than hate speech, especially if the context indicates a lack of hostility towards Christians.
+
+Example 4: "We should expel them from our community."
+- Context: Suggestion for removing a group from a community.
+- Idiomatic Expression: None.
+- Targeted Group: Non-specific group.
+- Perceived in Different Regions: May be seen as a recommendation or a call for action depending on the community's values, potentially leading to xenophobia and discrimination.
+
+Example 5: "The Palestinians are being brutalized by the Israelis."
+- Context: Description of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Palestinians.
+- Perceived in Different Regions: Might be seen as a factual report rather than hate speech, especially if the context provides balanced information.
+
+Example 6: "All Muslims are terrorists."
+- Context: Generalization about a religious group.
+- Idiomatic Expression: None.
+- Targeted Group: Muslims.
+- Perceived in Different Regions: Likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+
+Example 7: "The Palestinians are being brutalized by the Israelis."
+- Context: Description of actions by one ethnic group towards another.
+- Idiomatic Expression: None.
+- Targeted Group: Palestinians.
+- Perceived in Different Regions: Might be seen as a factual report rather than hate speech, especially if the context is provided.
+
+In your response, ensure that you analyze the text with respect to the following criteria:
+- **Context**: The circumstances under which the text was written or said.
+- **Idiomatic Expressions**: Any phrases or words that may carry different meanings in various contexts.
+- **Targeted Group**: Who or what the text is directed at.
+- **Perception in Different Regions**: How the text might be perceived in various cultural and social settings.
+- **Direct Call for Harm or Hatred**: Whether the text explicitly calls for harm or expresses hatred towards a protected characteristic.
+
+By providing a detailed explanation, you will help ensure that the classification of hate speech is accurate and nuanced.
+
+# Exemplar
+Text: "I would love to watch tearing apart every christian or muslim"
+Label: Yes
+
+Text: "Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your"
+Label: Yes
+
+Text: "Why do we even need to have diversity in our community? They just bring problems and shouldn't be here."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: Yes
+
+Text: "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(13), np.int64(16), np.int64(17), np.int64(21)},
+  examplers_idx_used: {np.int64(3), np.int64(6), np.int64(8), np.int64(11), np.int64(16)},
+  parent_score: 0.88,
+  score: 0.8833333333333333), Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Your response should include an analysis of the historical, social, and cultural context of any terms or phrases used, as well as an evaluation of the potential psychological and social impacts of the text on the targeted group.
+
+To determine whether a text constitutes hate speech, consider the following criteria:
+- **Context**: The circumstances under which the text was written or said.
+- **Idiomatic Expressions**: Any phrases or words that may carry different meanings in various contexts.
+- **Targeted Group**: Who or what the text is directed at.
+- **Perception in Different Regions**: How the text might be perceived in various cultural and social settings.
+- **Direct Call for Harm or Hatred**: Whether the text explicitly calls for harm or expresses hatred towards a protected characteristic.
+
+For example, the statement "They should have beat his ass. He deserves it." is a personal opinion about someone's actions. The phrase "beat his ass" is a colloquial expression meaning to defeat or punish someone. This text targets a specific individual and might be perceived as a call for physical violence, which could be considered threatening in many contexts. However, it does not directly call for harm or express hatred towards a protected characteristic. Therefore, while the language is aggressive, it is not necessarily hate speech.
+
+Another example, "They are a poo composition and should be shut down," uses the term "poo composition," a derogatory term historically used to refer to Dalits in India, which is highly offensive. This text targets a specific group (Dalits) and uses a term with a historically sensitive and derogatory connotation. It is likely to be seen as hate speech in most regions due to its derogatory and historically insensitive nature.
+
+In contrast, "Easter is the most silly holiday ever existed" is a critique of a holiday. There are no idiomatic expressions or targeted groups, and the statement is a personal opinion rather than a call for harm or hatred. Therefore, it is unlikely to be classified as hate speech.
+
+The statement "We should expel them from our community" suggests a desire to remove a group from a community. While there are no idiomatic expressions, it targets a non-specific group and implies exclusion, which could be seen as discriminatory. Depending on the context and the community's values, this could be perceived as hate speech in many regions.
+
+The phrase "The Palestinians are being brutalized by the Israelis" describes actions by one ethnic group towards another. There are no idiomatic expressions, and the statement is a factual report of a conflict. Whether it is hate speech depends on the context and balance of the information provided. If the context is balanced, it might be seen as a neutral description; otherwise, it could be seen as a biased report.
+
+The statement "All Muslims are terrorists" makes a sweeping generalization about a religious group. There are no idiomatic expressions, and the statement directly calls for harm (implying fear and discrimination against Muslims). This is likely to be seen as hate speech in most regions due to its generalization and harmful implications.
+
+The phrase "its a good thing im not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead" expresses a negative sentiment and suggests a desire for harm or deportation. This statement directly calls for harm and expresses a discriminatory attitude towards immigrants, making it hate speech.
+
+In summary, the classification of hate speech should be based on a thorough analysis of the text, considering the context, idiomatic expressions, targeted groups, regional perceptions, and the presence of direct calls for harm or hatred. By providing a detailed explanation, you will help ensure that the classification is accurate and nuanced.
+
+# Exemplar
+Text: "They are taking over our country and changing its very fabric. We need to take action before it's too late."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "i don't blame texas, trans should be looked down upon"
+Label: Yes
+
+Text: "Those people are nothing but parasites, draining resources and spreading their culture everywhere. We should get rid of them."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(4), np.int64(38), np.int64(41), np.int64(29)},
+  examplers_idx_used: {np.int64(2), np.int64(8), np.int64(12), np.int64(14), np.int64(22)},
+  parent_score: 0.9,
+  score: 0.8666666666666667), Prompt(
+  prompt: # Task
+Is the following text considered hate speech? Please provide a clear and detailed explanation of why you believe it is or is not hate speech, considering the context, any potential idiomatic expressions, and the specific groups or individuals targeted. Additionally, explain how the text might be perceived in different regions or cultures, and whether it directly calls for harm or expresses hatred towards a protected characteristic. Your response should include an analysis of the historical, social, and cultural context of any terms or phrases used, as well as an evaluation of the potential psychological and social impacts of the text on the targeted group.
+
+To improve the accuracy of the classification, consider the following criteria:
+- **Context**: The circumstances under which the text was written or said.
+- **Idiomatic Expressions**: Any phrases or words that may carry different meanings in various contexts.
+- **Targeted Group**: Who or what the text is directed at.
+- **Perception in Different Regions**: How the text might be perceived in various cultural and social settings.
+- **Direct Call for Harm or Hatred**: Whether the text explicitly calls for harm or expresses hatred towards a protected characteristic.
+
+For example, consider the text: "Tell me now 'Whose the terrorists again'???"
+- **Context**: The text appears to be challenging or questioning a label of terrorism, possibly in a debate or discussion.
+- **Idiomatic Expressions**: "Whose the terrorists again" could be a rhetorical question meant to highlight a particular group as terrorists, which might be seen as delegitimizing their actions.
+- **Targeted Group**: The text is directed at a specific group labeled as terrorists.
+- **Perception in Different Regions**: In contexts where terrorism is used as a justification for violence, such statements can be seen as supporting harmful actions against that group, making them potentially hate speech.
+- **Direct Call for Harm or Hatred**: The text does not explicitly call for direct harm but may imply support for harmful actions, which can be considered hate speech.
+
+Another example, "HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!"
+- **Context**: The text appears to be an aggressive and threatening statement.
+- **Idiomatic Expressions**: "Effin" is a colloquial and derogatory term, adding to the aggressive tone.
+- **Targeted Group**: The text is directed at a specific individual or group implied by the context.
+- **Perception in Different Regions**: Such aggressive and threatening language is likely to be seen as hate speech in most regions, regardless of the specific cultural context.
+- **Direct Call for Harm or Hatred**: The text explicitly calls for harm, making it hate speech.
+
+In another case, "Easter is the most silly holiday ever existed."
+- **Context**: The text is a critique of a holiday, possibly in a personal or cultural context.
+- **Idiomatic Expressions**: None.
+- **Targeted Group**: The text targets Christians, who celebrate Easter.
+- **Perception in Different Regions**: Without additional context indicating hostility, the statement is more likely a personal opinion rather than hate speech, especially in multicultural settings.
+- **Direct Call for Harm or Hatred**: The text does not express hatred or call for harm towards Christians.
+
+Lastly, "Huh kids like this with crazy eyes and weird moves lurking around are scary."
+- **Context**: The text describes a perceived threat based on appearance.
+- **Idiomatic Expressions**: "Crazy eyes and weird moves" is an idiomatic expression that carries negative stereotypes and can be seen as derogatory.
+- **Targeted Group**: The text targets a specific group based on appearance and behavior.
+- **Perception in Different Regions**: Such language can perpetuate harmful stereotypes and is likely to be seen as hate speech, especially in regions with existing prejudices against certain ethnic or marginalized groups.
+- **Direct Call for Harm or Hatred**: While not explicitly calling for harm, the text contributes to a negative and hostile sentiment towards the targeted group.
+
+By providing a detailed explanation, you will help ensure that the classification of hate speech is accurate and nuanced.
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: Yes
+
+Text: "I would love to watch tearing apart every christian or muslim"
+Label: Yes
+
+Text: "Why do we even need to accommodate these people? They just take all our jobs and don't even speak English properly."
+Label: Yes
+
+Text: "They are a bunch of criminals and scum, and they should be sent back to their home country immediately."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(42), np.int64(14), np.int64(47), np.int64(17), np.int64(63)},
+  examplers_idx_used: {np.int64(34), np.int64(6), np.int64(8), np.int64(20), np.int64(29)},
+  parent_score: 0.9,
+  score: 0.8666666666666667))
+Training accuracy: (np.float64(0.8833333333333333), np.float64(0.8833333333333333), np.float64(0.8666666666666667), np.float64(0.8666666666666667))
+Validation accuracy: [0.86, 0.86, 0.86, 0.84]
+Test accuracy: [0.92, 0.91, 0.92, 0.89]
