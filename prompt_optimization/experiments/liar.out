@@ -1,11 +1,12 @@
 {"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 6, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 18.160528659820557
+Time: 21.368089199066162
 Prompt: (Prompt(
   prompt: # Task
 Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
 
 # Exemplar
+Example goes here
 
 # Output format
 Answer ONLY Yes or No as labels
@@ -16,7 +17,353 @@ Label:,
   feedbacks_idx_used: set(),
   examplers_idx_used: set(),
   parent_score: 0,
-  score: 0.5439453125),)
-Training accuracy: (np.float64(0.5439453125),)
-Validation accuracy: [0.5067750677506775]
-Test accuracy: [0.5010845986984815]
+  score: 0.546875),)
+Training accuracy: (np.float64(0.546875),)
+Validation accuracy: [0.5257452574525745]
+Test accuracy: [0.49023861171366595]
+======== ROUND 1
+Time: 89.95084810256958
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.5268817204301075), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the speaker's role, the specific context of the statement, the reliability of the source, and any relevant background knowledge. For statements that are partially true but contain inaccuracies, consider the overall truthfulness of the statement. For personal anecdotes or subjective opinions, determine if they need to be verified factually before labeling them as a lie. Provide your reasoning for the classification.
+
+# Exemplar
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms.
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+Text: "Statement: He has ushered in $3 billion in new investment.
+Job title: mayor of Providence
+State: Rhode Island
+Party: democrat
+Context: a statement on Cicilline's website"
+Label: Yes
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(10), np.int64(12), np.int64(14)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  parent_score: 0.546875,
+  score: 0.510752688172043), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and any additional information provided. Consider the credibility of the speaker, the verifiability of the statement, and the nature of the claim (whether it is subjective or factual). Provide your judgment with reasoning if possible.
+
+# Exemplar
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms.
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: He has ushered in $3 billion in new investment.
+Job title: mayor of Providence
+State: Rhode Island
+Party: democrat
+Context: a statement on Cicilline's website"
+Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(3), np.int64(9), np.int64(13)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  parent_score: 0.546875,
+  score: 0.489247311827957), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the provided Context and other information. Consider the speaker's job title, party affiliation, and credibility, as well as the nature of the statement and the specific context in which it was made. Personal anecdotes or statements that do not require factual verification should not be labeled as lies without additional context or evidence. Evaluate the plausibility of the statement within the given context and the reliability of the source.
+
+# Exemplar
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms.
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: He has ushered in $3 billion in new investment.
+Job title: mayor of Providence
+State: Rhode Island
+Party: democrat
+Context: a statement on Cicilline's website"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(9), np.int64(10)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  parent_score: 0.546875,
+  score: 0.4731182795698925))
+Training accuracy: (np.float64(0.5268817204301075), np.float64(0.510752688172043), np.float64(0.489247311827957), np.float64(0.4731182795698925))
+Validation accuracy: [0.5284552845528455, 0.4932249322493225, 0.4715447154471545, 0.4796747967479675]
+Test accuracy: [0.4880694143167028, 0.5097613882863341, 0.5054229934924078, 0.4924078091106291]
+======== ROUND 2
+Time: 331.40895819664
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.6304347826086957), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the provided Context and other information. Consider the speaker's role, the specific context of the statement, and the reliability of the source. Handle statements that are partially true but contain inaccuracies by evaluating the overall truthfulness of the statement. Account for historical context, specialized knowledge, and outdated or incorrect assumptions. Evaluate the accuracy of the statement while taking into account any relevant historical facts or expert knowledge.
+
+# Exemplar
+Text: "Statement: The United States decided waterboarding was torture back when we court-martialed American soldiers for waterboarding Philippine insurgents in the Philippine revolution.
+Job title: U.S. Senator
+State: Rhode Island
+Party: democrat
+Context: a TV interview"
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: Milwaukee has the second-highest number of children recovered from sex trafficking.
+Job title: U.S. House member -- 4th District
+State: Wisconsin
+Party: democrat
+Context: remarks on the House floor"
+Label: Yes
+
+Text: "Statement: Pat Toomey advocated for eliminating all corporate taxes.
+Job title: 
+State: Pennsylvania
+Party: democrat
+Context: a press release."
+Label: No
+
+Text: "Statement: In 32 other states and Washington D.C., they [voters] can avoid the wait by voting before Election Day.
+Job title: Rhode Island State Representative
+State: Rhode Island
+Party: democrat
+Context: a news release"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(10), np.int64(12), np.int64(15), np.int64(19), np.int64(21)},
+  examplers_idx_used: {np.int64(1), np.int64(5), np.int64(6), np.int64(7), np.int64(9)},
+  parent_score: 0.5268817204301075,
+  score: 0.6086956521739131), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information provided. Consider the speaker's role, the specific context of the statement, the reliability of the source, and any relevant background knowledge. For statements that are partially true but contain inaccuracies, consider the overall truthfulness of the statement. For personal anecdotes or subjective opinions, determine if they need to be verified factually before labeling them as a lie. Additionally, ensure the model has access to and uses up-to-date information and authoritative sources to assess claims, especially those related to historical facts, legal regulations, and economic policies. Provide your reasoning for the classification.
+
+# Exemplar
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms.
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+Text: "Statement: He has ushered in $3 billion in new investment.
+Job title: mayor of Providence
+State: Rhode Island
+Party: democrat
+Context: a statement on Cicilline's website"
+Label: Yes
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(15), np.int64(18), np.int64(21), np.int64(26), np.int64(29)},
+  examplers_idx_used: {np.int64(0), np.int64(6), np.int64(7), np.int64(11), np.int64(13)},
+  parent_score: 0.510752688172043,
+  score: 0.6086956521739131), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and any additional information provided. Consider the credibility of the speaker, the verifiability of the statement, and the nature of the claim (whether it is subjective or factual). Provide your judgment with reasoning if possible. When evaluating the statement, take into account the following factors:
+
+- The accuracy of the factual claims based on available evidence or historical context.
+- The role and expertise of the speaker in relation to the statement.
+- The complexity and specificity of the claim, which may require deeper knowledge or context.
+- The nature of the statement—whether it is a matter of professional practice, subjective opinion, or a straightforward factual claim.
+- The potential for exaggeration or misrepresentation, even if the statement is not entirely false.
+
+For statements that are not directly verifiable from the given context, consider the plausibility of the claim and the likelihood of it being true or false based on general knowledge or common sense. If the statement is likely to be false based on available evidence or expert opinion, classify it as a lie. If the statement is an opinion or a matter of professional practice that cannot be definitively verified or refuted from the given context, consider the plausibility and the potential for misrepresentation.
+
+# Exemplar
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms.
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: He has ushered in $3 billion in new investment.
+Job title: mayor of Providence
+State: Rhode Island
+Party: democrat
+Context: a statement on Cicilline's website"
+Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(34), np.int64(4), np.int64(42), np.int64(13), np.int64(16)},
+  examplers_idx_used: {np.int64(3), np.int64(5), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.489247311827957,
+  score: 0.6086956521739131))
+Training accuracy: (np.float64(0.6304347826086957), np.float64(0.6086956521739131), np.float64(0.6086956521739131), np.float64(0.6086956521739131))
+Validation accuracy: [0.5230352303523035, 0.4878048780487805, 0.4742547425474255, 0.4986449864498645]
+Test accuracy: [0.49023861171366595, 0.5140997830802603, 0.4967462039045553, 0.5422993492407809]

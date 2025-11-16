@@ -134,7 +134,7 @@ class ExemplarMemory():
         # emb_matrix = np.stack(self.embeddings)
         # sims = emb_matrix @ q_emb.T
         # weighted_scores = np.array(self.scores) * sims
-        weighted_scores = self.scores
+        weighted_scores = np.array(self.scores)
         if inference:
             top_indices = np.argsort(weighted_scores)[-num:][::-1]
         else:
@@ -151,7 +151,7 @@ class ExemplarMemory():
         new_score = current_score + prompt_score * beta
         self.scores[exemplar_idx] = new_score
         if new_score < theta:
-            self.scores[exampler_idx] = 0
+            self.scores[exemplar_idx] = 0
 
 class MyOptimizer(PromptOptimizer):
     """Update ProTeGi: Prompt Optimization with Textual Gradients"""
@@ -208,7 +208,7 @@ class MyOptimizer(PromptOptimizer):
         To improve my understanding and performance, I would like to identify {num_examplers} typical
         examples from the above cases where the current prompt fails.
         These examples should be diverse to cover a range of different issues.
-        For each example, provide the following format and wrap each example with <ANSWER>
+        For each example, provide the following input and label, not the prediction and wrap each example with <ANSWER>
         and </ANSWER>:
         <ANSWER>
         [one full exampler here, no lists, no numbering]
@@ -425,6 +425,8 @@ class MyOptimizer(PromptOptimizer):
                 )
                 for feedback, error_string in feedbacks:
                     self.feedback_memory.add_feedback(feedback, error_string)
+                for exemplar in examplers:
+                    self.exemplar_memory.add_exemplar(exemplar)
                 # retrieved_feedbacks = self.feedback_memory.retrieve_feedback(len(feedbacks))
                 # for idx, feedback, error_string in tqdm(
                 #     retrieved_feedbacks, desc="applying gradients"
@@ -437,9 +439,9 @@ class MyOptimizer(PromptOptimizer):
                     feedback_idx = [i[0] for i in retrieved_feedbacks]
                     feedback_str = [i[1] for i in retrieved_feedbacks]
                     exemplar_idx = [i[0] for i in retrieved_exemplars]
-                    exemplar_str = [i[0] for i in retrieved_exemplars]
-                    feedback = "\n".join(feedback_str)
-                    exemplar = "\n".join(exemplar_str)
+                    exemplar_str = [i[1] for i in retrieved_exemplars]
+                    feedback = "\n\n".join(feedback_str)
+                    exemplar = "\n\n".join(exemplar_str)
                     tmp = self.optimize_prompt(
                         task_section,
                         "",
@@ -447,7 +449,7 @@ class MyOptimizer(PromptOptimizer):
                     )
                     for i in tmp:
                         new_task_sections.append(Prompt(i, set(feedback_idx), set(exemplar_idx), prompt.score, 0))
-                        new_exemplar_sections.appedn(exemplar)
+                        new_exemplar_sections.append(exemplar)
                 print("new promt: ", new_task_sections)
                 print("len new prompt: ", len(new_task_sections))
             # generate synonyms
@@ -478,7 +480,7 @@ class MyOptimizer(PromptOptimizer):
             tmp_new_prompts = [
                 Prompt(prompt.prompt.replace(task_section, tmp.prompt).replace(exemplar_section, tmp_exemplar), tmp.feedbacks_idx_used, tmp.examplers_idx_used, tmp.parent_score, tmp.score) for tmp, tmp_exemplar in zip(new_sections, new_exemplar_sections)
             ]
-
+            print(tmp_new_prompts[0])
             # # filter a little
             # if len(new_sections) > self.opt["max_expansion_factor"]:
             #     if self.opt["reject_on_errors"]:
@@ -542,7 +544,7 @@ class MyOptimizer(PromptOptimizer):
             for feedback_idx in prompt.feedbacks_idx_used:
                 self.feedback_memory.update_feedback(feedback_idx, prompt.score - prompt.parent_score)
             for exemplar_idx in prompt.examplers_idx_used:
-                self.exemplar_memory.update_exemplar(prompt.examplers_idx_used, prompt.score - prompt.parent_score)
+                self.exemplar_memory.update_exemplar(exemplar_idx, prompt.score - prompt.parent_score)
         print("Feedback Memory: ", self.feedback_memory)
         print("Exemplar Memory: ", self.exemplar_memory)
         return evals
