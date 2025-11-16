@@ -7,7 +7,13 @@ import concurrent.futures
 
 
 def predict_on_example(inputs):
-    ex, predictor, prompt = inputs
+    ex, predictor, prompt, exampler_memory = inputs
+    examplers = exampler_memory.retrieve_exemplar(ex["text"])
+    exampler_string = ""
+    for i, exampler in examplers:
+        prompt.examplers_idx_used.add(i)
+        exampler_string += f"{exampler}\n"
+    prompt += f"# Examplers: {exampler_string}"
     pred = predictor.inference(ex, prompt)
     return prompt, ex, pred
 
@@ -16,10 +22,10 @@ class Cached01Scorer:
     def __init__(self):
         self.cache = {}
 
-    def __call__(self, predictor, prompts, data, agg='mean', max_threads=1):
+    def __call__(self, predictor, prompts, data, exampler_memory, agg='mean', max_threads=1):
         def compute_scores(prompts_exs):
             out_scores = {}
-            inputs = [(ex, predictor, prompt) for prompt, ex in prompts_exs]
+            inputs = [(ex, predictor, prompt, exampler_memory) for prompt, ex in prompts_exs]
             with concurrent.futures.ProcessPoolExecutor(max_workers=max_threads) as executor:
                 futures = [executor.submit(predict_on_example, ex) for ex in inputs]
                 for i, future in tqdm(enumerate(concurrent.futures.as_completed(futures)), total=len(futures), desc='01 scorer'):

@@ -14,6 +14,7 @@ import my_optimizer_v2
 import numpy as np
 import sys
 import random
+from models import Prompt
 
 def get_task_class(task_name):
     if task_name == "ethos":
@@ -170,7 +171,7 @@ if __name__ == "__main__":
     with open(args.out, "a") as outf:
         outf.write(json.dumps(config) + "\n")
   
-    candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
+    candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
     sampled_examples = random.sample(train_exs, 5)
     # candidates = [optimizer.init_prompt_generation(i, sampled_examples) for i in candidates]
     initial_step_size = 200
@@ -204,14 +205,14 @@ if __name__ == "__main__":
         test_metrics = []
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
-                gpt4, candidate, validation_exs, n=args.n_test_exs
+                gpt4, candidate.prompt, validation_exs, n=len(validation_exs)
             )
             val_metrics.append(f1)
         with open(args.out, "a") as outf:
             outf.write(f"Validation accuracy: {val_metrics}\n")
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
-                gpt4, candidate, test_exs, n=args.n_test_exs
+                gpt4, candidate.prompt, test_exs, n=len(test_exs)
             )
             test_metrics.append(f1)
         with open(args.out, "a") as outf:
