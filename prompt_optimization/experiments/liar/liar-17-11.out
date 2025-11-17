@@ -1,0 +1,629 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 36.0915367603302
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.544921875),)
+Training accuracy: (np.float64(0.544921875),)
+Validation accuracy: [0.5203252032520326]
+Test accuracy: [0.48590021691973967]
+======== ROUND 1
+Time: 147.1215717792511
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate if the Statement is a fabrication (Yes) or accurate (No) considering the Context, the credibility of the Speaker, and the plausibility of the Claim. Take into account the speaker's background and expertise, the broader policy context, and any possible distortions or overstatements in political discussions. Present your assessment, recognizing the complexity and subjectivity inherent in analyzing political statements and arguments.
+
+# Exemplar
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Says five Democratic state senators were for her bicycle tailgating bill before they were against it.
+Job title: State delegate
+State: Virginia
+Party: republican
+Context: a Facebook post."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(7), np.int64(9), np.int64(12), np.int64(16)},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(11), np.int64(15)},
+  parent_score: 0,
+  score: 0.7027027027027027), Prompt(
+  prompt: # Task
+Output: Assess whether the Statement is a misrepresentation (Yes) or accurate (No) by considering the Context and additional information. Analyze if the statement is an exaggeration or hyperbole rather than a deliberate falsehood. Examine the reliability of the source and the plausibility of the statement. Consider any potential biases or credibility issues from the source or speaker, and whether the statement aligns with established facts or goes against common knowledge. A statement is deemed a misrepresentation if the speaker knowingly provided inaccurate or misleading information, even if the core information might be true but exaggerated or distorted.
+
+# Exemplar
+Text: "Statement: Says Alex Sinks plans for governor include $12.5 billion in new spending.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a Leadership Florida/Florida Press Association debate."
+Label: Yes
+
+Text: "Statement: Says five Democratic state senators were for her bicycle tailgating bill before they were against it.
+Job title: State delegate
+State: Virginia
+Party: republican
+Context: a Facebook post."
+Label: No
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(4), np.int64(9), np.int64(13), np.int64(15)},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(7), np.int64(8), np.int64(13)},
+  parent_score: 0,
+  score: 0.7027027027027027), Prompt(
+  prompt: # Task
+Evaluate if the Statement is a lie (Yes) or not (No) by assessing the Context, the Speaker's Credibility, the Source of Information, and the Broader Implications. Take into account any potential biases and the reliability of the speaker, the state context, and any additional context given. A statement is deemed a lie if the speaker intentionally provides false information, even if parts of the statement have some truth.
+
+# Exemplar
+Text: "Statement: In the state of Rhode Island 25 percent of our current physicians are graduates of for-profit medical schools.
+Job title: House member
+State: Rhode Island
+Party: democrat
+Context: a House debate"
+Label: Yes
+
+Text: "Statement: Over the last four years, the deficit has gone up, but 90 percent of that is as a consequence of President George W. Bushs policies and the recession.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on CBS' "60 Minutes""
+Label: No
+
+Text: "Statement: In the primary election, a right-wing group spent more than $100,000,000 to support Supreme Court Justice Rebecca Bradley.
+Job title: State Appeals Court judge
+State: Wisconsin
+Party: none
+Context: a website posting"
+Label: Yes
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(3), np.int64(8), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(3), np.int64(6), np.int64(8), np.int64(9), np.int64(10)},
+  parent_score: 0,
+  score: 0.7027027027027027), Prompt(
+  prompt: # Task
+Evaluate if the Statement is a lie (Yes) or not (No) by considering the Context, the Speaker's Credibility, the Source of Information, and the Broader Implications. Assess potential biases and the reliability of the speaker, the state context, and any additional context provided. A statement is deemed a lie if the speaker intentionally provides false information, even if parts of the statement are true.
+
+# Exemplar
+Text: "Statement: In the state of Rhode Island 25 percent of our current physicians are graduates of for-profit medical schools.
+Job title: House member
+State: Rhode Island
+Party: democrat
+Context: a House debate"
+Label: Yes
+
+Text: "Statement: Over the last four years, the deficit has gone up, but 90 percent of that is as a consequence of President George W. Bushs policies and the recession.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on CBS' "60 Minutes""
+Label: No
+
+Text: "Statement: In the primary election, a right-wing group spent more than $100,000,000 to support Supreme Court Justice Rebecca Bradley.
+Job title: State Appeals Court judge
+State: Wisconsin
+Party: none
+Context: a website posting"
+Label: Yes
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(3), np.int64(8), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(3), np.int64(6), np.int64(8), np.int64(9), np.int64(10)},
+  parent_score: 0,
+  score: 0.7027027027027027))
+Training accuracy: (np.float64(0.7027027027027027), np.float64(0.7027027027027027), np.float64(0.7027027027027027), np.float64(0.7027027027027027))
+Validation accuracy: [0.5013550135501355, 0.5257452574525745, 0.5853658536585366, 0.5555555555555556]
+Test accuracy: [0.5878524945770065, 0.5488069414316703, 0.5661605206073753, 0.5553145336225597]
+======== ROUND 2
+Time: 511.8510010242462
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate if the Statement is a fabrication (Yes) or accurate (No) by considering the Context, the credibility of the Speaker, and the plausibility of the Claim. Analyze the speaker's background and expertise, the broader policy context, and any possible distortions or overstatements in political discussions. Recognize the complexity and subjectivity inherent in analyzing political statements and arguments. Additionally, take into account the typical content and nature of the event or situation mentioned in the context, the source and credibility of the speaker, and whether the statement aligns with general knowledge or previous statements made by the speaker. Consider the potential for exaggeration or misrepresentation in political discourse, and assess the verifiability and severity of the claim, even if it seems factually accurate. Provide your assessment with an explanation of how these factors influenced your decision.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms."
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(6), np.int64(9), np.int64(10)},
+  examplers_idx_used: {np.int64(0), np.int64(9), np.int64(11), np.int64(13), np.int64(14)},
+  parent_score: 0.7027027027027027,
+  score: 0.7777777777777778), Prompt(
+  prompt: # Task
+Evaluate whether the Statement is a fabrication (Yes) or accurate (No) by considering the Context, the credibility of the Speaker, and the plausibility of the Claim. Examine the speaker's background, expertise, and the broader policy environment. Also, assess for potential distortions or exaggerations in political discourse. Determine if the speaker is likely to have accurate knowledge about the claim and whether it aligns with available evidence or expert consensus. Even if the statement is factually correct but seems exaggerated or misleading, classify it as a fabrication if the speaker should have known it was misleading. Provide your assessment, acknowledging the complexities and subjectivity involved in evaluating political claims and arguments.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Says Alex Sinks plans for governor include $12.5 billion in new spending.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a Leadership Florida/Florida Press Association debate."
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(7), np.int64(8), np.int64(9), np.int64(11), np.int64(13)},
+  parent_score: 0,
+  score: 0.7777777777777778), Prompt(
+  prompt: # Task
+Output: Determine if the given statement is a fabrication (Yes) or accurate (No) by evaluating it against the provided context, the speaker's credibility, and the plausibility of the claim. Consider the speaker's background, expertise, and the broader policy environment. Account for any potential exaggerations, distortions, or misrepresentations that might occur in political discourse. Assess whether the speaker is likely to have accurate information and whether the claim aligns with existing evidence or expert consensus. Even if the statement is factually correct but seems exaggerated or misleading, classify it as a fabrication if the speaker should have known it was misleading. Acknowledge the complexity and subjectivity involved in analyzing political claims and arguments.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Says Alex Sinks plans for governor include $12.5 billion in new spending.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a Leadership Florida/Florida Press Association debate."
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(7), np.int64(8), np.int64(9), np.int64(11), np.int64(13)},
+  parent_score: 0,
+  score: 0.7777777777777778), Prompt(
+  prompt: # Task
+Evaluate whether the Statement is a fabrication (Yes) or accurate (No) by considering the Context, the credibility of the Speaker, and the plausibility of the Claim. Examine the speaker's background, expertise, and the broader policy context. Also, look for any potential distortions, exaggerations, or misrepresentations in the political discourse. Determine if the speaker is likely to have accurate information on the topic and whether the claim aligns with existing evidence or expert consensus. Even if the statement is factually correct but seems exaggerated or misleading, classify it as a fabrication if the speaker should have known it was misleading. Provide your assessment, acknowledging the complexity and subjectivity involved in evaluating political statements and arguments.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Says Alex Sinks plans for governor include $12.5 billion in new spending.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a Leadership Florida/Florida Press Association debate."
+Label: Yes
+
+Text: "Statement: In Galveston, Texas, they have allowed people to privatize part of their Social Security. And people are building wealth.
+Job title: Pastor
+State: Virginia
+Party: republican
+Context: a debate."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(7), np.int64(8), np.int64(9), np.int64(11), np.int64(13)},
+  parent_score: 0,
+  score: 0.7777777777777778))
+Training accuracy: (np.float64(0.7777777777777778), np.float64(0.7777777777777778), np.float64(0.7777777777777778), np.float64(0.7777777777777778))
+Validation accuracy: [0.5772357723577236, 0.5609756097560976, 0.5745257452574526, 0.5772357723577236]
+Test accuracy: [0.5813449023861171, 0.5856832971800434, 0.5921908893709328, 0.579175704989154]
+======== ROUND 3
+Time: 611.995819568634
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate if the Statement is a fabrication (Yes) or accurate (No) by considering the Context, the credibility of the Speaker, and the plausibility of the Claim. Analyze the speaker's background and expertise, the broader policy context, and any possible distortions or overstatements in political discussions. Recognize the complexity and subjectivity inherent in analyzing political statements and arguments. Additionally, take into account the typical content and nature of the event or situation mentioned in the context, the source and credibility of the speaker, and whether the statement aligns with general knowledge or previous statements made by the speaker. Consider the potential for exaggeration or misrepresentation in political discourse, and assess the verifiability and severity of the claim, even if it seems factually accurate. Pay particular attention to the source and credibility of the speaker, as well as any alignment with common knowledge or policy context. Distinguish between statements that are factually incorrect and those that are true but may be misleading or exaggerated. Provide your assessment with an explanation of how these factors influenced your decision, and consider the reliability of the source and the context in which the statement was made.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms."
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(8), np.int64(9), np.int64(11), np.int64(13), np.int64(14)},
+  parent_score: 0.7777777777777778,
+  score: 0.8888888888888888), Prompt(
+  prompt: # Task
+Output: Assess whether the statement is a fabrication (Yes) or accurate (No) by examining the context, the speaker's credibility, and the plausibility of the claim. Analyze the speaker's background and expertise, the broader policy context, and any distortions or overstatements in political discussions. Acknowledge the complexity and subjectivity involved in evaluating political statements and arguments. Consider the typical content and nature of the event or situation mentioned, the source and credibility of the speaker, and whether the statement aligns with general knowledge or past statements by the speaker. Account for potential exaggeration or misrepresentation in political discourse, and evaluate the verifiability and severity of the claim, even if it appears factually correct. During evaluation, also consider the speaker's party affiliation and any known biases. If the statement is partially true but requires additional context, explain why the overall claim is deemed accurate or a fabrication. Differentiate between factual statements and claims that might be true but are not lies; a lie is a statement known to be false by the speaker. Pay attention to the speaker's credibility and the context in which the statement was made, as these factors can greatly impact the statement's accuracy.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms."
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(8), np.int64(9), np.int64(11), np.int64(13), np.int64(14)},
+  parent_score: 0,
+  score: 0.8888888888888888), Prompt(
+  prompt: # Task
+Output: Assess whether the Statement is a fabrication (Yes) or accurate (No) by examining the Context, the credibility of the Speaker, and the plausibility of the Claim. Examine the speaker's background and expertise, the broader policy context, and any potential distortions or overstatements in political discussions. Acknowledge the complexity and subjectivity involved in evaluating political statements and arguments. Consider the typical content and nature of the event or situation described in the context, the reliability of the speaker, and whether the statement aligns with general knowledge or prior statements by the speaker. Account for the possibility of exaggeration or misrepresentation in political discourse, and evaluate the verifiability and severity of the claim, even if it appears factually correct. Focus on the source and credibility of the speaker, along with any consistency with common knowledge or policy context. Differentiate between statements that are factually inaccurate and those that are true but potentially misleading or exaggerated. Offer your evaluation with an explanation of how these elements impacted your judgment, and consider the reliability of the source and the context in which the statement was made.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms."
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(8), np.int64(9), np.int64(11), np.int64(13), np.int64(14)},
+  parent_score: 0,
+  score: 0.8888888888888888), Prompt(
+  prompt: # Task
+Evaluate whether the Statement is a fabrication (Yes) or accurate (No) by examining the Context, the credibility of the Speaker, and the plausibility of the Claim. Assess the speaker's background and expertise, the broader policy context, and any potential distortions or overstatements in political discussions. Acknowledge the complexity and subjectivity involved in evaluating political statements and arguments. Consider the typical content and nature of the event or situation mentioned in the context, the source and credibility of the speaker, and whether the statement aligns with general knowledge or previous statements made by the speaker. Be aware of the possibility of exaggeration, misrepresentation, or deliberate misinformation in political discourse, and evaluate the verifiability and severity of the claim, even if it appears factually correct. Determine if the speaker is likely to possess the necessary knowledge to support their claims and whether the statement is likely to be a lie based on the speaker's expertise and the context. Provide your assessment along with an explanation of how these factors influenced your decision.
+
+# Exemplar
+Text: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.
+Job title: Radio host
+State: 
+Party: none
+Context: a radio broadcast"
+Label: Yes
+
+Text: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.
+Job title: Businessman
+State: Texas
+Party: republican
+Context: at a campaign stop."
+Label: No
+
+Text: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on MSNBC's "Hardball.""
+Label: No
+
+Text: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms."
+Job title: U.S. Congressman
+State: North Carolina
+Party: republican
+Context: an op ed article"
+Label: Yes
+
+Text: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.
+Job title: president, Massachusetts Prevention Alliance
+State: Massachusetts
+Party: activist
+Context: a commentary in The Providence Journal"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(9), np.int64(10), np.int64(13)},
+  examplers_idx_used: {np.int64(8), np.int64(9), np.int64(11), np.int64(13), np.int64(14)},
+  parent_score: 0,
+  score: 0.8888888888888888))
+Training accuracy: (np.float64(0.8888888888888888), np.float64(0.8888888888888888), np.float64(0.8888888888888888), np.float64(0.8888888888888888))
+Validation accuracy: [0.5663956639566395, 0.5609756097560976, 0.5772357723577236, 0.5582655826558266]
+Test accuracy: [0.5856832971800434, 0.5813449023861171, 0.5900216919739696, 0.561822125813449]

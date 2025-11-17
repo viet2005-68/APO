@@ -472,11 +472,11 @@ class MyOptimizer(PromptOptimizer):
                 for i in tqdm(range(self.opt["ea_samples_per_step"]), desc="evolution algorithm"):
                     if len(new_task_sections) < 2:
                         break
-                    parents_idx = random.sample(len(new_task_sections), 2)
-                    prompt1 = parents[parents_idx[0]]
-                    prompt2 = parents[parents_idx[1]]
+                    parents_idx = random.sample(range(len(new_task_sections)), 2)
+                    prompt1 = new_task_sections[parents_idx[0]]
+                    prompt2 = new_task_sections[parents_idx[1]]
                     ea_prompt = self.genetic_algorithm_expansion(prompt1, prompt2)
-                    ea_sampled_task_sections += [Prompt(ea_prompt, set(), set(), 0, 0)]
+                    ea_sampled_task_sections += [Prompt(ea_prompt[0], set(), set(), 0, 0)]
                     new_exemplar_sections.append(new_exemplar_sections[parents_idx[0]])
 
             # combine
