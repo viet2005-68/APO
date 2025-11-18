@@ -1,7 +1,21 @@
 {"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 3.4332275390625e-05
-Prompt: ('# Task\nEvaluate the truthfulness of the Statement by considering the Context, Job Title, State, Party Affiliation, and any other pertinent details. Assess the reliability of the speaker, the likelihood of the statement being true, and its potential political impact. If the statement is consistent with verified information or has backing from reliable sources, mark it as \'No\'. If the statement is false or appears to be politically driven without substantiation, mark it as \'Yes\'.\n\n# Exemplar\nText: "Statement: You cant read a speech by George Washington . . . without hearing him reference God, the Almighty.\nJob title: Radio host\nState: \nParty: none\nContext: a radio broadcast"\nLabel: Yes\n\nText: "Statement: Says U.S. House opponent Michael Williams does not live in and has never voted in the congressional district hes seeking to represent.\nJob title: Businessman\nState: Texas\nParty: republican\nContext: at a campaign stop."\nLabel: No\n\nText: "Statement: Obama says Clinton in 2002 suggested there was a connection between al-Qaida and the Iraqi government.\nJob title: President\nState: Illinois\nParty: democrat\nContext: an interview on MSNBC\'s "Hardball.""\nLabel: No\n\nText: "Statement: Early census returns are showing that conservatives have been measurably less likely than liberals to return their census forms."\nJob title: U.S. Congressman\nState: North Carolina\nParty: republican\nContext: an op ed article"\nLabel: Yes\n\nText: "Statement: Todays marijuana is 300 percent to 800 percent more potent than the pot of yesteryear.\nJob title: president, Massachusetts Prevention Alliance\nState: Massachusetts\nParty: activist\nContext: a commentary in The Providence Journal"\nLabel: No\n\n# Output format\nAnswer ONLY Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Time: 3.695487976074219e-05
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.5),)
 Training accuracy: (1.0,)
-Validation accuracy: [0.5989159891598916]
-Test accuracy: [0.5943600867678959]

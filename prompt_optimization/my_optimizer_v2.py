@@ -63,11 +63,15 @@ class FeedbackMemory():
         self.embeddings.append(new_emb)
         return True
 
-    def retrieve_feedback(self, num=5, T=1):
+    def retrieve_feedback(self, num=3, T=1):
         priority = np.array(self.scores)
         exp_scores = np.exp((priority - np.max(priority)) / T)
         probs = exp_scores / exp_scores.sum()
         retrieved_idx = np.random.choice(len(self.feedbacks), size=min(num, len(self.feedbacks)), replace=False, p=probs)
+        return [(i, self.feedbacks[i], self.error_string[i]) for i in retrieved_idx]
+
+    def retrieve_latest_feedback(self, num=3):
+        retrieved_idx = list(range(len(self.feedbacks) - num, len(self.feedbacks)))
         return [(i, self.feedbacks[i], self.error_string[i]) for i in retrieved_idx]
     
     def update_feedback(self, feedback_idx, score_gain, beta=0.3, theta=0.1):
@@ -130,7 +134,7 @@ class ExemplarMemory():
         else:
             return False
 
-    def retrieve_exemplar(self, question="", num=5, temperature=1, inference=False):
+    def retrieve_exemplar(self, question="", num=3, temperature=1, inference=False):
         # q_emb = self._encode(question)
         # emb_matrix = np.stack(self.embeddings)
         # sims = emb_matrix @ q_emb.T
@@ -147,6 +151,10 @@ class ExemplarMemory():
 
         return [(i, self.exemplars[i]) for i in top_indices]
 
+    def retrieve_latest_exemplar(self, num=3):
+        retrieved_idx = list(range(len(self.exemplars) - num, len(self.exemplars)))
+        return [(i, self.exemplars[i]) for i in retrieved_idx]
+
     def update_exemplar(self, exemplar_idx, prompt_score, beta=0.3, theta=0.1):
         current_score = self.scores[exemplar_idx]
         new_score = current_score + prompt_score * beta
@@ -162,6 +170,39 @@ class MyOptimizer(PromptOptimizer):
         embedding_model = BGEM3FlagModel('BAAI/bge-m3')
         self.feedback_memory = FeedbackMemory(embedding_model=embedding_model)
         self.exemplar_memory = ExemplarMemory(embedding_model=embedding_model)
+
+    def init_prompt_generation(self, original_prompt, examples):
+        instruction = f"""
+                        You are given an instruction on a certain task and some example inputs, outputs. Here is the current instruction: 
+                        {original_prompt}
+                        And here are some correct input-output pairs:
+                        {examples}
+                        Generate new instruction, clearer and better than the original instruction.
+                        It contains the following parts. Based on the input-output pairs provided,
+                        give me the final complete instruction in English without any explanation:
+                        Task: This is a <...> task.
+                        Task detailed description: <Task detailed description>
+                        You should follow the reasoning process: <add several reasoning steps if it's necessary>
+                        Tips: <add several useful tips from a professional point of view to accomplish this task better>
+                    """
+        instruction = "\n".join(
+            [line.lstrip() for line in instruction.split("\n")]
+        )
+        init_prompt = utils.chatgpt(instruction)[0]
+        init_prompt += """
+                        # Exemplar
+                        Example goes here
+                        # Output format
+                        Answer ONLY Yes or No as labels
+                        # Prediction
+                        Text: {{ text }}
+                        Label:
+                       """
+        final_prompt = "# Task\n" + init_prompt
+        final_prompt = "\n".join(
+            [line.lstrip() for line in final_prompt.split("\n")]
+        )
+        return final_prompt
 
     def _sample_error_str(self, texts, labels, preds, task, n=4):
         """Sample n error strings from the given texts, labels, and preds"""
@@ -438,16 +479,20 @@ class MyOptimizer(PromptOptimizer):
                     range(10), desc="applying gradients"
                 ):
                     retrieved_feedbacks = self.feedback_memory.retrieve_feedback()
+                    retrieved_feedbacks += self.feedback_memory.retrieve_latest_feedback()
                     retrieved_exemplars = self.exemplar_memory.retrieve_exemplar()
-                    feedback_idx = [i[0] for i in retrieved_feedbacks]
-                    feedback_str = [i[1] for i in retrieved_feedbacks]
-                    exemplar_idx = [i[0] for i in retrieved_exemplars]
-                    exemplar_str = [i[1] for i in retrieved_exemplars]
+                    retrieved_exemplars += self.exemplar_memory.retrieve_latest_exemplar()
+                    retrieved_feedbacks_set = set(retrieved_feedbacks)
+                    retrieved_exemplars_set = set(retrieved_exemplars)
+                    feedback_idx = [i[0] for i in retrieved_feedbacks_set]
+                    feedback_str = [i[1] for i in retrieved_feedbacks_set]
+                    exemplar_idx = [i[0] for i in retrieved_exemplars_set]
+                    exemplar_str = [i[1] for i in retrieved_exemplars_set]
                     feedback = "\n\n".join(feedback_str)
                     exemplar = "\n\n".join(exemplar_str)
                     tmp = self.optimize_prompt(
                         task_section,
-                        "",
+                        exemplar,
                         feedback
                     )
                     for i in tmp:
@@ -467,22 +512,22 @@ class MyOptimizer(PromptOptimizer):
                         new_exemplar_sections.append(new_exemplar_sections[ind])
 
             # Genetic algorithm
-            ea_sampled_task_sections = []
-            if self.opt["ea_samples_per_step"] > 0:
-                for i in tqdm(range(self.opt["ea_samples_per_step"]), desc="evolution algorithm"):
-                    if len(new_task_sections) < 2:
-                        break
-                    parents_idx = random.sample(range(len(new_task_sections)), 2)
-                    prompt1 = new_task_sections[parents_idx[0]]
-                    prompt2 = new_task_sections[parents_idx[1]]
-                    ea_prompt = self.genetic_algorithm_expansion(prompt1, prompt2)
-                    if len(ea_prompt == 0):
-                        continue
-                    ea_sampled_task_sections += [Prompt(ea_prompt[0], set(), set(), 0, 0)]
-                    new_exemplar_sections.append(new_exemplar_sections[parents_idx[0]])
+            # ea_sampled_task_sections = []
+            # if self.opt["ea_samples_per_step"] > 0:
+            #     for i in tqdm(range(self.opt["ea_samples_per_step"]), desc="evolution algorithm"):
+            #         if len(new_task_sections) < 2:
+            #             break
+            #         parents_idx = random.sample(range(len(new_task_sections)), 2)
+            #         prompt1 = new_task_sections[parents_idx[0]]
+            #         prompt2 = new_task_sections[parents_idx[1]]
+            #         ea_prompt = self.genetic_algorithm_expansion(prompt1, prompt2)
+            #         if len(ea_prompt) == 0:
+            #             continue
+            #         ea_sampled_task_sections += [Prompt(ea_prompt[0], set(), set(), 0, 0)]
+            #         new_exemplar_sections.append(new_exemplar_sections[parents_idx[0]])
 
             # combine
-            new_sections = new_task_sections + mc_sampled_task_sections + ea_sampled_task_sections
+            new_sections = new_task_sections + mc_sampled_task_sections 
             # new_sections = new_task_sections
             tmp_new_prompts = [
                 Prompt(prompt.prompt.replace(task_section, tmp.prompt).replace(exemplar_section, tmp_exemplar), tmp.feedbacks_idx_used, tmp.examplers_idx_used, tmp.parent_score, tmp.score) for tmp, tmp_exemplar in zip(new_sections, new_exemplar_sections)
@@ -535,6 +580,9 @@ class MyOptimizer(PromptOptimizer):
 
     def score_candidates(self, prompts, task, gpt4, train_exs):
         """Score a list of prompts."""
+        if len(prompts) == 1:
+            return [1.0]
+
         evals = self.evaluator_fn(
             [prompt.prompt for prompt in prompts],
             train_exs,

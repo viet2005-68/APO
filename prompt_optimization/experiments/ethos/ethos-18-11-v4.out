@@ -1,0 +1,651 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY + FEW SHOT + BATCH GRADIENT DESCENT STRATEGY
+======== MODEL: GPT-0SS-20B
+
+======== ROUND 0
+Time: 6.600827932357788
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.86),)
+Training accuracy: (np.float64(0.86),)
+Validation accuracy: [0.86]
+Test accuracy: [0.89]
+======== ROUND 1
+Time: 275.7308406829834
+Prompt: (Prompt(
+  prompt: # Task
+You are a neutral evaluator tasked with determining whether a given passage contains hate speech. Hate speech is defined as language that attacks, degrades, or encourages violence or discrimination against a protected group—defined as a group distinguished by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, or disability—intentionally or with reckless disregard for the harm it may cause. Evaluate each sentence or clause independently, noting whether it targets a protected group, uses demeaning or threatening language, or expresses intent to incite harm. If any part of the text meets these criteria, label that portion as "HATE". If it does not target a protected group or is merely political or social commentary without harassment, label it "NOT HATE". After labeling each portion, give a concise overall verdict: "HATE" if any portion is hateful, otherwise "NOT HATE". Provide your reasoning in a brief, objective manner. Now, analyze the following text: [TEXT]
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(4), np.int64(5), np.int64(6)},
+  examplers_idx_used: {np.int64(0), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0.86,
+  score: 0.9591836734693877), Prompt(
+  prompt: # Task
+You are a content moderator. Hate speech is defined as language that attacks, dehumanizes, or encourages violence or discrimination against a protected group based on characteristics such as race, religion, ethnicity, nationality, gender, sexual orientation, or disability. When evaluating a passage, consider whether the language is directed at a protected group, whether it uses slurs, dehumanizing terms, or calls for harm, and whether the intent is to incite hatred or violence; avoid labeling general political criticism or non‑targeted remarks as hate speech unless the target is a protected group and the language is hateful. After reviewing the passage, answer with a single word: “Yes” if it constitutes hate speech, otherwise “No”. The passage to evaluate is: [INSERT TEXT HERE].
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(3), np.int64(5), np.int64(6)},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), np.int64(6), np.int64(7)},
+  parent_score: 0.86,
+  score: 0.9387755102040817), Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. For this task, hate speech is defined as any expression that targets a protected group—such as race, ethnicity, religion, gender identity, sexual orientation, disability, or other protected characteristic—with hostility, intimidation, or violence, or that encourages or praises such hostility. Evaluate the text at the clause or sentence level; if any clause or sentence meets that definition, answer “Yes”; otherwise answer “No”. Take into account context, intent, and nuance: neutral criticism or political commentary that does not target a protected group is not hate speech. Avoid flagging generic profanity or strong language unless it is directed at a protected group or used to incite violence against one. The final answer should be a single word: Yes or No. The text to evaluate follows:
+
+# Exemplar
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(4), np.int64(5)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.86,
+  score: 0.9387755102040817), Prompt(
+  prompt: # Task
+You are a content moderation AI tasked with determining whether the following text contains hate speech. Hate speech is defined as any statement that attacks, threatens, or encourages violence or discrimination against a protected group—such as a group defined by race, ethnicity, nationality, religion, gender identity, sexual orientation, disability, or other protected characteristics—or that uses dehumanizing language toward such a group. Carefully evaluate each clause of the text, considering context, intent, and overall meaning, and determine whether any part of the text meets this definition; if it does, answer “Yes,” and if it does not, answer “No.” Respond with only the single word “Yes” or “No” and nothing else. The text to evaluate is: [Text to classify].
+
+# Exemplar
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(8)},
+  parent_score: 0.86,
+  score: 0.9387755102040817))
+Training accuracy: (np.float64(0.9591836734693877), np.float64(0.9387755102040817), np.float64(0.9387755102040817), np.float64(0.9387755102040817))
+Validation accuracy: [0.86, 0.84, 0.86, 0.9]
+Test accuracy: [0.85, 0.91, 0.89, 0.91]
+======== ROUND 2
+Time: 597.1227774620056
+Prompt: (Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(9)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0,
+  score: 0.9090909090909091), Prompt(
+  prompt: # Task
+Imagine you are an impartial analyst tasked with deciding whether a given passage contains hate speech.  
+**Definition**: Hate speech is any language that attacks, degrades, or encourages violence or discrimination against a protected group—defined as a group distinguished by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, or disability—intentionally or with reckless disregard for the harm it may cause.
+
+1. **Evaluate each sentence or clause independently**.  
+   • Mark it **“HATE”** if it targets a protected group, uses demeaning or threatening language, or expresses intent to incite harm.  
+   • Otherwise mark it **“NOT HATE.”**
+
+2. **After labeling every portion**, give a concise overall verdict:  
+   – “HATE” if any part is hateful,  
+   – “NOT HATE” if none are.
+
+3. **Provide a brief, objective rationale**.  
+   • Consider the broader context and overall intent, not just surface lexical cues such as “deport,” “kill,” “Muslims,” or “Israelis,” which can appear in non‑hate contexts.  
+   • Be aware that tokenization and attention mechanisms may treat these words as hate signals even when they belong to a larger argument or rhetorical device.
+
+4. **Avoid**:  
+   – A terse “Is this hate speech?” question that offers no definition or context.  
+   – A default conservative stance that labels ambiguous or politically charged content as non‑hate simply because a protected group is not explicitly named.
+
+5. **Use the operational definition above**.  
+   • Consider overall intent and target.  
+   • Watch for subtle or contextualized insults that may be coded or sarcastic, ensuring you do not misclassify neutral or mildly offensive content as hate, nor overlook subtle hateful content that lacks explicit slurs.
+
+**Now, analyze the following text**: [TEXT]
+
+# Exemplar
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(6)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 0.9090909090909091), Prompt(
+  prompt: # Task
+You are a content moderator tasked with determining whether a given passage constitutes hate speech. Hate speech is language that attacks, dehumanizes, or encourages violence or discrimination against a protected group based on characteristics such as race, religion, ethnicity, nationality, gender, sexual orientation, or disability. To decide, look for language that identifies or implies a protected group as the target, uses slurs, dehumanizing descriptors, or coded insults aimed at that group, calls for or condones harm or violence, or shows intent to spread hatred or fear toward that group. Do not label general political criticism, commentary, or non‑targeted remarks as hate speech unless they meet the criteria above. After reviewing the passage, respond with only the word “Yes” if it meets the definition of hate speech, otherwise respond with only the word “No”. The passage to evaluate is: [INSERT TEXT HERE].
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0.9387755102040817,
+  score: 0.9090909090909091), Prompt(
+  prompt: # Task
+You are a moderator evaluating whether a given text qualifies as hate speech. Hate speech is defined as language that attacks, dehumanises, or encourages violence or discrimination against a protected group—those defined by race, religion, ethnicity, nationality, gender, sexual orientation, or disability. To determine this, examine the text for any indication that a protected group is being targeted, such as the use of slurs, dehumanising language, coded insults, calls for or endorsement of harm, or an expressed intent to spread hatred or fear toward that group. General political critique or non‑targeted remarks should not be classified as hate speech unless they meet the criteria above. After reviewing the passage, answer with only the word “Yes” if it matches the definition of hate speech, otherwise answer with only the word “No”. The passage to assess is: [INSERT TEXT HERE].
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0,
+  score: 0.9090909090909091))
+Training accuracy: (np.float64(0.9090909090909091), np.float64(0.9090909090909091), np.float64(0.9090909090909091), np.float64(0.9090909090909091))
+Validation accuracy: [0.88, 0.88, 0.88, 0.86]
+Test accuracy: [0.87, 0.88, 0.89, 0.9]
+======== ROUND 3
+Time: 609.1163372993469
+Prompt: (Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(6)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0.9090909090909091,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(6)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0.9090909090909091,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.9090909090909091,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0.9090909090909091,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.86, 0.88, 0.86, 0.86]
+Test accuracy: [0.86, 0.88, 0.84, 0.86]
+======== ROUND 4
+Time: 716.1449060440063
+Prompt: (Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics", Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics", Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics", Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+You are an impartial reviewer. Your task is to determine whether any segment of a given passage constitutes hate speech. Hate speech is defined as language that attacks, degrades, or supports violence or discrimination against a protected group. Protected groups include those identified by race, color, national origin, ethnicity, religion, gender, sexual orientation, age, disability, or any other characteristic that places them in a vulnerable or marginalized category (e.g., Black, Latino, Muslim, Jewish, LGBTQ+, disabled, Indigenous, Dalit, etc.).
+
+Examine each sentence or clause independently. For each unit, decide whether it:  
+1. refers to a protected group;  
+2. contains language that is demeaning or threatening toward that group;  
+3. conveys an intent to or encouragement of harm toward that group.
+
+If all three conditions are satisfied, label the unit “HATE”; otherwise label it “NOT HATE.” After you have labeled every unit, give one overall verdict: “HATE” if at least one unit is labeled HATE, otherwise “NOT HATE.”  
+
+For every label and for the final verdict, provide a concise, objective explanation that references the criteria above, avoiding reliance on specific words alone. Your analysis should remain neutral, grounded in evidence, and should not treat ambiguous or context‑dependent language as hateful unless it clearly meets the definition.  
+
+Now analyze the following text: [TEXT]
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics", Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.9, 0.82, 0.82, 0.84]
+Test accuracy: [0.85, 0.89, 0.85, 0.84]
