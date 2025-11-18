@@ -1,0 +1,393 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY + FEW SHOT + BATCH GRADIENT DESCENT STRATEGY
+======== MODEL: GPT-0SS-20B
+
+======== ROUND 0
+Time: 9.525891304016113
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.87),)
+Training accuracy: (np.float64(0.87),)
+Validation accuracy: [0.82]
+Test accuracy: [0.88]
+======== ROUND 1
+Time: 122.22762608528137
+Prompt: (Prompt(
+  prompt: # Task
+You are a content moderation assistant tasked with determining whether the following text contains hate speech. Evaluate the text by identifying any protected group references, assessing the speaker’s intent, noting any calls to violence or discrimination, and judging the severity of the language. If the content meets the definition of hate speech as used in the dataset—i.e., it targets a protected group with demeaning or inciting language—answer “Yes”; otherwise answer “No.” Provide a concise justification for your decision.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(4), np.int64(5)},
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.87,
+  score: 0.91), Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech.  A text is considered hate speech if it targets a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or national origin—expresses hostility, contempt, or demeaning language toward that group, and is intended to incite violence or discrimination.  Evaluate the overall sentiment, context, and intent, not just the presence of profanity or aggressive phrasing.  If the text meets all these criteria, answer “Yes”; otherwise answer “No”.
+
+# Exemplar
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(3), np.int64(6), np.int64(10)},
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(4), np.int64(7), np.int64(8)},
+  parent_score: 0.87,
+  score: 0.89), Prompt(
+  prompt: # Task
+You are a content moderation assistant. Read the following text and determine whether it is hate speech. Consider whether the text targets a protected group, contains hostile or demeaning language, includes a call to violence or discrimination, and whether context or sarcasm alters its meaning. Provide a single word answer: “Yes” if the text meets the definition of hate speech, otherwise “No”.
+
+# Exemplar
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(4), np.int64(6), np.int64(7), np.int64(9)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(3), np.int64(4), np.int64(7)},
+  parent_score: 0.87,
+  score: 0.89), Prompt(
+  prompt: # Task
+Please read the following text and decide whether it contains hate speech. In your assessment, consider the presence of slurs or dehumanizing language, any calls to violence or discrimination, and whether the content is directed toward a protected group such as race, ethnicity, religion, gender, sexual orientation, disability, or nationality. Also evaluate the historical context and target audience, weighing whether the language is used to incite hatred or is neutral or praising. Respond with “Yes” or “No” followed by a brief explanation of your reasoning.
+
+# Exemplar
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(4), np.int64(7), np.int64(8), np.int64(9)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(6)},
+  parent_score: 0.87,
+  score: 0.88))
+Training accuracy: (np.float64(0.91), np.float64(0.89), np.float64(0.89), np.float64(0.88))
+Validation accuracy: [0.84, 0.86, 0.92, 0.88]
+Test accuracy: [0.9, 0.89, 0.9, 0.9]
+======== ROUND 2
+Time: 424.5073506832123
+Prompt: (Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. A text is considered hate speech if it targets a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or national origin—and expresses hostility, contempt, or demeaning language toward that group, with an intent to incite violence or discrimination. Evaluate the overall sentiment, context, and intent, not just the presence of profanity or aggressive phrasing, and pay special attention to subtle rhetoric, ambiguous pronouns, and multiple subjects that may mask hateful content. If the text meets all these criteria, answer “Yes”; otherwise answer “No”.
+
+# Exemplar
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(7), np.int64(8), np.int64(9), np.int64(15)},
+  examplers_idx_used: {np.int64(1), np.int64(6), np.int64(7), np.int64(9), np.int64(11)},
+  parent_score: 0.89,
+  score: 0.9285714285714286), Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. Hate speech is defined as language that targets a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or national origin—or a non‑protected group, holiday, ideology, or other entity, and that expresses hostility, contempt, or demeaning language toward that target, with the intent to incite violence or discrimination. Evaluate the overall sentiment, context, and intent, not just the presence of profanity or aggressive phrasing, and consider whether the content is aimed at a specific group or ideology rather than merely criticizing it. Provide a concise justification that clearly explains why the text meets or does not meet these criteria, making sure to distinguish between harsh criticism and hateful intent. If the text meets all these criteria, answer “Yes”; otherwise answer “No”.
+
+# Exemplar
+Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(7), np.int64(13), np.int64(14), np.int64(17)},
+  examplers_idx_used: {np.int64(0), np.int64(3), np.int64(9), np.int64(10), np.int64(12)},
+  parent_score: 0.89,
+  score: 0.9107142857142857), Prompt(
+  prompt: # Task
+You are a content moderation assistant. Read the following text and decide whether it is hate speech. Hate speech is defined as language that targets a protected group—such as race, religion, ethnicity, gender identity, sexual orientation, disability, or nationality—using hostile, demeaning, or dehumanizing words, or that encourages discrimination or violence against that group. The statement may be explicit or implicit, but intent to harm or incite is key; if the text is a joke, hyperbole, or sarcastic remark that does not actually intend to harm or discriminate, it is not hate speech. Provide a single word answer: Yes if the text meets the definition, No otherwise. For example, the sentence “All members of that group should be deported” is hate speech, whereas “I think that group is funny” is not.
+
+# Exemplar
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(6), np.int64(19), np.int64(21), np.int64(24)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(8), np.int64(10), np.int64(12)},
+  parent_score: 0.89,
+  score: 0.9107142857142857), Prompt(
+  prompt: # Task
+You are a content moderation assistant tasked with determining whether the following text contains hate speech. Evaluate the text by identifying any protected group references, assessing the speaker’s intent, noting any calls to violence or discrimination, and judging the severity of the language. If the content meets the definition of hate speech as used in the dataset—i.e., it targets a protected group with demeaning or inciting language—answer “Yes”; otherwise answer “No.” Provide a concise justification for your decision.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(4), np.int64(5)},
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.87,
+  score: 0.9107142857142857))
+Training accuracy: (np.float64(0.9285714285714286), np.float64(0.9107142857142857), np.float64(0.9107142857142857), np.float64(0.9107142857142857))
+Validation accuracy: [0.9, 0.88, 0.9, 0.84]
+Test accuracy: [0.92, 0.87, 0.92, 0.87]
+======== ROUND 3
+Time: 443.42010831832886
+Prompt: (Prompt(
+  prompt: # Task
+You are asked to determine whether the following text contains hate speech. To do so, first identify any references to a protected group such as race, religion, ethnicity, gender, sexual orientation, disability, or national origin; then assess the speaker’s intent, looking for hostility, contempt, demeaning language, or a desire to incite violence or discrimination; next note any explicit or implicit calls to violence or discrimination; then evaluate the overall severity of the language, taking into account subtle rhetoric, ambiguous pronouns, multiple subjects, and contextual factors such as historical usage, target audience, and the presence of calls to violence; weigh all these aspects together and decide if the text meets all the criteria for hate speech; finally answer “Yes” if it does, otherwise answer “No.”
+
+# Exemplar
+Text: "I like big thick bitches to serve me my cocktail. They are good only for such things"
+Label: Yes
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "i like dead refugees on my shore√Ø¬ª¬ø"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(4), np.int64(11), np.int64(12), np.int64(15)},
+  examplers_idx_used: {np.int64(4), np.int64(6), np.int64(14), np.int64(15), np.int64(16)},
+  parent_score: 0.9285714285714286,
+  score: 0.9245283018867925), Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. Hate speech is defined as language that targets a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or national origin—or a non‑protected group, holiday, ideology, or other entity, and that expresses hostility, contempt, or demeaning language toward that target with the intent to incite violence or discrimination. Evaluate the overall sentiment, context, and intent based solely on the content of the text itself, looking for explicit or implied targets, the tone of the language, and whether the speaker is encouraging harm or discrimination. Distinguish harsh criticism or political disagreement from hate speech by checking if the language dehumanizes, demonizes, or calls for violence against a specific group or ideology, and avoid flagging neutral or critical remarks that do not target a protected group or express hateful intent. Also consider whether coded or metaphorical expressions carry hateful meaning only when the overall context supports that interpretation. Provide a concise justification that explains why the text meets or does not meet these criteria, and answer “Yes” if all criteria are met or “No” otherwise.
+
+# Exemplar
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "I like big thick bitches to serve me my cocktail. They are good only for such things"
+Label: Yes
+
+Text: "i like dead refugees on my shore√Ø¬ª¬ø"
+Label: Yes
+
+Text: "These immigrants are stealing our jobs. We need to shut them down."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(9), np.int64(25), np.int64(27), np.int64(31)},
+  examplers_idx_used: {np.int64(1), np.int64(10), np.int64(15), np.int64(16), np.int64(20)},
+  parent_score: 0.9107142857142857,
+  score: 0.9245283018867925), Prompt(
+  prompt: # Task
+Determine whether the following text contains hate speech. A text is hate speech if it targets a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or national origin—expressing hostility, contempt, or demeaning language toward that group, with an intent to incite violence or discrimination. To evaluate this, first identify any protected group mentioned explicitly or implied by pronouns or contextual clues, then assess whether the language directed at that group is hostile, demeaning, or inciting. Pay special attention to subtle rhetoric, ambiguous pronouns, and multiple subjects that may conceal hateful content, while also considering the overall sentiment, context, and intent. If the text meets all these criteria, answer “Yes”; otherwise answer “No”. Include a confidence score on a scale from 0 to 100 after the answer, but do not provide any additional explanation or references to the criteria.
+
+# Exemplar
+Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "i like dead refugees on my shore√Ø¬ª¬ø"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(32), np.int64(0), np.int64(3), np.int64(15), np.int64(26)},
+  examplers_idx_used: {np.int64(3), np.int64(8), np.int64(12), np.int64(14), np.int64(15)},
+  parent_score: 0.9285714285714286,
+  score: 0.9056603773584906), Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. A text is considered hate speech if it targets a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or national origin—and expresses hostility, contempt, or demeaning language toward that group, with an intent to incite violence or discrimination. Evaluate the overall sentiment, context, intent, and subtle rhetoric, including sarcasm, rhetorical exaggeration, ambiguous pronouns, and multiple subjects that may mask hateful content. If any of these elements are present, answer “Yes”; otherwise answer “No”. Provide a brief explanation of your reasoning.
+
+# Exemplar
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(10), np.int64(16), np.int64(18), np.int64(20), np.int64(30)},
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(3), np.int64(7), np.int64(14)},
+  parent_score: 0.9285714285714286,
+  score: 0.9056603773584906))
+Training accuracy: (np.float64(0.9245283018867925), np.float64(0.9245283018867925), np.float64(0.9056603773584906), np.float64(0.9056603773584906))
+Validation accuracy: [0.88, 0.88, 0.9, 0.88]
+Test accuracy: [0.91, 0.92, 0.89, 0.89]
