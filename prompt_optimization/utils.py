@@ -34,7 +34,7 @@ def parse_sectioned_prompt(s):
 
 def chatgpt(
     prompt,
-    temperature=0.5,
+    temperature=0.7,
     n=1,
     top_p=1,
     stop=None,

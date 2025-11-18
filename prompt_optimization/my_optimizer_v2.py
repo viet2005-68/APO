@@ -70,7 +70,7 @@ class FeedbackMemory():
         retrieved_idx = np.random.choice(len(self.feedbacks), size=min(num, len(self.feedbacks)), replace=False, p=probs)
         return [(i, self.feedbacks[i], self.error_string[i]) for i in retrieved_idx]
     
-    def update_feedback(self, feedback_idx, score_gain, beta=1, theta=0.1):
+    def update_feedback(self, feedback_idx, score_gain, beta=0.3, theta=0.1):
         current_score = self.scores[feedback_idx]
         new_score = current_score + score_gain * beta
         self.scores[feedback_idx] = new_score
@@ -147,7 +147,7 @@ class ExemplarMemory():
 
         return [(i, self.exemplars[i]) for i in top_indices]
 
-    def update_exemplar(self, exemplar_idx, prompt_score, beta=1, theta=0.1):
+    def update_exemplar(self, exemplar_idx, prompt_score, beta=0.3, theta=0.1):
         current_score = self.scores[exemplar_idx]
         new_score = current_score + prompt_score * beta
         self.scores[exemplar_idx] = new_score
@@ -455,16 +455,16 @@ class MyOptimizer(PromptOptimizer):
                         new_exemplar_sections.append(exemplar)
                 print("new promt: ", new_task_sections)
                 print("len new prompt: ", len(new_task_sections))
-            # # generate synonyms
-            # mc_sampled_task_sections = []
-            # if self.opt["mc_samples_per_step"] > 0:
-            #     for ind, sect in tqdm(enumerate(new_task_sections), desc="mc samples"):
-            #         mc_sects = self.generate_synonyms(
-            #             sect.prompt, n=self.opt["mc_samples_per_step"]
-            #         )
-            #         for i in mc_sects:
-            #             mc_sampled_task_sections.append(Prompt(i, sect.feedbacks_idx_used, sect.examplers_idx_used, sect.score, 0))
-            #             new_exemplar_sections.append(new_exemplar_sections[ind])
+            # generate synonyms
+            mc_sampled_task_sections = []
+            if self.opt["mc_samples_per_step"] > 0:
+                for ind, sect in tqdm(enumerate(new_task_sections), desc="mc samples"):
+                    mc_sects = self.generate_synonyms(
+                        sect.prompt, n=self.opt["mc_samples_per_step"]
+                    )
+                    for i in mc_sects:
+                        mc_sampled_task_sections.append(Prompt(i, sect.feedbacks_idx_used, sect.examplers_idx_used, sect.score, 0))
+                        new_exemplar_sections.append(new_exemplar_sections[ind])
 
             # # Genetic algorithm
             # ea_sampled_task_sections = []
@@ -480,8 +480,8 @@ class MyOptimizer(PromptOptimizer):
             #         new_exemplar_sections.append(new_exemplar_sections[parents_idx[0]])
 
             # combine
-            # new_sections = new_task_sections + mc_sampled_task_sections + ea_sampled_task_sections
-            new_sections = new_task_sections
+            new_sections = new_task_sections + mc_sampled_task_sections
+            # new_sections = new_task_sections
             tmp_new_prompts = [
                 Prompt(prompt.prompt.replace(task_section, tmp.prompt).replace(exemplar_section, tmp_exemplar), tmp.feedbacks_idx_used, tmp.examplers_idx_used, tmp.parent_score, tmp.score) for tmp, tmp_exemplar in zip(new_sections, new_exemplar_sections)
             ]
