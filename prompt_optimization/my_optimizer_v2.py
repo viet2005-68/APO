@@ -455,33 +455,33 @@ class MyOptimizer(PromptOptimizer):
                         new_exemplar_sections.append(exemplar)
                 print("new promt: ", new_task_sections)
                 print("len new prompt: ", len(new_task_sections))
-            # generate synonyms
-            mc_sampled_task_sections = []
-            if self.opt["mc_samples_per_step"] > 0:
-                for ind, sect in tqdm(enumerate(new_task_sections), desc="mc samples"):
-                    mc_sects = self.generate_synonyms(
-                        sect.prompt, n=self.opt["mc_samples_per_step"]
-                    )
-                    for i in mc_sects:
-                        mc_sampled_task_sections.append(Prompt(i, sect.feedbacks_idx_used, sect.examplers_idx_used, sect.score, 0))
-                        new_exemplar_sections.append(new_exemplar_sections[ind])
+            # # generate synonyms
+            # mc_sampled_task_sections = []
+            # if self.opt["mc_samples_per_step"] > 0:
+            #     for ind, sect in tqdm(enumerate(new_task_sections), desc="mc samples"):
+            #         mc_sects = self.generate_synonyms(
+            #             sect.prompt, n=self.opt["mc_samples_per_step"]
+            #         )
+            #         for i in mc_sects:
+            #             mc_sampled_task_sections.append(Prompt(i, sect.feedbacks_idx_used, sect.examplers_idx_used, sect.score, 0))
+            #             new_exemplar_sections.append(new_exemplar_sections[ind])
 
-            # Genetic algorithm
-            ea_sampled_task_sections = []
-            if self.opt["ea_samples_per_step"] > 0:
-                for i in tqdm(range(self.opt["ea_samples_per_step"]), desc="evolution algorithm"):
-                    if len(new_task_sections) < 2:
-                        break
-                    parents_idx = random.sample(range(len(new_task_sections)), 2)
-                    prompt1 = new_task_sections[parents_idx[0]]
-                    prompt2 = new_task_sections[parents_idx[1]]
-                    ea_prompt = self.genetic_algorithm_expansion(prompt1, prompt2)
-                    ea_sampled_task_sections += [Prompt(ea_prompt[0], set(), set(), 0, 0)]
-                    new_exemplar_sections.append(new_exemplar_sections[parents_idx[0]])
+            # # Genetic algorithm
+            # ea_sampled_task_sections = []
+            # if self.opt["ea_samples_per_step"] > 0:
+            #     for i in tqdm(range(self.opt["ea_samples_per_step"]), desc="evolution algorithm"):
+            #         if len(new_task_sections) < 2:
+            #             break
+            #         parents_idx = random.sample(range(len(new_task_sections)), 2)
+            #         prompt1 = new_task_sections[parents_idx[0]]
+            #         prompt2 = new_task_sections[parents_idx[1]]
+            #         ea_prompt = self.genetic_algorithm_expansion(prompt1, prompt2)
+            #         ea_sampled_task_sections += [Prompt(ea_prompt[0], set(), set(), 0, 0)]
+            #         new_exemplar_sections.append(new_exemplar_sections[parents_idx[0]])
 
             # combine
-            new_sections = new_task_sections + mc_sampled_task_sections + ea_sampled_task_sections
-            # new_sections = new_task_sections
+            # new_sections = new_task_sections + mc_sampled_task_sections + ea_sampled_task_sections
+            new_sections = new_task_sections
             tmp_new_prompts = [
                 Prompt(prompt.prompt.replace(task_section, tmp.prompt).replace(exemplar_section, tmp_exemplar), tmp.feedbacks_idx_used, tmp.examplers_idx_used, tmp.parent_score, tmp.score) for tmp, tmp_exemplar in zip(new_sections, new_exemplar_sections)
             ]

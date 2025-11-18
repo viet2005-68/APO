@@ -47,7 +47,7 @@ def chatgpt(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "model": "openai/gpt-oss-20b",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,

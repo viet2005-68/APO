@@ -1,0 +1,681 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-18-11.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY + FEW SHOT + BATCH GRADIENT DESCENT STRATEGY
+======== MODEL: GPT-0SS-20B
+
+======== ROUND 0
+Time: 291.79627203941345
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.5810546875),)
+Training accuracy: (np.float64(0.5810546875),)
+Validation accuracy: [0.5718157181571816]
+Test accuracy: [0.5531453362255966]
+======== ROUND 1
+Time: 380.5956943035126
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.625), Prompt(
+  prompt: # Task
+Given the Context, Statement, and any supplementary Information, determine whether the Statement is a lie (answer “Yes”) or not (answer “No”). A statement is a lie if it contains a factual error, a false claim, or is misleading when judged in light of the Context and the credibility of the source. If the Statement is partially true, partially false, or ambiguous, it is not a lie, so answer “No.” Carefully evaluate the claim against verifiable facts, consider the speaker’s role, source reliability, and contextual cues before responding. Respond only with “Yes” or “No.”
+
+# Exemplar
+Text: "Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo."
+Label: Yes
+
+Text: "Statement: Says Russ Feingold was the only senator to vote against Homeland Security.
+Job title: 
+State: Wisconsin
+Party: organization
+Context: a TV ad"
+Label: Yes
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: Rand Pauls speech ... on Gattaca was totally ripped off of Wikipedia.
+Job title: MSNBC host
+State: 
+Party: none
+Context: comments on her TV show"
+Label: No
+
+Text: "Statement: Florida has the second-lowest (campaign) contribution limit in the entire country.
+Job title: State Representative
+State: Florida
+Party: republican
+Context: a news conference"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(3), np.int64(5), np.int64(8), np.int64(12)},
+  examplers_idx_used: {np.int64(3), np.int64(6), np.int64(7), np.int64(8), np.int64(13)},
+  parent_score: 0.5810546875,
+  score: 0.609375), Prompt(
+  prompt: # Task
+You are given a Context, a Statement, and optional metadata such as speaker role, source type, job title, state, and party affiliation. Your task is to decide whether the Statement is a lie (Yes) or not (No). First, weigh the credibility of the source and the speaker’s background, and then compare the claim to verifiable facts from reliable, up‑to‑date authorities. If the claim contradicts established evidence or is contradicted by reputable sources, label it as a lie. If the claim is supported by evidence or cannot be disproved due to insufficient reliable data, label it as not a lie. When information is ambiguous or incomplete, explicitly note the uncertainty but base your decision on the most trustworthy evidence available. Example: If the Context says the U.S. Department of Health and Human Services issued a statement that “the coronavirus vaccine is safe” and the Statement repeats that, the answer is No. If the Statement claims “the coronavirus vaccine causes infertility” and reliable sources show otherwise, the answer is Yes. Provide your answer as a single word: Yes or No.
+
+# Exemplar
+Text: "Statement: Rand Pauls speech ... on Gattaca was totally ripped off of Wikipedia.
+Job title: MSNBC host
+State: 
+Party: none
+Context: comments on her TV show"
+Label: No
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: Says Oregon ranks 30th in the nation with regard to its incarceration rate.
+Job title: political action committee
+State: Oregon
+Party: none
+Context: a website"
+Label: No
+
+Text: "Statement: In Texas, schools do not even have to teach sex education.
+Job title: Texas Eagle Forum former president
+State: Texas
+Party: republican
+Context: an e‑mail"
+Label: No
+
+Text: "Statement: Says President Obama has fired more cruise missiles than all other Peace Prize winners combined.
+Job title: 
+State: 
+Party: none
+Context: a yard on Route 12 near Keene, N.H."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(4), np.int64(7), np.int64(9), np.int64(11)},
+  examplers_idx_used: {np.int64(2), np.int64(8), np.int64(10), np.int64(13), np.int64(14)},
+  parent_score: 0.5810546875,
+  score: 0.60546875), Prompt(
+  prompt: # Task
+You are presented with a political statement and a set of metadata that includes the speaker’s job title, state, party affiliation, and source type, as well as a brief contextual note. Your task is to decide whether the statement is a lie (Yes) or not (No). In making this decision, weigh the speaker’s role, the political environment of the state, the party’s typical positions, and the credibility of the source, as these factors can influence the likelihood of a false claim. Below are two illustrative examples that show the reasoning you should use:
+
+Example 1  
+Job title: Governor  
+State: Texas  
+Party: Republican  
+Source: State press release  
+Statement: “The state will reduce the budget by 10% next year.”  
+Context: The state’s budget has historically increased by 5% annually.  
+Answer: Yes  
+
+Example 2  
+Job title: Senator  
+State: California  
+Party: Democrat  
+Source: Congressional hearing  
+Statement: “The federal government has a debt of $28 trillion.”  
+Context: The U.S. national debt is approximately $33 trillion.  
+Answer: No  
+
+Now evaluate the following:  
+Job title: [JOB]  
+State: [STATE]  
+Party: [PARTY]  
+Source: [SOURCE]  
+Statement: [STATEMENT]  
+Context: [CONTEXT]  
+Answer:
+
+# Exemplar
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Says Oregon ranks 30th in the nation with regard to its incarceration rate.
+Job title: political action committee
+State: Oregon
+Party: none
+Context: a website"
+Label: No
+
+Text: "Statement: Says ending the direct payment farm subsidy program could save up to $28.4 billion over ten years that could be used to reduce the deficit.
+Job title: U.S. representative
+State: Oregon
+Party: democrat
+Context: in a news release"
+Label: No
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: If youre a Mexican, you get sent back. ... But if youre from a noncontiguous country like the Central American countries then you can stay in the United States.
+Job title: U.S. Representative
+State: Texas
+Party: democrat
+Context: an interview on CNN's "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(2), np.int64(4), np.int64(6), np.int64(11)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(10), np.int64(11), np.int64(13)},
+  parent_score: 0.5810546875,
+  score: 0.60546875))
+Training accuracy: (np.float64(0.625), np.float64(0.609375), np.float64(0.60546875), np.float64(0.60546875))
+Validation accuracy: [0.5474254742547425, 0.5718157181571816, 0.6260162601626016, 0.6016260162601627]
+Test accuracy: [0.5531453362255966, 0.5900216919739696, 0.5401301518438177, 0.5726681127982647]
+======== ROUND 2
+Time: 616.6059603691101
+Prompt: (Prompt(
+  prompt: # Task
+You are a fact‑checking assistant. For each item, read the Statement, Context, and any additional metadata (e.g., Job title, State, Party). First, determine whether the Claim is supported by verifiable, up‑to‑date evidence from reputable sources (government data, peer‑reviewed research, official statistics, etc.). Consider the credibility of the speaker and the context in which the statement was made, but do not assume a claim is false simply because it is unfamiliar or complex. If reliable evidence confirms the claim, answer “No” (the statement is not a lie). If evidence contradicts the claim, or if the claim is unsupported and the speaker’s credibility is low, answer “Yes” (the statement is a lie). Always base your decision on factual verification; ignore unrelated attributes unless they influence source credibility or intent. Return only the word “Yes” or “No” as the final answer.
+
+# Exemplar
+Text: "Statement: Since 2008, U.S. crude oil output has increased by over 80 percent, an increase of over 4 million barrels a day. That is the fastest increase in U.S. history.
+Job title: 
+State: Florida
+Party: republican
+Context: his energy plan"
+Label: No
+
+Text: "Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo."
+Label: Yes
+
+Text: "Statement: Says Donald Trump was asked if he would defend our allies. He said well, first hed want to know if they made any payments to us to defend them."
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a rally in Florida
+Label: No
+
+Text: "Statement: Before the terrorist attacks in Benghazi, the State Department not only failed to honor repeated requests for additional security, but instead actually reduced security in Libya."
+Job title: 
+State: Wisconsin
+Party: republican
+Context: an opinion article
+Label: No
+
+Text: "Statement: The judicial system is the most underfunded in this state, able to only pay 52 percent of its obligations. Meanwhile, judges get some of the richest pensions of all public employees.
+Job title: State senator 
+State: New Jersey
+Party: democrat
+Context: a speech on the State Senate floor"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(6), np.int64(9), np.int64(15), np.int64(17)},
+  examplers_idx_used: {np.int64(3), np.int64(17), np.int64(18), np.int64(19), np.int64(30)},
+  parent_score: 0.625,
+  score: 0.75), Prompt(
+  prompt: # Task
+Given the Context, Statement, and any supplementary Information, determine whether the Statement is a lie. A statement is a lie if it contains a factual error, a false claim, or is misleading when judged against verifiable facts, the speaker’s role, source credibility, and contextual cues. If the Statement is partially true, partially false, or ambiguous, treat it as not a lie. When key details such as a job title, location, or other relevant facts are missing or unclear, explicitly note the uncertainty and base your decision on the best available evidence without making unfounded assumptions. Avoid letting the speaker’s political affiliation or position influence the judgment; evaluate each claim purely on factual accuracy and source reliability. Respond only with “Yes” if you determine the Statement is a lie, and “No” if it is not a lie.
+
+# Exemplar
+Text: "Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo."
+Label: Yes
+
+Text: "Statement: Says Russ Feingold was the only senator to vote against Homeland Security.
+Job title: 
+State: Wisconsin
+Party: organization
+Context: a TV ad"
+Label: Yes
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: Rand Pauls speech ... on Gattaca was totally ripped off of Wikipedia.
+Job title: MSNBC host
+State: 
+Party: none
+Context: comments on her TV show"
+Label: No
+
+Text: "Statement: Florida has the second-lowest (campaign) contribution limit in the entire country.
+Job title: State Representative
+State: Florida
+Party: republican
+Context: a news conference"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(7), np.int64(18)},
+  examplers_idx_used: {np.int64(33), np.int64(37), np.int64(14), np.int64(26), np.int64(30)},
+  parent_score: 0.609375,
+  score: 0.75), Prompt(
+  prompt: # Task
+You are presented with a political statement and a set of metadata that includes the speaker’s job title, state, party affiliation, and source type, as well as a brief contextual note. Your task is to decide whether the statement is a lie (Yes) or not (No). In making this decision, weigh the speaker’s role, the political environment of the state, the party’s typical positions, and the credibility of the source, as these factors can influence the likelihood of a false claim. Below are two illustrative examples that show the reasoning you should use:
+
+Example 1  
+Job title: Governor  
+State: Texas  
+Party: Republican  
+Source: State press release  
+Statement: “The state will reduce the budget by 10% next year.”  
+Context: The state’s budget has historically increased by 5% annually.  
+Answer: Yes  
+
+Example 2  
+Job title: Senator  
+State: California  
+Party: Democrat  
+Source: Congressional hearing  
+Statement: “The federal government has a debt of $28 trillion.”  
+Context: The U.S. national debt is approximately $33 trillion.  
+Answer: No  
+
+Now evaluate the following:  
+Job title: [JOB]  
+State: [STATE]  
+Party: [PARTY]  
+Source: [SOURCE]  
+Statement: [STATEMENT]  
+Context: [CONTEXT]  
+Answer:
+
+# Exemplar
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Says Oregon ranks 30th in the nation with regard to its incarceration rate.
+Job title: political action committee
+State: Oregon
+Party: none
+Context: a website"
+Label: No
+
+Text: "Statement: Says ending the direct payment farm subsidy program could save up to $28.4 billion over ten years that could be used to reduce the deficit.
+Job title: U.S. representative
+State: Oregon
+Party: democrat
+Context: in a news release"
+Label: No
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: If youre a Mexican, you get sent back. ... But if youre from a noncontiguous country like the Central American countries then you can stay in the United States.
+Job title: U.S. Representative
+State: Texas
+Party: democrat
+Context: an interview on CNN's "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(9), np.int64(18), np.int64(19), np.int64(21)},
+  examplers_idx_used: {np.int64(4), np.int64(11), np.int64(12), np.int64(44), np.int64(17)},
+  parent_score: 0.60546875,
+  score: 0.75), Prompt(
+  prompt: # Task
+You are presented with a political statement and a set of metadata that includes the speaker’s job title, state, party affiliation, and source type, as well as a brief contextual note. Your task is to decide whether the statement is a lie (Yes) or not (No). In making this decision, weigh the speaker’s role, the political environment of the state, the party’s typical positions, and the credibility of the source, as these factors can influence the likelihood of a false claim. Below are two illustrative examples that show the reasoning you should use:
+
+Example 1  
+Job title: Governor  
+State: Texas  
+Party: Republican  
+Source: State press release  
+Statement: “The state will reduce the budget by 10% next year.”  
+Context: The state’s budget has historically increased by 5% annually.  
+Answer: Yes  
+
+Example 2  
+Job title: Senator  
+State: California  
+Party: Democrat  
+Source: Congressional hearing  
+Statement: “The federal government has a debt of $28 trillion.”  
+Context: The U.S. national debt is approximately $33 trillion.  
+Answer: No  
+
+Now evaluate the following:  
+Job title: [JOB]  
+State: [STATE]  
+Party: [PARTY]  
+Source: [SOURCE]  
+Statement: [STATEMENT]  
+Context: [CONTEXT]  
+Answer:
+
+# Exemplar
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: Says Oregon ranks 30th in the nation with regard to its incarceration rate.
+Job title: political action committee
+State: Oregon
+Party: none
+Context: a website"
+Label: No
+
+Text: "Statement: Says ending the direct payment farm subsidy program could save up to $28.4 billion over ten years that could be used to reduce the deficit.
+Job title: U.S. representative
+State: Oregon
+Party: democrat
+Context: in a news release"
+Label: No
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: If youre a Mexican, you get sent back. ... But if youre from a noncontiguous country like the Central American countries then you can stay in the United States.
+Job title: U.S. Representative
+State: Texas
+Party: democrat
+Context: an interview on CNN's "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(37), np.int64(7), np.int64(16), np.int64(19)},
+  examplers_idx_used: {np.int64(33), np.int64(36), np.int64(5), np.int64(24), np.int64(30)},
+  parent_score: 0.60546875,
+  score: 0.75))
+Training accuracy: (np.float64(0.75), np.float64(0.75), np.float64(0.75), np.float64(0.75))
+Validation accuracy: [0.6097560975609756, 0.6016260162601627, 0.6016260162601627, 0.6070460704607046]
+Test accuracy: [0.579175704989154, 0.5531453362255966, 0.596529284164859, 0.5726681127982647]
+======== ROUND 3
+Time: 636.8204069137573
+Prompt: (Prompt(
+  prompt: # Task
+You are a fact‑checking assistant. For each item, read the Statement, Context, and any metadata. First, gather verifiable evidence from reputable sources such as government data, peer‑reviewed research, or official statistics. Second, rate each source’s credibility on a scale of 1 to 3 (3 for peer‑reviewed or official, 2 for reputable news or academic, 1 for unverified or informal). Third, rate the speaker’s credibility on a scale of 1 to 3 (3 for a subject‑matter expert or official office holder, 2 for a public figure with relevant expertise, 1 for an informal or unknown speaker). Fourth, assess contextual relevance: does the context support the claim or introduce possible misinterpretation? Add the three scores; if the sum is 6 or higher and the evidence confirms the claim, answer “No.” If the sum is 4 or lower and the evidence contradicts the claim or is lacking while speaker credibility is low, answer “Yes.” If the sum is 5, examine whether the evidence is partially supportive or contradictory; if uncertainty remains, err on the side of “Yes” to avoid endorsing unverified statements. Ignore unrelated attributes unless they influence source credibility or intent. Return only the word “Yes” or “No.”
+
+# Exemplar
+Text: "Statement: Since 2008, U.S. crude oil output has increased by over 80 percent, an increase of over 4 million barrels a day. That is the fastest increase in U.S. history.
+Job title: 
+State: Florida
+Party: republican
+Context: his energy plan"
+Label: No
+
+Text: "Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo."
+Label: Yes
+
+Text: "Statement: Says Donald Trump was asked if he would defend our allies. He said well, first hed want to know if they made any payments to us to defend them."
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a rally in Florida
+Label: No
+
+Text: "Statement: Before the terrorist attacks in Benghazi, the State Department not only failed to honor repeated requests for additional security, but instead actually reduced security in Libya."
+Job title: 
+State: Wisconsin
+Party: republican
+Context: an opinion article
+Label: No
+
+Text: "Statement: The judicial system is the most underfunded in this state, able to only pay 52 percent of its obligations. Meanwhile, judges get some of the richest pensions of all public employees.
+Job title: State senator 
+State: New Jersey
+Party: democrat
+Context: a speech on the State Senate floor"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(36), np.int64(37), np.int64(42), np.int64(23), np.int64(25)},
+  examplers_idx_used: {np.int64(2), np.int64(34), np.int64(35), np.int64(14), np.int64(58)},
+  parent_score: 0.75,
+  score: 0.6212121212121212), Prompt(
+  prompt: # Task
+You are given a Context, a Statement, and optional supplementary Information that may include the speaker’s Job title, State, Party, and Source type (e.g., press release, tweet, campaign mailer). Your task is to decide whether the Statement is a lie. A Statement is a lie only when it contains a factual error, a false claim, or is misleading when compared with verifiable facts, the speaker’s role, source credibility, and contextual cues. If the Statement is partially true, partially false, or ambiguous, treat it as not a lie. When key details such as a job title, location, or other relevant facts are missing or unclear, explicitly note the uncertainty and base your decision on the best available evidence without making unfounded assumptions. Do not let the speaker’s political affiliation or position influence the judgment; evaluate each claim purely on factual accuracy and source reliability. Respond only with “Yes” if you determine the Statement is a lie, and “No” if it is not a lie.
+
+# Exemplar
+Text: "Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo."
+Label: Yes
+
+Text: "Statement: Says Russ Feingold was the only senator to vote against Homeland Security.
+Job title: 
+State: Wisconsin
+Party: organization
+Context: a TV ad"
+Label: Yes
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: Rand Pauls speech ... on Gattaca was totally ripped off of Wikipedia.
+Job title: MSNBC host
+State: 
+Party: none
+Context: comments on her TV show"
+Label: No
+
+Text: "Statement: Florida has the second-lowest (campaign) contribution limit in the entire country.
+Job title: State Representative
+State: Florida
+Party: republican
+Context: a news conference"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(20), np.int64(21), np.int64(26)},
+  examplers_idx_used: {np.int64(9), np.int64(10), np.int64(12), np.int64(14), np.int64(24)},
+  parent_score: 0.75,
+  score: 0.5909090909090909), Prompt(
+  prompt: # Task
+You are asked to decide whether a given Statement is a lie.  A Statement is a lie if it contains a factual error, a false claim, or is misleading when judged against verifiable facts, the speaker’s role, the credibility of the source, and contextual cues that are directly relevant to the claim.  If the Statement is partially true, partially false, or ambiguous, treat it as not a lie.  When key details such as a job title, location, or other relevant facts are missing or unclear, explicitly note the uncertainty and base your decision on the best available evidence without making unfounded assumptions.  Do not let the speaker’s political affiliation, position, or the broader political environment influence the judgment; evaluate each claim purely on factual accuracy and source reliability.  To reach a conclusion, follow these steps: first, identify the core factual claim(s) in the Statement; second, gather verifiable evidence from reliable sources that directly addresses that claim; third, assess whether the evidence supports, contradicts, or is inconclusive about the claim; fourth, consider any contextual information provided (such as the speaker’s job title, state, party, or the specific policy or event mentioned) that could affect interpretation but only if it changes the factual truth; fifth, if the evidence conclusively contradicts the claim, answer “Yes”; if the evidence supports the claim or is inconclusive, answer “No”.  Respond only with “Yes” if you determine the Statement is a lie, and “No” if it is not a lie.
+
+# Exemplar
+Text: "Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo."
+Label: Yes
+
+Text: "Statement: Says Russ Feingold was the only senator to vote against Homeland Security.
+Job title: 
+State: Wisconsin
+Party: organization
+Context: a TV ad"
+Label: Yes
+
+Text: "Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters"
+Label: No
+
+Text: "Statement: Rand Pauls speech ... on Gattaca was totally ripped off of Wikipedia.
+Job title: MSNBC host
+State: 
+Party: none
+Context: comments on her TV show"
+Label: No
+
+Text: "Statement: Florida has the second-lowest (campaign) contribution limit in the entire country.
+Job title: State Representative
+State: Florida
+Party: republican
+Context: a news conference"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(36), np.int64(37), np.int64(6), np.int64(41), np.int64(12)},
+  examplers_idx_used: {np.int64(64), np.int64(0), np.int64(3), np.int64(23), np.int64(62)},
+  parent_score: 0.75,
+  score: 0.5757575757575758), Prompt(
+  prompt: # Task
+Act as a fact‑checking assistant. For each entry, read the Statement, Context, and any metadata such as speaker role, location, or affiliation. First, identify all verifiable facts that directly support or contradict the claim, using reputable sources (government data, peer‑reviewed research, official statistics, etc.). Evaluate the credibility of the speaker and the reliability of the source(s) cited in the context. If the claim is fully supported by reliable evidence, answer “No” (the statement is not a lie). If reliable evidence directly contradicts the claim, or if the claim is unsupported and the speaker’s credibility is low, answer “Yes” (the statement is a lie). If the evidence is inconclusive or the claim is partially true but not fully false, prefer “No” unless a credible source clearly refutes it. Do not assume a claim is false merely because it is unfamiliar or complex. Base your decision solely on factual verification, ignoring unrelated attributes unless they affect source credibility or intent. Return only the word “Yes” or “No” as the final answer.
+
+# Exemplar
+Text: "Statement: Since 2008, U.S. crude oil output has increased by over 80 percent, an increase of over 4 million barrels a day. That is the fastest increase in U.S. history.
+Job title: 
+State: Florida
+Party: republican
+Context: his energy plan"
+Label: No
+
+Text: "Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo."
+Label: Yes
+
+Text: "Statement: Says Donald Trump was asked if he would defend our allies. He said well, first hed want to know if they made any payments to us to defend them."
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a rally in Florida
+Label: No
+
+Text: "Statement: Before the terrorist attacks in Benghazi, the State Department not only failed to honor repeated requests for additional security, but instead actually reduced security in Libya."
+Job title: 
+State: Wisconsin
+Party: republican
+Context: an opinion article
+Label: No
+
+Text: "Statement: The judicial system is the most underfunded in this state, able to only pay 52 percent of its obligations. Meanwhile, judges get some of the richest pensions of all public employees.
+Job title: State senator 
+State: New Jersey
+Party: democrat
+Context: a speech on the State Senate floor"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(9), np.int64(17), np.int64(23), np.int64(24)},
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(50), np.int64(52), np.int64(27)},
+  parent_score: 0.75,
+  score: 0.5606060606060606))
+Training accuracy: (np.float64(0.6212121212121212), np.float64(0.5909090909090909), np.float64(0.5757575757575758), np.float64(0.5606060606060606))
+Validation accuracy: [0.5934959349593496, 0.5799457994579946, 0.5772357723577236, 0.5880758807588076]
+Test accuracy: [0.5813449023861171, 0.5748373101952278, 0.5661605206073753, 0.5726681127982647]
