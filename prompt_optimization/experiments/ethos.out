@@ -1,0 +1,290 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 6.444933891296387
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.86),)
+Training accuracy: (np.float64(0.86),)
+Validation accuracy: [0.84]
+Test accuracy: [0.89]
+======== ROUND 1
+Time: 297.14303970336914
+Prompt: (Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. Hate speech is defined as any statement that attacks or demeans a protected group—such as race, religion, ethnicity, gender identity, sexual orientation, disability, or nationality—through dehumanizing language, threats, or calls to violence. The text should be evaluated for intent, target, and severity; if it includes profanity or strong language but does not target a protected group or express dehumanizing intent, it is not hate speech, whereas if it includes slurs, hateful stereotypes, or violent threats directed at a protected group, it is hate speech. Based on this definition answer only “Yes” if the text contains hate speech, and “No” otherwise. Here is the text: [TEXT].
+
+# Exemplar
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), 6, np.int64(7), 8},
+  examplers_idx_used: {np.int64(1), np.int64(5), 6, 7, np.int64(8)},
+  parent_score: 0.86,
+  score: 0.9387755102040817), Prompt(
+  prompt: # Task
+You are an AI tasked with determining whether a given text contains hate speech. For this task, hate speech is defined as any expression that targets a protected group—such as a person or group identified by race, ethnicity, nationality, religion, gender identity, sexual orientation, disability, or other protected characteristics—and conveys hostility, dehumanization, or incitement against that group or encourages violence or discrimination. Profanity, aggressive language, or criticism that is not directed at a protected group does not constitute hate speech.
+
+When evaluating a sentence, consider the target of the statement, the speaker’s intended harm or intimidation, the presence of slurs or dehumanizing language, calls for violence or discrimination, and any contextual clues that might reveal a pattern of bias. Even if the text seems neutral, repeated negative stereotypes or historical bias can indicate hate speech.
+
+Here are brief examples to guide you:  
+Hateful: “All [protected group] are criminals and should be expelled from the country.”  
+Non‑hateful: “I think the new policy is unfair and needs revision.”  
+If the text meets the definition above, label it as HATE; otherwise label it as NOT_HATE. Output only the label, followed by a brief justification (≤2 sentences) that references the target, intent, or content, and does not mention the policy or system. Example format:  
+HATE: Because it targets a protected group with dehumanizing language.  
+NOT_HATE: Because the statement criticizes a policy, not a protected group.  
+Now, classify the following text: [TEXT]
+
+# Exemplar
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Didn’t know shitted coloured like you could talk", Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(5), 6, np.int64(7), 8},
+  examplers_idx_used: {np.int64(3), np.int64(5), np.int64(6), 7, 8},
+  parent_score: 0.86,
+  score: 0.9183673469387755), Prompt(
+  prompt: # Task
+Please decide whether the following text is hate speech. Define hate speech as any statement that dehumanizes, insults, or encourages violence or discrimination toward a protected group, such as race, religion, ethnicity, national origin, gender identity, sexual orientation, or disability. Statements that use profanity or are aggressive but do not target a protected group, or that are merely critical or sarcastic, should not be labeled as hate speech. If the text includes slurs or negative language aimed at a protected group and the tone is dehumanizing or inciting harm, label it as hate speech; otherwise, label it as not hate speech. Respond with “Hate speech” or “Not hate speech” and briefly justify your choice.
+
+# Exemplar
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(3), np.int64(6), 7},
+  examplers_idx_used: {np.int64(1), np.int64(5), 6, np.int64(7), 8},
+  parent_score: 0.86,
+  score: 0.9183673469387755), Prompt(
+  prompt: # Task
+You are a decision‑maker for hate‑speech detection. For the text that follows, first identify the target of any negative or aggressive language. Then, using the definition of hate speech as any expression that encourages or condones violence or discrimination against a protected group—such as race, ethnicity, religion, nationality, gender identity, sexual orientation, disability, or other protected characteristic—evaluate whether the statement meets that criterion. Consider intent, whether the language is dehumanizing or demeaning, and the severity of the threat or insult. Finally, answer with a single word: “Yes” if the text is hate speech, “No” if it is not, and follow with a brief, one‑sentence justification that cites the target, intent, and severity you identified.  
+Text: [insert text here]  
+Answer:
+
+# Exemplar
+Text: "Didn’t know shitted coloured like you could talk", Label: No
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims.", Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {8, np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), 6, 7, 8},
+  parent_score: 0.86,
+  score: 0.9183673469387755))
+Training accuracy: (np.float64(0.9387755102040817), np.float64(0.9183673469387755), np.float64(0.9183673469387755), np.float64(0.9183673469387755))
+Validation accuracy: [0.92, 0.9, 0.84, 0.86]
+Test accuracy: [0.89, 0.88, 0.9, 0.88]
+======== ROUND 2
+Time: 545.5390276908875
+Prompt: (Prompt(
+  prompt: # Task
+Please read the following text and determine whether it contains hate speech. Hate speech is any statement that attacks or dehumanizes a protected group—race, religion, ethnicity, nationality, gender identity, sexual orientation, or disability—through demeaning language, hateful stereotypes, threats, or calls to violence. Evaluate the text for intent, target, and severity. If the text uses profanity or strong language but does not target a protected group or express dehumanizing intent, answer “No”. If it includes slurs, hateful stereotypes, or violent threats directed at a protected group, answer “Yes”. When parsing multi‑sentence passages, separate praise or condemnation from target identification and avoid conflating political critique with hate. Base your decision on the protected categories and dehumanizing content, not merely on negative or violent wording. Here is the text: [TEXT].
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
+Label: Yes
+
+Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
+  examplers_idx_used: {np.int64(6), np.int64(7), np.int64(8), 14, 15, 16},
+  parent_score: 0.9387755102040817,
+  score: 1.0), Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. For this task, hate speech is any statement that attacks or demeans a protected group—such as race, religion, ethnicity, gender identity, sexual orientation, disability, or nationality—through dehumanizing language, threats, or calls to violence. To judge accurately, first identify the target of the statement, then assess whether the intent is to dehumanize or incite harm, and finally rate the severity of the language. If the text contains profanity or strong language that is not directed at a protected group or that does not have a dehumanizing or violent intent, it is not hate speech. Conversely, if the text includes slurs, hateful stereotypes, or violent threats directed at a protected group, it is hate speech. Below are two short examples: “I hate all Muslims and want nothing but violence against them” (hate speech) vs. “I think some politicians are corrupt” (not hate speech). Your answer should be a single word, either “Yes” if the text contains hate speech or “No” if it does not. Here is the text: [TEXT].
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
+Label: Yes
+
+Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
+  examplers_idx_used: {np.int64(6), np.int64(7), np.int64(8), 14, 15, 16},
+  parent_score: 0.9387755102040817,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are asked to decide whether the following text contains hate speech.  Hate speech is any statement that attacks or demeans a protected group—race, religion, ethnicity, nationality, gender identity, sexual orientation, disability, or other protected status—using dehumanizing language, slurs, hateful stereotypes, or violent threats.  The text may contain multiple sentences and mix praise, condemnation, or political commentary; you must separate the sentiment from the target, identify the intended target, assess the intent, and judge the severity.  If the target is a protected group and the statement includes dehumanizing language, a slur, a hateful stereotype, or a threat of violence, answer “Yes”; otherwise answer “No”.  Pay careful attention to context: a word like “slaughter” or “race” by itself does not constitute hate speech unless it is directed at a protected group with dehumanizing intent.  Provide a brief justification for your decision.  For example, the sentence “The Dalit community is inferior” targets a protected group with a slur and is hate speech; the sentence “I dislike the policies of the government” does not target a protected group and is not hate speech.  Here is the text: [TEXT].
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
+Label: Yes
+
+Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
+  examplers_idx_used: {np.int64(6), np.int64(7), np.int64(8), 14, 15, 16},
+  parent_score: 0.9387755102040817,
+  score: 1.0), Prompt(
+  prompt: # Task
+Please determine whether the following text contains hate speech. Hate speech is defined as any statement that attacks or demeans a protected group—such as race, ethnicity, religion, nationality, gender identity, sexual orientation, or disability—through dehumanizing language, hateful stereotypes, slurs, or explicit threats of violence. The text may contain multiple sentences; evaluate each clause for possible hate speech but base the final answer on whether any part of the text meets the definition. Consider the intent behind the words, the target of the remarks, and the severity of the language. If profanity or strong language appears but the target is not a protected group or there is no dehumanizing intent, the text is not hate speech. If the text contains slurs, hateful stereotypes, or violent threats directed at a protected group, it is hate speech. For example, “He is a monster” is not hate speech unless “monster” refers to a protected group; “The Jews are parasites” is hate speech. Based on this definition answer only “Yes” if the text contains hate speech, and “No” otherwise. Here is the text: [TEXT].
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Label: No
+
+Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
+Label: Yes
+
+Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
+  examplers_idx_used: {np.int64(1), np.int64(6), np.int64(7), 14, 15, 16},
+  parent_score: 0.9387755102040817,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.82, 0.84, 0.86, 0.84]
