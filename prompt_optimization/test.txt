@@ -1,3 +1,25 @@
-{'task': 'liar', 'data_dir': 'data/liar', 'prompts': 'prompts/liar.md', 'out': 'experiments/liar.out', 'max_threads': 32, 'temperature': 0.0, 'optimizer': 'nl-gradient', 'rounds': 6, 'beam_size': 4, 'n_test_exs': 400, 'minibatch_size': 256, 'n_gradients': 4, 'errors_per_gradient': 8, 'gradients_per_error': 5, 'steps_per_gradient': 1, 'mc_samples_per_step': 4, 'max_expansion_factor': 8, 'engine': 'chatgpt', 'evaluator': 'bf', 'scorer': '01', 'eval_rounds': 8, 'eval_prompts_per_round': 8, 'samples_per_eval': 32, 'c': 1.0, 'knn_k': 2, 'knn_t': 0.993, 'reject_on_errors': False, 'reflect_gradients': False, 'reflect_candidates': False, 'reflection_candidate_threshold': 0.5, 'reflection_gradient_passes': 1, 'reflection_candidate_passes': 1, 'reflection_temperature': 0.0, 'ea_samples_per_step': 4, 'eval_budget': 2048}
-STARTING ROUND  0
-STARTING ROUND  1
+Traceback (most recent call last):
+  File "/root/APO/prompt_optimization/main.py", line 13, in <module>
+    import my_optimizer_v2
+  File "/root/APO/prompt_optimization/my_optimizer_v2.py", line 7, in <module>
+    from FlagEmbedding import BGEM3FlagModel
+  File "/venv/main/lib/python3.12/site-packages/FlagEmbedding/__init__.py", line 1, in <module>
+    from .abc.inference import *
+  File "/venv/main/lib/python3.12/site-packages/FlagEmbedding/abc/inference/__init__.py", line 1, in <module>
+    from .AbsEmbedder import AbsEmbedder
+  File "/venv/main/lib/python3.12/site-packages/FlagEmbedding/abc/inference/AbsEmbedder.py", line 14, in <module>
+    from transformers import is_torch_npu_available
+  File "/venv/main/lib/python3.12/site-packages/transformers/__init__.py", line 958, in <module>
+    import_structure = define_import_structure(Path(__file__).parent / "models", prefix="models")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2867, in define_import_structure
+    import_structure = create_import_structure_from_path(module_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2580, in create_import_structure_from_path
+    import_structure[f] = create_import_structure_from_path(os.path.join(module_path, f))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/transformers/utils/import_utils.py", line 2604, in create_import_structure_from_path
+    with open(os.path.join(directory, module_name), encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen codecs>", line 309, in __init__
+KeyboardInterrupt

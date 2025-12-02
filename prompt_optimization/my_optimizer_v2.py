@@ -446,7 +446,7 @@ class MyOptimizer(PromptOptimizer):
         """Expand a list of prompts by generating gradient-based successors and
         synonyms for each section.
         """
-        minibatch = random.sample(train_exs, k=self.opt["minibatch_size"])
+        minibatch = random.sample(train_exs, k=min(self.opt["minibatch_size"], len(train_exs)))
 
         new_prompts = []
         for prompt in tqdm(prompts, desc=f"expanding {len(prompts)} prompts"):
@@ -580,8 +580,8 @@ class MyOptimizer(PromptOptimizer):
 
     def score_candidates(self, prompts, task, gpt4, train_exs):
         """Score a list of prompts."""
-        if len(prompts) == 1:
-            return [1.0]
+        # if len(prompts) == 1:
+        #     return [1.0]
 
         evals = self.evaluator_fn(
             [prompt.prompt for prompt in prompts],

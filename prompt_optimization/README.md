@@ -50,3 +50,27 @@ python main.py \
   --gradients_per_error 5 \
   --minibatch_size 256 \
   --out experiments/ethos.out
+
+# Ar Sacarsm
+python main.py \
+  --task ethos \
+  --prompts prompts/ar_sarcasm.md \
+  --data_dir data/ar_sarcasm \
+  --beam_size 4 \
+  --steps_per_gradient 1 \
+  --errors_per_gradient 8 \
+  --gradients_per_error 5 \
+  --minibatch_size 1024 \
+  --out experiments/ar_sarcasm.out
+
+# Clickbait
+python main.py \
+  --task ethos \
+  --prompts prompts/clickbait.md \
+  --data_dir data/clickbait \
+  --beam_size 4 \
+  --steps_per_gradient 1 \
+  --errors_per_gradient 8 \
+  --gradients_per_error 5 \
+  --minibatch_size 64 \
+  --out experiments/clickbait.out

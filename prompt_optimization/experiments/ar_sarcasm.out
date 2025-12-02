@@ -1,0 +1,167 @@
+{"task": "ethos", "data_dir": "data/ar_sarcasm", "prompts": "prompts/ar_sarcasm.md", "out": "experiments/ar_sarcasm.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 1024, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 239.23095893859863
+Prompt: (Prompt(
+  prompt: # Task
+Is this tweet sarcastic?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.79443359375),)
+Training accuracy: (np.float64(0.79443359375),)
+Validation accuracy: [0.8059701492537313]
+Test accuracy: [0.7976303317535545]
+======== ROUND 1
+Time: 398.74353289604187
+Prompt: (Prompt(
+  prompt: # Task
+You are a sarcasm detection assistant. Given a single tweet, determine whether it contains sarcasm.  Carefully consider the full text, any hashtags, user mentions, URLs, and any mixed Arabic or English language.  Reflect on the tone, rhetorical devices, and contextual clues that signal irony or sarcasm.  Provide a brief explanation of your reasoning, then give a confidence score from 0 to 1, followed by a final answer of “Yes” or “No.”  For example:  
+**Answer:** Yes  
+**Confidence:** 0.87  
+**Reasoning:** The tweet uses exaggerated praise and a contradictory hashtag, indicating sarcasm.  
+Apply this format to the tweet below.
+
+# Exemplar
+Text: "#مصر | #التحرير | صور.. ريكي مارتن يخطب رسام سوري https://t.co/uKVOBNP8OE #جبهة_شعب_مصر"
+Label: No
+
+Text: "لم تعد #حماس من جسدالأمةلتشعربألمه فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى https://t.co/yrziktbQ4a"
+Label: No
+
+Text: "الببلاوي: تصنيف الإخوان تنظيما إرهابيا قرار سياسي #الببلاوي #مصر"
+Label: Yes
+
+Text: "#حاميها_حرميها #الجيزة كفايه عليهم نور عنين #السفاح انتوا حتنهبوا ولا ايه؟؟"
+Label: Yes
+
+Text: ""حلب أمس💔😣الإرهابيون الذي يحاربهم بوتن ويدعمه ديمستورا وأوباما الذي لاقيمة له في وقف جرائم ضد الإنسانية منذ ٦  سنو… https://t.co/n7tqdvbOH9""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(4), 5, 6, 7},
+  examplers_idx_used: {np.int64(1), np.int64(3), 10, 11, np.int64(12)},
+  parent_score: 0.79443359375,
+  score: 0.8636363636363636), Prompt(
+  prompt: # Task
+**Task:**  
+Read the tweet shown below and decide if it is sarcastic. Examine the entire content—this includes Arabic or mixed-language text, hashtags, URLs, user mentions, emojis, and any other contextual clues.  
+Write a short paragraph explaining why you reached that conclusion, then give a confidence score between 0 % and 100 % for your judgment.  
+End the response with a single word: “Yes” if you think the tweet is sarcastic, or “No” if it is not.
+
+# Exemplar
+Text: "لم تعد #حماس من جسدالأمةلتشعربألمه فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى https://t.co/yrziktbQ4a"
+Label: No
+
+Text: "حلب وثوارها مخوزقي بوتن وجيشه الكافر ولن تسقط وهي مقبرة الفرس المجوس والشيعه الخنازير https://t.co/kKeAsDe3vH"
+Label: Yes
+
+Text: "الببلاوي: تصنيف الإخوان تنظيما إرهابيا قرار سياسي #الببلاوي #مصر"
+Label: Yes
+
+Text: "#حاميها_حرميها #الجيزة كفايه عليهم نور عنين #السفاح انتوا حتنهبوا ولا ايه؟؟"
+Label: Yes
+
+Text: ""حلب أمس💔😣الإرهابيون الذي يحاربهم بوتن ويدعمه ديمستورا وأوباما الذي لاقيمة له في وقف جرائم ضد الإنسانية منذ ٦  سنو… https://t.co/n7tqdvbOH9""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(3), np.int64(4), 5, 6, np.int64(7)},
+  examplers_idx_used: {np.int64(3), np.int64(5), 10, np.int64(11), 12},
+  parent_score: 0,
+  score: 0.8636363636363636), Prompt(
+  prompt: # Task
+**Input:**  
+You are provided with a tweet that may include Arabic, multiple scripts, hashtags, user mentions, URLs, and various symbols. Your task is to decide whether the tweet is sarcastic. Examine all aspects carefully: Arabic idiomatic expressions, language switches, punctuation that hints at exaggeration, ironic hashtags, URLs that could reference external content, and user mentions that might alter the tone. After your analysis, give a confidence score (0‑100%) indicating how certain you are, a brief justification of your reasoning, and then output a single word: “Yes” if you think the tweet is sarcastic, or “No” if you think it is not.  
+Tweet: ____________________________________________
+
+**Output:**  
+(Your confidence score, explanation, and “Yes”/“No”.)
+
+# Exemplar
+Text: "لم تعد #حماس من جسدالأمةلتشعربألمه فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى https://t.co/yrziktbQ4a"
+Label: No
+
+Text: "ملاك الانديه السعودية بعد الخصخصه بيكون لهم رابطه مثل #NBA و #NFL . https://t.co/osE2yNPnXC"
+Label: No
+
+Text: "الببلاوي: تصنيف الإخوان تنظيما إرهابيا قرار سياسي #الببلاوي #مصر"
+Label: Yes
+
+Text: "#حاميها_حرميها #الجيزة كفايه عليهم نور عنين #السفاح انتوا حتنهبوا ولا ايه؟؟"
+Label: Yes
+
+Text: ""حلب أمس💔😣الإرهابيون الذي يحاربهم بوتن ويدعمه ديمستورا وأوباما الذي لاقيمة له في وقف جرائم ضد الإنسانية منذ ٦  سنو… https://t.co/n7tqdvbOH9""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(4), 5, 6, np.int64(7)},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(10), 11, 12},
+  parent_score: 0,
+  score: 0.8484848484848485), Prompt(
+  prompt: # Task
+You are an assistant specialized in spotting sarcasm.  
+For a single tweet, decide if it expresses sarcasm.  
+Examine the entire text, including hashtags, @mentions, links, and any mix of Arabic and English words.  
+Think about the overall tone, rhetorical tricks, and contextual hints that point to irony or sarcasm.  
+Give a short explanation of your thought process, then a confidence level between 0 and 1, and finally a simple “Yes” or “No.”  
+Example format:  
+
+**Answer:** Yes  
+**Confidence:** 0.87  
+**Reasoning:** The tweet contains exaggerated praise and a contradictory hashtag, signalling sarcasm.  
+
+Use this template for the tweet below.
+
+# Exemplar
+Text: "#مصر | #التحرير | صور.. ريكي مارتن يخطب رسام سوري https://t.co/uKVOBNP8OE #جبهة_شعب_مصر"
+Label: No
+
+Text: "لم تعد #حماس من جسدالأمةلتشعربألمه فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى https://t.co/yrziktbQ4a"
+Label: No
+
+Text: "الببلاوي: تصنيف الإخوان تنظيما إرهابيا قرار سياسي #الببلاوي #مصر"
+Label: Yes
+
+Text: "#حاميها_حرميها #الجيزة كفايه عليهم نور عنين #السفاح انتوا حتنهبوا ولا ايه؟؟"
+Label: Yes
+
+Text: ""حلب أمس💔😣الإرهابيون الذي يحاربهم بوتن ويدعمه ديمستورا وأوباما الذي لاقيمة له في وقف جرائم ضد الإنسانية منذ ٦  سنو… https://t.co/n7tqdvbOH9""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(4), 5, 6, 7},
+  examplers_idx_used: {np.int64(1), np.int64(3), 10, 11, np.int64(12)},
+  parent_score: 0,
+  score: 0.8484848484848485))
+Training accuracy: (np.float64(0.8636363636363636), np.float64(0.8636363636363636), np.float64(0.8484848484848485), np.float64(0.8484848484848485))
+Validation accuracy: [0.8557213930348259, 0.8606965174129353, 0.845771144278607, 0.8606965174129353]

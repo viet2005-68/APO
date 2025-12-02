@@ -1,5 +1,5 @@
 # Task
-Is this tweet sarcastic?
+Is this text clickbait?
 
 # Exemplar
 Example goes here

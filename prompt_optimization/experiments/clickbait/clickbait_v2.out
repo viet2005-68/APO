@@ -1,0 +1,536 @@
+{"task": "ethos", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 12.0470552444458
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.905),)
+Training accuracy: (np.float64(0.905),)
+Validation accuracy: [0.88]
+Test accuracy: [0.96]
+======== ROUND 1
+Time: 186.0182557106018
+Prompt: (Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "This Stuffed Bhurji Pav Is Here To Up Your Breakfast Game"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(3), 4, 5},
+  examplers_idx_used: {np.int64(0), np.int64(1), 2, np.int64(3), 4},
+  parent_score: 0,
+  score: 0.9393939393939394), Prompt(
+  prompt: # Task
+"Given the following headline, decide whether it is clickbait. Clickbait is defined as a headline that uses sensational exaggeration, curiosity‑pacing phrasing, or other tactics designed to entice the reader to click without revealing substantive content. The answer must be a single word: 'Yes' if the headline is clickbait, 'No' otherwise, and no additional text. For example: 'You won’t believe what happens next' → Yes; 'Local bakery opens new shop' → No. Now classify the headline: [headline]."
+
+# Exemplar
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "This Stuffed Bhurji Pav Is Here To Up Your Breakfast Game"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(3), 4, 5},
+  examplers_idx_used: {np.int64(0), np.int64(1), 2, np.int64(3), 4},
+  parent_score: 0.905,
+  score: 0.9242424242424242), Prompt(
+  prompt: # Task
+You are to evaluate the given headline and determine if it is clickbait. A clickbait headline is one that uses sensational exaggeration, curiosity‑driven phrasing, or other tactics meant to lure the reader into clicking without actually revealing meaningful content. Respond with a single word: "Yes" if the headline is clickbait, "No" if it is not, and nothing else. For example: “You won’t believe what happens next” → Yes; “Local bakery opens new shop” → No. Now classify the headline: [headline].
+
+# Exemplar
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "This Stuffed Bhurji Pav Is Here To Up Your Breakfast Game"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(3), 4, 5},
+  examplers_idx_used: {np.int64(0), np.int64(1), 2, np.int64(3), 4},
+  parent_score: 0,
+  score: 0.9242424242424242), Prompt(
+  prompt: # Task
+Determine whether the following headline is clickbait. Clickbait is defined as a headline that uses sensational or curiosity‑laden language to attract clicks, often with exaggerated claims, emotional triggers, or incomplete information that promises a payoff. It typically includes words like “shocking,” “you won’t believe,” “the most,” “this will blow your mind,” or similar. Headlines that are straightforward, factual, or neutral are not clickbait. Respond with only “Yes” if you believe the headline is clickbait, otherwise respond with only “No”.
+
+# Exemplar
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "This Stuffed Bhurji Pav Is Here To Up Your Breakfast Game"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), 3, np.int64(4), 5},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), 3, 4},
+  parent_score: 0.905,
+  score: 0.9090909090909091))
+Training accuracy: (np.float64(0.9393939393939394), np.float64(0.9242424242424242), np.float64(0.9242424242424242), np.float64(0.9090909090909091))
+Validation accuracy: [0.93, 0.95, 0.93, 0.87]
+Test accuracy: [0.95, 0.95, 0.93, 0.93]
+======== ROUND 2
+Time: 509.5625219345093
+Prompt: (Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "This Stuffed Bhurji Pav Is Here To Up Your Breakfast Game"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "This Mom Posted An Incredibly Raw And Emotional Photo Of Life After Birth"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(5), 11, 12, 13},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), 8, 9, 10},
+  parent_score: 0.9393939393939394,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "This Mom Posted An Incredibly Raw And Emotional Photo Of Life After Birth"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(4), np.int64(5), 11, 12, 13},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), 8, 9, 10},
+  parent_score: 0.9393939393939394,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "This Mom Posted An Incredibly Raw And Emotional Photo Of Life After Birth"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), 11, 12, 13},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), 8, 9, 10},
+  parent_score: 0.9393939393939394,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "This Mom Posted An Incredibly Raw And Emotional Photo Of Life After Birth"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(5), 11, 12, 13},
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), 8, 9, 10},
+  parent_score: 0.9393939393939394,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.93, 0.95, 0.91, 0.96]
+Test accuracy: [0.95, 0.95, 0.97, 0.95]
+======== ROUND 3
+Time: 510.74117493629456
+Prompt: (Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+How to Save Money in 5 Minutes a Day – Yes
+
+You won't believe what happened when they tested the new vaccine – Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Local bakery opens new shop – No
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), 37, 38, 36},
+  examplers_idx_used: {np.int64(2), np.int64(3), 36, 37, 38, np.int64(4)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+How to Save Money in 5 Minutes a Day – Yes
+
+You won't believe what happened when they tested the new vaccine – Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Local bakery opens new shop – No
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), 36, 37, np.int64(5), 38},
+  examplers_idx_used: {np.int64(2), np.int64(3), 36, 37, 38, np.int64(4)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+How to Save Money in 5 Minutes a Day – Yes
+
+You won't believe what happened when they tested the new vaccine – Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Local bakery opens new shop – No
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), 36, 37, np.int64(5), 38},
+  examplers_idx_used: {np.int64(2), np.int64(3), 36, 37, 38, np.int64(4)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Instruction (variation)**  
+
+Examine the headline presented below and determine if it is clickbait. Clickbait headlines employ sensational exaggeration, curiosity‑driven wording, or other tactics that lure the reader to click without conveying meaningful information.  
+
+Your response must consist of a single word only:  
+- **Yes** if the headline is clickbait,  
+- **No** if it is not.  
+
+Do not include any additional commentary.  
+
+**Examples**  
+- “You won’t believe what happens next” → Yes  
+- “Local bakery opens new shop” → No  
+
+**Task**  
+Classify the following headline: **[headline]**
+
+# Exemplar
+How to Save Money in 5 Minutes a Day – Yes
+
+You won't believe what happened when they tested the new vaccine – Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Local bakery opens new shop – No
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), 36, 37, np.int64(5), 38},
+  examplers_idx_used: {np.int64(2), np.int64(3), 36, 37, 38, np.int64(4)},
+  parent_score: 1.0,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.93, 0.92, 0.94, 0.92]
+Test accuracy: [0.95, 0.94, 0.95, 0.95]
