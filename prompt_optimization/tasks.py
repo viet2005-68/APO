@@ -141,6 +141,27 @@ class JailbreakBinaryTask(BinaryClassificationTask):
             text = ' '.join([x['text'].strip() for x in json.loads(convo) if x['role'] == 'user'])
             exs.append({'id': i, 'text': text, 'label': label})
         return exs
+    
+class ArSacarsmBinaryTask(BinaryClassificationTask):
+    categories = ['No', 'Yes']
+
+    def get_train_examples(self):
+        exs = []
+        for i, l in enumerate(open(self.data_dir + '/train.tsv')):
+            convo, label = l.strip().split('\t')
+            label = int(label)
+            text = ' '.join([x['text'].strip() for x in json.loads(convo) if x['role'] == 'user'])
+            exs.append({'id': i, 'text': text, 'label': label})
+        return exs
+    
+    def get_test_examples(self):
+        exs = []
+        for i, l in enumerate(open(self.data_dir + '/test.tsv')):
+            convo, label = l.strip().split('\t')
+            label = int(label)
+            text = ' '.join([x['text'].strip() for x in json.loads(convo) if x['role'] == 'user'])
+            exs.append({'id': i, 'text': text, 'label': label})
+        return exs
 
 
 class DefaultHFBinaryTask(BinaryClassificationTask):
