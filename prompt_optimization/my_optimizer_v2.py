@@ -339,13 +339,34 @@ class MyOptimizer(PromptOptimizer):
         # Here are some examples of issues and their labels:
         # {error_samples}
         transformation_prompt = f"""
-        I'm trying to write and complete a zero-shot classifier prompt from difficult or erroneous
+        You are trying to write and complete a zero-shot classifier prompt from difficult or erroneous
         examples.
-        My current prompt is:
+        The current prompt is:
         {prompt}
+        However, due to the complexity of real-world situations, a single flow of instructions (i.e., sequential
+        instructions) cannot apply to all cases. Therefore, you should transform the instructions into a conditional
+        approach, which means adopting different instructions for different patterns.
+        Notably, the key aspect of this process is to create an adaptive prompt structure, thereby accommodating
+        tasks of varying difficulties. To achieve this, you should find the golden mean between adding the
+        branches to address the new pattern and providing more details to enhance the existing branches based on
+        the difficulty of your task and the distribution of recognized patterns.
         Here are some suggestions for improving the prompt:
         {feedback}
-        Based on the above information, I refine the prompt to make the model predict correctly.
+        Please optimize your [# Instructions] based on expert analysis step-by-step:
+        (1) Carefully review each step of your instructions.
+        (2) Identify the steps that went wrong due to a lack of key information mentioned in expert analysis.
+        (3) For each suboptimal step, you have the following options:
+        - 3.1 Consider improving the step to include the key information.
+        - 3.2 Otherwise, you can also consider adding **sub-steps** using an **if** or **if-else** structure to
+        handle the **new** patterns. Ensure that each substep is specific and avoids vague instructions.
+        Note that if a step needs to consider multiple situations, break it down into substeps to make it easier to
+        follow.
+        (4) Include Tips or Cautions: If merely optimizing existing steps with branches like if-else does not
+        sufficiently to address all aspects, add new tips or cautions to the current instructions to handle different
+        patterns.
+        (5) Maintain the other main steps unchanged from the initial prompt, in order to not lose information.
+        (6) At last, review the whole steps and prune the branches to avoid the instructions overfitting
+        Based on the above information, refine the prompt to make the model predict correctly.
         The improved prompt must be wrapped individually like this:
         <ANSWER>
         [one full improved prompt here, no lists, no numbering]

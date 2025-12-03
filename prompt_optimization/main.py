@@ -189,7 +189,7 @@ if __name__ == "__main__":
             candidates = optimizer.expand_candidates(candidates, task, gpt4, current_batch)
 
         # score candidates
-        scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
+        scores = optimizer.score_candidates(candidates, task, gpt4, validation_exs)
         [scores, candidates] = list(
             zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
         )
