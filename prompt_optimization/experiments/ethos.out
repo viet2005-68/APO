@@ -1,6 +1,6 @@
-{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 6.444933891296387
+Time: 17.928080081939697
 Prompt: (Prompt(
   prompt: # Task
 Is the following text hate speech?
@@ -17,69 +17,255 @@ Label:,
   feedbacks_idx_used: set(),
   examplers_idx_used: set(),
   parent_score: 0,
-  score: 0.86),)
-Training accuracy: (np.float64(0.86),)
-Validation accuracy: [0.84]
-Test accuracy: [0.89]
+  score: 0.84765625),)
+Training accuracy: (0.84765625,)
+Validation accuracy: [0.8]
+Test accuracy: [0.87]
 ======== ROUND 1
-Time: 297.14303970336914
+Time: 344.53775334358215
 Prompt: (Prompt(
   prompt: # Task
-Please determine whether the following text contains hate speech. Hate speech is defined as any statement that attacks or demeans a protected group—such as race, religion, ethnicity, gender identity, sexual orientation, disability, or nationality—through dehumanizing language, threats, or calls to violence. The text should be evaluated for intent, target, and severity; if it includes profanity or strong language but does not target a protected group or express dehumanizing intent, it is not hate speech, whereas if it includes slurs, hateful stereotypes, or violent threats directed at a protected group, it is hate speech. Based on this definition answer only “Yes” if the text contains hate speech, and “No” otherwise. Here is the text: [TEXT].
+You are asked: “Is the following text hate speech?”  
+First, identify any protected group or demographic mentioned.  
+Then, evaluate whether the language explicitly degrades, demonizes, or calls for harm against that group.  
+If the text contains profanity, slurs, or demeaning descriptors, proceed to the next check:  
+ • If the surrounding context explains the use of such language as historical critique, academic discussion, or rhetorical irony, note that the intent is not to incite harm.  
+ • If the context lacks clear justification—e.g., the language is presented as a general statement or a call for violence—then classify it as hate speech.  
+If the text does not contain obvious slurs but includes negative stereotypes or dismissive remarks toward a protected group, examine intent:  
+ • If the speaker is critiquing policies or actions of the group’s institutions, and the tone remains analytical rather than dehumanizing, treat as non‑hate speech.  
+ • If the remarks imply inherent inferiority or justify prejudice, treat as hate speech.  
+When sarcasm or rhetorical flourish appears, assess whether the message ultimately supports or rejects the group:  
+ • If sarcasm is used to expose hateful ideas, it is not hate speech.  
+ • If sarcasm masks a hateful agenda, it is hate speech.  
+Finally, consider the broader discourse: if the text is part of a larger narrative that encourages discrimination or violence, classify as hate speech; if it is a balanced critique without malicious intent, classify as not hate speech.  
+Always err on the side of caution: when intent is ambiguous, default to “not hate speech” unless clear evidence of hateful intent is present.  
+Answer with a single statement: “Yes, it is hate speech.” or “No, it is not hate speech.”
 
 # Exemplar
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
-Label: No
-
-Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
-Label: No
-
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Text: "Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????"
 Label: Yes
 
-Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Text: "All women who are teachers are lazy and incompetent."
+Label: Yes
+
+Text: "I think this policy is bad."
+Label: No
+
+Text: "I love all kinds of music, no matter the genre."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and \"stealing\" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad \"white\" Americans are."
+Label: No
+
+Text: "I support the boycott of companies that do not pay fair wages."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(2), 7},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(4), 6, 7, 8},
+  parent_score: 0.84765625,
+  score: 0.921875), Prompt(
+  prompt: # Task
+You will receive a paragraph and must decide whether it constitutes hate speech. Use the following decision tree:
+
+1. **Identify protected groups**  
+   - Does the text reference any protected category—race, ethnicity, religion, gender, sexual orientation, disability, or nationality?  
+   - If there is no such reference, label the passage “No” (not hate speech) and stop.
+
+2. **Assess the language used**  
+   - If a protected group is mentioned, look for explicit slurs, profanity, or dehumanizing wording aimed at that group.  
+   - If the wording is neutral or merely descriptive, answer “No” and stop.  
+   - If slurs or dehumanizing terms are present, proceed to step 3.
+
+3. **Consider context and intent**  
+   - Is the passage part of a historical analysis, academic critique, or clearly sarcastic commentary that signals the speaker does *not* intend to promote violence or discrimination? If so, label “No.”  
+   - Does the text contain a call to action that encourages hatred, violence, or exclusion against the protected group? If yes, label “Yes.”  
+   - If intent is unclear (e.g., rhetorical flourish or ambiguous satire), default to “No” but note the uncertainty in a brief justification.
+
+4. **Handle profanity unrelated to protected groups**  
+   - Strong language that does *not* target a protected group is not hate speech unless it is paired with a protected‑group target and the purpose is to demean or incite harm.
+
+5. **Resolve conflicting signals**  
+   - When a protected‑group slur appears alongside a historical grievance or critique, evaluate which tone dominates. A strong dehumanizing tone overrides mitigating context.  
+   - If the overall message leans toward hostility, classify as “Yes.” If it remains primarily critical or sarcastic without advocating harm, classify as “No.”
+
+Always provide a concise, objective justification for your decision, quoting the relevant portion of the text that guided your judgment. If intent is uncertain, state that explicitly and lean toward “No.”
+
+# Exemplar
+Text: "Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????"
+Label: Yes
+
+Text: "I think this policy is bad."
+Label: No
+
+Text: "All women who are teachers are lazy and incompetent."
+Label: Yes
+
+Text: "I support the boycott of companies that do not pay fair wages."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(2), 7},
+  examplers_idx_used: {np.int64(0), np.int64(8), np.int64(6), 7},
+  parent_score: 0.84765625,
+  score: 0.921875), Prompt(
+  prompt: # Task
+**Revised Instruction**
+
+**Input:**  
+Analyze the supplied passage and decide whether it constitutes hate speech. Follow these steps:
+
+1. **Identify Target** – First, determine if the text explicitly targets a protected group (e.g., race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category).  
+   - If *no* protected group is targeted, respond with **“No.”**
+
+2. **Assess Intent & Context** – If a protected group is targeted, examine the tone and surrounding context:  
+   - If the language is a critique or disagreement that is non‑violent, non‑derogatory, or includes historical references, sarcasm, or rhetorical flourish indicating no advocacy of harm, answer **“No.”**  
+   - If the passage contains slurs, dehumanizing language, calls for violence, or an unmistakable intent to intimidate or discriminate, answer **“Yes.”**
+
+3. **Contextual Stereotypes** – When negative stereotypes are mentioned, check for contextual qualifiers such as “in the context of,” “historically,” “to critique,” etc.  
+   - Weigh these qualifiers against any direct incitement; if they sufficiently explain the stereotype as part of a broader argument or historical discussion, the text may not be hate speech.
+
+4. **Ambiguity** – If the passage mixes rhetorical layers or is unclear, provide a concise justification for your decision.
+
+**Output:**  
+Return either **“Yes”** or **“No.”** If “No,” include a brief rationale when the case is ambiguous or contains nuanced context. Avoid labeling negative language as hate speech unless it clearly advocates or supports violence or discrimination against a protected group. Be careful not to over‑generalize; ensure that criticisms lacking harmful intent are not misclassified.
+
+# Exemplar
+Text: "I think this policy is bad."
+Label: No
+
+Text: "All women who are teachers are lazy and incompetent."
+Label: Yes
+
+Text: "I think people from that religion are lazy."
+Label: Yes
+
+Text: "I support the boycott of companies that do not pay fair wages."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(4), 7},
+  examplers_idx_used: {np.int64(8), np.int64(3), 6, np.int64(7)},
+  parent_score: 0.84765625,
+  score: 0.921875), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "I think this policy is bad."
+Label: No
+
+Text: "All women who are teachers are lazy and incompetent."
+Label: Yes
+
+Text: "I think people from that religion are lazy."
+Label: Yes
+
+Text: "I support the boycott of companies that do not pay fair wages."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(4), 7},
+  examplers_idx_used: {np.int64(8), np.int64(3), 6, np.int64(7)},
+  parent_score: 0.84765625,
+  score: 0.921875))
+Training accuracy: (0.921875, 0.921875, 0.921875, 0.921875)
+Validation accuracy: [0.86, 0.88, 0.86, 0.88]
+Test accuracy: [0.9, 0.91, 0.85, 0.87]
+======== ROUND 2
+Time: 819.1106691360474
+Prompt: (Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "Pale cancer! Back to your west pacific ocean"
+Label: Yes
+
+Text: "I think this policy is bad."
 Label: No
 
 Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
 Label: Yes
 
-# Output format
-Answer ONLY Yes or No as labels
-
-# Prediction
-Text: {{ text }}
-Label:,
-  feedbacks_idx_used: {np.int64(0), np.int64(3), 6, np.int64(7), 8},
-  examplers_idx_used: {np.int64(1), np.int64(5), 6, 7, np.int64(8)},
-  parent_score: 0.86,
-  score: 0.9387755102040817), Prompt(
-  prompt: # Task
-You are an AI tasked with determining whether a given text contains hate speech. For this task, hate speech is defined as any expression that targets a protected group—such as a person or group identified by race, ethnicity, nationality, religion, gender identity, sexual orientation, disability, or other protected characteristics—and conveys hostility, dehumanization, or incitement against that group or encourages violence or discrimination. Profanity, aggressive language, or criticism that is not directed at a protected group does not constitute hate speech.
-
-When evaluating a sentence, consider the target of the statement, the speaker’s intended harm or intimidation, the presence of slurs or dehumanizing language, calls for violence or discrimination, and any contextual clues that might reveal a pattern of bias. Even if the text seems neutral, repeated negative stereotypes or historical bias can indicate hate speech.
-
-Here are brief examples to guide you:  
-Hateful: “All [protected group] are criminals and should be expelled from the country.”  
-Non‑hateful: “I think the new policy is unfair and needs revision.”  
-If the text meets the definition above, label it as HATE; otherwise label it as NOT_HATE. Output only the label, followed by a brief justification (≤2 sentences) that references the target, intent, or content, and does not mention the policy or system. Example format:  
-HATE: Because it targets a protected group with dehumanizing language.  
-NOT_HATE: Because the statement criticizes a policy, not a protected group.  
-Now, classify the following text: [TEXT]
-
-# Exemplar
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Text: "I love all kinds of music, no matter the genre."
 Label: No
 
-Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
-Label: No
-
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Text: "We have to take our power back as the superior gender."
 Label: Yes
-
-Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
-Label: No
-
-Text: "Didn’t know shitted coloured like you could talk", Label: No
 
 # Output format
 Answer ONLY Yes or No as labels
@@ -87,57 +273,809 @@ Answer ONLY Yes or No as labels
 # Prediction
 Text: {{ text }}
 Label:,
-  feedbacks_idx_used: {np.int64(2), np.int64(5), 6, np.int64(7), 8},
-  examplers_idx_used: {np.int64(3), np.int64(5), np.int64(6), 7, 8},
-  parent_score: 0.86,
-  score: 0.9183673469387755), Prompt(
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(49), 50, 51, 52},
+  examplers_idx_used: {np.int64(4), np.int64(8), np.int64(11), 22, 23, 24},
+  parent_score: 0.921875,
+  score: 0.9375), Prompt(
   prompt: # Task
-Please decide whether the following text is hate speech. Define hate speech as any statement that dehumanizes, insults, or encourages violence or discrimination toward a protected group, such as race, religion, ethnicity, national origin, gender identity, sexual orientation, or disability. Statements that use profanity or are aggressive but do not target a protected group, or that are merely critical or sarcastic, should not be labeled as hate speech. If the text includes slurs or negative language aimed at a protected group and the tone is dehumanizing or inciting harm, label it as hate speech; otherwise, label it as not hate speech. Respond with “Hate speech” or “Not hate speech” and briefly justify your choice.
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
 
 # Exemplar
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
 Label: No
 
-Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
-Label: No
-
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Text: "Pale cancer! Back to your west pacific ocean"
 Label: Yes
 
-Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Text: "I think this policy is bad."
 Label: No
 
 Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
 Label: Yes
 
+Text: "I love all kinds of music, no matter the genre."
+Label: No
+
+Text: "We have to take our power back as the superior gender."
+Label: Yes
+
 # Output format
 Answer ONLY Yes or No as labels
 
 # Prediction
 Text: {{ text }}
 Label:,
-  feedbacks_idx_used: {np.int64(8), np.int64(3), np.int64(6), 7},
-  examplers_idx_used: {np.int64(1), np.int64(5), 6, np.int64(7), 8},
-  parent_score: 0.86,
-  score: 0.9183673469387755), Prompt(
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(49), 50, 51, 52},
+  examplers_idx_used: {np.int64(4), np.int64(8), np.int64(11), 22, 23, 24},
+  parent_score: 0.921875,
+  score: 0.9375), Prompt(
   prompt: # Task
-You are a decision‑maker for hate‑speech detection. For the text that follows, first identify the target of any negative or aggressive language. Then, using the definition of hate speech as any expression that encourages or condones violence or discrimination against a protected group—such as race, ethnicity, religion, nationality, gender identity, sexual orientation, disability, or other protected characteristic—evaluate whether the statement meets that criterion. Consider intent, whether the language is dehumanizing or demeaning, and the severity of the threat or insult. Finally, answer with a single word: “Yes” if the text is hate speech, “No” if it is not, and follow with a brief, one‑sentence justification that cites the target, intent, and severity you identified.  
-Text: [insert text here]  
-Answer:
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
 
 # Exemplar
-Text: "Didn’t know shitted coloured like you could talk", Label: No
-
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
 Label: No
 
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Text: "Pale cancer! Back to your west pacific ocean"
 Label: Yes
 
-Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Text: "I think this policy is bad."
 Label: No
 
-Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims.", Label: No
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "I love all kinds of music, no matter the genre."
+Label: No
+
+Text: "We have to take our power back as the superior gender."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(49), 50, 51, 52},
+  examplers_idx_used: {np.int64(4), np.int64(8), np.int64(11), 22, 23, 24},
+  parent_score: 0.921875,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "Pale cancer! Back to your west pacific ocean"
+Label: Yes
+
+Text: "I think this policy is bad."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "I love all kinds of music, no matter the genre."
+Label: No
+
+Text: "We have to take our power back as the superior gender."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(49), 50, 51, 52},
+  examplers_idx_used: {np.int64(4), np.int64(8), np.int64(11), 22, 23, 24},
+  parent_score: 0.921875,
+  score: 0.9375))
+Training accuracy: (0.9375, 0.9375, 0.9375, 0.9375)
+Validation accuracy: [0.88, 0.88, 0.86, 0.86]
+Test accuracy: [0.88, 0.89, 0.9, 0.89]
+======== ROUND 3
+Time: 798.1362752914429
+Prompt: (Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "Historically, the treatment of indigenous peoples has been unfair, but I'm not advocating violence."
+Label: No
+
+Text: "I think women are not as good as men when it comes to leadership."
+Label: Yes
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "The phrase 'women are bad drivers' is just an observation, not a criticism."
+Label: No
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(36), np.int64(38), 77, 78, 79, np.int64(17)},
+  examplers_idx_used: {np.int64(67), np.int64(72), 77, 78, 79, np.int64(28)},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "Historically, the treatment of indigenous peoples has been unfair, but I'm not advocating violence."
+Label: No
+
+Text: "I think women are not as good as men when it comes to leadership."
+Label: Yes
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "The phrase 'women are bad drivers' is just an observation, not a criticism."
+Label: No
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(36), np.int64(38), 77, 78, 79, np.int64(17)},
+  examplers_idx_used: {np.int64(67), np.int64(72), 77, 78, 79, np.int64(28)},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "Historically, the treatment of indigenous peoples has been unfair, but I'm not advocating violence."
+Label: No
+
+Text: "I think women are not as good as men when it comes to leadership."
+Label: Yes
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "The phrase 'women are bad drivers' is just an observation, not a criticism."
+Label: No
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(36), np.int64(38), 77, 78, 79, np.int64(17)},
+  examplers_idx_used: {np.int64(67), np.int64(72), 77, 78, 79, np.int64(28)},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "Pale cancer! Back to your west pacific ocean"
+Label: Yes
+
+Text: "The new immigration policy will help protect our borders and keep our country safe."
+Label: No
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(67), np.int64(41), np.int64(77), 78, 79},
+  examplers_idx_used: {np.int64(65), 77, 78, 79, np.int64(20), np.int64(22)},
+  parent_score: 0.9375,
+  score: 0.9375))
+Training accuracy: (0.9375, 0.9375, 0.9375, 0.9375)
+Validation accuracy: [0.88, 0.84, 0.88, 0.88]
+Test accuracy: [0.87, 0.88, 0.87, 0.88]
+======== ROUND 4
+Time: 761.094783782959
+Prompt: (Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {97, 98, 99, np.int64(20), np.int64(87), np.int64(27)},
+  examplers_idx_used: {np.int64(2), 77, 78, np.int64(79), np.int64(20)},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "During the debate, the speaker said 'the disabled community is often misunderstood', which is a critique, not hate."
+Label: No
+
+Text: "The article about the 'Jewish community' was a review of a historical novel."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and \"stealing\" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad \"white\" Americans are."
+Label: No
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {97, 98, 99, np.int64(81), np.int64(21), np.int64(63)},
+  examplers_idx_used: {np.int64(1), np.int64(70), np.int64(73), 77, 78, 79},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "During the debate, the speaker said 'the disabled community is often misunderstood', which is a critique, not hate."
+Label: No
+
+Text: "The article about the 'Jewish community' was a review of a historical novel."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and \"stealing\" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad \"white\" Americans are."
+Label: No
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {97, 98, 99, np.int64(81), np.int64(21), np.int64(63)},
+  examplers_idx_used: {np.int64(1), np.int64(70), np.int64(73), 77, 78, 79},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "During the debate, the speaker said 'the disabled community is often misunderstood', which is a critique, not hate."
+Label: No
+
+Text: "The article about the 'Jewish community' was a review of a historical novel."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and \"stealing\" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad \"white\" Americans are."
+Label: No
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "Great, another white supremacist."
+Label: No
+
+Text: "In the context of the Civil Rights Movement, we discuss the experiences of African Americans."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {97, 98, 99, np.int64(81), np.int64(21), np.int64(63)},
+  examplers_idx_used: {np.int64(1), np.int64(70), np.int64(73), 77, 78, 79},
+  parent_score: 0.9375,
+  score: 0.9375))
+Training accuracy: (0.9375, 0.9375, 0.9375, 0.9375)
+Validation accuracy: [0.86, 0.86, 0.86, 0.86]
+Test accuracy: [0.87, 0.87, 0.87, 0.9]
+======== ROUND 5
+Time: 735.9541096687317
+Prompt: (Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "The history of slavery is irrelevant to modern times."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "We should celebrate diversity, but not the indigenous people."
+Label: Yes
+
+Text: "I don't care about the LGBT community, just ignore them."
+Label: Yes
+
+Text: "I don't think men should be allowed to have certain rights."
+Label: Yes
+
+Text: "Some women should not hold leadership positions because of biology."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(33), 102, 103, 104, np.int64(8), np.int64(82)},
+  examplers_idx_used: {np.int64(79), np.int64(82), np.int64(21), 90, 91, 92},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+I used the slur 'yellow' but I hate that.
+Yes
+
+Text: "Those black people are always late."
+Label: Yes
+
+Text: "Those Asians should just go back to their countries."
+Label: Yes
+
+The government is so corrupt that the minority groups are the real problem.
+Yes
+
+Text: In the 1800s, white supremacists were a major problem.
+Label: No
+
+In the context of historical oppression, we must not allow the minority group to take over.
+Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(7), np.int64(74), np.int64(11), 120, 121, 122},
+  examplers_idx_used: {np.int64(96), np.int64(40), 119, 118, np.int64(87), 120},
+  parent_score: 0.9375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
+
+# Exemplar
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "In the 1960s, many white people believed in segregation."
+Label: No
+
+Text: "I hate the way some Muslims treat women."
+Label: Yes
+
+Text: "I read about the Black Panther Party in a textbook."
+Label: No
 
 Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
 Label: Yes
@@ -148,132 +1086,55 @@ Answer ONLY Yes or No as labels
 # Prediction
 Text: {{ text }}
 Label:,
-  feedbacks_idx_used: {8, np.int64(5), np.int64(6), np.int64(7)},
-  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), 6, 7, 8},
-  parent_score: 0.86,
-  score: 0.9183673469387755))
-Training accuracy: (np.float64(0.9387755102040817), np.float64(0.9183673469387755), np.float64(0.9183673469387755), np.float64(0.9183673469387755))
-Validation accuracy: [0.92, 0.9, 0.84, 0.86]
-Test accuracy: [0.89, 0.88, 0.9, 0.88]
-======== ROUND 2
-Time: 545.5390276908875
-Prompt: (Prompt(
+  feedbacks_idx_used: {np.int64(102), 108, 109, 110, np.int64(80), np.int64(28)},
+  examplers_idx_used: {98, 99, 100, np.int64(9), np.int64(20), np.int64(21)},
+  parent_score: 0.9375,
+  score: 0.921875), Prompt(
   prompt: # Task
-Please read the following text and determine whether it contains hate speech. Hate speech is any statement that attacks or dehumanizes a protected group—race, religion, ethnicity, nationality, gender identity, sexual orientation, or disability—through demeaning language, hateful stereotypes, threats, or calls to violence. Evaluate the text for intent, target, and severity. If the text uses profanity or strong language but does not target a protected group or express dehumanizing intent, answer “No”. If it includes slurs, hateful stereotypes, or violent threats directed at a protected group, answer “Yes”. When parsing multi‑sentence passages, separate praise or condemnation from target identification and avoid conflating political critique with hate. Base your decision on the protected categories and dehumanizing content, not merely on negative or violent wording. Here is the text: [TEXT].
+**Revised Guidance**
+
+Your task is to decide whether a given passage constitutes hate speech. Follow these steps:
+
+1. **Identify Target**  
+   First, determine if the passage explicitly points at a protected group—such as race, religion, ethnicity, gender, sexual orientation, disability, or any other protected category.  
+   - If no protected group is targeted, answer **“No.”**
+
+2. **Evaluate Tone and Context**  
+   If a protected group is mentioned, examine the intent and surrounding context:  
+   - **Non‑violent, non‑derogatory critique** (e.g., respectful disagreement, academic discussion, or rhetorical flourish that clearly shows no intent to harm) → **“No.”**  
+   - **Presence of historical framing, sarcasm, or qualifiers** (phrases like “in the context of,” “historically,” or “to critique”) that signal the speaker is not advocating violence or discrimination should also lead to **“No.”**
+
+3. **Check for Harmful Language**  
+   If the passage contains:  
+   - Slurs or dehumanizing remarks,  
+   - Calls for violence, or  
+   - Explicit intent to intimidate or discriminate,  
+   then answer **“Yes.”**
+
+4. **Handle Ambiguity**  
+   For passages that are unclear or mix rhetorical layers, provide a concise explanation of your decision.  
+   - Avoid labeling negative language as hate speech unless it clearly promotes or supports violence or discrimination against a protected group.  
+   - Ensure that legitimate criticism or opinion that does not aim to harm is not misidentified as hate speech.
+
+**Remember:** The goal is to distinguish between harmful, intent‑driven content and legitimate, non‑harmful critique or discussion.
 
 # Exemplar
-Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Text: "We should be careful not to let the marginalized group become the scapegoat for our country's problems."
 Label: No
 
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
+Text: "Those people always bring their weird culture to the party."
 Label: No
 
-Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
-Label: Yes
-
-Text: "hahahahahahahahaha europ fuck you fucking nazis"
-Label: Yes
-
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
-Label: Yes
-
-Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Text: "I have no problem with white people, but I hate Nazis."
 Label: No
 
-# Output format
-Answer ONLY Yes or No as labels
-
-# Prediction
-Text: {{ text }}
-Label:,
-  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
-  examplers_idx_used: {np.int64(6), np.int64(7), np.int64(8), 14, 15, 16},
-  parent_score: 0.9387755102040817,
-  score: 1.0), Prompt(
-  prompt: # Task
-Please determine whether the following text contains hate speech. For this task, hate speech is any statement that attacks or demeans a protected group—such as race, religion, ethnicity, gender identity, sexual orientation, disability, or nationality—through dehumanizing language, threats, or calls to violence. To judge accurately, first identify the target of the statement, then assess whether the intent is to dehumanize or incite harm, and finally rate the severity of the language. If the text contains profanity or strong language that is not directed at a protected group or that does not have a dehumanizing or violent intent, it is not hate speech. Conversely, if the text includes slurs, hateful stereotypes, or violent threats directed at a protected group, it is hate speech. Below are two short examples: “I hate all Muslims and want nothing but violence against them” (hate speech) vs. “I think some politicians are corrupt” (not hate speech). Your answer should be a single word, either “Yes” if the text contains hate speech or “No” if it does not. Here is the text: [TEXT].
-
-# Exemplar
-Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
-Label: No
-
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
-Label: No
-
-Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
+Text: "I love the way the government hates immigrants."
 Label: Yes
 
-Text: "hahahahahahahahaha europ fuck you fucking nazis"
+Text: "I think women are not as good as men when it comes to leadership."
 Label: Yes
 
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
-Label: Yes
-
-Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
-Label: No
-
-# Output format
-Answer ONLY Yes or No as labels
-
-# Prediction
-Text: {{ text }}
-Label:,
-  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
-  examplers_idx_used: {np.int64(6), np.int64(7), np.int64(8), 14, 15, 16},
-  parent_score: 0.9387755102040817,
-  score: 1.0), Prompt(
-  prompt: # Task
-You are asked to decide whether the following text contains hate speech.  Hate speech is any statement that attacks or demeans a protected group—race, religion, ethnicity, nationality, gender identity, sexual orientation, disability, or other protected status—using dehumanizing language, slurs, hateful stereotypes, or violent threats.  The text may contain multiple sentences and mix praise, condemnation, or political commentary; you must separate the sentiment from the target, identify the intended target, assess the intent, and judge the severity.  If the target is a protected group and the statement includes dehumanizing language, a slur, a hateful stereotype, or a threat of violence, answer “Yes”; otherwise answer “No”.  Pay careful attention to context: a word like “slaughter” or “race” by itself does not constitute hate speech unless it is directed at a protected group with dehumanizing intent.  Provide a brief justification for your decision.  For example, the sentence “The Dalit community is inferior” targets a protected group with a slur and is hate speech; the sentence “I dislike the policies of the government” does not target a protected group and is not hate speech.  Here is the text: [TEXT].
-
-# Exemplar
-Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
-Label: No
-
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
-Label: No
-
-Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
-Label: Yes
-
-Text: "hahahahahahahahaha europ fuck you fucking nazis"
-Label: Yes
-
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
-Label: Yes
-
-Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
-Label: No
-
-# Output format
-Answer ONLY Yes or No as labels
-
-# Prediction
-Text: {{ text }}
-Label:,
-  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
-  examplers_idx_used: {np.int64(6), np.int64(7), np.int64(8), 14, 15, 16},
-  parent_score: 0.9387755102040817,
-  score: 1.0), Prompt(
-  prompt: # Task
-Please determine whether the following text contains hate speech. Hate speech is defined as any statement that attacks or demeans a protected group—such as race, ethnicity, religion, nationality, gender identity, sexual orientation, or disability—through dehumanizing language, hateful stereotypes, slurs, or explicit threats of violence. The text may contain multiple sentences; evaluate each clause for possible hate speech but base the final answer on whether any part of the text meets the definition. Consider the intent behind the words, the target of the remarks, and the severity of the language. If profanity or strong language appears but the target is not a protected group or there is no dehumanizing intent, the text is not hate speech. If the text contains slurs, hateful stereotypes, or violent threats directed at a protected group, it is hate speech. For example, “He is a monster” is not hate speech unless “monster” refers to a protected group; “The Jews are parasites” is hate speech. Based on this definition answer only “Yes” if the text contains hate speech, and “No” otherwise. Here is the text: [TEXT].
-
-# Exemplar
-Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
-Label: No
-
-Text: "this women has to be some sort of psychopath but it goes both ways, if either a male or a female are in a toxic relationship they need to get help, the sooner the better."
-Label: No
-
-Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
-Label: Yes
-
-Text: "hahahahahahahahaha europ fuck you fucking nazis"
-Label: Yes
-
-Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
-Label: Yes
-
-Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Text: "We should boycott all Indian restaurants."
 Label: Yes
 
 # Output format
@@ -282,9 +1143,9 @@ Answer ONLY Yes or No as labels
 # Prediction
 Text: {{ text }}
 Label:,
-  feedbacks_idx_used: {np.int64(6), np.int64(7), np.int64(8), 16, 17, 18},
-  examplers_idx_used: {np.int64(1), np.int64(6), np.int64(7), 14, 15, 16},
-  parent_score: 0.9387755102040817,
-  score: 1.0))
-Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
-Validation accuracy: [0.82, 0.84, 0.86, 0.84]
+  feedbacks_idx_used: {np.int64(36), np.int64(37), 114, 115, 116, np.int64(24)},
+  examplers_idx_used: {np.int64(38), 106, 107, 108, np.int64(58), np.int64(28)},
+  parent_score: 0.9375,
+  score: 0.921875))
+Training accuracy: (0.9375, 0.9375, 0.921875, 0.921875)
+Validation accuracy: [0.86, 0.86, 0.84, 0.84]

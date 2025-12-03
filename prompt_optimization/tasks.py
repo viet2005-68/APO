@@ -36,8 +36,11 @@ class DataProcessor(ABC):
 
 
 def process_example(ex, predictor, prompt):
-    pred = predictor.inference(ex, prompt)
-    return ex, pred
+    try:
+        pred = predictor.inference(ex, prompt)
+        return ex, pred
+    except Exception as e:
+        return ex, 0
 
 def process_example_with_conf(ex, predictor, prompt):
     pred, conf = predictor.inference_with_conf(ex, prompt)

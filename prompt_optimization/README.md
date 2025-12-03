@@ -38,6 +38,7 @@ python main.py \
   --gradients_per_error 5 \
   --minibatch_size 256 \
   --out experiments/liar.out
+  --evaluator ucb
 
 # Ethos Task
 python main.py \
@@ -48,8 +49,9 @@ python main.py \
   --steps_per_gradient 1 \
   --errors_per_gradient 8 \
   --gradients_per_error 5 \
-  --minibatch_size 256 \
+  --minibatch_size 64 \
   --out experiments/ethos.out
+  --evaluator ucb
 
 # Ar Sacarsm
 python main.py \
@@ -62,6 +64,7 @@ python main.py \
   --gradients_per_error 5 \
   --minibatch_size 1024 \
   --out experiments/ar_sarcasm.out
+  --evaluator ucb
 
 # Clickbait
 python main.py \
@@ -74,3 +77,4 @@ python main.py \
   --gradients_per_error 5 \
   --minibatch_size 64 \
   --out experiments/clickbait.out
+  --evaluator ucb

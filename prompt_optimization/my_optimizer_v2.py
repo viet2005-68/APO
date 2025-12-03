@@ -529,7 +529,7 @@ class MyOptimizer(PromptOptimizer):
                         sect.prompt, n=self.opt["mc_samples_per_step"]
                     )
                     for i in mc_sects:
-                        mc_sampled_task_sections.append(Prompt(i, sect.feedbacks_idx_used, sect.examplers_idx_used, sect.score, 0))
+                        mc_sampled_task_sections.append(Prompt(i, sect.feedbacks_idx_used, sect.examplers_idx_used, sect.parent_score, 0))
                         new_exemplar_sections.append(new_exemplar_sections[ind])
 
             # Genetic algorithm
