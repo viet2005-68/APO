@@ -4,7 +4,91 @@ from tqdm import tqdm
 import random
 from abc import ABC, abstractmethod
 import utils
+from FlagEmbedding import BGEM3FlagModel
+from models import Prompt
+
 random.seed(42)
+
+class ExemplarMemory():
+    def __init__(self, embedding_model, similarity_threshold=0.8, replace_prob=0.5):
+        self.exemplars = []
+        self.scores = []
+        self.embeddings = []
+        self.embedding_model = embedding_model
+        self.similarity_threshold = similarity_threshold
+        self.replace_prob = replace_prob
+
+    def __str__(self):
+        max_score = max(self.scores) if self.scores else None
+        min_score = min(self.scores) if self.scores else None
+        return (f"ExemplarMemory(\n"
+                f"  exemplars: {self.exemplars} items,\n"
+                f"  scores: {self.scores} items,\n"
+                f"  max score: {max_score}\n"
+                f"  min score: {min_score}"
+                f")")
+
+
+    def _encode(self, text):
+        return self.embedding_model.encode(text)['dense_vecs']
+
+    def _find_duplicate(self, new_emb):
+        if not self.embeddings:
+            return None
+
+        emb_matrix = np.stack(self.embeddings)
+        sims = emb_matrix @ new_emb.T
+
+        idx = np.argmax(sims)
+        if sims[idx] >= self.similarity_threshold:
+            print("SIMILAR EXAMPLER ALREADY OCCUR WITH SIMILARITY ", sims[idx]) 
+            return idx
+        return None
+    
+    def add_exemplar(self, text, priority_score=0.5):
+        new_emb = self._encode(text)
+        dup_idx = self._find_duplicate(new_emb)
+
+        if dup_idx is None:
+            self.exemplars.append(text)
+            self.scores.append(priority_score)
+            self.embeddings.append(new_emb)
+            return True
+
+        if random.random() < self.replace_prob:
+            self.exemplars[dup_idx] = text
+            self.embeddings[dup_idx] = new_emb
+            return True
+        else:
+            return False
+
+    def retrieve_exemplar(self, question="", num=5, temperature=1, inference=False):
+        # q_emb = self._encode(question)
+        # emb_matrix = np.stack(self.embeddings)
+        # sims = emb_matrix @ q_emb.T
+        # weighted_scores = np.array(self.scores) * sims
+        weighted_scores = np.array(self.scores)
+        if inference:
+            top_indices = np.argsort(weighted_scores)[-num:][::-1]
+        else:
+            shifted = weighted_scores / temperature
+            shifted -= np.max(shifted)
+            exp_scores = np.exp(shifted)
+            probs = exp_scores / exp_scores.sum()
+            top_indices = np.random.choice(len(self.exemplars), size=min(num, len(self.exemplars)), replace=False, p=probs)
+
+        return [(i, self.exemplars[i]) for i in top_indices]
+
+    def retrieve_latest_exemplar(self, num=5):
+        retrieved_idx = list(range(len(self.exemplars) - num, len(self.exemplars)))
+        return [(i, self.exemplars[i]) for i in retrieved_idx]
+
+    def update_exemplar(self, exemplar_idx, prompt_score, beta=0.3, theta=0.1):
+        current_score = self.scores[exemplar_idx]
+        new_score = current_score + prompt_score * beta
+        self.scores[exemplar_idx] = new_score
+        if new_score < theta:
+            self.scores[exemplar_idx] = 0
 
 class PromptOptimizer(ABC):
     def __init__(self, args, evaluator_fn, scorer, max_threads=1, bf_eval=None):
@@ -21,6 +105,10 @@ class PromptOptimizer(ABC):
 
 class ProTeGi(PromptOptimizer):
     """ProTeGi: Prompt Optimization with Textual Gradients"""
+    def __init__(self, args, evaluator_fn, scorer, max_threads=1, bf_eval=None):
+        super().__init__(args, evaluator_fn, scorer, max_threads, bf_eval)
+        embedding_model = BGEM3FlagModel('BAAI/bge-m3')
+        self.exemplar_memory = ExemplarMemory(embedding_model=embedding_model)
 
     def _sample_error_str(self, texts, labels, preds, confs, task, n=4):
         """Sample n error strings from the given texts, labels, and preds"""
@@ -194,6 +282,54 @@ class ProTeGi(PromptOptimizer):
             prompt_feedbacks += [(t, error_string) for t in gradients]
         return prompt_feedbacks
 
+    def get_examplers(self, task_section, task, gpt4, texts, labels, preds, confs):
+        """Get "gradients" for a prompt based on sampled error strings."""
+        examplers_feedbacks = []
+        for _ in tqdm(
+            range(self.opt["n_gradients"]),
+            total=self.opt["n_gradients"],
+            desc="fetching examplers..",
+        ):
+            error_string = self._sample_error_str(
+                texts, labels, preds, confs, task, n=self.opt["errors_per_gradient"]
+            )
+            examplers = self._get_examplers(
+                task_section, error_string, self.opt["gradients_per_error"]
+            )
+            examplers_feedbacks += examplers
+        return examplers_feedbacks 
+
+    def _get_examplers(self, prompt, error_string, num_examplers=5):
+        examplers_prompt = f"""
+        I'm trying to write and complete a zero-shot classifier prompt from difficult or erroneous
+        examples.
+        My current prompt is:
+        {prompt}
+        But this prompt gets the following examples wrong:
+        {error_string}
+        To improve my understanding and performance, I would like to identify {num_examplers} typical
+        examples from the above cases where the current prompt fails.
+        These examples should be diverse to cover a range of different issues.
+        For each example, provide the following input and label, not the prediction and wrap each example with <ANSWER>
+        and </ANSWER>:
+        <ANSWER>
+        [one full exampler here, no lists, no numbering]
+        </ANSWER>
+        Output exactly {num_examplers} such blocks.
+        Do not output anything outside the <ANSWER> tags.
+        Begin now.
+        """
+        transformation_prompt = "\n".join(
+            [line.lstrip() for line in examplers_prompt.split("\n")]
+        )
+        res = utils.chatgpt(transformation_prompt, n=1)
+        examplers = []
+        for r in res:
+            examplers += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
+        print("LLM examplers: ", examplers)
+        print("LLM examplers size: ", len(examplers))
+        return examplers
+
     def expand_candidates(self, prompts, task, gpt4, train_exs):
         """Expand a list of prompts by generating gradient-based successors and
         synonyms for each section.
@@ -202,15 +338,21 @@ class ProTeGi(PromptOptimizer):
 
         new_prompts = []
         for prompt in tqdm(prompts, desc=f"expanding {len(prompts)} prompts"):
-            sections = utils.parse_sectioned_prompt(prompt)
+            sections = utils.parse_sectioned_prompt(prompt.prompt)
             task_section = sections["task"].strip()
-
+            exemplar_section = sections["exemplar"].strip()
             # evaluate prompt on minibatch
-            _, texts, labels, preds, confs = task.evaluate_with_conf(gpt4, prompt, minibatch)
-
+            _, texts, labels, preds, confs = task.evaluate_with_conf(gpt4, prompt.prompt, minibatch)
+            print(confs)
             # get gradients
             new_task_sections = []
+            new_exemplar_sections = []
             if self.opt["n_gradients"] > 0:
+                examplers = self.get_examplers(
+                    task_section, task, gpt4, texts, labels, preds, confs
+                )
+                for exemplar in examplers:
+                    self.exemplar_memory.add_exemplar(exemplar)
                 gradients = self.get_gradients(
                     prompt, task_section, task, gpt4, texts, labels, preds, confs
                 )
@@ -220,13 +362,21 @@ class ProTeGi(PromptOptimizer):
                 for feedback, error_string in tqdm(
                     gradients, desc="applying gradients"
                 ):
+                    retrieved_exemplars = self.exemplar_memory.retrieve_exemplar()
+                    retrieved_exemplars += self.exemplar_memory.retrieve_latest_exemplar()
+                    retrieved_exemplars_set = set(retrieved_exemplars)
+                    exemplar_idx = [i[0] for i in retrieved_exemplars_set]
+                    exemplar_str = [i[1] for i in retrieved_exemplars_set]
+                    exemplar = "\n\n".join(exemplar_str)
                     tmp = self.apply_gradient(
                         task_section,
                         error_string,
                         feedback,
                         self.opt["steps_per_gradient"],
                     )
-                    new_task_sections += tmp
+                    for i in tmp:
+                        new_task_sections.append(Prompt(i, set(), set(exemplar_idx), prompt.score, 0))
+                        new_exemplar_sections.append(exemplar)
                 print("new promt: ", new_task_sections)
                 print("len new prompt: ", len(new_task_sections))
             # generate synonyms
@@ -236,57 +386,62 @@ class ProTeGi(PromptOptimizer):
                     mc_sects = self.generate_synonyms(
                         sect, n=self.opt["mc_samples_per_step"]
                     )
-                    mc_sampled_task_sections += mc_sects
+                    for i in mc_sects:
+                        mc_sampled_task_sections.append(Prompt(i, set(), sect.examplers_idx_used, sect.parent_score, 0))
+                        new_exemplar_sections.append(new_exemplar_sections[ind])
 
             # combine
             new_sections = new_task_sections + mc_sampled_task_sections
-            new_sections = list(set(new_sections))  # dedup
+            # new_sections = list(set(new_sections))  # dedup
+            # tmp_new_prompts = [
+            #     prompt.replace(task_section, tmp) for tmp in new_sections
+            # ]
             tmp_new_prompts = [
-                prompt.replace(task_section, tmp) for tmp in new_sections
+                Prompt(prompt.prompt.replace(task_section, tmp.prompt).replace(exemplar_section, tmp_exemplar), set(), tmp.examplers_idx_used, tmp.parent_score, tmp.score) for tmp, tmp_exemplar in zip(new_sections, new_exemplar_sections)
             ]
 
             # filter a little
-            if len(new_sections) > self.opt["max_expansion_factor"]:
-                if self.opt["reject_on_errors"]:
-                    error_exs = []
-                    for i, (t, l, p) in enumerate(zip(texts, labels, preds)):
-                        if l != p:
-                            error_exs.append({"text": t, "label": l})
-                    error_exs = random.sample(error_exs, min(len(error_exs), 16))
+            # if len(new_sections) > self.opt["max_expansion_factor"]:
+            #     if self.opt["reject_on_errors"]:
+            #         error_exs = []
+            #         for i, (t, l, p) in enumerate(zip(texts, labels, preds)):
+            #             if l != p:
+            #                 error_exs.append({"text": t, "label": l})
+            #         error_exs = random.sample(error_exs, min(len(error_exs), 16))
 
-                    # speed up a little
-                    tmp_new_prompts = random.sample(
-                        tmp_new_prompts,
-                        min(len(tmp_new_prompts), self.opt["max_expansion_factor"] * 2),
-                    )
+            #         # speed up a little
+            #         tmp_new_prompts = random.sample(
+            #             tmp_new_prompts,
+            #             min(len(tmp_new_prompts), self.opt["max_expansion_factor"] * 2),
+            #         )
 
-                    error_scores = self.bf_eval(
-                        tmp_new_prompts,
-                        error_exs,
-                        task,
-                        gpt4,
-                        self.scorer,
-                        max_threads=self.max_threads,
-                    )
-                    tmp_new_prompts = [
-                        tmp_new_prompts[i]
-                        for i in np.argsort(error_scores)[
-                            -self.opt["max_expansion_factor"] :
-                        ]
-                    ]
-                else:
-                    sample_k = min(
-                        len(tmp_new_prompts), self.opt["max_expansion_factor"]
-                    )
-                    if sample_k > 0:
-                        tmp_new_prompts = random.sample(tmp_new_prompts, k=sample_k)
-                    else:
-                        tmp_new_prompts = []
+            #         error_scores = self.bf_eval(
+            #             tmp_new_prompts,
+            #             error_exs,
+            #             task,
+            #             gpt4,
+            #             self.scorer,
+            #             max_threads=self.max_threads,
+            #         )
+            #         tmp_new_prompts = [
+            #             tmp_new_prompts[i]
+            #             for i in np.argsort(error_scores)[
+            #                 -self.opt["max_expansion_factor"] :
+            #             ]
+            #         ]
+            #     else:
+            #         sample_k = min(
+            #             len(tmp_new_prompts), self.opt["max_expansion_factor"]
+            #         )
+            #         if sample_k > 0:
+            #             tmp_new_prompts = random.sample(tmp_new_prompts, k=sample_k)
+            #         else:
+            #             tmp_new_prompts = []
 
             new_prompts += tmp_new_prompts
 
         new_prompts += prompts  # add originals
-        new_prompts = list(set(new_prompts))  # dedup
+        # new_prompts = list(set(new_prompts))  # dedup
 
         return new_prompts
 
@@ -296,7 +451,7 @@ class ProTeGi(PromptOptimizer):
         #     return [1.0]
 
         evals = self.evaluator_fn(
-            prompts,
+            [prompt.prompt for prompt in prompts],
             train_exs,
             task,
             gpt4,
@@ -306,4 +461,9 @@ class ProTeGi(PromptOptimizer):
             samples_per_eval=self.opt["samples_per_eval"],
             max_threads=self.max_threads,
         )
+        for prompt, eval in zip(prompts, evals):
+            prompt.score = eval
+            for exemplar_idx in prompt.examplers_idx_used:
+                self.exemplar_memory.update_exemplar(exemplar_idx, prompt.score - prompt.parent_score)
+        print("Exemplar Memory: ", self.exemplar_memory)
         return evals

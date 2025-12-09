@@ -1,1 +1,937 @@
- [00:05<00:00, 18.70it/s][0.6224593298742985, 1.0, 0.9999963045256735, 1.0, 1.0, 0.9996646575567589, 0.9525741476724274, 0.9999938011552557, 1.0, 0.9984986705837912, 0.8175744308728488, 0.9994471746722718, 0.9984987894978749, 0.9999724634116024, 0.9820137577607906, 0.9525741476724274, 0.9995694822610254, 0.8807970468833343, 0.9968273290569476, 0.9999898673126559, 1.0, 0.9975274099865513, 0.9999724634116024, 0.9992903742048809, 0.9820137577607906, 1.0, 1.0, 0.9046505126460354, 0.9980732443617326, 0.9999898673126559, 0.9999545833252356, 0.9890130589396958, 1.0, 0.9999938011552557, 0.9999952316511552, 1.0, 0.8519528492100928, 0.9999991655356624, 0.9399133253553882, 1.0, 0.9999833109787883, 0.9999998807907247, 1.0, 0.9626730730490257, 0.9999998807907247, 0.9975274099865513, 1.0, 0.9999039265409296, 0.9999724634116024, 0.9999985694905718, 0.9525741476724274, 0.7310584695202703, 0.9999971389852362, 0.8175744308728488, 1.0, 0.9706877714009485, 1.0, 1.0, 0.9999952316511552, 0.9914224771982877, 0.9999996423722521, 0.9999938011552557, 1.0, 1.0, 0.9999833109787883, 0.9820137577607906, 0.6224593298742985, 0.77729988964086, 0.9999545833252356, 0.9914224771982877, 0.9999994039539004, 0.9997965511486372, 0.7310585348819939, 0.7310585348819939, 1.0, 1.0, 0.9999545833252356, 1.0, 0.9999645960934689, 0.9999645960934689, 0.8807970468833343, 0.6224593298742985, 0.9984987894978749, 0.999998927117538, 0.9968273290569476, 1.0, 0.49999999904767284, 0.9999963045256735, 0.9626730730490257, 0.8807970468833343, 0.9980732443617326, 0.8175744308728488, 0.9995694822610254, 0.9999998807907247, 0.999876633606226, 0.9988304957495425, 0.8519528492100928, 0.9999417100552707, 0.9997965511486372, 0.9997965511486372]
+Fetching 30 files:   0%|          | 0/30 [00:00<?, ?it/s]Fetching 30 files: 100%|██████████| 30/30 [00:00<00:00, 7619.54it/s]
+{'task': 'clickbait', 'data_dir': 'data/clickbait', 'prompts': 'prompts/clickbait.md', 'out': 'experiments/clickbait.out', 'max_threads': 32, 'temperature': 0.0, 'optimizer': 'nl-gradient', 'rounds': 6, 'beam_size': 4, 'n_test_exs': 400, 'minibatch_size': 64, 'n_gradients': 4, 'errors_per_gradient': 8, 'gradients_per_error': 5, 'steps_per_gradient': 1, 'mc_samples_per_step': 4, 'max_expansion_factor': 8, 'engine': 'chatgpt', 'evaluator': 'ucb', 'scorer': '01', 'eval_rounds': 8, 'eval_prompts_per_round': 8, 'samples_per_eval': 32, 'c': 1.0, 'knn_k': 2, 'knn_t': 0.993, 'reject_on_errors': False, 'reflect_gradients': False, 'reflect_candidates': False, 'reflection_candidate_threshold': 0.5, 'reflection_gradient_passes': 1, 'reflection_candidate_passes': 1, 'reflection_temperature': 0.0, 'ea_samples_per_step': 4, 'eval_budget': 2048}
+  0%|          | 0/7 [00:00<?, ?it/s]STARTING ROUND  0
+
+Evaluating 1 prompts:   0%|          | 0/8 [00:00<?, ?it/s][A
+
+01 scorer:   0%|          | 0/32 [00:00<?, ?it/s][A[A
+
+01 scorer:   3%|▎         | 1/32 [00:00<00:09,  3.20it/s][A[A01 scorer: 100%|██████████| 32/32 [00:00<00:00, 87.72it/s]
+
+Evaluating 1 prompts:  12%|█▎        | 1/8 [00:00<00:05,  1.17it/s][A
+
+01 scorer:   0%|          | 0/21 [00:00<?, ?it/s][A[A
+
+01 scorer:   5%|▍         | 1/21 [00:00<00:03,  5.24it/s][A[A01 scorer: 100%|██████████| 21/21 [00:00<00:00, 79.72it/s]
+
+Evaluating 1 prompts:  25%|██▌       | 2/8 [00:01<00:04,  1.30it/s][AProcess ForkProcess-91:
+Process ForkProcess-85:
+Process ForkProcess-83:
+Process ForkProcess-80:
+Process ForkProcess-79:
+Process ForkProcess-86:
+Process ForkProcess-77:
+Process ForkProcess-74:
+Process ForkProcess-66:
+Process ForkProcess-89:
+Process ForkProcess-72:
+Process ForkProcess-90:
+Process ForkProcess-75:
+Process ForkProcess-71:
+Process ForkProcess-82:
+Process ForkProcess-73:
+Process ForkProcess-88:
+Process ForkProcess-68:
+Process ForkProcess-78:
+Process ForkProcess-84:
+Process ForkProcess-81:
+Process ForkProcess-69:
+Process ForkProcess-87:
+Process ForkProcess-76:
+Process ForkProcess-67:
+Process ForkProcess-65:
+Process ForkProcess-70:
+Exception ignored in: <function _releaseLock at 0x7fcfe1fd4c20>
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/logging/__init__.py", line 243, in _releaseLock
+    def _releaseLock():
+    
+KeyboardInterrupt: 
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 103, in get
+    res = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+
+
+01 scorer:   0%|          | 0/16 [00:00<?, ?it/s][A[A01 scorer:   0%|          | 0/16 [00:00<?, ?it/s]
+Process ForkProcess-97:
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 103, in get
+    res = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Exception ignored in: <function _releaseLock at 0x7fcfe1fd4c20>
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/logging/__init__.py", line 243, in _releaseLock
+    def _releaseLock():
+    
+KeyboardInterrupt: 
+Process ForkProcess-100:
+Process ForkProcess-112:
+Process ForkProcess-111:
+Process ForkProcess-106:
+Process ForkProcess-109:
+Process ForkProcess-101:
+Process ForkProcess-103:
+Process ForkProcess-110:
+Process ForkProcess-107:
+Process ForkProcess-102:
+Process ForkProcess-98:
+Process ForkProcess-104:
+Process ForkProcess-108:
+Process ForkProcess-99:
+Process ForkProcess-105:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 103, in get
+    res = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+KeyboardInterrupt
+Exception ignored in: <function _releaseLock at 0x7fcfe1fd4c20>
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/logging/__init__.py", line 243, in _releaseLock
+    def _releaseLock():
+    
+KeyboardInterrupt: 
+Process ForkProcess-120:
+Process ForkProcess-118:
+Process ForkProcess-119:
+Process ForkProcess-117:
+Process ForkProcess-115:
+Process ForkProcess-116:
+Process ForkProcess-114:
+Process ForkProcess-113:
+Traceback (most recent call last):
+Exception ignored in: <function _releaseLock at 0x7fcfe1fd4c20>
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/logging/__init__.py", line 243, in _releaseLock
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    def _releaseLock():
+KeyboardInterrupt
+    
+KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+         ^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/venv/main/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 252, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/queues.py", line 103, in get
+    res = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+
+01 scorer:   0%|          | 0/16 [00:00<?, ?it/s][A[A01 scorer:   0%|          | 0/16 [00:00<?, ?it/s]
+
+
+01 scorer:   0%|          | 0/16 [00:00<?, ?it/s][A[A
+
+01 scorer:   6%|▋         | 1/16 [00:00<00:02,  5.24it/s][A[A01 scorer: 100%|██████████| 16/16 [00:00<00:00, 64.53it/s]
+
+Evaluating 1 prompts:  38%|███▊      | 3/8 [00:03<00:06,  1.24s/it][A
+
+01 scorer:   0%|          | 0/8 [00:00<?, ?it/s][A[A
+
+01 scorer:  12%|█▎        | 1/8 [00:00<00:01,  5.28it/s][A[A01 scorer: 100%|██████████| 8/8 [00:00<00:00, 37.39it/s]
+
+Evaluating 1 prompts:  50%|█████     | 4/8 [00:04<00:04,  1.03s/it][A
+
+01 scorer:   0%|          | 0/8 [00:00<?, ?it/s][A[A
+
+01 scorer:  12%|█▎        | 1/8 [00:00<00:01,  5.25it/s][A[A01 scorer: 100%|██████████| 8/8 [00:00<00:00, 37.48it/s]
+
+Evaluating 1 prompts:  62%|██████▎   | 5/8 [00:04<00:02,  1.09it/s][A
+
+01 scorer:   0%|          | 0/6 [00:00<?, ?it/s][A[A
+
+01 scorer:  17%|█▋        | 1/6 [00:00<00:00,  5.01it/s][A[A01 scorer: 100%|██████████| 6/6 [00:00<00:00, 27.07it/s]
+Evaluating 1 prompts:  62%|██████▎   | 5/8 [00:05<00:03,  1.11s/it]
+  0%|          | 0/7 [00:05<?, ?it/s]
+Traceback (most recent call last):
+  File "/root/APO/prompt_optimization/main.py", line 194, in <module>
+    scores = optimizer.score_candidates(candidates, task, gpt4, validation_exs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/optimizers_logits.py", line 453, in score_candidates
+    evals = self.evaluator_fn(
+            ^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/evaluators.py", line 207, in __call__
+    scores = scorer(predictor, sampled_prompts, sampled_data, max_threads=max_threads)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/scorers.py", line 46, in __call__
+    computed_scores = compute_scores(prompts_exs_to_compute)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/scorers.py", line 29, in compute_scores
+    with concurrent.futures.ProcessPoolExecutor(max_workers=max_threads) as executor:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/concurrent/futures/_base.py", line 647, in __exit__
+    self.shutdown(wait=True)
+  File "/venv/main/lib/python3.12/concurrent/futures/process.py", line 865, in shutdown
+    self._executor_manager_thread.join()
+  File "/venv/main/lib/python3.12/threading.py", line 1149, in join
+    self._wait_for_tstate_lock()
+  File "/venv/main/lib/python3.12/threading.py", line 1169, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
