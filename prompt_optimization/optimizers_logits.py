@@ -7,8 +7,6 @@ import utils
 from FlagEmbedding import BGEM3FlagModel
 from models import Prompt
 
-random.seed(42)
-
 class ExemplarMemory():
     def __init__(self, embedding_model, similarity_threshold=0.8, replace_prob=0.5):
         self.exemplars = []

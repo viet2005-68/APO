@@ -1,0 +1,1034 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 6.796457290649414
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.8359375),)
+Training accuracy: (0.8359375,)
+Validation accuracy: [0.82]
+Test accuracy: [0.88]
+======== ROUND 1
+Time: 68.58922624588013
+Prompt: (Prompt(
+  prompt: # Task
+Does the following text express hatred or contempt toward a protected group or individual based on their inherent characteristics, such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Consider whether the text promotes discrimination, prejudice, or violence against these groups.
+
+# Exemplar
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "These losers always mess up everything they touch, they should just stay out of it."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(2), 3, 4, np.int64(5), np.int64(6), np.int64(7)},
+  parent_score: 0.8359375,
+  score: 0.88671875), Prompt(
+  prompt: # Task
+Does this passage contain aggressive language targeting a particular group due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected trait, or does it encourage bias or prejudice toward such groups?
+
+# Exemplar
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "These losers always mess up everything they touch, they should just stay out of it."
+Label: No
+
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), 4, np.int64(5), np.int64(6), 7},
+  parent_score: 0.8359375,
+  score: 0.88671875), Prompt(
+  prompt: # Task
+Does this text exhibit hatred or disdain towards a specific protected class or individual due to inherent traits like race, ethnicity, religion, gender, sexual orientation, disability, or country of origin? Evaluate if the content encourages prejudiced views, discrimination, or harmful actions against such groups.
+
+# Exemplar
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "These losers always mess up everything they touch, they should just stay out of it."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(2), 3, 4, np.int64(5), np.int64(6), np.int64(7)},
+  parent_score: 0.8359375,
+  score: 0.88671875), Prompt(
+  prompt: # Task
+Does this passage convey explicit hostility towards any protected category, taking into account the writer's purpose and the broader setting? Keep in mind that protected categories encompass race, ethnicity, nationality, religion, gender, sexual orientation, and disability among others. Determine if the text escalates from mere expression of dissatisfaction or disagreement to advocating for harm or dehumanization of a protected group.
+
+# Exemplar
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "These losers always mess up everything they touch, they should just stay out of it."
+Label: No
+
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), 4, np.int64(5), np.int64(6), 7},
+  parent_score: 0.8359375,
+  score: 0.8828125))
+Training accuracy: (0.88671875, 0.88671875, 0.88671875, 0.8828125)
+Validation accuracy: [0.88, 0.88, 0.88, 0.88]
+Test accuracy: [0.86, 0.87, 0.87, 0.92]
+======== ROUND 2
+Time: 265.4955143928528
+Prompt: (Prompt(
+  prompt: # Task
+Does this passage convey hatred, contempt, discrimination, prejudice, or encourage violence against a protected group or person due to innate traits like race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Assess whether it also criticizes or disrespects religious beliefs or cultural customs linked to these groups. Furthermore, examine if the text singles out individuals based on their nationality or place of origin, implying violence or harm towards protected groups. Take into account the full context and tone to decide if the statement fosters negative attitudes or actions toward any protected characteristic.
+
+# Exemplar
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Deport him in military aircraft and dump him back where he is originated from. Him and his family
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "They say they want peace but all they do is spread hate and destroy everything beautiful."
+Label: No
+
+Text: "Is this what happens when immigrants don't integrate into society properly?"
+Label: No
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(13), np.int64(14), 15, np.int64(16), np.int64(17)},
+  parent_score: 0.88671875,
+  score: 0.90625), Prompt(
+  prompt: # Task
+Does the following text express hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups. Additionally, evaluate whether the text targets individuals based on nationality or origin in a way that suggests violence or harmful actions aimed at protected groups. Consider the overall context and tone to determine if the statement promotes harmful attitudes or actions toward any protected characteristic.
+
+# Exemplar
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Deport him in military aircraft and dump him back where he is originated from. Him and his family
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "They say they want peace but all they do is spread hate and destroy everything beautiful."
+Label: No
+
+Text: "Is this what happens when immigrants don't integrate into society properly?"
+Label: No
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(13), np.int64(14), 15, np.int64(16), np.int64(17)},
+  parent_score: 0.88671875,
+  score: 0.90625), Prompt(
+  prompt: # Task
+Does this piece of text convey hatred, scorn, bias, prejudice, or encourage violence against any protected group or person based on intrinsic traits like race, ethnicity, religion, gender, sexual orientation, disability, or place of origin? Also, assess if it attacks or disdains religious views or cultural customs linked to these groups. Further, examine if the content singles out people due to their nationality or background in a manner suggesting or advocating for violence or detrimental acts against protected groups. Take into account the full context and the tone to judge whether the message fosters harmful sentiments or behaviors towards any protected characteristic.
+
+# Exemplar
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Deport him in military aircraft and dump him back where he is originated from. Him and his family
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "They say they want peace but all they do is spread hate and destroy everything beautiful."
+Label: No
+
+Text: "Is this what happens when immigrants don't integrate into society properly?"
+Label: No
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(13), np.int64(14), 15, np.int64(16), np.int64(17)},
+  parent_score: 0.88671875,
+  score: 0.90625), Prompt(
+  prompt: # Task
+Does this passage convey hatred, contempt, discrimination, prejudice, or advocate violence against a protected group or individual due to inherent traits like race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Assess if it disapproves of or belittles religious views or cultural traditions linked to these groups. Also, examine if it singles out people by their nationality or origin, suggesting violent or harmful behavior directed at protected groups. Take into account the full context and tone to judge if the statement fosters negative attitudes or actions toward any protected characteristic.
+
+# Exemplar
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Deport him in military aircraft and dump him back where he is originated from. Him and his family
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Yes
+
+Text: "They say they want peace but all they do is spread hate and destroy everything beautiful."
+Label: No
+
+Text: "Is this what happens when immigrants don't integrate into society properly?"
+Label: No
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(13), np.int64(14), 15, np.int64(16), np.int64(17)},
+  parent_score: 0.88671875,
+  score: 0.90625))
+Training accuracy: (0.90625, 0.90625, 0.90625, 0.90625)
+Validation accuracy: [0.92, 0.92, 0.9, 0.92]
+Test accuracy: [0.91, 0.91, 0.9, 0.91]
+======== ROUND 3
+Time: 258.48656845092773
+Prompt: (Prompt(
+  prompt: # Task
+Does the following text express explicit hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups in a way that promotes harmful attitudes or actions. Additionally, evaluate whether the text targets individuals based on nationality or origin in a manner that suggests violence or harmful actions aimed at protected groups. Mild criticism or historical discussions alone do not imply harmful intent unless they explicitly promote violence or harmful actions towards protected groups. Consider the overall context and tone to determine if the statement promotes harmful attitudes or actions toward any protected characteristic.
+
+# Exemplar
+Text: "He shouldn't even be allowed to live here, let alone vote. We need to keep our community pure." Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "This woman deserves what happened to her for being outspoken in a male-dominated field."
+Label: Yes
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), 39, np.int64(8), np.int64(11), np.int64(19), np.int64(24)},
+  parent_score: 0.90625,
+  score: 0.95), Prompt(
+  prompt: # Task
+Assess whether the given text conveys hatred, scorn, bias, prejudice, or urges violence against a protected group or person due to intrinsic traits like race, ethnicity, religion, sex, sexual orientation, disability, or country of origin. Also, examine if it disparages religious views or traditions linked to these communities. Consider if the text singles out people because of their nationality or background in a manner that implies violent or detrimental conduct targeted at safeguarded groups. Nonetheless, acknowledge that conversations about history, politics, or societal concerns, despite being critical, do not automatically mean hatred or prejudice unless they encourage damaging sentiments or behavior toward any protected trait. Analyze the full context, mood, and purpose behind the statement to see if it truly fosters harm or negative stereotypes.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), np.int64(7), 39, np.int64(6), np.int64(11), np.int64(30)},
+  parent_score: 0.90625,
+  score: 0.9375), Prompt(
+  prompt: # Task
+Does the following text express hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups. Additionally, evaluate whether the text targets individuals based on nationality or origin in a way that suggests violence or harmful actions aimed at protected groups. However, recognize that discussions about history, politics, or social issues, even when critical, do not necessarily constitute hatred or prejudice unless they promote harmful attitudes or actions toward any protected characteristic. Evaluate the overall context, tone, and intent of the statement to determine if it genuinely promotes harm or negative stereotypes.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), np.int64(7), 39, np.int64(6), np.int64(11), np.int64(30)},
+  parent_score: 0.90625,
+  score: 0.9296875), Prompt(
+  prompt: # Task
+Assess whether this passage conveys hatred, contempt, discrimination, prejudice, or advocates violence against a protected group or individual based on inherent traits such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin. Specifically, determine if the passage disapproves of or belittles religious views or cultural traditions linked to these groups. Consider if it singles out individuals by their nationality or origin, suggesting violent or harmful behavior towards any protected group. In your evaluation, focus on whether the content directly targets a specific protected characteristic or group. Examine the context and tone carefully but prioritize identifying explicit, direct harm or bias over generalized negativity or aggression.
+
+# Exemplar
+Text: "It's time to stop the influx of immigrants flooding our borders, they're taking our jobs and bringing crime rates up." Label: No
+
+Text: "It's just so annoying when people always bring up how terrible things were in the past, like slavery or the Holocaust. Can't they just let it go and move on?"
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "The way they dress is just so odd; it’s like they are purposely trying to stand out, but in a bad way."
+Label: No
+
+The fact that you can't even understand simple English and still criticize others, it's quite disappointing.
+Label: No
+
+Text: "This woman deserves what happened to her for being outspoken in a male-dominated field."
+Label: Yes
+
+Text: "They never listen, always complaining about things they can't change. Just get over it already."
+Label: No
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(38), np.int64(40), 41, 42, 43, 44, np.int64(14), np.int64(15), np.int64(19)},
+  parent_score: 0.90625,
+  score: 0.9166666666666666))
+Training accuracy: (0.95, 0.9375, 0.9296875, 0.9166666666666666)
+Validation accuracy: [0.94, 0.9, 0.92, 0.88]
+Test accuracy: [0.9, 0.9, 0.91, 0.91]
+======== ROUND 4
+Time: 272.2785167694092
+Prompt: (Prompt(
+  prompt: # Task
+Does the following text express explicit hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups in a way that promotes harmful attitudes or actions. Additionally, evaluate whether the text targets individuals based on nationality or origin in a manner that suggests violence or harmful actions aimed at protected groups. Mild criticism or historical discussions alone do not imply harmful intent unless they explicitly promote violence or harmful actions towards protected groups. Consider the overall context and tone to determine if the statement promotes harmful attitudes or actions toward any protected characteristic.
+
+# Exemplar
+Text: "He shouldn't even be allowed to live here, let alone vote. We need to keep our community pure." Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "This woman deserves what happened to her for being outspoken in a male-dominated field."
+Label: Yes
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), 39, np.int64(8), np.int64(11), np.int64(19), np.int64(24)},
+  parent_score: 0.90625,
+  score: 0.921875), Prompt(
+  prompt: # Task
+Examine if the provided text conveys hatred, contempt, bias, prejudice, or advocates violence towards a protected class or individual because of intrinsic traits including race, ethnicity, religion, gender, sexual orientation, disability, or place of origin. Additionally, look into whether it denigrates religious beliefs or customs associated with these groups. Analyze if the content targets people based on their nationality or heritage in a way that implies violence or harmful behavior toward protected categories. Nonetheless, understand that conversations about history, politics, or societal problems, even if they are critical, do not automatically imply hate or prejudice unless they advance harmful actions or stereotypes about any protected characteristic. Thoroughly consider the complete context, tone, and intent behind the statement. Decide if the wording is utilized to provoke harmful or biased acts, or if it reflects a discussion on historical, political, or social matters without fomenting harmful feelings. Reflect on whether the text serves as a critique or analysis that does not inherently express hatred, prejudice, or violence, but rather offers an examination of social issues.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "They should never have been allowed to enter our country in the first place."
+Label: No
+
+Text: "Thanks god at least you have music to pale the pain being blind. Oh what you can’t hear too. Haha"
+Label: No
+
+Text: "The only good [group] is a dead [group]."
+Label: No
+
+Text: "They say all Palestinians are terrorists, but I know some really good ones personally."
+Label: No
+
+Text: "That's not a job for a woman; she should stay home and take care of her children."
+Label: Yes
+
+Text: "I wouldn't mind seeing them all go back where they came from."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "This country's economy is failing because of its leadership's incompetence, not because of the racial composition of its population."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(8), np.int64(45), 48, 49, 50, 51, 52, np.int64(20), np.int64(30)},
+  parent_score: 0.9375,
+  score: 0.90625), Prompt(
+  prompt: # Task
+Determine if the provided text conveys hatred, contempt, discrimination, prejudice, or advocates for violence towards a protected group or individual because of inherent traits like race, ethnicity, religion, gender, sexual orientation, disability, or national origin. Additionally, examine whether the text denigrates religious beliefs or customs associated with these groups. Investigate whether the text targets people based on their nationality or background in a way that implies violent or harmful intentions towards protected groups. However, acknowledge that conversations about history, politics, or social issues, even if critical, do not automatically indicate hatred or prejudice unless they encourage harm or negative stereotypes towards any protected characteristic. Thoroughly analyze the complete context, tone, and intent behind the statement. Decide if the used language is intended to provoke harmful or prejudiced behavior or if it is part of a larger discussion on historical, political, or social issues without promoting harmful attitudes. Consider whether the text offers criticism or commentary that does not inherently express hatred, prejudice, or violence, but rather provides insight into societal issues.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "They should never have been allowed to enter our country in the first place."
+Label: No
+
+Text: "Thanks god at least you have music to pale the pain being blind. Oh what you can’t hear too. Haha"
+Label: No
+
+Text: "The only good [group] is a dead [group]."
+Label: No
+
+Text: "They say all Palestinians are terrorists, but I know some really good ones personally."
+Label: No
+
+Text: "That's not a job for a woman; she should stay home and take care of her children."
+Label: Yes
+
+Text: "I wouldn't mind seeing them all go back where they came from."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "This country's economy is failing because of its leadership's incompetence, not because of the racial composition of its population."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(8), np.int64(45), 48, 49, 50, 51, 52, np.int64(20), np.int64(30)},
+  parent_score: 0.9375,
+  score: 0.90625), Prompt(
+  prompt: # Task
+Does the following text express hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups. Additionally, evaluate whether the text targets individuals based on nationality or origin in a way that suggests violence or harmful actions aimed at protected groups. However, recognize that discussions about history, politics, or social issues, even when critical, do not necessarily constitute hatred or prejudice unless they promote harmful attitudes or actions toward any protected characteristic. Evaluate the overall context, tone, and intent of the statement to determine if it genuinely promotes harm or negative stereotypes.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), np.int64(7), 39, np.int64(6), np.int64(11), np.int64(30)},
+  parent_score: 0.90625,
+  score: 0.90625))
+Training accuracy: (0.921875, 0.90625, 0.90625, 0.90625)
+Validation accuracy: [0.94, 0.92, 0.92, 0.92]
+Test accuracy: [0.9, 0.91, 0.9, 0.91]
+======== ROUND 5
+Time: 299.9476466178894
+Prompt: (Prompt(
+  prompt: # Task
+Does the following text express explicit hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups in a way that promotes harmful attitudes or actions. Additionally, evaluate whether the text targets individuals based on nationality or origin in a manner that suggests violence or harmful actions aimed at protected groups. Mild criticism or historical discussions alone do not imply harmful intent unless they explicitly promote violence or harmful actions towards protected groups. Consider the overall context and tone to determine if the statement promotes harmful attitudes or actions toward any protected characteristic.
+
+# Exemplar
+Text: "He shouldn't even be allowed to live here, let alone vote. We need to keep our community pure." Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "This woman deserves what happened to her for being outspoken in a male-dominated field."
+Label: Yes
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), 39, np.int64(8), np.int64(11), np.int64(19), np.int64(24)},
+  parent_score: 0.90625,
+  score: 0.9479166666666666), Prompt(
+  prompt: # Task
+Examine if the provided text conveys hatred, contempt, bias, prejudice, or advocates violence towards a protected class or individual because of intrinsic traits including race, ethnicity, religion, gender, sexual orientation, disability, or place of origin. Additionally, look into whether it denigrates religious beliefs or customs associated with these groups. Analyze if the content targets people based on their nationality or heritage in a way that implies violence or harmful behavior toward protected categories. Nonetheless, understand that conversations about history, politics, or societal problems, even if they are critical, do not automatically imply hate or prejudice unless they advance harmful actions or stereotypes about any protected characteristic. Thoroughly consider the complete context, tone, and intent behind the statement. Decide if the wording is utilized to provoke harmful or biased acts, or if it reflects a discussion on historical, political, or social matters without fomenting harmful feelings. Reflect on whether the text serves as a critique or analysis that does not inherently express hatred, prejudice, or violence, but rather offers an examination of social issues.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "They should never have been allowed to enter our country in the first place."
+Label: No
+
+Text: "Thanks god at least you have music to pale the pain being blind. Oh what you can’t hear too. Haha"
+Label: No
+
+Text: "The only good [group] is a dead [group]."
+Label: No
+
+Text: "They say all Palestinians are terrorists, but I know some really good ones personally."
+Label: No
+
+Text: "That's not a job for a woman; she should stay home and take care of her children."
+Label: Yes
+
+Text: "I wouldn't mind seeing them all go back where they came from."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "This country's economy is failing because of its leadership's incompetence, not because of the racial composition of its population."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(8), np.int64(45), 48, 49, 50, 51, 52, np.int64(20), np.int64(30)},
+  parent_score: 0.9375,
+  score: 0.9479166666666666), Prompt(
+  prompt: # Task
+Does the following text express hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups. Additionally, evaluate whether the text targets individuals based on nationality or origin in a way that suggests violence or harmful actions aimed at protected groups. However, recognize that discussions about history, politics, or social issues, even when critical, do not necessarily constitute hatred or prejudice unless they promote harmful attitudes or actions toward any protected characteristic. Evaluate the overall context, tone, and intent of the statement to determine if it genuinely promotes harm or negative stereotypes.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), np.int64(7), 39, np.int64(6), np.int64(11), np.int64(30)},
+  parent_score: 0.90625,
+  score: 0.9479166666666666), Prompt(
+  prompt: # Task
+Does the following text express hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups. Evaluate whether the text targets individuals based on nationality or origin in a manner suggesting violence or harmful actions against protected groups. However, recognize that discussions about history, politics, or social issues, even when critical, do not necessarily constitute hatred or prejudice unless they promote harmful attitudes or actions toward any protected characteristic. Focus particularly on whether the text explicitly names or refers to a protected group or individual, uses derogatory terms specific to a protected characteristic, or advocates for harmful actions against these characteristics. Evaluate the overall context, tone, and intent of the statement to determine if it genuinely promotes harm or negative stereotypes. For example, a statement criticizing someone's actions or behavior is not prejudiced if it does not specifically target a protected characteristic or suggest violence.
+
+# Exemplar
+Text: "Those stupid foreigners, always causing problems wherever they go."
+Label: Yes
+
+Text: "It's just so annoying when people always bring up how terrible things were in the past, like slavery or the Holocaust. Can't they just let it go and move on?"
+Label: No
+
+Text: "The whole world would be better off without those who don't follow the right path in life."
+Label: Yes
+
+Deport him in military aircraft and dump him back where he is originated from. Him and his family
+
+Text: "Those immigrants don't understand our ways, they should just leave."
+Label: No
+
+Text: "Why do some people still hold onto old-fashioned views about women's roles in society?"
+Label: No
+
+Text: "You people think you can just come here and change everything? Go back where you came from!"
+Label: Yes
+
+Text: "They say all Palestinians are terrorists, but I know some really good ones personally."
+Label: No
+
+Text: "Why do some countries have so many problems? It's like they're cursed or something."
+Label: No
+
+Text: "That's just what you'd expect from a bunch of good-for-nothing immigrants."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(69), np.int64(10), 75, np.int64(44), 74, 78, 76, 77, np.int64(50), np.int64(61)},
+  parent_score: 0.90625,
+  score: 0.9375))
+Training accuracy: (0.9479166666666666, 0.9479166666666666, 0.9479166666666666, 0.9375)
+Validation accuracy: [0.94, 0.92, 0.92, 0.9]
+Test accuracy: [0.9, 0.91, 0.91, 0.9]
+======== ROUND 6
+Time: 274.2490119934082
+Prompt: (Prompt(
+  prompt: # Task
+Does this text convey explicit hate, scorn, discrimination, bias, or encouragement of violence against any protected group or individual due to intrinsic traits like race, ethnicity, religion, gender identity, sexual orientation, disability, or country of origin? Assess if it disparages or criticizes religious views or cultural habits linked to these groups in a manner that fosters damaging behaviors or sentiments. Determine if the content includes direct incitements to violence or overtly disrespectful comments directed at individuals based on their background in a way that implies targeted harm towards protected groups. Remember, simple critiques or historical analyses do not suggest harmful intentions unless they explicitly endorse violence or detrimental actions towards protected groups. Keep the entire context and tone in mind, but focus primarily on pinpointing clear and explicit indications of harmful intent.
+
+# Exemplar
+Text: "They always stick together, never integrate, why can't they just assimilate like everyone else?"
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+Text: "It's just a joke, relax and stop being so politically correct." Label: No
+
+Text: "The whole world would be better off without those who don't follow the right path in life."
+Label: Yes
+
+Text: "This woman deserves what happened to her for being outspoken in a male-dominated field."
+Label: Yes
+
+Text: "You people think you can just come here and change everything? Go back where you came from!"
+Label: Yes
+
+Text: "It's unbelievable how some people still cling to outdated religious practices."
+Label: No
+
+Text: "They're all the same, always causing trouble. We need to keep them out."
+Label: No
+
+Text: "Why do some countries have so many problems? It's like they're cursed or something."
+Label: No
+
+Text: "I don't like how they talk and act, but I wouldn't hurt them. They just irritate me because of their culture."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(72), 76, 77, 78, 79, 80, np.int64(19), np.int64(22), np.int64(63)},
+  parent_score: 0.9479166666666666,
+  score: 0.9375), Prompt(
+  prompt: # Task
+Does this passage exhibit explicit hatred, contempt, discrimination, prejudice, or incitement to violence against a protected group or individual based on inherent traits like race, ethnicity, religion, gender, sexual orientation, disability, or country of origin? Assess whether it denounces or belittles religious beliefs or cultural practices related to these groups in a manner that fosters harmful sentiments or behaviors. Determine if there are direct encouragements for violence or overtly insulting comments aimed at individuals because of their nationality or origin, implying harmful intentions toward protected groups. Note that straightforward critique or historical analysis alone doesn't constitute harmful intent unless they actively encourage violence or harmful actions toward protected groups. Take into account the general context and tone, but focus on identifying clear and direct manifestations of harmful intent.
+
+# Exemplar
+Text: "They always stick together, never integrate, why can't they just assimilate like everyone else?"
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+Text: "It's just a joke, relax and stop being so politically correct." Label: No
+
+Text: "The whole world would be better off without those who don't follow the right path in life."
+Label: Yes
+
+Text: "This woman deserves what happened to her for being outspoken in a male-dominated field."
+Label: Yes
+
+Text: "You people think you can just come here and change everything? Go back where you came from!"
+Label: Yes
+
+Text: "It's unbelievable how some people still cling to outdated religious practices."
+Label: No
+
+Text: "They're all the same, always causing trouble. We need to keep them out."
+Label: No
+
+Text: "Why do some countries have so many problems? It's like they're cursed or something."
+Label: No
+
+Text: "I don't like how they talk and act, but I wouldn't hurt them. They just irritate me because of their culture."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(72), 76, 77, 78, 79, 80, np.int64(19), np.int64(22), np.int64(63)},
+  parent_score: 0.9479166666666666,
+  score: 0.9375), Prompt(
+  prompt: # Task
+Does the following text express explicit hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups in a way that promotes harmful attitudes or actions. Evaluate whether the text contains direct calls for violence or explicit derogatory remarks targeting individuals based on their nationality or origin in a manner suggesting harmful actions aimed at protected groups. Mild criticism or historical discussions alone do not imply harmful intent unless they explicitly promote violence or harmful actions towards protected groups. Consider the overall context and tone, but prioritize identifying clear and direct expressions of harmful intent.
+
+# Exemplar
+Text: "They always stick together, never integrate, why can't they just assimilate like everyone else?"
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+Text: "It's just a joke, relax and stop being so politically correct." Label: No
+
+Text: "The whole world would be better off without those who don't follow the right path in life."
+Label: Yes
+
+Text: "This woman deserves what happened to her for being outspoken in a male-dominated field."
+Label: Yes
+
+Text: "You people think you can just come here and change everything? Go back where you came from!"
+Label: Yes
+
+Text: "It's unbelievable how some people still cling to outdated religious practices."
+Label: No
+
+Text: "They're all the same, always causing trouble. We need to keep them out."
+Label: No
+
+Text: "Why do some countries have so many problems? It's like they're cursed or something."
+Label: No
+
+Text: "I don't like how they talk and act, but I wouldn't hurt them. They just irritate me because of their culture."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(72), 76, 77, 78, 79, 80, np.int64(19), np.int64(22), np.int64(63)},
+  parent_score: 0.9479166666666666,
+  score: 0.9375), Prompt(
+  prompt: # Task
+Does the following text express hatred, contempt, discrimination, prejudice, or incitement to violence towards a protected group or individual based on inherent characteristics such as race, ethnicity, religion, gender, sexual orientation, disability, or national origin? Also consider if the text criticizes or denigrates religious beliefs or cultural practices associated with these groups. Additionally, evaluate whether the text targets individuals based on nationality or origin in a way that suggests violence or harmful actions aimed at protected groups. However, recognize that discussions about history, politics, or social issues, even when critical, do not necessarily constitute hatred or prejudice unless they promote harmful attitudes or actions toward any protected characteristic. Evaluate the overall context, tone, and intent of the statement to determine if it genuinely promotes harm or negative stereotypes.
+
+# Exemplar
+Text: "They can never be trusted; they always cheat and lie. Get rid of them all!"
+Label: Yes
+
+Text: "People from that country are all liars; you can't trust anyone from there."
+Label: No
+
+Text: "Oh, look who's here, the usual suspect. Can't keep your nose out of trouble, can you?"
+Label: No
+
+this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+
+Text: "To those who think immigrants are taking our jobs, remember they are just looking for a better life, just like we all do."
+Label: No
+
+Text: "Those lazy Mexicans just want to cross the border to live off our welfare system."
+Label: No
+
+Text: "I just saw a person wearing a turban, they look suspicious and out of place here in our country."
+Label: No
+
+Text: "They say we're all equal, but some people just act like they’re better than everyone else, thinking their culture or background gives them special rights."
+Label: No
+
+Text: "The way they act, they should be ashamed of their culture and heritage, always causing problems wherever they go."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {35, 36, 37, np.int64(38), np.int64(7), 39, np.int64(6), np.int64(11), np.int64(30)},
+  parent_score: 0.90625,
+  score: 0.9375))
+Training accuracy: (0.9375, 0.9375, 0.9375, 0.9375)
+Validation accuracy: [0.9, 0.9, 0.9, 0.92]
+Test accuracy: [0.91, 0.91, 0.9, 0.91]

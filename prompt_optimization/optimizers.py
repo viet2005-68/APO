@@ -4,7 +4,6 @@ from tqdm import tqdm
 import random
 from abc import ABC, abstractmethod
 import utils
-random.seed(42)
 
 class PromptOptimizer(ABC):
     def __init__(self, args, evaluator_fn, scorer, max_threads=1, bf_eval=None):

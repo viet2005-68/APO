@@ -1,0 +1,1967 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-9-12.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 15.396792888641357
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.54296875),)
+Training accuracy: (0.54296875,)
+Validation accuracy: [0.5582655826558266]
+Test accuracy: [0.5639913232104121]
+======== ROUND 1
+Time: 110.49750447273254
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the Statement is false (Yes) or true (No) by closely analyzing the Job title, State, Party affiliation, Context, and all other given details. Evaluate the logical coherence and likelihood of the Statement based on the provided information. Make sure each piece of information either supports or refutes the Statement before reaching your conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(7), np.int64(10), 11, 12, 13, 14, np.int64(15)},
+  parent_score: 0.54296875,
+  score: 0.64453125), Prompt(
+  prompt: # Task
+Assess if the Statement is false (Yes) or true (No) by closely analyzing the Job title, State, Party affiliation, Context, and all other pertinent information given. Evaluate the logical coherence and likelihood of the Statement based on these elements. Make sure each piece of information either supports or refutes the Statement as you work towards your conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(7), np.int64(10), 11, 12, 13, 14, np.int64(15)},
+  parent_score: 0.54296875,
+  score: 0.63671875), Prompt(
+  prompt: # Task
+Decide if the Statement is false (Yes) or true (No) by carefully analyzing the Job title, State, Political party, Context, and all other pertinent information given. Assess the logical coherence and likelihood of the Statement based on these elements. Make sure each detail either backs up or challenges the Statement before reaching your conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(7), np.int64(10), 11, 12, 13, 14, np.int64(15)},
+  parent_score: 0.54296875,
+  score: 0.63671875), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) by thoroughly examining the Job title, State, Party, Context, and any other relevant information provided. Consider the logical consistency and plausibility of the Statement in relation to these details. Ensure that each aspect supports or contradicts the Statement before making your final decision.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(7), np.int64(10), 11, 12, 13, 14, np.int64(15)},
+  parent_score: 0.54296875,
+  score: 0.62109375))
+Training accuracy: (0.64453125, 0.63671875, 0.63671875, 0.62109375)
+Validation accuracy: [0.6449864498644986, 0.6422764227642277, 0.6531165311653117, 0.6476964769647696]
+Test accuracy: [0.631236442516269, 0.6290672451193059, 0.648590021691974, 0.648590021691974]
+======== ROUND 2
+Time: 357.3789505958557
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate whether the Statement is likely to be false (select Yes) or true (select No) by closely examining the Job title, State, Political party, and Context provided. Consider how these factors align with the content and tone of the Statement. For instance, statements made by certain political parties or individuals in particular roles may adhere to specific narratives or behaviors typical of their positions. Use your understanding of common practices and rhetoric associated with different jobs, states, and political affiliations to assess the plausibility of the Statement. Ensure each detail supports or contradicts the Statement before making your final determination.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(36), np.int64(4), np.int64(43), 47, np.int64(48), 49, 50, np.int64(51)},
+  parent_score: 0.63671875,
+  score: 0.6953125), Prompt(
+  prompt: # Task
+Assess if the Statement is false (Yes) or true (No) by meticulously examining the Job title, State, Party, Context, and all other pertinent details given. Take into account the logical coherence and likelihood of the Statement within the framework of general knowledge and historical records. Compare the Statement against established facts, statistical data, and previous occurrences associated with the Job title, State, Party, and Context. Additionally, scrutinize the Statement for any internal contradictions or deviations from the provided information. Verify that every detail either bolsters or refutes the Statement before arriving at your conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(26), np.int64(3), np.int64(15), np.int64(49), np.int64(18), 56, 57, 58, 59, 60},
+  parent_score: 0.62109375,
+  score: 0.6796875), Prompt(
+  prompt: # Task
+Assess if the Statement is false (Yes) or true (No) by meticulously examining the Job title, State, Political Party, and Context given. Take into account the logical coherence and likelihood of the Statement based on general knowledge and historical records. Compare the Statement against factual data, statistical evidence, and previous occurrences linked to the Job title, State, Political Party, and Context. Also, scrutinize the Statement for any internal conflicts or discrepancies with the presented details. Validate each element as either supporting or refuting the Statement prior to concluding your evaluation.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(26), np.int64(3), np.int64(15), np.int64(49), np.int64(18), 56, 57, 58, 59, 60},
+  parent_score: 0.62109375,
+  score: 0.671875), Prompt(
+  prompt: # Task
+Assess if the Statement is false (Yes) or true (No) by closely examining the Job title, State, Political Party, Context, and all other pertinent details given. Take into account the logical coherence and likelihood of the Statement based on general knowledge and historical records. Compare the Statement against established facts, statistical data, and previous occurrences linked to the Job title, State, Political Party, and Context. Also, scrutinize the Statement for any internal discrepancies that conflict with the supplied information. Verify that every element either backs up or refutes the Statement prior to reaching your conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(26), np.int64(3), np.int64(15), np.int64(49), np.int64(18), 56, 57, 58, 59, 60},
+  parent_score: 0.62109375,
+  score: 0.671875))
+Training accuracy: (0.6953125, 0.6796875, 0.671875, 0.671875)
+Validation accuracy: [0.6531165311653117, 0.6341463414634146, 0.6395663956639567, 0.6341463414634146]
+Test accuracy: [0.6420824295010846, 0.6290672451193059, 0.6334056399132321, 0.6334056399132321]
+======== ROUND 3
+Time: 361.1232497692108
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate if the Statement is incorrect (Yes) or correct (No) by carefully examining it against the Job title, State, Party affiliation, and Context, as well as all other relevant information provided. Concentrate on validating the statement using specific historical records, well-established facts, and statistical data pertinent to the individual's term in office and activities. Compare the statement with credible sources and databases that pertain to the given details. Scrutinize the statement for any internal conflicts or inconsistencies. Make sure each piece of information either corroborates or refutes the statement based on factual evidence before reaching a conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(74), np.int64(75), np.int64(83), 84, 85, 86, 87, 88, np.int64(24), np.int64(58)},
+  parent_score: 0.6796875,
+  score: 0.6979166666666666), Prompt(
+  prompt: # Task
+Evaluate if the Statement is incorrect (Yes) or accurate (No) by carefully analyzing it in relation to the Job title, State, Party, and Context, as well as every other relevant piece of information provided. Concentrate on validating the statement using specific historical documentation, recognized facts, and statistical evidence pertinent to the individual's term and deeds in office. Compare the statement with trustworthy sources and databases pertinent to the given details. Scrutinize the statement for any self-contradictions or logical flaws. Make sure that every fact either affirms or denies the statement based on verifiable evidence before reaching a conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(74), np.int64(75), np.int64(83), 84, 85, 86, 87, 88, np.int64(24), np.int64(58)},
+  parent_score: 0.6796875,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Evaluate if the Statement is incorrect (Yes) or accurate (No) through a thorough examination against the Job title, State, Party affiliation, and Context, as well as any additional relevant information provided. Concentrate on validating the statement using specific historical documents, widely accepted truths, and statistical evidence pertinent to the individual's term in office and activities. Compare the statement with trustworthy references and data bases that relate to the given information. Scrutinize the statement for any inherent contradictions or logical flaws. Make sure every aspect either aligns with or diverges from verifiable information before reaching a conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(74), np.int64(75), np.int64(83), 84, 85, 86, 87, 88, np.int64(24), np.int64(58)},
+  parent_score: 0.6796875,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Evaluate whether the Statement is incorrect (Yes) or accurate (No) by thoroughly analyzing its logical consistency and factual correctness. Confirm that the Statement is consistent with documented historical accounts, statistical figures, and acknowledged occurrences. Ignore trivial elements such as Job title, State, Party, and Context, unless they offer clear substantiation or refutation of the Statement. Investigate the Statement for any self-contradictions, irregularities, and departures from confirmed realities. Validate each component with credible references before formulating your judgment. Focus on comparing the Statement with validated information to verify its truthfulness.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(7), np.int64(77), 84, 85, 86, 87, 88, np.int64(28)},
+  parent_score: 0.6796875,
+  score: 0.6875))
+Training accuracy: (0.6979166666666666, 0.6875, 0.6875, 0.6875)
+Validation accuracy: [0.6368563685636857, 0.6395663956639567, 0.6260162601626016, 0.6504065040650406]
+Test accuracy: [0.648590021691974, 0.6529284164859002, 0.6572668112798264, 0.6572668112798264]
+======== ROUND 4
+Time: 389.37673139572144
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the given Statement is erroneous (Yes) or correct (No) by conducting an in-depth analysis considering the Job title, State, Party affiliation, and Context, along with any additional provided information. Confirm the accuracy of the statement by comparing it against pertinent historical records, established facts, and relevant statistical data from the person's tenure and activities in office. Also, review the statement for any internal discrepancies, illogical assertions, or conflicting claims. Make sure every assertion within the statement is backed by or contradicted through verifiable proof before forming a conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {130, 131, np.int64(4), 133, 134, np.int64(66), 132, np.int64(112), np.int64(88), np.int64(57)},
+  parent_score: 0.6875,
+  score: 0.6979166666666666), Prompt(
+  prompt: # Task
+Assess whether the Statement is incorrect (Yes) or correct (No) by conducting an in-depth analysis based on the Job title, State, Political party, and Context, along with any other pertinent details supplied. Concentrate on verifying the statement utilizing specific historical records, broadly acknowledged facts, and statistical evidence relevant to the person's tenure and actions. Contrast the statement with dependable references and databases associated with the provided information. Examine the statement for any internal inconsistencies or logical errors. Also, confirm that all quantitative assertions are substantiated by cross-checking them with authoritative data sources and statistical documentation. Carefully review numerical data and trends, ensuring they are consistent or inconsistent with verifiable information before formulating a conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(4), 138, 139, 140, np.int64(109), 142, 141, np.int64(58), np.int64(61), np.int64(63)},
+  parent_score: 0.6875,
+  score: 0.6979166666666666), Prompt(
+  prompt: # Task
+Assess whether the given Statement is inaccurate (Yes) or correct (No), by rigorously examining it in the context of the Job position, State affiliation, Political Party membership, and Background. Validate the statement's claims through detailed examination with specific historical records, acknowledged facts, and statistical proof relevant to the person's time in office and actions taken. Compare each assertion in the statement against precise historical information, official documents, and trustworthy data sources associated with the individual’s tenure and accomplishments. Examine the statement for internal inconsistencies or logical errors. Make sure each piece of information either supports or refutes the statement based on substantiated evidence before concluding. Also, critically evaluate the trustworthiness and reliability of the sources utilized for this assessment.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {130, 131, 132, np.int64(133), 134, np.int64(69), np.int64(76), np.int64(109), np.int64(110)},
+  parent_score: 0.6875,
+  score: 0.671875), Prompt(
+  prompt: # Task
+Assess whether the given Statement is inaccurate (Yes) or precise (No) through careful analysis in light of the Job position, State affiliation, Political party, and Context. Your evaluation should be based on cross-referencing the statement with relevant historical documents, established facts, and statistical data pertinent to the person's tenure and activities. Scrutinize the statement for any factual errors, logical discrepancies, or contradictions by consulting credible sources and databases specific to the provided details. Make sure each element of the statement is either supported by or at odds with verifiable evidence before concluding. Give particular consideration to how well the statement matches up with known political actions, employment statistics, legislative histories, and public pronouncements made by the person in question.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(5), np.int64(135), np.int64(8), 138, 139, 140, 141, 142, np.int64(31)},
+  parent_score: 0.6875,
+  score: 0.671875))
+Training accuracy: (0.6979166666666666, 0.6979166666666666, 0.671875, 0.671875)
+Validation accuracy: [0.6368563685636857, 0.6368563685636857, 0.6341463414634146, 0.6449864498644986]
+Test accuracy: [0.6616052060737527, 0.6355748373101953, 0.6117136659436009, 0.6399132321041214]
+======== ROUND 5
+Time: 357.31749296188354
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate if the provided Statement is imprecise (Yes) or accurate (No), using an in-depth examination aligned with the Job role, State connection, Political party membership, and Context. Base your assessment on comparing the statement against historical records, confirmed truths, and statistical information related to the individual’s period in office and their actions. Examine the statement for inaccuracies, logical inconsistencies, or contradictions by referring to reliable references and data banks specific to the given particulars. Ensure each part of the statement is substantiated or contradicted by verifiable proof before reaching a conclusion. Pay special attention to how closely the statement aligns with documented political initiatives, job statistics, legislative backgrounds, and public statements from the individual. Also, take into account commonly understood metaphors and numerical contrasts used in public conversations and economic debates, making sure they are evaluated within their proper context rather than taken literally.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(165), np.int64(72), np.int64(16), np.int64(114), np.int64(86), 185, 186, 187, 188, 189},
+  parent_score: 0.671875,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Assess whether the Statement is incorrect (Yes) or correct (No) by conducting an in-depth analysis based on the Job title, State, Political party, and Context, along with any other pertinent details supplied. Concentrate on verifying the statement utilizing specific historical records, broadly acknowledged facts, and statistical evidence relevant to the person's tenure and actions. Contrast the statement with dependable references and databases associated with the provided information. Examine the statement for any internal inconsistencies or logical errors. Also, confirm that all quantitative assertions are substantiated by cross-checking them with authoritative data sources and statistical documentation. Carefully review numerical data and trends, ensuring they are consistent or inconsistent with verifiable information before formulating a conclusion.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(4), 138, 139, 140, np.int64(109), 142, 141, np.int64(58), np.int64(61), np.int64(63)},
+  parent_score: 0.6875,
+  score: 0.6796875), Prompt(
+  prompt: # Task
+Assess whether the provided Statement is accurate (No) or incorrect (Yes). Begin by checking if the details in the statement match historical evidence, confirmed data, and pertinent metrics related to the official's role and actions. Then, evaluate the feasibility of the statement considering the person's Position, Region, Political party, and Surrounding circumstances. Carefully examine the statement for any internal logical flaws or contradictions and compare significant assertions with supporting outside documentation. Ultimately, make sure all parts of the statement are either backed up or refuted by concrete evidence before deciding on its validity.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), 161, 162, np.int64(67), 164, 165, 163, np.int64(135), np.int64(7), np.int64(45)},
+  parent_score: 0.6979166666666666,
+  score: 0.66875), Prompt(
+  prompt: # Task
+Evaluate if the given Statement is inaccurate (Yes) or accurate (No), through a detailed examination that takes into account the Position held, Geographic location, Political affiliation, and situational Context, along with additional relevant information provided. Your assessment should be grounded in specific historical records, widely accepted facts, and statistically supported data pertinent to the individual’s period in office and their activities. Scrutinize the statement’s credibility and sensibility by considering the broader circumstances and background of the person involved. Confirm that all numerical claims are backed up by verification from reliable data sources and statistical reports. Look for any internal contradictions or logical flaws within the statement, and assess how well the numerical data and trends correlate with factual information. Also, consider how probable the described scenario is and whether it matches typical behaviors and patterns in analogous situations. Conclude your evaluation after thoroughly analyzing these elements.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), np.int64(136), 171, 172, 173, 174, 175, np.int64(145), np.int64(83), np.int64(31)},
+  parent_score: 0.6979166666666666,
+  score: 0.66875))
+Training accuracy: (0.6875, 0.6796875, 0.66875, 0.66875)
+Validation accuracy: [0.6287262872628726, 0.6368563685636857, 0.6476964769647696, 0.6395663956639567]
+Test accuracy: [0.6117136659436009, 0.6355748373101953, 0.6681127982646421, 0.6399132321041214]
+======== ROUND 6
+Time: 378.39612340927124
+Prompt: (Prompt(
+  prompt: # Task
+Assess whether the Statement is accurate (No) or inaccurate (Yes). Begin by cross-referencing the statement's details with verifiable historical records, confirmed statistics, and pertinent indicators. Take into account the official's position and activities. Then, evaluate the logical soundness and practicality of the statement in light of the individual's role, geographical area, political alignment, and the context, such as any specific occurrences or initiatives referenced. Be mindful of any persuasive techniques common in campaign advertisements, rallies, or public addresses that could impact how factual claims are perceived. Make sure each claim can be supported or refuted by solid evidence before reaching a conclusion. Also, reflect on additional background and implications that could influence the statement's truthfulness.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {224, 225, np.int64(45), np.int64(109), np.int64(141), np.int64(56), np.int64(126), 221, 222, 223},
+  parent_score: 0.66875,
+  score: 0.734375), Prompt(
+  prompt: # Task
+Evaluate if the given Statement is inaccurate (Yes) or accurate (No), through a detailed examination that takes into account the Position held, Geographic location, Political affiliation, and situational Context, along with additional relevant information provided. Your assessment should be grounded in specific historical records, widely accepted facts, and statistically supported data pertinent to the individual’s period in office and their activities. Scrutinize the statement’s credibility and sensibility by considering the broader circumstances and background of the person involved. Confirm that all numerical claims are backed up by verification from reliable data sources and statistical reports. Look for any internal contradictions or logical flaws within the statement, and assess how well the numerical data and trends correlate with factual information. Also, consider how probable the described scenario is and whether it matches typical behaviors and patterns in analogous situations. Conclude your evaluation after thoroughly analyzing these elements.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), np.int64(136), 171, 172, 173, 174, 175, np.int64(145), np.int64(83), np.int64(31)},
+  parent_score: 0.6979166666666666,
+  score: 0.7083333333333334), Prompt(
+  prompt: # Task
+To evaluate whether the given Statement is accurate (No) or inaccurate (Yes), adhere to the following guidelines:
+
+1. **Internal Logic Examination**: Start with an analysis of the statement’s internal coherence. Examine if there are any logical fallacies or inconsistencies within the statement itself and between its different parts.
+
+2. **Fact-Checking**: Validate the content of the statement by comparing it with historical records, verified statistics, and relevant indicators concerning the individual’s position and activities. Search for clear proof that either backs up or disputes the claims within the statement.
+
+3. **Context Analysis**: Apply the information about Position, Region, Political affiliation, and Environmental conditions to critically review the statement. Reflect on how these elements could affect the statement’s credibility and truthfulness.
+
+4. **Conclusive Verification**: Confirm that all aspects of the statement have been substantiated with strong evidence or challenged with reliable counter-evidence. After a meticulous investigation, provide your final judgment on the statement’s overall veracity.
+
+Following these steps will enable a thorough and precise evaluation of the statement’s accuracy.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {224, 225, np.int64(196), np.int64(68), np.int64(45), np.int64(175), np.int64(54), 221, 222, 223},
+  parent_score: 0.66875,
+  score: 0.703125), Prompt(
+  prompt: # Task
+Assess whether the Statement is accurate (No) or inaccurate (Yes). Begin by cross-referencing the specifics of the statement with credible historical records, verified statistics, and pertinent measurements, taking into account the official's function and deeds. Then, evaluate the statement's logical coherence and practicality in light of the individual's Position, Geographic Area, Political alignment, and Surrounding circumstances, along with any referenced specific occurrences or initiatives. Be mindful of any persuasive techniques characteristic of political advertisements, gatherings, or addresses, as these might impact how factual assertions are interpreted. Confirm that each claim can be supported or refuted by tangible proof before reaching your conclusion. Also, take into consideration the wider context and supplementary facts that could influence the statement's truthfulness.
+
+# Exemplar
+Text: "Statement: We have over 300 state agencies. Forty-five of those agencies are related to health care.
+Job title: U.S. Senator
+State: Texas
+Party: republican
+Context: a debate."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The No. 1 cause of death for African-American males 15-34 is murder.
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday"
+Label: No
+
+Text: "Statement: The city's public schools have seen a significant decrease in student enrollment over the past five years, despite what the mayor claims.
+Job title: City Council Member
+State: Massachusetts
+Party: democrat
+Context: a press conference"
+Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obamas policies, were looking at over 9 percent unemployment next year in the fourth quarter.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: The average temperature in Alaska has decreased by 2 degrees Celsius since the last decade.
+Job title: State Climatologist
+State: Alaska
+Party: none
+Context: a press conference."
+Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {224, 225, np.int64(45), np.int64(109), np.int64(141), np.int64(56), np.int64(126), 221, 222, 223},
+  parent_score: 0.66875,
+  score: 0.703125))
+Training accuracy: (0.734375, 0.7083333333333334, 0.703125, 0.703125)
+Validation accuracy: [0.6639566395663956, 0.6395663956639567, 0.6368563685636857, 0.6612466124661247]
+Test accuracy: [0.6789587852494577, 0.6399132321041214, 0.6594360086767896, 0.6854663774403471]

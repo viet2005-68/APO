@@ -46,11 +46,10 @@ python main.py \
   --data_dir data/ethos \
   --beam_size 4 \
   --steps_per_gradient 1 \
-  --errors_per_gradient 8 \
-  --gradients_per_error 5 \
   --minibatch_size 64 \
-  --out experiments/ethos.out
-  --evaluator ucb
+  --out experiments/ethos.out \
+  --evaluator ucb \
+  --reject_on_error
 
 # Ar Sacarsm
 python main.py \
