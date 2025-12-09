@@ -1,0 +1,1135 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-9-12-softlabel-fewshot.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 11.049502611160278
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.54296875),)
+Training accuracy: (0.54296875,)
+Validation accuracy: [0.5582655826558266]
+Test accuracy: [0.561822125813449]
+======== ROUND 1
+Time: 232.27555131912231
+Prompt: (Prompt(
+  prompt: # Task
+Use the given Context along with any additional verifiable details to ascertain whether the Statement is false (Yes) or true (No). Your analysis should be confined to factual evidence present within the Context, disregarding personal opinions or unverified assumptions. Refrain from making broad assumptions or drawing conclusions that aren't directly supported by the Context provided.
+
+# Exemplar
+Text: "Statement: The No. 1 cause of death for African-American males aged 15-34 is murder." Job title: Pundit, Fox News State: Party: none Context: comments on Fox News Sunday Label: No
+
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: Twenty percent of single adults, ages 21 to 25 with no kids, are not working or even in school trying to find a job.
+Job title: U.S. Representative
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(4), np.int64(9), np.int64(11), np.int64(13), np.int64(14), 15, 16, 17},
+  parent_score: 0.54296875,
+  score: 0.71875), Prompt(
+  prompt: # Task
+Instruction Variation:
+
+Decide if the Statement is a falsehood (Yes) or a truth (No), considering only the factual content of the Statement itself. Disregard any additional details such as Job title, State, Party affiliation, or extra Context provided. Your analysis should be based purely on the verifiability of the Statement's content against known facts and evidence.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(6), np.int64(7), np.int64(9), np.int64(10), 13, 14, 15, 16, 17},
+  parent_score: 0.54296875,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the job title, political affiliation, and context provided. Consider the typical rhetoric and behaviors associated with the individual's role and party affiliation. Use the Context to understand the scenario in which the Statement was made. Evaluate if the Statement aligns with known facts, typical claims, or common exaggerations from someone in that position. If the Statement significantly diverges from expected norms or known facts, classify it as a lie.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women." Job title: Candidate for U.S. Senate and physician State: Kentucky Party: republican Context: an interview with CNN Label: Yes
+
+Text: "Statement: We are number one in the world when it comes to energy resources. ... The Russians are second; Saudi Arabia is number three.
+Job title: consultant
+State: Virginia
+Party: republican
+Context: a press conference."
+Label: No
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(9), np.int64(12), 13, 14, np.int64(15), 16, 17},
+  parent_score: 0.54296875,
+  score: 0.671875), Prompt(
+  prompt: # Task
+Determine if the given Statement constitutes a falsehood (Yes) or the truth (No), taking into account the professional role, political leaning, and situational background detailed. Assess the claim against the usual speech patterns and conduct typical for the person's job and political party. Utilize the Context to gain insight into the circumstances under which the Statement was uttered. Judge whether the Statement is consistent with established truths, standard assertions, or typical overstatements from an individual with such attributes. Should the Statement markedly deviate from anticipated standards or verifiable information, categorize it as a falsehood.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women." Job title: Candidate for U.S. Senate and physician State: Kentucky Party: republican Context: an interview with CNN Label: Yes
+
+Text: "Statement: We are number one in the world when it comes to energy resources. ... The Russians are second; Saudi Arabia is number three.
+Job title: consultant
+State: Virginia
+Party: republican
+Context: a press conference."
+Label: No
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(9), np.int64(12), 13, 14, np.int64(15), 16, 17},
+  parent_score: 0.54296875,
+  score: 0.671875))
+Training accuracy: (0.71875, 0.6875, 0.671875, 0.671875)
+Validation accuracy: [0.6476964769647696, 0.6476964769647696, 0.6178861788617886, 0.6260162601626016]
+Test accuracy: [0.6203904555314533, 0.665943600867679, 0.6334056399132321, 0.6550976138828634]
+======== ROUND 2
+Time: 753.1801517009735
+Prompt: (Prompt(
+  prompt: # Task
+Use the given Context along with any additional verifiable details to ascertain whether the Statement is false (Yes) or true (No). Your analysis should be confined to factual evidence present within the Context, disregarding personal opinions or unverified assumptions. Refrain from making broad assumptions or drawing conclusions that aren't directly supported by the Context provided. When evaluating statements involving statistics or demographic information, ensure that the numbers align with reliable sources mentioned in the Context. If no such sources are available, assume the statement cannot be verified and treat it as false unless explicitly supported by the Context.
+
+# Exemplar
+Text: "Statement: The No. 1 cause of death for African-American males aged 15-34 is murder." Job title: Pundit, Fox News State: Party: none Context: comments on Fox News Sunday Label: No
+
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: Twenty percent of single adults, ages 21 to 25 with no kids, are not working or even in school trying to find a job.
+Job title: U.S. Representative
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, 33, np.int64(34), np.int64(3), np.int64(13), np.int64(15), np.int64(16), 30, 31},
+  parent_score: 0.71875,
+  score: 0.71875), Prompt(
+  prompt: # Task
+Rephrased Instruction:
+
+Assess whether the Statement presented is false (Yes) or true (No), considering the professional role, political orientation, and situational environment provided. Analyze the claim based on the typical behavior and speech patterns associated with the individual’s profession and political affiliation. Use the Context to understand the conditions under which the Statement was made. Decide if the Statement is in line with factual information, commonly held beliefs, or typical exaggerations for someone with those characteristics.
+
+For statements involving politics, take into account the relevant legal framework and economic theories pertinent to the position and context given. Examine if the statement is consistent with established facts and rules, especially in cases related to legislation, policy, or financial matters. If the Statement significantly diverges from expected norms or contradicts verifiable evidence, label it as a falsehood.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women." Job title: Candidate for U.S. Senate and physician State: Kentucky Party: republican Context: an interview with CNN Label: Yes
+
+Text: "Statement: We are number one in the world when it comes to energy resources. ... The Russians are second; Saudi Arabia is number three.
+Job title: consultant
+State: Virginia
+Party: republican
+Context: a press conference."
+Label: No
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(36), np.int64(5), np.int64(7), np.int64(14), np.int64(23), 53, 54, 55, 56, 57},
+  parent_score: 0.671875,
+  score: 0.71875), Prompt(
+  prompt: # Task
+Evaluate whether the provided Statement is false (Yes) or true (No). Take into account the professional function, political stance, and contextual background given. Assess the claim in light of the usual speech habits and behavior typical for someone in their position and with their political leanings. Use the Context to grasp the conditions under which the Statement was made. Decide if the Statement matches up with known truths, regular claims, or typical exaggerations made by people with similar attributes. Additionally, verify that any political or financial statements align with recognized policies and financial practices relevant to the individual’s role and political environment. Categorize the Statement as a falsehood if it substantially deviates from expected norms or proven facts.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women." Job title: Candidate for U.S. Senate and physician State: Kentucky Party: republican Context: an interview with CNN Label: Yes
+
+Text: "Statement: We are number one in the world when it comes to energy resources. ... The Russians are second; Saudi Arabia is number three.
+Job title: consultant
+State: Virginia
+Party: republican
+Context: a press conference."
+Label: No
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), np.int64(42), np.int64(21), 53, 55, 56, np.int64(54), np.int64(29), 57},
+  parent_score: 0.671875,
+  score: 0.71875), Prompt(
+  prompt: # Task
+Decide if the Statement is a falsehood (Yes) or a truth (No), considering only the factual content of the Statement itself. Disregard any additional details such as Job title, State, Party affiliation, or extra Context provided. Your analysis should be based purely on the verifiability of the Statement's content against known facts and evidence. When evaluating statements about financial savings or benefits, ensure that the underlying policy or action is corroborated by reliable sources.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(36), 38, 39, 40, 41, 42, np.int64(13), np.int64(19), np.int64(23)},
+  parent_score: 0.6875,
+  score: 0.6875))
+Training accuracy: (0.71875, 0.71875, 0.71875, 0.6875)
+Validation accuracy: [0.5962059620596206, 0.6341463414634146, 0.6341463414634146, 0.6395663956639567]
+Test accuracy: [0.5856832971800434, 0.6507592190889371, 0.6637744034707158, 0.6789587852494577]
+======== ROUND 3
+Time: 839.8984959125519
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the given Statement is false (Yes) or true (No), focusing solely on its factual content. Ignore supplementary information like job roles, location, political affiliations, or additional context. Assess the statement based on how well its contents align with established facts and evidence. When examining claims related to financial savings or advantages, make sure they are supported by credible references. For assertions involving general trends or statistical data, verify them against official reports and expert analyses from governmental bodies and respected international entities.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), 97, 98, 96, np.int64(71), np.int64(42), np.int64(83), np.int64(21), 94, 95},
+  parent_score: 0.6875,
+  score: 0.8125), Prompt(
+  prompt: # Task
+Decide if the Statement is a falsehood (Yes) or a truth (No), considering only the factual content of the Statement itself. Disregard any additional details such as Job title, State, Party affiliation, or extra Context provided. Your analysis should be based purely on the verifiability of the Statement's content against known facts and evidence. When evaluating statements about financial savings, benefits, or economic projections, ensure that the underlying policy, action, or estimate is corroborated by reliable sources and comprehensive economic models or empirical research demonstrating the stated outcomes.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(96), 97, 98, np.int64(70), np.int64(46), np.int64(51), 94, np.int64(95)},
+  parent_score: 0.6875,
+  score: 0.78125), Prompt(
+  prompt: # Task
+Decide whether the given Statement is false (Yes) or true (No), focusing solely on its factual content. Ignore any supplementary information like job roles, geographical locations, political affiliations, or additional context. Your evaluation should strictly adhere to the verifiability of the Statement’s claims against existing facts and evidence. In cases where the statement involves financial savings or benefits, confirm that the referenced policy or action is substantiated by credible sources. For any projections about future outcomes, ensure that these predictions are backed by current data, professional analyses, or recognized forecasting methodologies.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, 97, 98, np.int64(73), np.int64(42), np.int64(83), np.int64(52), np.int64(61), 94, 95},
+  parent_score: 0.6875,
+  score: 0.78125), Prompt(
+  prompt: # Task
+Determine whether the given Statement is false (Yes) or true (No), focusing solely on the factual accuracy of the Statement. Ignore extraneous information like Job title, State, Political party, or additional Context. The assessment must rely exclusively on comparing the Statement's contents to established facts and evidence. For assertions regarding municipal policies or activities, verify the claims against formal city records, policies, and trustworthy references. For statements involving economic savings or advantages, ensure that the referenced policy or activity is supported by dependable sources.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, 97, 98, np.int64(7), np.int64(13), np.int64(84), np.int64(52), 94, np.int64(30), 95},
+  parent_score: 0.6875,
+  score: 0.78125))
+Training accuracy: (0.8125, 0.78125, 0.78125, 0.78125)
+Validation accuracy: [0.6531165311653117, 0.6449864498644986, 0.6449864498644986, 0.6368563685636857]
+Test accuracy: [0.6702819956616052, 0.6789587852494577, 0.6767895878524945, 0.6832971800433839]
+======== ROUND 4
+Time: 731.8966219425201
+Prompt: (Prompt(
+  prompt: # Task
+Determine if the provided Statement is factually correct (No) or incorrect (Yes), considering only the factual claims within it. Disregard any extraneous details such as job positions, geographic settings, political alignments, or further background. Base your judgment on how well the Statement’s assertions align with established facts and evidence. When the statement includes financial savings, advantages, or funding origins, make sure that the cited policy, action, or assertion is supported by reliable resources like official papers, financial statements, or expert opinions recognized in the field. For forecasts about future results, ensure they are grounded in present data, professional evaluations, or accepted prediction techniques. Should the statement assert a certain sum of financial backing or contribution from a specific entity, validate this claim through verifiable financial documentation or reports issued by trustworthy organizations.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(128), 129, np.int64(130), 131, 132, np.int64(107), np.int64(94), np.int64(31)},
+  parent_score: 0.78125,
+  score: 0.78125), Prompt(
+  prompt: # Task
+Determine if the provided Statement is false (mark as Yes) or true (mark as No) by strictly examining its factual accuracy. Exclude any extraneous details such as the speaker's occupation, location, political stance, or other contextual elements from your assessment. The truthfulness of the Statement must be verified against known facts and evidence. If the Statement includes information on financial savings, advantages, or contributions, verify that the mentioned policies or actions are supported by official financial statements, public records, or reliable financial news sources. For any future projections in the Statement, make sure they are grounded in current data, expert analysis, or accepted forecasting practices.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(128), 129, 130, 131, 132, np.int64(105), np.int64(106), np.int64(118), np.int64(91)},
+  parent_score: 0.78125,
+  score: 0.78125), Prompt(
+  prompt: # Task
+Evaluate if the provided Statement is incorrect (Yes) or correct (No), concentrating only on the factual precision of the Statement itself. Disregard any supplementary details such as Occupation, Location, Political Affiliation, or Additional Information. Your evaluation should be based strictly on a comparison between the Statement and confirmed facts and evidence. When the Statement pertains to local government actions or policies, check the claims against official city archives, ordinances, and reputable references. In cases where the Statement includes financial savings or benefits, confirm that the cited policy or action is backed by credible sources. Furthermore, for claims that include past data or calculated statistics, corroborate the information using several reliable resources to ensure its validity. This method will aid in verifying the veracity of claims rooted in historical data or necessitating thorough examination.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(131), 132, 133, 134, 135, np.int64(10), np.int64(17), np.int64(20), np.int64(121)},
+  parent_score: 0.78125,
+  score: 0.75), Prompt(
+  prompt: # Task
+Task Description: Evaluate if the provided Statement is incorrect (respond Yes) or correct (respond No). Concentrate purely on assessing the factual veracity of the Statement itself. Disregard any supplementary details such as Job roles, States, Political affiliations, or other unrelated Context. Your judgment should be based strictly on comparing the Statement’s content with confirmed facts and evidence. In cases where the Statement pertains to local governance actions or initiatives, cross-check the claims with official town documents, regulations, and credible resources. For claims about monetary benefits or efficiencies, confirm that the cited regulation or activity is backed by reliable data. Similarly, when analyzing statements concerning political ideologies such as "reconciliation," judge them according to their congruence with standard political language and recognized interpretations, without insisting on rigid numerical or factual validation.
+
+# Exemplar
+Text: "Statement: Were the worst state in the country at moving people from welfare to work.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: a Republican gubernatorial debate"
+Label: Yes
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: Says he has a fiduciary responsibility to his business, his family and his employees to pay no more tax than legally required." Job title: President-Elect State: New York Party: republican Context: a statement from the campaign Label: Yes
+
+Text: "Statement: Wisconsin employers have repeatedly said in surveys that our anti-business litigation climate is one of the most important factors affecting their expansion decisions.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: comments at a bill signing ceremony"
+Label: Yes
+
+Text: "Statement: As president, Barack Obama has never visited Israel." Job title: Former governor State: Massachusetts Party: republican Context: a campaign ad Label: No
+
+Text: "Statement: I unsealed my records at Marquette University.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: an interview"
+Label: Yes
+
+Text: "Statement: Jeff Greene only moved from California to Florida in the last two years. In fact, he would not legally be allowed to run for any other statewide office because he has not lived here long enough to meet the residency requirement." Job title: State: Florida Party: democrat Context: a campaign website Label: No
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {131, 132, 133, 134, 135, np.int64(77), np.int64(46), np.int64(18), np.int64(115), np.int64(59)},
+  parent_score: 0.78125,
+  score: 0.75))
+Training accuracy: (0.78125, 0.78125, 0.75, 0.75)
+Validation accuracy: [0.6639566395663956, 0.6558265582655827, 0.6314363143631436, 0.6287262872628726]
+Test accuracy: [0.7093275488069414, 0.6898047722342733, 0.6594360086767896, 0.6767895878524945]
