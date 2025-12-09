@@ -291,7 +291,7 @@ class ProTeGi(PromptOptimizer):
                 texts, labels, preds, confs, task, n=self.opt["errors_per_gradient"]
             )
             examplers = self._get_examplers(
-                task_section, error_string, self.opt["gradients_per_error"]
+                task_section, error_string
             )
             examplers_feedbacks += examplers
         return examplers_feedbacks 
@@ -351,7 +351,7 @@ class ProTeGi(PromptOptimizer):
                 for exemplar in examplers:
                     self.exemplar_memory.add_exemplar(exemplar)
                 gradients = self.get_gradients(
-                    prompt, task_section, task, gpt4, texts, labels, preds, confs
+                    prompt.prompt, task_section, task, gpt4, texts, labels, preds, confs
                 )
                 print("gradients: ", gradients)
                 print("len gradients: ", len(gradients))
@@ -381,7 +381,7 @@ class ProTeGi(PromptOptimizer):
             if self.opt["mc_samples_per_step"] > 0:
                 for ind, sect in tqdm(enumerate(new_task_sections), desc="mc samples"):
                     mc_sects = self.generate_synonyms(
-                        sect, n=self.opt["mc_samples_per_step"]
+                        sect.prompt, n=self.opt["mc_samples_per_step"]
                     )
                     for i in mc_sects:
                         mc_sampled_task_sections.append(Prompt(i, set(), sect.examplers_idx_used, sect.parent_score, 0))
@@ -398,42 +398,42 @@ class ProTeGi(PromptOptimizer):
             ]
 
             # filter a little
-            # if len(new_sections) > self.opt["max_expansion_factor"]:
-            #     if self.opt["reject_on_errors"]:
-            #         error_exs = []
-            #         for i, (t, l, p) in enumerate(zip(texts, labels, preds)):
-            #             if l != p:
-            #                 error_exs.append({"text": t, "label": l})
-            #         error_exs = random.sample(error_exs, min(len(error_exs), 16))
+            if len(new_sections) > self.opt["max_expansion_factor"]:
+                if self.opt["reject_on_errors"]:
+                    error_exs = []
+                    for i, (t, l, p) in enumerate(zip(texts, labels, preds)):
+                        if l != p:
+                            error_exs.append({"text": t, "label": l})
+                    error_exs = random.sample(error_exs, min(len(error_exs), 16))
 
-            #         # speed up a little
-            #         tmp_new_prompts = random.sample(
-            #             tmp_new_prompts,
-            #             min(len(tmp_new_prompts), self.opt["max_expansion_factor"] * 2),
-            #         )
+                    # speed up a little
+                    tmp_new_prompts = random.sample(
+                        tmp_new_prompts,
+                        min(len(tmp_new_prompts), self.opt["max_expansion_factor"] * 2),
+                    )
 
-            #         error_scores = self.bf_eval(
-            #             tmp_new_prompts,
-            #             error_exs,
-            #             task,
-            #             gpt4,
-            #             self.scorer,
-            #             max_threads=self.max_threads,
-            #         )
-            #         tmp_new_prompts = [
-            #             tmp_new_prompts[i]
-            #             for i in np.argsort(error_scores)[
-            #                 -self.opt["max_expansion_factor"] :
-            #             ]
-            #         ]
-            #     else:
-            #         sample_k = min(
-            #             len(tmp_new_prompts), self.opt["max_expansion_factor"]
-            #         )
-            #         if sample_k > 0:
-            #             tmp_new_prompts = random.sample(tmp_new_prompts, k=sample_k)
-            #         else:
-            #             tmp_new_prompts = []
+                    error_scores = self.bf_eval(
+                        [prompt.prompt for prompt in tmp_new_prompts],
+                        error_exs,
+                        task,
+                        gpt4,
+                        self.scorer,
+                        max_threads=self.max_threads,
+                    )
+                    tmp_new_prompts = [
+                        tmp_new_prompts[i]
+                        for i in np.argsort(error_scores)[
+                            -self.opt["max_expansion_factor"] :
+                        ]
+                    ]
+                else:
+                    sample_k = min(
+                        len(tmp_new_prompts), self.opt["max_expansion_factor"]
+                    )
+                    if sample_k > 0:
+                        tmp_new_prompts = random.sample(tmp_new_prompts, k=sample_k)
+                    else:
+                        tmp_new_prompts = []
 
             new_prompts += tmp_new_prompts
 

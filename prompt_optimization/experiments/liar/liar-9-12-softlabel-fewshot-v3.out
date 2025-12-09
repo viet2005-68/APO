@@ -1,0 +1,1822 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-9-12.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 16.199912309646606
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.60546875),)
+Training accuracy: (0.60546875,)
+Validation accuracy: [0.5582655826558266]
+Test accuracy: [0.5639913232104121]
+======== ROUND 1
+Time: 153.88119316101074
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate the statement's truthfulness considering the speaker's political background, previous statements, current political climate, and available factual data. Indicate if the statement is misleading or false (Yes), or truthful (No). Ensure to weigh the speaker's track record of accuracy and the relevance of the factual information provided against the claim made.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: 
+State: California
+Party: democrat
+Context: in a comedy sketch"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: If we had been on Obamacare and a bureaucrat was trying to tell me when I could get that CAT scan, that would have delayed my treatment. Job title: State: Georgia Party: republican Context: the Fox News Google debate in Orlando" Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(4), np.int64(6), np.int64(7), np.int64(10), 12, 13, 14, 15, np.int64(16)},
+  parent_score: 0.60546875,
+  score: 0.5989583333333334), Prompt(
+  prompt: # Task
+Assess the veracity of the statement by taking into account the speaker’s political affiliation, their past remarks, the present political atmosphere, and any relevant evidence. Determine whether the statement is deceptive or inaccurate (Yes) or accurate (No). Make sure to consider the speaker’s historical reliability and how pertinent the factual details are in relation to the assertion being evaluated.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: 
+State: California
+Party: democrat
+Context: in a comedy sketch"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: If we had been on Obamacare and a bureaucrat was trying to tell me when I could get that CAT scan, that would have delayed my treatment. Job title: State: Georgia Party: republican Context: the Fox News Google debate in Orlando" Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(4), np.int64(6), np.int64(7), np.int64(10), 12, 13, 14, 15, np.int64(16)},
+  parent_score: 0.60546875,
+  score: 0.5859375), Prompt(
+  prompt: # Task
+Based on the Statement, Context, Party affiliation, and Job title, assess if the Statement is likely made with deceptive intent (Yes for Lie, No for Truth). Consider the usual practices and statements of the individual in their role, the credibility of the source where the statement was made, and any potential biases or interests that may influence the truthfulness of the statement.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(6), np.int64(10), 12, 13, 14, np.int64(15), 16},
+  parent_score: 0.60546875,
+  score: 0.5859375), Prompt(
+  prompt: # Task
+Using the provided Statement, Context, Party affiliation, and Job title, determine whether the Statement is probably misleading (Mark Yes for a Lie, and No for a Truthful Statement). Take into account typical behaviors and declarations of the individual in their position, the reliability of the platform where the statement was issued, and any possible prejudices or motivations that could affect the statement's veracity.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(6), np.int64(10), 12, 13, 14, np.int64(15), 16},
+  parent_score: 0.60546875,
+  score: 0.58203125))
+Training accuracy: (0.5989583333333334, 0.5859375, 0.5859375, 0.58203125)
+Validation accuracy: [0.6585365853658537, 0.6504065040650406, 0.6504065040650406, 0.6449864498644986]
+Test accuracy: [0.6811279826464208, 0.6637744034707158, 0.6550976138828634, 0.6377440347071583]
+======== ROUND 2
+Time: 370.2985785007477
+Prompt: (Prompt(
+  prompt: # Task
+First, scrutinize the given Statement to assess its factual accuracy and logical coherence. Then, examine the Context, Job title, Political affiliation, and the credibility of the issuing platform to see if they are consistent with the statement's claims. Utilize this comprehensive evaluation to ascertain whether the Statement is likely to be deceptive (Label as Yes if it's a Lie, and No if it's a True Statement). Refrain from assuming bias or intent without concrete evidence presented in the statement.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(7), np.int64(40), np.int64(48), np.int64(53), 59, 60, 61, 62, 63},
+  parent_score: 0.58203125,
+  score: 0.734375), Prompt(
+  prompt: # Task
+First, assess the factual accuracy of the statement using available evidence and data. If the statement can be verified or refuted based on objective facts, indicate whether it is truthful (No) or misleading/false (Yes). If there is ambiguity or insufficient factual information, then consider additional factors including the speaker's political background, previous statements, and the current political climate. Weigh the speaker's track record of accuracy and the relevance of the factual information provided against the claim made to make a final determination.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: 
+State: California
+Party: democrat
+Context: in a comedy sketch"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: If we had been on Obamacare and a bureaucrat was trying to tell me when I could get that CAT scan, that would have delayed my treatment. Job title: State: Georgia Party: republican Context: the Fox News Google debate in Orlando" Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, 33, np.int64(34), np.int64(35), np.int64(11), np.int64(26), np.int64(29), 31},
+  parent_score: 0.5989583333333334,
+  score: 0.7291666666666666), Prompt(
+  prompt: # Task
+First, carefully analyze the provided Statement for its factual basis and logical consistency. Next, consider the Context, Job title, Party affiliation, and reliability of the platform where the statement was issued to determine if these factors align with the statement's content. Use this combined analysis to decide whether the Statement is probably misleading (Mark Yes for a Lie, and No for a Truthful Statement). Avoid making assumptions about prejudice or motivation without clear evidence within the statement itself.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(7), np.int64(40), np.int64(48), np.int64(53), 59, 60, 61, 62, 63},
+  parent_score: 0.58203125,
+  score: 0.7291666666666666), Prompt(
+  prompt: # Task
+First, thoroughly examine the given Statement to assess its factual accuracy and logical structure. Then, evaluate the Context, Job position, Political affiliation, and the credibility of the source platform from which the statement originated, to see if they correlate with the message conveyed in the Statement. Utilize your overall assessment to conclude if the Statement is likely deceptive (indicate Yes for a Falsehood, and No for an Accurate Statement). Refrain from inferring bias or intent without solid proof presented in the statement.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(7), np.int64(40), np.int64(48), np.int64(53), 59, 60, 61, 62, 63},
+  parent_score: 0.58203125,
+  score: 0.71875))
+Training accuracy: (0.734375, 0.7291666666666666, 0.7291666666666666, 0.71875)
+Validation accuracy: [0.6476964769647696, 0.6476964769647696, 0.6476964769647696, 0.6585365853658537]
+Test accuracy: [0.6464208242950108, 0.6724511930585684, 0.6702819956616052, 0.6702819956616052]
+======== ROUND 3
+Time: 339.1214904785156
+Prompt: (Prompt(
+  prompt: # Task
+First, independently assess the Statement's factual accuracy and logical consistency. Next, evaluate how the job position, political affiliation, situational context, and the trustworthiness of the source platform either reinforce or challenge your initial judgment. Refrain from deeming the Statement as misleading based only on external elements. Utilize this integrated evaluation to determine whether the Statement is probably misleading (indicate Yes for False, No for True).
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, np.int64(41), np.int64(10), np.int64(45), np.int64(20), 92, np.int64(93), 94, 95},
+  parent_score: 0.7291666666666666,
+  score: 0.7109375), Prompt(
+  prompt: # Task
+First, conduct an independent assessment of the factual accuracy and logical consistency of the Statement, setting aside all external elements at the beginning. Then, take into account the Context, Job title, Political affiliation, and credibility of the Statement’s source to see how they align with or challenge the statement's claims. Make sure to give equal weight to both parts of the examination. Utilize this integrated evaluation to determine if the Statement can be considered misleading (tick 'Yes' for a False statement, 'No' for a True one). Refrain from assuming bias or intent without concrete evidence from within the statement.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, np.int64(1), np.int64(68), np.int64(11), np.int64(76), np.int64(78), 92, 93, 94, 95},
+  parent_score: 0.7291666666666666,
+  score: 0.6875), Prompt(
+  prompt: # Task
+First, conduct an independent evaluation focusing solely on the factual accuracy and logical consistency of the Statement. At this stage, ignore any external elements. Then, assess how the Context, Job title, Party affiliation, and the credibility of the issuing platform influence the statement's validity, noting whether they align with or challenge its claims. Balance both evaluations evenly as you analyze. Utilize this comprehensive review to judge if the Statement is potentially deceptive (indicate 'Yes' for a False statement, 'No' for a True one). Refrain from assuming bias or intent without direct evidence from the statement.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, np.int64(1), np.int64(68), np.int64(11), np.int64(76), np.int64(78), 92, 93, 94, 95},
+  parent_score: 0.7291666666666666,
+  score: 0.6770833333333334), Prompt(
+  prompt: # Task
+First, conduct an independent assessment of the factual accuracy and logical consistency of the Statement, setting aside any external elements at the outset. Then, analyze the Context, the individual's Job title, their Party affiliation, and the credibility of the platform through which the statement was disseminated to see how these elements align with or challenge the statement’s claims. Make sure to give equal weight to both the initial evaluation and the contextual analysis in your overall judgment. Utilize this comprehensive review to conclude whether the Statement is potentially misleading (Indicate 'Yes' if it's a Lie, 'No' if it's a True Statement). Refrain from inferring bias or intent without concrete evidence from within the statement itself.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, np.int64(1), np.int64(68), np.int64(11), np.int64(76), np.int64(78), 92, 93, 94, 95},
+  parent_score: 0.7291666666666666,
+  score: 0.6666666666666666))
+Training accuracy: (0.7109375, 0.6875, 0.6770833333333334, 0.6666666666666666)
+Validation accuracy: [0.6531165311653117, 0.6476964769647696, 0.6341463414634146, 0.6287262872628726]
+Test accuracy: [0.665943600867679, 0.6681127982646421, 0.6507592190889371, 0.6550976138828634]
+======== ROUND 4
+Time: 372.9992959499359
+Prompt: (Prompt(
+  prompt: # Task
+First, independently assess the factual accuracy and logical coherence of the Statement without presupposing the reliability of its source. After forming an independent opinion, analyze how the Context, Job title, Political affiliation, and source credibility of the Statement either reinforce or contradict your initial analysis. Use this combined evaluation to decide if the Statement is misleading (mark 'Yes' if False, 'No' if True). Avoid attributing bias or motive to the source without supporting details from the Statement itself.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {128, 129, np.int64(130), np.int64(3), 131, np.int64(37), np.int64(42), np.int64(45), 127},
+  parent_score: 0.6875,
+  score: 0.7265625), Prompt(
+  prompt: # Task
+First, independently examine the factual accuracy and logical coherence of the Statement without relying on external information. Should you find the Statement's accuracy or logical consistency questionable, move to the subsequent step. Reflect on how the role, political alignment, circumstances, and reliability of the source channel could impact the interpretation of the Statement. Nevertheless, these elements should not be the sole criteria for determining if the Statement is deceptive; they should serve to support or contest the primary judgment derived from the Statement itself. Employ this integrated analysis to conclude whether the Statement is likely deceptive. Respond with "Yes" if the Statement appears likely deceptive, and "No" if it seems likely truthful.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(37), np.int64(8), np.int64(115), 116, 117, 118, 119, np.int64(28)},
+  parent_score: 0.7109375,
+  score: 0.6875), Prompt(
+  prompt: # Task
+First, perform an individual assessment that strictly examines the factual correctness and logical coherence of the Statement. During this phase, disregard all external factors. Next, evaluate how the Context, Position, Political Affiliation, and the reliability of the publishing platform impact the statement’s credibility. Take into account the context and the source’s reliability as key elements, assigning them substantial importance in your ultimate determination of the statement’s credibility. These aspects should directly influence your consideration of whether the statement might be misleading. Maintain an even balance between these two assessments throughout your analysis. Use this thorough examination to decide if the Statement could be misleading ('Yes' if False, 'No' if True). Avoid attributing bias or motive without concrete evidence from the statement itself.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {133, 134, 135, 136, 137, np.int64(102), np.int64(18), np.int64(52), np.int64(118), np.int64(55)},
+  parent_score: 0.6770833333333334,
+  score: 0.6875), Prompt(
+  prompt: # Task
+First, perform a self-contained analysis of the factual correctness and logical coherence of the Statement, concentrating exclusively on its intrinsic content and ignoring any outside factors. After completing this preliminary examination, scrutinize the Context, the speaker's Position, their Political Affiliation, and the reliability of the medium used to share the statement to evaluate how these aspects could affect the interpretation of the statement. Nonetheless, make sure that the original analysis of the statement forms the main foundation of your conclusion. Utilize this comprehensive appraisal to determine if the Statement has the potential to mislead (mark 'Yes' if it’s Deceptive, 'No' if it’s Accurate). Refrain from attributing bias or motive without tangible evidence directly from the statement.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(37), 141, 142, 143, np.int64(45), 145, 144, np.int64(116), np.int64(26)},
+  parent_score: 0.6666666666666666,
+  score: 0.6875))
+Training accuracy: (0.7265625, 0.6875, 0.6875, 0.6875)
+Validation accuracy: [0.6531165311653117, 0.6449864498644986, 0.6531165311653117, 0.6395663956639567]
+Test accuracy: [0.665943600867679, 0.6377440347071583, 0.6637744034707158, 0.6572668112798264]
+======== ROUND 5
+Time: 342.06301736831665
+Prompt: (Prompt(
+  prompt: # Task
+First, evaluate the factual accuracy and logical consistency of the Statement solely based on its content, without initially considering the reliability of its source. Once you have formed this preliminary assessment, incorporate other elements such as the Context, Job title, Political affiliation, and the credibility of the source to either reinforce or contest your initial analysis, but do not let these factors overturn your first evaluation. Utilize this integrated assessment to determine if the Statement is misleading (respond with 'Yes' if it's False, 'No' if it's True). Refrain from assuming bias or intent in the source unless there are specific details within the Statement that justify such assumptions. Ensure that the ultimate decision is anchored mainly in the factual and logical soundness of the Statement rather than being influenced predominantly by contextual biases.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {160, 159, np.int64(150), np.int64(62), np.int64(89), np.int64(123), 156, 157, 158, np.int64(31)},
+  parent_score: 0.7265625,
+  score: 0.64375), Prompt(
+  prompt: # Task
+First, critically assess the factual accuracy and logical coherence of the Statement independently of any external information or context. If the Statement lacks factual accuracy or logical consistency, proceed to the next step. Subsequently, reflect on how the role, political alignment, circumstances, and reliability of the source channel might influence the interpretation of the Statement. However, these factors should only reinforce or challenge your initial assessment of the Statement's factual and logical integrity, not override it. Use this combined analysis to conclude whether the Statement is likely deceptive. Respond with "Yes" if the Statement appears likely deceptive, and "No" if it seems likely truthful.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {166, 167, 168, 169, 170, np.int64(17), np.int64(148), np.int64(22), np.int64(59), np.int64(157)},
+  parent_score: 0.6875,
+  score: 0.640625), Prompt(
+  prompt: # Task
+First, independently evaluate the factual correctness and logical flow of the Statement without considering any external information or context. If the Statement shows deficiencies in factual accuracy or logical consistency, move on to the next step. Then, consider how the position, political stance, situation, and trustworthiness of the source might affect the interpretation of the Statement. These elements should serve to confirm or question your preliminary judgment about the Statement's factual and logical soundness but should not supersede it. Utilize this integrated assessment to determine if the Statement is probably misleading. Answer with "Yes" if the Statement seems likely misleading, and "No" if it appears likely to be accurate.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {166, 167, 168, 169, 170, np.int64(17), np.int64(148), np.int64(22), np.int64(59), np.int64(157)},
+  parent_score: 0.6875,
+  score: 0.63125), Prompt(
+  prompt: # Task
+First, conduct an independent evaluation of the Statement's factual accuracy and logical consistency, relying solely on the information provided. At this stage, refrain from making any assumptions about the reliability of the source. Once you have formed your initial assessment, take into account supplementary elements like the Context, Job title, Political affiliation, and credibility of the source. These should serve to either reinforce or question your initial judgment, without overturning it entirely. Utilize this comprehensive analysis to determine whether the Statement is misleading ('Yes' for False, 'No' for True). Avoid inferring bias or intention from the source unless there is evidence within the Statement. Ensure that the ultimate decision is anchored more in the factual and logical soundness of the Statement than in any contextual prejudices.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {160, 159, np.int64(150), np.int64(62), np.int64(89), np.int64(123), 156, 157, 158, np.int64(31)},
+  parent_score: 0.7265625,
+  score: 0.625))
+Training accuracy: (0.64375, 0.640625, 0.63125, 0.625)
+Validation accuracy: [0.6341463414634146, 0.6395663956639567, 0.6476964769647696, 0.6476964769647696]
+Test accuracy: [0.6507592190889371, 0.648590021691974, 0.6334056399132321, 0.6399132321041214]
+======== ROUND 6
+Time: 316.88202452659607
+Prompt: (Prompt(
+  prompt: # Task
+First, critically assess the factual accuracy and logical coherence of the Statement independently of any external information or context. If the Statement lacks factual accuracy or logical consistency, proceed to the next step. Subsequently, reflect on how the role, political alignment, circumstances, and reliability of the source channel might influence the interpretation of the Statement. However, these factors should only reinforce or challenge your initial assessment of the Statement's factual and logical integrity, not override it. Use this combined analysis to conclude whether the Statement is likely deceptive. Respond with "Yes" if the Statement appears likely deceptive, and "No" if it seems likely truthful.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {166, 167, 168, 169, 170, np.int64(17), np.int64(148), np.int64(22), np.int64(59), np.int64(157)},
+  parent_score: 0.6875,
+  score: 0.65), Prompt(
+  prompt: # Task
+First, assess the factual accuracy and logical coherence of the Statement solely based on its own content without considering any external factors or the reliability of the source. Once you have formed an initial evaluation, incorporate supporting details like the Context, Job title, Political leaning, and the credibility of the source. These additional pieces of information should help refine but not entirely change your initial judgment. Conclude whether the Statement is misleading ('Yes' for False, 'No' for True) by weighing both the intrinsic qualities of the Statement and the supplementary information. Refrain from inferring biases or intentions from the source unless the Statement explicitly suggests them. Your final determination should emphasize the inherent truthfulness and logic of the Statement while also considering pertinent contextual data.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {224, 225, 226, np.int64(128), 227, np.int64(140), np.int64(45), np.int64(22), np.int64(90), 223},
+  parent_score: 0.625,
+  score: 0.640625), Prompt(
+  prompt: # Task
+First, evaluate the factual accuracy and logical consistency of the Statement solely based on its content, without initially considering the reliability of its source. Once you have formed this preliminary assessment, incorporate other elements such as the Context, Job title, Political affiliation, and the credibility of the source to either reinforce or contest your initial analysis, but do not let these factors overturn your first evaluation. Utilize this integrated assessment to determine if the Statement is misleading (respond with 'Yes' if it's False, 'No' if it's True). Refrain from assuming bias or intent in the source unless there are specific details within the Statement that justify such assumptions. Ensure that the ultimate decision is anchored mainly in the factual and logical soundness of the Statement rather than being influenced predominantly by contextual biases.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {160, 159, np.int64(150), np.int64(62), np.int64(89), np.int64(123), 156, 157, 158, np.int64(31)},
+  parent_score: 0.7265625,
+  score: 0.640625), Prompt(
+  prompt: # Task
+First, conduct an independent evaluation focusing on the factual accuracy and logical consistency of the Statement. Then, reflect on the source channel’s position, political stance, situational factors, condition, and trustworthiness, as they offer essential context that might support or contest your preliminary evaluation. Analyze how well the Statement aligns with behaviors or viewpoints commonly linked to the source channel’s position and political orientation. Utilize this integrated assessment to decide if the Statement is probably misleading. Reply with "Yes" if you conclude the Statement is likely misleading, and "No" if you believe it is likely accurate.
+
+# Exemplar
+Text: "Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency. Job title: Governor State: Texas Party: republican Context: a debate" Label: Yes
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases.
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference."
+Label: Yes
+
+Text: "Statement: Our veterans, in many cases, are being treated worse than illegal immigrants.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech in Philadelphia"
+Label: Yes
+
+Text: "Statement: The new tax bill will significantly help the middle class by reducing their tax burden.
+Job title: Senior Tax Analyst
+State: California
+Party: none
+Context: a financial news article."
+Label: No
+
+Text: "Statement: The unemployment rate has never been lower under this administration.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a state of the state address"
+Label: Yes
+
+Text: "Statement: Over half of the young people in medical, dental and law schools are women.
+Job title: Candidate for U.S. Senate and physician
+State: Kentucky
+Party: republican
+Context: an interview with CNN"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: It was allowed, referring to her email practices.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on ABC"
+Label: Yes
+
+Text: "Statement: Weve got more revenue than we ever have.
+Job title: President, Heritage Foundation
+State: South Carolina
+Party: republican
+Context: an interview on CNN's "State of the Union with Candy Crowley""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(193), np.int64(2), 203, 204, 205, 206, 207, np.int64(53), np.int64(150), np.int64(125)},
+  parent_score: 0.640625,
+  score: 0.625))
+Training accuracy: (0.65, 0.640625, 0.640625, 0.625)
+Validation accuracy: [0.6368563685636857, 0.6449864498644986, 0.6341463414634146, 0.6639566395663956]
+Test accuracy: [0.648590021691974, 0.6616052060737527, 0.648590021691974, 0.665943600867679]
