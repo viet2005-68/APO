@@ -37,7 +37,7 @@ python main.py \
   --errors_per_gradient 8 \
   --gradients_per_error 5 \
   --minibatch_size 256 \
-  --out experiments/liar.out
+  --out experiments/liar-9-12.out \
   --evaluator ucb
 
 # Ethos Task
@@ -68,7 +68,7 @@ python main.py \
 
 # Clickbait
 python main.py \
-  --task ethos \
+  --task clickbait \
   --prompts prompts/clickbait.md \
   --data_dir data/clickbait \
   --beam_size 4 \
@@ -76,5 +76,5 @@ python main.py \
   --errors_per_gradient 8 \
   --gradients_per_error 5 \
   --minibatch_size 64 \
-  --out experiments/clickbait.out
+  --out experiments/clickbait.out \
   --evaluator ucb

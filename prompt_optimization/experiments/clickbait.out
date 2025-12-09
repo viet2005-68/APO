@@ -1,0 +1,23 @@
+{"task": "clickbait", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.7733027935028076
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.85),)
+Training accuracy: (np.float64(0.85),)
+Validation accuracy: [0.84]
+Test accuracy: [0.865]

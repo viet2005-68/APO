@@ -47,7 +47,7 @@ def chatgpt(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "openai/gpt-oss-20b",
+        "model": "Qwen/Qwen2.5-14B-Instruct",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,
@@ -105,7 +105,7 @@ def chatgpt_with_confidence(
     n=1,
     top_p=1,
     stop=None,
-    max_tokens=1024,
+    max_tokens=10240,
     presence_penalty=0,
     frequency_penalty=0,
     logit_bias={},
@@ -114,7 +114,7 @@ def chatgpt_with_confidence(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "model": "Qwen/Qwen2.5-14B-Instruct",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,
@@ -172,6 +172,7 @@ def chatgpt_with_confidence(
             confidences.append(confidence)
         else:
             confidences.append(0.5)
+    print(choice)
     return results, confidences
 
 

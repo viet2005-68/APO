@@ -1,6 +1,6 @@
 {"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 3.695487976074219e-05
+Time: 7.371759653091431
 Prompt: (Prompt(
   prompt: # Task
 Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
@@ -17,5 +17,285 @@ Label:,
   feedbacks_idx_used: set(),
   examplers_idx_used: set(),
   parent_score: 0,
-  score: 0.5),)
-Training accuracy: (1.0,)
+  score: 0.46612466124661245),)
+Training accuracy: (np.float64(0.46612466124661245),)
+Validation accuracy: [0.4634146341463415]
+Test accuracy: [0.48156182212581344]
+======== ROUND 1
+Time: 870.3094167709351
+Prompt: (Prompt(
+  prompt: # Task
+Instruction: Assess whether the given Statement is a lie (Yes) or not (No), considering various aspects:
+
+1. Examine the Speaker's Motivation: Investigate if the speaker intends to deceive or mislead, or if the statement reflects a personal viewpoint or opinion. If the statement appears to be purposefully deceptive, categorize it as a lie. If it seems like an honest perspective, albeit possibly skewed, proceed to further scrutiny.
+
+2. Analyze Political Factors: Scrutinize if the statement is employed as a political tool that includes exaggerations or oversimplifications. If the statement aligns with political rhetoric aimed at swaying public opinion rather than providing unbiased information, label it as a lie.
+
+3. Identify Partial Truths: Investigate if the statement holds some truths but manipulates them through exaggeration, omission, or distortion. If the statement is partly true but misleadingly represented, classify it as a lie.
+
+4. Basic Factual Accuracy: Confirm the factual correctness of the statement using credible sources. If the statement can be proven false, classify it as a lie. If it matches the facts or if the evidence is insufficient, advance to the next evaluation criterion.
+
+5. Broader Implications: Evaluate the statement's overall impact and context. If the statement leads to misunderstanding or misinformation despite being technically accurate or unproven otherwise, classify it as a lie.
+
+Guidelines:
+- Exercise care with statements that might be seen as subjective views or deliberate oversimplifications; they may not inherently constitute lies unless there is evident intention to deceive.
+- Acknowledge that not every inaccurate statement is a lie—it could be a simple error or misunderstanding.
+- Avoid allowing political ambitions to cloud judgments about the speaker's genuine intentions to inform or persuade.
+- Proceed cautiously when labeling statements as lies based on political influence or possible bias; ensure the presence of deceitful intent is confirmed first.
+
+# Exemplar
+Statement: On the way the federal government should spend Floridas rejected high-speed rail money.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a press release.
+Label: Yes
+
+Statement: Almost 37 percent of the total income from Planned Parenthood is from abortions. comments during a committee hearing
+Label: Yes
+
+Statement: If we had been on Obamacare and a bureaucrat was trying to tell me when I could get that CAT scan, that would have delayed my treatment.
+Job title: 
+State: Georgia
+Party: republican
+Context: the Fox News Google debate in Orlando
+Label: Yes
+
+Statement: Dan Gecker voted to double vehicle registration fees, costing (Chesterfield) county residents over $6 million annually.
+Job title: 
+State: 
+Party: republican
+Context: a TV ad
+Label: Yes
+
+Statement: African-American children are 500 percent more likely to die from asthma than white kids.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech to the National Urban League in Fort Lauderdale, Fla.
+Label: No
+
+Statement: The law says ... when a police officer stops you, do whatever he says and then deal with it later.
+Job title: Former NYPD detective
+State: 
+Party: none
+Context: a panel debate on "CNN Tonight with Don Lemon"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(5), 7, 8, np.int64(9)},
+  examplers_idx_used: {np.int64(5), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.46612466124661245,
+  score: 0.5799457994579946), Prompt(
+  prompt: # Task
+Input: Decide if the given Statement is a lie (Yes) or not (No) by analyzing the Context and additional details, considering multiple aspects:
+
+1. Explore the Speaker’s Purpose: Examine if the speaker's goal is to deceive or misinform, or if they are expressing a subjective view or opinion. Statements that seem designed to deceive should be classified as lies. Honest yet possibly biased views require deeper scrutiny.
+
+2. Factor in Political Background: Scrutinize if the statement is embedded within political discourse or campaigning, which might involve exaggerations or oversimplifications. If the statement aligns with these characteristics and is clearly aimed at shaping public opinion rather than providing objective information, categorize it as a lie.
+
+3. Assess for Partial Truths: Investigate whether the statement includes facts but distorts them through exaggeration, omission, or manipulation. When a statement is only partly true but presented deceivingly, it should be considered a lie.
+
+4. Basic Fact-Checking: Confirm the factual accuracy of the statement using available data. If the statement can be proven false, label it as a lie. If it checks out as true or if verification does not yield conclusive results, proceed to the next criterion.
+
+5. Broader Consequence Analysis: Reflect on the wider implications and context of the statement. Even if the statement is technically correct or cannot be verified, classify it as a lie if it leads to significant misunderstandings or distortions.
+
+Guidelines:
+- Exercise caution with statements that could be seen as subjective interpretations or deliberate simplifications; such statements aren't automatically lies unless there's evident deception.
+- Acknowledge that not every incorrect statement is a lie—some could just be errors or misconceptions.
+- Avoid letting political agendas overshadow the effort to provide genuine information or persuasion.
+- Be careful about labeling statements as lies purely based on political context or possible bias; ensure that a deceptive intention exists first.
+
+# Exemplar
+Statement: On the way the federal government should spend Floridas rejected high-speed rail money.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a press release.
+Label: Yes
+
+Statement: Almost 37 percent of the total income from Planned Parenthood is from abortions. comments during a committee hearing
+Label: Yes
+
+Statement: If we had been on Obamacare and a bureaucrat was trying to tell me when I could get that CAT scan, that would have delayed my treatment.
+Job title: 
+State: Georgia
+Party: republican
+Context: the Fox News Google debate in Orlando
+Label: Yes
+
+Statement: Dan Gecker voted to double vehicle registration fees, costing (Chesterfield) county residents over $6 million annually.
+Job title: 
+State: 
+Party: republican
+Context: a TV ad
+Label: Yes
+
+Statement: African-American children are 500 percent more likely to die from asthma than white kids.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech to the National Urban League in Fort Lauderdale, Fla.
+Label: No
+
+Statement: The law says ... when a police officer stops you, do whatever he says and then deal with it later.
+Job title: Former NYPD detective
+State: 
+Party: none
+Context: a panel debate on "CNN Tonight with Don Lemon"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(5), 7, 8, np.int64(9)},
+  examplers_idx_used: {np.int64(5), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.46612466124661245,
+  score: 0.5772357723577236), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information, taking into consideration several factors:
+
+1. Evaluate the Speaker’s Intent: Analyze whether the speaker aims to deceive or mislead, or if their statement represents a subjective interpretation or opinion. If the statement appears to be intentionally misleading, classify it as a lie. If it seems to be an honest but potentially biased viewpoint, evaluate further.
+
+2. Consider Political Context: Assess whether the statement is part of a political rhetoric or campaigning tactic that involves exaggeration or simplification. If the statement fits these criteria and is clearly intended to sway public opinion rather than inform objectively, classify it as a lie.
+
+3. Check for Partial Truths: Determine if the statement contains elements of truth but is distorted through exaggeration, omission, or manipulation of facts. If the statement is partially true but presented in a way that misleads or distorts the overall meaning, classify it as a lie.
+
+4. Surface-Level Truth-Checking: Verify the factual accuracy of the statement based on available evidence. If the statement is demonstrably false, classify it as a lie. If it is factually accurate or if verification is inconclusive, move to the next step.
+
+5. Overall Implication: Consider the broader implications and context of the statement. If the statement is misleading or distorts the overall understanding despite being technically correct or unverifiable, classify it as a lie.
+
+Tips and Cautions:
+- Be cautious with statements that could be interpreted as subjective opinions or strategic oversimplifications; they may not necessarily be lies unless there is clear intent to deceive.
+- Recognize that not all false statements are lies—some may be mistakes or misunderstandings.
+- Ensure that political motivations do not overshadow a genuine attempt to inform or persuade.
+- Use caution when classifying statements as lies based solely on political context or potential bias; verify the presence of deceptive intent first.
+
+# Exemplar
+Statement: On the way the federal government should spend Floridas rejected high-speed rail money.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a press release.
+Label: Yes
+
+Statement: Almost 37 percent of the total income from Planned Parenthood is from abortions. comments during a committee hearing
+Label: Yes
+
+Statement: If we had been on Obamacare and a bureaucrat was trying to tell me when I could get that CAT scan, that would have delayed my treatment.
+Job title: 
+State: Georgia
+Party: republican
+Context: the Fox News Google debate in Orlando
+Label: Yes
+
+Statement: Dan Gecker voted to double vehicle registration fees, costing (Chesterfield) county residents over $6 million annually.
+Job title: 
+State: 
+Party: republican
+Context: a TV ad
+Label: Yes
+
+Statement: African-American children are 500 percent more likely to die from asthma than white kids.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech to the National Urban League in Fort Lauderdale, Fla.
+Label: No
+
+Statement: The law says ... when a police officer stops you, do whatever he says and then deal with it later.
+Job title: Former NYPD detective
+State: 
+Party: none
+Context: a panel debate on "CNN Tonight with Don Lemon"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(5), 7, 8, np.int64(9)},
+  examplers_idx_used: {np.int64(5), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.46612466124661245,
+  score: 0.5636856368563685), Prompt(
+  prompt: # Task
+Instruction: Assess whether the given Statement constitutes a lie (Yes) or not (No), considering various aspects along with the provided Context:
+
+1. Speaker's Motivation: Scrutinize whether the speaker seeks to deceive or mislead, or if the statement is more of a personal view or opinion. Should the statement appear to be an intentional deception, categorize it as a lie. However, if it comes across as a sincere but possibly skewed perspective, proceed to further analysis.
+
+2. Political Framework: Examine if the statement is part of political discourse or campaign strategies involving exaggerations or simplifications. When the statement aligns with these characteristics and is clearly aimed at influencing public opinion without providing objective information, classify it as a lie.
+
+3. Partial Truth Analysis: Investigate if the statement includes truths that are twisted through exaggeration, omission, or manipulation. If the statement holds some truth but is conveyed in a manner that misleads or alters the overall message, classify it as a lie.
+
+4. Basic Fact Verification: Confirm the factual correctness of the statement using available evidence. If the statement can be proven false, categorize it as a lie. Should it be accurate or if verification remains unclear, advance to the subsequent step.
+
+5. Broader Interpretation: Take into account the wider implications and context of the statement. If the statement is misleading or distorts the general understanding even though it might be technically accurate or unverifiable, classify it as a lie.
+
+Guidelines:
+- Exercise caution with statements that can be seen as subjective opinions or simplified views; they aren't automatically classified as lies unless there is clear intent to deceive.
+- Acknowledge that not every incorrect statement is a lie; some may result from errors or misunderstandings.
+- Avoid letting political goals overshadow genuine attempts at informing or persuading.
+- Refrain from categorizing statements as lies primarily due to political context or potential bias; ensure that deceptive intent is confirmed first.
+
+# Exemplar
+Statement: On the way the federal government should spend Floridas rejected high-speed rail money.
+Job title: Governor
+State: Florida
+Party: republican
+Context: a press release.
+Label: Yes
+
+Statement: Almost 37 percent of the total income from Planned Parenthood is from abortions. comments during a committee hearing
+Label: Yes
+
+Statement: If we had been on Obamacare and a bureaucrat was trying to tell me when I could get that CAT scan, that would have delayed my treatment.
+Job title: 
+State: Georgia
+Party: republican
+Context: the Fox News Google debate in Orlando
+Label: Yes
+
+Statement: Dan Gecker voted to double vehicle registration fees, costing (Chesterfield) county residents over $6 million annually.
+Job title: 
+State: 
+Party: republican
+Context: a TV ad
+Label: Yes
+
+Statement: African-American children are 500 percent more likely to die from asthma than white kids.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech to the National Urban League in Fort Lauderdale, Fla.
+Label: No
+
+Statement: The law says ... when a police officer stops you, do whatever he says and then deal with it later.
+Job title: Former NYPD detective
+State: 
+Party: none
+Context: a panel debate on "CNN Tonight with Don Lemon"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(5), 7, 8, np.int64(9)},
+  examplers_idx_used: {np.int64(5), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.46612466124661245,
+  score: 0.5447154471544715))
+Training accuracy: (np.float64(0.5799457994579946), np.float64(0.5772357723577236), np.float64(0.5636856368563685), np.float64(0.5447154471544715))
+Validation accuracy: [0.5826558265582655, 0.5826558265582655, 0.5609756097560976, 0.5474254742547425]
+Test accuracy: [0.5900216919739696, 0.5770065075921909, 0.5835140997830802, 0.5639913232104121]

@@ -476,8 +476,8 @@ class MyOptimizer(PromptOptimizer):
             task_section = sections["task"].strip()
             exemplar_section = sections["exemplar"].strip()
             # evaluate prompt on minibatch
-            _, texts, labels, preds = task.evaluate(gpt4, prompt.prompt, minibatch)
-
+            _, texts, labels, preds, confs = task.evaluate_with_conf(gpt4, prompt.prompt, minibatch)
+            print(confs)
             # get gradients
             new_task_sections = []
             new_exemplar_sections = []
