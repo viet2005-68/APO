@@ -224,9 +224,6 @@ class ProTeGi(PromptOptimizer):
         - LOW-CONFIDENCE ERROR (confidence < 0.60):
         → Apply a small update. Only lightly edit or clarify wording; avoid major structural changes.
 
-        - LOW-CONFIDENCE CORRECT:
-        → Apply a small clarifying update to improve guidance while keeping the structure intact.
-
         YOUR TASK:
         - Generate {steps_per_gradient} substantively different improved versions of the prompt.
         - Each improved prompt must:
@@ -382,7 +379,7 @@ class ProTeGi(PromptOptimizer):
             # generate synonyms
             mc_sampled_task_sections = []
             if self.opt["mc_samples_per_step"] > 0:
-                for sect in tqdm(new_task_sections + [task_section], desc="mc samples"):
+                for ind, sect in tqdm(enumerate(new_task_sections), desc="mc samples"):
                     mc_sects = self.generate_synonyms(
                         sect, n=self.opt["mc_samples_per_step"]
                     )

@@ -1,0 +1,686 @@
+{"task": "clickbait", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.420042276382446
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.84375),)
+Training accuracy: (0.84375,)
+Validation accuracy: [0.85]
+Test accuracy: [0.91]
+======== ROUND 1
+Time: 201.48375296592712
+Prompt: (Prompt(
+  prompt: # Task
+To assess whether the given content constitutes clickbait, use these guidelines:
+- Check if the content uses extreme exaggeration or dramatization to attract viewers.
+- Evaluate if the main goal of the content is to entice clicks rather than providing precise information.
+- See if the title offers sufficient factual details so that one can decide without having to click through.
+- Determine if the veracity of the statement can be ascertained without additional research.
+
+Should the content satisfy any of these conditions, it may be categorized as clickbait.
+
+# Exemplar
+Text: "The Secret Ingredient That Makes This Recipe Irresistible"
+Label: No
+
+Text: "Unbelievable: This Small Town's Secret That No One Knew About For Centuries!"
+Label: Yes
+
+Text: "New Study Reveals Shocking Truth About Daily Screen Time"
+Label: No
+
+Text: "What Happens Next Will Shock You: The Truth Behind a Mysterious Disappearance"
+Label: Yes
+
+Text: "This one ingredient can make you live longer"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "The Incredible Journey of a Man Who Survived Against All Odds"
+Label: Yes
+
+Text: "Incredible Discovery: Ancient Artifact Unearthed in Remote Jungle!"
+Label: No
+
+Text: "You won't believe what happened next in the stock market"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(6), np.int64(7), 9, 10, 11, 12, np.int64(13)},
+  parent_score: 0.84375,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To assess whether this content qualifies as clickbait, use these guidelines:
+- Does it employ dramatic or exaggerated language primarily to attract clicks?
+- Is its main goal to entice users to click through rather than offering precise information upfront?
+- Does the title contain sufficient factual details for users to judge its merit without additional clicks?
+- Can the veracity of the statement be evaluated without delving deeper into the content?
+
+Should the content align with any of these points, it likely represents clickbait.
+
+# Exemplar
+Text: "The Secret Ingredient That Makes This Recipe Irresistible"
+Label: No
+
+Text: "Unbelievable: This Small Town's Secret That No One Knew About For Centuries!"
+Label: Yes
+
+Text: "New Study Reveals Shocking Truth About Daily Screen Time"
+Label: No
+
+Text: "What Happens Next Will Shock You: The Truth Behind a Mysterious Disappearance"
+Label: Yes
+
+Text: "This one ingredient can make you live longer"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "The Incredible Journey of a Man Who Survived Against All Odds"
+Label: Yes
+
+Text: "Incredible Discovery: Ancient Artifact Unearthed in Remote Jungle!"
+Label: No
+
+Text: "You won't believe what happened next in the stock market"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(6), np.int64(7), 9, 10, 11, 12, np.int64(13)},
+  parent_score: 0.84375,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To assess whether a piece of text qualifies as clickbait, look for the use of exaggerated language and a scarcity of substantive information that suggests its primary goal is to generate clicks rather than convey meaningful, fact-based content. Analyze if the text depends on sensational appeals or emotional triggers without providing specific details or significant information to back up its assertions. Does this text meet the definition of clickbait based on these standards?
+
+# Exemplar
+Text: "What Happens When You Eat an Apple Every Day? The Results Will Surprise You!"
+Label: No
+
+Text: "You Won't Believe What This Small Town Discovered in Their Attic!"
+Label: No
+
+Text: "How Does This Tiny Country Manage To Keep Its Wealth?"
+Label: No
+
+Text: "New Study Reveals Shocking Truth About Daily Screen Time"
+Label: No
+
+Text: "What Happens Next Will Shock You: The Truth Behind a Mysterious Disappearance"
+Label: Yes
+
+Text: "This one ingredient can make you live longer"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "The Incredible Journey of a Man Who Survived Against All Odds"
+Label: Yes
+
+Text: "You won't believe what happened next in the stock market"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), np.int64(5), 9, 10, np.int64(11), 12, 13},
+  parent_score: 0.84375,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To assess whether a given text qualifies as clickbait, analyze if it employs excessively dramatic phrasing or sparse details, with the primary intention being to lure clicks instead of delivering meaningful and factual information. Determine if the text depends on exaggerated claims or emotional provocation without providing specific facts or useful data to back up its assertions. Can this text be classified as clickbait based on these standards?
+
+# Exemplar
+Text: "What Happens When You Eat an Apple Every Day? The Results Will Surprise You!"
+Label: No
+
+Text: "You Won't Believe What This Small Town Discovered in Their Attic!"
+Label: No
+
+Text: "How Does This Tiny Country Manage To Keep Its Wealth?"
+Label: No
+
+Text: "New Study Reveals Shocking Truth About Daily Screen Time"
+Label: No
+
+Text: "What Happens Next Will Shock You: The Truth Behind a Mysterious Disappearance"
+Label: Yes
+
+Text: "This one ingredient can make you live longer"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "The Incredible Journey of a Man Who Survived Against All Odds"
+Label: Yes
+
+Text: "You won't believe what happened next in the stock market"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(3), np.int64(5), 9, 10, np.int64(11), 12, 13},
+  parent_score: 0.84375,
+  score: 0.96875))
+Training accuracy: (0.96875, 0.96875, 0.96875, 0.96875)
+Validation accuracy: [0.87, 0.88, 0.88, 0.88]
+Test accuracy: [0.875, 0.88, 0.885, 0.87]
+======== ROUND 2
+Time: 611.1047246456146
+Prompt: (Prompt(
+  prompt: # Task
+To determine if a piece of text is clickbait, look for features including overly dramatic language, minimal details, and the presence of numbered lists or extreme modifiers. Investigate whether the main goal appears to be enticing clicks instead of delivering valuable, accurate information. Analyze the general tone to see if it hinges on overstatement or emotional manipulation without grounding in specific facts or beneficial content. Also, assess if there is insufficient depth or context provided to give the reader a comprehensive understanding of the topic. Does this text fit the profile of clickbait according to these standards?
+
+# Exemplar
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+Text: "19 Quick And Healthy Salmon Dinners That Anybody Can Make"
+Label: Yes
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "This Hidden Gem of a Restaurant Will Surprise You!"
+Label: Yes
+
+Text: "You won't believe what happened next in the stock market"
+Label: Yes
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "What It Looks Like To Not Throw Your Trash Out For A Week"
+Label: Yes
+
+Text: "Robert De Niro And Anne Hathaway Find Out How Well They Know Each Other" Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(12), np.int64(16), np.int64(20), np.int64(21), 22, 23, 24, 25},
+  parent_score: 0.96875,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a given text is clickbait, analyze whether the text predominantly uses dramatic statements, extreme adjectives, shocking details, or intriguing questions to pique interest. Assess whether its main goal appears to be enticing readers to click rather than conveying factual or valuable information. Also, look for ambiguous promises or emotional appeals that lack concrete evidence or detailed support. Would you say this text meets the characteristics of clickbait based on these criteria?
+
+# Exemplar
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "We, the two-headed snake, dies in U.S. museum at age 8" Label: No
+
+Text: "The Incredible Journey of a Man Who Survived Against All Odds"
+Label: Yes
+
+Text: "Incredible Discovery: Ancient Artifact Unearthed in Remote Jungle!"
+Label: No
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "What It Looks Like To Not Throw Your Trash Out For A Week"
+Label: Yes
+
+Text: "19 Quick And Healthy Salmon Dinners That Anybody Can Make"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(10), np.int64(17), np.int64(21), 22, np.int64(23), 24, 25},
+  parent_score: 0.96875,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a given text is clickbait, analyze whether it employs over-the-top statements, extreme adjectives, dramatic scenarios, or intriguing questions to capture attention. Evaluate if its main purpose is to generate clicks instead of conveying valuable or accurate information. Also, inspect if the text makes ambiguous assurances or appeals to emotions while lacking concrete details to back up its claims. Is this text indicative of clickbait based on these characteristics?
+
+# Exemplar
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "We, the two-headed snake, dies in U.S. museum at age 8" Label: No
+
+Text: "The Incredible Journey of a Man Who Survived Against All Odds"
+Label: Yes
+
+Text: "Incredible Discovery: Ancient Artifact Unearthed in Remote Jungle!"
+Label: No
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "What It Looks Like To Not Throw Your Trash Out For A Week"
+Label: Yes
+
+Text: "19 Quick And Healthy Salmon Dinners That Anybody Can Make"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(10), np.int64(17), np.int64(21), 22, np.int64(23), 24, 25},
+  parent_score: 0.96875,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a piece of text is clickbait, look for characteristics such as exaggerated statements, extreme adjectives, shocking elements, or questions designed to pique interest. Assess whether the primary goal seems to be drawing clicks rather than sharing valuable or accurate information. Also, inspect if the text includes ambiguous promises or stirs emotions without backing up its claims with concrete, detailed evidence. Would you categorize this text as clickbait based on these features?
+
+# Exemplar
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "We, the two-headed snake, dies in U.S. museum at age 8" Label: No
+
+Text: "The Incredible Journey of a Man Who Survived Against All Odds"
+Label: Yes
+
+Text: "Incredible Discovery: Ancient Artifact Unearthed in Remote Jungle!"
+Label: No
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "What It Looks Like To Not Throw Your Trash Out For A Week"
+Label: Yes
+
+Text: "19 Quick And Healthy Salmon Dinners That Anybody Can Make"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(10), np.int64(17), np.int64(21), 22, np.int64(23), 24, 25},
+  parent_score: 0.96875,
+  score: 1.0))
+Training accuracy: (1.0, 1.0, 1.0, 1.0)
+Validation accuracy: [0.94, 0.91, 0.92, 0.92]
+Test accuracy: [0.97, 0.97, 0.97, 0.965]
+======== ROUND 3
+Time: 617.6864457130432
+Prompt: (Prompt(
+  prompt: # Task
+To determine if a piece of text is clickbait, look for features including overly dramatic language, minimal details, and the presence of numbered lists or extreme modifiers. Investigate whether the main goal appears to be enticing clicks instead of delivering valuable, accurate information. Analyze the general tone to see if it hinges on overstatement or emotional manipulation without grounding in specific facts or beneficial content. Also, assess if there is insufficient depth or context provided to give the reader a comprehensive understanding of the topic. Does this text fit the profile of clickbait according to these standards?
+
+# Exemplar
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+Text: "19 Quick And Healthy Salmon Dinners That Anybody Can Make"
+Label: Yes
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "This Hidden Gem of a Restaurant Will Surprise You!"
+Label: Yes
+
+Text: "You won't believe what happened next in the stock market"
+Label: Yes
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "What It Looks Like To Not Throw Your Trash Out For A Week"
+Label: Yes
+
+Text: "Robert De Niro And Anne Hathaway Find Out How Well They Know Each Other" Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(12), np.int64(16), np.int64(20), np.int64(21), 22, 23, 24, 25},
+  parent_score: 0.96875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To identify whether a text fragment qualifies as clickbait, consider the following elements: dramatic wording, limited specifics, and reliance on numbered lists or exaggerated descriptors. Examine if the main goal is to entice clicks instead of offering factual and useful information. Analyze the tone for signs of exaggeration or emotional persuasion without concrete evidence or helpful insights. Also, check if the content lacks sufficient detail or contextual background that would offer readers a thorough grasp of the subject. Nonetheless, headlines that include statistical information or cite research should not be automatically labeled as clickbait if they supply relevant context and substance. Does this excerpt match the clickbait criteria based on the aforementioned qualities?
+
+# Exemplar
+Text: "How This Unknown Inventor Changed the World With a Single Invention"
+Label: Yes
+
+Text: "What Happens Next Will Shock You: The Truth Behind a Mysterious Disappearance"
+Label: Yes
+
+Adults Spend 8 Hours a Day in Front of a Screen, Study Finds
+
+Text: "How This One Weird Trick Can Save Your Marriage"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases Instantly!"
+Label: Yes
+
+The Shocking Truth About What Happens When You Eat Sugar
+
+Text: "What It Looks Like To Not Throw Your Trash Out For A Week"
+Label: Yes
+
+Text: "Local Hero Saves Child From Drowning Incident at Popular Beach"
+Label: No
+
+A Full Breakdown Of The Long Feud Involving Amber Rose, Kanye West, And The Kardashians
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, 33, np.int64(34), 35, 36, np.int64(9), np.int64(22), np.int64(28), np.int64(30)},
+  parent_score: 1.0,
+  score: 0.953125), Prompt(
+  prompt: # Task
+To assess whether a piece of text qualifies as clickbait, scrutinize if it heavily employs exaggerated claims, overly intense descriptors, startling specifics, or enigmatic queries designed to spark curiosity. Determine if the main objective of the text appears to be enticing clicks from readers rather than furnishing them with factual or beneficial information. Also, evaluate if the text omits concrete instances or verifiable data to back up its assertions, frequently resorting to ambiguous assurances or broad statements. Reflect on whether the text includes enough particulars or supporting evidence to validate its claims, or if it simply aims to arouse intrigue without conveying meaningful substance. Using these guidelines, do you think this text exhibits the traits typical of clickbait?
+
+# Exemplar
+This new diet trick will shock you! Lose weight in just one week without exercise. Discover the secret now!
+
+Text: "How This Unknown Inventor Changed the World With a Single Invention"
+Label: Yes
+
+This hidden ingredient could change your life forever. See why everyone is talking about it.
+
+Text: "Here's What Two Actual Southerners Think Of Reese Witherspoon's Draper James"
+Label: Yes
+
+You won't believe what happened when I tried this DIY hack. My results were incredible!
+
+Text: "Local Hero Saves Child From Drowning Incident at Popular Beach"
+Label: No
+
+Are you making this common mistake with your finances? Find out what it is and how to avoid it.
+
+The surprising reason why you can't stop eating chocolate! It's not what you think.
+
+This ancient herb has been used for centuries to treat everything from colds to cancer. But can it really cure diseases? Explore the science behind this natural remedy and learn why it's worth considering.
+Label: Clickbait
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(34), np.int64(41), np.int64(15), 51, 52, 53, np.int64(54), 55},
+  parent_score: 1.0,
+  score: 0.953125), Prompt(
+  prompt: # Task
+To assess whether a text segment qualifies as clickbait, analyze its features meticulously. Focus on exaggerated expressions, insufficient specifics, and reliance on numbered lists or superlative descriptors. Scrutinize if the main goal is to lure clicks instead of providing meaningful, factual data. Reflect on whether the text manipulates emotions, involves celebrities, or exaggerates narratives about disputes and scandals to capture interest. Analyze if it lacks sufficient detail or background that would enable readers to grasp the topic comprehensively. Also, observe if headlines claim to reveal in-depth analyses or complete stories but fail to substantiate with rich content when delved into further. Is this piece of writing indicative of clickbait based on the aforementioned characteristics?
+
+# Exemplar
+Text: "What Happens When You Eat an Apple Every Day? The Results Will Surprise You!"
+Label: No
+
+Text: "How This Unknown Inventor Changed the World With a Single Invention"
+Label: Yes
+
+Text: "You Won't Believe What This Small Town Discovered in Their Attic!"
+Label: No
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "What Happens Next Will Shock You: The Truth Behind a Mysterious Disappearance"
+Label: Yes
+
+Text: "How This One Weird Trick Can Save Your Marriage"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases Instantly!"
+Label: Yes
+
+Text: "Local Hero Saves Child From Drowning Incident at Popular Beach"
+Label: No
+
+A Full Breakdown Of The Long Feud Involving Amber Rose, Kanye West, And The Kardashians
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, 33, np.int64(2), np.int64(3), np.int64(36), 35, 34, np.int64(9), np.int64(24)},
+  parent_score: 1.0,
+  score: 0.9375))
+Training accuracy: (0.96875, 0.953125, 0.953125, 0.9375)
+Validation accuracy: [0.94, 0.91, 0.92, 0.92]
+Test accuracy: [0.97, 0.915, 0.92, 0.94]
+======== ROUND 4
+Time: 706.3018162250519
+Prompt: (Prompt(
+  prompt: # Task
+To determine if a text segment is clickbait, scrutinize its structure and purpose. Examine whether it employs hyperbolic language, ambiguous details, or depends on numbered lists and extreme adjectives. Reflect on whether its main goal is to lure clicks instead of offering valuable, substantive information. Consider if it plays on emotions by mentioning famous individuals or highlighting conflicts and controversies. Also, assess if the headline implies providing deep insights or compelling stories that don’t hold up under closer inspection. Evaluate if the title offers exclusive or highly prized information, such as access to exclusive content or newsletters, which can serve as click诱饵而没有提供实质性内容的手段。最终，根据上述标准判断这段文字是否更符合点击诱饵的特征。 
+
+Note: The last sentence contains a mix of English and Chinese. If you prefer it entirely in one language, let me know, and I'll adjust it accordingly.
+
+# Exemplar
+Text: "This new diet trick lost people 20 pounds in just one week!"
+Label: Yes
+
+Text: "Local Hero Saves Drowning Child at Neighborhood Pool"
+Label: No
+
+Text: "Debating the Blame for Reducing Much of a Village to Rubble"
+Label: No
+
+Text: "Miracle fruit found in Amazon Rainforest cures all diseases"
+Label: Yes
+
+Text: "Local man wins lottery, donates all to charity"
+Label: No
+
+The Surprising Benefits Of Doing Nothing At All
+
+Discover The Secrets To Happiness That Only Few People Know About
+
+Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter
+
+Text: "The Surprising Reason Why You Should Never Skip Breakfast Again"
+Label: Yes
+
+Text: "Ohio man dies after sitting in chair for two years"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(34), np.int64(102), 106, 107, 108, 109, 110, np.int64(90), np.int64(61), np.int64(94)},
+  parent_score: 0.9375,
+  score: 1.0), Prompt(
+  prompt: # Task
+To assess whether a text snippet can be classified as clickbait, analyze its elements carefully. Focus on overly dramatic phrasing, vague specifics, and the presence of numbered lists or extreme adjectives. Determine if the main objective seems to be enticing clicks over delivering valuable information. Investigate if the text employs emotional manipulation, centers around celebrity scandals, or amplifies disputes and controversies to capture interest. Also, check for assertions of disclosing in-depth revelations or narratives that fail to back up their claims with solid content when scrutinized. Observe if there are pledges of effortless, straightforward remedies or citations of authoritative approval without thorough substantiation or scientific proof. Is this written content indicative of clickbait attributes?
+
+# Exemplar
+This Simple Trick Can Make Your Life Easier - You Won't Believe Number 3!
+
+This hidden gem of a restaurant is the tastiest spot you've never heard of! Located in the heart of the city, its unique blend of flavors has everyone talking, but don't wait too long—secrets don't stay hidden for long.
+
+Text: "Debating the Blame for Reducing Much of a Village to Rubble"
+Label: No
+
+Text: "Shocking confession: Famous actor reveals hidden talent in cooking"
+Label: Yes
+
+The Surprising Benefits Of Doing Nothing At All
+
+Discover The Secrets To Happiness That Only Few People Know About
+
+Text: "New Study Reveals Surprising Benefits of Daily Coffee Consumption"
+Label: No
+
+Text: "The Surprising Reason Why You Should Never Skip Breakfast Again"
+Label: Yes
+
+Text: "Ohio man dies after sitting in chair for two years"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {106, np.int64(107), 108, 109, 110, np.int64(80), np.int64(58), np.int64(92), np.int64(31)},
+  parent_score: 0.9375,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a given text snippet is clickbait, closely examine its characteristics. Pay attention to elements such as overstatement, lack of specific details, heavy use of rankings or superlatives, and manipulation through emotional appeal, celebrity connections, or amplified tales of conflicts and controversies aimed at capturing viewers' interest. Also, check if the text provides minimal background or detail necessary for a thorough understanding or if it promises a full story or in-depth analysis in the headline but falls short when inspected more closely. Scrutinize whether serious subjects are treated with appropriate depth and delicacy, avoiding the dramatization of sad events purely to increase click-through rates. Based on the above points, does this piece of writing exhibit traits typical of clickbait?
+
+# Exemplar
+Text: "Debating the Blame for Reducing Much of a Village to Rubble"
+Label: No
+
+Text: "Woman finds $20 note between pages of library book"
+Label: No
+
+Discover The Secrets To Happiness That Only Few People Know About
+
+The Surprising Benefits Of Doing Nothing At All
+
+This new diet plan will change your life in just one week! Don't believe it? Just take a look at these before and after pictures!
+
+What is the secret they don't want you to know? Learn the hidden truth behind this mysterious event.
+
+You won't believe what happened when this family found out about their inheritance! They thought they had it all figured out, but the truth will shock you! The legal drama that unfolds next will leave you gasping for breath!
+
+Are you struggling with anxiety and stress? Find out how this simple trick can calm your mind in under a minute. Learn why thousands of people are already using it to feel better every day!
+Label: Clickbait
+
+Text: "The Surprising Reason Why You Should Never Skip Breakfast Again"
+Label: Yes
+
+Text: "Ohio man dies after sitting in chair for two years"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(38), np.int64(74), 107, 108, 106, 110, np.int64(46), 109, np.int64(51), np.int64(86)},
+  parent_score: 0.9375,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a text fragment can be classified as clickbait, examine its characteristics closely. Pay attention to elements such as hyperbole, lack of detailed information, heavy use of rankings or extreme descriptions, and an emphasis on getting clicks over delivering valuable, accurate information. Also, consider if the text is designed to evoke strong emotions, capitalize on famous personalities, or inflate stories about conflicts and controversies just to grab attention. Look into whether there is enough context and background provided to fully understand the subject matter. Verify if the title promises a thorough discussion or full story but falls short when closely examined. Lastly, assess whether serious issues are addressed with due care and sensitivity, making sure that news coverage doesn't exploit tragedies merely to increase engagement. Based on these points, does this text exhibit traits typical of clickbait?
+
+# Exemplar
+Text: "Debating the Blame for Reducing Much of a Village to Rubble"
+Label: No
+
+Text: "Woman finds $20 note between pages of library book"
+Label: No
+
+Discover The Secrets To Happiness That Only Few People Know About
+
+The Surprising Benefits Of Doing Nothing At All
+
+This new diet plan will change your life in just one week! Don't believe it? Just take a look at these before and after pictures!
+
+What is the secret they don't want you to know? Learn the hidden truth behind this mysterious event.
+
+You won't believe what happened when this family found out about their inheritance! They thought they had it all figured out, but the truth will shock you! The legal drama that unfolds next will leave you gasping for breath!
+
+Are you struggling with anxiety and stress? Find out how this simple trick can calm your mind in under a minute. Learn why thousands of people are already using it to feel better every day!
+Label: Clickbait
+
+Text: "The Surprising Reason Why You Should Never Skip Breakfast Again"
+Label: Yes
+
+Text: "Ohio man dies after sitting in chair for two years"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(38), np.int64(74), 107, 108, 106, 110, np.int64(46), 109, np.int64(51), np.int64(86)},
+  parent_score: 0.9375,
+  score: 1.0))
+Training accuracy: (1.0, 1.0, 1.0, 1.0)
+Validation accuracy: [0.95, 0.94, 0.91, 0.91]
+Test accuracy: [0.96, 0.975, 0.915, 0.91]
