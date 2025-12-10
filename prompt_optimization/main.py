@@ -17,6 +17,8 @@ import sys
 import random
 from models import Prompt
 
+random.seed(42)
+
 def get_task_class(task_name):
     if task_name == "ethos":
         return tasks.DefaultHFBinaryTask
@@ -157,7 +159,10 @@ if __name__ == "__main__":
     # optimizer = my_optimizer_v2.MyOptimizer(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
-    # random.shuffle(train_exs)
+    # val_size = int(0.2 * len(train_exs))
+    # val_exs = random.sample(train_exs, val_size)
+    # train_exs = [ex for ex in train_exs if ex not in val_exs]
+
     batch_train_exs = [
         train_exs[i:i + config["minibatch_size"]]
         for i in range(0, len(train_exs), config["minibatch_size"])

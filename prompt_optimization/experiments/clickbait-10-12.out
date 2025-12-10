@@ -1,0 +1,1125 @@
+{"task": "clickbait", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 4.26102089881897
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.83984375),)
+Training accuracy: (0.83984375,)
+Validation accuracy: [0.83]
+Test accuracy: [0.94]
+======== ROUND 1
+Time: 64.71073269844055
+Prompt: (Prompt(
+  prompt: # Task
+Does this text employ exaggerated claims or misleading promises aimed at boosting click-through rates instead of offering precise and truthful information? Evaluate if the text depends on sensational language or asserts statements that are improbable to be completely supported by the linked content.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Russians Strengthen Their Faith and a Tradition With an Icy Water Plunge"
+Label: No
+
+Is this text clickbait? Text: "How This Small Town Became The Hottest Travel Destination In Europe" Label: Yes
+
+Text: "The Surprising Truth About What Happens When You Eat Sugar"
+Label: Yes
+
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Is this text clickbait? Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks" Label: Yes
+
+Is this text clickbait? Text: "Baby dies after being found abandoned behind shop in Gwent, Wales" Label: No
+
+Text: "NASA Discovers New Planet in Nearby Star System, Could Support Life"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), np.int64(6), 7, 8, 9, np.int64(10)},
+  parent_score: 0.83984375,
+  score: 0.9296875), Prompt(
+  prompt: # Task
+Does this headline rely on exaggeration, misleading information, or emotional appeal to attract clicks, rather than providing substantial and factual content? Evaluate if it makes false promises or uses sensationalism without offering real information.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Is this text clickbait? Text: "How This Small Town Became The Hottest Travel Destination In Europe" Label: Yes
+
+Text: "NASA Discovers New Planet in Nearby Star System, Could Support Life"
+Label: No
+
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Is this text clickbait? Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks" Label: Yes
+
+Is this text clickbait? Text: "Baby dies after being found abandoned behind shop in Gwent, Wales" Label: No
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(3), np.int64(5), 6, 7, np.int64(8), np.int64(9), 10},
+  parent_score: 0.83984375,
+  score: 0.921875), Prompt(
+  prompt: # Task
+Does this headline employ exaggeration, misleading details, or emotional rhetoric to entice clicks instead of delivering substantial and factual information? Assess whether it gives false assurances or resorts to sensationalism without providing genuine content.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Is this text clickbait? Text: "How This Small Town Became The Hottest Travel Destination In Europe" Label: Yes
+
+Text: "NASA Discovers New Planet in Nearby Star System, Could Support Life"
+Label: No
+
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Is this text clickbait? Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks" Label: Yes
+
+Is this text clickbait? Text: "Baby dies after being found abandoned behind shop in Gwent, Wales" Label: No
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(3), np.int64(5), 6, 7, np.int64(8), np.int64(9), 10},
+  parent_score: 0.83984375,
+  score: 0.921875), Prompt(
+  prompt: # Task
+Does this headline use exaggerated language or sensational claims to attract readers' attention instead of providing straightforward factual information? If so, classify it as clickbait.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Is this text clickbait? Text: "How This Small Town Became The Hottest Travel Destination In Europe" Label: Yes
+
+Text: "The Surprising Truth About What Happens When You Eat Sugar"
+Label: Yes
+
+Is this text clickbait? Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks" Label: Yes
+
+Text: "Kept From World Baseball Classic, Johan Santana Acts as a Fan"
+Label: No
+
+Is this text clickbait? Text: "Baby dies after being found abandoned behind shop in Gwent, Wales" Label: No
+
+Text: "NASA Discovers New Planet in Nearby Star System, Could Support Life"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(6), 7, np.int64(8), np.int64(9), 10},
+  parent_score: 0.83984375,
+  score: 0.91796875))
+Training accuracy: (0.9296875, 0.921875, 0.921875, 0.91796875)
+Validation accuracy: [0.81, 0.94, 0.94, 0.92]
+Test accuracy: [0.96, 0.95, 0.96, 0.98]
+======== ROUND 2
+Time: 224.79293060302734
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate if this headline depends exclusively on exaggeration, deceptive claims, or emotional manipulation to draw attention, without grounding itself in meaningful or factual information. Determine whether it is making unfounded promises or resorting to sensationalism at the expense of real substance. Distinguish between headlines that employ emotion honestly to convey important facts and those that misuse emotional triggers to mask a deficiency in genuine content.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Citizens Unite To Clean Up Local Park After Years Of Neglect"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "New Diet Claims You Can Lose 50 Pounds In One Week By Only Drinking Water"
+Label: Yes
+
+Text: "Small Town Comes Together After Nighttime Fire Destroys Historic Building"
+Label: Yes
+
+Text: "Volunteers Distribute Food In Response To City's Growing Hunger Crisis"
+Label: Yes
+
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Text: "Community Raises Funds For Family Affected By Natural Disaster"
+Label: Yes
+
+Text: "This Simple Trick Can Help You Win the Lottery Every Time!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), 34, 35, np.int64(3), 37, 38, 36, np.int64(5), np.int64(9), np.int64(14)},
+  parent_score: 0.921875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+Assess whether this headline relies solely on exaggeration, misleading information, or emotional appeal to attract clicks, without providing substantial or factual content. Consider if the headline makes false promises or uses sensationalism without offering real information. Differentiate headlines that evoke emotion while remaining truthful and informative from those that use emotional appeal to distract from a lack of substantive content.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Citizens Unite To Clean Up Local Park After Years Of Neglect"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "New Diet Claims You Can Lose 50 Pounds In One Week By Only Drinking Water"
+Label: Yes
+
+Text: "Small Town Comes Together After Nighttime Fire Destroys Historic Building"
+Label: Yes
+
+Text: "Volunteers Distribute Food In Response To City's Growing Hunger Crisis"
+Label: Yes
+
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Text: "Community Raises Funds For Family Affected By Natural Disaster"
+Label: Yes
+
+Text: "This Simple Trick Can Help You Win the Lottery Every Time!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), 34, 35, np.int64(3), 37, 38, 36, np.int64(5), np.int64(9), np.int64(14)},
+  parent_score: 0.921875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+Does this headline employ subtle provocative language, curiosity-inducing elements, or indirect misleading contexts to capture attention beyond its factual content? Label it as clickbait if it uses any of these techniques to engage the reader, even without explicit exaggeration or sensationalism.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "The Shocking Truth Behind the Popular New Weight Loss Method Revealed"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Dog Met a Stranger on the Street!"
+Label: Yes
+
+Text: "What No One Tells You About Living in the World's Tallest Building"
+Label: Yes
+
+Text: "Incredible New Breakthrough Promises Cure For All Cancers" Label: Yes
+
+Text: "The Secret Ingredient That Made This Street Food Vendor Go From Rags To Riches"
+Label: Yes
+
+Text: "Unbelievable Discovery Proves Time Travel Is Possible With This Simple Device!"
+Label: Yes
+
+Text: "Heartwarming Story Of Dog That Walked Miles To Find Lost Child"
+Label: Yes
+
+Text: "Incredible Survival Story: Man Escapes Deadly Trap After Days of Struggle"
+Label: Yes
+
+Text: "This Simple Trick Boosts Your Mood More Than Any Medication"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(9), np.int64(46), 60, np.int64(24), np.int64(57), np.int64(31), 61, 62, 63},
+  parent_score: 0.91796875,
+  score: 0.953125), Prompt(
+  prompt: # Task
+Is this headline using overstated phrases, dramatic assertions, or confusing details to draw readers’ interest instead of just stating straightforward facts? Evaluate if crucial information has been deliberately left out or if strong emotions are being used to trick readers into believing there's more to the story than what is actually supported by the facts. If you find these characteristics, categorize it as clickbait.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "The Shocking Truth Behind the Popular New Weight Loss Method Revealed"
+Label: Yes
+
+Text: "Local Hero Saves Dozens in Fiery Building Collapse"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Dog Met a Stranger on the Street!"
+Label: Yes
+
+Text: "Russians Strengthen Their Faith and a Tradition With an Icy Water Plunge"
+Label: No
+
+Text: "What No One Tells You About Living in the World's Tallest Building"
+Label: Yes
+
+Text: "Miracle Drug Erases All Symptoms Of Chronic Disease" Label: Yes
+</ANSAYER>
+<ANSWER>
+Text: "Community Comes Together To Celebrate Local Hero's Deed" Label: Yes
+
+Text: "Incredible Survival Story: Man Escapes Deadly Trap After Days of Struggle"
+Label: Yes
+
+Text: "Community Raises Funds For Family Affected By Natural Disaster"
+Label: Yes
+
+Text: "This Simple Trick Boosts Your Mood More Than Any Medication"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(2), np.int64(36), np.int64(9), np.int64(43), np.int64(22), 60, 61, 62, 63},
+  parent_score: 0.91796875,
+  score: 0.953125))
+Training accuracy: (0.96875, 0.96875, 0.953125, 0.953125)
+Validation accuracy: [0.87, 0.89, 0.89, 0.85]
+Test accuracy: [0.92, 0.94, 0.97, 0.96]
+======== ROUND 3
+Time: 265.6063804626465
+Prompt: (Prompt(
+  prompt: # Task
+Is this headline crafted to attract attention by using overstated phrases, dramatic assertions, or vague promises of revealing secrets or surprising truths, rather than presenting straightforward facts? Consider whether the headline exploits curiosity or hints at exclusive knowledge to draw readers in, even if it does not provide concrete, factual information. Also, evaluate if key details have been omitted or if strong emotions are being leveraged to entice readers into believing there is more substance to the story than what is actually supported by the facts. If these characteristics are present, categorize it as clickbait.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Here's What Two Actual Southerners Think Of Reese Witherspoon's Draper James"
+Label: Yes
+
+Text: "How Many Kinds Of French Fries Have You Actually Eaten"
+Label: Yes
+
+Text: "Surprising Ways Bananas Can Improve Your Health, According To Science"
+Label: Yes
+
+Text: "Miracle Drug Erases All Symptoms Of Chronic Disease" Label: Yes
+</ANSAYER>
+<ANSWER>
+Text: "Community Comes Together To Celebrate Local Hero's Deed" Label: Yes
+
+Text: "The Surprising Way Your Coffee Habit Could Be Hurting The Environment"
+Label: Yes
+
+Text: "A Small Town in Norway Is Now Running Completely on Renewable Energy Sources"
+Label: Yes
+
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(9), 79, 80, 81, 82, np.int64(83), np.int64(22), np.int64(25)},
+  parent_score: 0.953125,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+Does this headline use exaggerated expressions, sensational claims, or ambiguous promises about revealing secrets or startling truths to grab attention, instead of sticking to clear facts? Assess if the headline relies on arousing curiosity or suggesting access to unique insights to engage readers, without offering precise, factual details. Additionally, determine if significant specifics are left out or if intense emotions are used to entice readers into thinking the story holds more substance than it actually does based on the facts provided. If these traits are evident, classify it as clickbait.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Here's What Two Actual Southerners Think Of Reese Witherspoon's Draper James"
+Label: Yes
+
+Text: "How Many Kinds Of French Fries Have You Actually Eaten"
+Label: Yes
+
+Text: "Surprising Ways Bananas Can Improve Your Health, According To Science"
+Label: Yes
+
+Text: "Miracle Drug Erases All Symptoms Of Chronic Disease" Label: Yes
+</ANSAYER>
+<ANSWER>
+Text: "Community Comes Together To Celebrate Local Hero's Deed" Label: Yes
+
+Text: "The Surprising Way Your Coffee Habit Could Be Hurting The Environment"
+Label: Yes
+
+Text: "A Small Town in Norway Is Now Running Completely on Renewable Energy Sources"
+Label: Yes
+
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(9), 79, 80, 81, 82, np.int64(83), np.int64(22), np.int64(25)},
+  parent_score: 0.953125,
+  score: 0.96875), Prompt(
+  prompt: # Task
+Is this headline using overstated phrases, dramatic assertions, or confusing details to draw readers’ interest instead of just stating straightforward facts? Evaluate if crucial information has been deliberately left out or if strong emotions are being used to trick readers into believing there's more to the story than what is actually supported by the facts. If you find these characteristics, categorize it as clickbait.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "The Shocking Truth Behind the Popular New Weight Loss Method Revealed"
+Label: Yes
+
+Text: "Local Hero Saves Dozens in Fiery Building Collapse"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Dog Met a Stranger on the Street!"
+Label: Yes
+
+Text: "Russians Strengthen Their Faith and a Tradition With an Icy Water Plunge"
+Label: No
+
+Text: "What No One Tells You About Living in the World's Tallest Building"
+Label: Yes
+
+Text: "Miracle Drug Erases All Symptoms Of Chronic Disease" Label: Yes
+</ANSAYER>
+<ANSWER>
+Text: "Community Comes Together To Celebrate Local Hero's Deed" Label: Yes
+
+Text: "Incredible Survival Story: Man Escapes Deadly Trap After Days of Struggle"
+Label: Yes
+
+Text: "Community Raises Funds For Family Affected By Natural Disaster"
+Label: Yes
+
+Text: "This Simple Trick Boosts Your Mood More Than Any Medication"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(2), np.int64(36), np.int64(9), np.int64(43), np.int64(22), 60, 61, 62, 63},
+  parent_score: 0.91796875,
+  score: 0.9583333333333334), Prompt(
+  prompt: # Task
+Does this headline employ subtle provocative language, curiosity-inducing elements, or indirect misleading contexts to capture attention beyond its factual content? Label it as clickbait if it uses any of these techniques to engage the reader, even without explicit exaggeration or sensationalism.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "The Shocking Truth Behind the Popular New Weight Loss Method Revealed"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Dog Met a Stranger on the Street!"
+Label: Yes
+
+Text: "What No One Tells You About Living in the World's Tallest Building"
+Label: Yes
+
+Text: "Incredible New Breakthrough Promises Cure For All Cancers" Label: Yes
+
+Text: "The Secret Ingredient That Made This Street Food Vendor Go From Rags To Riches"
+Label: Yes
+
+Text: "Unbelievable Discovery Proves Time Travel Is Possible With This Simple Device!"
+Label: Yes
+
+Text: "Heartwarming Story Of Dog That Walked Miles To Find Lost Child"
+Label: Yes
+
+Text: "Incredible Survival Story: Man Escapes Deadly Trap After Days of Struggle"
+Label: Yes
+
+Text: "This Simple Trick Boosts Your Mood More Than Any Medication"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(9), np.int64(46), 60, np.int64(24), np.int64(57), np.int64(31), 61, 62, 63},
+  parent_score: 0.91796875,
+  score: 0.9479166666666666))
+Training accuracy: (0.9791666666666666, 0.96875, 0.9583333333333334, 0.9479166666666666)
+Validation accuracy: [0.94, 0.91, 0.85, 0.89]
+Test accuracy: [0.98, 0.98, 0.96, 0.97]
+======== ROUND 4
+Time: 266.4951202869415
+Prompt: (Prompt(
+  prompt: # Task
+Assess whether this headline employs exaggeration, sensationalism, or non-specific promises of revealing hidden secrets or shocking facts to draw attention, rather than offering clear and factual content. Determine if the headline aims to spark interest or suggest access to exclusive insights to engage readers without furnishing precise and verifiable information. Analyze if the headline makes indirect claims or utilizes emotionally charged language to indicate that the article holds significant disclosures or insights not fully substantiated by the facts. Also, assess if the headline refrains from making explicit or detailed assertions and instead uses broad, appealing language to prompt clicks over informing the audience. Label the headline as clickbait if these traits are evident; otherwise, consider it a direct and factual headline.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Citizens Unite To Clean Up Local Park After Years Of Neglect"
+Label: Yes
+
+Text: "Bill Gates Predicts The End Of The World Without Internet Access"
+Label: Yes
+
+Text: "How A Small Town Became The Unlikeliest Tech Hub In America"
+Label: Yes
+
+Text: "New Study Reveals Surprising Secrets About Human Behavior!"
+Label: Yes
+
+Text: "Unbelievable Acts Of Kindness Inspire Entire Neighborhood" Label: Yes
+
+Text: "What No One Tells You About Living in the World's Tallest Building"
+Label: Yes
+
+Text: "Everybody Watching The GOP Debates Made The Same CNN Plane Joke"
+Label: Yes
+
+Text: "Kept From World Baseball Classic, Johan Santana Acts as a Fan"
+Label: No
+
+Text: "Scientists Discover New Way To Reverse Aging"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(38), np.int64(9), np.int64(47), 86, 87, 88, 89, 90, np.int64(63)},
+  parent_score: 0.96875,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+Assess if this headline relies on overstated phrases, dramatic assertions, or vague pledges about unveiling mysteries or shocking facts to grab attention instead of presenting clear data. Determine whether it uses wording meant to provoke interest, hint at unique revelations, or incite powerful feelings such as urgency, anxiety, or thrill to attract readers without divulging concrete, factual information. Focus on whether the headline suggests an air of uniqueness or significance, leading readers to think they will discover confidential knowledge or miss essential details. Additionally, check if key specifics are deliberately left out to keep readers curious, which might signify clickbait. Classify the headline as clickbait if these traits are identified.
+
+# Exemplar
+Text: "Bill Gates Predicts The End Of The World Without Internet Access"
+Label: Yes
+
+Text: "How A Small Town Became The Unlikeliest Tech Hub In America"
+Label: Yes
+
+Text: "New Study Reveals Surprising Secrets About Human Behavior!"
+Label: Yes
+
+Text: "The Shocking Reason Why You Can't Stop Eating Fast Food"
+Label: Yes
+
+Text: "10 Surprising Ways To Boost Your Mood Instantly, According To Science"
+Label: Yes
+
+Text: "The Surprising Truth About What Happens When You Eat Sugar"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Everybody Watching The GOP Debates Made The Same CNN Plane Joke"
+Label: Yes
+
+Text: "Scientists Discover New Way To Reverse Aging"
+Label: No
+
+Text: "What Happened When I Spent $1 Million on Myself in One Month!"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(4), np.int64(6), np.int64(74), np.int64(52), 86, 87, 88, 89, 90},
+  parent_score: 0.96875,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+Is this headline crafted to attract attention by using overstated phrases, dramatic assertions, or vague promises of revealing secrets or surprising truths, rather than presenting straightforward facts? Consider whether the headline exploits curiosity or hints at exclusive knowledge to draw readers in, even if it does not provide concrete, factual information. Also, evaluate if key details have been omitted or if strong emotions are being leveraged to entice readers into believing there is more substance to the story than what is actually supported by the facts. If these characteristics are present, categorize it as clickbait.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Here's What Two Actual Southerners Think Of Reese Witherspoon's Draper James"
+Label: Yes
+
+Text: "How Many Kinds Of French Fries Have You Actually Eaten"
+Label: Yes
+
+Text: "Surprising Ways Bananas Can Improve Your Health, According To Science"
+Label: Yes
+
+Text: "Miracle Drug Erases All Symptoms Of Chronic Disease" Label: Yes
+</ANSAYER>
+<ANSWER>
+Text: "Community Comes Together To Celebrate Local Hero's Deed" Label: Yes
+
+Text: "The Surprising Way Your Coffee Habit Could Be Hurting The Environment"
+Label: Yes
+
+Text: "A Small Town in Norway Is Now Running Completely on Renewable Energy Sources"
+Label: Yes
+
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(9), 79, 80, 81, 82, np.int64(83), np.int64(22), np.int64(25)},
+  parent_score: 0.953125,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+Assess whether this headline uses exaggerated statements, sensational claims, or ambiguous references to concealed insights or startling revelations to capture interest instead of offering clear-cut data. Consider if it manipulates intrigue or suggests privileged insights to engage the audience, taking into account both the setting and the type of news. Decide if it leaves out crucial elements and appeals to intense feelings to persuade readers that the story contains more depth than the evidence actually supports. Also, judge if the headline gives enough background or verifiable details to back up its statements. Label it as clickbait if it depends largely on sensational wording without delivering specific information. Mark it as non-clickbait only if it combines dramatic flair with significant factual substance.
+
+# Exemplar
+Text: "Experts Warn: This Common Item in Your Home Could Be Deadly"
+Label: Yes
+
+Text: "Bill Gates Predicts The End Of The World Without Internet Access"
+Label: Yes
+
+Text: "How A Small Town Became The Unlikeliest Tech Hub In America"
+Label: Yes
+
+Text: "Exclusive: What Will Happen Next In The Ongoing Crisis Could Shock The World!"
+Label: Yes
+
+Text: "Government Secretly Plans Massive Surveillance Program Against Citizens"
+Label: Yes
+
+Text: "What No One Tells You About Living in the World's Tallest Building"
+Label: Yes
+
+Text: "Samuel L. Jackson Has Some Issues With The Lightsaber Battles In 'The Force Awakens'"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like "A Man In A Dress""
+Label: Yes
+
+Text: "Scientists Discover New Way To Reverse Aging"
+Label: No
+
+Text: "Uncover the Secrets Behind Your Favorite TV Shows and What Really Happened"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(41), np.int64(49), np.int64(17), 84, 85, 86, np.int64(23), 87, 88, np.int64(63)},
+  parent_score: 0.9791666666666666,
+  score: 0.96875))
+Training accuracy: (0.9791666666666666, 0.9791666666666666, 0.9791666666666666, 0.96875)
+Validation accuracy: [0.86, 0.83, 0.94, 0.88]
+Test accuracy: [0.97, 0.95, 0.98, 0.97]
+======== ROUND 5
+Time: 244.18628525733948
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate whether the given headline employs exaggerated expressions, dramatic claims, or ambiguous promises related to revealing secrets or startling truths primarily to capture attention rather than offering precise data. Identify if it utilizes language designed to arouse interest, suggest exclusive discoveries, or evoke strong emotions like urgency, concern, or excitement to engage readers without sharing explicit, factual content. Pay attention to whether the headline conveys a sense of distinctiveness or importance, making readers believe they will uncover insider information or miss crucial insights. Also, assess if important specifics are intentionally omitted to maintain curiosity, which could indicate clickbait. Verify that the headline explicitly mentions a particular incident or action with measurable consequences. If the headline does not contain such explicit references and depends on ambiguous or sensational phrasing without revealing specific information, it should be categorized as clickbait.
+
+A headline that explicitly outlines a specific event or action with measurable consequences, even in the absence of sensational language, should not be labeled as clickbait. This assessment involves determining whether the headline gives enough detail for the reader to understand the primary topic without depending only on emotional triggers.
+
+# Exemplar
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "This Invention Could Change the World – But Only If You Share It on Social Media"
+Label: Yes
+
+Text: "New Study Reveals Surprising Secrets About Human Behavior!"
+Label: Yes
+
+Text: "What Happened When This Man Decided To Walk For 100 Miles Straight"
+Label: No
+
+Text: "What Happens in This Small Village Every Summer Will Leave You Speechless"
+Label: Yes
+
+Text: "What Happened Next Will Shock You: The Untold Story Behind A Small Town's Mysterious Event"
+Label: Yes
+
+Text: "Unbelievable: Witness The Miracle That Occurred When A Lost Child Was Found After Hours In The Forest"
+Label: Yes
+
+Text: "Government Secretly Plans Massive Surveillance Program Against Citizens"
+Label: Yes
+
+Text: "Miracle Worker Cures Terminal Illnesses Overnight With Secret Herb"
+Label: Yes
+
+Text: "Innovative Startup Claims To Solve The World's Plastic Crisis With Revolutionary New Technology"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(71), np.int64(104), np.int64(42), 116, 117, np.int64(23), 119, 120, 118, np.int64(90)},
+  parent_score: 0.9791666666666666,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+Is this headline crafted to attract attention by using overstated phrases, dramatic assertions, vague promises of revealing secrets, surprising truths, or by leveraging community events, local news, or relatable human-interest angles, rather than presenting straightforward facts? Consider whether the headline exploits curiosity, hints at exclusive knowledge, or taps into local pride and interest to draw readers in, even if it does not provide concrete, factual information. Evaluate if key details have been omitted or if strong emotions are being leveraged to entice readers into believing there is more substance to the story than what is actually supported by the facts. If these characteristics are present, categorize it as clickbait.
+
+# Exemplar
+Text: "This Simple Trick Can Cure Your Back Pain Permanently – See How It Works!"
+Label: Yes
+
+Text: "You Won't Believe What This Couple Found When They Renovated Their Old House"
+Label: Yes
+
+Text: "Exclusive: What Will Happen Next In The Ongoing Crisis Could Shock The World!"
+Label: Yes
+
+Text: "This Unknown Inventor's Device Can Reduce Your Electricity Bill By Half"
+Label: Yes
+
+Text: "Unbelievable: See What Happened When This Man Decided to Dye His Hair Green"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Man Visited The Doctor!"
+Label: Yes
+
+Text: "Exclusive: What Really Happened When The Famous Actor Visited This Small Town"
+Label: Yes
+
+Text: "Scientists Discover New Way To Reverse Aging"
+Label: No
+
+Text: "Unbelievable Transformation: Before And After Pictures Will Leave You Speechless!"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {128, 129, 130, 131, 132, np.int64(102), np.int64(6), np.int64(41), np.int64(113), np.int64(88)},
+  parent_score: 0.9791666666666666,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+Assess if this headline relies on overstated phrases, dramatic assertions, or vague pledges about unveiling mysteries or shocking facts to grab attention instead of presenting clear data. Determine whether it uses wording meant to provoke interest, hint at unique revelations, or incite powerful feelings such as urgency, anxiety, or thrill to attract readers without divulging concrete, factual information. Focus on whether the headline suggests an air of uniqueness or significance, leading readers to think they will discover confidential knowledge or miss essential details. Additionally, check if key specifics are deliberately left out to keep readers curious, which might signify clickbait. Classify the headline as clickbait if these traits are identified.
+
+# Exemplar
+Text: "Bill Gates Predicts The End Of The World Without Internet Access"
+Label: Yes
+
+Text: "How A Small Town Became The Unlikeliest Tech Hub In America"
+Label: Yes
+
+Text: "New Study Reveals Surprising Secrets About Human Behavior!"
+Label: Yes
+
+Text: "The Shocking Reason Why You Can't Stop Eating Fast Food"
+Label: Yes
+
+Text: "10 Surprising Ways To Boost Your Mood Instantly, According To Science"
+Label: Yes
+
+Text: "The Surprising Truth About What Happens When You Eat Sugar"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Everybody Watching The GOP Debates Made The Same CNN Plane Joke"
+Label: Yes
+
+Text: "Scientists Discover New Way To Reverse Aging"
+Label: No
+
+Text: "What Happened When I Spent $1 Million on Myself in One Month!"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(4), np.int64(6), np.int64(74), np.int64(52), 86, 87, 88, 89, 90},
+  parent_score: 0.96875,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+Assess whether this headline employs exaggeration, sensationalism, or non-specific promises of revealing hidden secrets or shocking facts to draw attention, rather than offering clear and factual content. Determine if the headline aims to spark interest or suggest access to exclusive insights to engage readers without furnishing precise and verifiable information. Analyze if the headline makes indirect claims or utilizes emotionally charged language to indicate that the article holds significant disclosures or insights not fully substantiated by the facts. Also, assess if the headline refrains from making explicit or detailed assertions and instead uses broad, appealing language to prompt clicks over informing the audience. Label the headline as clickbait if these traits are evident; otherwise, consider it a direct and factual headline.
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Citizens Unite To Clean Up Local Park After Years Of Neglect"
+Label: Yes
+
+Text: "Bill Gates Predicts The End Of The World Without Internet Access"
+Label: Yes
+
+Text: "How A Small Town Became The Unlikeliest Tech Hub In America"
+Label: Yes
+
+Text: "New Study Reveals Surprising Secrets About Human Behavior!"
+Label: Yes
+
+Text: "Unbelievable Acts Of Kindness Inspire Entire Neighborhood" Label: Yes
+
+Text: "What No One Tells You About Living in the World's Tallest Building"
+Label: Yes
+
+Text: "Everybody Watching The GOP Debates Made The Same CNN Plane Joke"
+Label: Yes
+
+Text: "Kept From World Baseball Classic, Johan Santana Acts as a Fan"
+Label: No
+
+Text: "Scientists Discover New Way To Reverse Aging"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(38), np.int64(9), np.int64(47), 86, 87, 88, 89, 90, np.int64(63)},
+  parent_score: 0.96875,
+  score: 0.96875))
+Training accuracy: (0.9791666666666666, 0.9791666666666666, 0.9791666666666666, 0.96875)
+Validation accuracy: [0.83, 0.85, 0.83, 0.86]
+Test accuracy: [0.94, 0.96, 0.95, 0.97]
+======== ROUND 6
+Time: 273.00880217552185
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the provided headline relies on overstated phrases, sensational declarations, or unclear commitments about disclosing secrets or shocking facts, mainly aimed at grabbing attention rather than presenting clear facts. Determine if it uses wording meant to spark curiosity, hint at unique findings, or provoke intense feelings such as urgency, worry, or thrill, to attract readers without sharing concrete, factual information. Focus on whether the headline suggests a feeling of uniqueness or significance, leading readers to think they will discover insider details or miss vital insights. Also, consider if key details are deliberately left out to keep intrigue alive, potentially marking it as clickbait. Further, examine if the headline makes broad or vague promises of essential or extensive knowledge without specifying any particulars or referring directly to specific incidents or activities with quantifiable outcomes. Classify headlines that hinge on ambiguous terms, sensationalistic language, or wide-ranging promises without divulging specific information as clickbait. However, a headline that clearly describes a specific incident or activity with observable results, regardless of the use of sensational language, should not be labeled as clickbait. Your evaluation should focus on whether the headline offers sufficient information for the reader to grasp the main subject without depending merely on emotional appeals.
+
+# Exemplar
+Text: "How One Woman's Brave Stand Against a Powerful Corporation Inspired a Nationwide Protest"
+Label: Yes
+
+Text: "Local Hero Saves Dozens in Fiery Building Collapse"
+Label: Yes
+
+Text: "The Shocking Truth About What Happens When You Quit Sugar Forever!"
+Label: Yes
+
+Text: "Small Town Comes Together After Nighttime Fire Destroys Historic Building"
+Label: Yes
+
+Text: "Uncover Secrets Behind The Most Popular New Technology In 2023"
+Label: Yes
+
+Text: "Everything You Need To Know About The Sweetest Bakery In London"
+Label: Yes
+
+Text: "Unbelievable Transformation: See How This Small Town Became a Tourist Magnet in Just One Year!"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Couple Found Out Their Baby Has Superpowers!"
+Label: Yes
+
+Input: We Played "Never Have I Ever" With Tamar And Adrienne From "The Real"
+Label: Yes
+
+Text: "Exclusive: Inside Look at How This Small Town's Mayor Is Running a Secretive Money-Making Scheme"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(35), np.int64(4), np.int64(43), 140, np.int64(11), 142, 143, 144, 141, np.int64(56)},
+  parent_score: 0.9791666666666666,
+  score: 1.0), Prompt(
+  prompt: # Task
+Evaluate whether the given headline employs exaggerated expressions, dramatic claims, or ambiguous promises related to revealing secrets or startling truths primarily to capture attention rather than offering precise data. Identify if it utilizes language designed to arouse interest, suggest exclusive discoveries, or evoke strong emotions like urgency, concern, or excitement to engage readers without sharing explicit, factual content. Pay attention to whether the headline conveys a sense of distinctiveness or importance, making readers believe they will uncover insider information or miss crucial insights. Also, assess if important specifics are intentionally omitted to maintain curiosity, which could indicate clickbait. Additionally, evaluate if the headline makes vague or overly broad promises of indispensable or comprehensive knowledge without providing concrete details or explicit references to specific events or actions with measurable consequences. Headlines that depend on ambiguous phrasing, sensational language, or broad promises without revealing specific information should be categorized as clickbait. A headline that explicitly outlines a specific event or action with measurable consequences, even in the absence of sensational language, should not be labeled as clickbait. This assessment involves determining whether the headline provides enough detail for the reader to understand the primary topic without relying solely on emotional triggers.
+
+# Exemplar
+Text: "How One Woman's Brave Stand Against a Powerful Corporation Inspired a Nationwide Protest"
+Label: Yes
+
+Text: "Local Hero Saves Dozens in Fiery Building Collapse"
+Label: Yes
+
+Text: "The Shocking Truth About What Happens When You Quit Sugar Forever!"
+Label: Yes
+
+Text: "Small Town Comes Together After Nighttime Fire Destroys Historic Building"
+Label: Yes
+
+Text: "Uncover Secrets Behind The Most Popular New Technology In 2023"
+Label: Yes
+
+Text: "Everything You Need To Know About The Sweetest Bakery In London"
+Label: Yes
+
+Text: "Unbelievable Transformation: See How This Small Town Became a Tourist Magnet in Just One Year!"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Couple Found Out Their Baby Has Superpowers!"
+Label: Yes
+
+Input: We Played "Never Have I Ever" With Tamar And Adrienne From "The Real"
+Label: Yes
+
+Text: "Exclusive: Inside Look at How This Small Town's Mayor Is Running a Secretive Money-Making Scheme"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(35), np.int64(4), np.int64(43), 140, np.int64(11), 142, 143, 144, 141, np.int64(56)},
+  parent_score: 0.9791666666666666,
+  score: 1.0), Prompt(
+  prompt: # Task
+Assess if the provided headline uses exaggerated language, dramatic assertions, or vague promises about revealing hidden facts or shocking truths mainly to attract attention, rather than delivering clear and specific information. Check if it employs wording meant to pique interest, hint at unique revelations, or provoke emotions such as urgency, worry, or excitement, engaging the audience without disclosing precise, factual content. Note whether the headline suggests a feeling of uniqueness or significance, leading readers to think they will gain insider information or miss out on critical insights. Also, consider if key specifics are deliberately left out to sustain intrigue, which might point towards clickbait. Furthermore, determine if the headline makes imprecise or overgeneralized claims of essential or exhaustive knowledge without giving concrete particulars or specific references to events or actions with quantifiable outcomes. Classify headlines that rely on ambiguous terms, sensationalist language, or broad assurances without revealing specific information as clickbait. Conversely, a headline that clearly describes a specific event or action with measurable outcomes, even without using sensational language, should not be deemed clickbait. This evaluation requires judging whether the headline offers sufficient detail to convey its main subject matter without depending primarily on emotional appeal.
+
+# Exemplar
+Text: "How One Woman's Brave Stand Against a Powerful Corporation Inspired a Nationwide Protest"
+Label: Yes
+
+Text: "Local Hero Saves Dozens in Fiery Building Collapse"
+Label: Yes
+
+Text: "The Shocking Truth About What Happens When You Quit Sugar Forever!"
+Label: Yes
+
+Text: "Small Town Comes Together After Nighttime Fire Destroys Historic Building"
+Label: Yes
+
+Text: "Uncover Secrets Behind The Most Popular New Technology In 2023"
+Label: Yes
+
+Text: "Everything You Need To Know About The Sweetest Bakery In London"
+Label: Yes
+
+Text: "Unbelievable Transformation: See How This Small Town Became a Tourist Magnet in Just One Year!"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Couple Found Out Their Baby Has Superpowers!"
+Label: Yes
+
+Input: We Played "Never Have I Ever" With Tamar And Adrienne From "The Real"
+Label: Yes
+
+Text: "Exclusive: Inside Look at How This Small Town's Mayor Is Running a Secretive Money-Making Scheme"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(35), np.int64(4), np.int64(43), 140, np.int64(11), 142, 143, 144, 141, np.int64(56)},
+  parent_score: 0.9791666666666666,
+  score: 1.0), Prompt(
+  prompt: # Task
+Does this headline employ exaggerated language, dramatic claims, vague promises of uncovering secrets or surprising revelations, tapping into local pride, community happenings, or personal narratives to attract attention instead of providing straightforward facts? Assess whether it proposes rapid, simple fixes, suggests insider knowledge from experts, or guarantees instant advantages to engage readers, even if such assertions lack solid factual backing. Determine if the headline leaves out crucial details, depends on powerful emotional persuasion, or includes wording that suggests an underlying story beyond what is actually disclosed. Should these characteristics be present, classify it as clickbait.
+
+# Exemplar
+Text: "The Secret Benefits of Walking 10,000 Steps a Day"
+Label: Yes
+
+Text: "How One Woman's Brave Stand Against a Powerful Corporation Inspired a Nationwide Protest"
+Label: Yes
+
+Input: We Played "Never Have I Ever" With Tamar And Adrienne From "The Real"
+Label: Yes
+
+Text: "Uncover Secrets Behind The Most Popular New Technology In 2023"
+Label: Yes
+
+Text: "Everything You Need To Know About The Sweetest Bakery In London"
+Label: Yes
+
+Text: "The Secret Ingredient That Made This Street Food Vendor Go From Rags To Riches"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Couple Found Out Their Baby Has Superpowers!"
+Label: Yes
+
+Text: "Unbelievable Discovery In Ancient Forest Shocks Archaeologists!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Exclusive: Inside Look at How This Small Town's Mayor Is Running a Secretive Money-Making Scheme"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(11), np.int64(140), 141, 142, 143, 144, 145, np.int64(53), np.int64(57)},
+  parent_score: 0.9791666666666666,
+  score: 1.0))
+Training accuracy: (1.0, 1.0, 1.0, 1.0)
+Validation accuracy: [0.84, 0.86, 0.86, 0.88]
+Test accuracy: [0.96, 0.97, 0.96, 0.96]

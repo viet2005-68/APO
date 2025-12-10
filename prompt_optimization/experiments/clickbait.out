@@ -1,0 +1,878 @@
+{"task": "clickbait", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 12.88861870765686
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.875),)
+Training accuracy: (0.875,)
+Validation accuracy: []
+Test accuracy: [0.885]
+======== ROUND 1
+Time: 85.06026220321655
+Prompt: (Prompt(
+  prompt: # Task
+To assess whether the given headline employs exaggeration, sensationalism, or deceitful claims primarily to attract attention rather than convey factual information, apply the following assessment criteria:
+- Exaggeration: Is there an overstated portrayal of the significance or effect of the scenario described?
+- Sensationalism: Are provocative or emotionally charged terms utilized to evoke intense feelings?
+- Deceitfulness: Does the headline propose something unsupported by the article’s content, or does it leave out vital facts leading to misunderstanding?
+
+If the headline satisfies any of these conditions, categorize it as clickbait.
+
+# Exemplar
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Text: "Adults Spend 8 Hours a Day in Front of a Screen, Study Finds"
+Label: No
+
+Text: "Scientists discover new species in remote Amazon rainforest"
+Label: No
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "New Study Reveals Shocking Truth About Common Breakfast Food"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), 8, 9, 10, 11, np.int64(12)},
+  parent_score: 0.875,
+  score: 0.92578125), Prompt(
+  prompt: # Task
+To assess whether the given headline employs exaggeration, sensationalism, or deceptive claims primarily to entice clicks instead of conveying clear, factual information, apply these evaluation points:
+- Exaggeration: Is there an overstated significance or effect of the occurrence in the headline?
+- Sensationalism: Are provocative or emotionally charged terms used to evoke intense feelings?
+- Deceptive Claims: Does the headline imply something not substantiated by the article's content, or does it leave out key facts to cause misunderstanding?
+
+If the headline aligns with one or more of these points, categorize it as clickbait.
+
+# Exemplar
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Text: "Adults Spend 8 Hours a Day in Front of a Screen, Study Finds"
+Label: No
+
+Text: "Scientists discover new species in remote Amazon rainforest"
+Label: No
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "New Study Reveals Shocking Truth About Common Breakfast Food"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), 8, 9, 10, 11, np.int64(12)},
+  parent_score: 0.875,
+  score: 0.921875), Prompt(
+  prompt: # Task
+To determine if the following headline uses exaggeration, sensational language, or misleading statements to attract clicks rather than providing straightforward, factual information, consider the following guidelines:
+- Exaggeration: Does the headline overstate the importance or impact of the event?
+- Sensational language: Does it use dramatic or emotional words to provoke strong reactions?
+- Misleading statements: Does the headline suggest something that is not supported by the content, or does it omit critical details to create confusion?
+
+Based on these criteria, classify the headline as clickbait if it meets one or more of the above conditions.
+
+# Exemplar
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Text: "Adults Spend 8 Hours a Day in Front of a Screen, Study Finds"
+Label: No
+
+Text: "Scientists discover new species in remote Amazon rainforest"
+Label: No
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "New Study Reveals Shocking Truth About Common Breakfast Food"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), 8, 9, 10, 11, np.int64(12)},
+  parent_score: 0.875,
+  score: 0.9140625), Prompt(
+  prompt: # Task
+To assess whether the given headline employs exaggeration, sensationalism, or misleading information primarily to increase click-through rates rather than delivering clear and factual news, use the following assessment points:
+- Exaggeration: Is there an overstated significance or effect emphasized in the headline?
+- Sensationalism: Are provocative or emotionally charged terms used to elicit intense feelings?
+- Misleading Information: Does the headline imply something unsupported by the article's content, or does it leave out key facts to confuse readers?
+
+If the headline fulfills any of the above criteria, categorize it as clickbait.
+
+# Exemplar
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Text: "Adults Spend 8 Hours a Day in Front of a Screen, Study Finds"
+Label: No
+
+Text: "Scientists discover new species in remote Amazon rainforest"
+Label: No
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "New Study Reveals Shocking Truth About Common Breakfast Food"
+Label: Yes
+
+Text: "Dead body left in UK hospital alongside living patients for seven hours"
+Label: No
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(5), np.int64(6), 8, 9, 10, 11, np.int64(12)},
+  parent_score: 0.875,
+  score: 0.91015625))
+Training accuracy: (0.92578125, 0.921875, 0.9140625, 0.91015625)
+Validation accuracy: []
+Test accuracy: [0.97, 0.97, 0.96, 0.955]
+======== ROUND 2
+Time: 324.22034525871277
+Prompt: (Prompt(
+  prompt: # Task
+To evaluate whether the given headline employs exaggeration, sensational language, or misleading claims to draw clicks instead of delivering clear, factual content, follow these comprehensive criteria:
+- **Exaggeration**: Is there an overstating of the event's importance or impact seen in the headline? Keep an eye out for language that unnecessarily inflates the event’s magnitude or relevance.
+- **Sensational Language**: Does the headline include overly dramatic or emotionally stirring terms designed to provoke a strong emotional response? Spot words intended to instill feelings like alarm, exhilaration, or indignation rather than presenting impartial facts.
+- **Misleading Claims**: Does the headline hint at something not substantiated by the article’s content, or does it leave out significant details to cause misunderstanding? Confirm that the headline faithfully reflects the story without excluding vital information or making promises unfulfilled within the piece.
+
+Also, analyze the general tone and purpose behind the headline. While a single term might appear sensational, take into account whether the headline's overarching goal is to enlighten or to lure clicks through deceptive tactics.
+
+Using this framework, categorize the headline as clickbait if it satisfies any of the outlined conditions.
+
+# Exemplar
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases in One Week – Here’s the Secret!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Shocking Discovery: Ancient City Found Under Ice, Experts Stunned!"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(7), np.int64(15), np.int64(16), 20, 21, 22, 23, 24},
+  parent_score: 0.9140625,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+To evaluate whether the given headline employs exaggeration, sensationalism, or deceptive claims primarily to generate clicks instead of offering clear, factual information, use the following comprehensive framework:
+- **Exaggeration**: Analyze if the headline inflates the event's importance or scope beyond what is justified. Focus on identifying any language that excessively magnifies the event’s relevance or magnitude.
+- **Sensationalism**: Check if the headline utilizes dramatic or highly emotional terminology designed to evoke strong feelings. Highlight any vocabulary aimed at stirring up fear, thrill, or indignation, rather than presenting unbiased facts.
+- **Deception**: Investigate whether the headline implies something not substantiated by the article or omits key details that could lead to misunderstanding. Make sure the headline reflects the story's contents accurately, without leaving out essential information or making unfulfilled assertions.
+
+Furthermore, review the headline's general tone and purpose. Consider whether an overall pattern of click-attracting tactics exists, even if individual elements might appear neutral.
+
+Apply these standards to categorize the headline as clickbait if it satisfies any of the outlined characteristics.
+
+# Exemplar
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases in One Week – Here’s the Secret!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Shocking Discovery: Ancient City Found Under Ice, Experts Stunned!"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(7), np.int64(15), np.int64(16), 20, 21, 22, 23, 24},
+  parent_score: 0.9140625,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To evaluate if a headline qualifies as clickbait, consider these aspects critically, making sure they reflect the actual substance of the article:
+- Exaggeration: Verify if the headline overstates the importance or impact of the event beyond what is actually covered in the article.
+- Sensationalism: Look for the use of inflammatory or emotionally stimulating language that does not have a solid foundation based on the article's text.
+- Misleading Information: Assess if the headline suggests something that is not backed by the article or if it leaves out crucial details leading to confusion.
+
+A headline is categorized as clickbait if it utilizes one or more of the above elements to purposefully misrepresent the true content of the article. It's important to note that the use of emotionally charged language should not be the sole criterion for labeling a headline as clickbait; it must also serve to deceive readers.
+
+# Exemplar
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "Cure For Cancer Found, But Pharmaceutical Companies Suppressing It"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "How This Small Town Became the Unofficial Capital of a Strange New Religion"
+Label: No
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like "A Man In A Dress""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(4), np.int64(14), np.int64(16), np.int64(19), 20, 21, 22, 23},
+  parent_score: 0.921875,
+  score: 0.953125), Prompt(
+  prompt: # Task
+To evaluate whether the given headline employs exaggeration, sensational language, or misleading elements primarily to attract attention rather than to communicate factual information, follow these comprehensive rules:
+
+- **Exaggeration**: Check if the headline inflates the importance or scope of the event. Search for terms that disproportionately magnify the event’s relevance or size.
+- **Sensational Language**: Determine if the headline utilizes emotionally intense or highly charged vocabulary designed to trigger strong feelings. Highlight any wording meant to evoke reactions such as fear, excitement, or anger rather than presenting unbiased truths.
+- **Misleading Information**: Assess if the headline suggests information not supported by the full story or intentionally leaves out crucial details that could cause misunderstanding. Ensure the headline truthfully reflects the content without leaving out significant points or making unsubstantiated claims.
+
+Furthermore, analyze the headline's general tone and purpose. Even if a few words appear sensational, consider whether the headline is intended to provide insight or to lure readers with deceptive tactics.
+
+Based on these standards, categorize the headline as clickbait if it fulfills one or more of the outlined conditions.
+
+# Exemplar
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases in One Week – Here’s the Secret!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Shocking Discovery: Ancient City Found Under Ice, Experts Stunned!"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(7), np.int64(15), np.int64(16), 20, 21, 22, 23, 24},
+  parent_score: 0.9140625,
+  score: 0.953125))
+Training accuracy: (0.9791666666666666, 0.96875, 0.953125, 0.953125)
+Validation accuracy: []
+Test accuracy: [0.92, 0.9, 0.885, 0.89]
+======== ROUND 3
+Time: 283.3726511001587
+Prompt: (Prompt(
+  prompt: # Task
+To evaluate whether the given headline employs exaggeration, sensational language, or misleading claims to draw clicks instead of delivering clear, factual content, follow these comprehensive criteria:
+- **Exaggeration**: Is there an overstating of the event's importance or impact seen in the headline? Keep an eye out for language that unnecessarily inflates the event’s magnitude or relevance.
+- **Sensational Language**: Does the headline include overly dramatic or emotionally stirring terms designed to provoke a strong emotional response? Spot words intended to instill feelings like alarm, exhilaration, or indignation rather than presenting impartial facts.
+- **Misleading Claims**: Does the headline hint at something not substantiated by the article’s content, or does it leave out significant details to cause misunderstanding? Confirm that the headline faithfully reflects the story without excluding vital information or making promises unfulfilled within the piece.
+
+Also, analyze the general tone and purpose behind the headline. While a single term might appear sensational, take into account whether the headline's overarching goal is to enlighten or to lure clicks through deceptive tactics.
+
+Using this framework, categorize the headline as clickbait if it satisfies any of the outlined conditions.
+
+# Exemplar
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases in One Week – Here’s the Secret!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Shocking Discovery: Ancient City Found Under Ice, Experts Stunned!"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(7), np.int64(15), np.int64(16), 20, 21, 22, 23, 24},
+  parent_score: 0.9140625,
+  score: 0.9), Prompt(
+  prompt: # Task
+To evaluate whether the given headline employs exaggeration, sensationalism, or deceptive claims primarily to generate clicks instead of offering clear, factual information, use the following comprehensive framework:
+- **Exaggeration**: Analyze if the headline inflates the event's importance or scope beyond what is justified. Focus on identifying any language that excessively magnifies the event’s relevance or magnitude.
+- **Sensationalism**: Check if the headline utilizes dramatic or highly emotional terminology designed to evoke strong feelings. Highlight any vocabulary aimed at stirring up fear, thrill, or indignation, rather than presenting unbiased facts.
+- **Deception**: Investigate whether the headline implies something not substantiated by the article or omits key details that could lead to misunderstanding. Make sure the headline reflects the story's contents accurately, without leaving out essential information or making unfulfilled assertions.
+
+Furthermore, review the headline's general tone and purpose. Consider whether an overall pattern of click-attracting tactics exists, even if individual elements might appear neutral.
+
+Apply these standards to categorize the headline as clickbait if it satisfies any of the outlined characteristics.
+
+# Exemplar
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases in One Week – Here’s the Secret!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Shocking Discovery: Ancient City Found Under Ice, Experts Stunned!"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(7), np.int64(15), np.int64(16), 20, 21, 22, 23, 24},
+  parent_score: 0.9140625,
+  score: 0.8828125), Prompt(
+  prompt: # Task
+To evaluate if a headline qualifies as clickbait, consider these aspects critically, making sure they reflect the actual substance of the article:
+- Exaggeration: Verify if the headline overstates the importance or impact of the event beyond what is actually covered in the article.
+- Sensationalism: Look for the use of inflammatory or emotionally stimulating language that does not have a solid foundation based on the article's text.
+- Misleading Information: Assess if the headline suggests something that is not backed by the article or if it leaves out crucial details leading to confusion.
+
+A headline is categorized as clickbait if it utilizes one or more of the above elements to purposefully misrepresent the true content of the article. It's important to note that the use of emotionally charged language should not be the sole criterion for labeling a headline as clickbait; it must also serve to deceive readers.
+
+# Exemplar
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+Text: "Cure For Cancer Found, But Pharmaceutical Companies Suppressing It"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "How This Small Town Became the Unofficial Capital of a Strange New Religion"
+Label: No
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like "A Man In A Dress""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(4), np.int64(14), np.int64(16), np.int64(19), 20, 21, 22, 23},
+  parent_score: 0.921875,
+  score: 0.86875), Prompt(
+  prompt: # Task
+To evaluate whether the given headline employs exaggeration, sensational language, or misleading elements primarily to attract attention rather than to communicate factual information, follow these comprehensive rules:
+
+- **Exaggeration**: Check if the headline inflates the importance or scope of the event. Search for terms that disproportionately magnify the event’s relevance or size.
+- **Sensational Language**: Determine if the headline utilizes emotionally intense or highly charged vocabulary designed to trigger strong feelings. Highlight any wording meant to evoke reactions such as fear, excitement, or anger rather than presenting unbiased truths.
+- **Misleading Information**: Assess if the headline suggests information not supported by the full story or intentionally leaves out crucial details that could cause misunderstanding. Ensure the headline truthfully reflects the content without leaving out significant points or making unsubstantiated claims.
+
+Furthermore, analyze the headline's general tone and purpose. Even if a few words appear sensational, consider whether the headline is intended to provide insight or to lure readers with deceptive tactics.
+
+Based on these standards, categorize the headline as clickbait if it fulfills one or more of the outlined conditions.
+
+# Exemplar
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "Miracle Drug Cures All Diseases in One Week – Here’s the Secret!"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "Unbelievable Discovery Could Change Everything We Know About Dinosaurs!"
+Label: Yes
+
+Text: "Local Hero Saves Drowning Puppy With Quick Thinking and Bravery"
+Label: Yes
+
+Text: "Shocking Discovery: Ancient City Found Under Ice, Experts Stunned!"
+Label: Yes
+
+Text: "Scientists Discover New Species Hidden in Plain Sight!"
+Label: Yes
+
+Text: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+Label: Yes
+
+Text: "New Study Reveals How Chocolate Can Make You Thin Without Any Exercise!"
+Label: Yes
+
+Text: "Iraq on verge of civil war, head of Arab league fears"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(6), np.int64(7), np.int64(15), np.int64(16), 20, 21, 22, 23, 24},
+  parent_score: 0.9140625,
+  score: 0.859375))
+Training accuracy: (0.9, 0.8828125, 0.86875, 0.859375)
+Validation accuracy: []
+Test accuracy: [0.915, 0.9, 0.885, 0.89]
+======== ROUND 4
+Time: 327.8978283405304
+Prompt: (Prompt(
+  prompt: # Task
+To assess if a headline uses exaggeration, emotional appeal, or misleading content mainly to grab attention rather than conveying factual details, use these criteria:
+
+- **Exaggeration**: Investigate if the headline inflates the significance or magnitude of an event. Watch for words that overly emphasize the impact or size of the event.
+- **Emotional Appeal**: Determine if the headline employs emotionally charged vocabulary intended to elicit strong feelings. Note any words that aim to evoke responses like fear, enthusiasm, or indignation instead of delivering impartial information.
+- **Misleading Elements**: Evaluate if the headline suggests facts not supported by the complete article or deliberately leaves out essential details causing confusion. Confirm that the headline truthfully summarizes the content without leaving out key points or asserting unverified claims.
+
+Moreover, consider the frequent characteristics associated with clickbait headlines:
+- Referencing famous individuals, brands, or personalities.
+- Proposing simple solutions, quick outcomes, or immediate benefits.
+- Incorporating directives that encourage reader engagement.
+- Pledging hidden knowledge, unique perspectives, or confidential information.
+
+Analyze the general tone and purpose of the headline. Even when some aspects aren't obviously sensational, judge whether the headline seeks to entice readers through deceptive methods rather than sharing valuable insights.
+
+Based on these benchmarks, label the headline as clickbait if it meets any of the specified conditions.
+
+# Exemplar
+Text: "The shocking truth about what happens when you eat chocolate every day"
+Label: Yes
+
+Text: "Here's What Two Actual Southerners Think Of Reese Witherspoon's Draper James"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+You won't believe what happened when this man opened his lottery ticket! The result shocked everyone around him. But the article reveals nothing more than a standard lottery win with common odds.
+
+Text: "The Shocking Truth About What Really Happens After You Die"
+Label: Yes
+
+Text: "Miracle Cure For All Diseases Revealed By Scientist"
+Label: Yes
+
+Text: "World's Largest Pizza Served to 10,000 Hungry Fans in Italy"
+Label: Yes
+
+Text: "How This Tiny Island is Solving the World's Biggest Problems"
+Label: Yes
+
+How this small town became a global sensation overnight! The prompt may classify this as clickbait due to its exaggerated claim and potential sensationalism. Yet, if the article substantiates the claim with real events, statistical data, and interviews that validate the town’s rapid rise to fame, it could avoid being labeled as clickbait.
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like "A Man In A Dress""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(73), np.int64(108), np.int64(44), 110, 111, 112, 113, 109, np.int64(14)},
+  parent_score: 0.859375,
+  score: 0.9479166666666666), Prompt(
+  prompt: # Task
+To determine if a headline is crafted to capture attention through exaggeration, emotional provocation, or by being potentially misleading, follow these steps closely:
+
+- **Exaggeration**: Assess if the headline inflates the significance or extent of an event. Watch out for language that unnecessarily boosts the event's relevance or magnitude.
+- **Emotional Provocation**: Detect whether the headline uses strongly evocative or charged words intended to elicit intense feelings from the reader. Focus on any terminology used to spark emotions like fear, excitement, or anger, rather than presenting a neutral perspective.
+- **Misleading Elements**: Analyze if the headline suggests information not supported by the full article or deliberately leaves out important details that could lead to confusion. Make sure the headline aligns truthfully with the content, refraining from omitting key points or asserting claims without evidence.
+
+Also, be wary of these typical characteristics frequently seen in clickbait headlines:
+- Referencing famous people, renowned brands, or respected figures.
+- Implying simple solutions, rapid gains, or immediate outcomes.
+- Incorporating directives to encourage reader engagement.
+- Claiming access to secrets, private insights, or special knowledge.
+
+Consider the general mood and purpose behind the headline. Even when individual aspects do not stand out as sensational, evaluate whether the headline is designed to lure readers using deceitful methods rather than sharing valuable information.
+
+According to these criteria, label the headline as clickbait if it meets one or more of the described conditions.
+
+# Exemplar
+Text: "The shocking truth about what happens when you eat chocolate every day"
+Label: Yes
+
+Text: "Here's What Two Actual Southerners Think Of Reese Witherspoon's Draper James"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+You won't believe what happened when this man opened his lottery ticket! The result shocked everyone around him. But the article reveals nothing more than a standard lottery win with common odds.
+
+Text: "The Shocking Truth About What Really Happens After You Die"
+Label: Yes
+
+Text: "Miracle Cure For All Diseases Revealed By Scientist"
+Label: Yes
+
+Text: "World's Largest Pizza Served to 10,000 Hungry Fans in Italy"
+Label: Yes
+
+Text: "How This Tiny Island is Solving the World's Biggest Problems"
+Label: Yes
+
+How this small town became a global sensation overnight! The prompt may classify this as clickbait due to its exaggerated claim and potential sensationalism. Yet, if the article substantiates the claim with real events, statistical data, and interviews that validate the town’s rapid rise to fame, it could avoid being labeled as clickbait.
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like "A Man In A Dress""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(73), np.int64(108), np.int64(44), 110, 111, 112, 113, 109, np.int64(14)},
+  parent_score: 0.859375,
+  score: 0.9479166666666666), Prompt(
+  prompt: # Task
+To determine if a headline utilizes exaggeration, sensationalist terms, or misleading content primarily to capture attention rather than convey facts, follow these steps:
+
+- **Exaggeration**: Investigate if the headline inflates the significance or magnitude of an event. Watch out for phrases that overly emphasize the impact or size of the event.
+- **Sensational Language**: Determine if the headline incorporates emotionally charged words intended to evoke strong feelings. Pinpoint any vocabulary designed to elicit responses like fear, excitement, or anger rather than presenting neutral information.
+- **Misleading Details**: Assess if the headline suggests information not supported by the article's content or omits crucial details that could lead to confusion. Make sure the headline truthfully represents the story without leaving out major points or stating unverified claims.
+
+Also, be wary of typical characteristics associated with clickbait:
+- Mentioning famous individuals, companies, or public figures.
+- Implying simple solutions, rapid achievements, or immediate outcomes.
+- Employing calls to action to engage the audience.
+- Offering purported secrets, unique insights, or behind-the-scenes information.
+
+Consider the headline’s overall mood and purpose. If certain aspects do not appear overtly sensational but still seem to lure readers through deceptive methods rather than delivering substantial insight, they should be noted.
+
+If the headline meets one or more of the above criteria, categorize it as clickbait based on this assessment.
+
+# Exemplar
+Text: "The shocking truth about what happens when you eat chocolate every day"
+Label: Yes
+
+Text: "Here's What Two Actual Southerners Think Of Reese Witherspoon's Draper James"
+Label: Yes
+
+Text: "13 Movies That Have Iconic Mermaids That Aren't "The Little Mermaid""
+Label: Yes
+
+You won't believe what happened when this man opened his lottery ticket! The result shocked everyone around him. But the article reveals nothing more than a standard lottery win with common odds.
+
+Text: "The Shocking Truth About What Really Happens After You Die"
+Label: Yes
+
+Text: "Miracle Cure For All Diseases Revealed By Scientist"
+Label: Yes
+
+Text: "World's Largest Pizza Served to 10,000 Hungry Fans in Italy"
+Label: Yes
+
+Text: "How This Tiny Island is Solving the World's Biggest Problems"
+Label: Yes
+
+How this small town became a global sensation overnight! The prompt may classify this as clickbait due to its exaggerated claim and potential sensationalism. Yet, if the article substantiates the claim with real events, statistical data, and interviews that validate the town’s rapid rise to fame, it could avoid being labeled as clickbait.
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like "A Man In A Dress""
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(73), np.int64(108), np.int64(44), 110, 111, 112, 113, 109, np.int64(14)},
+  parent_score: 0.859375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+To assess if a given headline uses tactics such as exaggeration, sensationalism, deception, or others to attract clicks rather than conveying straightforward, factual news, apply this detailed evaluation guide:
+- **Exaggeration**: Scrutinize whether the headline overstates the significance or scale of an event beyond reasonable bounds. Pay particular attention to language that overly amplifies the event's impact or size.
+- **Sensationalism**: Examine if the headline uses overly dramatic or emotionally charged words meant to provoke powerful reactions. Identify any terms that aim to incite fear, excitement, or outrage rather than sticking to impartial facts.
+- **Deception**: Review whether the headline suggests something not supported by the article or leaves out crucial information that might cause confusion. Make certain the headline truthfully represents the story's substance, without omitting vital details or making unsubstantiated claims.
+- **Interest and Promise**: Consider whether the headline sparks curiosity or promises unique, inside information, potentially enticing clicks without delivering meaningful content. Evaluate if it uses novelty or personal intrigue to draw readers in.
+
+Take into account the headline's general tone and intent, searching for signs of techniques aimed at boosting click-through rates, even when singular aspects seem benign. Utilize these criteria to label the headline as clickbait if it exhibits any of the described traits.
+
+# Exemplar
+Text: "12 Everyday Activities That Might Actually Be Good For You" Label: Yes
+
+Text: "The Secret Habits Of Highly Successful People That You Can Start Today" Label: Yes
+
+You won't believe what happened next when these two strangers met on a train! The article turns out to be a detailed, nuanced piece about human connection and storytelling, but the dramatic headline could trick the prompt into thinking it's purely sensationalist.
+
+The shocking truth about why your phone battery doesn't last all day!
+
+The hidden treasure map that could make you rich overnight! Inside, find out how an ordinary person stumbled upon a fortune buried for centuries. The article turns out to be a fictional story about treasure hunting with no real-life application for finding treasures.
+
+Text: "Unlock Secret Tips to Boost Your Productivity by 50%"
+Label: Yes
+
+Text: "New Study Reveals Shocking Truth About Common Breakfast Food"
+Label: Yes
+
+Text: "19 Quick And Healthy Salmon Dinners That Anybody Can Make"
+Label: Yes
+
+Text: "The Most Unbelievable Miracle in the Desert Has People Asking, 'What Is This?'"
+Label: Yes
+
+Input: "The Shocking Truth About Why Your Cat Might Be Trying to Kill You"
+Label: Clickbait
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(66), np.int64(37), 102, 103, 104, 105, np.int64(10), 106, np.int64(76), np.int64(92)},
+  parent_score: 0.8828125,
+  score: 0.9270833333333334))
+Training accuracy: (0.9479166666666666, 0.9479166666666666, 0.9375, 0.9270833333333334)
+Validation accuracy: []
+Test accuracy: [0.94, 0.945, 0.945, 0.91]

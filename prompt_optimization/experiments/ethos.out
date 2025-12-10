@@ -1,25 +1,883 @@
 {"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 9.08810830116272
-Prompt: ('# Task\nIs the following text hate speech?\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
-Training accuracy: (0.85546875,)
+Time: 11.48710322380066
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.8515625),)
+Training accuracy: (0.8515625,)
 Validation accuracy: [0.82]
 Test accuracy: [0.88]
 ======== ROUND 1
-Time: 49.17951035499573
-Prompt: ('# Task\nTo assess whether the given text constitutes hate speech, use these criteria: hate speech specifically aims at a protected group with malicious intent, employs language that dehumanizes, or advocates violence towards a particular group. Classify the text as hate speech if it satisfies any of these conditions; otherwise, do not classify it as such.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo determine if the following text is hate speech, consider the following guidelines: Hate speech explicitly targets a protected group with harmful intent, uses dehumanizing language, or promotes violence against a specific group. If the text meets these criteria, classify it as hate speech; otherwise, do not classify it as hate speech.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nAssess whether the provided text constitutes hate speech, remembering that it usually includes explicit encouragement of discrimination, hostility, or violence towards people due to their protected attributes like race, religion, ethnic background, or sexual orientation.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo assess whether the given text constitutes hate speech, use these criteria: Hate speech clearly aims at a protected group with malicious intent, employs dehumanizing terms, or advocates for violence against a particular group. Classify the text as hate speech if it satisfies any of these conditions; otherwise, do not classify it as such.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (0.921875, 0.91015625, 0.90234375, 0.8984375)
-Validation accuracy: [0.82, 0.82, 0.86, 0.8]
-Test accuracy: [0.9, 0.9, 0.91, 0.9]
+Time: 80.30727243423462
+Prompt: (Prompt(
+  prompt: # Task
+Is this text considered hate speech, which is defined as showing prejudice or hostility toward people or groups because of their race, ethnicity, religion, national origin, gender, sexual orientation, age, or disability? Evaluate if the content targets these specific attributes in a discriminatory way, distinct from critiquing general actions or topics.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "This so-called expert knows less than a high school dropout."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "They always cause trouble wherever they go, but I guess that’s just part of being who they are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), 5, np.int64(6), np.int64(7), 8},
+  parent_score: 0.8515625,
+  score: 0.94140625), Prompt(
+  prompt: # Task
+Does this text constitute hate speech, defined as an expression of prejudice or hostility towards individuals or groups based on their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability? Consider whether the text targets these protected characteristics in a discriminatory manner, rather than expressing disagreement or criticism on general issues or behaviors.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "This so-called expert knows less than a high school dropout."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "They always cause trouble wherever they go, but I guess that’s just part of being who they are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), 5, np.int64(6), np.int64(7), 8},
+  parent_score: 0.8515625,
+  score: 0.93359375), Prompt(
+  prompt: # Task
+Does this text qualify as hate speech, which is the manifestation of bias or antagonism toward people or groups because of their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability? Evaluate if the text singles out these specific traits in a prejudiced fashion, rather than just voicing disagreements or critiques about general topics or actions.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "This so-called expert knows less than a high school dropout."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "They always cause trouble wherever they go, but I guess that’s just part of being who they are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), 5, np.int64(6), np.int64(7), 8},
+  parent_score: 0.8515625,
+  score: 0.93359375), Prompt(
+  prompt: # Task
+Is this text considered hate speech, which is the expression of prejudice or hostility toward people or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability? Evaluate if the content specifically discriminates against these protected traits, rather than simply disagreeing with viewpoints or behaviors.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "This so-called expert knows less than a high school dropout."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "They always cause trouble wherever they go, but I guess that’s just part of being who they are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(4), 5, np.int64(6), np.int64(7), 8},
+  parent_score: 0.8515625,
+  score: 0.93359375))
+Training accuracy: (0.94140625, 0.93359375, 0.93359375, 0.93359375)
+Validation accuracy: [0.86, 0.86, 0.86, 0.86]
+Test accuracy: [0.9, 0.9, 0.9, 0.9]
 ======== ROUND 2
-Time: 177.68237924575806
-Prompt: ('# Task\nTo accurately assess whether the given text constitutes hate speech, consider the following refined criteria: hate speech specifically targets a protected group with malicious intent, uses language that dehumanizes the group, or promotes direct violence against the group. However, strong opinions or negative sentiments alone, without clear targeting of a protected group, should not be classified as hate speech. Additionally, ensure to distinguish between hate speech and criticism or satire of cultural practices, holidays, or religious beliefs, which do not typically qualify as hate speech if they do not target individuals within a protected group with malicious intent.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo effectively determine if the provided text is considered hate speech, apply these clarified guidelines: hate speech particularly aims at a protected group with harmful intentions, employs language that demeans the group, or advocates for direct aggression against the group. Nevertheless, robust viewpoints or negative emotions, in the absence of explicit targeting of a protected group, should not be categorized as hate speech. Furthermore, make sure to differentiate between hate speech and critique or parody concerning cultural traditions, festivals, or religious convictions, which generally do not fall under hate speech unless they specifically aim at individuals from a protected group with ill will.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo determine if the following text is hate speech, consider the following guidelines: Hate speech explicitly targets a protected group with harmful intent, uses dehumanizing language, or promotes violence against a specific group. If the text meets these criteria, classify it as hate speech; otherwise, do not classify it as hate speech.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo determine if the given text qualifies as hate speech, apply these precise guidelines: Hate speech singles out a protected group with malicious intent via clear incitements to violence, degrading terminology, or advocacy for prejudiced dominance over others. Also, make sure the text is not simply expressing strong opinions or criticisms that do not include direct threats or encouragement of harm. Classify the text as hate speech if it fulfills any of the specified conditions; otherwise, do not label it as hate speech.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (0.9479166666666666, 0.9479166666666666, 0.9479166666666666, 0.9375)
-Validation accuracy: [0.78, 0.84, 0.82, 0.82]
-Test accuracy: [0.88, 0.89, 0.9, 0.89]
+Time: 296.51643657684326
+Prompt: (Prompt(
+  prompt: # Task
+Is this passage considered hate speech, which involves showing bias or hostility toward people or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability? For it to be categorized as hate speech, the content needs to contain clearly offensive words, negative generalizations, or direct assaults focused on these protected traits. Mere disagreement or critique about actions or policies does not qualify. Crucial for recognizing hate speech is the use of language that discriminates by undermining, dehumanizing, or threatening a protected group.
+
+# Exemplar
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "That is just some typical lazy behavior, all they do is sit around and collect welfare."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Those people are just parasites, taking advantage of our system without contributing anything."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "They think it's funny but they're just lazy and don't want to learn the language."
+Label: No
+
+Text: "Women should stay at home and leave business to men."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(12), np.int64(13), 15, 16, np.int64(17), 18, np.int64(19)},
+  parent_score: 0.93359375,
+  score: 0.984375), Prompt(
+  prompt: # Task
+Identify hate speech as content specifically targeting race, ethnicity, religion, national origin, gender, sexual orientation, age, or disability with prejudiced or hostile language. To distinguish hate speech from criticism, consider whether the content attacks or degrades individuals or groups based solely on their protected characteristics rather than their actions or beliefs. Examples of non-hate speech include expressing frustration or dissatisfaction without targeting protected characteristics, discussing actions unrelated to group membership, or critiquing religious practices rather than individuals.
+
+# Exemplar
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "They always cause trouble wherever they go, but I guess that’s just part of being who they are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(4), np.int64(7), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.94140625,
+  score: 0.96875), Prompt(
+  prompt: # Task
+This content will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressions of bias or animosity towards individuals or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability. For content to be deemed hate speech, it must explicitly focus on one or more of these specific traits in a discriminatory way, instead of critiquing general behaviors or issues. If the content shows bias or animosity towards persons or groups merely for being members of a protected class, it will be categorized as hate speech. Conversely, if the content critiques beliefs, customs, or actions without singling out a protected trait, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.96875), Prompt(
+  prompt: # Task
+This text will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressing bias or animosity towards individuals or groups due to their race, ethnicity, religion, country of origin, gender, sexual orientation, age, or disability. For the text to be deemed hate speech, it should explicitly focus on one or more of these specified traits in a prejudiced way, instead of commenting on general behaviors or subjects. If the text conveys bias or animosity towards individuals or groups purely based on their affiliation with a protected class, it will be categorized as hate speech. Conversely, if the text critiques beliefs, activities, or actions without focusing on a protected attribute, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.96875))
+Training accuracy: (0.984375, 0.96875, 0.96875, 0.96875)
+Validation accuracy: [0.84, 0.84, 0.86, 0.88]
+Test accuracy: [0.89, 0.91, 0.9, 0.88]
 ======== ROUND 3
-Time: 200.3721694946289
-Prompt: ('# Task\nTo accurately assess whether the given text constitutes hate speech, consider the broader context beyond just identifying a protected group; focus also on the tone and intent of the language used. Hate speech specifically targets a protected group with malicious intent, uses language that dehumanizes the group, or promotes direct violence against the group. However, strong opinions or negative sentiments alone, without clear targeting of a protected group, should not be classified as hate speech. Pay close attention to derogatory terms, slurs, and phrases that demean specific groups, even when the protected status of the group is not overtly mentioned. Furthermore, distinguish between hate speech and criticism or satire of cultural practices, holidays, or religious beliefs, which do not typically qualify as hate speech if they do not target individuals within a protected group with malicious intent. To avoid misclassification, examine the text for any language that conveys prejudice, contempt, or hostility towards a group, regardless of whether the group is directly named or clearly identified.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo accurately assess whether the given text constitutes hate speech, consider the following refined criteria: hate speech specifically targets a protected group with malicious intent, uses language that dehumanizes the group, or promotes direct violence against the group. However, strong opinions or negative sentiments alone, without clear targeting of a protected group, should not be classified as hate speech. Additionally, ensure to distinguish between hate speech and criticism or satire of cultural practices, holidays, or religious beliefs, which do not typically qualify as hate speech if they do not target individuals within a protected group with malicious intent.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo determine if the given text qualifies as hate speech, apply these precise guidelines: Hate speech singles out a protected group with malicious intent via clear incitements to violence, degrading terminology, or advocacy for prejudiced dominance over others. Also, make sure the text is not simply expressing strong opinions or criticisms that do not include direct threats or encouragement of harm. Classify the text as hate speech if it fulfills any of the specified conditions; otherwise, do not label it as hate speech.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nTo assess whether the provided text constitutes hate speech, follow these detailed criteria: Hate speech specifically aims at a protected group with harmful intentions via direct calls to violence, derogatory terminology, promotion of discriminatory superiority over others, or articulation of disdain and animosity toward the group. Distinguish between robust criticism or personal opinion, which may not amount to hate speech, and language that reveals prejudiced perspectives or urges harm against a protected group, even if implicit. Should the text exhibit evident or nuanced signs of prejudice, disrespect, or animosity toward a protected group, categorize it as hate speech. Otherwise, avoid applying this label unnecessarily.\n\n# Exemplar\nExample goes here\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (0.9375, 0.9375, 0.9375, 0.9375)
-Validation accuracy: [0.82, 0.78, 0.82, 0.82]
-Test accuracy: [0.89, 0.88, 0.89, 0.91]
+Time: 299.4040689468384
+Prompt: (Prompt(
+  prompt: # Task
+This content will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressions of bias or animosity towards individuals or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability. For content to be deemed hate speech, it must explicitly focus on one or more of these specific traits in a discriminatory way, instead of critiquing general behaviors or issues. If the content shows bias or animosity towards persons or groups merely for being members of a protected class, it will be categorized as hate speech. Conversely, if the content critiques beliefs, customs, or actions without singling out a protected trait, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.9479166666666666), Prompt(
+  prompt: # Task
+Is this passage considered hate speech, which involves showing bias or hostility toward people or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability? For it to be categorized as hate speech, the content needs to contain clearly offensive words, negative generalizations, or direct assaults focused on these protected traits. Mere disagreement or critique about actions or policies does not qualify. Crucial for recognizing hate speech is the use of language that discriminates by undermining, dehumanizing, or threatening a protected group.
+
+# Exemplar
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "That is just some typical lazy behavior, all they do is sit around and collect welfare."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Those people are just parasites, taking advantage of our system without contributing anything."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "They think it's funny but they're just lazy and don't want to learn the language."
+Label: No
+
+Text: "Women should stay at home and leave business to men."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(12), np.int64(13), 15, 16, np.int64(17), 18, np.int64(19)},
+  parent_score: 0.93359375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+Identify hate speech as content specifically targeting race, ethnicity, religion, national origin, gender, sexual orientation, age, or disability with prejudiced or hostile language. To distinguish hate speech from criticism, consider whether the content attacks or degrades individuals or groups based solely on their protected characteristics rather than their actions or beliefs. Examples of non-hate speech include expressing frustration or dissatisfaction without targeting protected characteristics, discussing actions unrelated to group membership, or critiquing religious practices rather than individuals.
+
+# Exemplar
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "They always cause trouble wherever they go, but I guess that’s just part of being who they are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(4), np.int64(7), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.94140625,
+  score: 0.9375), Prompt(
+  prompt: # Task
+This text will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressing bias or animosity towards individuals or groups due to their race, ethnicity, religion, country of origin, gender, sexual orientation, age, or disability. For the text to be deemed hate speech, it should explicitly focus on one or more of these specified traits in a prejudiced way, instead of commenting on general behaviors or subjects. If the text conveys bias or animosity towards individuals or groups purely based on their affiliation with a protected class, it will be categorized as hate speech. Conversely, if the text critiques beliefs, activities, or actions without focusing on a protected attribute, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.9375))
+Training accuracy: (0.9479166666666666, 0.9375, 0.9375, 0.9375)
+Validation accuracy: [0.86, 0.84, 0.84, 0.88]
+Test accuracy: [0.9, 0.89, 0.91, 0.88]
+======== ROUND 4
+Time: 306.4175660610199
+Prompt: (Prompt(
+  prompt: # Task
+This content will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressions of bias or animosity towards individuals or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability. For content to be deemed hate speech, it must explicitly focus on one or more of these specific traits in a discriminatory way, instead of critiquing general behaviors or issues. If the content shows bias or animosity towards persons or groups merely for being members of a protected class, it will be categorized as hate speech. Conversely, if the content critiques beliefs, customs, or actions without singling out a protected trait, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.984375), Prompt(
+  prompt: # Task
+This text will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressing bias or animosity towards individuals or groups due to their race, ethnicity, religion, country of origin, gender, sexual orientation, age, or disability. For the text to be deemed hate speech, it should explicitly focus on one or more of these specified traits in a prejudiced way, instead of commenting on general behaviors or subjects. If the text conveys bias or animosity towards individuals or groups purely based on their affiliation with a protected class, it will be categorized as hate speech. Conversely, if the text critiques beliefs, activities, or actions without focusing on a protected attribute, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.984375), Prompt(
+  prompt: # Task
+Recognize hate speech as expressions that specifically aim at individuals or groups based on traits such as race, ethnicity, religion, national origin, gender, sexual orientation, age, or disability, using biased or aggressive language. Distinguish this from legitimate criticism by examining if the content targets people for who they are rather than what they do or believe. Criticism should focus on specific behaviors, policies, or actions rather than attacking someone's core identity. Non-hate speech examples include voicing discontent without singling out protected traits, commenting on actions that don't stem from group affiliations, or criticizing practices of a religion instead of its followers. Furthermore, expression of intense negative feelings should not be labeled as hate speech if it criticizes actions or policies rather than the personal characteristics of individuals.
+
+# Exemplar
+Text: "They all look the same to me, why can't they just blend in?"
+Label: Yes
+
+Text: "Everyone knows that it's just a joke, lighten up!"
+Label: No
+
+Text: "All Muslims should be banned from entering this country."
+Label: Yes
+
+Text: "I can't believe white people get all the opportunities."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything."
+Label: Yes
+
+Text: "Shame on you for believing in such foolish traditions; they hold no real value."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "That's just great, another one of those [ethnic slur] people coming over, taking all our jobs. We need to keep them out."
+Label: Yes
+
+Text: "Disabled people always need special treatment which is unfair to others."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(46), np.int64(14), 80, 81, np.int64(50), 83, 82, 84, np.int64(54)},
+  parent_score: 0.9375,
+  score: 0.96875), Prompt(
+  prompt: # Task
+Is this passage considered hate speech, which involves showing bias or hostility toward people or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability? For it to be categorized as hate speech, the content needs to contain clearly offensive words, negative generalizations, or direct assaults focused on these protected traits. Mere disagreement or critique about actions or policies does not qualify. Crucial for recognizing hate speech is the use of language that discriminates by undermining, dehumanizing, or threatening a protected group.
+
+# Exemplar
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+Text: "That is just some typical lazy behavior, all they do is sit around and collect welfare."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Those people are just parasites, taking advantage of our system without contributing anything."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "They think it's funny but they're just lazy and don't want to learn the language."
+Label: No
+
+Text: "Women should stay at home and leave business to men."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(12), np.int64(13), 15, 16, np.int64(17), 18, np.int64(19)},
+  parent_score: 0.93359375,
+  score: 0.96875))
+Training accuracy: (0.984375, 0.984375, 0.96875, 0.96875)
+Validation accuracy: [0.86, 0.88, 0.82, 0.84]
+Test accuracy: [0.9, 0.88, 0.9, 0.89]
+======== ROUND 5
+Time: 307.50389432907104
+Prompt: (Prompt(
+  prompt: # Task
+This content will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressions of bias or animosity towards individuals or groups due to their race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability. For content to be deemed hate speech, it must explicitly focus on one or more of these specific traits in a discriminatory way, instead of critiquing general behaviors or issues. If the content shows bias or animosity towards persons or groups merely for being members of a protected class, it will be categorized as hate speech. Conversely, if the content critiques beliefs, customs, or actions without singling out a protected trait, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.96875), Prompt(
+  prompt: # Task
+This text will undergo assessment to identify whether it qualifies as hate speech. Hate speech is characterized by expressing bias or animosity towards individuals or groups due to their race, ethnicity, religion, country of origin, gender, sexual orientation, age, or disability. For the text to be deemed hate speech, it should explicitly focus on one or more of these specified traits in a prejudiced way, instead of commenting on general behaviors or subjects. If the text conveys bias or animosity towards individuals or groups purely based on their affiliation with a protected class, it will be categorized as hate speech. Conversely, if the text critiques beliefs, activities, or actions without focusing on a protected attribute, it will not be considered hate speech.
+
+# Exemplar
+Text: "People are getting tired of being called racists when they stand up for their country's rights."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "Women are not fit for leadership roles; they're too emotional."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "The stupidest people come from that country. They should leave our land."
+Label: Yes
+
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(7), np.int64(8), 11, 12, np.int64(13), 14, 15},
+  parent_score: 0.94140625,
+  score: 0.9479166666666666), Prompt(
+  prompt: # Task
+This content will be evaluated to determine if it constitutes hate speech. Hate speech is defined as communication that displays prejudice or hostility toward people or groups based on race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability. To be classified as hate speech, the content must specifically target one or more of these characteristics with discriminatory intent, rather than addressing general conduct or topics. Although the use of racial slurs or insulting terms aimed at protected categories often points to hate speech, the overall context and purpose of the language used should also be taken into account. If the content exhibits prejudice or hostility toward individuals or groups solely because of their association with a protected class, it will be identified as hate speech. However, if the content criticizes beliefs, actions, or behaviors without concentrating on a protected characteristic, it will not be labeled as hate speech.
+
+# Exemplar
+Text: "Everyone knows that it's just a joke, lighten up!"
+Label: No
+
+Text: "They think they're better than everyone else just because of their skin color, but really they're nothing special."
+Label: No
+
+Text: "I can't believe anyone would support that backwards country."
+Label: No
+
+Text: "That type of behavior is only tolerated in certain races."
+Label: Yes
+
+Text: "Women who work are just doing it for the money, not because they have any real skills."
+Label: No
+
+Text: "I don't understand why people can't just get along without insulting each other's backgrounds."
+Label: No
+
+Text: "It's unbelievable how much crime comes from that neighborhood filled with immigrants."
+Label: Yes
+
+Text: "The way some people from your community behave is really disappointing."
+Label: No
+
+Text: "This person is nothing but a waste of space and resources, they should never have been allowed to stay here."
+Label: No
+
+Text: "That gay person over there just ruined the whole place with their presence."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), 103, 105, 106, 107, np.int64(40), 104, np.int64(78), np.int64(80), np.int64(28)},
+  parent_score: 0.984375,
+  score: 0.9375), Prompt(
+  prompt: # Task
+Detect instances of hate speech, defined as communications that single out individuals or groups due to inherent attributes like race, ethnicity, religion, nationality, gender, sexual orientation, age, or disability, through the use of prejudiced or harsh language. Differentiate between hate speech and valid critique by assessing if the content targets an individual’s fundamental identity rather than their conduct, policies, or activities. Expressions classified as hate speech encompass, but are not limited to, explicit racial epithets, insulting terms directed at marginalized groups, or statements suggesting that someone should be institutionalized based on their physical traits. Remarks concerning specific actions, policies, or behaviors towards individuals do not fall under hate speech unless they employ discriminatory language relating to protected statuses. For instance, voicing dissatisfaction with a policy or action without emphasizing protected traits, discussing actions independent of group associations, or critiquing religious practices without targeting the practitioners, do not qualify as hate speech. Conversely, utilizing extremely negative terminology that focuses on the personal characteristics of individuals is invariably categorized as hate speech. Moreover, unequivocal examples of hate speech involve overtly insulting or derogatory remarks directed at particular groups, irrespective of the surrounding context.
+
+# Exemplar
+Text: "This group is just a bunch of radical troublemakers, but I don't have a problem with their religion itself"
+Label: No
+
+Text: "Women who refuse to conform to traditional norms are just confused." Label: Yes
+
+Text: "This new immigrant policy is going to ruin our country!" Label: No
+
+Text: "I'd get my money back if I were you. Your sex change was a complete failure."
+Label: Yes
+
+Text: "I can't believe that blind people can be so lazy and not contribute to society."
+Label: Yes
+
+Text: "They think they can just come here and take our jobs because of their [religion]."
+Label: Yes
+
+Text: "Women are so annoying when they complain about equal pay. They just need to work harder and shut up."
+Label: Yes
+
+Text: "This policy is absolutely ridiculous, they should really reconsider their stance."
+Label: No
+
+Text: "The way those immigrants come here and take our jobs, it's beyond me why anyone would support them."
+Label: Yes
+
+Text: "Their traditions are so backward, they should just disappear already."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(75), 108, 109, 110, 111, 112, np.int64(49), np.int64(85), np.int64(22), np.int64(62)},
+  parent_score: 0.96875,
+  score: 0.9375))
+Training accuracy: (0.96875, 0.9479166666666666, 0.9375, 0.9375)
+Validation accuracy: [0.86, 0.88, 0.84, 0.82]
+Test accuracy: [0.9, 0.88, 0.9, 0.92]

@@ -1,0 +1,1575 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-9-12.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 11.797163248062134
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.62890625),)
+Training accuracy: (0.62890625,)
+Validation accuracy: [0.5582655826558266]
+Test accuracy: [0.561822125813449]
+======== ROUND 1
+Time: 157.97954511642456
+Prompt: (Prompt(
+  prompt: # Task
+Utilize the Given Statement, Context (such as Job Position, State, Political Party), and any additional pertinent information to meticulously examine the relationship between the provided data and the statement. Reflect on how the job position, state, political party, and context might affect the credibility of the statement. Following this thorough examination, decide whether the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(7), np.int64(8), np.int64(10), 11, 12, 13, 14},
+  parent_score: 0.62890625,
+  score: 0.6354166666666666), Prompt(
+  prompt: # Task
+Using the Given Statement along with Context such as Job Position, State, and Political Party, conduct a thorough examination of the relationship between these elements and the statement. Evaluate how the job position, state affiliation, political party, and additional contextual details might affect the credibility of the statement. After completing this detailed analysis, decide whether the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(7), np.int64(8), np.int64(10), 11, 12, 13, 14},
+  parent_score: 0.62890625,
+  score: 0.6328125), Prompt(
+  prompt: # Task
+Based on the Given Statement, along with the Context such as Job Title, State, and Party affiliation, perform a thorough examination to understand the relationship between the provided elements and the Statement. Assess how these factors might affect the credibility of the Statement. Following your detailed analysis, decide whether the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(7), np.int64(8), np.int64(10), 11, 12, 13, 14},
+  parent_score: 0.62890625,
+  score: 0.6328125), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.6171875))
+Training accuracy: (0.6354166666666666, 0.6328125, 0.6328125, 0.6171875)
+Validation accuracy: [0.6504065040650406, 0.6585365853658537, 0.6476964769647696, 0.5555555555555556]
+Test accuracy: [0.6854663774403471, 0.6767895878524945, 0.6832971800433839, 0.5639913232104121]
+======== ROUND 2
+Time: 381.20989441871643
+Prompt: (Prompt(
+  prompt: # Task
+Examine the Provided Statement in conjunction with supplementary details like Job Title, Location, Political Affiliation, and more pertinent data. Your objective is to assess the factual correctness of the Provided Statement. Utilize the supplementary details mainly to uncover possible biases or extra contextual information that could affect how you interpret the Statement; however, avoid letting these elements alone dictate your conclusion. Concentrate on pinpointing any verifiable truths or discrepancies directly within the Provided Statement. Following a comprehensive analysis of both the Provided Statement and supplementary details, determine if the Provided Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(12), np.int64(16), np.int64(21), 26, 27, np.int64(28), 29, np.int64(30)},
+  parent_score: 0.6354166666666666,
+  score: 0.71875), Prompt(
+  prompt: # Task
+Utilize the Given Statement, Context (including Job Position, State, Political Party), and any additional pertinent information to thoroughly evaluate the relationship between the provided data and the statement. Consider the expertise, potential biases, and relevant experiences associated with the job position and political affiliation when assessing the credibility of the statement. For example, a statement made by someone in a position of authority or with relevant experience in the subject matter should be given more weight. After this comprehensive evaluation, decide whether the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(6), np.int64(10), np.int64(11), np.int64(17), np.int64(22), 26, 27, 28, 29, 30},
+  parent_score: 0.6354166666666666,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Using the Provided Statement, Context (which includes details like Job Position, State, and Political Party), along with any other relevant information, critically assess how well the given data aligns with the statement. Take into account the job role's expertise, possible biases, and related experiences, as well as the individual's political affiliation, to gauge the statement's reliability. Statements from individuals holding authoritative roles or having direct experience in the topic area should be regarded with greater importance. Following this thorough analysis, determine if the Statement is False (Yes) or True (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(6), np.int64(10), np.int64(11), np.int64(17), np.int64(22), 26, 27, 28, 29, 30},
+  parent_score: 0.6354166666666666,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Based on the Provided Statement, along with details such as Job Title, Geographic Location, and Political Affiliation, conduct a thorough evaluation of the statement’s accuracy in relation to established facts and expected behaviors or positions associated with these details. Each detail—the job title, geographic location, political affiliation, and any other relevant context—must be weighed equally to assess their influence on the reliability of the statement. Consider how the statement aligns with what would typically be said or done in the given role and situation. Following this comprehensive assessment, determine if the statement is likely to be false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(6), np.int64(7), np.int64(11), np.int64(14), 26, 27, 28, 29, 30},
+  parent_score: 0.6354166666666666,
+  score: 0.6875))
+Training accuracy: (0.71875, 0.6875, 0.6875, 0.6875)
+Validation accuracy: [0.6558265582655827, 0.6612466124661247, 0.6585365853658537, 0.6449864498644986]
+Test accuracy: [0.6898047722342733, 0.6963123644251626, 0.6724511930585684, 0.6854663774403471]
+======== ROUND 3
+Time: 374.3906898498535
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate the Given Statement for its factual accuracy, considering it in isolation initially. Begin by assessing if the information contained within the statement holds up independently, separate from extraneous information such as Position, Geographic Location, Ideological Alignment, and other contextual factors. Utilize this additional information only to uncover possible biases or extra layers of meaning that might influence how the statement is understood; however, refrain from basing your final determination solely on these elements. Once you have verified the factual basis of the Given Statement, reassess it while keeping in mind the supplementary details to confirm that your assessment remains unbiased. Ultimately, decide if the Given Statement is false (Yes) or true (No) after completing this dual assessment process.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(42), 76, 77, 78, 79, 80, np.int64(18), np.int64(51), np.int64(55)},
+  parent_score: 0.71875,
+  score: 0.70625), Prompt(
+  prompt: # Task
+Review the Given Statement along with extra information like Position, Geographic Area, Political Alignment, and other relevant facts. Your goal is to assess the truthfulness of the Given Statement. Utilize the additional information mainly to uncover possible biases or further context that might affect your understanding of the statement; however, do not let these factors solely determine your judgment. Concentrate on pinpointing any verifiable facts or inconsistencies directly in the Given Statement. For statements involving forecasts or hypothetical situations, consider them true if they correspond logically to the speaker's background and circumstances. Following a detailed examination of the Given Statement and supporting information, decide whether the Given Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(69), np.int64(12), 77, 78, 76, 80, np.int64(17), 79, np.int64(51), np.int64(23)},
+  parent_score: 0.71875,
+  score: 0.703125), Prompt(
+  prompt: # Task
+Assess the Provided Statement for its factual accuracy independently of supplementary information such as Job Title, Location, Political Affiliation, and other contextual details. Begin by evaluating if the facts within the statement hold true on their own. Then utilize the supplementary details only to uncover any potential biases or additional context that might affect how the statement is understood, without letting these factors alone sway your assessment. Once you have confirmed the factual correctness of the Provided Statement, reconsider it with the supplementary details to ensure no underlying biases are influencing your evaluation. Finally, decide if the Provided Statement is false (Yes) or true (No) based on this two-part process.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(42), 76, 77, 78, 79, 80, np.int64(18), np.int64(51), np.int64(55)},
+  parent_score: 0.71875,
+  score: 0.6979166666666666), Prompt(
+  prompt: # Task
+First, carefully examine the content of the Statement independently of the provided context. Next, utilize the Job Position, State, Political Party, and additional Context to assess the reliability and possible biases of the speaker. Take into account the speaker’s expertise and past statements related to the subject matter. Evaluate whether the Statement aligns with factual information and common knowledge given the context. Furthermore, consider the relevance of the speaker’s role and background in relation to the topic at hand. After a thorough analysis, determine if the Statement is true (No) or false (Yes).
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, np.int64(2), np.int64(42), np.int64(51), np.int64(89), np.int64(27), 92, 93, 94, 95},
+  parent_score: 0.6875,
+  score: 0.6875))
+Training accuracy: (0.70625, 0.703125, 0.6979166666666666, 0.6875)
+Validation accuracy: [0.6720867208672087, 0.6531165311653117, 0.6693766937669376, 0.6639566395663956]
+Test accuracy: [0.6832971800433839, 0.7093275488069414, 0.6898047722342733, 0.7158351409978309]
+======== ROUND 4
+Time: 380.40371084213257
+Prompt: (Prompt(
+  prompt: # Task
+Assess the Provided Statement strictly based on its factual content first, disregarding any supplementary information such as Job Title, Location, Political Affiliation, and other contextual details. Evaluate whether the facts contained within the statement are verifiable and true. Next, consider the supplementary information solely to identify any potential biases or additional context that may influence the understanding of the statement, but do not let these factors alone affect your initial assessment of factual accuracy. After confirming the factual correctness of the Provided Statement, reassess it using the supplementary information to ensure there are no hidden biases or additional context affecting the truthfulness of the statement. Finally, conclude whether the Provided Statement is false (Yes) or true (No) based on this comprehensive two-part process.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(36), 135, 136, 137, 138, 139, np.int64(12), np.int64(125), np.int64(93)},
+  parent_score: 0.6979166666666666,
+  score: 0.65625), Prompt(
+  prompt: # Task
+Evaluate the Given Statement for its factual accuracy, considering it in isolation initially. Begin by assessing if the information contained within the statement holds up independently, separate from extraneous information such as Position, Geographic Location, Ideological Alignment, and other contextual factors. Utilize this additional information only to uncover possible biases or extra layers of meaning that might influence how the statement is understood; however, refrain from basing your final determination solely on these elements. Once you have verified the factual basis of the Given Statement, reassess it while keeping in mind the supplementary details to confirm that your assessment remains unbiased. Ultimately, decide if the Given Statement is false (Yes) or true (No) after completing this dual assessment process.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(42), 76, 77, 78, 79, 80, np.int64(18), np.int64(51), np.int64(55)},
+  parent_score: 0.71875,
+  score: 0.6041666666666666), Prompt(
+  prompt: # Task
+Evaluate the accuracy of the Given Statement by initially analyzing each main fact separately. Then, consider additional information like Position, Geographic Area, Political Leanings, and the Surrounding Circumstances to conduct a second assessment. Pay special attention to identifying and reducing any biases that could affect how the facts are interpreted. This combination of extra information should lead to a thorough reassessment of the statement's validity, without allowing biases to disproportionately impact the analysis. Following both evaluations, determine whether the Given Statement is false (Yes) or true (No), based on an in-depth examination that takes into account both the primary facts and the additional context supplied.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(36), 135, 136, 137, 138, 139, np.int64(108), np.int64(46), np.int64(114), np.int64(23)},
+  parent_score: 0.6979166666666666,
+  score: 0.59375), Prompt(
+  prompt: # Task
+Assess the Provided Statement for its factual accuracy independently of supplementary information such as Job Title, Location, Political Affiliation, and other contextual details. Begin by evaluating if the facts within the statement hold true on their own. Then utilize the supplementary details only to uncover any potential biases or additional context that might affect how the statement is understood, without letting these factors alone sway your assessment. Once you have confirmed the factual correctness of the Provided Statement, reconsider it with the supplementary details to ensure no underlying biases are influencing your evaluation. Finally, decide if the Provided Statement is false (Yes) or true (No) based on this two-part process.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(42), 76, 77, 78, 79, 80, np.int64(18), np.int64(51), np.int64(55)},
+  parent_score: 0.71875,
+  score: 0.59375))
+Training accuracy: (0.65625, 0.6041666666666666, 0.59375, 0.59375)
+Validation accuracy: [0.6531165311653117, 0.6720867208672087, 0.6476964769647696, 0.6693766937669376]
+Test accuracy: [0.6963123644251626, 0.6832971800433839, 0.6984815618221258, 0.6898047722342733]
+======== ROUND 5
+Time: 330.11452412605286
+Prompt: (Prompt(
+  prompt: # Task
+Assess the accuracy of the Provided Statement on its own merit first. Start by determining if the information in the statement stands correct without taking into account additional factors like Position, Geographic Setting, Political Orientation, and other situational elements. Use these additional factors solely to uncover any underlying biases or deeper implications that could affect understanding of the statement. To do this methodically, adhere to the following guidelines:
+
+1. Perform an initial standalone analysis of the accuracy of the Provided Statement.
+2. Examine the additional context given, which includes Position, Geographic Setting, Political Orientation, and Surrounding Circumstances.
+3. Reflect on how this additional context could shape the interpretation of the Provided Statement and pinpoint any biases introduced.
+4. Reevaluate the Provided Statement by incorporating the insights from the additional context to maintain an objective perspective.
+5. Conclude whether the Provided Statement is false (Yes) or true (No) after completing both stages of the assessment.
+
+This systematic procedure guarantees a comprehensive and impartial review of the Provided Statement.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(98), np.int64(99), np.int64(71), np.int64(169), 170, 171, 172, 173, 174, np.int64(21)},
+  parent_score: 0.6041666666666666,
+  score: 0.66875), Prompt(
+  prompt: # Task
+Evaluate the Given Statement for its factual accuracy, focusing initially on the information contained within the statement itself, independent of other contextual factors such as Position, Geographic Location, Ideological Alignment, and other supplementary details. Use this additional information solely to uncover potential biases or deeper layers of meaning that could influence the interpretation of the statement. However, ensure that your final determination prioritizes the factual independence of the statement over these contextual influences. After verifying the factual basis of the Given Statement, reassess it by integrating the supplementary details to confirm that your assessment remains unbiased and free from hidden contradictions. Ultimately, decide if the Given Statement is false (Yes) or true (No) based on this comprehensive but prioritized evaluation process.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(130), np.int64(102), 170, 171, 172, 173, 174, np.int64(81), np.int64(51), np.int64(95)},
+  parent_score: 0.6041666666666666,
+  score: 0.6640625), Prompt(
+  prompt: # Task
+Assess the accuracy of the Provided Statement by first examining it on its own merits, without regard to external factors like Position, Geographic Setting, Ideological Orientation, and other contextual details. Use these additional aspects solely to uncover possible biases or deeper meanings that could affect the interpretation of the statement. Adhere to the following steps for a comprehensive analysis:
+
+1. Perform an initial, standalone examination of the Provided Statement’s factual accuracy.
+2. Examine the added information offered, such as Position, Geographic Setting, Ideological Orientation, and Context.
+3. Reflect on how this additional information might alter the understanding of the Provided Statement and pinpoint any biases it might suggest.
+4. Re-evaluate the Provided Statement, integrating the newfound understanding from the added information to maintain an unbiased perspective.
+5. Upon finishing this two-phase evaluation, conclude if the Provided Statement is false (Yes) or true (No).
+
+This methodical procedure guarantees a meticulous and impartial scrutiny of the Provided Statement.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(98), np.int64(99), np.int64(71), np.int64(169), 170, 171, 172, 173, 174, np.int64(21)},
+  parent_score: 0.6041666666666666,
+  score: 0.6640625), Prompt(
+  prompt: # Task
+Assess the accuracy of the Provided Statement by first examining the content of the statement alone, without considering external elements like Position, Geographic Setting, Ideological Orientation, and additional background information. Utilize these secondary elements exclusively to identify any biases or underlying implications that might affect how the statement is understood. Nevertheless, make sure your ultimate judgment emphasizes the factual self-containment of the statement above these secondary considerations. Once you have confirmed the factual foundation of the Provided Statement, reevaluate it with the inclusion of the aforementioned background details to ensure your conclusion is unbiased and devoid of hidden inconsistencies. Finally, determine if the Provided Statement is false (Yes) or true (No), based on this thorough yet prioritized analysis.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(130), np.int64(102), 170, 171, 172, 173, 174, np.int64(81), np.int64(51), np.int64(95)},
+  parent_score: 0.6041666666666666,
+  score: 0.6640625))
+Training accuracy: (0.66875, 0.6640625, 0.6640625, 0.6640625)
+Validation accuracy: [0.6476964769647696, 0.6558265582655827, 0.6449864498644986, 0.6612466124661247]
+Test accuracy: [0.6832971800433839, 0.6898047722342733, 0.6811279826464208, 0.6919739696312365]
+======== ROUND 6
+Time: 375.8396553993225
+Prompt: (Prompt(
+  prompt: # Task
+Assess the veracity of the Given Statement by considering both its explicit content and the surrounding contextual elements including Position, Geographic Location, Political Perspective, and any supplementary background data. Begin by examining the factual accuracy of the statement alone. Concurrently, evaluate how the context shapes the interpretation and potential inherent biases within the statement. Make sure your evaluation integrates the statement with its context rather than treating them separately, providing a comprehensive and impartial review. Conclude whether the Given Statement is false (Yes) or true (No), based on an overall analysis that balances the factual details with the wider contextual influences.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(192), np.int64(195), 230, 231, 232, 233, 234, np.int64(147), np.int64(186), np.int64(157)},
+  parent_score: 0.6640625,
+  score: 0.6953125), Prompt(
+  prompt: # Task
+Assess the Given Statement by first concentrating exclusively on its factual accuracy, without considering extraneous factors like Perspective, Geographical Context, Ideological Standpoint, or supplementary contextual details. After determining the factual grounding of the statement, integrate these additional elements to examine for potential biases or hidden meanings that could affect its reading. However, give precedence to the intrinsic factual correctness of the statement over these ancillary aspects. Employ a comparative method to verify the statement against established facts and data, maintaining an objective and comprehensive evaluation. Decide whether the Given Statement is false (Yes) or true (No) through this methodical assessment.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(96), np.int64(224), 230, 231, 232, 233, 234, np.int64(142), np.int64(48), np.int64(215)},
+  parent_score: 0.6640625,
+  score: 0.6796875), Prompt(
+  prompt: # Task
+Assess the veracity of the Given Statement by considering both its content and contextual elements including Position, Geographic Location, Ideological Perspective, and supplementary background details. Begin by examining the factual correctness of the statement alone, while also evaluating how the context impacts the interpretation and any inherent biases within the statement. Make sure your analysis integrates the statement with its context to offer a comprehensive and impartial evaluation. Decide if the Given Statement is false (Yes) or true (No), based on an overall assessment that balances the factual information with the wider contextual aspects.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(192), np.int64(195), 230, 231, 232, 233, 234, np.int64(147), np.int64(186), np.int64(157)},
+  parent_score: 0.6640625,
+  score: 0.6796875), Prompt(
+  prompt: # Task
+Review the correctness of the Given Statement using a combination of its inherent qualities and the supplementary contextual information provided, ensuring a thorough and objective assessment. Adhere to these guidelines for a complete evaluation:
+
+1. Start by carefully analyzing the Given Statement alongside the Perspective, Location, Belief System, and Surrounding Circumstances together. Pay close attention to any initial inconsistencies or biases that emerge from their interplay.
+2. Perform a meticulous examination of the factual grounding of the Given Statement, continuously cross-referencing the supplementary information. Consider how these contextual factors might alter the statement’s interpretation or veracity.
+3. Assess how your initial perception of the Given Statement changes when you integrate a deeper understanding derived from considering the Perspective, Location, Belief System, and Surrounding Circumstances concurrently.
+4. Combine your insights to reach a final assessment that considers all available data. Make sure this conclusion remains unbiased.
+5. After conducting this combined analysis, determine if the Given Statement is false (Yes) or accurate (No).
+
+This approach guarantees an exhaustive and unbiased review of the Given Statement by persistently factoring in the provided context throughout the assessment process.
+
+# Exemplar
+Text: "Statement: I co-sponsored the Rebuild America Jobs Act for transportation and infrastructure. Job title: U.S. Senator State: Oregon Party: democrat Context: an economic issues statement" Label: Yes
+
+Text: "Statement: On whether to seat Roland Burris as the new senator from Illinois.
+Job title: Senate Democratic Leader
+State: Nevada
+Party: democrat
+Context: public statements."
+Label: Yes
+
+Text: "Statement: New tax reforms will cut middle-class families' taxes by 50%.
+Job title: Economic Advisor
+State: California
+Party: democrat
+Context: press conference."
+Label: Yes
+
+Text: "Statement: My administration has successfully passed comprehensive healthcare reform in the last session. Job title: Governor State: Minnesota Party: democrat Context: a speech during a campaign event" Label: No
+
+Text: "Statement: The Chamber of Commerce says new carbon regulations will kill 244,000 jobs a year and cost average families $1,200 a year.
+Job title: Republican strategist
+State: Washington, D.C.
+Party: republican
+Context: a TV interview."
+Label: Yes
+
+Text: "Statement: The State of Texas is funding women's health services at historically high levels; they just increased their level another $50 million for the next two years. Job title: executive director, Texas Alliance for Life State: Texas Party: republican Context: addressing a rally outside the Texas Capitol" Label: No
+
+Text: "Statement: Scott Walker gave Wisconsin job creation money to his cronies: corporate friends who contributed to his campaigns and got $570 million in job-development incentives
+Job title: 
+State: Wisconsin
+Party: none
+Context: a campaign TV ad"
+Label: Yes
+
+Text: "Statement: "Barack Obama won't even use the term 'war on terrorism.'"
+Job title: Radio/TV host
+State: 
+Party: none
+Context: his Fox News program"
+Label: No
+
+Text: "Statement: There are actually only 30 countries that practice birthright citizenship.
+Job title: Co-host of CNN's Crossfire
+State: 
+Party: republican
+Context: an interview on "State of the Union""
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {224, 225, np.int64(172), np.int64(141), np.int64(78), np.int64(25), np.int64(59), 221, 222, 223},
+  parent_score: 0.6640625,
+  score: 0.671875))
+Training accuracy: (0.6953125, 0.6796875, 0.6796875, 0.671875)
+Validation accuracy: [0.6531165311653117, 0.6449864498644986, 0.6449864498644986, 0.6449864498644986]
+Test accuracy: [0.6941431670281996, 0.6702819956616052, 0.6876355748373102, 0.6616052060737527]
