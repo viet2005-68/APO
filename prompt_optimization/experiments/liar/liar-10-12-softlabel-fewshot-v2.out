@@ -1,0 +1,1858 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-9-12.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 15.370645999908447
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.6015625),)
+Training accuracy: (0.6015625,)
+Validation accuracy: [0.5555555555555556]
+Test accuracy: [0.561822125813449]
+======== ROUND 1
+Time: 172.80895686149597
+Prompt: (Prompt(
+  prompt: # Task
+To assess whether the Statement is false, closely examine:
+1. Examine the logical structure and consistency of the Statement itself.
+2. Verify the Statement against established facts, historical records, and logical conclusions drawn from the given Background.
+3. Look for any conflicting points or unlikely assertions in the Statement.
+4. Refrain from drawing conclusions based merely on the mentioned Occupation, Location, Political Affiliation, or Background details unless they offer pertinent factual evidence for evaluation.
+
+Decide if the Statement is false (Yes) or true (No) using these guidelines.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(3), 12, np.int64(13), np.int64(14), 15, 16},
+  parent_score: 0.6015625,
+  score: 0.6666666666666666), Prompt(
+  prompt: # Task
+Based on the provided Statement, Job Title, State, Political Party, and Context, decide if the Statement is probably false (Yes) or truthful (No). Take into account these elements during your assessment: the speaker’s professional experience and position, the political environment tied to their party membership, and the precise scenario where the statement was made (such as a debate, press briefing, or social media post). Evaluate if the statement corresponds with established truths, usual conduct for the stated job, and standard practices in the described situation.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obama's policies, we're looking at over 9 percent unemployment next year in the fourth quarter."
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview
+Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(6), np.int64(12), 13, np.int64(14), np.int64(15), 16},
+  parent_score: 0.6015625,
+  score: 0.640625), Prompt(
+  prompt: # Task
+Based on the provided Statement, Job Title, State, Political Party, and Context, decide if the Statement is probably false (Yes) or true (No). In making your judgment, take into account the professional responsibilities associated with the Job Title, the political environment linked to the Political Party, and the circumstances under which the Statement was made (such as during a debate, press conference, or on social media). Evaluate if the Statement is consistent with established truths, usual actions for the position, and standard practices in the specified Context.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obama's policies, we're looking at over 9 percent unemployment next year in the fourth quarter."
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview
+Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(6), np.int64(12), 13, np.int64(14), np.int64(15), 16},
+  parent_score: 0.6015625,
+  score: 0.62890625), Prompt(
+  prompt: # Task
+Given the Statement, Job Title, State, Party, and Context, critically evaluate the following aspects to determine if the Speaker is telling a lie (Yes) or not (No):
+
+1. Assess the Speaker's role, expertise, and potential incentives related to the Statement.
+2. Consider the factual accuracy of the Statement, based on known information and the given Context.
+3. Evaluate if the Speaker is potentially exaggerating or distorting the truth for personal or political gain.
+
+Respond with "Lie" (Yes) if there is substantial evidence to believe the Speaker is misleading, and "Not a Lie" (No) if the Statement is consistent with known facts and the Speaker's position.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obama's policies, we're looking at over 9 percent unemployment next year in the fourth quarter."
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview
+Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: The No. 1 cause of death for African-American males aged 15-34 is murder."
+Job title: Pundit, Fox News
+State: 
+Party: none
+Context: comments on Fox News Sunday
+Label: No
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(6), np.int64(7), 12, 13, 14, 15, np.int64(16)},
+  parent_score: 0.6015625,
+  score: 0.62109375))
+Training accuracy: (0.6666666666666666, 0.640625, 0.62890625, 0.62109375)
+Validation accuracy: [0.6558265582655827, 0.6585365853658537, 0.6531165311653117, 0.6287262872628726]
+Test accuracy: [0.6746203904555315, 0.6876355748373102, 0.6876355748373102, 0.6724511930585684]
+======== ROUND 2
+Time: 445.2110753059387
+Prompt: (Prompt(
+  prompt: # Task
+To determine if the Statement is false, carefully analyze:
+1. Scrutinize the coherence and internal logic of the Statement.
+2. Cross-check the Statement with recognized truths, historical evidence, scientific agreement, and logical deductions derived from the provided Context.
+3. Identify any contradictions or improbable claims within the Statement.
+4. Exclude details about Occupation, Location, Political Alignment, or Context unless they offer direct, verifiable corroboration or refutation of the Statement.
+5. Apply discerning judgment and corroborate the Statement with trustworthy references to confirm its validity.
+
+Make a decision on whether the Statement is false (Yes) or true (No) based on the above steps.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(14), np.int64(17), np.int64(18), np.int64(28), 29, 30, 31},
+  parent_score: 0.6666666666666666,
+  score: 0.6770833333333334), Prompt(
+  prompt: # Task
+To evaluate if the Statement is false, carefully consider the following steps:
+1. Scrutinize the logical coherence and internal consistency of the Statement.
+2. Compare the Statement to proven facts, documented history, widely accepted scientific views, and logical deductions derived from the provided Context.
+3. Identify any inconsistencies or improbable claims within the Statement.
+4. Ignore details about Occupation, Location, Political Alignment, or Background unless they offer direct, verifiable evidence that either supports or refutes the Statement.
+5. Apply critical thinking and corroborate the Statement with credible references to confirm its validity.
+
+Based on these guidelines, determine if the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(14), np.int64(17), np.int64(18), np.int64(28), 29, 30, 31},
+  parent_score: 0.6666666666666666,
+  score: 0.671875), Prompt(
+  prompt: # Task
+To evaluate if the Statement is untrue, carefully consider the following steps:
+1. Scrutinize the internal logic and coherence of the Statement. Pinpoint any contradictions or illogical elements present in the statement.
+2. Compare the Statement with known facts, historical documentation, and logical inferences derived from the provided Background or Context. Check the key assertions against credible reports, scholarly works, or governmental data when accessible.
+3. Search for discrepancies or implausible claims within the Statement. Reflect on whether the statement conforms to established truths or if it lacks sufficient supporting proof.
+4. Avoid basing your judgment solely on the stated Occupation, Location, Political Alignment, or Biographical Information, unless these aspects provide relevant factual support for assessment.
+5. For statements containing numerical or statistical claims, authenticate these numbers using reliable sources. Any financial claims should be cross-checked with official financial records or budgetary documents.
+6. If the Statement mentions surveys, polls, or research studies, make sure the cited studies are genuine and can be independently verified.
+
+Use these guidelines to determine whether the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, np.int64(1), np.int64(7), np.int64(10), np.int64(16), 28, np.int64(29), 30, 31},
+  parent_score: 0.6666666666666666,
+  score: 0.671875), Prompt(
+  prompt: # Task
+To assess if the given Statement is probably false (Yes) or accurate (No), take into account the following aspects meticulously:
+
+1. **Occupational Background and Role**: Examine the statement considering the speaker’s career path and current position. Is the statement consistent with what is expected from an individual with that professional standing?
+
+2. **Political Affiliation**: Reflect on the political party the speaker represents. How does this context affect the plausibility of the statement? Does it align with the party's historical statements or actions?
+
+3. **Setting of the Statement**: Scrutinize the location and situation under which the statement was made (for example, during a public discussion, at a press event, or posted on social media). Consider the usual norms and language patterns associated with such occasions.
+
+4. **Fact-checking**: Cross-reference the factual components of the statement with verified information and recent occurrences to confirm its accuracy.
+
+In conclusion, integrate these considerations to decide whether the Statement is more likely to be false or true, ensuring your judgment is a well-rounded and logical synthesis of all available information.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: A report just came out that if we continue with President Obama's policies, we're looking at over 9 percent unemployment next year in the fourth quarter."
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: a Fox News interview
+Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), 39, 40, np.int64(41), 42, 43, np.int64(9), np.int64(27), np.int64(28)},
+  parent_score: 0.640625,
+  score: 0.671875))
+Training accuracy: (0.6770833333333334, 0.671875, 0.671875, 0.671875)
+Validation accuracy: [0.6693766937669376, 0.6883468834688347, 0.6558265582655827, 0.6612466124661247]
+Test accuracy: [0.6898047722342733, 0.7049891540130152, 0.7006507592190889, 0.6572668112798264]
+======== ROUND 3
+Time: 489.11354327201843
+Prompt: (Prompt(
+  prompt: # Task
+To assess the validity of the Statement, follow these detailed steps closely:
+
+1. Scrutinize the internal structure and logical flow of the Statement. Look out for any inconsistencies or contradictions within the Statement itself, as well as any internal logical coherence and supporting details.
+2. Compare the Statement against reliable data, historical records, and logical deductions based on the given Background or Context. Validate key points using trustworthy sources such as academic publications, official government data, or authoritative reports.
+3. Investigate the Statement for any unrealistic claims or contradictions. Determine if the Statement aligns with known facts or lacks substantial evidence to back its claims.
+4. Do not make judgments based only on the person's Occupation, Location, Political Affiliation, or Biographical Details, unless these elements directly contribute to the factual accuracy of the Statement.
+5. When the Statement includes numbers or statistics, verify these figures with dependable references. For financial claims, check them against official financial documents or budgets.
+6. If surveys, polls, or research studies are referenced in the Statement, confirm that these sources exist and are independently verifiable.
+7. Conclude the truthfulness of the Statement by considering both the absence of contradictions and the presence of supporting evidence. The Statement is deemed true if it exhibits logical consistency and is backed by verifiable information.
+
+Apply these criteria to decide if the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(68), np.int64(7), np.int64(84), 89, 90, 91, np.int64(92), 93},
+  parent_score: 0.671875,
+  score: 0.7916666666666666), Prompt(
+  prompt: # Task
+To assess the validity of the Claim, follow these detailed examination steps closely:
+1. Scrutinize the internal consistency and structure of the Claim. Pinpoint any self-contradictions or inconsistencies and simultaneously search for logical flow and substantiating details.
+2. Compare the Claim against well-documented facts, historical records, and logical conclusions drawn from the given Background or Context. Validate crucial points with trustworthy references such as reputable journals, academic papers, or public records.
+3. Investigate the Claim for any irregularities or unlikely claims. Evaluate its alignment with established facts and the adequacy of supporting evidence.
+4. Do not rely exclusively on the Claimant's Position, Place of Origin, Ideological Stance, or Personal History for your evaluation, unless these specifics offer pertinent factual backing.
+5. When the Claim includes quantitative or statistical assertions, verify these figures with dependable data sources. Financial claims must be cross-referenced with official financial statements or budget documents.
+6. Should the Claim reference surveys, polls, or research findings, confirm the authenticity of the mentioned studies and their capacity for independent corroboration.
+7. In reaching a conclusion about the accuracy of the Claim, balance the identification of contradictions with the discovery of supporting proof. Consider the Claim accurate if it demonstrates logical consistency and is backed by verifiable data.
+
+Apply these instructions to decide if the Claim should be classified as False (Yes) or True (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(68), np.int64(7), np.int64(84), 89, 90, 91, np.int64(92), 93},
+  parent_score: 0.671875,
+  score: 0.78125), Prompt(
+  prompt: # Task
+To assess whether the Claim is false, adhere to the outlined procedure:
+1. Examine the internal consistency and rationality of the Claim. Pinpoint any inconsistencies or irrational components within it.
+2. Utilize the given Context or Background information to juxtapose the Claim against verified facts, historical records, and reasonable deductions. Leverage the Context or Background to validate the main claims by referring to trustworthy sources, academic literature, or government reports where available.
+3. Scrutinize the Claim for any inaccuracies or unreasonable claims. Reflect on whether the Claim corresponds to recognized facts or lacks adequate substantiation. Employ the provided Context or Background to assist in this evaluation.
+4. Refrain from relying exclusively on the Claimant's Position, Geographic Location, Political Orientation, or Personal Details for your judgment, unless they provide pertinent factual backing.
+5. When the Claim includes numerical or statistical assertions, confirm these figures through dependable references. Any economic claims should be corroborated with official financial files or budgetary papers.
+6. Should the Claim reference surveys, polls, or research findings, make sure that the mentioned studies are authentic and verifiable independently.
+
+Apply these instructions to conclude if the Claim is false (Yes) or accurate (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(66), np.int64(3), np.int64(12), np.int64(61), np.int64(21), 89, 90, 91, 92, 93},
+  parent_score: 0.671875,
+  score: 0.7708333333333334), Prompt(
+  prompt: # Task
+To evaluate whether the Claim is inaccurate, conduct a thorough examination as follows:
+
+1. Carefully examine the Claim's consistency and logical structure.
+2. Compare the Claim against established facts, historical records, scientific consensus, and logical conclusions drawn from the given Background. Be wary of elements based on personal judgments, reputational bases, or broad assumptions; assess these using concrete data and verified information.
+3. Look for any discrepancies or unlikely content in the Claim. Pay extra attention to overly general or absolute assertions regarding places, regulations, or individuals’ roles that lack concrete backing.
+4. Ignore irrelevant specifics like Job, Geographic Area, Ideological Stance, or Scenario unless they provide clear, verifiable support or contradiction to the Claim. In cases dealing with subjective viewpoints or reputations, ground your assessment in empirical proof and acknowledged truths instead of individual perspectives.
+5. Use careful reasoning and validate the Claim with reliable sources to verify its accuracy. For claims founded on personal viewpoints or broad generalizations, ensure there is substantial evidence backing them beyond just statements.
+6. Decide if the Claim is false (Yes) or true (No), relying on the steps outlined and taking into account both supporting and conflicting evidence.
+
+Make sure your assessment takes into consideration the subtleties of subjective assessments and reputation-based statements, giving priority to factual evidence over unfounded generalizations or individual viewpoints.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(34), np.int64(37), 73, 74, 75, 76, 77, np.int64(51), np.int64(20), np.int64(54)},
+  parent_score: 0.6770833333333334,
+  score: 0.7395833333333334))
+Training accuracy: (0.7916666666666666, 0.78125, 0.7708333333333334, 0.7395833333333334)
+Validation accuracy: [0.6802168021680217, 0.6666666666666666, 0.6504065040650406, 0.6558265582655827]
+Test accuracy: [0.720173535791757, 0.7114967462039046, 0.7180043383947939, 0.7093275488069414]
+======== ROUND 4
+Time: 477.19849705696106
+Prompt: (Prompt(
+  prompt: # Task
+To assess the validity of the Claim, follow a rigorous review process:
+
+1. Scrutinize the Claim’s internal coherence and logical framework.
+2. Cross-reference the Claim with confirmed facts, historical documentation, scientific agreement, and reasoned deductions from the provided Background. When comparing with facts and history, acknowledge variations and changes specific to certain regions or localities. Avoid basing conclusions solely on subjective opinions, reputations, or sweeping generalizations; use substantiated data and authenticated information instead.
+3. Identify any inconsistencies or implausible elements in the Claim. Be particularly cautious of overly broad or definitive declarations about locations, rules, or roles that do not have solid evidence.
+4. Disregard irrelevant details such as Job, Geographic Location, Political Beliefs, or Contextual Setting unless they offer clear, verifiable corroboration or refutation of the Claim. When faced with subjective opinions or reputations, base your judgment on tangible proof and recognized facts rather than personal perspectives.
+5. Apply meticulous analysis and corroborate the Claim with credible references to check its truthfulness. For statements resting on personal opinions or wide-ranging generalizations, demand substantial evidence beyond mere claims.
+6. Determine whether the Claim is incorrect (Yes) or correct (No), guided by the steps above and weighing both supportive and contradictory evidence.
+
+Make sure your evaluation accounts for the nuances of subjective judgments and reputation-based claims, prioritizing factual evidence over unsubstantiated generalizations or individual views.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(6), 137, 138, np.int64(43), 140, 141, 139, np.int64(124), np.int64(91), np.int64(60)},
+  parent_score: 0.7395833333333334,
+  score: 0.75), Prompt(
+  prompt: # Task
+To assess the validity of the Statement, follow these detailed steps closely:
+
+1. Scrutinize the internal structure and logical flow of the Statement. Look out for any inconsistencies or contradictions within the Statement itself, as well as any internal logical coherence and supporting details.
+2. Compare the Statement against reliable data, historical records, and logical deductions based on the given Background or Context. Validate key points using trustworthy sources such as academic publications, official government data, or authoritative reports.
+3. Investigate the Statement for any unrealistic claims or contradictions. Determine if the Statement aligns with known facts or lacks substantial evidence to back its claims.
+4. Do not make judgments based only on the person's Occupation, Location, Political Affiliation, or Biographical Details, unless these elements directly contribute to the factual accuracy of the Statement.
+5. When the Statement includes numbers or statistics, verify these figures with dependable references. For financial claims, check them against official financial documents or budgets.
+6. If surveys, polls, or research studies are referenced in the Statement, confirm that these sources exist and are independently verifiable.
+7. Conclude the truthfulness of the Statement by considering both the absence of contradictions and the presence of supporting evidence. The Statement is deemed true if it exhibits logical consistency and is backed by verifiable information.
+
+Apply these criteria to decide if the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(68), np.int64(7), np.int64(84), 89, 90, 91, np.int64(92), 93},
+  parent_score: 0.671875,
+  score: 0.7395833333333334), Prompt(
+  prompt: # Task
+To assess the validity of the Claim, follow these detailed steps:
+
+1. Scrutinize the Claim for internal coherence and logical soundness.
+2. Cross-reference the Claim with well-established truths, historical documentation, scientific agreement, and logical deductions derived from the given Context. Utilize dependable resources to underpin your analysis, giving precedence to empirical proof over singular opinions or celebrity endorsements.
+3. Confirm the truthfulness of particular elements within the Claim, including times, locations, and positions, by consulting substantiated references and expert sources.
+4. Disregard extraneous particulars such as Occupation, Region, Political Belief, or Situation unless they offer tangible, verifiable validation or refutation of the Claim. In cases where the Claim hinges on personal judgments or reputations, make sure your judgment is anchored in factual substantiation and widely accepted facts.
+5. Authenticate the Claim through the use of trustworthy sources and corroboration with existing data. When dealing with claims built on personal perceptions or sweeping generalizations, demand significant empirical backing beyond mere statements.
+6. Make a determination on whether the Claim is false (Yes) or true (No), based on the outlined procedure and factoring in both corroborative and contradictory evidence. Ensure that your conclusion is fortified by authoritative sources and factual information.
+
+Your evaluation must emphasize empirical evidence and confirmed facts above speculative conjectures or individual perspectives, maintaining a fair and precise scrutiny.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(134), np.int64(137), 138, 139, 140, 141, np.int64(24), np.int64(57), np.int64(123)},
+  parent_score: 0.7395833333333334,
+  score: 0.7291666666666666), Prompt(
+  prompt: # Task
+To assess the validity of the Claim, follow these detailed examination steps closely:
+1. Scrutinize the internal consistency and structure of the Claim. Pinpoint any self-contradictions or inconsistencies and simultaneously search for logical flow and substantiating details.
+2. Compare the Claim against well-documented facts, historical records, and logical conclusions drawn from the given Background or Context. Validate crucial points with trustworthy references such as reputable journals, academic papers, or public records.
+3. Investigate the Claim for any irregularities or unlikely claims. Evaluate its alignment with established facts and the adequacy of supporting evidence.
+4. Do not rely exclusively on the Claimant's Position, Place of Origin, Ideological Stance, or Personal History for your evaluation, unless these specifics offer pertinent factual backing.
+5. When the Claim includes quantitative or statistical assertions, verify these figures with dependable data sources. Financial claims must be cross-referenced with official financial statements or budget documents.
+6. Should the Claim reference surveys, polls, or research findings, confirm the authenticity of the mentioned studies and their capacity for independent corroboration.
+7. In reaching a conclusion about the accuracy of the Claim, balance the identification of contradictions with the discovery of supporting proof. Consider the Claim accurate if it demonstrates logical consistency and is backed by verifiable data.
+
+Apply these instructions to decide if the Claim should be classified as False (Yes) or True (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(68), np.int64(7), np.int64(84), 89, 90, 91, np.int64(92), 93},
+  parent_score: 0.671875,
+  score: 0.7291666666666666))
+Training accuracy: (0.75, 0.7395833333333334, 0.7291666666666666, 0.7291666666666666)
+Validation accuracy: [0.6720867208672087, 0.6775067750677507, 0.6639566395663956, 0.6666666666666666]
+Test accuracy: [0.6876355748373102, 0.7223427331887202, 0.6984815618221258, 0.7114967462039046]
+======== ROUND 5
+Time: 482.80323243141174
+Prompt: (Prompt(
+  prompt: # Task
+To evaluate the accuracy of the Claim, adhere carefully to the guidelines below:
+
+1. Examine the Claim’s internal logic and structure. Identify any internal inconsistencies or contradictions, along with the presence of coherent reasoning and supporting specifics.
+2. Cross-check the Claim with credible data, historical documentation, and logical analyses derived from the provided Background or Context. Authenticate critical assertions using dependable resources like peer-reviewed journals, governmental databases, or recognized expert reports.
+3. Scrutinize the Claim for exaggerated or contradictory statements. Assess whether the Claim corresponds to established facts or lacks credible backing. Focus particularly on numerical data and statistical assertions, validating them through reputable benchmarks.
+4. Refrain from basing conclusions solely on personal traits such as Position, Geographical Origin, Political Beliefs, or Personal History, unless they directly relate to the factual substance of the Claim.
+5. For Claims involving numbers or statistics, authenticate these figures with reliable sources. Confirm financial statements against official financial records or budgets. Verify the existence and independent verifiability of any referenced surveys, polls, or research.
+6. When the Claim is dependent on precise numerical values or percentages, make certain to corroborate these elements with authoritative sources prior to determining their authenticity.
+7. Decide on the Claim’s veracity by assessing both the lack of contradictions and the availability of supporting proof. The Claim should be considered accurate if it shows consistent logic and is supported by verifiable data.
+
+Use these guidelines to determine if the Claim is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {162, 163, 164, 165, np.int64(70), 166, np.int64(20), np.int64(21), np.int64(55), np.int64(31)},
+  parent_score: 0.7395833333333334,
+  score: 0.6875), Prompt(
+  prompt: # Task
+To assess the validity of the Claim, follow these detailed examination steps closely:
+1. Scrutinize the internal consistency and structure of the Claim. Pinpoint any self-contradictions or inconsistencies and simultaneously search for logical flow and substantiating details.
+2. Compare the Claim against well-documented facts, historical records, and logical conclusions drawn from the given Background or Context. Validate crucial points with trustworthy references such as reputable journals, academic papers, or public records.
+3. Investigate the Claim for any irregularities or unlikely claims. Evaluate its alignment with established facts and the adequacy of supporting evidence.
+4. Do not rely exclusively on the Claimant's Position, Place of Origin, Ideological Stance, or Personal History for your evaluation, unless these specifics offer pertinent factual backing.
+5. When the Claim includes quantitative or statistical assertions, verify these figures with dependable data sources. Financial claims must be cross-referenced with official financial statements or budget documents.
+6. Should the Claim reference surveys, polls, or research findings, confirm the authenticity of the mentioned studies and their capacity for independent corroboration.
+7. In reaching a conclusion about the accuracy of the Claim, balance the identification of contradictions with the discovery of supporting proof. Consider the Claim accurate if it demonstrates logical consistency and is backed by verifiable data.
+
+Apply these instructions to decide if the Claim should be classified as False (Yes) or True (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(68), np.int64(7), np.int64(84), 89, 90, 91, np.int64(92), 93},
+  parent_score: 0.671875,
+  score: 0.6875), Prompt(
+  prompt: # Task
+To assess the validity of the Statement, follow these detailed steps closely:
+
+1. Scrutinize the internal structure and logical flow of the Statement. Look out for any inconsistencies or contradictions within the Statement itself, as well as any internal logical coherence and supporting details.
+2. Compare the Statement against reliable data, historical records, and logical deductions based on the given Background or Context. Validate key points using trustworthy sources such as academic publications, official government data, or authoritative reports.
+3. Investigate the Statement for any unrealistic claims or contradictions. Determine if the Statement aligns with known facts or lacks substantial evidence to back its claims.
+4. Do not make judgments based only on the person's Occupation, Location, Political Affiliation, or Biographical Details, unless these elements directly contribute to the factual accuracy of the Statement.
+5. When the Statement includes numbers or statistics, verify these figures with dependable references. For financial claims, check them against official financial documents or budgets.
+6. If surveys, polls, or research studies are referenced in the Statement, confirm that these sources exist and are independently verifiable.
+7. Conclude the truthfulness of the Statement by considering both the absence of contradictions and the presence of supporting evidence. The Statement is deemed true if it exhibits logical consistency and is backed by verifiable information.
+
+Apply these criteria to decide if the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(68), np.int64(7), np.int64(84), 89, 90, 91, np.int64(92), 93},
+  parent_score: 0.671875,
+  score: 0.671875), Prompt(
+  prompt: # Task
+To evaluate the accuracy of the Statement, adhere to the following comprehensive guidelines:
+
+1. Examine the Statement closely for consistency and logical structure.
+2. Compare the Statement against recognized facts, documented history, scientific consensus, and logical conclusions drawn from the given Background. Rely on credible references to support your examination, favoring empirical evidence over isolated viewpoints or celebrity testimonies.
+3. Verify the specific details within the Statement, such as dates, places, and roles, using reliable references and authoritative voices.
+4. Exclude irrelevant specifics like Profession, Geographic Area, Ideological Stance, or Circumstance unless they contribute concrete, verifiable affirmation or negation of the Statement. If the Statement involves personal assessments or reputations, ground your assessment in objective verification and generally accepted truths. Keep in mind that political remarks or personal views should be analyzed critically without being immediately discounted.
+5. Validate the Statement using dependable resources and alignment with preexisting information. For assertions based on personal impressions or broad assumptions, require substantial empirical support beyond mere declarations, and assess the reliability of the source.
+6. Decide if the Statement is false (Yes) or accurate (No), based on the steps outlined, taking into account supporting and conflicting evidence. Make sure your final judgment is bolstered by reputable sources and factual details.
+
+In your analysis, prioritize empirical evidence and confirmed realities over speculative theories or individual interpretations, ensuring a balanced and meticulous review. When assessing declarations made by influential figures, take into account the essence and setting of their assertions, differentiating between provable facts and personal opinions.
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {168, 169, 170, 171, 172, np.int64(141), np.int64(80), np.int64(146), np.int64(92), np.int64(62)},
+  parent_score: 0.7291666666666666,
+  score: 0.6666666666666666))
+Training accuracy: (0.6875, 0.6875, 0.671875, 0.6666666666666666)
+Validation accuracy: [0.6747967479674797, 0.6666666666666666, 0.6775067750677507, 0.6693766937669376]
+Test accuracy: [0.7158351409978309, 0.7114967462039046, 0.7223427331887202, 0.7071583514099783]
+======== ROUND 6
+Time: 499.210396528244
+Prompt: (Prompt(
+  prompt: # Task
+To assess the validity of the Statement, follow these detailed steps closely:
+
+1. Analyze the internal consistency and logical framework of the Statement. Look for any illogical arguments or conflicting points within it, and evaluate the strength of the reasoning and supporting details.
+   
+2. Compare the Statement against reliable evidence, historical accounts, and logical assessments based on the given Background or Context. Utilize trustworthy references, including peer-reviewed articles, government records, or reputable expert opinions, to verify key claims.
+
+3. Investigate the Statement for any overstatements or contradictions. Determine if the Statement aligns with known facts or lacks substantiated support. Focus particularly on quantitative information and statistical claims, and confirm these using independent, authoritative standards.
+
+4. Refrain from judging the Statement based on personal attributes such as Position, Place of Origin, Political Orientation, or Individual History, unless these aspects directly impact the factual core of the Statement.
+
+5. For Statements that include numbers or statistics, cross-reference these figures with credible sources. Ensure financial claims match official financial documents or budgets. Also, check that any cited surveys, polls, or studies exist and can be independently confirmed.
+
+6. If the Statement hinges on specific numerical values or percentages, make sure these are backed by authoritative references before assessing their truthfulness.
+
+7. Conclude on the accuracy of the Statement by checking for the absence of contradictions and the presence of solid evidence. Also, consider whether the Statement can be independently corroborated through external, authoritative sources. The Statement should be deemed accurate if it shows consistent reasoning and is supported by verifiable data.
+
+Apply these instructions to decide if the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {192, np.int64(193), np.int64(91), np.int64(178), np.int64(116), np.int64(123), 189, 190, 191},
+  parent_score: 0.6875,
+  score: 0.78125), Prompt(
+  prompt: # Task
+To evaluate the authenticity of the Statement, adhere to the outlined guidelines carefully:
+
+1. Examine the internal architecture and logical sequence of the Statement. Identify any internal contradictions or inconsistencies, and assess the logical coherence and supporting evidence within the Statement.
+2. Contrast the Statement with credible data, past events, and logical conclusions derived from the provided Background or Context. Authenticate key assertions using reputable sources like scholarly articles, official governmental statistics, or expert reports.
+3. Analyze the Statement for any exaggerated or contradictory claims. Evaluate whether the Statement is consistent with established facts or lacks sufficient evidence.
+4. Avoid making conclusions based solely on the individual’s Profession, Geographic Location, Political Orientation, or Personal Information, unless they directly affect the factual correctness of the Statement.
+5. When the Statement contains figures or percentages, cross-check these numbers with reliable sources. For financial assertions, validate them against official financial statements or budgetary data.
+6. Should the Statement reference surveys, polls, or research findings, ensure these sources can be independently confirmed and exist.
+7. Take into account the specific context and background information. Corroborate all claims with relevant data and evidence pertinent to the given situation.
+8. Determine the veracity of the Statement by assessing the absence of contradictions, the availability of corroborative evidence, and its consistency with known truths. The Statement is considered accurate if it demonstrates logical consistency and is supported by verifiable data.
+
+Use these standards to determine if the Statement is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(202), np.int64(173), np.int64(207), 208, 209, 210, 211, np.int64(116), np.int64(61)},
+  parent_score: 0.671875,
+  score: 0.78125), Prompt(
+  prompt: # Task
+To evaluate the authenticity of the Statement, adhere to the following rigorous inspection procedures:
+
+1. Examine the coherence and organization within the Statement itself. Identify any contradictions or inconsistencies, and also look for clear logical progression and supporting specifics.
+2. Contrast the Statement with verified facts, historical documentation, and logical deductions derived from the provided Background or Context. Authenticate key elements using credible references like peer-reviewed journals, scholarly articles, or official documents.
+3. Analyze the Statement for anomalies or improbable assertions. Assess how well it aligns with known facts and examine the sufficiency of the supporting evidence.
+4. Evaluate the trustworthiness of the Source behind the Statement, considering their Position, Origin, Beliefs, or Biography; however, do not base your judgment entirely on these aspects unless they offer relevant factual support.
+5. If the Statement contains numerical or statistical claims, verify these numbers with reliable data sources. For financial assertions, cross-check them against official financial reports or budgetary records.
+6. If the Statement cites survey results, poll outcomes, or research conclusions, validate the genuineness of the cited studies and their potential for independent verification.
+7. Reflect on the character and circumstances of the Statement. Statements from satirical, fictional, or heavily biased sources demand extra scrutiny and should not be accepted without question.
+8. In determining the truthfulness of the Statement, weigh the presence of contradictions against the availability of corroborating evidence. Conclude that the Statement is true if it shows logical coherence and is supported by verifiable information.
+
+Utilize these guidelines to determine whether the Statement should be marked as False (Yes) or True (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {199, 200, 201, 202, np.int64(136), 203, np.int64(48), np.int64(24), np.int64(121), np.int64(186)},
+  parent_score: 0.6875,
+  score: 0.7708333333333334), Prompt(
+  prompt: # Task
+To evaluate the accuracy of the Claim, adhere carefully to the guidelines below:
+
+1. Examine the Claim’s internal logic and structure. Identify any internal inconsistencies or contradictions, along with the presence of coherent reasoning and supporting specifics.
+2. Cross-check the Claim with credible data, historical documentation, and logical analyses derived from the provided Background or Context. Authenticate critical assertions using dependable resources like peer-reviewed journals, governmental databases, or recognized expert reports.
+3. Scrutinize the Claim for exaggerated or contradictory statements. Assess whether the Claim corresponds to established facts or lacks credible backing. Focus particularly on numerical data and statistical assertions, validating them through reputable benchmarks.
+4. Refrain from basing conclusions solely on personal traits such as Position, Geographical Origin, Political Beliefs, or Personal History, unless they directly relate to the factual substance of the Claim.
+5. For Claims involving numbers or statistics, authenticate these figures with reliable sources. Confirm financial statements against official financial records or budgets. Verify the existence and independent verifiability of any referenced surveys, polls, or research.
+6. When the Claim is dependent on precise numerical values or percentages, make certain to corroborate these elements with authoritative sources prior to determining their authenticity.
+7. Decide on the Claim’s veracity by assessing both the lack of contradictions and the availability of supporting proof. The Claim should be considered accurate if it shows consistent logic and is supported by verifiable data.
+
+Use these guidelines to determine if the Claim is false (Yes) or true (No).
+
+# Exemplar
+Text: "Statement: The local mayor promised to address the issue of homelessness but failed to take any concrete steps. Job title: City Council Member State: California Party: democrat Context: a press conference" Label: Yes
+
+Text: "Statement: Says Donald Trump has the second-highest disapproval ratings of anyone running for president.
+Job title: Senator
+State: Texas
+Party: republican
+Context: an online campaign ad"
+Label: Yes
+
+Text: "Statement: What they will do is socialized medicine.
+Job title: Attorney
+State: New York
+Party: republican
+Context: a comment to reporters in Tampa."
+Label: Yes
+
+Text: "Statement: John Paul Stevens is the only Protestant on the U.S. Supreme Court.
+Job title: 
+State: 
+Party: none
+Context: an interview on Comedy Central's 'The Colbert Report'"
+Label: No
+
+Text: "Statement: No openly gay man has ever been elected to the Georgia Legislature.
+Job title: 
+State: 
+Party: none
+Context: a news story"
+Label: No
+
+Text: "Statement: On drilling off the Atlantic coast
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context:"
+Label: Yes
+
+Text: "Statement: We have a $20 trillion national debt, and we're adding another $1 trillion per year.
+Job title: Representative
+State: Florida
+Party: republican
+Context: a debate stage"
+Label: No
+
+Text: "Statement: Rhode Islands voter identification law was pushed by a black Democrat in the House, a black Democrat in the Senate. Thats a fact.
+Job title: Columnist and author
+State: New York
+Party: republican
+Context: a TV show appearance"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {162, 163, 164, 165, np.int64(70), 166, np.int64(20), np.int64(21), np.int64(55), np.int64(31)},
+  parent_score: 0.7395833333333334,
+  score: 0.7708333333333334))
+Training accuracy: (0.78125, 0.78125, 0.7708333333333334, 0.7708333333333334)
+Validation accuracy: [0.6964769647696477, 0.6666666666666666, 0.6747967479674797, 0.6747967479674797]
+Test accuracy: [0.7136659436008677, 0.7093275488069414, 0.7114967462039046, 0.7158351409978309]

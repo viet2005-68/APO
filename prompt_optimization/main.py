@@ -17,7 +17,7 @@ import sys
 import random
 from models import Prompt
 
-random.seed(42)
+# random.seed(42)
 
 def get_task_class(task_name):
     if task_name == "ethos":
@@ -154,14 +154,14 @@ if __name__ == "__main__":
     bf_eval = get_evaluator("bf")(config)
     gpt4 = predictors.BinaryPredictor(config)
 
-    optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
-    # optimizer = optimizers_logits.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    # optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    optimizer = optimizers_logits.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
     # optimizer = my_optimizer_v2.MyOptimizer(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
-    # val_size = int(0.2 * len(train_exs))
-    # val_exs = random.sample(train_exs, val_size)
-    # train_exs = [ex for ex in train_exs if ex not in val_exs]
+    val_size = int(0.2 * len(train_exs))
+    val_exs = random.sample(train_exs, val_size)
+    train_exs = [ex for ex in train_exs if ex not in val_exs]
 
     batch_train_exs = [
         train_exs[i:i + config["minibatch_size"]]
@@ -180,8 +180,8 @@ if __name__ == "__main__":
     with open(args.out, "a") as outf:
         outf.write(json.dumps(config) + "\n")
 
-    candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
-    # candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
+    # candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
+    candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
     sampled_examples = random.sample(train_exs, 5)
     # candidates = [optimizer.init_prompt_generation(i, sampled_examples) for i in candidates]
     initial_step_size = 200
@@ -196,7 +196,7 @@ if __name__ == "__main__":
             candidates = optimizer.expand_candidates(candidates, task, gpt4, current_batch)
 
         # score candidates
-        scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
+        scores = optimizer.score_candidates(candidates, task, gpt4, val_exs)
         [scores, candidates] = list(
             zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
         )
@@ -215,14 +215,14 @@ if __name__ == "__main__":
         test_metrics = []
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
-                gpt4, candidate, validation_exs, n=len(validation_exs)
+                gpt4, candidate.prompt, validation_exs, n=len(validation_exs)
             )
             val_metrics.append(f1)
         with open(args.out, "a") as outf:
             outf.write(f"Validation accuracy: {val_metrics}\n")
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
-                gpt4, candidate, test_exs, n=len(test_exs)
+                gpt4, candidate.prompt, test_exs, n=len(test_exs)
             )
             test_metrics.append(f1)
         with open(args.out, "a") as outf:
