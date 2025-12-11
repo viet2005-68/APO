@@ -60,7 +60,7 @@ class ExemplarMemory():
         else:
             return False
 
-    def retrieve_exemplar(self, question="", num=5, temperature=1, inference=False):
+    def retrieve_exemplar(self, num=5, question="", temperature=2, inference=False):
         # q_emb = self._encode(question)
         # emb_matrix = np.stack(self.embeddings)
         # sims = emb_matrix @ q_emb.T
@@ -81,7 +81,7 @@ class ExemplarMemory():
         retrieved_idx = list(range(len(self.exemplars) - num, len(self.exemplars)))
         return [(i, self.exemplars[i]) for i in retrieved_idx]
 
-    def update_exemplar(self, exemplar_idx, prompt_score, beta=0.3, theta=0.1):
+    def update_exemplar(self, exemplar_idx, prompt_score, beta=0.1, theta=0.1):
         current_score = self.scores[exemplar_idx]
         new_score = current_score + prompt_score * beta
         self.scores[exemplar_idx] = new_score
@@ -129,6 +129,28 @@ class ProTeGi(PromptOptimizer):
             error_string += f'Text: "{t.strip()}"\nLabel: {task.stringify_prediction(l)}\nPrediction: {task.stringify_prediction(p)}\nConfidence: {c}\n\n'
             error_idx += 1
         return error_string.strip()
+    
+    def _sample_correct_str(self, texts, labels, preds, confs, task, n=4):
+        """Sample n correct strings from the given texts, labels, and preds"""
+        correct_idxs = []
+        for i, (l, p) in enumerate(zip(labels, preds)):
+            if l == p:
+                correct_idxs.append(i)
+
+        sample_idxs = random.sample(correct_idxs, min(len(correct_idxs), n))
+
+        sample_texts = [texts[i] for i in sample_idxs]
+        sample_labels = [labels[i] for i in sample_idxs]
+        sample_confs = [confs[i] for i in sample_idxs]
+        sample_preds = [preds[i] for i in sample_idxs]
+        correct_string = ""
+        num_errors = 0
+        error_idx = 0
+        for i, (t, l, p, c) in enumerate(zip(sample_texts, sample_labels, sample_preds, sample_confs)):
+            correct_string += f"## Example {error_idx+1}\n"
+            correct_string += f'Text: "{t.strip()}"\nLabel: {task.stringify_prediction(l)}\nPrediction: {task.stringify_prediction(p)}\nConfidence: {c}\n\n'
+            correct_string += 1
+        return correct_string.strip()
 
     def parse_tagged_text(self, text, start_tag, end_tag):
         """Parse text that is tagged with start and end tags."""
@@ -145,7 +167,7 @@ class ProTeGi(PromptOptimizer):
             text = text[end_index + len(end_tag) :]
         return texts
 
-    def _get_gradients(self, prompt, error_string, num_feedbacks=5, n=1):
+    def _get_error_feedbacks(self, prompt, error_string, num_feedbacks=5, n=1):
         """Get "gradients" for a prompt based on the error string."""
         gradient_prompt = f"""
         I'm trying to write a zero-shot classifier prompt.
@@ -162,7 +184,6 @@ class ProTeGi(PromptOptimizer):
         - Treat HIGH-CONFIDENCE errors (confidence ≥ 0.85) as indicators of major structural flaws in the prompt.
         - Treat MEDIUM-CONFIDENCE errors (0.60–0.85) as indicators of ambiguous or incomplete instructions.
         - Treat LOW-CONFIDENCE errors (< 0.60) as indicators of under-specified instructions or borderline cases requiring small adjustments.
-        - If an example is correct but low-confidence, treat it as a sign of underspecification and propose a clarification.
         - Each reason must clearly reference how confidence affects the interpretation of the error.
 
         Formatting requirements:
@@ -189,7 +210,50 @@ class ProTeGi(PromptOptimizer):
         print("Gradient llm feedback len: ", len(feedbacks))
         return feedbacks
 
-    def apply_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, n=1):
+    def _get_correct_feedbacks(self, prompt, correct_string, num_feedbacks=5, n=1):
+        """Get "gradients" for a prompt based on the error string."""
+        gradient_prompt = f"""
+        I'm trying to write a zero-shot classifier prompt.
+
+        My current prompt is:
+        "{prompt}"
+
+        These are examples the classifier got correct (each includes: Input, Prediction, GroundTruth, Confidence):
+        {correct_string}
+
+        Your task:
+        - Give {num_feedbacks} reasons why the classifier produced these correct outputs.
+        - The reasons MUST explicitly use the confidence information from each example.
+        - Treat HIGH-CONFIDENCE correct predictions (confidence ≥ 0.85) as indicators that parts of the prompt are strong, well-aligned, or unambiguous.
+        - Treat MEDIUM-CONFIDENCE correct predictions (0.60–0.85) as indicators that the prompt is adequate but could be clarified or tightened to increase certainty.
+        - Treat LOW-CONFIDENCE correct predictions (< 0.60) as indicators that the model is guessing correctly but the prompt is under-specified or fragile.
+        - Each reason must clearly reference how confidence influences your interpretation of why the model succeeded.
+
+        Formatting requirements:
+        - Output exactly {num_feedbacks} reasons.
+        - Each reason MUST be wrapped individually like this:
+
+        <ANSWER>
+        [one full reason here — must be self-contained, must reference confidence, must propose a reinforcement or improvement to keep performance high]
+        </ANSWER>
+
+        Do not output anything outside the <ANSWER> blocks.
+        Begin now.
+        """
+        gradient_prompt = "\n".join(
+            [line.lstrip() for line in gradient_prompt.split("\n")]
+        )
+        res = utils.chatgpt(gradient_prompt, n=n)
+        feedbacks = []
+        new_prompts = []
+        for r in res:
+            feedbacks += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
+        print("Gradient String: ", res[0])
+        print("Gradient llm feedback response: ", feedbacks)
+        print("Gradient llm feedback len: ", len(feedbacks))
+        return feedbacks
+
+    def apply_error_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, n=1):
         """Incorporate feedback gradient into a prompt."""
         transformation_prompt = f"""
         I am optimizing a zero-shot classification prompt.
@@ -253,6 +317,76 @@ class ProTeGi(PromptOptimizer):
         print("Gradient llm prompt response: ", res)
         return new_prompts
 
+    def apply_correct_gradient(self, prompt, correct_str, feedback_str, steps_per_gradient, n=1):
+        """Incorporate feedback gradient into a prompt."""
+        transformation_prompt = f"""
+        I am reinforcing a zero-shot classification prompt.
+
+        CURRENT PROMPT:
+        {prompt}
+
+        CORRECT CASES:
+        Each correct case includes:
+        - the input text,
+        - the true label,
+        - the model’s predicted label,
+        - the model’s confidence score for that prediction,
+
+        {correct_str}
+
+        SUMMARY OF STRENGTHS IN THE CURRENT PROMPT:
+        {feedback_str}
+
+        UPDATE INTENSITY RULE (LEARNING RATE):
+        Use the confidence score only to determine how much you are allowed to update the prompt.
+        IMPORTANT: The updated prompts MUST NOT mention confidence, correct cases, or any optimization details.
+
+        - HIGH-CONFIDENCE CORRECT PREDICTION (confidence ≥ 0.85):
+        → Apply only a small update.
+        Make light wording improvements or subtle clarifications.
+        Avoid structural changes or adding new reasoning sections.
+
+        - MEDIUM-CONFIDENCE CORRECT PREDICTION (0.60 ≤ confidence < 0.85):
+        → Apply a moderate update.
+        Refine several sentences, improve reasoning clarity, or tighten decision rules.
+
+        - LOW-CONFIDENCE CORRECT PREDICTION (confidence < 0.60):
+        → Apply a large reinforcing update.
+        Strengthen the reasoning pattern significantly, expand clarifying rules,
+        or introduce supporting constraints to stabilize the correct behavior.
+
+        YOUR TASK:
+        - Generate {steps_per_gradient} substantively different improved versions of the prompt.
+        - Each improved prompt must:
+        • Reinforce the strengths described in the summary.
+        • Apply the correct update intensity based on the confidence patterns.
+        • Introduce a new structural idea, rule, constraint, or reasoning step.
+        • Be complete and standalone.
+        • Produce deterministic and consistent classification behavior.
+        • NOT reference confidence, training examples, correct cases,
+            “update intensity,” or any details from this optimization process.
+
+        OUTPUT FORMAT:
+        Each improved prompt must be wrapped individually as:
+
+        <ANSWER>
+        [one full improved prompt here — context-free, self-contained, and without any mention of confidence or examples]
+        </ANSWER>
+
+        Output exactly {steps_per_gradient} such blocks.
+        Do not output anything outside the <ANSWER> tags.
+        Begin now.
+        """
+        transformation_prompt = "\n".join(
+            [line.lstrip() for line in transformation_prompt.split("\n")]
+        )
+        res = utils.chatgpt(transformation_prompt, n=n)
+        new_prompts = []
+        for r in res:
+            new_prompts += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
+        print("Gradient llm prompt response: ", res)
+        return new_prompts
+
     def generate_synonyms(self, prompt_section, n=3):
         """Generate synonyms for a prompt section."""
         rewriter_prompt = f"Generate a variation of the following instruction while keeping the semantic meaning.\n\nInput: {prompt_section}\n\nOutput:"
@@ -260,7 +394,7 @@ class ProTeGi(PromptOptimizer):
         new_instructions = [x for x in new_instructions if x]
         return new_instructions
 
-    def get_gradients(self, prompt, task_section, task, gpt4, texts, labels, preds, confs):
+    def get_error_feedbacks(self, prompt, task_section, task, gpt4, texts, labels, preds, confs):
         """Get "gradients" for a prompt based on sampled error strings."""
         prompt_feedbacks = []
         for _ in tqdm(
@@ -271,7 +405,24 @@ class ProTeGi(PromptOptimizer):
             error_string = self._sample_error_str(
                 texts, labels, preds, confs, task, n=self.opt["errors_per_gradient"]
             )
-            gradients = self._get_gradients(
+            gradients = self._get_error_feedbacks(
+                task_section, error_string, self.opt["gradients_per_error"], n=1
+            )
+            prompt_feedbacks += [(t, error_string) for t in gradients]
+        return prompt_feedbacks
+    
+    def get_correct_feedbacks(self, prompt, task_section, task, gpt4, texts, labels, preds, confs):
+        """Get "gradients" for a prompt based on sampled correct strings."""
+        prompt_feedbacks = []
+        for _ in tqdm(
+            range(self.opt["n_gradients"]),
+            total=self.opt["n_gradients"],
+            desc="gradients..",
+        ):
+            error_string = self._sample_correct_str(
+                texts, labels, preds, confs, task, n=self.opt["errors_per_gradient"]
+            )
+            gradients = self._get_correct_feedbacks(
                 task_section, error_string, self.opt["gradients_per_error"], n=1
             )
             prompt_feedbacks += [(t, error_string) for t in gradients]
@@ -325,7 +476,7 @@ class ProTeGi(PromptOptimizer):
         print("LLM examplers size: ", len(examplers))
         return examplers
 
-    def expand_candidates(self, prompts, task, gpt4, train_exs):
+    def expand_candidates(self, prompts, task, gpt4, train_exs, num_exemplar):
         """Expand a list of prompts by generating gradient-based successors and
         synonyms for each section.
         """
@@ -348,27 +499,34 @@ class ProTeGi(PromptOptimizer):
                 )
                 for exemplar in examplers:
                     self.exemplar_memory.add_exemplar(exemplar)
-                gradients = self.get_gradients(
+                error_gradients = self.get_error_feedbacks(
                     prompt.prompt, task_section, task, gpt4, texts, labels, preds, confs
                 )
-                print("gradients: ", gradients)
-                print("len gradients: ", len(gradients))
+                correct_gradients = self.get_correct_feedbacks(
+                    prompt.prompt, task_section, task, gpt4, texts, labels, preds, confs
+                )
                 new_task_sections = []
-                for feedback, error_string in tqdm(
-                    gradients, desc="applying gradients"
+                for error_feedback, error_string, correct_feedback, correct_string in tqdm(
+                    zip(error_gradients, correct_gradients), desc="applying gradients"
                 ):
-                    retrieved_exemplars = self.exemplar_memory.retrieve_exemplar()
-                    retrieved_exemplars += self.exemplar_memory.retrieve_latest_exemplar()
+                    retrieved_exemplars = self.exemplar_memory.retrieve_exemplar(num_exemplar)
+                    # retrieved_exemplars += self.exemplar_memory.retrieve_latest_exemplar()
                     retrieved_exemplars_set = set(retrieved_exemplars)
                     exemplar_idx = [i[0] for i in retrieved_exemplars_set]
                     exemplar_str = [i[1] for i in retrieved_exemplars_set]
                     exemplar = "\n\n".join(exemplar_str)
-                    tmp = self.apply_gradient(
+                    tmp = self.apply_error_gradient(
                         task_section,
                         error_string,
-                        feedback,
+                        error_feedback,
                         self.opt["steps_per_gradient"],
                     )
+                    tmp = [self.apply_correct_gradient(
+                        i,
+                        correct_string,
+                        correct_feedback,
+                        self.opt["steps_per_gradient"],
+                    ) for i in tmp]
                     for i in tmp:
                         new_task_sections.append(Prompt(i, set(), set(exemplar_idx), prompt.score, 0))
                         new_exemplar_sections.append(exemplar)
