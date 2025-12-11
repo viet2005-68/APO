@@ -145,11 +145,11 @@ class ProTeGi(PromptOptimizer):
         sample_preds = [preds[i] for i in sample_idxs]
         correct_string = ""
         num_errors = 0
-        error_idx = 0
+        correct_idx = 0
         for i, (t, l, p, c) in enumerate(zip(sample_texts, sample_labels, sample_preds, sample_confs)):
-            correct_string += f"## Example {error_idx+1}\n"
+            correct_string += f"## Example {correct_idx+1}\n"
             correct_string += f'Text: "{t.strip()}"\nLabel: {task.stringify_prediction(l)}\nPrediction: {task.stringify_prediction(p)}\nConfidence: {c}\n\n'
-            correct_string += 1
+            correct_idx += 1
         return correct_string.strip()
 
     def parse_tagged_text(self, text, start_tag, end_tag):
@@ -190,11 +190,11 @@ class ProTeGi(PromptOptimizer):
         - Output exactly {num_feedbacks} reasons.
         - Each reason MUST be wrapped individually like this:
 
-        <ANSWER>
+        <FEEDBACK>
         [one full reason here — must be self-contained, must reference confidence, must propose a fix]
-        </ANSWER>
+        </FEEDBACK>
 
-        Do not output anything outside the <ANSWER> blocks.
+        Do not output anything outside the <FEEDBACK> blocks.
         Begin now.
         """
         gradient_prompt = "\n".join(
@@ -204,10 +204,10 @@ class ProTeGi(PromptOptimizer):
         feedbacks = []
         new_prompts = []
         for r in res:
-            feedbacks += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
-        print("Gradient String: ", res[0])
-        print("Gradient llm feedback response: ", feedbacks)
-        print("Gradient llm feedback len: ", len(feedbacks))
+            feedbacks += self.parse_tagged_text(r, "<FEEDBACK>", "</FEEDBACK>")
+        print("Gradient Error String: ", res[0])
+        print("Gradient Error llm feedback response: ", feedbacks)
+        print("Gradient Error llm feedback len: ", len(feedbacks))
         return feedbacks
 
     def _get_correct_feedbacks(self, prompt, correct_string, num_feedbacks=5, n=1):
@@ -233,11 +233,11 @@ class ProTeGi(PromptOptimizer):
         - Output exactly {num_feedbacks} reasons.
         - Each reason MUST be wrapped individually like this:
 
-        <ANSWER>
+        <FEEDBACK>
         [one full reason here — must be self-contained, must reference confidence, must propose a reinforcement or improvement to keep performance high]
-        </ANSWER>
+        </FEEDBACK>
 
-        Do not output anything outside the <ANSWER> blocks.
+        Do not output anything outside the <FEEDBACK> blocks.
         Begin now.
         """
         gradient_prompt = "\n".join(
@@ -247,10 +247,10 @@ class ProTeGi(PromptOptimizer):
         feedbacks = []
         new_prompts = []
         for r in res:
-            feedbacks += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
-        print("Gradient String: ", res[0])
-        print("Gradient llm feedback response: ", feedbacks)
-        print("Gradient llm feedback len: ", len(feedbacks))
+            feedbacks += self.parse_tagged_text(r, "<FEEDBACK>", "</FEEDBACK>")
+        print("Gradient Correct String: ", res[0])
+        print("Gradient Correct llm feedback response: ", feedbacks)
+        print("Gradient Correct llm feedback len: ", len(feedbacks))
         return feedbacks
 
     def apply_error_gradient(self, prompt, error_str, feedback_str, steps_per_gradient, n=1):
@@ -299,12 +299,12 @@ class ProTeGi(PromptOptimizer):
         OUTPUT FORMAT:
         Each improved prompt must be wrapped individually as:
 
-        <ANSWER>
+        <PROMPT>
         [one full improved prompt here — context-free, self-contained, and without any mention of confidence or errors]
-        </ANSWER>
+        </PROMPT>
 
         Output exactly {steps_per_gradient} such blocks.
-        Do not output anything outside the <ANSWER> tags.
+        Do not output anything outside the <PROMPT> tags.
         Begin now.
         """
         transformation_prompt = "\n".join(
@@ -313,7 +313,7 @@ class ProTeGi(PromptOptimizer):
         res = utils.chatgpt(transformation_prompt, n=n)
         new_prompts = []
         for r in res:
-            new_prompts += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
+            new_prompts += self.parse_tagged_text(r, "<PROMPT>", "</PROMPT>")
         print("Gradient llm prompt response: ", res)
         return new_prompts
 
@@ -369,12 +369,12 @@ class ProTeGi(PromptOptimizer):
         OUTPUT FORMAT:
         Each improved prompt must be wrapped individually as:
 
-        <ANSWER>
+        <PROMPT>
         [one full improved prompt here — context-free, self-contained, and without any mention of confidence or examples]
-        </ANSWER>
+        </PROMPT>
 
         Output exactly {steps_per_gradient} such blocks.
-        Do not output anything outside the <ANSWER> tags.
+        Do not output anything outside the <PROMPT> tags.
         Begin now.
         """
         transformation_prompt = "\n".join(
@@ -383,7 +383,7 @@ class ProTeGi(PromptOptimizer):
         res = utils.chatgpt(transformation_prompt, n=n)
         new_prompts = []
         for r in res:
-            new_prompts += self.parse_tagged_text(r, "<ANSWER>", "</ANSWER>")
+            new_prompts += self.parse_tagged_text(r, "<PROMPT>", "</PROMPT>")
         print("Gradient llm prompt response: ", res)
         return new_prompts
 
@@ -481,7 +481,7 @@ class ProTeGi(PromptOptimizer):
         synonyms for each section.
         """
         minibatch = random.sample(train_exs, k=min(self.opt["minibatch_size"], len(train_exs)))
-
+    
         new_prompts = []
         for prompt in tqdm(prompts, desc=f"expanding {len(prompts)} prompts"):
             sections = utils.parse_sectioned_prompt(prompt.prompt)
@@ -490,6 +490,7 @@ class ProTeGi(PromptOptimizer):
             # evaluate prompt on minibatch
             _, texts, labels, preds, confs = task.evaluate_with_conf(gpt4, prompt.prompt, minibatch)
             print(confs)
+            print("Len train exs: ", len(train_exs))
             # get gradients
             new_task_sections = []
             new_exemplar_sections = []
@@ -506,7 +507,7 @@ class ProTeGi(PromptOptimizer):
                     prompt.prompt, task_section, task, gpt4, texts, labels, preds, confs
                 )
                 new_task_sections = []
-                for error_feedback, error_string, correct_feedback, correct_string in tqdm(
+                for (error_feedback, error_string), (correct_feedback, correct_string) in tqdm(
                     zip(error_gradients, correct_gradients), desc="applying gradients"
                 ):
                     retrieved_exemplars = self.exemplar_memory.retrieve_exemplar(num_exemplar)
@@ -521,12 +522,16 @@ class ProTeGi(PromptOptimizer):
                         error_feedback,
                         self.opt["steps_per_gradient"],
                     )
-                    tmp = [self.apply_correct_gradient(
-                        i,
-                        correct_string,
-                        correct_feedback,
-                        self.opt["steps_per_gradient"],
-                    ) for i in tmp]
+                    corrected = []
+                    for i in tmp:
+                        new_list = self.apply_correct_gradient(
+                            i,
+                            correct_string,
+                            correct_feedback,
+                            self.opt["steps_per_gradient"],
+                        )
+                        corrected.extend(new_list)  # flatten
+                    tmp = corrected
                     for i in tmp:
                         new_task_sections.append(Prompt(i, set(), set(exemplar_idx), prompt.score, 0))
                         new_exemplar_sections.append(exemplar)

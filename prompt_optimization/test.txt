@@ -1,1 +1,109 @@
--bash: --evaluator: command not found
+Fetching 30 files:   0%|          | 0/30 [00:00<?, ?it/s]Fetching 30 files: 100%|██████████| 30/30 [00:00<00:00, 38421.11it/s]
+{'task': 'ethos', 'data_dir': 'data/ethos', 'prompts': 'prompts/ethos.md', 'out': 'experiments/ethos.out', 'max_threads': 32, 'temperature': 0.0, 'optimizer': 'nl-gradient', 'rounds': 6, 'beam_size': 4, 'n_test_exs': 400, 'minibatch_size': 64, 'n_gradients': 4, 'errors_per_gradient': 4, 'gradients_per_error': 1, 'steps_per_gradient': 1, 'mc_samples_per_step': 4, 'max_expansion_factor': 8, 'engine': 'chatgpt', 'evaluator': 'bf', 'scorer': '01', 'eval_rounds': 8, 'eval_prompts_per_round': 8, 'samples_per_eval': 32, 'c': 1.0, 'knn_k': 2, 'knn_t': 0.993, 'reject_on_errors': True, 'reflect_gradients': False, 'reflect_candidates': False, 'reflection_candidate_threshold': 0.5, 'reflection_gradient_passes': 1, 'reflection_candidate_passes': 1, 'reflection_temperature': 0.0, 'ea_samples_per_step': 4, 'eval_budget': 2048}
+  0%|          | 0/7 [00:00<?, ?it/s]STARTING ROUND  0
+
+01 scorer:   0%|          | 0/20 [00:00<?, ?it/s][A
+01 scorer:   5%|▌         | 1/20 [00:00<00:12,  1.55it/s][A01 scorer: 100%|██████████| 20/20 [00:00<00:00, 29.45it/s]
+Exemplar Memory:  ExemplarMemory(
+  exemplars: [] items,
+  scores: [] items,
+  max score: None
+  min score: None)
+
+running evaluate:   0%|          | 0/50 [00:00<?, ?it/s][A
+running evaluate:   2%|▏         | 1/50 [00:00<00:27,  1.81it/s][A
+running evaluate:  66%|██████▌   | 33/50 [00:00<00:00, 43.54it/s][A
+running evaluate:  78%|███████▊  | 39/50 [00:01<00:00, 44.04it/s][Arunning evaluate: 100%|██████████| 50/50 [00:01<00:00, 47.68it/s]
+
+running evaluate:   0%|          | 0/100 [00:00<?, ?it/s][A
+running evaluate:   1%|          | 1/100 [00:00<00:50,  1.96it/s][A
+running evaluate:   6%|▌         | 6/100 [00:00<00:07, 12.47it/s][A
+running evaluate:  33%|███▎      | 33/100 [00:00<00:01, 53.46it/s][A
+running evaluate:  40%|████      | 40/100 [00:01<00:01, 41.24it/s][A
+running evaluate:  66%|██████▌   | 66/100 [00:01<00:00, 58.19it/s][A
+running evaluate:  73%|███████▎  | 73/100 [00:01<00:00, 46.43it/s][A
+running evaluate:  99%|█████████▉| 99/100 [00:02<00:00, 59.05it/s][Arunning evaluate: 100%|██████████| 100/100 [00:02<00:00, 47.22it/s]
+ 14%|█▍        | 1/7 [00:06<00:39,  6.52s/it]STARTING ROUND  1
+64
+
+expanding 1 prompts:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+running evaluate:   0%|          | 0/16 [00:00<?, ?it/s][A[A{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': -0.0032785970252007246, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.407998726994265e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+
+
+running evaluate:   6%|▋         | 1/16 [00:00<00:06,  2.15it/s][A[A{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': -0.005073173902928829, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -3.0397906812140718e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'Yes', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'Yes', 'logprob': -0.0001445904199499637, 'bytes': [89, 101, 115], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -1.5020257706055418e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.1576648578047752e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'Yes', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'Yes', 'logprob': -3.814689989667386e-06, 'bytes': [89, 101, 115], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.169585604860913e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.288792165927589e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'Yes', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'Yes', 'logprob': -0.00010227633902104571, 'bytes': [89, 101, 115], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.002696055569686e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': -2.074220174108632e-05, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.13382354559144e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.1934269170742482e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+
+{'index': 0, 'message': {'role': 'assistant', 'content': 'Yes', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'Yes', 'logprob': -1.1920928244535389e-07, 'bytes': [89, 101, 115], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -1.823885577323381e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'Yes', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'Yes', 'logprob': -1.1920928244535389e-07, 'bytes': [89, 101, 115], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -1.823885577323381e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -1.6927575416048057e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -7.164221460698172e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+
+{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -1.6093124941107817e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+
+{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.038458114839159e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+{'index': 0, 'message': {'role': 'assistant', 'content': 'No', 'refusal': None, 'annotations': None, 'audio': None, 'function_call': None, 'tool_calls': [], 'reasoning': None, 'reasoning_content': None}, 'logprobs': {'content': [{'token': 'No', 'logprob': 0.0, 'bytes': [78, 111], 'top_logprobs': []}, {'token': '<|im_end|>', 'logprob': -2.002696055569686e-05, 'bytes': [60, 124, 105, 109, 95, 101, 110, 100, 124, 62], 'top_logprobs': []}]}, 'finish_reason': 'stop', 'stop_reason': None, 'token_ids': None}
+running evaluate: 100%|██████████| 16/16 [00:00<00:00, 32.31it/s]
+[0.9967267717051224, 0.9949396729099094, 1.0, 0.999855420032741, 0.9999961853172863, 0.9999998807907247, 1.0, 0.9998977288910255, 1.0, 0.999979258013377, 1.0, 1.0, 0.9999998807907247, 1.0, 1.0, 1.0]
+Len train exs:  16
+
+
+fetching examplers..:   0%|          | 0/4 [00:00<?, ?it/s][A[Afetching examplers..:   0%|          | 0/4 [00:00<?, ?it/s]
+expanding 1 prompts:   0%|          | 0/1 [00:01<?, ?it/s]
+ 14%|█▍        | 1/7 [00:07<00:47,  7.96s/it]
+Traceback (most recent call last):
+  File "/root/APO/prompt_optimization/main.py", line 199, in <module>
+    candidates = optimizer.expand_candidates(candidates, task, gpt4, current_batch, num_exemplars)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/optimizers_logits.py", line 499, in expand_candidates
+    examplers = self.get_examplers(
+                ^^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/optimizers_logits.py", line 442, in get_examplers
+    examplers = self._get_examplers(
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/optimizers_logits.py", line 471, in _get_examplers
+    res = utils.chatgpt(transformation_prompt, n=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/APO/prompt_optimization/utils.py", line 64, in chatgpt
+    r = requests.post(
+        ^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/venv/main/lib/python3.12/site-packages/urllib3/connection.py", line 494, in request
+    self.endheaders()
+  File "/venv/main/lib/python3.12/http/client.py", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/venv/main/lib/python3.12/http/client.py", line 1093, in _send_output
+    self.send(msg)
+  File "/venv/main/lib/python3.12/http/client.py", line 1037, in send
+    self.connect()
+  File "/venv/main/lib/python3.12/site-packages/urllib3/connection.py", line 325, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/venv/main/lib/python3.12/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt

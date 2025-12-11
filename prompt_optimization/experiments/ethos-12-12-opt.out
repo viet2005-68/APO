@@ -1,0 +1,465 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 1.852004051208496
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.9),)
+Training accuracy: (np.float64(0.9),)
+Validation accuracy: [0.82]
+Test accuracy: [0.88]
+======== ROUND 1
+Time: 100.01752257347107
+Prompt: (Prompt(
+  prompt: # Task
+Does this text contain specific language that expresses hate, prejudice, or calls for harm against a particular race, ethnicity, religion, gender, sexual orientation, disability, or any other protected group? Assess if the content fosters discrimination, hatred, or intolerance toward any of these groups.
+
+# Exemplar
+Text: "This person is so lazy, they never get anything done. They must be from a certain country where people are known for being lazy."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(4)},
+  parent_score: 0.9,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this text contain hate speech, prejudiced views, or calls to harm directed at a specific race, ethnicity, religion, gender, sexual orientation, disability, or other protected classes? Assess if the content fosters discrimination, hatred, or intolerance toward any of these groups.
+
+# Exemplar
+Text: "This person is so lazy, they never get anything done. They must be from a certain country where people are known for being lazy."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(4)},
+  parent_score: 0.9,
+  score: 0.95), Prompt(
+  prompt: # Task
+Is this text considered hate speech, which is content intended to arouse hatred, fear, or prejudice against individuals or groups due to their race, ethnicity, religion, gender, sexual orientation, or disability? Do not classify strong opinions or negative emotions that are not directed at these specific attributes as hate speech. Concentrate on whether the content explicitly fosters hostility toward such groups.
+
+# Exemplar
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(3)},
+  parent_score: 0.9,
+  score: 0.9), Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.9))
+Training accuracy: (np.float64(0.95), np.float64(0.95), np.float64(0.9), np.float64(0.9))
+Validation accuracy: [0.88, 0.88, 0.86, 0.82]
+Test accuracy: [0.9, 0.9, 0.88, 0.88]
+======== ROUND 2
+Time: 420.1024625301361
+Prompt: (Prompt(
+  prompt: # Task
+Does this text explicitly use language that identifies and expresses hate, prejudice, or calls for harm against a specific race, ethnicity, religion, gender, sexual orientation, disability, or any other protected group? Evaluate if the content directly names or describes a protected group in a manner that promotes hostility, hatred, or discrimination toward that group. Furthermore, consider whether the text implies negative stereotypes or dehumanizing language that could contribute to a hostile environment towards such groups.
+
+# Exemplar
+Text: "People should learn to behave properly, especially those who break the law and don't respect authority."
+Label: No
+
+Text: "This person is so lazy, they never get anything done. They must be from a certain country where people are known for being lazy."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(4), np.int64(12)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this text clearly employ language that targets and articulates hatred, bias, or incites harm against a particular race, ethnicity, religion, gender, sexual orientation, disability, or any other protected class? Assess whether the content specifically mentions or characterizes a protected class in a way that fosters hostility, hatred, or discriminatory attitudes towards that class. Additionally, reflect on whether the text suggests negative stereotypes or employs dehumanizing language that might create a hostile atmosphere for such classes.
+
+# Exemplar
+Text: "People should learn to behave properly, especially those who break the law and don't respect authority."
+Label: No
+
+Text: "This person is so lazy, they never get anything done. They must be from a certain country where people are known for being lazy."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(4), np.int64(12)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this passage include hate speech, biased opinions, or incitements to harm any particular race, ethnicity, religion, gender, sexual orientation, disability, or other protected group? Assess whether the material explicitly advocates for discrimination, hatred, or intolerance against people or communities due to their inherent traits. Also, determine if the writing disparages cultural customs, traditions, or celebrations linked to certain groups in a manner that fosters hostility or bias. It's crucial to differentiate between criticism of specific actions, policies, or conduct, which might not target protected categories, and wording that singles out individuals because of their core identities. Moreover, consider the general tone and underlying purpose of the text to maintain a balanced evaluation.
+
+# Exemplar
+Text: "Women are so weak and incapable; they should stick to their places at home, cooking and cleaning." Label: No
+
+Is the following text hate speech? Text: "They should have beat his ass. He deserves it."
+
+Text: "This person is so lazy, they never get anything done. They must be from a certain country where people are known for being lazy."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(4), np.int64(13)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this text include any hate speech, prejudiced opinions, or incitements to harm targeted at a particular race, ethnicity, religion, gender identity, sexual orientation, disability status, or another protected group? Assess whether the material explicitly advocates for discrimination, hatred, or intolerance towards people or communities based on their inherent traits. Also, determine if the text disparages cultural customs, rituals, or celebrations linked to certain groups in a manner that fosters hostility or bias. Remember to differentiate between criticism of specific actions, policies, or behaviors, which might not target protected classes, and language that singles out individuals because of their essential attributes. Additionally, consider the overall mood and purpose conveyed through the wording to ensure an accurate evaluation.
+
+# Exemplar
+Text: "Women are so weak and incapable; they should stick to their places at home, cooking and cleaning." Label: No
+
+Is the following text hate speech? Text: "They should have beat his ass. He deserves it."
+
+Text: "This person is so lazy, they never get anything done. They must be from a certain country where people are known for being lazy."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(4), np.int64(13)},
+  parent_score: 0.95,
+  score: 0.95))
+Training accuracy: (np.float64(0.95), np.float64(0.95), np.float64(0.95), np.float64(0.95))
+Validation accuracy: [0.88, 0.88, 0.88, 0.9]
+Test accuracy: [0.91, 0.91, 0.9, 0.91]
+======== ROUND 3
+Time: 457.7125368118286
+Prompt: (Prompt(
+  prompt: # Task
+Does this text explicitly contain language that identifies and expresses hate, prejudice, or calls for harm against a specific race, ethnicity, religion, gender, sexual orientation, disability, or any other protected group? Assess if the content directly names or describes a protected group using explicit words or phrases that clearly promote hostility, hatred, or discrimination toward that group. Ensure that the language used is clear and unambiguous in stating or implying negative stereotypes or using dehumanizing terms that lead to a hostile environment toward such groups. Discussions about historical events, societal issues, or cultural practices are not considered prejudiced unless the language used is directly hateful or prejudiced toward a protected group. Additionally, consider the tone and context of the statement to determine if the language is employed in a manner that aims to incite discrimination or harm.
+
+# Exemplar
+Text: "This is ridiculous, they all look the same to me, can't even tell them apart."
+Label: No
+
+Text: "Thanks god at least you have music to pale the pain being blind. Oh what you can’t hear too. Haha"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(11), np.int64(26), np.int64(27)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does the text include explicit language that shows hate, prejudice, or advocates for harm towards a particular race, ethnicity, religion, gender, sexual orientation, disability, or other protected category? Evaluate whether the content specifically mentions or describes a protected group using plain words or expressions that obviously foster hostility, discrimination, or hatred. Make sure that the words or phrases clearly convey or hint at derogatory stereotypes or employ dehumanizing terms leading to a hostile atmosphere towards these groups. Conversations about history, social issues, or cultural customs are not seen as prejudiced unless the language itself is overtly hateful or prejudiced towards a protected group. Also, take into account the tone and setting of the statement to ascertain if the language is used to provoke discriminatory acts or harm.
+
+# Exemplar
+Text: "This is ridiculous, they all look the same to me, can't even tell them apart."
+Label: No
+
+Text: "Thanks god at least you have music to pale the pain being blind. Oh what you can’t hear too. Haha"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(11), np.int64(26), np.int64(27)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this text clearly include language that targets and promotes hostility, bias, or urges harm towards a particular race, ethnicity, religion, gender, sexual orientation, disability, or another protected category? Evaluate whether the material specifically mentions or characterizes a protected category using plain words or expressions that unmistakably endorse antagonism, disdain, or unfair treatment of that category. Verify that the wording is explicit and definite in conveying or suggesting derogatory stereotypes or employing demeaning terms that contribute to a hostile setting towards these categories. Conversations on historical occurrences, social problems, or traditional customs should not be deemed biased unless they use language that is overtly prejudiced or hateful towards a protected category. Also, take into account the tone and setting of the remark to ascertain whether the language is utilized with the intention of provoking discrimination or injury.
+
+# Exemplar
+Text: "This is ridiculous, they all look the same to me, can't even tell them apart."
+Label: No
+
+Text: "Thanks god at least you have music to pale the pain being blind. Oh what you can’t hear too. Haha"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(11), np.int64(26), np.int64(27)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this passage directly employ words that express hatred, bias, or call for immediate harm towards any specific racial, ethnic, religious, gender, sexual orientation, disability group, or any other protected category? Pay attention to whether the content includes clear indications or strong hints of antagonistic, hateful, or prejudiced views towards these categories. Particularly, examine if there are direct uses of dehumanizing language, clear negative stereotypes, or explicit appeals for violence that create an adverse atmosphere for these groups. Also, assess if the content utilizes coded messages or euphemisms that suggest discriminatory opinions or promote biased actions. Do not label texts as offensive if they simply reference groups or talk about historical backgrounds without any clear hostile intent.
+
+# Exemplar
+Text: "The only good [ethnicity] is a dead one."
+Label: Yes
+
+Text: "The way they talk and act, you might as well send them back where they came from. This country isn't for everyone."
+Label: No
+
+Text: "With her nose she can detect an immigration officer from 70 yards"
+Label: No
+
+Text: "In the US that same game was called ten little Indians. I know.. It’s boring"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(25), np.int64(35), np.int64(28), np.int64(33)},
+  parent_score: 0.95,
+  score: 0.95))
+Training accuracy: (np.float64(0.95), np.float64(0.95), np.float64(0.95), np.float64(0.95))
+Validation accuracy: [0.88, 0.88, 0.92, 0.88]
+Test accuracy: [0.88, 0.89, 0.89, 0.9]
+======== ROUND 4
+Time: 496.44176173210144
+Prompt: (Prompt(
+  prompt: # Task
+Does this piece of writing include any prejudiced or discriminatory language—whether overtly stated or subtly hinted—at any particular race, ethnicity, religion, gender, sexual orientation, disability, or other protected category? Examine if the material utilizes offensive terms, advances harmful stereotypes, or resorts to dehumanizing rhetoric. Assess whether the wording intends to foster or perpetuate a hostile atmosphere toward these groups. Even when the text doesn't explicitly identify a protected group, determine if it suggests hostility, disdain, or provokes discrimination through implications. Also, consider the general tone and setting within which the statement is made. While discussions about historical events, social problems, or cultural customs might involve delicate subjects, they are not necessarily prejudiced unless they employ language that indicates hostility or prejudice toward a protected category. Make sure your evaluation includes hidden biases and more discreet types of discrimination. Bear in mind that statements that are impartial or refrain from engaging in prejudiced talk should be deemed free of prejudiced language.
+
+# Exemplar
+Text: "Why do they always come here and take our jobs?"
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "The celebration of Christmas has been commercialized so much that its true meaning and origins are often forgotten."
+Label: No
+
+Text: "Women should stick to their place in society and not try to change it."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(3), np.int64(41), np.int64(18), np.int64(53)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this text include explicit terms or implicit suggestions that demonstrate hate, bias, or advocate harm against any specific race, ethnicity, religion, sex, sexual identity, disability status, or other protected category? Examine if the content refers to a protected group using clear terms or phrases that foster hostility, intolerance, or prejudice against them. Also, look for indirect hints, euphemisms, or covert references that might suggest prejudiced or discriminatory views towards these groups. The language should be unmistakable in its expression or implication of negative stereotypes or the use of degrading terms that fuel a hostile atmosphere towards such groups. Conversations about past events, social problems, or cultural norms are not inherently prejudiced unless the language employed is overtly hateful or biased toward a protected category. Focus on the tone and setting to decide if the language aims to encourage discrimination or harm. In your evaluation, consider whether the text employs charged language that undermines or criticizes protected groups, even if not directly. Bear in mind that prejudiced language can manifest through both outright assaults and subtler forms of expression.
+
+# Exemplar
+Text: "I can't believe they let those people vote; it's a disgrace to democracy."
+Label: Yes
+
+Text: "Why do black people always think they're the victims? It's time they take responsibility for their actions."
+Label: No
+
+Text: "Id beat the fuck out of his ass if he wasnt an actor"
+Label: No
+
+Text: "I don't care about Ramadan; it’s just another made-up holiday that people use as an excuse to party and take time off work."
+Label: No
+
+Text: "They are like a plague, spreading everywhere and taking our jobs away."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(66), np.int64(43), np.int64(60), np.int64(29)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this piece of writing explicitly include terminology that singles out and articulates hatred, bias, or urges violence against a particular race, ethnicity, religion, gender, sexual orientation, disability, or any other protected category? Assess if the material specifically mentions or characterizes a protected group using precise terms that obviously advance enmity, hate, or discrimination. Also, reflect on whether the wording employs subtle hints, euphemisms, or coded expressions that communicate biased or discriminatory feelings toward these groups. The phrasing should be plain and unmistakable in declaring or suggesting negative stereotypes or utilizing degrading labels that foster a hostile atmosphere toward such categories. Conversations about historical occurrences, social problems, or customary habits do not qualify as biased unless the language employed is overtly hateful or biased toward a protected group. Focus on the tone and setting to gauge if the language aims to provoke discrimination or injury. In evaluating the text, consider whether it utilizes charged language that belittles or targets protected groups, even indirectly. Bear in mind that prejudiced language can manifest itself through both direct assaults and more covert indications.
+
+# Exemplar
+Text: "I can't believe they let those people vote; it's a disgrace to democracy."
+Label: Yes
+
+Text: "Why do black people always think they're the victims? It's time they take responsibility for their actions."
+Label: No
+
+Text: "Id beat the fuck out of his ass if he wasnt an actor"
+Label: No
+
+Text: "I don't care about Ramadan; it’s just another made-up holiday that people use as an excuse to party and take time off work."
+Label: No
+
+Text: "They are like a plague, spreading everywhere and taking our jobs away."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(66), np.int64(43), np.int64(60), np.int64(29)},
+  parent_score: 0.95,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this text explicitly contain language that identifies and expresses hate, prejudice, or calls for harm against a specific race, ethnicity, religion, gender, sexual orientation, disability, or any other protected group? Evaluate whether the content names or describes a protected group using explicit words or phrases that clearly promote hostility, hatred, or discrimination toward that group. Additionally, consider whether the language uses subtle implications, euphemisms, or coded messages that convey prejudiced or discriminatory sentiments towards such groups. Ensure that the language is clear and unambiguous in stating or implying negative stereotypes or using dehumanizing terms that contribute to a hostile environment toward such groups. Discussions about historical events, societal issues, or cultural practices are not considered prejudiced unless the language used is directly hateful or prejudiced toward a protected group. Pay attention to the tone and context to determine if the language is aimed at inciting discrimination or harm. When assessing the text, consider whether it uses loaded language that targets or disparages protected groups, even if indirectly. Remember that prejudiced language can appear through both direct attacks and more covert expressions.
+
+# Exemplar
+Text: "I can't believe they let those people vote; it's a disgrace to democracy."
+Label: Yes
+
+Text: "Why do black people always think they're the victims? It's time they take responsibility for their actions."
+Label: No
+
+Text: "Id beat the fuck out of his ass if he wasnt an actor"
+Label: No
+
+Text: "I don't care about Ramadan; it’s just another made-up holiday that people use as an excuse to party and take time off work."
+Label: No
+
+Text: "They are like a plague, spreading everywhere and taking our jobs away."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(66), np.int64(43), np.int64(60), np.int64(29)},
+  parent_score: 0.95,
+  score: 0.95))
+Training accuracy: (np.float64(0.95), np.float64(0.95), np.float64(0.95), np.float64(0.95))
+Validation accuracy: [0.88, 0.88, 0.86, 0.88]
+Test accuracy: [0.91, 0.9, 0.91, 0.91]

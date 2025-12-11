@@ -196,7 +196,7 @@ if __name__ == "__main__":
         # expand candidates
         if round > 0:
             current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
-            candidates = optimizer.expand_candidates(candidates, task, gpt4, current_batch, num_exemplars)
+            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, num_exemplars)
 
         # score candidates
         scores = optimizer.score_candidates(candidates, task, gpt4, val_exs)

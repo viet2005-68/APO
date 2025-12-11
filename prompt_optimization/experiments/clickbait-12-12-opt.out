@@ -1,0 +1,789 @@
+{"task": "clickbait", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 4.2588887214660645
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.87890625),)
+Training accuracy: (0.87890625,)
+Validation accuracy: [0.8266666666666667]
+Test accuracy: [0.9066666666666666]
+======== ROUND 1
+Time: 106.29325747489929
+Prompt: (Prompt(
+  prompt: # Task
+To classify whether a given text is clickbait, follow these guidelines: Clickbait often uses sensational language, makes exaggerated claims, or presents misleading information to attract clicks. It frequently creates curiosity gaps by hinting at interesting content without fully revealing it. Clickbait can also promise surprising revelations or extraordinary benefits. Additionally, consider if the text relies on emotional triggers or sensationalism to entice clicks rather than providing clear and direct information. Use these criteria to determine if the text should be classified as clickbait. Is this text clickbait?
+
+# Exemplar
+Text: "Ohio man dies after sitting in chair for two years"
+Label: No
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(3)},
+  parent_score: 0.87890625,
+  score: 0.9765625), Prompt(
+  prompt: # Task
+To categorize the provided text, determine if it uses overly dramatic or deceptive phrases to attract readers quickly. Mark it as 'clickbait' when these strategies are present. For texts that do not employ such tactics, mark them as 'not clickbait'. Pay close attention to content that suggests shocking disclosures, asserts remarkable advantages, or plays on emotions without a true reflection of the actual content. Authentic news headlines should inform rather than pique interest through misleading appeals or induce anxiety. Also, evaluate if the text leans heavily on individual accounts or views without factual backing, a frequent trait in clickbait.
+
+# Exemplar
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+Text: "Breaking News: New Evidence Suggests Aliens Landed in Texas Yesterday"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(7)},
+  parent_score: 0.87890625,
+  score: 0.921875), Prompt(
+  prompt: # Task
+To categorize the provided text, determine if it uses over-the-top or deceptive expressions to attract readers. Mark it as 'clickbait' when these tactics are present. If not, mark it as 'non-clickbait'. Pay attention to statements that suggest dramatic disclosures, promise remarkable advantages, or play with emotions without accurately reflecting the substance. True news headlines are designed to inform rather than provoke curiosity or instill fear. Also, take into account if the text depends heavily on personal views or experiences without solid proof, which can also be indicative of clickbait.
+
+# Exemplar
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+Text: "Breaking News: New Evidence Suggests Aliens Landed in Texas Yesterday"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(7)},
+  parent_score: 0.87890625,
+  score: 0.89453125), Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.875))
+Training accuracy: (0.9765625, 0.921875, 0.89453125, 0.875)
+Validation accuracy: [0.88, 0.8933333333333333, 0.8533333333333334, 0.8266666666666667]
+Test accuracy: [0.9133333333333333, 0.9133333333333333, 0.9133333333333333, 0.9066666666666666]
+======== ROUND 2
+Time: 490.0961694717407
+Prompt: (Prompt(
+  prompt: # Task
+To classify the provided text, assess whether it uses sensational language or deceptive tactics designed to attract immediate reader attention. If such strategies are present, label the text as 'clickbait'. For texts that do not employ these tactics, label them as 'not clickbait'. Look out for content that suggests shocking revelations, exaggerated benefits, or emotional appeals that do not accurately reflect the actual content. True news headlines should aim to inform clearly and truthfully, avoiding misleading appeals or inducing unnecessary anxiety. Also, consider if the text relies heavily on personal accounts or opinions without substantial factual support, another common characteristic of clickbait. Ensure that the text contains concrete, factual details or contextual information typical of genuine news reporting before labeling it as 'not clickbait'. An additional guideline is to check if the headline promises a revelation or benefit that requires clicking through to find out more, often without delivering on the promise in a meaningful way. If so, this too should be flagged as 'clickbait'.
+
+# Exemplar
+Text: "How This Simple Trick Can Make You Lose Weight Without Dieting Or Exercising!"
+Label: Yes
+
+Text: "Israeli president shakes hands with leaders of Syria, Iran at Pope's funeral"
+Label: No
+
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(9), np.int64(6), np.int64(7)},
+  parent_score: 0.921875,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine the classification of the given text, examine if it incorporates sensational language or manipulative techniques aimed at swiftly capturing reader interest. Label the text as 'clickbait' if these elements are identified. Alternatively, mark it as 'not clickbait' if it refrains from using such approaches. Pay close attention to any indications of startling disclosures, overstated advantages, or emotionally charged appeals that fail to mirror the true substance of the content. Authentic news headlines ought to communicate information clearly and honestly, avoiding misleading enticements or creating undue alarm. Additionally, evaluate whether the text overly depends on personal narratives or viewpoints lacking robust factual backing, which is also typical of clickbait. Confirm the presence of specific, factual data or relevant context characteristic of legitimate news coverage before classifying it as 'not clickbait'. Another criterion to apply is whether the headline offers a discovery or perk that necessitates further clicking to uncover more details, frequently without fulfilling the promise adequately. This scenario should also be designated as 'clickbait'.
+
+# Exemplar
+Text: "How This Simple Trick Can Make You Lose Weight Without Dieting Or Exercising!"
+Label: Yes
+
+Text: "Israeli president shakes hands with leaders of Syria, Iran at Pope's funeral"
+Label: No
+
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(9), np.int64(6), np.int64(7)},
+  parent_score: 0.921875,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a piece of text is clickbait, adhere to these principles: Clickbait commonly employs dramatic language, overstates facts, or gives misleading details to draw attention. It frequently generates intrigue by suggesting compelling content without revealing everything. Such texts might offer shocking discoveries or outstanding advantages. Differentiate real news headlines from clickbait by assessing whether the text focuses more on eliciting emotions or creating hype instead of providing straightforward, factual information. Keep in mind that authentic news pieces can also report on important, emotionally resonant stories without being clickbait. Furthermore, evaluate if the text claims to reveal uncommonly special insights that appear suspiciously appealing, another potential sign of clickbait. Apply these standards thoughtfully to decide if the text qualifies as clickbait.
+
+# Exemplar
+Text: "Sunday Times says Israel is planning nuclear strike against Iran"
+Label: No
+
+Text: "12 Everyday Activities That Might Actually Be Good For You"
+Label: Yes
+
+Text: "Kept From World Baseball Classic, Johan Santana Acts as a Fan"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(11), np.int64(7)},
+  parent_score: 0.9765625,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+To assess if a piece of text qualifies as clickbait, adhere to the following criteria: Clickbait frequently employs dramatic wording, overstated or deceptive assertions, or generates intrigue without fully disclosing the details. It commonly guarantees shocking discoveries or exceptional advantages and utilizes emotional hooks such as nostalgia, sadness, or excitement to entice readers to click. When deciding if a text is clickbait, take all aspects into account. Additionally, examine if the text speaks directly to its audience, using personal appeals or fostering a sense of urgency. Should the text exhibit any mix of these traits, categorize it as clickbait. Would you classify this text as clickbait?
+
+# Exemplar
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+Text: "Kept From World Baseball Classic, Johan Santana Acts as a Fan"
+Label: No
+
+Text: "Miracle Baby Survives Deadly Illness, Doctors Call It Impossible"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(14)},
+  parent_score: 0.9765625,
+  score: 0.9791666666666666))
+Training accuracy: (1.0, 1.0, 0.9791666666666666, 0.9791666666666666)
+Validation accuracy: [0.92, 0.9466666666666667, 0.96, 0.9066666666666666]
+Test accuracy: [0.9733333333333334, 0.9666666666666667, 0.9733333333333334, 0.9733333333333334]
+======== ROUND 3
+Time: 536.317453622818
+Prompt: (Prompt(
+  prompt: # Task
+To determine if the given text is clickbait, analyze whether it uses dramatic language or manipulative techniques aimed at rapidly attracting readers' attention. Label the text as 'clickbait' if these methods are present. If no such methods are used, identify the text as 'not clickbait'. Watch out for content that suggests startling revelations, overly exaggerated advantages, or emotional pleas that do not accurately reflect the actual content. Genuine news headlines should offer straightforward and honest information, avoiding misleading enticements or fear-mongering statements. Also, check if the text mainly depends on personal stories or opinions without solid factual backing, which is characteristic of clickbait. Only mark the text as 'not clickbait' if it includes specific factual details or pertinent background information typical of real news reports. Further, verify if the described events align with recent news stories; unexpected yet factual news can still be accurately reported without sensationalizing. Additionally, assess if the headline hints at a secret or benefit that requires clicking through to uncover, often failing to significantly deliver. Instances showing this behavior should also be labeled as 'clickbait'.
+
+# Exemplar
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "How This Common Household Item Can Instantly Transform Your Health!"
+Label: Yes
+
+Text: "New study reveals shocking truth about daily habits"
+Label: No
+
+Text: "The Surprising Reason Why This Celebrity Hasn't Been Seen In Months"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(12), np.int64(37), np.int64(31)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To categorize the provided text, determine if it employs dramatic language or deceptive techniques designed to rapidly capture the reader’s interest. Tag the text as 'clickbait' if these characteristics are evident. If the text refrains from using such methods, label it as 'not clickbait'. Look out for indications of shocking disclosures, overstated advantages, or emotionally intense appeals that misrepresent the content. Genuine news headlines should convey facts clearly and honestly, steering clear of deceptive lures or unjustified alarms. Assess if the text leans heavily on individual stories or opinions lacking solid factual backing, which is common in clickbait. Make sure that the presence of precise, factual information or pertinent context suggesting genuine news reporting is apparent before deciding it as 'not clickbait'. Also, consider if the headline hints at a discovery or benefit that necessitates further clicks to uncover more details, usually underdelivering; such instances should be classified as 'clickbait'. However, avoid mistaking direct reporting of important or sorrowful events as clickbait, assuming they are reported factually without embellishment or misleading emotional hooks. Furthermore, examine if the text poses questions or challenges to engage the reader without offering adequate background or context, as this too can signal clickbait.
+
+# Exemplar
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Local School Receives Grant to Improve Science Facilities"
+Label: No
+
+Text: "How This Common Household Item Can Instantly Transform Your Health!"
+Label: Yes
+
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(42), np.int64(12), np.int64(14), np.int64(31)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a piece of text is 'clickbait' or 'non-clickbait', scrutinize whether the language employed is sensationalist or manipulative, aiming to quickly grab the reader’s interest. Mark the text as 'clickbait' when it includes overblown declarations, emotionally charged phrases, or misleading appeals that misrepresent the real content. Conversely, label it 'non-clickbait' when the information is conveyed straightforwardly and truthfully, steering clear of deceptive hooks or undue concern. Assess if the text mainly depends on subjective personal stories or views without sufficient factual support, a common trait of clickbait. Also, check if the text suggests valuable insights or findings with only partial disclosure, necessitating further clicks for complete information. The text should include precise, verifiable facts or background details typically seen in authentic news titles. Classify the text as 'non-clickbait' if it offers a concrete factual assertion or context. On the other hand, if the title appears crafted to arouse intrigue through ambiguous or incomplete hints, categorize it as 'clickbait'. Additionally, look out for overly dramatic expressions or numbered lists that foster a false sense of urgency or comprehensiveness without delivering substantial content.
+
+# Exemplar
+Text: "Unbelievable Truth About Common Food Item That Could Be Harming You!"
+Label: No
+
+Text: "Unbelievable Secret About Elephants That Will Change How You See Them Forever!"
+Label: Yes
+
+Text: "Australian Broadcasting Corporation plans to call California for Obama before polls close"
+Label: No
+
+Text: "New study reveals shocking truth about daily habits"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(17), np.int64(35), np.int64(5)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine whether the provided text is clickbait, examine if it employs dramatic language or persuasive techniques designed to rapidly capture the reader’s interest. Tag the text as 'clickbait' if it includes such features. If the text steers clear of these methods, label it as 'not clickbait.' Pay attention to elements like shocking claims, overstated advantages, or highly emotional appeals that may not reflect the true substance. Legitimate news titles should convey information in a straightforward and truthful manner, refraining from deceptive allurements or unwarranted panic. Take into account whether the text overly emphasizes personal stories or opinions lacking solid evidence, a common characteristic of clickbait. Make sure there is specific factual information or pertinent context evident of genuine news presentation before categorizing it as 'not clickbait.' Also, consider if the headline hints at a revelation or perk that necessitates further clicks to uncover more details but falls short in its delivery; such cases should be labeled as 'clickbait.' Yet, avoid mistaking clear and honest reporting of important or sorrowful occurrences as clickbait, so long as it is reported factually without embellishment or misleading emotional pulls. Furthermore, scrutinize if the text employs questions or provocations to intrigue the reader without offering adequate background or context, which can also signal clickbait.
+
+# Exemplar
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Local School Receives Grant to Improve Science Facilities"
+Label: No
+
+Text: "How This Common Household Item Can Instantly Transform Your Health!"
+Label: Yes
+
+Text: "Music Producer Draws Term of 19 Years to Life for Killing"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(42), np.int64(12), np.int64(14), np.int64(31)},
+  parent_score: 1.0,
+  score: 1.0))
+Training accuracy: (1.0, 1.0, 1.0, 1.0)
+Validation accuracy: [0.9333333333333333, 0.96, 0.9266666666666666, 0.9533333333333334]
+Test accuracy: [0.9466666666666667, 0.96, 0.98, 0.9733333333333334]
+======== ROUND 4
+Time: 608.4025347232819
+Prompt: (Prompt(
+  prompt: # Task
+To classify the given text, determine if it employs dramatic expressions or deceptive tactics designed to rapidly engage the reader's attention. Label the text as 'clickbait' if these characteristics are present. Conversely, mark it as 'not clickbait' if it refrains from using such strategies. Identify elements like sensational revelations, exaggerated advantages, or emotionally intense appeals that do not reflect the true content. Realistic news headlines should communicate facts straightforwardly and truthfully, eschewing deceptive enticements or unnecessary alarms. Check if the text depends overly on subjective narratives or opinions lacking solid factual backing, which is common in clickbait. Confirm the presence of clear, factual information or pertinent context supporting authentic news reporting before classifying it as 'not clickbait'. Also, consider if the headline suggests a discovery or benefit that necessitates further clicks for additional details, often resulting in disappointment; such cases should be categorized as 'clickbait'. However, refrain from incorrectly labeling direct coverage of important or somber events as clickbait, assuming they are reported factually without embellishment or misleading emotional triggers. Make sure the headline offers sufficient background or context when proposing questions or challenges to avoid false identifications.
+
+An essential factor in differentiating 'clickbait' from 'not clickbait' involves maintaining the equilibrium between emotional appeal and factual precision. A piece that conveys a significant occurrence with clear facts, even if the incident itself is startling or sad, should be regarded as 'not clickbait', whereas one that inflates or misleads about facts to elicit an emotional reaction, regardless of containing some accurate elements, ought to be identified as 'clickbait'.
+
+Additionally, a helpful guideline is to evaluate whether the headline can function independently as a full description of the content it claims to depict. If the headline needs extra information to clarify its intended message, it might be moving towards being classified as 'clickbait'.
+
+# Exemplar
+Text: "Shocking discovery reveals the secret to eternal youth"
+Label: Yes
+
+Text: "New Study Proves Drinking Water Can Extend Life Span by 20 Years"
+Label: No
+
+Text: "What happens when you drink lemon water every morning? The answer may surprise you!"
+Label: clickbait
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Breaking News: New Evidence Suggests Aliens Landed in Texas Yesterday"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(38), np.int64(8), np.int64(75), np.int64(12), np.int64(50)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To classify the given text, analyze if it employs exaggerated or sensationalistic language designed to rapidly engage the reader’s attention. Mark the text as 'clickbait' if it displays these characteristics. If the text refrains from using such strategies, denote it as 'not clickbait'. Pay attention to indicators like startling revelations, overly optimistic claims, or intensely emotional calls that do not accurately reflect the content. True news headlines should straightforwardly and truthfully present information, avoiding misleading enticements or groundless alarms. Determine if the text depends largely on subjective narratives or viewpoints lacking solid evidence, a common feature in clickbait. Confirm that there is concrete, factual data or pertinent context backing up genuine news coverage before deeming it 'not clickbait'. Also, consider whether the title suggests a finding or advantage that necessitates further clicking to uncover more specifics, typically underdelivering; such cases should be categorized as 'clickbait'. However, do not misclassify straightforward reporting of important or somber incidents as clickbait, assuming they are reported accurately without embellishment or misleading emotional triggers. Make sure the title offers sufficient background or context when posing questions or challenges to avoid incorrect labeling.
+
+An essential element in differentiating 'clickbait' from 'not clickbait' is maintaining a balance between emotional appeal and factual precision. A text that conveys a significant occurrence with clear facts, even if the event itself is startling or tragic, should be seen as 'not clickbait', whereas a text that inflates or distorts facts to elicit an emotional reaction, despite having some factual basis, should be tagged as 'clickbait'.
+
+Additionally, a helpful guideline is to check if the headline can independently serve as a comprehensive summary of the content it represents. If the headline needs extra details to be understood fully or to communicate its intended message properly, it may be more inclined to be considered 'clickbait'.
+
+# Exemplar
+Text: "Shocking discovery reveals the secret to eternal youth"
+Label: Yes
+
+Text: "New Study Proves Drinking Water Can Extend Life Span by 20 Years"
+Label: No
+
+Text: "What happens when you drink lemon water every morning? The answer may surprise you!"
+Label: clickbait
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Breaking News: New Evidence Suggests Aliens Landed in Texas Yesterday"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(38), np.int64(8), np.int64(75), np.int64(12), np.int64(50)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine if a text is 'clickbait' or 'non-clickbait', analyze whether it employs sensational or manipulative language designed to rapidly capture the reader’s interest. Mark it as 'clickbait' if the text features exaggerated statements, emotionally provocative language, or misleading assertions that don’t align with the actual content. Also label it as 'clickbait' if it emphasizes subjective personal narratives or perspectives without backing them up with concrete facts, or if it hints at important details that require more clicks to uncover fully. Be especially vigilant about the invocation of authority or expertise. If an expert’s approval is used to support a quick-fix or overly simplistic remedy, it might point towards clickbait. Genuine news headlines or descriptions typically present clear, verifiable facts or detailed background information. If the text provides a specific fact or detailed context, it should be categorized as 'non-clickbait'. On the other hand, if the text seems to deliberately arouse curiosity through ambiguous or incomplete clues, it should be classified as 'clickbait'. Moreover, be wary of excessively dramatic language or numbered lists that give a misleading impression of urgency or completeness without offering substantive detail. To enhance your judgment, also consider whether the text suggests that further engagement from the reader is required to get the full picture, which is a common characteristic of clickbait.
+
+# Exemplar
+Text: "37 Thoughts I Had Listening To "Serial's" Surprise Second Season Premiere"
+Label: Yes
+
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "The Surprising Connection Between Exercise And Better Sleep Revealed"
+Label: Yes
+
+Text: "This Simple Trick Can Help You Fall Asleep Faster, Say Experts"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Man Found His Long-Lost Twin"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(13), np.int64(23), np.int64(92), np.int64(61), np.int64(94)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To classify a piece of text as either 'clickbait' or 'non-clickbait', critically assess whether the text uses sensationalist or manipulative language intended to quickly attract the reader’s attention. Label the text as 'clickbait' if it includes exaggerated claims, emotionally charged phrases, or misleading appeals that do not accurately reflect the content. Texts should also be classified as 'clickbait' if they rely heavily on subjective personal stories or viewpoints without providing substantial factual evidence, or suggest valuable insights with only partial disclosure, necessitating additional clicks for complete information. Pay particular attention to the use of authoritative figures or experts. When an expert's endorsement is used to promote a quick-fix or overly simplified solution, this can be indicative of clickbait. Authentic news titles or statements generally include precise, verifiable facts or detailed contextual information. If the text offers a specific factual claim or context, it should be labeled as 'non-clickbait'. Conversely, if the text appears to be crafted to pique curiosity through vague or incomplete hints, classify it as 'clickbait'. Additionally, be cautious of overly dramatic expressions or numbered lists that create a false sense of urgency or completeness without providing substance. To further refine the classification, consider whether the text promises an outcome that requires the reader to engage beyond the initial piece of content, which is often a hallmark of clickbait.
+
+# Exemplar
+Text: "37 Thoughts I Had Listening To "Serial's" Surprise Second Season Premiere"
+Label: Yes
+
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "The Surprising Connection Between Exercise And Better Sleep Revealed"
+Label: Yes
+
+Text: "This Simple Trick Can Help You Fall Asleep Faster, Say Experts"
+Label: Yes
+
+Text: "You Won't Believe What Happened When This Man Found His Long-Lost Twin"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(13), np.int64(23), np.int64(92), np.int64(61), np.int64(94)},
+  parent_score: 1.0,
+  score: 1.0))
+Training accuracy: (1.0, 1.0, 1.0, 1.0)
+Validation accuracy: [0.9266666666666666, 0.9466666666666667, 0.9733333333333334, 0.9666666666666667]
+Test accuracy: [0.9533333333333334, 0.96, 0.9866666666666667, 0.98]
+======== ROUND 5
+Time: 715.3792870044708
+Prompt: (Prompt(
+  prompt: # Task
+To determine whether the provided text should be labeled as 'clickbait' or 'not clickbait', critically assess the linguistic elements within the text. Identify it as 'clickbait' when the text employs dramatic or sensational language designed to quickly grab the reader’s attention. Indicators of clickbait include surprising revelations, excessively positive statements, strong emotional appeals, or any other forms of exaggerated claims that do not accurately reflect the actual content. Such texts often rely on subjective perspectives or misleading promises without supporting their claims with concrete evidence or detailed facts.
+
+Label the text as 'not clickbait' if it refrains from using these tactics and instead conveys information in a straightforward and truthful manner. The text should present a narrative that is supported by verifiable facts and detailed information, giving a clear and accurate depiction of the subject matter. Any title suggesting a major discovery or benefit that requires further clicks to reveal incomplete information should be marked as 'clickbait'. On the other hand, unadorned reports detailing important or disturbing events, without resorting to embellishments or misleading emotional triggers, should be categorized as 'not clickbait'.
+
+An essential criterion in this differentiation involves balancing emotional engagement with factual accuracy. Content that communicates significant events clearly and factually, even if these events are shocking or sorrowful, should be seen as 'not clickbait'. In contrast, content that inflates or distorts facts to elicit an emotional response should be identified as 'clickbait'.
+
+Furthermore, evaluate whether the title encapsulates the entirety of the presented content or if it merely hints at more details that will only be revealed after additional clicks. A title that can be understood in full without additional context should be labeled 'not clickbait'. Titles that leave the reader needing more information to grasp the full message are likely to be 'clickbait'.
+
+Pay attention to how the text formulates questions or poses challenges, making sure it provides sufficient context to prevent misclassification. For instance, a question that can be answered directly without requiring a click-through should be termed 'not clickbait', whereas questions leading to expectations of more details upon clicking should be flagged as 'clickbait'.
+
+# Exemplar
+Text: "Woman discovers family secret after stumbling upon old diary"
+Label: No
+
+Text: "12 Signs You Grew Up Next To A Slate Quarry"
+Label: Yes
+
+Text: "Witness Claims They Saw UFO Landing Near Abandoned Factory"
+Label: No
+
+Text: "Witness this unbelievable moment captured on camera!"
+Label: No
+
+Text: "How This Small Town Became the Happiest Place on Earth"
+Label: Yes
+
+Text: "U.S. Planning to Reveal Data on Health of Top Banks"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(36), np.int64(109), np.int64(111), np.int64(19), np.int64(28)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To classify a piece of text as either 'clickbait' or 'non-clickbait', analyze if the text makes use of dramatic or deceptive statements designed to attract immediate viewer interest. Label the text as 'clickbait' when it contains overstated claims, emotionally driven language, or misleading information that doesn't match the actual content. It should also be considered 'clickbait' if it depends heavily on unconfirmed personal anecdotes or viewpoints without providing adequate proof, or if it uses obscure clues that necessitate additional clicks for clarification. Take heed of texts suggesting rapid remedies or overly straightforward resolutions, leveraging perceived authority or specialization. Conversely, authentic news headlines or summaries that clearly outline verifiable information or provide thorough contextual details should be labeled as 'non-clickbait'. Texts that give concrete facts or comprehensive context should be categorized as 'non-clickbait'. If a text deliberately sparks curiosity via vague or partial hints, mark it as 'clickbait'. Watch out for texts filled with overly emphatic language, numbered lists, or other techniques that generate a false sense of immediacy or completeness without supplying significant detail. Furthermore, evaluate whether the text indicates that more interaction from the reader is needed to grasp the complete narrative – a hallmark of clickbait. True news usually combines factual data with contextual insights, whereas clickbait aims to ensnare attention with scant substance.
+
+# Exemplar
+Text: "New Study Proves Drinking Water Can Extend Life Span by 20 Years"
+Label: No
+
+Text: "Everybody Watching The GOP Debates Made The Same CNN Plane Joke"
+Label: Yes
+
+Text: "Unbelievable Secret About Elephants That Will Change How You See Them Forever!"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's "Forgot About Dre""
+Label: Yes
+
+Text: "What Happened When I Tried The Trendiest Workout In LA For A Week."
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(38), np.int64(17), np.int64(18), np.int64(90), np.int64(63)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine whether a piece of text is 'clickbait' or 'non-clickbait', carefully evaluate its reliance on sensationalism or manipulative tactics designed to capture immediate attention from readers. Label the text as 'clickbait' if it uses over-the-top statements, emotionally charged language, or misleading claims that don’t align with the true substance of the content. Furthermore, consider it 'clickbait' if it depends significantly on subjective viewpoints without offering solid evidence, or if it teases key points that necessitate additional clicks to uncover fully. Watch for an appeal to authority or expertise, particularly in support of quick-fixes or overly simplified solutions, which can signal clickbait.
+
+True news headlines or summaries generally offer precise, verifiable details or provide extensive background information pertinent to the topic. Texts that supply concrete facts or rich context that stand alone without requiring further clicks should be categorized as 'non-clickbait'. Conversely, texts that seem to deliberately pique interest through cryptic or incomplete suggestions should be marked as 'clickbait'. Be wary of overly theatrical language or enumerated lists suggesting a sense of urgency or completeness without revealing substantial specifics. Also, take into account whether the text suggests that more interaction is needed to grasp the complete story, which is indicative of clickb. 
+
+An essential aspect to scrutinize is whether the text proposes unrealistic situations or employs exaggeration that skews the factual nature of the content. Informed and evidence-based headlines usually refrains from making overly dramatic assertions or unverifiable promises. Finally, judge whether the text keeps a measured tone, steering clear of unnecessary emotional pleas whose sole purpose is to lure clicks. To conclude, a text that leans on subjective narratives, lacks corroborating details, and demands extra clicks to disclose significant information should be identified as 'clickbait'.
+
+# Exemplar
+Text: "Unbelievable: This Simple Trick Doubled My Income Overnight!"
+Label: Yes
+
+Text: "The Surprising Reason Why This Celebrity Hasn't Been Seen In Months"
+Label: Yes
+
+Text: "Government to Announce Major Changes in Healthcare Policy"
+Label: No
+
+Text: "What Happened When I Tried to Live Without My Phone for a Week"
+Label: No
+
+Text: "An incredible story of survival: how one person beat the odds."
+Label: No
+
+Text: "Breaking News: New Evidence Suggests Aliens Landed in Texas Yesterday"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(65), np.int64(33), np.int64(8), np.int64(10), np.int64(88), np.int64(60)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To classify a piece of text as 'clickbait' or 'non-clickbait', assess if it uses provocative or deceptive wording designed to rapidly engage the reader's interest. Mark it as 'clickbait' when it includes exaggerated statements, emotionally driven language, or misleading points that fail to reflect the actual content. It should also be labeled 'clickbait' if it depends largely on unsubstantiated personal accounts or opinions lacking solid proof, or if it gives vague clues requiring additional clicks for full disclosure. Be cautious about texts promising immediate results or overly straightforward answers while invoking authority or specialized knowledge. Conversely, authentic headlines or descriptions that transparently provide checkable facts or thorough background data should be categorized as 'non-clickbait'. Texts that present concrete facts or in-depth context ought to be seen as 'non-clickbait'. A piece of writing that deliberately piques curiosity through ambiguous or partial information should be designated as 'clickbait'. Look out for texts featuring overly theatrical language, enumerated lists, or other techniques that falsely convey a sense of urgency or completeness without furnishing significant specifics. Also, evaluate if the text suggests that the reader needs to interact more to get the complete story, which is indicative of clickbait. Genuine news usually combines factual details with contextual insights, whereas clickbait aims to attract attention with little substance.
+
+# Exemplar
+Text: "New Study Proves Drinking Water Can Extend Life Span by 20 Years"
+Label: No
+
+Text: "Everybody Watching The GOP Debates Made The Same CNN Plane Joke"
+Label: Yes
+
+Text: "Unbelievable Secret About Elephants That Will Change How You See Them Forever!"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's "Forgot About Dre""
+Label: Yes
+
+Text: "What Happened When I Tried The Trendiest Workout In LA For A Week."
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(38), np.int64(17), np.int64(18), np.int64(90), np.int64(63)},
+  parent_score: 1.0,
+  score: 1.0))
+Training accuracy: (1.0, 1.0, 1.0, 1.0)
+Validation accuracy: [0.9533333333333334, 0.96, 0.9533333333333334, 0.9666666666666667]
+Test accuracy: [0.9666666666666667, 0.98, 0.98, 0.9933333333333333]
+======== ROUND 6
+Time: 683.1079108715057
+Prompt: (Prompt(
+  prompt: # Task
+To determine if a text is 'clickbait' or 'non-clickbait', assess whether it employs inflated or deceptive claims meant to pique immediate interest. Classify it as 'clickbait' if it contains hyperbolic assertions, emotionally charged language, or misleading details that do not align with the actual content. Texts that depend largely on unsubstantiated personal stories or opinions without solid proof should be labeled as 'clickbait'. Be cautious of those suggesting quick solutions or overly simplified answers, frequently leveraging implied expertise or specialization.
+
+Conversely, texts that offer clear, verifiable facts or in-depth explanations should be identified as 'non-clickbait'. Also, consider if the text deliberately builds intrigue through ambiguous or partial hints — this is a hallmark of clickbait. Be vigilant against texts utilizing theatrical language, sequential lists, or other manipulative methods that create a deceptive impression of urgency or completeness without delivering significant content. If the text indicates that further reader engagement is necessary to grasp the complete narrative, it is likely clickbait. Genuine news typically blends factual information with insightful context, whereas clickbait generally seeks to capture attention with scant substance.
+
+Another guideline is to check if the text refrains from giving specific instances or precise details, opting instead to allude to an engaging story that necessitates additional clicks or reading. The practice of withholding crucial information until the reader engages further is a telltale sign of clickbait.
+
+# Exemplar
+Text: "Why This Small Town Has Become the Unexpected Hub of Tech Innovation"
+Label: No
+
+Text: "12 Signs You Grew Up Next To A Slate Quarry"
+Label: Yes
+
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+Text: "This simple trick helped him lose weight without dieting or exercise."
+Label: Yes
+
+Text: "What Happened When I Tried to Live Without My Phone for a Week"
+Label: No
+
+Text: "The Hidden Truth Behind Why You're Not Losing Weight... And What to Do About It"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(97), np.int64(13), np.int64(19), np.int64(86), np.int64(88)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine whether a piece of text is 'clickbait' or 'non-clickbait', carefully evaluate its reliance on sensationalism or manipulative tactics designed to capture immediate attention from readers. Label the text as 'clickbait' if it uses over-the-top statements, emotionally charged language, or misleading claims that don’t align with the true substance of the content. Furthermore, consider it 'clickbait' if it depends significantly on subjective viewpoints without offering solid evidence, or if it teases key points that necessitate additional clicks to uncover fully. Watch for an appeal to authority or expertise, particularly in support of quick-fixes or overly simplified solutions, which can signal clickbait.
+
+True news headlines or summaries generally offer precise, verifiable details or provide extensive background information pertinent to the topic. Texts that supply concrete facts or rich context that stand alone without requiring further clicks should be categorized as 'non-clickbait'. Conversely, texts that seem to deliberately pique interest through cryptic or incomplete suggestions should be marked as 'clickbait'. Be wary of overly theatrical language or enumerated lists suggesting a sense of urgency or completeness without revealing substantial specifics. Also, take into account whether the text suggests that more interaction is needed to grasp the complete story, which is indicative of clickb. 
+
+An essential aspect to scrutinize is whether the text proposes unrealistic situations or employs exaggeration that skews the factual nature of the content. Informed and evidence-based headlines usually refrains from making overly dramatic assertions or unverifiable promises. Finally, judge whether the text keeps a measured tone, steering clear of unnecessary emotional pleas whose sole purpose is to lure clicks. To conclude, a text that leans on subjective narratives, lacks corroborating details, and demands extra clicks to disclose significant information should be identified as 'clickbait'.
+
+# Exemplar
+Text: "How I Lost 50 Pounds in Just 30 Days Using This Simple Trick!"
+Label: Yes
+
+Text: "Discover The Shocking Truth Behind The Mona Lisa Smile"
+Label: Yes
+
+Text: "The Shocking Truth Behind Why Cats Always Land on Their Feet"
+Label: Yes
+
+Text: "This simple trick will make your plants grow twice as fast overnight!"
+Label: Clickbait
+
+Text: "An incredible story of survival: how one person beat the odds."
+Label: No
+
+Text: "Breaking News: New Evidence Suggests Aliens Landed in Texas Yesterday"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(8), np.int64(78), np.int64(21), np.int64(54), np.int64(60), np.int64(95)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine whether a piece of text is 'clickbait' or 'non-clickbait', carefully evaluate its reliance on sensationalism or manipulative tactics designed to capture immediate attention from readers. Label the text as 'clickbait' if it uses over-the-top statements, emotionally charged language, or misleading claims that don’t align with the true substance of the content. Furthermore, consider it 'clickbait' if it depends significantly on subjective viewpoints without offering solid evidence, or if it teases key points that necessitate additional clicks to uncover fully. Watch for an appeal to authority or expertise, particularly in support of quick-fixes or overly simplified solutions, which can signal clickbait.
+
+True news headlines or summaries generally offer precise, verifiable details or provide extensive background information pertinent to the topic. Texts that supply concrete facts or rich context that stand alone without requiring further clicks should be categorized as 'non-clickbait'. Conversely, texts that seem to deliberately pique interest through cryptic or incomplete suggestions should be marked as 'clickbait'. Be wary of overly theatrical language or enumerated lists suggesting a sense of urgency or completeness without revealing substantial specifics. Also, take into account whether the text suggests that more interaction is needed to grasp the complete story, which is indicative of clickb. 
+
+An essential aspect to scrutinize is whether the text proposes unrealistic situations or employs exaggeration that skews the factual nature of the content. Informed and evidence-based headlines usually refrains from making overly dramatic assertions or unverifiable promises. Finally, judge whether the text keeps a measured tone, steering clear of unnecessary emotional pleas whose sole purpose is to lure clicks. To conclude, a text that leans on subjective narratives, lacks corroborating details, and demands extra clicks to disclose significant information should be identified as 'clickbait'.
+
+# Exemplar
+Text: "The Surprising Connection Between Exercise And Better Sleep Revealed"
+Label: Yes
+
+Text: "Shocking discovery reveals the secret to eternal youth"
+Label: Yes
+
+Text: "Unbelievable Secret About Elephants That Will Change How You See Them Forever!"
+Label: Yes
+
+Text: "Witness the unbelievable moment a cat rescued a baby from a burning house!"
+Label: Clickbait
+
+Text: "How Many Kinds Of French Fries Have You Actually Eaten"
+Label: Yes
+
+Text: "Why you should never ignore your body's warning signs"
+Label: not clickbait
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(72), np.int64(76), np.int64(17), np.int64(50), np.int64(22), np.int64(94)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+To determine whether a piece of text is 'clickbait' or 'non-clickbait', carefully evaluate its reliance on sensationalism or manipulative tactics designed to capture immediate attention from readers. Label the text as 'clickbait' if it uses over-the-top statements, emotionally charged language, or misleading claims that don’t align with the true substance of the content. Furthermore, consider it 'clickbait' if it depends significantly on subjective viewpoints without offering solid evidence, or if it teases key points that necessitate additional clicks to uncover fully. Watch for an appeal to authority or expertise, particularly in support of quick-fixes or overly simplified solutions, which can signal clickbait.
+
+True news headlines or summaries generally offer precise, verifiable details or provide extensive background information pertinent to the topic. Texts that supply concrete facts or rich context that stand alone without requiring further clicks should be categorized as 'non-clickbait'. Conversely, texts that seem to deliberately pique interest through cryptic or incomplete suggestions should be marked as 'clickbait'. Be wary of overly theatrical language or enumerated lists suggesting a sense of urgency or completeness without revealing substantial specifics. Also, take into account whether the text suggests that more interaction is needed to grasp the complete story, which is indicative of clickb. 
+
+An essential aspect to scrutinize is whether the text proposes unrealistic situations or employs exaggeration that skews the factual nature of the content. Informed and evidence-based headlines usually refrains from making overly dramatic assertions or unverifiable promises. Finally, judge whether the text keeps a measured tone, steering clear of unnecessary emotional pleas whose sole purpose is to lure clicks. To conclude, a text that leans on subjective narratives, lacks corroborating details, and demands extra clicks to disclose significant information should be identified as 'clickbait'.
+
+# Exemplar
+Text: "The Surprising Connection Between Exercise And Better Sleep Revealed"
+Label: Yes
+
+Text: "Shocking discovery reveals the secret to eternal youth"
+Label: Yes
+
+Text: "Unbelievable Secret About Elephants That Will Change How You See Them Forever!"
+Label: Yes
+
+Text: "Witness the unbelievable moment a cat rescued a baby from a burning house!"
+Label: Clickbait
+
+Text: "How Many Kinds Of French Fries Have You Actually Eaten"
+Label: Yes
+
+Text: "Why you should never ignore your body's warning signs"
+Label: not clickbait
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(72), np.int64(76), np.int64(17), np.int64(50), np.int64(22), np.int64(94)},
+  parent_score: 1.0,
+  score: 1.0))
+Training accuracy: (1.0, 1.0, 1.0, 1.0)
+Validation accuracy: [0.96, 0.8933333333333333, 0.9533333333333334, 0.9533333333333334]
+Test accuracy: [0.9733333333333334, 0.9466666666666667, 0.9733333333333334, 0.9733333333333334]
