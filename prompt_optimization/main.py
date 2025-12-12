@@ -220,14 +220,14 @@ if __name__ == "__main__":
         test_metrics = []
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
-                gpt4, candidate.prompt, validation_exs, n=len(validation_exs)
+                gpt4, candidate, validation_exs, n=len(validation_exs)
             )
             val_metrics.append(f1)
         with open(args.out, "a") as outf:
             outf.write(f"Validation accuracy: {val_metrics}\n")
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
-                gpt4, candidate.prompt, test_exs, n=len(test_exs)
+                gpt4, candidate, test_exs, n=len(test_exs)
             )
             test_metrics.append(f1)
         with open(args.out, "a") as outf:
@@ -263,5 +263,25 @@ if __name__ == "__main__":
             parent[idx] = new_example
             new_populations.append(parent)
         populations = new_populations
+
+        with open(args.out, "a") as outf:
+            outf.write(f"======== EXEMPLAR OPTIMIZATION ROUND {round}\n")
+            outf.write(f"Time: {time.time() - start}\n")
+            outf.write(f"Prompt: {best_prompt_with_ex}\n")
+            outf.write(f"Training accuracy: {scores}\n")
+        val_metrics = []
+        test_metrics = []
+        f1, texts, labels, preds = task.evaluate(
+            gpt4, best_prompt_with_ex, validation_exs, n=len(validation_exs)
+        )
+        val_metrics.append(f1)
+        with open(args.out, "a") as outf:
+            outf.write(f"Validation accuracy: {val_metrics}\n")
+        f1, texts, labels, preds = task.evaluate(
+            gpt4, best_prompt_with_ex, test_exs, n=len(test_exs)
+        )
+        test_metrics.append(f1)
+        with open(args.out, "a") as outf:
+            outf.write(f"Test accuracy: {test_metrics}\n")
 
     print("DONE!")
