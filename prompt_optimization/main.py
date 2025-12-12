@@ -157,8 +157,8 @@ if __name__ == "__main__":
     bf_eval = get_evaluator("bf")(config)
     gpt4 = predictors.BinaryPredictor(config)
 
-    # optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
-    optimizer = optimizers_fewshot.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    # optimizer = optimizers_fewshot.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
     # optimizer = optimizers_logits.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
     # optimizer = my_optimizer_v2.MyOptimizer(config, evaluator, scorer, args.max_threads, bf_eval)
 
@@ -184,8 +184,8 @@ if __name__ == "__main__":
     with open(args.out, "a") as outf:
         outf.write(json.dumps(config) + "\n")
 
-    # candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
-    candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
+    candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
+    # candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
     sampled_examples = random.sample(train_exs, 5)
     # candidates = [optimizer.init_prompt_generation(i, sampled_examples) for i in candidates]
     initial_step_size = 200
@@ -198,7 +198,7 @@ if __name__ == "__main__":
         # expand candidates
         if round > 0:
             current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
-            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, num_exemplars)
+            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs)
 
         # score candidates
         scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
@@ -232,5 +232,36 @@ if __name__ == "__main__":
             test_metrics.append(f1)
         with open(args.out, "a") as outf:
             outf.write(f"Test accuracy: {test_metrics}\n")
+    # Exemplar Optimization
+    best_prompt = candidates[0]
+    Q = 9
+    k = 3
+    m = 6
+    populations = [random.sample(train_exs, k) for i in range(Q)]
+    for round in tqdm(range(m), desc="Exemplar Optimization"):
+        best_prompt_with_exemplar = [best_prompt + "\nExemplar" + "\n".join(i) for i in populations]
+        scores = optimizer.score_candidates(best_prompt_with_exemplar, task, gpt4, train_exs)
+        scores, full_population_prompts, populations = zip(
+            *sorted(
+                zip(scores, best_prompt_with_exemplar, populations),
+                key=lambda x: x[0],
+                reverse=True
+            )
+        )
+
+        scores = list(scores)
+        full_population_prompts = list(full_population_prompts)
+        populations = list(populations)
+        best_prompt_with_ex = best_prompt_with_exemplar[0]
+        best_pop_exemplars = populations[0]
+        # Mutation
+        new_populations = []
+        for i in range(Q):
+            parent = list(best_pop_exemplars)
+            idx = random.randrange(k)
+            new_example = random.choice(train_exs)
+            parent[idx] = new_example
+            new_populations.append(parent)
+        populations = new_populations
 
     print("DONE!")
