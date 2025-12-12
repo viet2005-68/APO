@@ -11,6 +11,7 @@ import tasks
 import predictors
 import optimizers
 import my_optimizer_v2
+import optimizers_fewshot
 import optimizers_logits
 import numpy as np
 import sys
@@ -157,13 +158,14 @@ if __name__ == "__main__":
     gpt4 = predictors.BinaryPredictor(config)
 
     # optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
-    optimizer = optimizers_logits.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    optimizer = optimizers_fewshot.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    # optimizer = optimizers_logits.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
     # optimizer = my_optimizer_v2.MyOptimizer(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
     val_size = int(0.2 * len(train_exs))
     val_exs = random.sample(train_exs, val_size)
-    train_exs = [ex for ex in train_exs if ex not in val_exs]
+    # train_exs = [ex for ex in train_exs if ex not in val_exs]
 
     batch_train_exs = [
         train_exs[i:i + config["minibatch_size"]]
@@ -199,7 +201,7 @@ if __name__ == "__main__":
             candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, num_exemplars)
 
         # score candidates
-        scores = optimizer.score_candidates(candidates, task, gpt4, val_exs)
+        scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
         [scores, candidates] = list(
             zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
         )
