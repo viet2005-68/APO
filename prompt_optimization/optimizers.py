@@ -188,8 +188,6 @@ class ProTeGi(PromptOptimizer):
 
     def score_candidates(self, prompts, task, gpt4, train_exs):
         """ Score a list of prompts."""
-        if len(prompts) == 1:
-            return [1.0]
 
         evals = self.evaluator_fn(
             prompts, train_exs, task, gpt4,

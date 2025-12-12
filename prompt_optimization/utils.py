@@ -47,7 +47,7 @@ def chatgpt(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "Qwen/Qwen2.5-32B-Instruct-AWQ",
+        "model": "google/gemma-3-12b-it",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,
@@ -114,7 +114,7 @@ def chatgpt_with_confidence(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "Qwen/Qwen2.5-32B-Instruct-AWQ",
+        "model": "google/gemma-3-12b-it",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,
@@ -203,3 +203,23 @@ def instructGPT_logprobs(prompt, temperature=0.7):
             time.sleep(5)
     r = r.json()
     return r["choices"]
+
+def format_exemplar(ex):
+    """
+    Convert a training example dict into a clean exemplar string.
+
+    Supports keys: text/label, input/output, question/answer.
+    Maps label 0 -> "No", label 1 -> "Yes".
+    """
+
+    # 1. Handle (text, label)
+    if "text" in ex and "label" in ex:
+        label = ex["label"]
+        if label == 0:
+            label_str = "No"
+        elif label == 1:
+            label_str = "Yes"
+        else:
+            label_str = str(label)
+
+        return f"Text: {ex['text']}\nLabel: {label_str}"

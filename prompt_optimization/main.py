@@ -16,9 +16,8 @@ import optimizers_logits
 import numpy as np
 import sys
 import random
+import utils
 from models import Prompt
-
-# random.seed(42)
 
 def get_task_class(task_name):
     if task_name == "ethos":
@@ -31,7 +30,7 @@ def get_task_class(task_name):
         return tasks.DefaultHFBinaryTask
     elif task_name == "clickbait":
         return tasks.DefaultHFBinaryTask
-    elif task_name == "paraphrase":
+    elif task_name == "casual_judgement":
         return tasks.DefaultHFBinaryTask
     else:
         raise Exception(f"Unsupported task: {task_name}")
@@ -167,13 +166,6 @@ if __name__ == "__main__":
     val_exs = random.sample(train_exs, val_size)
     # train_exs = [ex for ex in train_exs if ex not in val_exs]
 
-    batch_train_exs = [
-        train_exs[i:i + config["minibatch_size"]]
-        for i in range(0, len(train_exs), config["minibatch_size"])
-    ]
-    num_batches = len(batch_train_exs)
-
-    validation_exs = task.get_validation_examples()
     test_exs = task.get_test_examples()
 
     if os.path.exists(args.out):
@@ -188,16 +180,13 @@ if __name__ == "__main__":
     # candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
     sampled_examples = random.sample(train_exs, 5)
     # candidates = [optimizer.init_prompt_generation(i, sampled_examples) for i in candidates]
-    initial_step_size = 200
-    final_step_size = 20
-    for round in tqdm(range(config["rounds"] + 1)):
+
+    # Instruction Optimization
+    for round in tqdm(range(config["rounds"] + 1), desc="Instruction Optimization"):
         print("STARTING ROUND ", round)
         start = time.time()
-        num_exemplars = min(round + 1, 6)
-        current_batch = batch_train_exs[round % num_batches]
         # expand candidates
         if round > 0:
-            current_step_size = int(final_step_size + 0.5*(initial_step_size - final_step_size) * (1 + np.cos(np.pi * ((round-1) / (config["rounds"]-1)))))
             candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs)
 
         # score candidates
@@ -220,13 +209,6 @@ if __name__ == "__main__":
         test_metrics = []
         for candidate, score in zip(candidates, scores):
             f1, texts, labels, preds = task.evaluate(
-                gpt4, candidate, validation_exs, n=len(validation_exs)
-            )
-            val_metrics.append(f1)
-        with open(args.out, "a") as outf:
-            outf.write(f"Validation accuracy: {val_metrics}\n")
-        for candidate, score in zip(candidates, scores):
-            f1, texts, labels, preds = task.evaluate(
                 gpt4, candidate, test_exs, n=len(test_exs)
             )
             test_metrics.append(f1)
@@ -234,12 +216,24 @@ if __name__ == "__main__":
             outf.write(f"Test accuracy: {test_metrics}\n")
     # Exemplar Optimization
     best_prompt = candidates[0]
-    Q = 9
-    k = 3
-    m = 6
+    Q = 8 # Population Size
+    k = 3 # Num of exemplars
+    m = 1 # Mutation step
+    t = 3 # Optimization rounds
     populations = [random.sample(train_exs, k) for i in range(Q)]
-    for round in tqdm(range(m), desc="Exemplar Optimization"):
-        best_prompt_with_exemplar = [best_prompt + "\nExemplar" + "\n".join(i) for i in populations]
+    for round in tqdm(range(t), desc="Exemplar Optimization"):
+        start = time.time()
+        sections = utils.parse_sectioned_prompt(best_prompt)
+        task_section = sections['task'].strip()
+        best_prompt_with_exemplar = []
+        for ex_list in populations:
+            exemplar_block = "\n".join(utils.format_exemplar(ex) for ex in ex_list)
+            prompt_with_ex = task_section + "\n\n# Exemplar\n" + exemplar_block
+            best_prompt_with_exemplar.append(prompt_with_ex)
+        best_prompt_with_exemplar = [
+            best_prompt.replace(task_section, tmp) 
+            for tmp in best_prompt_with_exemplar
+        ]
         scores = optimizer.score_candidates(best_prompt_with_exemplar, task, gpt4, train_exs)
         scores, full_population_prompts, populations = zip(
             *sorted(
@@ -252,36 +246,29 @@ if __name__ == "__main__":
         scores = list(scores)
         full_population_prompts = list(full_population_prompts)
         populations = list(populations)
-        best_prompt_with_ex = best_prompt_with_exemplar[0]
-        best_pop_exemplars = populations[0]
+        best_prompt_with_ex = full_population_prompts[0]
         # Mutation
-        new_populations = []
-        for i in range(Q):
-            parent = list(best_pop_exemplars)
-            idx = random.randrange(k)
-            new_example = random.choice(train_exs)
-            parent[idx] = new_example
-            new_populations.append(parent)
-        populations = new_populations
+        num_elites = Q // 2
+        elites = populations[:num_elites]
+        children = []
+        for i in range(num_elites):
+            parent = list(elites[i])
+            mutate_indices = random.sample(range(k), m)
+            for idx in mutate_indices:
+                parent[idx] = random.choice(train_exs)
+            children.append(parent)
+
+        populations = elites + children
 
         with open(args.out, "a") as outf:
             outf.write(f"======== EXEMPLAR OPTIMIZATION ROUND {round}\n")
             outf.write(f"Time: {time.time() - start}\n")
             outf.write(f"Prompt: {best_prompt_with_ex}\n")
-            outf.write(f"Training accuracy: {scores}\n")
-        val_metrics = []
-        test_metrics = []
-        f1, texts, labels, preds = task.evaluate(
-            gpt4, best_prompt_with_ex, validation_exs, n=len(validation_exs)
-        )
-        val_metrics.append(f1)
-        with open(args.out, "a") as outf:
-            outf.write(f"Validation accuracy: {val_metrics}\n")
+            outf.write(f"Training accuracy: {scores[0]}\n")
         f1, texts, labels, preds = task.evaluate(
             gpt4, best_prompt_with_ex, test_exs, n=len(test_exs)
         )
-        test_metrics.append(f1)
         with open(args.out, "a") as outf:
-            outf.write(f"Test accuracy: {test_metrics}\n")
+            outf.write(f"Test accuracy: {f1}\n")
 
     print("DONE!")

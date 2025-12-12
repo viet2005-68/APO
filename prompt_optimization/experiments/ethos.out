@@ -1,0 +1,64 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.065301418304443
+Prompt: ('# Task\nDoes the provided text contain clear and unambiguous language that explicitly conveys hatred or disdain toward any group or person based on race, ethnicity, country of origin, religion, sex, gender identity, sexual orientation, age, or disability? Concentrate solely on direct and explicit expressions of hate, disregarding any indirect or sarcastic comments.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.93),)
+Test accuracy: [0.8933333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 34.502217292785645
+Prompt: # Task
+Does the provided text contain clear and unambiguous language that explicitly conveys hatred or disdain toward any group or person based on race, ethnicity, country of origin, religion, sex, gender identity, sexual orientation, age, or disability? Concentrate solely on direct and explicit expressions of hate, disregarding any indirect or sarcastic comments.
+
+# Exemplar
+Text: White chocolate and raspberry :)
+Label: No
+Text: Kill ALL black people.
+Label: Yes
+Text: I want to draw you something but I do not know where to send it. Do you have an instagram? ^^
+Label: No
+Text: There was one facility opened in the US to provide shelter for abused men. Feminist protested until it was closed. Now there are none.
+Label: No
+Text: ive been trying to figure out which common american voter is more uniformed republican or democrat for years democrats do any of you have the slightest clue that obama has deported more mexicans than any other president in history
+Label: No
+Text: Pale cancer! Back to your west pacific ocean
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 18.306694269180298
+Prompt: # Task
+Does the provided text contain clear and unambiguous language that explicitly conveys hatred or disdain toward any group or person based on race, ethnicity, country of origin, religion, sex, gender identity, sexual orientation, age, or disability? Concentrate solely on direct and explicit expressions of hate, disregarding any indirect or sarcastic comments.
+
+# Exemplar
+Text: White chocolate and raspberry :)
+Label: No
+Text: Kill ALL black people.
+Label: Yes
+Text: I want to draw you something but I do not know where to send it. Do you have an instagram? ^^
+Label: No
+Text: There was one facility opened in the US to provide shelter for abused men. Feminist protested until it was closed. Now there are none.
+Label: No
+Text: ive been trying to figure out which common american voter is more uniformed republican or democrat for years democrats do any of you have the slightest clue that obama has deported more mexicans than any other president in history
+Label: No
+Text: Pale cancer! Back to your west pacific ocean
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94
+Test accuracy: 0.9

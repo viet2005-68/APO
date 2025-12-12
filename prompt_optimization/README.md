@@ -49,7 +49,8 @@ python main.py \
   --minibatch_size 64 \
   --out experiments/ethos.out \
   --evaluator ucb \
-  --reject_on_error
+  --reject_on_error \
+  --rounds -1
 
 # Ar Sacarsm
 python main.py \
@@ -61,7 +62,8 @@ python main.py \
   --minibatch_size 256 \
   --out experiments/ar_sarcasm.out \
   --evaluator ucb \
-  --reject_on_error
+  --reject_on_error \
+  --rounds 0
   
 # Clickbait
 python main.py \
@@ -74,3 +76,14 @@ python main.py \
   --out experiments/clickbait.out \
   --evaluator ucb \
   --reject_on_error
+
+# Casual Judgement (BBH)
+python main.py \
+  --task casual_judgement \
+  --prompts prompts/casual_judgement.md \
+  --data_dir data/casual_judgement \
+  --beam_size 4 \
+  --steps_per_gradient 1 \
+  --minibatch_size 64 \
+  --out experiments/casual_judgement.out \
+  --evaluator bf 
