@@ -214,6 +214,7 @@ if __name__ == "__main__":
             test_metrics.append(f1)
         with open(args.out, "a") as outf:
             outf.write(f"Test accuracy: {test_metrics}\n")
+            
     # Exemplar Optimization
     best_prompt = candidates[0]
     Q = 8 # Population Size
@@ -230,14 +231,22 @@ if __name__ == "__main__":
             exemplar_block = "\n".join(utils.format_exemplar(ex) for ex in ex_list)
             prompt_with_ex = task_section + "\n\n# Exemplar\n" + exemplar_block
             best_prompt_with_exemplar.append(prompt_with_ex)
-        best_prompt_with_exemplar = [
-            best_prompt.replace(task_section, tmp) 
-            for tmp in best_prompt_with_exemplar
-        ]
-        scores = optimizer.score_candidates(best_prompt_with_exemplar, task, gpt4, train_exs)
+
+        start_marker = "# Task"
+        end_marker = "# Output format"
+        final_prompts = []
+        for tmp in best_prompt_with_exemplar:
+            start_idx = best_prompt.find(start_marker)
+            end_idx = best_prompt.rfind(end_marker)
+            if start_idx != -1 and end_idx != -1:
+                task_line_end = best_prompt.find("\n", start_idx) + 1
+                final_prompt = best_prompt[:task_line_end] + tmp + "\n" + best_prompt[end_idx:]
+                final_prompts.append(final_prompt)
+
+        scores = optimizer.score_candidates(final_prompts, task, gpt4, train_exs)
         scores, full_population_prompts, populations = zip(
             *sorted(
-                zip(scores, best_prompt_with_exemplar, populations),
+                zip(scores, final_prompts, populations),
                 key=lambda x: x[0],
                 reverse=True
             )

@@ -156,11 +156,17 @@ class ProTeGi(PromptOptimizer):
             # combine
             new_sections = new_task_sections + mc_sampled_task_sections
             new_sections = list(set(new_sections)) # dedup
-            tmp_new_prompts = [
-                prompt.replace(task_section, tmp) 
-                for tmp in new_sections
-            ]
-            
+            tmp_new_prompts = []
+            start_marker = "# Task"
+            end_marker = "# Output format"
+            for tmp in new_sections:
+                start_idx = prompt.find(start_marker)
+                end_idx = prompt.rfind(end_marker)
+                if start_idx != -1 and end_idx != -1:
+                    task_line_end = prompt.find("\n", start_idx) + 1
+                    final_prompt = prompt[:task_line_end] + tmp + "\n" + prompt[end_idx:]
+                    tmp_new_prompts.append(final_prompt)
+
             # filter a little
             if len(new_sections) > self.opt['max_expansion_factor']:
                 if self.opt['reject_on_errors']:
