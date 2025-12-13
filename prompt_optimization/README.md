@@ -48,7 +48,7 @@ python main.py \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
   --out experiments/ethos.out \
-  --evaluator ucb \
+  --evaluator bf \
   --reject_on_error
 
 # Ar Sacarsm
