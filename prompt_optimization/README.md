@@ -49,8 +49,7 @@ python main.py \
   --minibatch_size 64 \
   --out experiments/ethos.out \
   --evaluator ucb \
-  --reject_on_error \
-  --rounds -1
+  --reject_on_error
 
 # Ar Sacarsm
 python main.py \
@@ -85,5 +84,5 @@ python main.py \
   --beam_size 4 \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
-  --out experiments/casual_judgement.out \
+  --out experiments/casual_judgement-v2.out \
   --evaluator bf 

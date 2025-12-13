@@ -47,7 +47,7 @@ def chatgpt(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "openai/gpt-oss-20b",
+        "model": "Qwen/Qwen3-14B",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,
@@ -56,7 +56,7 @@ def chatgpt(
         "presence_penalty": presence_penalty,
         "frequency_penalty": frequency_penalty,
         "logit_bias": logit_bias,
-        "reasoning_effort": "low"
+        # "reasoning_effort": "low"
     }
     retries = 0
     while True:
@@ -85,7 +85,7 @@ def chatgpt(
             if retries > 10:
                 raise Exception("API request timeout after 10 retries")
     r = r.json()
-    # print(r)
+    print(r)
     if "choices" not in r or not r["choices"]:
         raise Exception(f"Invalid API response: {r}")
     results = []
@@ -124,7 +124,7 @@ def chatgpt_with_confidence(
         "presence_penalty": presence_penalty,
         "frequency_penalty": frequency_penalty,
         "logit_bias": logit_bias,
-        # "reasoning_effort": "low",
+        "reasoning_effort": "low",
         "logprobs": "true",
     }
     retries = 0

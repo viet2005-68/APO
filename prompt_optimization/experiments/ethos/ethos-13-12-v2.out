@@ -1,0 +1,225 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos-v2.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.709414720535278
+Prompt: ('# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.89),)
+Test accuracy: [0.8733333333333333]
+======== ROUND 1
+Time: 109.10131978988647
+Prompt: ('# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier responsible for detecting hate speech. Use the following decision process:\n\n1. **Does the text reference a protected group?**  \n   - If **no**, respond with `No`.  \n   - If **yes**, proceed to step\u202f2.\n\n2. **Is the wording aimed *against* that group?**  \n   - If **no** (e.g., neutral or descriptive language), respond with `No`.  \n   - If **yes**, proceed to step\u202f3.\n\n3. **Does the text contain any of these elements?**  \n   - Dehumanizing descriptors (e.g., “monsters”, “vermin”).  \n   - Threats or calls for violence (e.g., “kill them”, “burn them”).  \n   - Encouragement of discrimination or hostility (e.g., “exterminate”, “do not let them live”).  \n   - If **any** of the above are present, answer `Yes`; otherwise answer `No`.\n\nReply **only** with `Yes` or `No` on a single line.\n\nText: “seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide.”\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier whose job is to spot hate speech. Use the following decision workflow:\n\n1. **Does the passage reference a protected group?**  \n   - If **not**, respond with `No`.  \n   - If **yes**, move to step\u202f2.\n\n2. **Is the wording aimed *against* that group?**  \n   - If **not** (e.g., a neutral statement), respond with `No`.  \n   - If **yes**, move to step\u202f3.\n\n3. **Does the text include any of these elements?**  \n   - Dehumanizing language (e.g., “monsters”, “vermin”).  \n   - Threats or calls for violence (e.g., “kill them”, “burn them”).  \n   - Encouragement of discrimination or hostility (e.g., “exterminate”, “do not let them live”).  \n   - If **any** of the above are present, answer `Yes`; otherwise answer `No`.\n\nOnly output `Yes` or `No` on a single line.\n\nText: “seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide.”\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a text‑analysis helper.  \nYour task is to determine whether a single English sentence or paragraph contains **hate speech**.  \nA statement qualifies as hate speech if it meets all of the following:\n\n1. It **targets a protected group** (such as race, ethnicity, religion, nationality, gender, sexual orientation, disability, etc.).  \n2. It shows **hostility, contempt, or violent intent** toward that group, or it attempts to justify or encourage such hostility.  \n3. It employs **derogatory or demeaning language** that reinforces negative stereotypes.\n\nIf the text satisfies all three points, output **YES**; otherwise output **NO**.\n\nProvide only the label and a brief one‑sentence justification. Use the exact format below:\n\n```\nAnswer: <YES|NO>\nJustification: <short explanation>\n```\n\nNow classify the following text:\n\nText: "<INSERT TEXT HERE>"\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.89), np.float64(0.87), np.float64(0.82), np.float64(0.78))
+Test accuracy: [0.8533333333333334, 0.7866666666666666, 0.76, 0.74]
+======== ROUND 2
+Time: 353.3341209888458
+Prompt: ('# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Rephrased Instruction**\n\nYou are a text‑analysis assistant.  \nYour job is to decide whether a given English sentence or paragraph contains **hate speech**.  \nA statement is considered hate speech if it simultaneously satisfies all of the following criteria:\n\n1. It **directly targets a protected group** (e.g., race, ethnicity, religion, nationality, gender, sexual orientation, disability, etc.).\n2. It expresses **hostility, contempt, or violent intent** toward that group, or it attempts to justify or encourage such hostility.\n3. It uses **derogatory or demeaning language** that perpetuates negative stereotypes.\n\nIf the text meets all three conditions, answer **YES**; otherwise answer **NO**.\n\nRespond only with the label and a concise one‑sentence justification in the exact format shown:\n\n```\nAnswer: <YES|NO>\nJustification: <short explanation>\n```\n\nNow classify the following text:\n\nText: "<INSERT TEXT HERE>"\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier responsible for detecting hate speech. Use the following decision process:\n\n1. **Does the text reference a protected group?**  \n   - If **no**, respond with `No`.  \n   - If **yes**, proceed to step\u202f2.\n\n2. **Is the wording aimed *against* that group?**  \n   - If **no** (e.g., neutral or descriptive language), respond with `No`.  \n   - If **yes**, proceed to step\u202f3.\n\n3. **Does the text contain any of these elements?**  \n   - Dehumanizing descriptors (e.g., “monsters”, “vermin”).  \n   - Threats or calls for violence (e.g., “kill them”, “burn them”).  \n   - Encouragement of discrimination or hostility (e.g., “exterminate”, “do not let them live”).  \n   - If **any** of the above are present, answer `Yes`; otherwise answer `No`.\n\nReply **only** with `Yes` or `No` on a single line.\n\nText: “seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide.”\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a text‑analysis assistant.  \nYour job is to decide if a given English sentence or paragraph contains **hate speech**.  \nA statement is considered hate speech only if it meets every one of these criteria:\n\n1. It **directly targets a protected category** (e.g., race, ethnicity, religion, nationality, gender, sexual orientation, disability, etc.).  \n2. It expresses **hostility, contempt, or violent intent** toward that group, or it seeks to justify or promote such hostility.  \n3. It uses **derogatory or demeaning language** that reinforces negative stereotypes.\n\nIf all three conditions are fulfilled, reply **YES**; otherwise reply **NO**.\n\nReturn only the label and a single‑sentence rationale, exactly in this format:\n\n```\nAnswer: <YES|NO>\nJustification: <brief explanation>\n```\n\nClassify the following passage:\n\nText: "<INSERT TEXT HERE>"\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.89), np.float64(0.89), np.float64(0.87), np.float64(0.87))
+Test accuracy: [0.86, 0.8666666666666667, 0.8, 0.72]
+======== ROUND 3
+Time: 373.9505217075348
+Prompt: ('# Task\nYou are an AI helper tasked with determining whether a given passage constitutes hate speech.  \nReply **exactly** with `Yes` or `No` on a single line—nothing else.\n\n**Procedure:**\n\n1. **Check for mention or implication of a protected group** (e.g., race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other federally protected category).  \n   - If the text contains no such reference or implication, answer `No`.  \n   - If it does, move to step\u202f2.\n\n2. **Assess whether the language is hostile toward that group.**  \n   - Look for aggression, hateful adjectives, stereotypes, or dehumanizing terms directed at the group.  \n   - If the text is neutral, factual, or praising the group, answer `No`.  \n   - If hostility is detected, proceed to step\u202f3.\n\n3. **Look for classic hate‑speech markers:**\n   - Dehumanizing language (e.g., “monsters,” “vermin,” “animals” used for people).  \n   - Threats or calls to violence (e.g., “kill them,” “burn them,” “exterminate”).  \n   - Encouragement of discrimination or exclusion (e.g., “do not let them live,” “keep them out”).  \n   - Coded or dog‑whistle terms understood by a specific audience as hateful (e.g., “blue‑green” for “white people”, “Judas” for “Jewish people”).  \n   - Stereotypical or hateful generalizations portraying the group as inferior or dangerous.\n\n   If any of these indicators are present, answer `Yes`; otherwise answer `No`.\n\n**Illustrative examples:**\n\n- *Text:* “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \n  **Answer:** Yes  \n\n- *Text:* “Germans need to quit blaming themselves for the atrocities committed by the Nazis… People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \n  **Answer:** No  \n\n- *Text:* “I\'d get my money back if I were you. Your sex change was a complete failure.”  \n  **Answer:** Yes  \n\n- *Text:* “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”  \n  **Answer:** No  \n\n- *Text:* “Ugly white girls and white dudes would not get away with that.”  \n  **Answer:** Yes  \n\n**Now classify the following text:**\n\nText: “<INSERT_TEXT_HERE>”\n\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier tasked with detecting hate speech.  \nFollow the steps below and output **only** `Yes` or `No` on a single line.\n\n1. **Is the text offensive toward a protected group?**  \n   *Protected groups include race, ethnicity, national origin, religion, gender identity, sexual orientation, disability, or any other protected characteristic.*  \n   - If **no**, output `No`.  \n   - If **yes**, proceed to step\u202f2.\n\n2. **Does the text contain any of the following indicators?**  \n   - **Direct or indirect dehumanization**: words that strip humanity, e.g., “monsters,” “vermin,” “animals.”  \n   - **Calls to violence or harm**: explicit or implicit threats, e.g., “kill them,” “burn them,” “take them out.”  \n   - **Encouragement of discrimination or hostility**: phrases that promote exclusion, segregation, or removal, e.g., “exterminate,” “do not let them live.”  \n   - **Harassing or humiliating language**: slurs, insults, or phrases that belittle the group, even if not overtly violent.  \n   - **Contextual hostility**: repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group.  \n   - **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**\n\n   If **any** of the above are present, output `Yes`.  \n   If none are present, output `No`.\n\n**Example**  \nText: “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \nOutput: Yes\n\nText: “Didn’t know shitted coloured like you could talk”  \nOutput: Yes\n\nText: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nOutput: Yes\n\nText: “hahahahahahahahaha europ fuck you fucking nazis”  \nOutput: Yes\n\nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nOutput: Yes\n\nText: “this is just a friendly reminder to everyone to be kind.”  \nOutput: No\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Rephrased Instruction**\n\nYou are a text‑analysis assistant.  \nYour job is to decide whether a given English sentence or paragraph contains **hate speech**.  \nA statement is considered hate speech if it simultaneously satisfies all of the following criteria:\n\n1. It **directly targets a protected group** (e.g., race, ethnicity, religion, nationality, gender, sexual orientation, disability, etc.).\n2. It expresses **hostility, contempt, or violent intent** toward that group, or it attempts to justify or encourage such hostility.\n3. It uses **derogatory or demeaning language** that perpetuates negative stereotypes.\n\nIf the text meets all three conditions, answer **YES**; otherwise answer **NO**.\n\nRespond only with the label and a concise one‑sentence justification in the exact format shown:\n\n```\nAnswer: <YES|NO>\nJustification: <short explanation>\n```\n\nNow classify the following text:\n\nText: "<INSERT TEXT HERE>"\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.9), np.float64(0.89), np.float64(0.89), np.float64(0.89))
+Test accuracy: [0.8733333333333333, 0.8733333333333333, 0.8733333333333333, 0.8733333333333333]
+======== ROUND 4
+Time: 435.4465563297272
+Prompt: ('# Task\nYou are an AI helper tasked with determining whether a given passage constitutes hate speech.  \nReply **exactly** with `Yes` or `No` on a single line—nothing else.\n\n**Procedure:**\n\n1. **Check for mention or implication of a protected group** (e.g., race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other federally protected category).  \n   - If the text contains no such reference or implication, answer `No`.  \n   - If it does, move to step\u202f2.\n\n2. **Assess whether the language is hostile toward that group.**  \n   - Look for aggression, hateful adjectives, stereotypes, or dehumanizing terms directed at the group.  \n   - If the text is neutral, factual, or praising the group, answer `No`.  \n   - If hostility is detected, proceed to step\u202f3.\n\n3. **Look for classic hate‑speech markers:**\n   - Dehumanizing language (e.g., “monsters,” “vermin,” “animals” used for people).  \n   - Threats or calls to violence (e.g., “kill them,” “burn them,” “exterminate”).  \n   - Encouragement of discrimination or exclusion (e.g., “do not let them live,” “keep them out”).  \n   - Coded or dog‑whistle terms understood by a specific audience as hateful (e.g., “blue‑green” for “white people”, “Judas” for “Jewish people”).  \n   - Stereotypical or hateful generalizations portraying the group as inferior or dangerous.\n\n   If any of these indicators are present, answer `Yes`; otherwise answer `No`.\n\n**Illustrative examples:**\n\n- *Text:* “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \n  **Answer:** Yes  \n\n- *Text:* “Germans need to quit blaming themselves for the atrocities committed by the Nazis… People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \n  **Answer:** No  \n\n- *Text:* “I\'d get my money back if I were you. Your sex change was a complete failure.”  \n  **Answer:** Yes  \n\n- *Text:* “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”  \n  **Answer:** No  \n\n- *Text:* “Ugly white girls and white dudes would not get away with that.”  \n  **Answer:** Yes  \n\n**Now classify the following text:**\n\nText: “<INSERT_TEXT_HERE>”\n\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier tasked with detecting hate speech.  \nFollow the steps below and output **only** `Yes` or `No` on a single line.\n\n1. **Is the text offensive toward a protected group?**  \n   *Protected groups include race, ethnicity, national origin, religion, gender identity, sexual orientation, disability, or any other protected characteristic.*  \n   - If **no**, output `No`.  \n   - If **yes**, proceed to step\u202f2.\n\n2. **Does the text contain any of the following indicators?**  \n   - **Direct or indirect dehumanization**: words that strip humanity, e.g., “monsters,” “vermin,” “animals.”  \n   - **Calls to violence or harm**: explicit or implicit threats, e.g., “kill them,” “burn them,” “take them out.”  \n   - **Encouragement of discrimination or hostility**: phrases that promote exclusion, segregation, or removal, e.g., “exterminate,” “do not let them live.”  \n   - **Harassing or humiliating language**: slurs, insults, or phrases that belittle the group, even if not overtly violent.  \n   - **Contextual hostility**: repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group.  \n   - **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**\n\n   If **any** of the above are present, output `Yes`.  \n   If none are present, output `No`.\n\n**Example**  \nText: “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \nOutput: Yes\n\nText: “Didn’t know shitted coloured like you could talk”  \nOutput: Yes\n\nText: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nOutput: Yes\n\nText: “hahahahahahahahaha europ fuck you fucking nazis”  \nOutput: Yes\n\nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nOutput: Yes\n\nText: “this is just a friendly reminder to everyone to be kind.”  \nOutput: No\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Rephrased Instruction**\n\nYou are a text‑analysis assistant.  \nYour job is to decide whether a given English sentence or paragraph contains **hate speech**.  \nA statement is considered hate speech if it simultaneously satisfies all of the following criteria:\n\n1. It **directly targets a protected group** (e.g., race, ethnicity, religion, nationality, gender, sexual orientation, disability, etc.).\n2. It expresses **hostility, contempt, or violent intent** toward that group, or it attempts to justify or encourage such hostility.\n3. It uses **derogatory or demeaning language** that perpetuates negative stereotypes.\n\nIf the text meets all three conditions, answer **YES**; otherwise answer **NO**.\n\nRespond only with the label and a concise one‑sentence justification in the exact format shown:\n\n```\nAnswer: <YES|NO>\nJustification: <short explanation>\n```\n\nNow classify the following text:\n\nText: "<INSERT TEXT HERE>"\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.9), np.float64(0.89), np.float64(0.89), np.float64(0.89))
+Test accuracy: [0.86, 0.8733333333333333, 0.86, 0.8666666666666667]
+======== ROUND 5
+Time: 369.6238133907318
+Prompt: ('# Task\nYou are an AI helper tasked with determining whether a given passage constitutes hate speech.  \nReply **exactly** with `Yes` or `No` on a single line—nothing else.\n\n**Procedure:**\n\n1. **Check for mention or implication of a protected group** (e.g., race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other federally protected category).  \n   - If the text contains no such reference or implication, answer `No`.  \n   - If it does, move to step\u202f2.\n\n2. **Assess whether the language is hostile toward that group.**  \n   - Look for aggression, hateful adjectives, stereotypes, or dehumanizing terms directed at the group.  \n   - If the text is neutral, factual, or praising the group, answer `No`.  \n   - If hostility is detected, proceed to step\u202f3.\n\n3. **Look for classic hate‑speech markers:**\n   - Dehumanizing language (e.g., “monsters,” “vermin,” “animals” used for people).  \n   - Threats or calls to violence (e.g., “kill them,” “burn them,” “exterminate”).  \n   - Encouragement of discrimination or exclusion (e.g., “do not let them live,” “keep them out”).  \n   - Coded or dog‑whistle terms understood by a specific audience as hateful (e.g., “blue‑green” for “white people”, “Judas” for “Jewish people”).  \n   - Stereotypical or hateful generalizations portraying the group as inferior or dangerous.\n\n   If any of these indicators are present, answer `Yes`; otherwise answer `No`.\n\n**Illustrative examples:**\n\n- *Text:* “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \n  **Answer:** Yes  \n\n- *Text:* “Germans need to quit blaming themselves for the atrocities committed by the Nazis… People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \n  **Answer:** No  \n\n- *Text:* “I\'d get my money back if I were you. Your sex change was a complete failure.”  \n  **Answer:** Yes  \n\n- *Text:* “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”  \n  **Answer:** No  \n\n- *Text:* “Ugly white girls and white dudes would not get away with that.”  \n  **Answer:** Yes  \n\n**Now classify the following text:**\n\nText: “<INSERT_TEXT_HERE>”\n\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier tasked with detecting hate speech.  \nFollow the steps below and output **only** `Yes` or `No` on a single line.\n\n1. **Is the text offensive toward a protected group?**  \n   *Protected groups include race, ethnicity, national origin, religion, gender identity, sexual orientation, disability, or any other protected characteristic.*  \n   - If **no**, output `No`.  \n   - If **yes**, proceed to step\u202f2.\n\n2. **Does the text contain any of the following indicators?**  \n   - **Direct or indirect dehumanization**: words that strip humanity, e.g., “monsters,” “vermin,” “animals.”  \n   - **Calls to violence or harm**: explicit or implicit threats, e.g., “kill them,” “burn them,” “take them out.”  \n   - **Encouragement of discrimination or hostility**: phrases that promote exclusion, segregation, or removal, e.g., “exterminate,” “do not let them live.”  \n   - **Harassing or humiliating language**: slurs, insults, or phrases that belittle the group, even if not overtly violent.  \n   - **Contextual hostility**: repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group.  \n   - **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**\n\n   If **any** of the above are present, output `Yes`.  \n   If none are present, output `No`.\n\n**Example**  \nText: “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \nOutput: Yes\n\nText: “Didn’t know shitted coloured like you could talk”  \nOutput: Yes\n\nText: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nOutput: Yes\n\nText: “hahahahahahahahaha europ fuck you fucking nazis”  \nOutput: Yes\n\nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nOutput: Yes\n\nText: “this is just a friendly reminder to everyone to be kind.”  \nOutput: No\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Rephrased Instruction**\n\nYou are a text‑analysis assistant.  \nYour job is to decide whether a given English sentence or paragraph contains **hate speech**.  \nA statement is considered hate speech if it simultaneously satisfies all of the following criteria:\n\n1. It **directly targets a protected group** (e.g., race, ethnicity, religion, nationality, gender, sexual orientation, disability, etc.).\n2. It expresses **hostility, contempt, or violent intent** toward that group, or it attempts to justify or encourage such hostility.\n3. It uses **derogatory or demeaning language** that perpetuates negative stereotypes.\n\nIf the text meets all three conditions, answer **YES**; otherwise answer **NO**.\n\nRespond only with the label and a concise one‑sentence justification in the exact format shown:\n\n```\nAnswer: <YES|NO>\nJustification: <short explanation>\n```\n\nNow classify the following text:\n\nText: "<INSERT TEXT HERE>"\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.9), np.float64(0.89), np.float64(0.89), np.float64(0.89))
+Test accuracy: [0.86, 0.8666666666666667, 0.8666666666666667, 0.8733333333333333]
+======== ROUND 6
+Time: 382.2223198413849
+Prompt: ('# Task\nYou are a zero‑shot classifier tasked with detecting hate speech.  \nFollow the steps below and output **only** `Yes` or `No` on a single line.\n\n1. **Identify protected group references**  \n   Protected groups include, but are not limited to:  \n   - **Race / ethnicity**  \n   - **Nationality / national origin**  \n   - **Religion / faith**  \n   - **Gender / gender identity**  \n   - **Sexual orientation**  \n   - **Disability**  \n   - **Age**  \n   - **Socio‑economic status**  \n   - **Political affiliation or ideology**  \n   - **Any other characteristic that is protected or commonly targeted in hate‑speech.**  \n   If the text contains no reference to any of these groups, output `No`.\n\n2. **Apply hate‑speech indicators**  \n   If a protected group is referenced, check for any of the following:\n\n   * **Dehumanization** – words that strip humanity (e.g., “monsters,” “vermin,” “animals,” “fungus”).  \n   * **Calls to violence or harm** – explicit or implicit threats (e.g., “kill them,” “burn them,” “take them out,” “destroy”).  \n   * **Encouragement of discrimination or hostility** – phrases that promote exclusion, segregation, or removal (e.g., “exterminate,” “do not let them live,” “purge”).  \n   * **Harassing or humiliating language** – slurs, insults, or phrases that belittle or devalue the group (e.g., “fucking nazis,” “leeches,” “shitty”).  \n   * **Contextual hostility** – repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group (e.g., “silly holiday,” “must be stopped”).  \n   * **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**\n\n   If **any** of the above are present, output `Yes`.  \n   If none are present, output `No`.\n\n**Example**  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nOutput: Yes\n\nText: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nOutput: Yes\n\nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family.”  \nOutput: No\n\nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”  \nOutput: Yes\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are an AI helper tasked with determining whether a given passage constitutes hate speech.  \nReply **exactly** with `Yes` or `No` on a single line—nothing else.\n\n**Procedure:**\n\n1. **Check for mention or implication of a protected group** (e.g., race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other federally protected category).  \n   - If the text contains no such reference or implication, answer `No`.  \n   - If it does, move to step\u202f2.\n\n2. **Assess whether the language is hostile toward that group.**  \n   - Look for aggression, hateful adjectives, stereotypes, or dehumanizing terms directed at the group.  \n   - If the text is neutral, factual, or praising the group, answer `No`.  \n   - If hostility is detected, proceed to step\u202f3.\n\n3. **Look for classic hate‑speech markers:**\n   - Dehumanizing language (e.g., “monsters,” “vermin,” “animals” used for people).  \n   - Threats or calls to violence (e.g., “kill them,” “burn them,” “exterminate”).  \n   - Encouragement of discrimination or exclusion (e.g., “do not let them live,” “keep them out”).  \n   - Coded or dog‑whistle terms understood by a specific audience as hateful (e.g., “blue‑green” for “white people”, “Judas” for “Jewish people”).  \n   - Stereotypical or hateful generalizations portraying the group as inferior or dangerous.\n\n   If any of these indicators are present, answer `Yes`; otherwise answer `No`.\n\n**Illustrative examples:**\n\n- *Text:* “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \n  **Answer:** Yes  \n\n- *Text:* “Germans need to quit blaming themselves for the atrocities committed by the Nazis… People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \n  **Answer:** No  \n\n- *Text:* “I\'d get my money back if I were you. Your sex change was a complete failure.”  \n  **Answer:** Yes  \n\n- *Text:* “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”  \n  **Answer:** No  \n\n- *Text:* “Ugly white girls and white dudes would not get away with that.”  \n  **Answer:** Yes  \n\n**Now classify the following text:**\n\nText: “<INSERT_TEXT_HERE>”\n\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier that must decide whether a given text contains hate speech.  \nYour answer must be a single word: **Yes** or **No**.\n\nFollow these guidelines:\n\n1. **Check for mentions of protected groups**  \n   Protected groups include, but are not limited to:  \n   - Race / ethnicity  \n   - Nationality / national origin  \n   - Religion / faith  \n   - Gender / gender identity  \n   - Sexual orientation  \n   - Disability  \n   - Age  \n   - Socio‑economic status  \n   - Political affiliation or ideology  \n   - Any other characteristic that is commonly targeted in hate‑speech.  \n   If the text does not reference any of these groups, answer **No**.\n\n2. **Look for hate‑speech signals**  \n   If a protected group is referenced, evaluate whether the text contains any of the following:\n\n   * **Dehumanizing language** (e.g., “monsters,” “vermin,” “animals,” “fungus”).  \n   * **Calls to violence or harm** (e.g., “kill them,” “burn them,” “take them out,” “destroy”).  \n   * **Encouragement of discrimination or hostility** (e.g., “exterminate,” “do not let them live,” “purge”).  \n   * **Harassing or humiliating remarks** (slurs, insults, or demeaning terms).  \n   * **Hostile context** (repeated negative stereotypes, mocking tone, or conspiratorial claims).  \n   * **Any other content that is widely recognized as hateful or harassing toward the group.**\n\n   If any of these indicators appear, output **Yes**.  \n   If none appear, output **No**.\n\n**Examples**  \n\nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nOutput: Yes  \n\nText: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nOutput: Yes  \n\nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family.”  \nOutput: No  \n\nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”  \nOutput: Yes  \n\nProceed to classify the next input.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot classifier tasked with detecting hate speech.  \nFollow the steps below and output **only** `Yes` or `No` on a single line.\n\n1. **Is the text offensive toward a protected group?**  \n   *Protected groups include race, ethnicity, national origin, religion, gender identity, sexual orientation, disability, or any other protected characteristic.*  \n   - If **no**, output `No`.  \n   - If **yes**, proceed to step\u202f2.\n\n2. **Does the text contain any of the following indicators?**  \n   - **Direct or indirect dehumanization**: words that strip humanity, e.g., “monsters,” “vermin,” “animals.”  \n   - **Calls to violence or harm**: explicit or implicit threats, e.g., “kill them,” “burn them,” “take them out.”  \n   - **Encouragement of discrimination or hostility**: phrases that promote exclusion, segregation, or removal, e.g., “exterminate,” “do not let them live.”  \n   - **Harassing or humiliating language**: slurs, insults, or phrases that belittle the group, even if not overtly violent.  \n   - **Contextual hostility**: repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group.  \n   - **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**\n\n   If **any** of the above are present, output `Yes`.  \n   If none are present, output `No`.\n\n**Example**  \nText: “Seen the way the Israelis treat the Palestinians? Slaughter on a weekly basis, very racist are the Israelis to the point of genocide.”  \nOutput: Yes\n\nText: “Didn’t know shitted coloured like you could talk”  \nOutput: Yes\n\nText: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nOutput: Yes\n\nText: “hahahahahahahahaha europ fuck you fucking nazis”  \nOutput: Yes\n\nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nOutput: Yes\n\nText: “this is just a friendly reminder to everyone to be kind.”  \nOutput: No\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.91), np.float64(0.9), np.float64(0.9), np.float64(0.89))
+Test accuracy: [0.9, 0.8666666666666667, 0.8933333333333333, 0.8733333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 30.613672733306885
+Prompt: # Task
+You are a zero‑shot classifier tasked with detecting hate speech.
+Follow the steps below and output **only** `Yes` or `No` on a single line.
+
+1. **Identify protected group references**
+Protected groups include, but are not limited to:
+- **Race / ethnicity**
+- **Nationality / national origin**
+- **Religion / faith**
+- **Gender / gender identity**
+- **Sexual orientation**
+- **Disability**
+- **Age**
+- **Socio‑economic status**
+- **Political affiliation or ideology**
+- **Any other characteristic that is protected or commonly targeted in hate‑speech.**
+If the text contains no reference to any of these groups, output `No`.
+
+2. **Apply hate‑speech indicators**
+If a protected group is referenced, check for any of the following:
+
+* **Dehumanization** – words that strip humanity (e.g., “monsters,” “vermin,” “animals,” “fungus”).
+* **Calls to violence or harm** – explicit or implicit threats (e.g., “kill them,” “burn them,” “take them out,” “destroy”).
+* **Encouragement of discrimination or hostility** – phrases that promote exclusion, segregation, or removal (e.g., “exterminate,” “do not let them live,” “purge”).
+* **Harassing or humiliating language** – slurs, insults, or phrases that belittle or devalue the group (e.g., “fucking nazis,” “leeches,” “shitty”).
+* **Contextual hostility** – repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group (e.g., “silly holiday,” “must be stopped”).
+* **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**
+
+If **any** of the above are present, output `Yes`.
+If none are present, output `No`.
+
+**Example**
+Text: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”
+Output: Yes
+
+Text: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”
+Output: Yes
+
+Text: “Deport him in military aircraft and dump him back where he is originated from. Him and his family.”
+Output: No
+
+Text: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”
+Output: Yes
+
+# Exemplar
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: Depends on whether or not Ryan Reynolds is in the room
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 16.501904726028442
+Prompt: # Task
+You are a zero‑shot classifier tasked with detecting hate speech.
+Follow the steps below and output **only** `Yes` or `No` on a single line.
+
+1. **Identify protected group references**
+Protected groups include, but are not limited to:
+- **Race / ethnicity**
+- **Nationality / national origin**
+- **Religion / faith**
+- **Gender / gender identity**
+- **Sexual orientation**
+- **Disability**
+- **Age**
+- **Socio‑economic status**
+- **Political affiliation or ideology**
+- **Any other characteristic that is protected or commonly targeted in hate‑speech.**
+If the text contains no reference to any of these groups, output `No`.
+
+2. **Apply hate‑speech indicators**
+If a protected group is referenced, check for any of the following:
+
+* **Dehumanization** – words that strip humanity (e.g., “monsters,” “vermin,” “animals,” “fungus”).
+* **Calls to violence or harm** – explicit or implicit threats (e.g., “kill them,” “burn them,” “take them out,” “destroy”).
+* **Encouragement of discrimination or hostility** – phrases that promote exclusion, segregation, or removal (e.g., “exterminate,” “do not let them live,” “purge”).
+* **Harassing or humiliating language** – slurs, insults, or phrases that belittle or devalue the group (e.g., “fucking nazis,” “leeches,” “shitty”).
+* **Contextual hostility** – repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group (e.g., “silly holiday,” “must be stopped”).
+* **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**
+
+If **any** of the above are present, output `Yes`.
+If none are present, output `No`.
+
+**Example**
+Text: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”
+Output: Yes
+
+Text: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”
+Output: Yes
+
+Text: “Deport him in military aircraft and dump him back where he is originated from. Him and his family.”
+Output: No
+
+Text: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”
+Output: Yes
+
+# Exemplar
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: Depends on whether or not Ryan Reynolds is in the room
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 14.701719999313354
+Prompt: # Task
+You are a zero‑shot classifier tasked with detecting hate speech.
+Follow the steps below and output **only** `Yes` or `No` on a single line.
+
+1. **Identify protected group references**
+Protected groups include, but are not limited to:
+- **Race / ethnicity**
+- **Nationality / national origin**
+- **Religion / faith**
+- **Gender / gender identity**
+- **Sexual orientation**
+- **Disability**
+- **Age**
+- **Socio‑economic status**
+- **Political affiliation or ideology**
+- **Any other characteristic that is protected or commonly targeted in hate‑speech.**
+If the text contains no reference to any of these groups, output `No`.
+
+2. **Apply hate‑speech indicators**
+If a protected group is referenced, check for any of the following:
+
+* **Dehumanization** – words that strip humanity (e.g., “monsters,” “vermin,” “animals,” “fungus”).
+* **Calls to violence or harm** – explicit or implicit threats (e.g., “kill them,” “burn them,” “take them out,” “destroy”).
+* **Encouragement of discrimination or hostility** – phrases that promote exclusion, segregation, or removal (e.g., “exterminate,” “do not let them live,” “purge”).
+* **Harassing or humiliating language** – slurs, insults, or phrases that belittle or devalue the group (e.g., “fucking nazis,” “leeches,” “shitty”).
+* **Contextual hostility** – repeated negative stereotypes, mocking tone, or conspiratorial claims aimed at the group (e.g., “silly holiday,” “must be stopped”).
+* **Any other content that, on its own, is widely recognized as hateful or harassing toward the group.**
+
+If **any** of the above are present, output `Yes`.
+If none are present, output `No`.
+
+**Example**
+Text: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”
+Output: Yes
+
+Text: “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”
+Output: Yes
+
+Text: “Deport him in military aircraft and dump him back where he is originated from. Him and his family.”
+Output: No
+
+Text: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame.”
+Output: Yes
+
+# Exemplar
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: Depends on whether or not Ryan Reynolds is in the room
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92
+Test accuracy: 0.8666666666666667

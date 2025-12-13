@@ -1,0 +1,234 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos-v3.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.532365798950195
+Prompt: ('# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.88),)
+Test accuracy: [0.8666666666666667]
+======== ROUND 1
+Time: 105.7993323802948
+Prompt: ('# Task\nYou are a classification assistant.  \nBelow are examples of *hate speech* (label **Yes**) and *non‑hate speech* (label **No**).\n\n**Hate speech examples**  \n1. “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \n2. “Fucking idiots. Keep them out. They change the culture. Take over small towns. Vote in their own people to rule the town. And start enforcing their religious beliefs on everyone. It CANNOT FUCKING HAPPEN. Stop them now while you still can.”  \n3. “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”\n\n**Non‑hate speech examples**  \n1. “you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics”\n\nNow classify the following text:\n\nText: “{TEXT}”\n\nReply with **Yes** if it is hate speech, otherwise **No**.  \nAnswer only with the word “Yes” or “No”.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** You are a classifier that determines whether a passage contains hate speech.\n\n**Definition of hate speech:** Sentences that *directly target a protected group* and express a *hostile or violent intent* aimed at *degrading, intimidating, or inciting harm* toward that group.\n\n**Output format:** For each passage, write **YES** if it meets the definition, otherwise **NO**. Follow with a single‑sentence explanation for your decision.\n\n**Illustrations**\n1. “All people of X are criminals.” → YES – targets protected group, hostile.\n2. “I like sushi.” → NO – no protected group, no hostility.\n\n**Classification task**\n\nText: "Should have been sterilised upon arrival. Now your future doesn\'t exist."\n\n**Answer:**\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Variation:**  \n` towards `\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.89), np.float64(0.88), np.float64(0.83), np.float64(0.83))
+Test accuracy: [0.8733333333333333, 0.8666666666666667, 0.8666666666666667, 0.8333333333333334]
+======== ROUND 2
+Time: 373.02494764328003
+Prompt: ('# Task\nYou are a classification assistant.  \nBelow are examples of *hate speech* (label **Yes**) and *non‑hate speech* (label **No**).\n\n**Hate speech examples**  \n1. “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \n2. “Fucking idiots. Keep them out. They change the culture. Take over small towns. Vote in their own people to rule the town. And start enforcing their religious beliefs on everyone. It CANNOT FUCKING HAPPEN. Stop them now while you still can.”  \n3. “this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”\n\n**Non‑hate speech examples**  \n1. “you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics”\n\nNow classify the following text:\n\nText: “{TEXT}”\n\nReply with **Yes** if it is hate speech, otherwise **No**.  \nAnswer only with the word “Yes” or “No”.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a zero‑shot text classifier.  \nYour job: mark each sentence with **Yes** if it contains hate‑speech or extremist content, otherwise **No**.  \nHate‑speech is defined as insults, threats, or dehumanizing remarks aimed at protected groups.  \nRespond only with **Yes** or **No**—nothing else.  \n\n**Example 1**  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: **No**\n\n**Example 2**  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: **Yes**\n\n**Example 3**  \nText: “We have to take our power back as the superior gender.”  \nAnswer: **Yes**\n\n**Example 4**  \nText: “you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics”  \nAnswer: **No**\n\nNow classify the following sentence:\nText: “{TEXT}”\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour task is to label the following text as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are a few *exact* examples that illustrate the boundary.  \nUse them as a reference.  \nAfter the examples, provide the label for the new text.  \nDo not add any extra commentary.\n\n**Examples**\n\n1.  \nText: "Pale cancer! Back to your west pacific ocean"  \nAnswer: Yes\n\n2.  \nText: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"  \nAnswer: No\n\n3.  \nText: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"  \nAnswer: No\n\n4.  \nText: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"  \nAnswer: Yes\n\n**Now classify**\n\nText: "Pale cancer! Back to your west pacific ocean"\n\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou act as a content‑moderation assistant.  \nDetermine whether the following text is **Yes** (contains hate speech) or **No** (does not contain hate speech).  \nRefer to the examples below for guidance.  \nAfter the examples, provide the classification for the new text.  \nDo not add any commentary.\n\n**Examples**\n\n1.  \nText: "Pale cancer! Back to your west pacific ocean"  \nAnswer: Yes\n\n2.  \nText: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"  \nAnswer: No\n\n3.  \nText: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"  \nAnswer: No\n\n4.  \nText: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"  \nAnswer: Yes\n\n**Now classify**\n\nText: "Pale cancer! Back to your west pacific ocean"\n\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.89), np.float64(0.89), np.float64(0.89), np.float64(0.89))
+Test accuracy: [0.8866666666666667, 0.88, 0.86, 0.8933333333333333]
+======== ROUND 3
+Time: 357.9345512390137
+Prompt: ('# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage is **Yes** (contains hate speech) or **No** (does not contain hate speech).  \nBelow are several *exact* examples that show the line between the two categories.  \nUse them as a guide.  \nAfter the examples, give the label for the new passage.  \nDo not add any extra explanation.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour task is to label the following text as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are a number of *exact* examples that illustrate the boundary.  \nUse them as a reference.  \nAfter the examples, provide the label for the new text.  \nDo not add any extra commentary.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour job is to classify the following passage as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are exact examples that illustrate a wide variety of target groups and expressions.  \nUse these examples to guide your decision.  \nAfter the examples, give only the label for the new passage—no additional explanation.\n\n**Examples**\n\n1. Target: Racial group – “Pale cancer! Back to your west pacific ocean” → Yes  \n2. Target: No clear target – “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum” → No  \n3. Target: National group – “Deport him in military aircraft and dump him back where he is originated from. Him and his family” → No  \n4. Target: Religious group – “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame” → Yes  \n5. Target: Gender group – “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.” → Yes  \n6. Target: Ethnic group – “Dalit? Is this a name of religion or an atom of poo composition” → Yes  \n7. Target: National group – “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.” → No  \n8. Target: National group – “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.” → Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage contains hate speech.  \nLabel it **Yes** if it does, or **No** if it does not.  \nBelow are several precise examples that show where the line is drawn.  \nUse these as a guide.  \nAfter the examples, give only the label for the new passage—no extra comments.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.92), np.float64(0.92), np.float64(0.92), np.float64(0.91))
+Test accuracy: [0.8933333333333333, 0.8666666666666667, 0.88, 0.8666666666666667]
+======== ROUND 4
+Time: 409.8474977016449
+Prompt: ('# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage is **Yes** (contains hate speech) or **No** (does not contain hate speech).  \nBelow are several *exact* examples that show the line between the two categories.  \nUse them as a guide.  \nAfter the examples, give the label for the new passage.  \nDo not add any extra explanation.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour task is to label the following text as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are a number of *exact* examples that illustrate the boundary.  \nUse them as a reference.  \nAfter the examples, provide the label for the new text.  \nDo not add any extra commentary.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour job is to classify the following passage as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are exact examples that illustrate a wide variety of target groups and expressions.  \nUse these examples to guide your decision.  \nAfter the examples, give only the label for the new passage—no additional explanation.\n\n**Examples**\n\n1. Target: Racial group – “Pale cancer! Back to your west pacific ocean” → Yes  \n2. Target: No clear target – “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum” → No  \n3. Target: National group – “Deport him in military aircraft and dump him back where he is originated from. Him and his family” → No  \n4. Target: Religious group – “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame” → Yes  \n5. Target: Gender group – “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.” → Yes  \n6. Target: Ethnic group – “Dalit? Is this a name of religion or an atom of poo composition” → Yes  \n7. Target: National group – “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.” → No  \n8. Target: National group – “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.” → Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage contains hate speech.  \nLabel it **Yes** if it does, or **No** if it does not.  \nBelow are several precise examples that show where the line is drawn.  \nUse these as a guide.  \nAfter the examples, give only the label for the new passage—no extra comments.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.92), np.float64(0.92), np.float64(0.92), np.float64(0.91))
+Test accuracy: [0.9066666666666666, 0.86, 0.88, 0.88]
+======== ROUND 5
+Time: 388.42199063301086
+Prompt: ('# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage is **Yes** (contains hate speech) or **No** (does not contain hate speech).  \nBelow are several *exact* examples that show the line between the two categories.  \nUse them as a guide.  \nAfter the examples, give the label for the new passage.  \nDo not add any extra explanation.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour task is to label the following text as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are a number of *exact* examples that illustrate the boundary.  \nUse them as a reference.  \nAfter the examples, provide the label for the new text.  \nDo not add any extra commentary.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour job is to classify the following passage as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are exact examples that illustrate a wide variety of target groups and expressions.  \nUse these examples to guide your decision.  \nAfter the examples, give only the label for the new passage—no additional explanation.\n\n**Examples**\n\n1. Target: Racial group – “Pale cancer! Back to your west pacific ocean” → Yes  \n2. Target: No clear target – “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum” → No  \n3. Target: National group – “Deport him in military aircraft and dump him back where he is originated from. Him and his family” → No  \n4. Target: Religious group – “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame” → Yes  \n5. Target: Gender group – “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.” → Yes  \n6. Target: Ethnic group – “Dalit? Is this a name of religion or an atom of poo composition” → Yes  \n7. Target: National group – “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.” → No  \n8. Target: National group – “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.” → Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage contains hate speech.  \nLabel it **Yes** if it does, or **No** if it does not.  \nBelow are several precise examples that show where the line is drawn.  \nUse these as a guide.  \nAfter the examples, give only the label for the new passage—no extra comments.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.92), np.float64(0.92), np.float64(0.92), np.float64(0.91))
+Test accuracy: [0.8866666666666667, 0.8666666666666667, 0.88, 0.8733333333333333]
+======== ROUND 6
+Time: 348.5424795150757
+Prompt: ('# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage is **Yes** (contains hate speech) or **No** (does not contain hate speech).  \nBelow are several *exact* examples that show the line between the two categories.  \nUse them as a guide.  \nAfter the examples, give the label for the new passage.  \nDo not add any extra explanation.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour task is to label the following text as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are a number of *exact* examples that illustrate the boundary.  \nUse them as a reference.  \nAfter the examples, provide the label for the new text.  \nDo not add any extra commentary.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation assistant.  \nYour job is to classify the following passage as **Yes** (hate speech) or **No** (not hate speech).  \nBelow are exact examples that illustrate a wide variety of target groups and expressions.  \nUse these examples to guide your decision.  \nAfter the examples, give only the label for the new passage—no additional explanation.\n\n**Examples**\n\n1. Target: Racial group – “Pale cancer! Back to your west pacific ocean” → Yes  \n2. Target: No clear target – “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum” → No  \n3. Target: National group – “Deport him in military aircraft and dump him back where he is originated from. Him and his family” → No  \n4. Target: Religious group – “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame” → Yes  \n5. Target: Gender group – “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.” → Yes  \n6. Target: Ethnic group – “Dalit? Is this a name of religion or an atom of poo composition” → Yes  \n7. Target: National group – “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.” → No  \n8. Target: National group – “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.” → Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a content‑moderation helper.  \nYour job is to decide whether the following passage contains hate speech.  \nLabel it **Yes** if it does, or **No** if it does not.  \nBelow are several precise examples that show where the line is drawn.  \nUse these as a guide.  \nAfter the examples, give only the label for the new passage—no extra comments.\n\n**Examples**\n\n1.  \nText: “Pale cancer! Back to your west pacific ocean”  \nAnswer: Yes  \n\n2.  \nText: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”  \nAnswer: No  \n\n3.  \nText: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”  \nAnswer: No  \n\n4.  \nText: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”  \nAnswer: Yes  \n\n5.  \nText: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”  \nAnswer: Yes  \n\n6.  \nText: “Dalit? Is this a name of religion or an atom of poo composition”  \nAnswer: Yes  \n\n7.  \nText: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”  \nAnswer: No  \n\n8.  \nText: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”  \nAnswer: Yes  \n\n**Now classify**\n\nText: <TEXT>  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.92), np.float64(0.92), np.float64(0.92), np.float64(0.91))
+Test accuracy: [0.88, 0.8533333333333334, 0.88, 0.8866666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 37.514628410339355
+Prompt: # Task
+You are a content‑moderation helper.
+Your job is to decide whether the following passage is **Yes** (contains hate speech) or **No** (does not contain hate speech).
+Below are several *exact* examples that show the line between the two categories.
+Use them as a guide.
+After the examples, give the label for the new passage.
+Do not add any extra explanation.
+
+**Examples**
+
+1.
+Text: “Pale cancer! Back to your west pacific ocean”
+Answer: Yes
+
+2.
+Text: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”
+Answer: No
+
+3.
+Text: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”
+Answer: No
+
+4.
+Text: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”
+Answer: Yes
+
+5.
+Text: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”
+Answer: Yes
+
+6.
+Text: “Dalit? Is this a name of religion or an atom of poo composition”
+Answer: Yes
+
+7.
+Text: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”
+Answer: No
+
+8.
+Text: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”
+Answer: Yes
+
+**Now classify**
+
+Text: <TEXT>
+Answer:
+
+# Exemplar
+Text: Depends on whether or not Ryan Reynolds is in the room
+Label: No
+Text: All girls like you should have a pimp to guide them to successful prostitution
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 19.008293867111206
+Prompt: # Task
+You are a content‑moderation helper.
+Your job is to decide whether the following passage is **Yes** (contains hate speech) or **No** (does not contain hate speech).
+Below are several *exact* examples that show the line between the two categories.
+Use them as a guide.
+After the examples, give the label for the new passage.
+Do not add any extra explanation.
+
+**Examples**
+
+1.
+Text: “Pale cancer! Back to your west pacific ocean”
+Answer: Yes
+
+2.
+Text: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”
+Answer: No
+
+3.
+Text: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”
+Answer: No
+
+4.
+Text: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”
+Answer: Yes
+
+5.
+Text: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”
+Answer: Yes
+
+6.
+Text: “Dalit? Is this a name of religion or an atom of poo composition”
+Answer: Yes
+
+7.
+Text: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”
+Answer: No
+
+8.
+Text: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”
+Answer: Yes
+
+**Now classify**
+
+Text: <TEXT>
+Answer:
+
+# Exemplar
+Text: Depends on whether or not Ryan Reynolds is in the room
+Label: No
+Text: All girls like you should have a pimp to guide them to successful prostitution
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 18.90452551841736
+Prompt: # Task
+You are a content‑moderation helper.
+Your job is to decide whether the following passage is **Yes** (contains hate speech) or **No** (does not contain hate speech).
+Below are several *exact* examples that show the line between the two categories.
+Use them as a guide.
+After the examples, give the label for the new passage.
+Do not add any extra explanation.
+
+**Examples**
+
+1.
+Text: “Pale cancer! Back to your west pacific ocean”
+Answer: Yes
+
+2.
+Text: “Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum”
+Answer: No
+
+3.
+Text: “Deport him in military aircraft and dump him back where he is originated from. Him and his family”
+Answer: No
+
+4.
+Text: “Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame”
+Answer: Yes
+
+5.
+Text: “This man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.”
+Answer: Yes
+
+6.
+Text: “Dalit? Is this a name of religion or an atom of poo composition”
+Answer: Yes
+
+7.
+Text: “Germans need to quit blaming themselves for the atrocities committed by the Nazi’s. The same thing (shame) is happening here in the U.S. because of the past because of slavery and “stealing” the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad “white” Americans are.”
+Answer: No
+
+8.
+Text: “Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches.”
+Answer: Yes
+
+**Now classify**
+
+Text: <TEXT>
+Answer:
+
+# Exemplar
+Text: Depends on whether or not Ryan Reynolds is in the room
+Label: No
+Text: All girls like you should have a pimp to guide them to successful prostitution
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94
+Test accuracy: 0.9

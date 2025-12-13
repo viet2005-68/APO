@@ -1,5 +1,5 @@
 # Task
-How would a typical person answer each of the following questions about causation?
+Thoroughly analyze the circumstances and determine if the individual in question is indeed the actual cause of the outcome, considering all relevant factors, intentions, and alternative explanations. Do not assume a causal relationship simply because an action occurred alongside a result.
 
 # Output format
 Answer ONLY "Yes" or "No".
