@@ -83,7 +83,7 @@ def chatgpt(
             time.sleep(1)
             retries += 1
             if retries > 10:
-                raise Exception("API request timeout after 10 retries")
+                return [""]
     r = r.json()
     print(r)
     if "choices" not in r or not r["choices"]:
@@ -115,7 +115,7 @@ def chatgpt_with_confidence(
     messages = [{"role": "user", "content": prompt}]
     payload = {
         "messages": messages,
-        "model": "Qwen/Qwen2.5-14B-Instruct",
+        "model": "Qwen/Qwen3-14B",
         "temperature": temperature,
         "n": n,
         "top_p": top_p,
@@ -124,7 +124,7 @@ def chatgpt_with_confidence(
         "presence_penalty": presence_penalty,
         "frequency_penalty": frequency_penalty,
         "logit_bias": logit_bias,
-        "reasoning_effort": "low",
+        # "reasoning_effort": "low",
         "logprobs": "true",
     }
     retries = 0
@@ -152,7 +152,7 @@ def chatgpt_with_confidence(
             time.sleep(1)
             retries += 1
             if retries > 10:
-                raise Exception("API request timeout after 10 retries")
+                return [""]
     r = r.json()
     if "choices" not in r or not r["choices"]:
         raise Exception(f"Invalid API response: {r}")

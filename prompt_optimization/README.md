@@ -84,5 +84,5 @@ python main.py \
   --beam_size 4 \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
-  --out experiments/casual_judgement-v2.out \
+  --out experiments/casual_judgement.out \
   --evaluator bf 
