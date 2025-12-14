@@ -3,6 +3,8 @@ from tqdm import tqdm
 import random
 from abc import ABC, abstractmethod
 import utils
+from FlagEmbedding import BGEM3FlagModel
+from sklearn.metrics.pairwise import cosine_similarity
 
 class PromptOptimizer(ABC):
     def __init__(self, args, evaluator_fn, scorer, max_threads=1, bf_eval=None):
@@ -19,6 +21,26 @@ class PromptOptimizer(ABC):
 class ProTeGi(PromptOptimizer):
     """ ProTeGi: Prompt Optimization with Textual Gradients
     """
+    def __init__(self, args, evaluator_fn, scorer, max_threads=1, bf_eval=None):
+        super().__init__(args, evaluator_fn, scorer, max_threads, bf_eval)
+        self.embedding_model = BGEM3FlagModel('BAAI/bge-m3')
+
+    def embed_exemplars(self, exemplars: list):
+        texts = [utils.format_exemplar(ex) for ex in exemplars]
+        embeddings = self.embedding_model.encode(
+            texts,
+            batch_size=8,
+            max_length=512
+        )["dense_vecs"]
+        return embeddings
+
+    def diversity_penalize(self, exemplars):
+        embeddings = self.embed_exemplars(exemplars)
+        sim = cosine_similarity(embeddings)
+
+        i, j = np.triu_indices(sim.shape[0], k=1)
+        return sim[i, j].mean()
+
     def _sample_error_str(self, texts, labels, preds, task, n=4):
         """ Sample n error strings from the given texts, labels, and preds"""
         error_idxs = []

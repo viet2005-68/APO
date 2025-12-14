@@ -10,7 +10,6 @@ import config
 import string
 import numpy as np
 
-
 def parse_sectioned_prompt(s):
 
     result = {}
@@ -85,7 +84,6 @@ def chatgpt(
             if retries > 10:
                 return [""]
     r = r.json()
-    print(r)
     if "choices" not in r or not r["choices"]:
         raise Exception(f"Invalid API response: {r}")
     results = []

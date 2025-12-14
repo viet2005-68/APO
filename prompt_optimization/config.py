@@ -1,4 +1,4 @@
 import os
 
 OPENAI_KEY = ""
-BASE_URL = "http://66.23.193.245:18369/v1"
+BASE_URL = "http://194.14.47.19:22378/v1"

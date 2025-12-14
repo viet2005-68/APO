@@ -1,0 +1,187 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-ga.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 12.89147663116455
+Prompt: ('# Task\nYou are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).\n\nIf the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.\n\nIf the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.\n\nOtherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.61328125,)
+Test accuracy: [0.5900216919739696]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 68.59429836273193
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Exemplar
+Text: Statement: Says she has bipartisan support, including 53 sheriffs throughout the state, Democrats and Republicans.
+Job title: Wisconsin Supreme Court justice
+State: Wisconsin
+Party: none
+Context: a candidate forum
+Label: No
+Text: Statement: Says (t)his 12 year council Seat-warmer has never chaired, vice chaired, or led a single Council committee meeting.
+Job title: transportation consultant
+State: Georgia
+Party: none
+Context: a flier
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.5971875
+Test accuracy: 0.6334056399132321
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 67.90379047393799
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Exemplar
+Text: Statement: Says she has bipartisan support, including 53 sheriffs throughout the state, Democrats and Republicans.
+Job title: Wisconsin Supreme Court justice
+State: Wisconsin
+Party: none
+Context: a candidate forum
+Label: No
+Text: Statement: Says (t)his 12 year council Seat-warmer has never chaired, vice chaired, or led a single Council committee meeting.
+Job title: transportation consultant
+State: Georgia
+Party: none
+Context: a flier
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.589375
+Test accuracy: 0.6334056399132321
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 63.40453004837036
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Exemplar
+Text: Statement: Says she has bipartisan support, including 53 sheriffs throughout the state, Democrats and Republicans.
+Job title: Wisconsin Supreme Court justice
+State: Wisconsin
+Party: none
+Context: a candidate forum
+Label: No
+Text: Statement: Says (t)his 12 year council Seat-warmer has never chaired, vice chaired, or led a single Council committee meeting.
+Job title: transportation consultant
+State: Georgia
+Party: none
+Context: a flier
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6284375
+Test accuracy: 0.631236442516269
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 57.400718450546265
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Exemplar
+Text: Statement: When Social Security was passed, there were all kinds of lawsuits, just as there have been in the legal battle over the new health care law.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a television interview
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6384375
+Test accuracy: 0.6095444685466378
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 62.60501432418823
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Exemplar
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6484375
+Test accuracy: 0.6052060737527115
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 49.791696310043335
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Exemplar
+Text: Statement: When Social Security was passed, there were all kinds of lawsuits, just as there have been in the legal battle over the new health care law.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a television interview
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6540625
+Test accuracy: 0.6117136659436009

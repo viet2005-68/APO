@@ -35,9 +35,10 @@ python main.py \
   --beam_size 4 \
   --steps_per_gradient 1 \
   --minibatch_size 256 \
-  --out experiments/liar-14-12.out \
+  --out experiments/liar-14-12-v4.out \
   --evaluator ucb \
-  --reject_on_error
+  --reject_on_error \
+  --max_threads 48
 
 # Ethos Task
 python main.py \
@@ -49,7 +50,9 @@ python main.py \
   --minibatch_size 64 \
   --out experiments/ethos.out \
   --evaluator bf \
-  --reject_on_error
+  --reject_on_error \
+  --max_threads 48 \
+  --rounds 0
 
 # Ar Sacarsm
 python main.py \
@@ -85,4 +88,6 @@ python main.py \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
   --out experiments/casual_judgement.out \
-  --evaluator bf 
+  --evaluator bf \
+  --max_threads 48 \
+  --rounds 0

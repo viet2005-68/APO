@@ -18,6 +18,8 @@ import sys
 import random
 import utils
 from models import Prompt
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def get_task_class(task_name):
     if task_name == "ethos":
@@ -217,11 +219,16 @@ if __name__ == "__main__":
             
     # Exemplar Optimization
     best_prompt = candidates[0]
-    Q = 8 # Population Size
-    k = 6 # Num of exemplars
-    m = 2 # Mutation step
+    Q = 10 # Population Size
+    k_min = 2 # Min exemplars
+    k_max = 10 # Max exemplars
     t = 6 # Optimization rounds
-    populations = [random.sample(train_exs, k) for i in range(Q)]
+    lambda_len = 0 # Length penalize parameter
+    lambda_div = 0.2 # Diversity penalize parameter
+    populations = [
+        random.sample(train_exs, random.randint(k_min, k_max))
+        for _ in range(Q)
+    ]
     for round in tqdm(range(t), desc="Exemplar Optimization"):
         start = time.time()
         sections = utils.parse_sectioned_prompt(best_prompt)
@@ -244,28 +251,40 @@ if __name__ == "__main__":
                 final_prompts.append(final_prompt)
 
         scores = optimizer.score_candidates(final_prompts, task, gpt4, train_exs)
-        scores, full_population_prompts, populations = zip(
+        scores_after_regularize = [
+            s - (lambda_len * len(pop)) - (lambda_div * optimizer.diversity_penalize(pop))
+            for s, pop in zip(scores, populations)
+        ]
+
+        scores, scores_after_regularize, full_population_prompts, populations = zip(
             *sorted(
-                zip(scores, final_prompts, populations),
-                key=lambda x: x[0],
+                zip(scores, scores_after_regularize, final_prompts, populations),
+                key=lambda x: x[1],
                 reverse=True
             )
         )
-
         scores = list(scores)
+        scores_after_regularize = list(scores_after_regularize)
         full_population_prompts = list(full_population_prompts)
         populations = list(populations)
         best_prompt_with_ex = full_population_prompts[0]
-        # Mutation
+        
+        # Mutations
         num_elites = Q // 2
         elites = populations[:num_elites]
         children = []
-        for i in range(num_elites):
-            parent = list(elites[i])
-            mutate_indices = random.sample(range(k), m)
-            for idx in mutate_indices:
-                parent[idx] = random.choice(train_exs)
-            children.append(parent)
+        for parent in elites:
+            child = list(parent)
+            mutation_type = random.choice(["replace", "add", "remove"])
+            if mutation_type == "add" and len(child) < k_max:
+                child.append(random.choice(train_exs))
+            elif mutation_type == "remove" and len(child) > k_min:
+                remove_idx = random.randrange(len(child))
+                child.pop(remove_idx)
+            elif mutation_type == "replace" and len(child) > 0:
+                replace_idx = random.randrange(len(child))
+                child[replace_idx] = random.choice(train_exs)
+            children.append(child)
 
         populations = elites + children
 
@@ -273,7 +292,7 @@ if __name__ == "__main__":
             outf.write(f"======== EXEMPLAR OPTIMIZATION ROUND {round}\n")
             outf.write(f"Time: {time.time() - start}\n")
             outf.write(f"Prompt: {best_prompt_with_ex}\n")
-            outf.write(f"Training accuracy: {scores[0]}\n")
+            outf.write(f"Training accuracy: {scores[0]} | Penalized score: {scores_after_regularize[0]}\n")
         f1, texts, labels, preds = task.evaluate(
             gpt4, best_prompt_with_ex, test_exs, n=len(test_exs)
         )
