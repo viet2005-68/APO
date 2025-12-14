@@ -1,33 +1,66 @@
-{"task": "ethos", "data_dir": "data/ar_sarcasm", "prompts": "prompts/ar_sarcasm.md", "out": "experiments/ar_sarcasm.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+{"task": "ethos", "data_dir": "data/ar_sarcasm", "prompts": "prompts/ar_sarcasm.md", "out": "experiments/ar_sarcasm.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 69.0481584072113
+Time: 18.30585813522339
 Prompt: ('# Task\nCraft a revised version of the given directive focused on identifying texts containing offensive language, insults, crude expressions, or sensitive subjects, ensuring it retains the core message of the original. Additionally, supply an example to illustrate the type of content analysis expected based on prior examples. For instance, if the original directive concerns detecting inappropriate content in social media comments or posts, provide an example demonstrating how to evaluate text for signs of profanity, derogatory terms, or references to controversial topics that may be considered inappropriate or offensive.\n\n# Output format\nAnswer ONLY Yes or No as labels\n\n# Prediction\nText: {{ text }}\nLabel:',)
-Training accuracy: (0.8671875,)
-Test accuracy: [0.8394648829431438]
+Training accuracy: (0.828125,)
+Test accuracy: [0.8230383973288815]
 ======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 384.7042467594147
+Time: 54.46919655799866
 Prompt: # Task
 Craft a revised version of the given directive focused on identifying texts containing offensive language, insults, crude expressions, or sensitive subjects, ensuring it retains the core message of the original. Additionally, supply an example to illustrate the type of content analysis expected based on prior examples. For instance, if the original directive concerns detecting inappropriate content in social media comments or posts, provide an example demonstrating how to evaluate text for signs of profanity, derogatory terms, or references to controversial topics that may be considered inappropriate or offensive.
 
-# Exemplar
-Text: "الحياة اللندنية تورد تقرير عن #بنغازي :المتشددون يعترفون بهزيمتهم أمام قوات حفتر في #بنغازيhttps://t.co/2DEzp8pSvW"
+# Here are some examples:
+Text: "بيونسيه دي حلوه فاهشخ يا ديني"
 Label: No
-Text: "اجتماع ثلاثي في موسكو لبحث أزمة #حلب https://t.co/c50G6e5Wta"
+Text: #سيدنا_النبي كان طيب الرائحة، وإذا صافحه أحد ظل بيده عطره سائر اليوم صلى الله عليك يا سيدي يا رسول الله
 Label: No
-Text: "#kw ترامب هدّد بسجن كلينتون في حال أصبح رئيساً - تقارير خاصة: عوّض المرشح الجمهوري للرئاسة الاميركية، دونالد ... https://t.co/klJ2XSLpzZ"
+Text: لن أُصدق كتب التاريخ بعد اليوم وقد رأيت الحاضر يُزيف بلا حياء فكيف بتاريخ كتبه مُنتصر ؟ #مجزرة_رابعة
 Label: No
-Text: "#ماذا_لو_المدارس_مختلطهماقدر اقول انه مرة بيكون مافي فساد لا في فساد بس اعتقد بيكون اقل من اللي صاير الحين بكثير الكثير"
-Label: No
-Text: "@Epic_moi هيلارى كلنتون شنب😂هي سبب فوز زوجها بيل بالرئاسة الامريكيه.الانتخابات حاليا صراع الجهل والثقافهلكنها كلاهما نتن"
-Label: Yes
-Text: الله ينور عليك يا دكتور عبد المنعم ابو الفتوح، الهي ما تنضام ابدا انا من عندياتي باحبك #3"
-Label: No
-
 # Output format
 Answer ONLY Yes or No as labels
 
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.8359375
-Test accuracy: 0.842809364548495
+Training accuracy: 0.86328125 | Penalized score: 0.686563041723899
+Test accuracy: 0.8263772954924875
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 58.003549575805664
+Prompt: # Task
+Craft a revised version of the given directive focused on identifying texts containing offensive language, insults, crude expressions, or sensitive subjects, ensuring it retains the core message of the original. Additionally, supply an example to illustrate the type of content analysis expected based on prior examples. For instance, if the original directive concerns detecting inappropriate content in social media comments or posts, provide an example demonstrating how to evaluate text for signs of profanity, derogatory terms, or references to controversial topics that may be considered inappropriate or offensive.
+
+# Here are some examples:
+Text: اسألوا #البرادعي عما فعله في #العراق #البرادعى_طلع_جاسوس #باسم_طلع_حرامي …
+Label: Yes
+Text: #سيدنا_النبي كان طيب الرائحة، وإذا صافحه أحد ظل بيده عطره سائر اليوم صلى الله عليك يا سيدي يا رسول الله
+Label: No
+Text: لن أُصدق كتب التاريخ بعد اليوم وقد رأيت الحاضر يُزيف بلا حياء فكيف بتاريخ كتبه مُنتصر ؟ #مجزرة_رابعة
+Label: No
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83984375 | Penalized score: 0.6750051702352966
+Test accuracy: 0.8196994991652755
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 57.49728322029114
+Prompt: # Task
+Craft a revised version of the given directive focused on identifying texts containing offensive language, insults, crude expressions, or sensitive subjects, ensuring it retains the core message of the original. Additionally, supply an example to illustrate the type of content analysis expected based on prior examples. For instance, if the original directive concerns detecting inappropriate content in social media comments or posts, provide an example demonstrating how to evaluate text for signs of profanity, derogatory terms, or references to controversial topics that may be considered inappropriate or offensive.
+
+# Here are some examples:
+Text: "بيونسيه دي حلوه فاهشخ يا ديني"
+Label: No
+Text: #سيدنا_النبي كان طيب الرائحة، وإذا صافحه أحد ظل بيده عطره سائر اليوم صلى الله عليك يا سيدي يا رسول الله
+Label: No
+Text: البنك المركزى التابع للانقلاب يعلن أن ديون مصر ارتفع لمستوى بشع غير مسبوق وتجاوزت 1,8 تريليون جنيه كارثة لا يشير لها اعلام العار
+Label: No
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.8515625 | Penalized score: 0.7025522357557307
+Test accuracy: 0.8280467445742905

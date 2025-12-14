@@ -219,16 +219,17 @@ if __name__ == "__main__":
             
     # Exemplar Optimization
     best_prompt = candidates[0]
-    Q = 10 # Population Size
-    k_min = 2 # Min exemplars
-    k_max = 10 # Max exemplars
+    Q = 12 # Population Size
+    k_min = 3 # Min exemplars
+    k_max = 6 # Max exemplars
     t = 6 # Optimization rounds
-    lambda_len = 0 # Length penalize parameter
-    lambda_div = 0.2 # Diversity penalize parameter
+    lambda_len = 0.01 # Length penalize parameter
+    lambda_div = 0.3 # Diversity penalize parameter
     populations = [
         random.sample(train_exs, random.randint(k_min, k_max))
         for _ in range(Q)
     ]
+    print([len(p) for p in populations])
     for round in tqdm(range(t), desc="Exemplar Optimization"):
         start = time.time()
         sections = utils.parse_sectioned_prompt(best_prompt)
@@ -236,7 +237,7 @@ if __name__ == "__main__":
         best_prompt_with_exemplar = []
         for ex_list in populations:
             exemplar_block = "\n".join(utils.format_exemplar(ex) for ex in ex_list)
-            prompt_with_ex = task_section + "\n\n# Exemplar\n" + exemplar_block
+            prompt_with_ex = task_section + "\n\n# Here are some examples:\n" + exemplar_block
             best_prompt_with_exemplar.append(prompt_with_ex)
 
         start_marker = "# Task"

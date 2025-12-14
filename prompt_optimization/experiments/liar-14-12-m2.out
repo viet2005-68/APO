@@ -1,0 +1,270 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 17.702958345413208
+Prompt: ('# Task\nGenerate a rephrased version of the following instruction, ensuring the meaning remains unchanged.\n\nInput: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.\n\nIn your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.\n\nWhen making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.\n\nIf the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.51171875,)
+Test accuracy: [0.5553145336225597]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 52.93225169181824
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: In the past year alone, Ohio businesses have created more jobs than almost every other state in the country.
+Job title: State job creation organization
+State: Ohio
+Party: none
+Context: a television ad
+Label: No
+Text: Statement: Guantanamo detainees get taxpayer-paid-for prayer rugsthey had honey-glazed chicken and rice pilaf.
+Job title: U.S. representative
+State: California
+Party: republican
+Context: a debate in Durham, N.H.
+Label: No
+Text: Statement: The major immigration issue was about Poles, and Bulgarians, and Romanians, and that they werent contributing economically. The unemployment rate among Poles in Britain is lower than the unemployment rate among Brits.
+Job title: 
+State: 
+Party: none
+Context: comments on "Meet the Press"
+Label: No
+Text: Statement: When the United States invaded Iraq, Saddam Hussein wanted to acquire weapons of mass destruction, and "he said so himself after his capture."
+Job title: U.S. senator
+State: Arizona
+Party: republican
+Context: St. Petersburg, Fla.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6354166666666666 | Penalized score: 0.4595743586264177
+Test accuracy: 0.6008676789587852
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 57.52582931518555
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Most state employees could pay twice as much toward their health care premiums and it would still be half the national average
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: the State of the State speech
+Label: No
+Text: Statement: Every one of the 67 supervisors of elections in Florida refused to carry out the effort to remove noncitizens from the voter rolls.
+Job title: 
+State: 
+Party: democrat
+Context: an email
+Label: Yes
+Text: Statement: Says Wisconsin Gov. Scott Walker is making voting more difficult by closing Department of Motor Vehicles offices where low-income voters live.
+Job title: 
+State: 
+Party: none
+Context: an interview
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65234375 | Penalized score: 0.46885618415026364
+Test accuracy: 0.5856832971800434
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 57.08165764808655
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: In the past year alone, Ohio businesses have created more jobs than almost every other state in the country.
+Job title: State job creation organization
+State: Ohio
+Party: none
+Context: a television ad
+Label: No
+Text: Statement: "Senator McCain voted against the Bush tax cuts. Now he's for them."
+Job title: Former governor
+State: Massachusetts
+Party: republican
+Context: Stratham, N.H.
+Label: No
+Text: Statement: The major immigration issue was about Poles, and Bulgarians, and Romanians, and that they werent contributing economically. The unemployment rate among Poles in Britain is lower than the unemployment rate among Brits.
+Job title: 
+State: 
+Party: none
+Context: comments on "Meet the Press"
+Label: No
+Text: Statement: When the United States invaded Iraq, Saddam Hussein wanted to acquire weapons of mass destruction, and "he said so himself after his capture."
+Job title: U.S. senator
+State: Arizona
+Party: republican
+Context: St. Petersburg, Fla.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.64453125 | Penalized score: 0.4690982883879409
+Test accuracy: 0.5726681127982647
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 55.847820520401
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Most state employees could pay twice as much toward their health care premiums and it would still be half the national average
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: the State of the State speech
+Label: No
+Text: Statement: Every one of the 67 supervisors of elections in Florida refused to carry out the effort to remove noncitizens from the voter rolls.
+Job title: 
+State: 
+Party: democrat
+Context: an email
+Label: Yes
+Text: Statement: When Social Security started, age expectancy for the average man was 58. It was 62 -- 62 for women.
+Job title: 
+State: 
+Party: none
+Context: comments on his television show
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.62890625 | Penalized score: 0.46044344148844174
+Test accuracy: 0.6030368763557483
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 57.29239535331726
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Most state employees could pay twice as much toward their health care premiums and it would still be half the national average
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: the State of the State speech
+Label: No
+Text: Statement: Every one of the 67 supervisors of elections in Florida refused to carry out the effort to remove noncitizens from the voter rolls.
+Job title: 
+State: 
+Party: democrat
+Context: an email
+Label: Yes
+Text: Statement: When Social Security started, age expectancy for the average man was 58. It was 62 -- 62 for women.
+Job title: 
+State: 
+Party: none
+Context: comments on his television show
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.64453125 | Penalized score: 0.47606844148844174
+Test accuracy: 0.6052060737527115
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 56.99887728691101
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Most state employees could pay twice as much toward their health care premiums and it would still be half the national average
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: the State of the State speech
+Label: No
+Text: Statement: Every one of the 67 supervisors of elections in Florida refused to carry out the effort to remove noncitizens from the voter rolls.
+Job title: 
+State: 
+Party: democrat
+Context: an email
+Label: Yes
+Text: Statement: Did you know that in 2013 over 50 percent of all babies born in Oregon were Hispanic?
+Job title: Oregon School Boards Association executive director
+State: Oregon
+Party: none
+Context: a newsletter
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.59375 | Penalized score: 0.4178010317661112
+Test accuracy: 0.5986984815618221

@@ -1,0 +1,346 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos-14-12-m1.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 6
+Time: 666.9412772655487
+Prompt: ('# Task\nClassify the following text as either \'Hate Speech\' or \'Not Hate Speech\' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.\n\nExamples:\n- "I hate all Muslims" → Hate Speech  \n- "I would punch him in the face if he wasn\'t a celebrity" → Not Hate Speech  \n- "You\'re so stupid, you\'re like a dog" → Not Hate Speech  \n- "All white people are racists" → Hate Speech  \n- "You\'re just like the rats I’d expect from your country" → Hate Speech  \n- "You\'re third world pieces with no job on this planet" → Hate Speech  \n- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech  \n- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech  \n- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech  \n- "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful." → Not Hate Speech  \n- "Didn’t know shitted coloured like you could talk" → Not Hate Speech  \n- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech  \n- "Should have been sterilised upon arrival. Now your future doesn\'t exist." → Not Hate Speech  \n- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech  \n- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes  \n- "We have to take our power back as the superior gender." → Hate Speech  \n- "Anti-LGBT people, How sad and ignorant...I can\'t believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech  \n\nAnswer only with \'Hate Speech\' or \'Not Hate Speech\' and provide no explanation.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nClassify the following text as either \'Hate Speech\' or \'Not Hate Speech\' according to the given definition: any language that degrades, offends, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected characteristics. This encompasses explicit or implicit expressions that dehumanize, use derogatory terms, or demonstrate intent to harm or exclude based on these attributes. Be particularly attentive to statements that advocate for supremacy, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, indirect, or context-based.\n\nExamples:\n- "I hate all Muslims" → Hate Speech  \n- "I would punch him in the face if he wasn\'t a celebrity" → Not Hate Speech  \n- "You\'re so stupid, you\'re like a dog" → Not Hate Speech  \n- "All white people are racists" → Hate Speech  \n- "You\'re just like the rats I’d expect from your country" → Hate Speech  \n- "You\'re third world pieces with no job on this planet" → Hate Speech  \n- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech  \n- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech  \n- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech  \n- "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful." → Not Hate Speech  \n- "Didn’t know shitted coloured like you could talk" → Not Hate Speech  \n- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech  \n- "Should have been sterilised upon arrival. Now your future doesn\'t exist." → Not Hate Speech  \n- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech  \n- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes  \n- "We have to take our power back as the superior gender." → Hate Speech  \n- "Anti-LGBT people, How sad and ignorant...I can\'t believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech  \n\nAnswer only with \'Hate Speech\' or \'Not Hate Speech\' and provide no explanation.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nClassify the following text as either \'Hate Speech\' or \'Not Hate Speech\' based on the definition: language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected traits. This includes explicit or implicit language that dehumanizes, uses derogatory terms, or expresses intent to harm or exclude based on these characteristics. Pay close attention to statements promoting superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, indirect, or context-based.\n\nExamples:\n- "I hate all Muslims" → Hate Speech\n- "I would punch him in the face if he wasn\'t a celebrity" → Not Hate Speech\n- "You\'re so stupid, you\'re like a dog" → Not Hate Speech\n- "All white people are racists" → Hate Speech\n- "You\'re just like the rats I’d expect from your country" → Hate Speech\n- "You\'re third world pieces with no job on this planet" → Hate Speech\n- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech\n- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech\n- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech\n- "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful." → Not Hate Speech\n- "Didn’t know shitted coloured like you could talk" → Not Hate Speech\n- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech\n- "Should have been sterilised upon arrival. Now your future doesn\'t exist." → Not Hate Speech\n- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech\n- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes\n- "We have to take our power back as the superior gender." → Hate Speech\n- "Anti-LGBT people, How sad and ignorant...I can\'t believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech\n\nAnswer only with \'Hate Speech\' or \'Not Hate Speech\' and provide no explanation.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nClassify the following text as either \'Hate Speech\' or \'Not Hate Speech\' according to the guidelines: speech that employs degrading language directed at individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected characteristics, encompassing dehumanizing, offensive, or disrespectful language. Take into account context, intent, and whether the language is indirect, sarcastic, or context-dependent.\n\nBe careful with:\n- Use of extreme or violent language aimed at individuals or groups based on protected characteristics should be categorized as Hate Speech.\n- Broad or political critique without direct targeting or dehumanizing language should be categorized as Not Hate Speech.\n- Context matters — differentiate between views on policies, immigration, or conflict, and explicit degradation of individuals or groups.\n- Refrain from generalizing words like "crazy," "weird," or "scary" unless they are evidently used in a dehumanizing or discriminatory manner toward a protected group.\n- Exercise caution with fear-based or exaggerated language that might not be directed at specific protected groups.\n\nExamples:\n- "I hate all Muslims" → Hate Speech\n- "I would punch him in the face if he wasn\'t a celebrity" → Not Hate Speech\n- "You\'re so stupid, you\'re like a dog" → Not Hate Speech\n- "All white people are racists" → Hate Speech\n- "You\'re just like the rats I’d expect from your country" → Hate Speech\n- "You\'re third world pieces with no job on this planet" → Hate Speech\n- "Deport him in military aircraft and dump him back where he is originated from" → Not Hate Speech\n- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech\n- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech\n- "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful." → Not Hate Speech\n- "Didn’t know shitted coloured like you could talk" → Not Hate Speech\n- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech\n- "Should have been sterilised upon arrival. Now your future doesn\'t exist." → Not Hate Speech\n- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech\n- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Not Hate Speech\n- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → Not Hate Speech\n\nAnswer only with \'Hate Speech\' or \'Not Hate Speech\' and provide no explanation.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.99), np.float64(0.99), np.float64(0.99), np.float64(0.98))
+Test accuracy: [0.8733333333333333, 0.8733333333333333, 0.88, 0.88]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 30.831151723861694
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Exemplar
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: this doesn’t  represent mental illness correctly at all, it doesn't just randomly appear its always present
+Label: No
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+Text: I was clinically depressed for a while and this blew my mind. Due to me having stress I don't say 'oh man I'm getting anxiety' or 'ugh I'm so depressed' because all that does is brings attention I don't want.  The fact that people make these illnesses a fashion merch makes me feel like everyone is looking in my or other people's directions. Memes are relatable,funny, and relieving. When he said 'Do people who post these memes have a mental illness or are they just doing it for ..' it made me wonder alot   Now Ik what people are capable of nowadays
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: They must be really suffering if they're throwing food all over the ground for the pigeons.
+Label: No
+Text: the engagement ring story outrages me more than it should have.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99 | Penalized score: 0.8884192988650307
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 15.544667959213257
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Exemplar
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: this doesn’t  represent mental illness correctly at all, it doesn't just randomly appear its always present
+Label: No
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+Text: I was clinically depressed for a while and this blew my mind. Due to me having stress I don't say 'oh man I'm getting anxiety' or 'ugh I'm so depressed' because all that does is brings attention I don't want.  The fact that people make these illnesses a fashion merch makes me feel like everyone is looking in my or other people's directions. Memes are relatable,funny, and relieving. When he said 'Do people who post these memes have a mental illness or are they just doing it for ..' it made me wonder alot   Now Ik what people are capable of nowadays
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: They must be really suffering if they're throwing food all over the ground for the pigeons.
+Label: No
+Text: the engagement ring story outrages me more than it should have.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99 | Penalized score: 0.8884192988650307
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 13.625182628631592
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Exemplar
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: this doesn’t  represent mental illness correctly at all, it doesn't just randomly appear its always present
+Label: No
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+Text: I was clinically depressed for a while and this blew my mind. Due to me having stress I don't say 'oh man I'm getting anxiety' or 'ugh I'm so depressed' because all that does is brings attention I don't want.  The fact that people make these illnesses a fashion merch makes me feel like everyone is looking in my or other people's directions. Memes are relatable,funny, and relieving. When he said 'Do people who post these memes have a mental illness or are they just doing it for ..' it made me wonder alot   Now Ik what people are capable of nowadays
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: They must be really suffering if they're throwing food all over the ground for the pigeons.
+Label: No
+Text: the engagement ring story outrages me more than it should have.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99 | Penalized score: 0.8884192988650307
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 17.70607018470764
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Exemplar
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: this doesn’t  represent mental illness correctly at all, it doesn't just randomly appear its always present
+Label: No
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+Text: I was clinically depressed for a while and this blew my mind. Due to me having stress I don't say 'oh man I'm getting anxiety' or 'ugh I'm so depressed' because all that does is brings attention I don't want.  The fact that people make these illnesses a fashion merch makes me feel like everyone is looking in my or other people's directions. Memes are relatable,funny, and relieving. When he said 'Do people who post these memes have a mental illness or are they just doing it for ..' it made me wonder alot   Now Ik what people are capable of nowadays
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: They must be really suffering if they're throwing food all over the ground for the pigeons.
+Label: No
+Text: the engagement ring story outrages me more than it should have.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99 | Penalized score: 0.8884192988650307
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 12.01853632926941
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Exemplar
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: this doesn’t  represent mental illness correctly at all, it doesn't just randomly appear its always present
+Label: No
+Text: We have to take our power back as the superior gender. 
+Label: Yes
+Text: you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+Text: I was clinically depressed for a while and this blew my mind. Due to me having stress I don't say 'oh man I'm getting anxiety' or 'ugh I'm so depressed' because all that does is brings attention I don't want.  The fact that people make these illnesses a fashion merch makes me feel like everyone is looking in my or other people's directions. Memes are relatable,funny, and relieving. When he said 'Do people who post these memes have a mental illness or are they just doing it for ..' it made me wonder alot   Now Ik what people are capable of nowadays
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: They must be really suffering if they're throwing food all over the ground for the pigeons.
+Label: No
+Text: the engagement ring story outrages me more than it should have.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99 | Penalized score: 0.8884192988650307
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 9.101851463317871
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Exemplar
+Text: So can I put a wig and run with girls?
+Label: No
+Text: Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your
+Label: Yes
+Text: Im lesbian and proud im happy my friends accept me but i dont know if my family does but i dont care what anyone says im proud to be a lesbian
+Label: No
+Text: Thanks god at least you have music to pale the pain being blind. Oh what you can’t hear too. Haha
+Label: No
+Text: the engagement ring story outrages me more than it should have.
+Label: No
+Text: White chocolate and raspberry :)
+Label: No
+Text: When u two getting married? Kid in mind?
+Label: No
+Text: its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead
+Label: Yes
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99 | Penalized score: 0.8888965378036449
+Test accuracy: 0.8933333333333333

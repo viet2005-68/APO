@@ -35,6 +35,8 @@ class ProTeGi(PromptOptimizer):
         return embeddings
 
     def diversity_penalize(self, exemplars):
+        if len(exemplars) == 0 or len(exemplars) == 1:
+            return 0
         embeddings = self.embed_exemplars(exemplars)
         sim = cosine_similarity(embeddings)
 

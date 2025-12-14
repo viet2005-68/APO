@@ -35,10 +35,11 @@ python main.py \
   --beam_size 4 \
   --steps_per_gradient 1 \
   --minibatch_size 256 \
-  --out experiments/liar-14-12-v4.out \
+  --out experiments/liar-14-12-m2.out \
   --evaluator ucb \
   --reject_on_error \
-  --max_threads 48
+  --max_threads 48 \
+  --rounds 0
 
 # Ethos Task
 python main.py \
@@ -65,6 +66,7 @@ python main.py \
   --out experiments/ar_sarcasm.out \
   --evaluator ucb \
   --reject_on_error \
+  --max_threads 48 \
   --rounds 0
   
 # Clickbait
@@ -76,8 +78,10 @@ python main.py \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
   --out experiments/clickbait.out \
-  --evaluator ucb \
-  --reject_on_error
+  --evaluator bf \
+  --reject_on_error \
+  --max_threads 48 \
+  --rounds 0
 
 # Casual Judgement (BBH)
 python main.py \
@@ -87,7 +91,8 @@ python main.py \
   --beam_size 4 \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
-  --out experiments/casual_judgement.out \
+  --out experiments/casual_judgement-14-12-m2.out \
   --evaluator bf \
   --max_threads 48 \
+  --reject_on_error \
   --rounds 0

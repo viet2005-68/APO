@@ -382,3 +382,252 @@ Text: {{ text }}
 Label:
 Training accuracy: 0.6796875
 Test accuracy: 0.6203904555314533
+
+
+====== AFTER REGULARIZE
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 50.93590426445007
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Here are some examples:
+Text: Statement: Welcome to Wisconsin road signs have always been made in Wisconsin,but Scott Walker is outsourcing themto an out-of-state company and paying more money for them.
+Job title: 
+State: 
+Party: democrat
+Context: an interview
+Label: Yes
+Text: Statement: Last year we spent more than $40 billion on highways. And Lord knows we need that. But thats more than we spent on Amtrak in its entire 40-year history.
+Job title: U.S. Senator
+State: New Jersey
+Party: democrat
+Context: an article on NOLA.com
+Label: No
+Text: Statement: Most young Americans right now, theyre not covered by health insurance.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a Funnyordie.com "Between Two Ferns" interview with Zach Galifianakis
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6458333333333334 | Penalized score: 0.4693558011695761
+Test accuracy: 0.6420824295010846
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 55.49569272994995
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Here are some examples:
+Text: Statement: Welcome to Wisconsin road signs have always been made in Wisconsin,but Scott Walker is outsourcing themto an out-of-state company and paying more money for them.
+Job title: 
+State: 
+Party: democrat
+Context: an interview
+Label: Yes
+Text: Statement: Last year we spent more than $40 billion on highways. And Lord knows we need that. But thats more than we spent on Amtrak in its entire 40-year history.
+Job title: U.S. Senator
+State: New Jersey
+Party: democrat
+Context: an article on NOLA.com
+Label: No
+Text: Statement: Most young Americans right now, theyre not covered by health insurance.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a Funnyordie.com "Between Two Ferns" interview with Zach Galifianakis
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.640625 | Penalized score: 0.4641474678362427
+Test accuracy: 0.6420824295010846
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 55.03614830970764
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Here are some examples:
+Text: Statement: Says President Obamas deal allows Iran to produce a nuclear weapon.
+Job title: Developer
+State: Florida
+Party: republican
+Context: a press release
+Label: Yes
+Text: Statement: Women and men both are making less when you adjust for inflation than when John Kitzhaber was first elected governor.
+Job title: state representative
+State: Oregon
+Party: republican
+Context: a campaign debate
+Label: Yes
+Text: Statement: Nevada has been recently ranked No. 1 in unemployment, foreclosures, violent crime, personal bankruptcy and divorce.
+Job title: 
+State: Florida
+Party: none
+Context: a news article
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.68359375 | Penalized score: 0.5043890260622431
+Test accuracy: 0.6550976138828634
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 56.1127290725708
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Here are some examples:
+Text: Statement: Welcome to Wisconsin road signs have always been made in Wisconsin,but Scott Walker is outsourcing themto an out-of-state company and paying more money for them.
+Job title: 
+State: 
+Party: democrat
+Context: an interview
+Label: Yes
+Text: Statement: Newt Gingrich has been a proponent of selecting a president by popular vote instead of the Electoral College.
+Job title: reporting
+State: Georgia
+Party: none
+Context: news media reports
+Label: No
+Text: Statement: Most young Americans right now, theyre not covered by health insurance.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a Funnyordie.com "Between Two Ferns" interview with Zach Galifianakis
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625 | Penalized score: 0.48873496307244807
+Test accuracy: 0.6464208242950108
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 55.048311948776245
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Here are some examples:
+Text: Statement: Welcome to Wisconsin road signs have always been made in Wisconsin,but Scott Walker is outsourcing themto an out-of-state company and paying more money for them.
+Job title: 
+State: 
+Party: democrat
+Context: an interview
+Label: Yes
+Text: Statement: Last year we spent more than $40 billion on highways. And Lord knows we need that. But thats more than we spent on Amtrak in its entire 40-year history.
+Job title: U.S. Senator
+State: New Jersey
+Party: democrat
+Context: an article on NOLA.com
+Label: No
+Text: Statement: Muslims attempted to establish the first Islamic Sharia court inside the United States in the town of Irving, Texas.
+Job title: 
+State: 
+Party: none
+Context: a chain email
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65234375 | Penalized score: 0.4975550345087453
+Test accuracy: 0.6420824295010846
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 54.99940848350525
+Prompt: # Task
+You are to evaluate whether a Statement is **true (No)** or **false (Yes)**. Your evaluation must be based on the **Context**, along with **general knowledge** and **logical reasoning**. Consider the **Job title, State, and Party** of the person making the statement, as well as the **type of source** (e.g., a news release, interview, letter, or video).
+
+If the statement is **unclear**, **incomplete**, or **does not provide enough detail** to be assessed **even with the Context and general knowledge**, label it as **false (Yes)** — since it cannot be verified or disproven with the available information.
+
+If the statement **contradicts known facts**, **lacks credible support**, or **cannot be validated using the Context or general knowledge**, label it as **false (Yes)**.
+
+Otherwise, if the statement is **backed by the Context or general knowledge**, or **can be logically inferred from it**, label it as **true (No)**.
+
+# Here are some examples:
+Text: Statement: A Texas police department bought an ad telling drug dealers, We can take your competition off the streets for FREE.
+Job title: Social media posting
+State: 
+Party: none
+Context: a Snopes.com tweet recapping a Facebook post
+Label: No
+Text: Statement: A bill before the Georgia General Assembly would make presidential candidates meet citizenship requirements that are not in the U.S. Constitution.
+Job title: Attorney, blogger
+State: Georgia
+Party: libertarian
+Context: an op-ed in The Atlanta Journal-Constitution
+Label: No
+Text: Statement: Says that Sherrod Brown voted to cut Medicare by over $500 billion in order to fund government-run health care.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: Yes
+Text: Statement: The states unemployment rate is fifth-highest in the country, a full point above the nationwide rate and higher than all of our...neighboring states.
+Job title: State Senator
+State: New Jersey
+Party: democrat
+Context: a speech on the State Senate floor
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6927083333333334 | Penalized score: 0.5122423300502009
+Test accuracy: 0.6724511930585684

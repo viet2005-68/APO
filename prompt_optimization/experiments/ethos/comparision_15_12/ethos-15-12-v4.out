@@ -1,11 +1,11 @@
 {"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 3.4345953464508057
+Time: 2.8520054817199707
 Prompt: ('# Task\n**Revised Prompt:**\n\nYou are to determine whether the provided text qualifies as hate speech by categorizing it as either "Yes" or "No." Make your judgment using the **following clear and strict criteria**:\n\n- **Hate speech** exists when a message:\n- **Explicitly or implicitly** conveys **prejudice, hostility, or contempt** toward an individual or group based on **protected attributes** such as race, religion, ethnicity, gender, sexual orientation, disability, and similar categories.\n- **Explicitly or implicitly** advocates for **violence, discrimination, or harm** against individuals or groups.\n- **Explicitly or implicitly** **dehumanizes or belittles** individuals or groups in a **clearly directed** way.\n- **Explicitly or implicitly** **supports or justifies oppressive systems or ideologies**.\n\n- **Key Considerations:**\n- The message must **specifically reference a group or individual**, even if the group is not directly named or is alluded to via **coded, indirect, or symbolic** language.\n- **Sarcasm, irony, or cryptic expressions** that imply hostility or disdain toward a protected group should be considered hate speech **only when the intent is unambiguous** and the target is clearly a protected group.\n- **Context, tone, and intent** are essential. Words such as "racist," "genocide," "deport," or "asylum" should only be classified as hate speech if they **clearly point to a protected group or suggest advocating for harm**.\n- **Avoid under-classification.** Be watchful for **subtle or indirect expressions** that still meet the hate speech criteria, especially when they are directed at protected groups.\n- **Avoid over-classification.** Only assign the label "Yes" if the text **clearly and unambiguously meets** the outlined criteria — **even if the language is strong**, the **target must be clear** and the **intent must be hostile** toward a protected group.\n\n**Examples to guide your classification:**\n- "Slaughter on a weekly basis, very racist are the Israelis to the point of genocide." — **Label: No (criticizes actions, not a protected group directly)**.\n- "Deport him in military aircraft and dump him back where he is originated from." — **Label: No (targets an individual, not a protected group)**.\n- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." — **Label: Yes (targets a religious group with dehumanizing language)**.\n- "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful." — **Label: No (criticizes behavior, not a protected group)**.\n\nUsing these guidelines, assess the text and provide your classification as either "Yes" or "No."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
 Training accuracy: (np.float64(0.94),)
 Test accuracy: [0.8333333333333334]
 ======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 22.919004678726196
+Time: 18.09780526161194
 Prompt: # Task
 **Revised Prompt:**
 
@@ -32,11 +32,13 @@ You are to determine whether the provided text qualifies as hate speech by categ
 
 Using these guidelines, assess the text and provide your classification as either "Yes" or "No."
 
-# Exemplar
-Text: White chocolate and raspberry :)
-Label: No
-Text: i like dead refugees on my shore√Ø¬ª¬ø
+# Here are some examples:
+Text: I hate mentally disabled people trying to touch my kids.
 Label: Yes
+Text: Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass.
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -45,10 +47,10 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.89
-Test accuracy: 0.8866666666666667
+Training accuracy: 0.95 | Penalized score: 0.7850663445042079
+Test accuracy: 0.8733333333333333
 ======== EXEMPLAR OPTIMIZATION ROUND 1
-Time: 12.614242553710938
+Time: 9.031069993972778
 Prompt: # Task
 **Revised Prompt:**
 
@@ -75,11 +77,13 @@ You are to determine whether the provided text qualifies as hate speech by categ
 
 Using these guidelines, assess the text and provide your classification as either "Yes" or "No."
 
-# Exemplar
-Text: the only thing that annoys me is noisy neighbours and their music.
-Label: No
-Text: i like dead refugees on my shore√Ø¬ª¬ø
+# Here are some examples:
+Text: I hate mentally disabled people trying to touch my kids.
 Label: Yes
+Text: Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass.
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -88,10 +92,10 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.9
+Training accuracy: 0.95 | Penalized score: 0.7850663445042079
 Test accuracy: 0.8733333333333333
 ======== EXEMPLAR OPTIMIZATION ROUND 2
-Time: 6.507426500320435
+Time: 10.541837692260742
 Prompt: # Task
 **Revised Prompt:**
 
@@ -118,11 +122,13 @@ You are to determine whether the provided text qualifies as hate speech by categ
 
 Using these guidelines, assess the text and provide your classification as either "Yes" or "No."
 
-# Exemplar
-Text: the only thing that annoys me is noisy neighbours and their music.
-Label: No
-Text: i like dead refugees on my shore√Ø¬ª¬ø
+# Here are some examples:
+Text: I hate mentally disabled people trying to touch my kids.
 Label: Yes
+Text: Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass.
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -131,10 +137,10 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.9
+Training accuracy: 0.95 | Penalized score: 0.7850663445042079
 Test accuracy: 0.8733333333333333
 ======== EXEMPLAR OPTIMIZATION ROUND 3
-Time: 12.004597187042236
+Time: 8.50985050201416
 Prompt: # Task
 **Revised Prompt:**
 
@@ -161,10 +167,12 @@ You are to determine whether the provided text qualifies as hate speech by categ
 
 Using these guidelines, assess the text and provide your classification as either "Yes" or "No."
 
-# Exemplar
-Text: the only thing that annoys me is noisy neighbours and their music.
+# Here are some examples:
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass.
 Label: No
-Text: That guys chin strap bothers me man....idk why.
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
 Label: No
 # Output format
 Answer ONLY "Yes" or "No".
@@ -174,10 +182,10 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.9199999999999999
-Test accuracy: 0.8866666666666667
+Training accuracy: 0.95 | Penalized score: 0.7850663445042079
+Test accuracy: 0.8733333333333333
 ======== EXEMPLAR OPTIMIZATION ROUND 4
-Time: 8.697272539138794
+Time: 8.368907928466797
 Prompt: # Task
 **Revised Prompt:**
 
@@ -204,10 +212,12 @@ You are to determine whether the provided text qualifies as hate speech by categ
 
 Using these guidelines, assess the text and provide your classification as either "Yes" or "No."
 
-# Exemplar
-Text: the only thing that annoys me is noisy neighbours and their music.
+# Here are some examples:
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass.
 Label: No
-Text: That guys chin strap bothers me man....idk why.
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
 Label: No
 # Output format
 Answer ONLY "Yes" or "No".
@@ -217,10 +227,10 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.9199999999999999
-Test accuracy: 0.8933333333333333
+Training accuracy: 0.95 | Penalized score: 0.7850663445042079
+Test accuracy: 0.8733333333333333
 ======== EXEMPLAR OPTIMIZATION ROUND 5
-Time: 6.603705644607544
+Time: 7.417738199234009
 Prompt: # Task
 **Revised Prompt:**
 
@@ -247,10 +257,12 @@ You are to determine whether the provided text qualifies as hate speech by categ
 
 Using these guidelines, assess the text and provide your classification as either "Yes" or "No."
 
-# Exemplar
-Text: the only thing that annoys me is noisy neighbours and their music.
+# Here are some examples:
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass.
 Label: No
-Text: ADIDAS for you means "All Day I Dream About Snacks"
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
 Label: No
 # Output format
 Answer ONLY "Yes" or "No".
@@ -260,5 +272,5 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.9299999999999999
-Test accuracy: 0.8933333333333333
+Training accuracy: 0.95 | Penalized score: 0.7850663445042079
+Test accuracy: 0.8733333333333333
