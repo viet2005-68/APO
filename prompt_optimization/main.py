@@ -178,7 +178,7 @@ if __name__ == "__main__":
 
     candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
     # candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
-    sampled_examples = random.sample(train_exs, 5)
+    # sampled_examples = random.sample(train_exs, 5)
     # candidates = [optimizer.init_prompt_generation(i, sampled_examples) for i in candidates]
 
     # Instruction Optimization
@@ -218,9 +218,9 @@ if __name__ == "__main__":
     # Exemplar Optimization
     best_prompt = candidates[0]
     Q = 8 # Population Size
-    k = 3 # Num of exemplars
-    m = 1 # Mutation step
-    t = 3 # Optimization rounds
+    k = 6 # Num of exemplars
+    m = 2 # Mutation step
+    t = 6 # Optimization rounds
     populations = [random.sample(train_exs, k) for i in range(Q)]
     for round in tqdm(range(t), desc="Exemplar Optimization"):
         start = time.time()

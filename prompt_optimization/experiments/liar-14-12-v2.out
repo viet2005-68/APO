@@ -1,0 +1,435 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-v2.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== OPT
+
+======== ROUND 0
+Time: 15.089907169342041
+Prompt: ('# Task\nDetermine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.4921875,)
+Test accuracy: [0.4837310195227766]
+======== ROUND 1
+Time: 150.1946403980255
+Prompt: ('# Task\nInput: Determine if the Statement is false (Yes) or true (No) by thoroughly analyzing how well it aligns with the Context, while also taking into account the speaker\'s role, political leanings, and the origin of the claim. Evaluate whether the Statement is in line with established facts, the reliability of the speaker, and any possible biases or implications linked to their position. Prior to forming a conclusion, clearly contrast the Statement with the Context to assess if it is directly supported, refuted, or unrelated. Your judgment must be based exclusively on the given information and should not involve external knowledge. Present your final decision with clear and detailed reasoning that reflects your examination of the Statement, Context, and speaker details.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Determine if the Statement is false (Yes) or true (No) by thoroughly analyzing its alignment with the Context, taking into account the speaker\'s role, political leanings, and the origin of the claim. Evaluate the Statement\'s consistency with established facts, the reliability of the speaker, and any possible biases or implications arising from their position. Prior to forming a judgment, clearly contrast the Statement with the Context to ascertain whether it is directly supported, opposed, or unrelated. Your conclusion must be drawn exclusively from the given information and should not depend on outside knowledge. Offer your final assessment with detailed and specific reasoning that reflects your review of the Statement, Context, and the speaker\'s background.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEvaluate whether the Statement is false (Yes) or true (No) by thoroughly analyzing the degree to which the Statement aligns with the Context, while also taking into account the speaker\'s role, political background, and the origin of the claim. Determine if the Statement is in agreement with established facts, the reliability of the speaker, and any possible biases or implications stemming from their position. Prior to forming a conclusion, clearly contrast the Statement with the Context to assess whether it is directly corroborated, refuted, or irrelevant. Your judgment must be grounded strictly in the information provided and should not depend on outside knowledge. Provide your final determination along with detailed and specific reasoning that showcases your evaluation of the Statement, Context, and speaker-related factors.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nDetermine whether the Statement constitutes a lie (Yes) or not (No) by thoroughly examining its factual accuracy in relation to the Context and any other pertinent information. You must take into account the speaker\'s identity, the context in which the statement was made, and any underlying or overt assertions contained within the statement. If the statement conflicts with established facts, is unsupported by adequate evidence, or is presented in a way that implies intentional misrepresentation, it should be classified as a lie. Otherwise, it should be classified as not a lie.\n\nPrior to making your final determination, explicitly evaluate whether the speaker has a documented record of making false or misleading statements regarding similar subjects. If such a record exists, it may affect the interpretation of the current statement, but only insofar as it relates to the factual correctness of the claim. Your conclusion must be grounded exclusively in the information provided and should not rely on assumptions or outside knowledge.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.52734375, 0.5234375, 0.5208333333333334, 0.51953125)
+Test accuracy: [0.5097613882863341, 0.5314533622559653, 0.5401301518438177, 0.47288503253796094]
+======== ROUND 2
+Time: 523.8883488178253
+Prompt: ('# Task\nEvaluate whether the Statement is false (Yes) or true (No) by thoroughly analyzing the degree to which the Statement aligns with the Context, while also taking into account the speaker\'s role, political background, and the origin of the claim. Determine if the Statement is in agreement with established facts, the reliability of the speaker, and any possible biases or implications stemming from their position. Prior to forming a conclusion, clearly contrast the Statement with the Context to assess whether it is directly corroborated, refuted, or irrelevant. Your judgment must be grounded strictly in the information provided and should not depend on outside knowledge. Provide your final determination along with detailed and specific reasoning that showcases your evaluation of the Statement, Context, and speaker-related factors.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a revised version of the following instruction, ensuring that the core meaning and requirements remain unchanged, but with rephrased language and structure.\n\nInput: Determine if the Statement is false (Yes) or true (No) by thoroughly analyzing its alignment with the Context. Begin by directly comparing the Statement to the Context to assess whether it is explicitly supported, contradicted, or unrelated. Consider the speaker\'s role, political leanings, and the origin of the claim, as these may influence the reliability or intent behind the Statement. When evaluating factual consistency, prioritize explicit references within the Context over general assumptions or external knowledge. If the Statement contains numerical claims, extraordinary assertions, or lacks sufficient contextual support, scrutinize whether such claims are reasonable based solely on the information provided. Treat any specific or extraordinary claim as potentially inaccurate unless the Context explicitly confirms it. When assessing generalized or broad statistical claims, such as percentages or trends, evaluate whether the Context provides sufficient evidence to corroborate the claim or if the Statement introduces an unverified or overly broad assertion. Base your final judgment exclusively on the given information, ensuring your reasoning clearly reflects the relationship between the Statement, Context, and speaker background. Provide a detailed and specific explanation for your conclusion that directly ties to the evidence and reasoning steps applied.\n\nOutput:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nDetermine whether the Statement is false (Yes) or true (No) by thoroughly comparing it to the Context, and clearly indicate whether the Statement is directly supported, contradicted, or unrelated in relation to the information provided. In evaluating the Statement, take into account the speaker\'s role, political background, and the source of the claim, as these elements may affect the credibility or bias of the Statement. Additionally, assess whether the Statement is consistent with established facts found in the Context, and whether the speaker’s position or affiliations could plausibly influence their viewpoint. Prior to forming a conclusion, explicitly identify if the Statement includes claims that go beyond the scope of the Context or rely on assumptions not included in the given information. Furthermore, consider whether the speaker has a potential conflict of interest regarding the claim and whether the platform or medium through which the Statement is presented might shape its interpretation. Ensure that your final judgment is based exclusively on the Context and not on any external knowledge. Provide a comprehensive explanation of how the Statement corresponds with or contradicts the Context, and how the speaker’s characteristics may or may not impact the accuracy of the Statement.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a revised version of the following instruction that preserves its core meaning and intent.\n\nInput: Determine if the Statement is false (Yes) or true (No) by rigorously evaluating its direct alignment with the Context. Consider the speaker\'s role, political affiliation, and the specific setting in which the statement was made, as these factors may influence the framing or interpretation of the claim. Evaluate whether the Statement is directly supported by, contradicted by, or unrelated to the Context, while also examining whether the speaker’s position or background might introduce bias or affect the reliability of the claim. When analyzing, distinguish between an objective assertion and a subjective interpretation shaped by the speaker’s perspective. Additionally, assess whether the Statement contains a generalization, an exception, or a conditional that may alter its alignment with the Context. Always base your conclusion solely on the provided Statement, Context, and speaker information, without relying on external knowledge. Provide a clear and detailed explanation of your reasoning, explicitly connecting elements of the Statement to the Context and considering how the speaker’s role and background may impact the validity of the claim.\n\nOutput:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.625, 0.625, 0.609375, 0.6041666666666666)
+Test accuracy: [0.5357917570498916, 0.5835140997830802, 0.5336225596529284, 0.5509761388286334]
+======== ROUND 3
+Time: 539.2086451053619
+Prompt: ('# Task\nGenerate a revised version of the following instruction that preserves its core meaning and intent.\n\nInput: Determine if the Statement is false (Yes) or true (No) by rigorously evaluating its direct alignment with the Context. Consider the speaker\'s role, political affiliation, and the specific setting in which the statement was made, as these factors may influence the framing or interpretation of the claim. Evaluate whether the Statement is directly supported by, contradicted by, or unrelated to the Context, while also examining whether the speaker’s position or background might introduce bias or affect the reliability of the claim. When analyzing, distinguish between an objective assertion and a subjective interpretation shaped by the speaker’s perspective. Additionally, assess whether the Statement contains a generalization, an exception, or a conditional that may alter its alignment with the Context. Always base your conclusion solely on the provided Statement, Context, and speaker information, without relying on external knowledge. Provide a clear and detailed explanation of your reasoning, explicitly connecting elements of the Statement to the Context and considering how the speaker’s role and background may impact the validity of the claim.\n\nOutput:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a rephrased version of the following instruction while preserving its core meaning and structure.\n\nInput: Determine if the Statement is false (Yes) or true (No) by examining how directly it is supported, contradicted, or is unrelated to the Context. Start by identifying the nature of the Statement—whether it is a factual claim, an opinion, a hyperbolic remark, or a contextual observation. Then, evaluate whether the Statement can be confirmed using the Context or general knowledge, if it is a factual assertion. If the Statement is an opinion or tied to a particular context, assess whether it is presented as a factual claim or as a subjective perspective, and take into account whether it is consistent with the speaker’s role, political stance, and probable intent. Compare the Statement with the Context to see if it is directly supported, refuted, or irrelevant. If it is a factual claim, base your judgment solely on the information provided and avoid relying on external knowledge. If it is an opinion or contextual observation, assess whether it is logically aligned with the Context and the speaker’s position. Your final conclusion must be based strictly on the given information, and your reasoning should clearly explain how the Statement relates to or differs from the Context, including whether the Statement is meant to be a factual claim or a contextual remark.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nDetermine whether the Statement is false (Yes) or true (No) by carefully comparing it with the Context, paying particular attention to whether the Statement is directly supported, contradicted, or unrelated to the information provided. Prior to forming a conclusion, clearly contrast the Statement with the Context to assess whether the Statement is corroborated, refuted, or irrelevant based exclusively on the given information. Your analysis must be strictly limited to the content provided and must not incorporate external knowledge, assumptions, or generalizations.\n\nTake into account the speaker\'s role, political affiliations, and the source of the claim, as these factors may influence the interpretation of the Statement. Additionally, evaluate the reliability of the speaker within the context and consider how their position might affect the credibility of the Statement. For a more in-depth analysis, explicitly identify any assumptions made by the speaker that are not supported by the Context, and explain how these assumptions may affect the interpretation of the Statement.\n\nYour reasoning must demonstrate a detailed examination of how the Statement interacts with the Context, and you must clearly explain why the Statement does or does not align with the facts presented. Ensure that your conclusion is entirely based on the information provided, and that the reasoning process includes a step where you isolate the central factual claim in the Statement and compare it directly to the corresponding information in the Context.\n\nProvide a final determination that is strictly based on the information given, accompanied by thorough and specific reasoning that illustrates your evaluation of the Statement, the Context, and the speaker-related factors.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nDetermine whether the Statement is false (Yes) or true (No) by making a strict comparison between the Statement and the Context, without using any external knowledge or assumptions. Prior to forming a conclusion, explicitly identify whether the Statement is directly supported by, contradicted by, or unrelated to the Context. If the Context lacks enough information to evaluate the Statement, clearly indicate that the information is insufficient and refrain from making a determination. When analyzing the Statement, take into account the speaker\'s role, political background, and the source of the claim, but only to the extent that they affect the reliability or perspective of the Statement. Do not let these factors override the actual content of the Context. Additionally, evaluate whether the Statement contains any claims that are inherently unverifiable or rely on subjective interpretation, and treat these as unrelated unless the Context directly addresses them. Ensure that your reasoning is based solely on the information provided and does not introduce any interpretations or inferences not directly supported by the Context. Provide your final judgment, along with thorough and specific reasoning that clearly demonstrates how the Statement was assessed in relation to the Context and any relevant speaker-related factors.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.6041666666666666, 0.6041666666666666, 0.5833333333333334, 0.5625)
+Test accuracy: [0.559652928416486, 0.5357917570498916, 0.5748373101952278, 0.5466377440347071]
+======== ROUND 4
+Time: 587.7920770645142
+Prompt: ('# Task\n**Revised Instruction:**\n\nDetermine whether the Statement is false (Yes) or true (No) by exclusively examining the relationship between the Statement and the Context. Do not use any external knowledge, assumptions, or interpretations not explicitly present in the Context. Before making a judgment, explicitly assess whether the Statement is directly supported by, contradicted by, or unrelated to the Context. If the Context lacks sufficient information to assess the Statement, clearly state that the information is insufficient and do not provide a determination. When considering the Statement, take into account the speaker\'s role, political background, and the source of the claim only to the extent that these may impact how the Statement is framed or interpreted. Recognize that statements from individuals in positions of authority or within specific contexts (e.g., speeches, interviews, campaign events) may include implicit assumptions that influence understanding, but these should not override the explicit content of the Context. Additionally, identify whether the Statement contains claims that are inherently unverifiable or based on subjective interpretation, and treat these as unrelated unless the Context directly addresses them. All reasoning must be strictly grounded in the information provided, without including any inferences or interpretations not explicitly supported by the Context. In your final judgment, clearly explain how the Statement was evaluated in relation to the Context, and how any speaker-related factors were considered as part of the evaluation process.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n# Task\nProvide a rephrased version of the following instruction, ensuring that its essential meaning and structure remain unchanged.\n\nInput: Determine if the Statement is false (Yes) or true (No) by examining how directly it is supported, contradicted, or is unrelated to the Context. Start by identifying the nature of the Statement—whether it is a factual claim, an opinion, a hyperbolic remark, or a contextual observation. Then, evaluate whether the Statement can be confirmed using the Context or general knowledge, if it is a factual assertion. If the Statement is an opinion or tied to a particular context, assess whether it is presented as a factual claim or as a subjective perspective, and take into account whether it is consistent with the speaker’s role, political stance, and probable intent. Compare the Statement with the Context to see if it is directly supported, refuted, or irrelevant. If it is a factual claim, base your judgment solely on the information provided and avoid relying on external knowledge. If it is an opinion or contextual observation, assess whether it is logically aligned with the Context and the speaker’s position. Your final conclusion must be based strictly on the given information, and your reasoning should clearly explain how the Statement relates to or differs from the Context, including whether the Statement is meant to be a factual claim or a contextual remark.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:\n\nOutput:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n# Task\nProvide a modified version of the following instruction that retains its original meaning and structure.\n\nInput: Determine if the Statement is false (Yes) or true (No) by examining how directly it is supported, contradicted, or is unrelated to the Context. Begin by identifying the type of the Statement—whether it is a factual claim, an opinion, a hyperbolic statement, or a contextual observation. Next, assess whether the Statement can be verified using the Context or general knowledge, if it is a factual assertion. If the Statement is an opinion or tied to a specific context, determine whether it is presented as a factual claim or as a subjective view, and consider whether it is consistent with the speaker’s role, political stance, and likely intent. Compare the Statement to the Context to determine if it is directly supported, contradicted, or irrelevant. If it is a factual claim, base your judgment solely on the information provided and avoid using external knowledge. If it is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s position. Your final decision must be based strictly on the given information, and your reasoning should clearly explain how the Statement relates to or differs from the Context, including whether the Statement is intended to be a factual claim or a contextual remark.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nDetermine whether the Statement is false (Yes) or true (No) by strictly comparing it to the Context, without using any external knowledge, assumptions, or interpretations that are not directly supported by the Context. Prior to providing a conclusion, clearly indicate whether the Statement is directly supported by, contradicted by, or unrelated to the Context. If the Context lacks sufficient information to assess the Statement, explicitly state that the information is insufficient and refrain from making a determination. When evaluating the Statement, take into account the speaker\'s role, political background, and the source of the claim, but only to the extent that they affect the reliability or perspective of the Statement. These factors should not override the actual content of the Context. Any claims in the Statement that are inherently unverifiable or depend on subjective interpretation should be classified as unrelated unless the Context explicitly addresses them. Moreover, when assessing comparative or relative claims (e.g., "has the same impact as the Great Depression"), determine whether the Context provides clear numerical or qualitative benchmarks to support or refute such comparisons. In the absence of such benchmarks, treat the claim as unrelated. All reasoning must be based solely on the information given, and no inferences or interpretations beyond what is explicitly stated in the Context are allowed. Clearly outline how the Statement was evaluated in relation to the Context and provide your final judgment with detailed and specific reasoning.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.625, 0.625, 0.6041666666666666, 0.59375)
+Test accuracy: [0.5184381778741866, 0.5227765726681128, 0.5184381778741866, 0.5336225596529284]
+======== ROUND 5
+Time: 652.1246197223663
+Prompt: ('# Task\n# Task\nGenerate a rephrased version of the following instruction, ensuring that the original semantic meaning is preserved.\n\nInput: Determine whether the Statement is false (Yes) or true (No) by assessing its consistency with the Context. Start by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation. If it is a factual claim, check if it can be confirmed using only the Context or general knowledge, and base your decision strictly on the provided information. If it is an opinion or contextual observation, evaluate whether it logically aligns with the Context and the speaker’s role, responsibilities, and probable intent. Take into account the speaker’s position and the setting in which the Statement was made, and determine whether the Statement is framed as a factual assertion or a subjective viewpoint. If the Statement pertains to the speaker’s role or responsibilities, ensure that the Context includes direct evidence of their involvement or authority in the matter. When comparing the Statement to the Context, consider whether it is directly supported, opposed, or unrelated. If the Context lacks sufficient or explicit information to confirm or deny the Statement, label it as false (Yes), because the Statement cannot be verified as true based on the available information. Make sure your reasoning clearly outlines how the Statement connects to or diverges from the Context, and whether the Statement is presented as a factual claim or a contextual remark. Always base your judgment solely on the information provided and avoid making assumptions or using external knowledge.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nEvaluate whether the Statement is false (Yes) or true (No) by strictly comparing it to the Context, without relying on external knowledge, assumptions, or interpretations not directly supported by the Context. Before providing a conclusion, explicitly state whether the Statement is directly supported by, contradicted by, or unrelated to the Context. If the Context does not contain enough information to determine the truth value of the Statement, clearly state that the information is insufficient and do not make a determination. When assessing the Statement, consider the speaker\'s role, political background, and the source of the claim only insofar as they influence the reliability or perspective of the Statement, but never to the point of overriding the actual content of the Context. Any claim in the Statement that is inherently unverifiable or depends on subjective interpretation must be classified as unrelated unless the Context explicitly addresses it. When evaluating comparative or relative claims (e.g., "has the same impact as the Great Depression"), determine whether the Context provides clear numerical or qualitative benchmarks to support or refute such comparisons. If no such benchmarks are present, classify the claim as unrelated. All reasoning must be based solely on the information provided in the Context, and no inferences or interpretations beyond what is explicitly stated are permitted. Additionally, if the Context is too vague, incomplete, or lacks direct references to the Statement, the evaluation must be classified as unrelated, and the conclusion must reflect that lack of clarity without assuming additional details. Before finalizing your judgment, explicitly assess whether the Statement and Context share a common factual domain; if they do not, the evaluation must be classified as unrelated. Clearly outline how the Statement was evaluated in relation to the Context and provide your final judgment with detailed and specific reasoning.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nEvaluate whether the Statement is false (Yes) or true (No) by strictly comparing it to the Context. Your assessment must be based exclusively on the information presented in the Context, and you must not use any external knowledge, assumptions, or interpretations that are not directly supported by the Context.\n\nPrior to reaching a conclusion, you must clearly indicate whether the Statement is directly supported by, contradicted by, or unrelated to the Context. If the Context lacks sufficient information to assess the Statement, you must conclude that the information is insufficient and avoid making a determination.\n\nWhen assessing the Statement, take into account the speaker\'s role, political background, and the source of the claim, but only to the extent that these factors affect the reliability or perspective of the Statement. These considerations should not override the actual content provided in the Context.\n\nAny claims in the Statement that are inherently unverifiable or dependent on subjective interpretation must be treated as unrelated, unless the Context explicitly addresses them. When analyzing comparative or relative claims (e.g., "has the same impact as the Great Depression"), determine whether the Context provides clear numerical or qualitative benchmarks that support or refute the comparison. If such benchmarks are not present, classify the claim as unrelated.\n\nBefore analyzing the Statement, identify and separate any terms or concepts that require external interpretation, and explicitly exclude them from your evaluation unless they are directly defined or discussed in the Context. This exclusion must be clearly stated in your reasoning.\n\nYou must not draw inferences or interpretations that go beyond what is explicitly stated in the Context. All reasoning must be anchored in the explicit content of the Context, and you must clearly explain how the Statement was assessed in relation to the Context. Provide your final judgment with detailed and specific reasoning, ensuring that your classification is definitive and consistent.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n# Task\nGenerate a rephrased version of the following instruction, ensuring that the core meaning and intent are preserved.\n\nInput: Determine if the Statement is false (Yes) or true (No) by evaluating how well it aligns with the Context. Start by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation. If the Statement is a factual claim, determine if it can be confirmed using only the Context or general knowledge, and base your decision strictly on the information provided. If the Statement is an opinion or contextual observation, assess whether it is logically consistent with the Context and with the speaker’s role, responsibilities, and likely intent. Take into account the speaker’s position and the setting in which the Statement was made, and decide whether the Statement is being presented as a fact or as a subjective viewpoint. If the Statement involves the speaker’s role or responsibilities, make sure the Context offers direct evidence of their involvement or authority on the subject. When comparing the Statement to the Context, consider if it is supported, contradicted, or unrelated. If the Context does not contain enough or direct enough information to verify or deny the Statement, classify it as false (Yes), since the Statement cannot be confirmed as true based on the provided information. Make sure your reasoning clearly explains how the Statement connects to or differs from the Context, and whether the Statement is meant to be a factual assertion or a contextual remark. Always base your judgment solely on the given information and avoid making assumptions or using external knowledge.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.640625, 0.640625, 0.640625, 0.6354166666666666)
+Test accuracy: [0.5574837310195228, 0.5314533622559653, 0.5336225596529284, 0.561822125813449]
+======== ROUND 6
+Time: 726.2053091526031
+Prompt: ('# Task\n# Task\n**Revised Instruction:**\n\nDetermine whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation.\n\nFor factual claims, assess whether the Statement can be verified solely based on the information in the Context or general knowledge. If the Context neither supports nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement should be marked as false (Yes), regardless of any external knowledge.\n\nIf the Statement is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s role, responsibilities, and likely intent. Take into account the speaker\'s position and the situation in which the Statement was made, and determine if the Statement is presented as a factual assertion or a subjective perspective. If the Statement involves the speaker’s role or responsibilities, the Context must provide explicit evidence of their involvement or authority in the matter to support the Statement as true; otherwise, it should be labeled as false (Yes).\n\nBefore handling factual claims, check if the Statement makes a specific, quantifiable claim or refers to a clearly defined event. If so, confirm that the Context contains an exact match or an unambiguous reference to that claim or event. If not, the Statement cannot be considered true (No) based on the available information.\n\nWhen comparing the Statement to the Context, evaluate whether it is directly supported, contradicted, or unrelated. If the Statement is unrelated or not adequately supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it must be labeled as true (No). If the Statement is contradicted by the Context, it must be labeled as false (Yes). If the Statement is a contextual observation and aligns with the Context, it must be labeled as true (No).\n\nYour judgment must be based entirely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement relates to or differs from the Context, and identify whether the Statement is framed as a factual claim or a contextual remark.\n\nAdditionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). In the absence of such evidence, the Statement should be labeled as false (Yes).\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n# Task\n**Revised Instruction:**\n\nAssess whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by categorizing the Statement into one of the following types: factual claim, opinion, hyperbolic statement, or contextual observation.\n\nIf the Statement is a factual claim, determine whether it can be verified using only the information provided in the Context or general knowledge. However, if the Context neither confirms nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement must be deemed false (Yes), regardless of what might be known outside the Context.\n\nIf the Statement is an opinion or a contextual observation, evaluate whether it logically corresponds with the Context, as well as the speaker’s role, responsibilities, and likely intent. Take into account the speaker’s position and the circumstances under which the Statement was made. Determine whether the Statement is being presented as a factual assertion or a subjective viewpoint. If the Statement relates to the speaker’s role or responsibilities, the Context must provide direct evidence of their involvement or authority in the matter to support the Statement as true. In the absence of such evidence, the Statement is false (Yes).\n\nBefore analyzing factual claims, explicitly determine whether the Statement includes a specific, measurable claim or refers to a clearly defined event. If it does, ensure the Context contains an exact match or an unambiguous reference to the claim or event. If not, the Statement cannot be considered true (No) based on the available information.\n\nWhen comparing the Statement to the Context, determine whether the Context directly supports, contradicts, or is unrelated to the Statement. If the Statement is unrelated or not sufficiently supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it is true (No). If the Context contradicts the Statement, it is false (Yes). If the Statement is a contextual observation and aligns with the Context, it is true (No).\n\nYour judgment must be based solely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement connects to or differs from the Context, and clarify whether it is presented as a factual claim or a contextual remark.\n\nAdditionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). If the Context does not provide such clarity, the Statement is false (Yes).\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction (Variation):**\n\nAssess the Statement for truth (No) or falsity (Yes) based exclusively on the explicit content of the Context. Your evaluation must be limited to the information directly presented in the Context and must not depend on external knowledge, assumptions, or interpretations not clearly supported by the text.\n\nPrior to evaluation, you must clearly indicate whether the Statement is directly supported by, contradicted by, or unrelated to the Context. If the Context does not contain enough information to evaluate the Statement, you must determine that the information is insufficient and avoid rendering a judgment.\n\nIn your evaluation, consider the speaker\'s role, political background, and the source of the claim, but only to the extent that these elements are explicitly relevant to the credibility or perspective of the Statement. However, these factors must not override the factual content of the Statement as stated in the Context.\n\nAny elements of the Statement that are inherently unverifiable or rely on subjective interpretation must be categorized as unrelated, unless the Context explicitly discusses or defines them. For comparative or relative claims (e.g., "is as impactful as the Great Depression"), you must assess whether the Context provides clear quantitative or qualitative standards that either confirm or deny the comparison. If such standards are absent, the claim should be classified as unrelated.\n\nBefore beginning your analysis, identify and explicitly exclude from evaluation any terms or concepts that require external interpretation unless they are clearly defined or discussed in the Context. This exclusion must be clearly noted in your reasoning.\n\nYou must not make inferences or interpretations that extend beyond what is explicitly stated in the Context. Your reasoning must be grounded solely on the explicit content of the Context. You must clearly explain how the Statement was assessed in relation to the Context, specifying which parts of the Context were used to support or challenge the Statement.\n\nWhen evaluating a Statement derived from a source such as a campaign mailer, debate transcript, or commentary, treat the source as reliable for the purpose of the evaluation, provided the Statement is directly quoted or cited in the Context. Do not question the reliability of the source unless the Context explicitly indicates that the Statement should not be trusted.\n\nYou must also explicitly identify and isolate any portions of the Statement that depend on external assumptions or definitions, and exclude them from consideration unless the Context directly addresses those elements.\n\nProvide your final judgment with detailed and specific reasoning, ensuring that your classification is clear, definitive, and consistent with the Context.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n# Task\nEvaluate whether the Statement is false (Yes) or true (No) by examining its alignment with the Context. Begin by identifying the Statement\'s category: factual claim, opinion, hyperbolic statement, or contextual observation. \n\nFor factual claims, determine if the Context or general knowledge confirms the Statement, but base your judgment solely on the information provided. If the Context does not explicitly confirm or deny the Statement, classify it as false (Yes), since it cannot be verified as true based on the given information.\n\nFor opinions or contextual observations, assess whether the Statement logically aligns with the Context and consider the speaker’s role, responsibilities, and intent. If the Statement reflects the speaker’s perspective, frame it as a contextual remark and evaluate whether it is consistent with the speaker\'s position or authority as described in the Context. If the Statement implies an action or responsibility, ensure the Context provides direct evidence of the speaker’s involvement or authority.\n\nWhen comparing the Statement to the Context, determine if it is directly supported, contradicted, or unrelated. If the Statement is unrelated or cannot be logically connected to the Context, classify it as false (Yes). If the Statement is a direct reflection of the speaker’s role or responsibilities and is consistent with the Context, classify it as true (No).\n\nA key additional consideration: if the Statement makes a reference to a specific event, person, or detail, ensure that the Context contains a matching or equivalent reference. If such a reference is absent, the Statement may be assumed to be false (Yes) unless it is clearly framed as an opinion or contextual observation.\n\nAlways ensure your reasoning clearly explains how the Statement connects to or diverges from the Context, and whether it is presented as a factual claim or a contextual remark. Avoid assumptions and rely only on the information provided in the Context.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.625, 0.6145833333333334, 0.59375, 0.59375)
+Test accuracy: [0.5401301518438177, 0.5488069414316703, 0.5032537960954447, 0.5900216919739696]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 53.509111166000366
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation.
+
+For factual claims, assess whether the Statement can be verified solely based on the information in the Context or general knowledge. If the Context neither supports nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement should be marked as false (Yes), regardless of any external knowledge.
+
+If the Statement is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s role, responsibilities, and likely intent. Take into account the speaker's position and the situation in which the Statement was made, and determine if the Statement is presented as a factual assertion or a subjective perspective. If the Statement involves the speaker’s role or responsibilities, the Context must provide explicit evidence of their involvement or authority in the matter to support the Statement as true; otherwise, it should be labeled as false (Yes).
+
+Before handling factual claims, check if the Statement makes a specific, quantifiable claim or refers to a clearly defined event. If so, confirm that the Context contains an exact match or an unambiguous reference to that claim or event. If not, the Statement cannot be considered true (No) based on the available information.
+
+When comparing the Statement to the Context, evaluate whether it is directly supported, contradicted, or unrelated. If the Statement is unrelated or not adequately supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it must be labeled as true (No). If the Statement is contradicted by the Context, it must be labeled as false (Yes). If the Statement is a contextual observation and aligns with the Context, it must be labeled as true (No).
+
+Your judgment must be based entirely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement relates to or differs from the Context, and identify whether the Statement is framed as a factual claim or a contextual remark.
+
+Additionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). In the absence of such evidence, the Statement should be labeled as false (Yes).
+
+# Exemplar
+Text: Statement: The city of Atlanta has either the highest or second-highest average water bills in the country.
+Job title: 
+State: 
+Party: none
+Context: a meeting
+Label: No
+Text: Statement: When President, then candidate, Obama was asked to disclose some of his donors because there was suspicion of their being the foreign source of money into his campaign, they refused to do it.
+Job title: chairman of the Republican National Committee
+State: Maryland
+Party: republican
+Context: an interview on NBC's "Meet the Press"
+Label: Yes
+Text: Statement: The president released all of the oil from the Strategic Oil Reserve.
+Job title: Congresswoman
+State: Minnesota
+Party: republican
+Context: an interview on CBS's "Face the Nation"
+Label: Yes
+Text: Statement: "There are no earmarks" in the stimulus bill.
+Job title: Former White House Press Secretary
+State: 
+Party: democrat
+Context: a comment at the daily White House press briefing.
+Label: Yes
+Text: Statement: Will Hurd tends to have a 96 percent straight Republican, straight party voting record.
+Job title: Former legislator and U.S. House member
+State: Texas
+Party: democrat
+Context: a blog post by the Texas Tribune
+Label: No
+Text: Statement: Cigarette butts poison babies and small children because of the nicotine in them.
+Job title: Policy director, the American Lung Association
+State: Rhode Island
+Party: organization
+Context: testimony before the R.I. Senate Judiciary Committee
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6015625
+Test accuracy: 0.6052060737527115
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 50.1058554649353
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation.
+
+For factual claims, assess whether the Statement can be verified solely based on the information in the Context or general knowledge. If the Context neither supports nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement should be marked as false (Yes), regardless of any external knowledge.
+
+If the Statement is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s role, responsibilities, and likely intent. Take into account the speaker's position and the situation in which the Statement was made, and determine if the Statement is presented as a factual assertion or a subjective perspective. If the Statement involves the speaker’s role or responsibilities, the Context must provide explicit evidence of their involvement or authority in the matter to support the Statement as true; otherwise, it should be labeled as false (Yes).
+
+Before handling factual claims, check if the Statement makes a specific, quantifiable claim or refers to a clearly defined event. If so, confirm that the Context contains an exact match or an unambiguous reference to that claim or event. If not, the Statement cannot be considered true (No) based on the available information.
+
+When comparing the Statement to the Context, evaluate whether it is directly supported, contradicted, or unrelated. If the Statement is unrelated or not adequately supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it must be labeled as true (No). If the Statement is contradicted by the Context, it must be labeled as false (Yes). If the Statement is a contextual observation and aligns with the Context, it must be labeled as true (No).
+
+Your judgment must be based entirely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement relates to or differs from the Context, and identify whether the Statement is framed as a factual claim or a contextual remark.
+
+Additionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). In the absence of such evidence, the Statement should be labeled as false (Yes).
+
+# Exemplar
+Text: Statement: There is little if any evidence that the use of red light cameras in New Jersey has reduced the number or severity of accidents at the intersections where they are used.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: No
+Text: Statement: "He's promising four more years of an administration that will push for the privatization of Social Security..."
+Job title: President
+State: Illinois
+Party: democrat
+Context: Associated Press Annual Meeting, Washington D.C.
+Label: Yes
+Text: Statement: We can save $125 billion in simply not giving out money to Medicare recipients that dont exist for procedures that didnt happen.
+Job title: U.S. House of Representatives
+State: California
+Party: republican
+Context: CBS's "Face the Nation"
+Label: Yes
+Text: Statement: Says PolitiFact listed Governor Scott Walker of Wisconsin as the Governor who told the most lies and our own untruthful Governor Chris Christie made it into Politifacts top five of Lie - en Governors.
+Job title: State Senator
+State: 
+Party: democrat
+Context: a column on Blue Jersey
+Label: Yes
+Text: Statement: Says carpet bombing means bombing not a city, but the location of the troops, with embedded special forces to direct the air power.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a Republican presidential debate in Las Vegas
+Label: Yes
+Text: Statement: Says the Pentagon has never passed a financial audit. In fact, the Pentagon is exempt from a federal law that requires all federal agencies to complete annual audits.
+Job title: U.S. representative
+State: Oregon
+Party: democrat
+Context: his congressional website
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.67578125
+Test accuracy: 0.6095444685466378
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 50.208566427230835
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation.
+
+For factual claims, assess whether the Statement can be verified solely based on the information in the Context or general knowledge. If the Context neither supports nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement should be marked as false (Yes), regardless of any external knowledge.
+
+If the Statement is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s role, responsibilities, and likely intent. Take into account the speaker's position and the situation in which the Statement was made, and determine if the Statement is presented as a factual assertion or a subjective perspective. If the Statement involves the speaker’s role or responsibilities, the Context must provide explicit evidence of their involvement or authority in the matter to support the Statement as true; otherwise, it should be labeled as false (Yes).
+
+Before handling factual claims, check if the Statement makes a specific, quantifiable claim or refers to a clearly defined event. If so, confirm that the Context contains an exact match or an unambiguous reference to that claim or event. If not, the Statement cannot be considered true (No) based on the available information.
+
+When comparing the Statement to the Context, evaluate whether it is directly supported, contradicted, or unrelated. If the Statement is unrelated or not adequately supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it must be labeled as true (No). If the Statement is contradicted by the Context, it must be labeled as false (Yes). If the Statement is a contextual observation and aligns with the Context, it must be labeled as true (No).
+
+Your judgment must be based entirely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement relates to or differs from the Context, and identify whether the Statement is framed as a factual claim or a contextual remark.
+
+Additionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). In the absence of such evidence, the Statement should be labeled as false (Yes).
+
+# Exemplar
+Text: Statement: There is little if any evidence that the use of red light cameras in New Jersey has reduced the number or severity of accidents at the intersections where they are used.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: No
+Text: Statement: "He's promising four more years of an administration that will push for the privatization of Social Security..."
+Job title: President
+State: Illinois
+Party: democrat
+Context: Associated Press Annual Meeting, Washington D.C.
+Label: Yes
+Text: Statement: On reconciliation
+Job title: President
+State: Illinois
+Party: democrat
+Context: campaign speeches
+Label: Yes
+Text: Statement: Says PolitiFact listed Governor Scott Walker of Wisconsin as the Governor who told the most lies and our own untruthful Governor Chris Christie made it into Politifacts top five of Lie - en Governors.
+Job title: State Senator
+State: 
+Party: democrat
+Context: a column on Blue Jersey
+Label: Yes
+Text: Statement: Says Rick Perry wanted to secede from the union.
+Job title: White House press secretary
+State: District of Columbia
+Party: none
+Context: an interview.
+Label: Yes
+Text: Statement: Says the Pentagon has never passed a financial audit. In fact, the Pentagon is exempt from a federal law that requires all federal agencies to complete annual audits.
+Job title: U.S. representative
+State: Oregon
+Party: democrat
+Context: his congressional website
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.64453125
+Test accuracy: 0.5986984815618221
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 50.400392293930054
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation.
+
+For factual claims, assess whether the Statement can be verified solely based on the information in the Context or general knowledge. If the Context neither supports nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement should be marked as false (Yes), regardless of any external knowledge.
+
+If the Statement is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s role, responsibilities, and likely intent. Take into account the speaker's position and the situation in which the Statement was made, and determine if the Statement is presented as a factual assertion or a subjective perspective. If the Statement involves the speaker’s role or responsibilities, the Context must provide explicit evidence of their involvement or authority in the matter to support the Statement as true; otherwise, it should be labeled as false (Yes).
+
+Before handling factual claims, check if the Statement makes a specific, quantifiable claim or refers to a clearly defined event. If so, confirm that the Context contains an exact match or an unambiguous reference to that claim or event. If not, the Statement cannot be considered true (No) based on the available information.
+
+When comparing the Statement to the Context, evaluate whether it is directly supported, contradicted, or unrelated. If the Statement is unrelated or not adequately supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it must be labeled as true (No). If the Statement is contradicted by the Context, it must be labeled as false (Yes). If the Statement is a contextual observation and aligns with the Context, it must be labeled as true (No).
+
+Your judgment must be based entirely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement relates to or differs from the Context, and identify whether the Statement is framed as a factual claim or a contextual remark.
+
+Additionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). In the absence of such evidence, the Statement should be labeled as false (Yes).
+
+# Exemplar
+Text: Statement: There is little if any evidence that the use of red light cameras in New Jersey has reduced the number or severity of accidents at the intersections where they are used.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: No
+Text: Statement: "He's promising four more years of an administration that will push for the privatization of Social Security..."
+Job title: President
+State: Illinois
+Party: democrat
+Context: Associated Press Annual Meeting, Washington D.C.
+Label: Yes
+Text: Statement: On reconciliation
+Job title: President
+State: Illinois
+Party: democrat
+Context: campaign speeches
+Label: Yes
+Text: Statement: Says PolitiFact listed Governor Scott Walker of Wisconsin as the Governor who told the most lies and our own untruthful Governor Chris Christie made it into Politifacts top five of Lie - en Governors.
+Job title: State Senator
+State: 
+Party: democrat
+Context: a column on Blue Jersey
+Label: Yes
+Text: Statement: Under changes being debated, state employees in Wisconsin who earn $30,000, $40,000, $50,000 a year might have 20 percent of their income just disappear overnight.
+Job title: MSNBC television host
+State: 
+Party: none
+Context: a statement on his television talk show
+Label: Yes
+Text: Statement: Says area near proposed northern Wisconsin iron ore mine is 15 hours away from where public hearing on mining was held.
+Job title: 
+State: 
+Party: democrat
+Context: a news release
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.62890625
+Test accuracy: 0.5943600867678959
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 51.606650590896606
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation.
+
+For factual claims, assess whether the Statement can be verified solely based on the information in the Context or general knowledge. If the Context neither supports nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement should be marked as false (Yes), regardless of any external knowledge.
+
+If the Statement is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s role, responsibilities, and likely intent. Take into account the speaker's position and the situation in which the Statement was made, and determine if the Statement is presented as a factual assertion or a subjective perspective. If the Statement involves the speaker’s role or responsibilities, the Context must provide explicit evidence of their involvement or authority in the matter to support the Statement as true; otherwise, it should be labeled as false (Yes).
+
+Before handling factual claims, check if the Statement makes a specific, quantifiable claim or refers to a clearly defined event. If so, confirm that the Context contains an exact match or an unambiguous reference to that claim or event. If not, the Statement cannot be considered true (No) based on the available information.
+
+When comparing the Statement to the Context, evaluate whether it is directly supported, contradicted, or unrelated. If the Statement is unrelated or not adequately supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it must be labeled as true (No). If the Statement is contradicted by the Context, it must be labeled as false (Yes). If the Statement is a contextual observation and aligns with the Context, it must be labeled as true (No).
+
+Your judgment must be based entirely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement relates to or differs from the Context, and identify whether the Statement is framed as a factual claim or a contextual remark.
+
+Additionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). In the absence of such evidence, the Statement should be labeled as false (Yes).
+
+# Exemplar
+Text: Statement: Science is very certain that the measles vaccine doesnt cause autism.
+Job title: Host of "The Kelly File"
+State: 
+Party: talk-show-host
+Context: a broadcast of "The O'Reilly Factor"
+Label: No
+Text: Statement: Says Maryellen OShaughnessy accepted campaign cash from indicted politician Jimmy Dimora.
+Job title: 
+State: Ohio
+Party: republican
+Context: a campaign mailer
+Label: Yes
+Text: Statement: Since Oregons prescription-only law took effect, meth lab incidents have dropped by 96 percent and meth-related arrests by 32 percent.
+Job title: District attorney of Lincoln County
+State: Oregon
+Party: none
+Context: an article in The New York Times
+Label: No
+Text: Statement: Our real unemployment is anywhere from 18 to 20 percent. Dont believe the 5.6. Dont believe it.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: his presidential announcement speech
+Label: Yes
+Text: Statement: Seventy percent of all uninsured live in households in which at least one person is working.
+Job title: Governor
+State: Virginia
+Party: democrat
+Context: a speech.
+Label: No
+Text: Statement: Health care premiums up 90 percent in New Hampshire.
+Job title: 
+State: 
+Party: none
+Context: an ad
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65234375
+Test accuracy: 0.5878524945770065
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 49.60391545295715
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement is false (Yes) or true (No) by directly comparing it to the Context. Begin by classifying the Statement into one of the following categories: factual claim, opinion, hyperbolic statement, or contextual observation.
+
+For factual claims, assess whether the Statement can be verified solely based on the information in the Context or general knowledge. If the Context neither supports nor contradicts the Statement, or if it lacks sufficient or explicit details, the Statement should be marked as false (Yes), regardless of any external knowledge.
+
+If the Statement is an opinion or contextual observation, evaluate whether it is logically consistent with the Context and the speaker’s role, responsibilities, and likely intent. Take into account the speaker's position and the situation in which the Statement was made, and determine if the Statement is presented as a factual assertion or a subjective perspective. If the Statement involves the speaker’s role or responsibilities, the Context must provide explicit evidence of their involvement or authority in the matter to support the Statement as true; otherwise, it should be labeled as false (Yes).
+
+Before handling factual claims, check if the Statement makes a specific, quantifiable claim or refers to a clearly defined event. If so, confirm that the Context contains an exact match or an unambiguous reference to that claim or event. If not, the Statement cannot be considered true (No) based on the available information.
+
+When comparing the Statement to the Context, evaluate whether it is directly supported, contradicted, or unrelated. If the Statement is unrelated or not adequately supported, it must be labeled as false (Yes). If the Statement is directly supported by the Context, it must be labeled as true (No). If the Statement is contradicted by the Context, it must be labeled as false (Yes). If the Statement is a contextual observation and aligns with the Context, it must be labeled as true (No).
+
+Your judgment must be based entirely on the information provided. Avoid making assumptions or relying on external knowledge. Clearly explain how the Statement relates to or differs from the Context, and identify whether the Statement is framed as a factual claim or a contextual remark.
+
+Additionally, if the Statement implies a cause-and-effect relationship or a sequence of events, the Context must clearly establish that relationship or sequence for the Statement to be considered true (No). In the absence of such evidence, the Statement should be labeled as false (Yes).
+
+# Exemplar
+Text: Statement: There is little if any evidence that the use of red light cameras in New Jersey has reduced the number or severity of accidents at the intersections where they are used.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: No
+Text: Statement: "He's promising four more years of an administration that will push for the privatization of Social Security..."
+Job title: President
+State: Illinois
+Party: democrat
+Context: Associated Press Annual Meeting, Washington D.C.
+Label: Yes
+Text: Statement: On reconciliation
+Job title: President
+State: Illinois
+Party: democrat
+Context: campaign speeches
+Label: Yes
+Text: Statement: 98 percent of American families make under $250,000 a year.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a speech at Florida Atlantic University in Boca Raton, Fla. 
+Label: No
+Text: Statement: You can fill out your tax return in Estonia online in five minutes.
+Job title: 
+State: Florida
+Party: republican
+Context: remarks at an economic summit in Orlando
+Label: No
+Text: Statement: Says area near proposed northern Wisconsin iron ore mine is 15 hours away from where public hearing on mining was held.
+Job title: 
+State: 
+Party: democrat
+Context: a news release
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.58984375
+Test accuracy: 0.6225596529284165

@@ -35,7 +35,7 @@ python main.py \
   --beam_size 4 \
   --steps_per_gradient 1 \
   --minibatch_size 256 \
-  --out experiments/liar-9-12.out \
+  --out experiments/liar-14-12.out \
   --evaluator ucb \
   --reject_on_error
 
