@@ -1,0 +1,225 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 27.422621965408325
+Prompt: ('# Task\nDetermine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.57421875,)
+Test accuracy: [0.559652928416486]
+======== ROUND 1
+Time: 164.59484672546387
+Prompt: ('# Task\nDetermine if the given "Statement" is likely to be a lie (Yes) or not (No). Consider the speaker\'s "Job title", their "State", their "Party", and the "Context" of the statement to make your evaluation. Political statements often vary in truthfulness based on these factors.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nAssess whether the provided "Statement" is probably false (Yes) or true (No), taking into account the speaker\'s "Occupation", "Location", "Political Party", and the "Situation" surrounding the statement. The veracity of political claims can often be gauged by examining these details.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDecide if the Statement is false (Yes) or true (No) considering the Context and additional details.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nAssess whether the provided "Statement" is probably false (Yes) or true (No), taking into account the speaker\'s "Job title", their "State", their "Party affiliation", and the "Context" of the statement. The veracity of political statements can often be influenced by these elements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.6171875, 0.609375, 0.609375, 0.609375)
+Test accuracy: [0.6247288503253796, 0.6399132321041214, 0.6160520607375272, 0.6377440347071583]
+======== ROUND 2
+Time: 359.49956035614014
+Prompt: ('# Task\nEvaluate if the given "Statement" is likely false (Yes) or true (No), considering the speaker\'s "Occupation", "Location", "Political Party", and the "Context" in which the statement was made. The accuracy of political statements frequently depends on analyzing such factors.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine if the given "Statement" is likely to be a lie (Yes) or not (No). Consider the speaker\'s "Job title", their "State", their "Party", and the "Context" of the statement to make your evaluation. Political statements often vary in truthfulness based on these factors.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nAssess whether the "Statement" is likely false (Yes) or true (No), considering the speaker\'s "Occupation", "Location", "Political Party", and the "Situation". Additionally, scrutinize the details within the statement, such as figures, occurrences, and rational consistency, to form a comprehensive evaluation of its truthfulness.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine if the provided "Statement" is probably false (Yes) or true (No), taking into account the speaker’s "Occupation", "Location", and "Political Party", as well as the "Situation". Also, carefully analyze the context and precise details in the statement to assess its likelihood and veracity.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.7083333333333334, 0.6666666666666666, 0.6666666666666666, 0.6666666666666666)
+Test accuracy: [0.6464208242950108, 0.6247288503253796, 0.6355748373101953, 0.6420824295010846]
+======== ROUND 3
+Time: 382.6806011199951
+Prompt: ('# Task\n"Given a statement, along with the speaker\'s occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEvaluate if the given "Statement" seems misleading (Yes) or factual (No), using the "Job title", "State", "Party", and "Context" for reference. Primarily, check the consistency within the claim and how it aligns with established knowledge or typical behaviors in similar roles and political settings. Take into account any possible biases or motivations that could affect the truthfulness of the statement.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Assess the accuracy of a statement preceded by \'Statement:\' by examining the speaker\'s occupation, geographical location, political affiliation, and the context of the statement. Determine if the statement is probably accurate (No) or inaccurate (Yes). Consider the speaker\'s area of expertise and their operational environment, while also meticulously scrutinizing the details of the statement to conduct a comprehensive evaluation."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine if the given "Statement" is likely to be a lie (Yes) or not (No). Consider the speaker\'s "Job title", their "State", their "Party", and the "Context" of the statement to make your evaluation. Political statements often vary in truthfulness based on these factors.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (0.6666666666666666, 0.65625, 0.6484375, 0.6354166666666666)
+Test accuracy: [0.6377440347071583, 0.6616052060737527, 0.6507592190889371, 0.6247288503253796]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 176.42156171798706
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: 78702 is the second-most gentrified ZIP code in the entire country.
+Job title: Community activist
+State: Texas
+Party: democrat
+Context: an opinion column
+Label: Yes
+Text: Statement: Over the last two years since President Obama has taken office, the federal government has added 200,000 new federal jobs.
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a press conference
+Label: Yes
+Text: Statement: The presence of gorillas calls into question the concept of evolution.
+Job title: Radio host
+State: 
+Party: none
+Context: the Rush Limbaugh Show
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6160714285714286 | Penalized score: 0.4528882644486154
+Test accuracy: 0.6550976138828634
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 159.76332211494446
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Palin said stimulus money for weatherization required "universal energy building codes for Alaska, kind of a one-size-fits-all building code that isn't going to work up there in Alaska."
+Job title: 
+State: Alaska
+Party: republican
+Context: an interview with Sean Hannity on Fox
+Label: Yes
+Text: Statement: The Iran Deal will facilitate and accelerate the nation of Iran acquiring nuclear weapons.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a tweet
+Label: Yes
+Text: Statement: The most recent survey of climate scientists said about 57 percent dont agree with the idea that 95 percent of the change in the climate is caused by CO2.
+Job title: 
+State: Pennsylvania
+Party: republican
+Context: an interview with Bill Maher.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7232142857142857 | Penalized score: 0.545986647210489
+Test accuracy: 0.665943600867679
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 114.40598344802856
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Palin said stimulus money for weatherization required "universal energy building codes for Alaska, kind of a one-size-fits-all building code that isn't going to work up there in Alaska."
+Job title: 
+State: Alaska
+Party: republican
+Context: an interview with Sean Hannity on Fox
+Label: Yes
+Text: Statement: The Iran Deal will facilitate and accelerate the nation of Iran acquiring nuclear weapons.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a tweet
+Label: Yes
+Text: Statement: The most recent survey of climate scientists said about 57 percent dont agree with the idea that 95 percent of the change in the climate is caused by CO2.
+Job title: 
+State: Pennsylvania
+Party: republican
+Context: an interview with Bill Maher.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625 | Penalized score: 0.47902236149620325
+Test accuracy: 0.665943600867679
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 113.58489513397217
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Ken Buck wants to outlaw abortion, even in cases of rape or incest.
+Job title: 
+State: Colorado
+Party: democrat
+Context: a campaign ad
+Label: No
+Text: Statement: Over the last two years since President Obama has taken office, the federal government has added 200,000 new federal jobs.
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a press conference
+Label: Yes
+Text: Statement: The presence of gorillas calls into question the concept of evolution.
+Job title: Radio host
+State: 
+Party: none
+Context: the Rush Limbaugh Show
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6785714285714286 | Penalized score: 0.5102565976735238
+Test accuracy: 0.6442516268980477
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 139.35114336013794
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Ken Buck wants to outlaw abortion, even in cases of rape or incest.
+Job title: 
+State: Colorado
+Party: democrat
+Context: a campaign ad
+Label: No
+Text: Statement: Over the last two years since President Obama has taken office, the federal government has added 200,000 new federal jobs.
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a press conference
+Label: Yes
+Text: Statement: The presence of gorillas calls into question the concept of evolution.
+Job title: Radio host
+State: 
+Party: none
+Context: the Rush Limbaugh Show
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.64375 | Penalized score: 0.47543516910209527
+Test accuracy: 0.6442516268980477
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 127.36637759208679
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Ken Buck wants to outlaw abortion, even in cases of rape or incest.
+Job title: 
+State: Colorado
+Party: democrat
+Context: a campaign ad
+Label: No
+Text: Statement: Over the last two years since President Obama has taken office, the federal government has added 200,000 new federal jobs.
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a press conference
+Label: Yes
+Text: Statement: The presence of gorillas calls into question the concept of evolution.
+Job title: Radio host
+State: 
+Party: none
+Context: the Rush Limbaugh Show
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7142857142857143 | Penalized score: 0.5459708833878095
+Test accuracy: 0.6442516268980477
