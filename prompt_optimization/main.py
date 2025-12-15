@@ -36,8 +36,10 @@ def get_task_class(task_name):
         return tasks.DefaultHFBinaryTask
     elif task_name == "web_of_lies":
         return tasks.DefaultHFBinaryTask
+    elif task_name == "sports_understanding":
+        return tasks.DefaultHFBinaryTask
     else:
-        raise Exception(f"Unsupported task: {task_name}")
+        return tasks.DefaultHFBinaryTask
 
 
 def get_evaluator(evaluator):

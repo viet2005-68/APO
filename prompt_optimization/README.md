@@ -53,7 +53,7 @@ python main.py \
   --evaluator bf \
   --reject_on_error \
   --max_threads 48 \
-  --rounds 0
+  --rounds 3
 
 # Ar Sacarsm
 python main.py \
@@ -90,11 +90,11 @@ python main.py \
   --beam_size 4 \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
-  --out experiments/casual_judgement-14-12-m2.out \
+  --out experiments/casual_judgement.out \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 0
+  --rounds 3
 
 # Web of lies (BBH)
 python main.py \
@@ -103,9 +103,37 @@ python main.py \
   --data_dir data/web_of_lies \
   --beam_size 4 \
   --steps_per_gradient 1 \
-  --minibatch_size 50 \
+  --minibatch_size 64 \
   --out experiments/web_of_lies.out \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
   --rounds 0
+
+# Sports understanding (BBH)
+python main.py \
+  --task sports_understanding \
+  --prompts prompts/sports_understanding.md \
+  --data_dir data/sports_understanding \
+  --beam_size 4 \
+  --steps_per_gradient 1 \
+  --minibatch_size 64 \
+  --out experiments/sports_understanding.out \
+  --evaluator bf \
+  --max_threads 48 \
+  --reject_on_error \
+  --rounds 3
+
+# Boolean expressions (BBH)
+python main.py \
+  --task boolean_expressions \
+  --prompts prompts/boolean_expressions.md \
+  --data_dir data/boolean_expressions \
+  --beam_size 4 \
+  --steps_per_gradient 1 \
+  --minibatch_size 64 \
+  --out experiments/boolean_expressions.out \
+  --evaluator bf \
+  --max_threads 48 \
+  --reject_on_error \
+  --rounds 3

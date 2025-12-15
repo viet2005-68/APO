@@ -1,0 +1,179 @@
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding-tmp.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 4.625467300415039
+Prompt: ('# Task\nIs the following sentence plausible?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.71),)
+Test accuracy: [0.74]
+======== ROUND 1
+Time: 46.28966236114502
+Prompt: ('# Task\nIn the realm of professional sports, evaluate if the sentence reasonably connects an athlete to an action typical for their sport. Does the provided sentence make sense?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGiven the context of professional sports, assess whether the sentence logically pairs a player with an action they might perform in their respective sport. Is the following sentence plausible?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIn the realm of professional sports, determine if the given sentence reasonably matches an athlete with an activity typical to their sport. Does the sentence below make sense?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the following sentence plausible?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.75), np.float64(0.74), np.float64(0.72), np.float64(0.71))
+Test accuracy: [0.7, 0.7066666666666667, 0.6933333333333334, 0.74]
+======== ROUND 2
+Time: 187.2436809539795
+Prompt: ('# Task\nAssess whether the provided sentence fits within the realm of sports by examining the roles, actions, and typical jargon associated with different sports.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEvaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"In the setting of professional athletics, assess whether the statement depicts an action that is realistic for an athlete within their specific sport, taking into account both literal actions and idiomatic phrases frequently employed in sports broadcasting."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"In the setting of professional athletics, assess whether the statement depicts a feasible action for an athlete within their specific sport, taking into account both literal descriptions and idiomatic phrases frequently employed in sports broadcasting."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.78), np.float64(0.78), np.float64(0.77), np.float64(0.77))
+Test accuracy: [0.8133333333333334, 0.82, 0.7733333333333333, 0.76]
+======== ROUND 3
+Time: 206.7234182357788
+Prompt: ('# Task\nEvaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nAssess whether the provided sentence fits within the realm of sports by examining the roles, actions, and typical jargon associated with different sports.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Within the realm of professional sports, assess whether the provided statement reflects a plausible action for an athlete within their specific sport. This should include considerations of both direct physical actions and sport-related figurative language often heard in sports broadcasting. Also, factor in the regulations and common situations found in the sport being discussed."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Within the realm of professional sports, assess whether the provided statement reflects a plausible action for an athlete within their particular sport. This should include consideration of both explicit movements and sport-specific phrases frequently employed in sports coverage. Also, factor in the regulations and common situations associated with the mentioned sport."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.78), np.float64(0.78), np.float64(0.77), np.float64(0.77))
+Test accuracy: [0.82, 0.8133333333333334, 0.7466666666666667, 0.7133333333333334]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 34.61389517784119
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Mitchell Trubisky caught the screen pass."
+Label: Yes
+Text: "John Brown went for it on fourth down in the NFC championship."
+Label: Yes
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.82 | Penalized score: 0.6218421536609546
+Test accuracy: 0.8533333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 15.45317268371582
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Mitchell Trubisky caught the screen pass."
+Label: Yes
+Text: "John Brown went for it on fourth down in the NFC championship."
+Label: Yes
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.82 | Penalized score: 0.6218421536609546
+Test accuracy: 0.8533333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 18.170156240463257
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Mitchell Trubisky caught the screen pass."
+Label: Yes
+Text: "John Brown went for it on fourth down in the NFC championship."
+Label: Yes
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+Text: "Mookie Betts skated behind the net."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6363478800645462
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 16.44871425628662
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Mitchell Trubisky caught the screen pass."
+Label: Yes
+Text: "John Brown went for it on fourth down in the NFC championship."
+Label: Yes
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+Text: "Mookie Betts skated behind the net."
+Label: No
+Text: "Jerry Jeudy killed the powerplay."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6461200894031635
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 18.639567136764526
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Mitchell Trubisky caught the screen pass."
+Label: Yes
+Text: "John Brown went for it on fourth down in the NFC championship."
+Label: Yes
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+Text: "Mookie Betts skated behind the net."
+Label: No
+Text: "Jerry Jeudy killed the powerplay."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6461200894031635
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 15.086666822433472
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Mitchell Trubisky caught the screen pass."
+Label: Yes
+Text: "John Brown went for it on fourth down in the NFC championship."
+Label: Yes
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+Text: "Mookie Betts skated behind the net."
+Label: No
+Text: "Jerry Jeudy killed the powerplay."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6461200894031635
+Test accuracy: 0.88
