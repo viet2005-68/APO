@@ -1,0 +1,282 @@
+{"task": "clickbait", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait-ga.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 4.551574230194092
+Prompt: ('# Task\n**Instruction Variation:**\n\nDetermine whether the following text should be labeled as \\\'Yes\\\' if it is clickbait or \\\'No\\\' if it represents a genuine news headline.\n\n**Clickbait** headlines aim to grab attention using **exaggerated claims, emotional triggers, misleading wording, or curiosity-driven phrasing**, often with little connection to the real content of the article. These may involve:\n- Strong emotional words (e.g., "heart-wrenching," "cute," "shocking")\n- References to nostalgia or celebrities (e.g., "remember when," "celebrity linked")\\n- Lists or numerical claims (e.g., "5 things you didn’t know about...")\n- Puzzling or vague statements that don’t clearly reflect factual news\n\n**Legitimate news headlines**, by contrast, are **factual, neutral, and directly connected to actual events or developments**. They avoid sensationalism and emotional manipulation, clearly communicating the content of the article — even if the event is emotionally sensitive or shocking.\n\n**Important Note:** Sensitivity or shock value alone does **not** make a headline clickbait. A legitimate news headline may report on a sensitive or shocking event but will still be **factual, direct, and aligned with real-world events** without embellishment or emotional manipulation.\n\n**Examples for reference:**\n- Clickbait: "A Baby Bandicoot Moved In With A Family Of Ducks And It Is Adorable"\n- Clickbait: "Harry Potter Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"\n- Legitimate: "Front Pages Of The World\\\'s Newspapers Mourn The Paris Attacks"\n- Legitimate: "Parents aid jailbreak of 18 year old Swede convicted of rape"\n- Legitimate: "Dead body left in UK hospital alongside living patients for seven hours"\n- Legitimate: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"\n\nUse these examples to guide your judgment.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.965),)
+Test accuracy: [0.9666666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 37.34733700752258
+Prompt: # Task
+**Instruction Variation:**
+
+Determine whether the following text should be labeled as \'Yes\' if it is clickbait or \'No\' if it represents a genuine news headline.
+
+**Clickbait** headlines aim to grab attention using **exaggerated claims, emotional triggers, misleading wording, or curiosity-driven phrasing**, often with little connection to the real content of the article. These may involve:
+- Strong emotional words (e.g., "heart-wrenching," "cute," "shocking")
+- References to nostalgia or celebrities (e.g., "remember when," "celebrity linked")\n- Lists or numerical claims (e.g., "5 things you didn’t know about...")
+- Puzzling or vague statements that don’t clearly reflect factual news
+
+**Legitimate news headlines**, by contrast, are **factual, neutral, and directly connected to actual events or developments**. They avoid sensationalism and emotional manipulation, clearly communicating the content of the article — even if the event is emotionally sensitive or shocking.
+
+**Important Note:** Sensitivity or shock value alone does **not** make a headline clickbait. A legitimate news headline may report on a sensitive or shocking event but will still be **factual, direct, and aligned with real-world events** without embellishment or emotional manipulation.
+
+**Examples for reference:**
+- Clickbait: "A Baby Bandicoot Moved In With A Family Of Ducks And It Is Adorable"
+- Clickbait: "Harry Potter Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+- Legitimate: "Front Pages Of The World\'s Newspapers Mourn The Paris Attacks"
+- Legitimate: "Parents aid jailbreak of 18 year old Swede convicted of rape"
+- Legitimate: "Dead body left in UK hospital alongside living patients for seven hours"
+- Legitimate: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+
+Use these examples to guide your judgment.
+
+# Here are some examples:
+Text: White House Chief of Staff Rahm Emanuel steps down to run for Mayor of Chicago
+
+Label: No
+Text: This Acrobatic Hoverboard Choreography To Justin Bieber's "Sorry" May Be The Best Thing You See
+
+Label: Yes
+Text: Wiz Khalifa Sang Over Adele's "Hello" To Create The Perfect Stoner Anthem
+
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.96 | Penalized score: 0.8058784396530151
+Test accuracy: 0.9666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 17.912708044052124
+Prompt: # Task
+**Instruction Variation:**
+
+Determine whether the following text should be labeled as \'Yes\' if it is clickbait or \'No\' if it represents a genuine news headline.
+
+**Clickbait** headlines aim to grab attention using **exaggerated claims, emotional triggers, misleading wording, or curiosity-driven phrasing**, often with little connection to the real content of the article. These may involve:
+- Strong emotional words (e.g., "heart-wrenching," "cute," "shocking")
+- References to nostalgia or celebrities (e.g., "remember when," "celebrity linked")\n- Lists or numerical claims (e.g., "5 things you didn’t know about...")
+- Puzzling or vague statements that don’t clearly reflect factual news
+
+**Legitimate news headlines**, by contrast, are **factual, neutral, and directly connected to actual events or developments**. They avoid sensationalism and emotional manipulation, clearly communicating the content of the article — even if the event is emotionally sensitive or shocking.
+
+**Important Note:** Sensitivity or shock value alone does **not** make a headline clickbait. A legitimate news headline may report on a sensitive or shocking event but will still be **factual, direct, and aligned with real-world events** without embellishment or emotional manipulation.
+
+**Examples for reference:**
+- Clickbait: "A Baby Bandicoot Moved In With A Family Of Ducks And It Is Adorable"
+- Clickbait: "Harry Potter Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+- Legitimate: "Front Pages Of The World\'s Newspapers Mourn The Paris Attacks"
+- Legitimate: "Parents aid jailbreak of 18 year old Swede convicted of rape"
+- Legitimate: "Dead body left in UK hospital alongside living patients for seven hours"
+- Legitimate: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+
+Use these examples to guide your judgment.
+
+# Here are some examples:
+Text: Democratic Republic of Congo: UN expert accuses soldiers of killing 50 Hutu refugees in North Kivu
+
+Label: No
+Text: 23 Hilarious "Toy Story" Moments That'll Make You Laugh Every Time
+
+Label: Yes
+Text: 37 Thoughts I Had Listening To "Serial's" Surprise Second Season Premiere
+
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.96 | Penalized score: 0.8124676034260704
+Test accuracy: 0.95
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 14.74793004989624
+Prompt: # Task
+**Instruction Variation:**
+
+Determine whether the following text should be labeled as \'Yes\' if it is clickbait or \'No\' if it represents a genuine news headline.
+
+**Clickbait** headlines aim to grab attention using **exaggerated claims, emotional triggers, misleading wording, or curiosity-driven phrasing**, often with little connection to the real content of the article. These may involve:
+- Strong emotional words (e.g., "heart-wrenching," "cute," "shocking")
+- References to nostalgia or celebrities (e.g., "remember when," "celebrity linked")\n- Lists or numerical claims (e.g., "5 things you didn’t know about...")
+- Puzzling or vague statements that don’t clearly reflect factual news
+
+**Legitimate news headlines**, by contrast, are **factual, neutral, and directly connected to actual events or developments**. They avoid sensationalism and emotional manipulation, clearly communicating the content of the article — even if the event is emotionally sensitive or shocking.
+
+**Important Note:** Sensitivity or shock value alone does **not** make a headline clickbait. A legitimate news headline may report on a sensitive or shocking event but will still be **factual, direct, and aligned with real-world events** without embellishment or emotional manipulation.
+
+**Examples for reference:**
+- Clickbait: "A Baby Bandicoot Moved In With A Family Of Ducks And It Is Adorable"
+- Clickbait: "Harry Potter Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+- Legitimate: "Front Pages Of The World\'s Newspapers Mourn The Paris Attacks"
+- Legitimate: "Parents aid jailbreak of 18 year old Swede convicted of rape"
+- Legitimate: "Dead body left in UK hospital alongside living patients for seven hours"
+- Legitimate: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+
+Use these examples to guide your judgment.
+
+# Here are some examples:
+Text: Democratic Republic of Congo: UN expert accuses soldiers of killing 50 Hutu refugees in North Kivu
+
+Label: No
+Text: 23 Hilarious "Toy Story" Moments That'll Make You Laugh Every Time
+
+Label: Yes
+Text: 37 Thoughts I Had Listening To "Serial's" Surprise Second Season Premiere
+
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.96 | Penalized score: 0.8124676034260704
+Test accuracy: 0.95
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 14.802361726760864
+Prompt: # Task
+**Instruction Variation:**
+
+Determine whether the following text should be labeled as \'Yes\' if it is clickbait or \'No\' if it represents a genuine news headline.
+
+**Clickbait** headlines aim to grab attention using **exaggerated claims, emotional triggers, misleading wording, or curiosity-driven phrasing**, often with little connection to the real content of the article. These may involve:
+- Strong emotional words (e.g., "heart-wrenching," "cute," "shocking")
+- References to nostalgia or celebrities (e.g., "remember when," "celebrity linked")\n- Lists or numerical claims (e.g., "5 things you didn’t know about...")
+- Puzzling or vague statements that don’t clearly reflect factual news
+
+**Legitimate news headlines**, by contrast, are **factual, neutral, and directly connected to actual events or developments**. They avoid sensationalism and emotional manipulation, clearly communicating the content of the article — even if the event is emotionally sensitive or shocking.
+
+**Important Note:** Sensitivity or shock value alone does **not** make a headline clickbait. A legitimate news headline may report on a sensitive or shocking event but will still be **factual, direct, and aligned with real-world events** without embellishment or emotional manipulation.
+
+**Examples for reference:**
+- Clickbait: "A Baby Bandicoot Moved In With A Family Of Ducks And It Is Adorable"
+- Clickbait: "Harry Potter Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+- Legitimate: "Front Pages Of The World\'s Newspapers Mourn The Paris Attacks"
+- Legitimate: "Parents aid jailbreak of 18 year old Swede convicted of rape"
+- Legitimate: "Dead body left in UK hospital alongside living patients for seven hours"
+- Legitimate: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+
+Use these examples to guide your judgment.
+
+# Here are some examples:
+Text: Democratic Republic of Congo: UN expert accuses soldiers of killing 50 Hutu refugees in North Kivu
+
+Label: No
+Text: Jennifer Lawrence Was So Nervous About Her First Sex Scene That She Got Drunk
+
+Label: Yes
+Text: 37 Thoughts I Had Listening To "Serial's" Surprise Second Season Premiere
+
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.965 | Penalized score: 0.8235410450574033
+Test accuracy: 0.94
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 14.631099224090576
+Prompt: # Task
+**Instruction Variation:**
+
+Determine whether the following text should be labeled as \'Yes\' if it is clickbait or \'No\' if it represents a genuine news headline.
+
+**Clickbait** headlines aim to grab attention using **exaggerated claims, emotional triggers, misleading wording, or curiosity-driven phrasing**, often with little connection to the real content of the article. These may involve:
+- Strong emotional words (e.g., "heart-wrenching," "cute," "shocking")
+- References to nostalgia or celebrities (e.g., "remember when," "celebrity linked")\n- Lists or numerical claims (e.g., "5 things you didn’t know about...")
+- Puzzling or vague statements that don’t clearly reflect factual news
+
+**Legitimate news headlines**, by contrast, are **factual, neutral, and directly connected to actual events or developments**. They avoid sensationalism and emotional manipulation, clearly communicating the content of the article — even if the event is emotionally sensitive or shocking.
+
+**Important Note:** Sensitivity or shock value alone does **not** make a headline clickbait. A legitimate news headline may report on a sensitive or shocking event but will still be **factual, direct, and aligned with real-world events** without embellishment or emotional manipulation.
+
+**Examples for reference:**
+- Clickbait: "A Baby Bandicoot Moved In With A Family Of Ducks And It Is Adorable"
+- Clickbait: "Harry Potter Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+- Legitimate: "Front Pages Of The World\'s Newspapers Mourn The Paris Attacks"
+- Legitimate: "Parents aid jailbreak of 18 year old Swede convicted of rape"
+- Legitimate: "Dead body left in UK hospital alongside living patients for seven hours"
+- Legitimate: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+
+Use these examples to guide your judgment.
+
+# Here are some examples:
+Text: Democratic Republic of Congo: UN expert accuses soldiers of killing 50 Hutu refugees in North Kivu
+
+Label: No
+Text: Jennifer Lawrence Was So Nervous About Her First Sex Scene That She Got Drunk
+
+Label: Yes
+Text: 37 Thoughts I Had Listening To "Serial's" Surprise Second Season Premiere
+
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.965 | Penalized score: 0.8235410450574033
+Test accuracy: 0.94
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 14.075771570205688
+Prompt: # Task
+**Instruction Variation:**
+
+Determine whether the following text should be labeled as \'Yes\' if it is clickbait or \'No\' if it represents a genuine news headline.
+
+**Clickbait** headlines aim to grab attention using **exaggerated claims, emotional triggers, misleading wording, or curiosity-driven phrasing**, often with little connection to the real content of the article. These may involve:
+- Strong emotional words (e.g., "heart-wrenching," "cute," "shocking")
+- References to nostalgia or celebrities (e.g., "remember when," "celebrity linked")\n- Lists or numerical claims (e.g., "5 things you didn’t know about...")
+- Puzzling or vague statements that don’t clearly reflect factual news
+
+**Legitimate news headlines**, by contrast, are **factual, neutral, and directly connected to actual events or developments**. They avoid sensationalism and emotional manipulation, clearly communicating the content of the article — even if the event is emotionally sensitive or shocking.
+
+**Important Note:** Sensitivity or shock value alone does **not** make a headline clickbait. A legitimate news headline may report on a sensitive or shocking event but will still be **factual, direct, and aligned with real-world events** without embellishment or emotional manipulation.
+
+**Examples for reference:**
+- Clickbait: "A Baby Bandicoot Moved In With A Family Of Ducks And It Is Adorable"
+- Clickbait: "Harry Potter Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+- Legitimate: "Front Pages Of The World\'s Newspapers Mourn The Paris Attacks"
+- Legitimate: "Parents aid jailbreak of 18 year old Swede convicted of rape"
+- Legitimate: "Dead body left in UK hospital alongside living patients for seven hours"
+- Legitimate: "A Group Of Chennaiites Formed A Human Chain To Help Someone Trapped By The Floods"
+
+Use these examples to guide your judgment.
+
+# Here are some examples:
+Text: Democratic Republic of Congo: UN expert accuses soldiers of killing 50 Hutu refugees in North Kivu
+
+Label: No
+Text: Jennifer Lawrence Was So Nervous About Her First Sex Scene That She Got Drunk
+
+Label: Yes
+Text: 37 Thoughts I Had Listening To "Serial's" Surprise Second Season Premiere
+
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.965 | Penalized score: 0.8235410450574033
+Test accuracy: 0.94

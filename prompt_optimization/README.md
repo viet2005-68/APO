@@ -80,8 +80,7 @@ python main.py \
   --out experiments/clickbait.out \
   --evaluator bf \
   --reject_on_error \
-  --max_threads 48 \
-  --rounds 0
+  --max_threads 48
 
 # Casual Judgement (BBH)
 python main.py \
@@ -92,6 +91,20 @@ python main.py \
   --steps_per_gradient 1 \
   --minibatch_size 64 \
   --out experiments/casual_judgement-14-12-m2.out \
+  --evaluator bf \
+  --max_threads 48 \
+  --reject_on_error \
+  --rounds 0
+
+# Web of lies (BBH)
+python main.py \
+  --task web_of_lies \
+  --prompts prompts/web_of_lies.md \
+  --data_dir data/web_of_lies \
+  --beam_size 4 \
+  --steps_per_gradient 1 \
+  --minibatch_size 50 \
+  --out experiments/web_of_lies.out \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \

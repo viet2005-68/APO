@@ -1,0 +1,207 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 96, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 50, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.366905689239502
+Prompt: ('# Task\nDetermine whether the final person mentioned is telling the truth.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.56),)
+Test accuracy: [0.5333333333333333]
+======== ROUND 1
+Time: 116.90075254440308
+Prompt: ('# Task\nAnalyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.\n\nExamples:\n1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"  \n   - Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga\'s statement being false, making Dallas truthful.)\n\n2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"  \n   - Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)\n\nBe sure to follow this reasoning pattern when analyzing the text.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning:\n\n**Input:** Examine the connections between the individuals\' statements and assess whether the last person referred to is being truthful. Someone who tells the truth always speaks honestly, while a deceiver always lies. Apply logical deduction to explore the consequences of each statement and ensure there are no contradictions.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine whether the final person mentioned is telling the truth.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that retains the same semantic meaning:\n\n**Input:** Assess if the last individual referenced is being truthful.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.65), np.float64(0.6), np.float64(0.56), np.float64(0.54))
+Test accuracy: [0.5, 0.5666666666666667, 0.5333333333333333, 0.4866666666666667]
+======== ROUND 2
+Time: 349.7236337661743
+Prompt: ('# Task\nAnalyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.\n\nExamples:\n1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"  \n   - Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga\'s statement being false, making Dallas truthful.)\n\n2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"  \n   - Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)\n\nBe sure to follow this reasoning pattern when analyzing the text.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are to act as a logical reasoning assistant. Given a series of statements about people and their truthfulness, determine whether the final person mentioned is telling the truth or lying. To do this:\n\n1. **Start with the first statement** and assume it is true unless otherwise indicated.\n2. **Trace the chain of claims** logically, applying the following rules:\n   - If a person **tells the truth**, then their statement about another person\'s truthfulness is **correct**.\n   - If a person **lies**, then their statement about another person\'s truthfulness is **incorrect**.\n3. **Work step-by-step**, updating the truth value of each person as you go.\n4. **Do not assume** a person is telling the truth or lying unless it can be logically deduced from the previous statements.\n5. **Ensure your answer is logically consistent** with all the information provided in the prompt.\n\nExamples:\n- "Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?"\n  - Jaymie is truthful → Millicent is lying → Millie is lying (since Millicent lies about Jaymie, and Millie says Millicent tells the truth) → Vina is truthful (since Millie is lying, and Vina says Millie lies) → Leda is truthful (since Vina is truthful and Leda says Vina tells the truth).\n  - **Answer: Yes (Leda is telling the truth).**\n\n- "Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?"\n  - Bernita is truthful → Audrie is lying (since Audrie says Bernita lies) → Delfina is lying (since Delfina says Audrie tells the truth, but Audrie is lying) → Vina is truthful (since Delfina is lying, and Vina says Delfina lies) → Sal is truthful (since Vina is truthful and Sal says Vina tells the truth).\n  - **Answer: Yes (Sal is telling the truth).**\n\nApply this reasoning process to the given question.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Instruction Variation:**\n\nEvaluate the logical connections between individuals and their claims. Ascertain whether the last person referenced is being truthful, considering the truth or falsehood of all previous statements. Pay close attention to the sequence of assertions and ensure that your conclusion aligns logically with all provided details.\n\nExamples:  \n1. "Question: Willian is lying. Fidel claims Willian is truthful. Crista claims Fidel is truthful. Inga claims Crista is truthful. Dallas claims Inga is lying. Is Dallas truthful?"  \n- Answer: Yes (Dallas is truthful because the chain of lies leads to Inga\'s statement being false, which makes Dallas truthful.)\n\n2. "Question: Kandi is truthful. Ryan claims Kandi is lying. Michaela claims Ryan is truthful. Sima claims Michaela is lying. Andree claims Sima is truthful. Is Andree truthful?"  \n- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)\n\nMake sure to follow this logical reasoning structure when interpreting the text.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nEvaluate the logical connections among individuals and their statements, assuming that each person is either consistently truthful or consistently deceptive. Determine the truthfulness of the last individual referenced by considering the reliability of all previous claims. Be thorough in tracing the logical dependencies, including indirect or embedded statements. Analyze each person\'s assertion in relation to the others and the established facts, ensuring your conclusion aligns with all provided information without contradiction.\n\n**Examples:**\n1. **Question:** "Willian lies. Fidel claims Willian is truthful. Crista says Fidel is truthful. Inga affirms Crista is truthful. Dallas states that Inga lies. Is Dallas truthful?"  \n   - **Answer:** Yes (Dallas is truthful because the chain of statements reveals that Inga\'s assertion is false, which makes Dallas\'s statement true.)\n\n2. **Question:** "Kandi is truthful. Ryan says Kandi lies. Michaela claims Ryan is truthful. Sima says Michaela lies. Andree says Sima is truthful. Is Andree truthful?"  \n   - **Answer:** Yes (Andree is truthful because the sequence of statements leads to Sima being truthful, which supports Andree\'s claim.)\n\nFollow this reasoning structure when interpreting the scenario. Pay close attention to layered or indirect implications and ensure that your analysis reflects the full complexity of the relationships, not just a straightforward chain of statements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.65), np.float64(0.64), np.float64(0.63), np.float64(0.62))
+Test accuracy: [0.5, 0.5733333333333334, 0.5066666666666667, 0.5333333333333333]
+======== ROUND 3
+Time: 628.9410872459412
+Prompt: ('# Task\nAnalyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.\n\nExamples:\n1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"  \n   - Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga\'s statement being false, making Dallas truthful.)\n\n2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"  \n   - Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)\n\nBe sure to follow this reasoning pattern when analyzing the text.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are to act as a logical reasoning assistant. Given a series of statements about people and their truthfulness, determine whether the final person mentioned is telling the truth or lying. To do this:\n\n1. **Start with the first statement** and assume it is true unless otherwise indicated.\n2. **Trace the chain of claims** logically, applying the following rules:\n   - If a person **tells the truth**, then their statement about another person\'s truthfulness is **correct**.\n   - If a person **lies**, then their statement about another person\'s truthfulness is **incorrect**.\n3. **Work step-by-step**, updating the truth value of each person as you go.\n4. **Do not assume** a person is telling the truth or lying unless it can be logically deduced from the previous statements.\n5. **Ensure your answer is logically consistent** with all the information provided in the prompt.\n\nExamples:\n- "Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?"\n  - Jaymie is truthful → Millicent is lying → Millie is lying (since Millicent lies about Jaymie, and Millie says Millicent tells the truth) → Vina is truthful (since Millie is lying, and Vina says Millie lies) → Leda is truthful (since Vina is truthful and Leda says Vina tells the truth).\n  - **Answer: Yes (Leda is telling the truth).**\n\n- "Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?"\n  - Bernita is truthful → Audrie is lying (since Audrie says Bernita lies) → Delfina is lying (since Delfina says Audrie tells the truth, but Audrie is lying) → Vina is truthful (since Delfina is lying, and Vina says Delfina lies) → Sal is truthful (since Vina is truthful and Sal says Vina tells the truth).\n  - **Answer: Yes (Sal is telling the truth).**\n\nApply this reasoning process to the given question.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Instruction Variation:**\n\nEvaluate the logical connections between individuals and their claims. Ascertain whether the last person referenced is being truthful, considering the truth or falsehood of all previous statements. Pay close attention to the sequence of assertions and ensure that your conclusion aligns logically with all provided details.\n\nExamples:  \n1. "Question: Willian is lying. Fidel claims Willian is truthful. Crista claims Fidel is truthful. Inga claims Crista is truthful. Dallas claims Inga is lying. Is Dallas truthful?"  \n- Answer: Yes (Dallas is truthful because the chain of lies leads to Inga\'s statement being false, which makes Dallas truthful.)\n\n2. "Question: Kandi is truthful. Ryan claims Kandi is lying. Michaela claims Ryan is truthful. Sima claims Michaela is lying. Andree claims Sima is truthful. Is Andree truthful?"  \n- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)\n\nMake sure to follow this logical reasoning structure when interpreting the text.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**\n\nEvaluate the logical connections among individuals and their statements, assuming that each person is either consistently truthful or consistently deceptive. Determine the truthfulness of the last individual referenced by considering the reliability of all previous claims. Be thorough in tracing the logical dependencies, including indirect or embedded statements. Analyze each person\'s assertion in relation to the others and the established facts, ensuring your conclusion aligns with all provided information without contradiction.\n\n**Examples:**\n1. **Question:** "Willian lies. Fidel claims Willian is truthful. Crista says Fidel is truthful. Inga affirms Crista is truthful. Dallas states that Inga lies. Is Dallas truthful?"  \n   - **Answer:** Yes (Dallas is truthful because the chain of statements reveals that Inga\'s assertion is false, which makes Dallas\'s statement true.)\n\n2. **Question:** "Kandi is truthful. Ryan says Kandi lies. Michaela claims Ryan is truthful. Sima says Michaela lies. Andree says Sima is truthful. Is Andree truthful?"  \n   - **Answer:** Yes (Andree is truthful because the sequence of statements leads to Sima being truthful, which supports Andree\'s claim.)\n\nFollow this reasoning structure when interpreting the scenario. Pay close attention to layered or indirect implications and ensure that your analysis reflects the full complexity of the relationships, not just a straightforward chain of statements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.65), np.float64(0.64), np.float64(0.63), np.float64(0.62))
+Test accuracy: [0.5, 0.5666666666666667, 0.5, 0.54]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 20.559709072113037
+Prompt: # Task
+Analyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.
+
+Examples:
+1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"
+- Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga's statement being false, making Dallas truthful.)
+
+2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"
+- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)
+
+Be sure to follow this reasoning pattern when analyzing the text.
+
+# Here are some examples:
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+Text: Question: Jerry lies. Millicent says Jerry tells the truth. Sal says Millicent tells the truth. Amberly says Sal tells the truth. Shenna says Amberly lies. Does Shenna tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.64 | Penalized score: 0.42425339774424364
+Test accuracy: 0.54
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 11.703412055969238
+Prompt: # Task
+Analyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.
+
+Examples:
+1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"
+- Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga's statement being false, making Dallas truthful.)
+
+2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"
+- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)
+
+Be sure to follow this reasoning pattern when analyzing the text.
+
+# Here are some examples:
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+Text: Question: Jerry lies. Millicent says Jerry tells the truth. Sal says Millicent tells the truth. Amberly says Sal tells the truth. Shenna says Amberly lies. Does Shenna tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.64 | Penalized score: 0.42425339774424364
+Test accuracy: 0.5466666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 11.607576131820679
+Prompt: # Task
+Analyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.
+
+Examples:
+1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"
+- Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga's statement being false, making Dallas truthful.)
+
+2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"
+- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)
+
+Be sure to follow this reasoning pattern when analyzing the text.
+
+# Here are some examples:
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Rashida tells the truth. Jim says Rashida lies. Tamika says Jim tells the truth. Lorine says Tamika tells the truth. Vina says Lorine tells the truth. Does Vina tell the truth?
+Label: No
+Text: Question: Jerry lies. Millicent says Jerry tells the truth. Sal says Millicent tells the truth. Amberly says Sal tells the truth. Shenna says Amberly lies. Does Shenna tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66 | Penalized score: 0.4450546266751457
+Test accuracy: 0.5066666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 7.690089464187622
+Prompt: # Task
+Analyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.
+
+Examples:
+1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"
+- Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga's statement being false, making Dallas truthful.)
+
+2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"
+- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)
+
+Be sure to follow this reasoning pattern when analyzing the text.
+
+# Here are some examples:
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Rashida tells the truth. Jim says Rashida lies. Tamika says Jim tells the truth. Lorine says Tamika tells the truth. Vina says Lorine tells the truth. Does Vina tell the truth?
+Label: No
+Text: Question: Jerry lies. Millicent says Jerry tells the truth. Sal says Millicent tells the truth. Amberly says Sal tells the truth. Shenna says Amberly lies. Does Shenna tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66 | Penalized score: 0.4450546266751457
+Test accuracy: 0.5066666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 9.097288608551025
+Prompt: # Task
+Analyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.
+
+Examples:
+1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"
+- Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga's statement being false, making Dallas truthful.)
+
+2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"
+- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)
+
+Be sure to follow this reasoning pattern when analyzing the text.
+
+# Here are some examples:
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Rashida tells the truth. Jim says Rashida lies. Tamika says Jim tells the truth. Lorine says Tamika tells the truth. Vina says Lorine tells the truth. Does Vina tell the truth?
+Label: No
+Text: Question: Jerry lies. Millicent says Jerry tells the truth. Sal says Millicent tells the truth. Amberly says Sal tells the truth. Shenna says Amberly lies. Does Shenna tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66 | Penalized score: 0.4450546266751457
+Test accuracy: 0.5
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 7.931758165359497
+Prompt: # Task
+Analyze the logical relationships between the people and their statements. Determine whether the final person mentioned is telling the truth, taking into account the truthfulness or falsity of all prior statements. Be careful to trace the chain of claims and ensure your conclusion is logically consistent with all given information.
+
+Examples:
+1. "Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?"
+- Answer: Yes (Dallas is telling the truth because the chain of lies leads to Inga's statement being false, making Dallas truthful.)
+
+2. "Question: Kandi tells the truth. Ryan says Kandi lies. Michaela says Ryan tells the truth. Sima says Michaela lies. Andree says Sima tells the truth. Does Andree tell the truth?"
+- Answer: Yes (Andree is truthful because the chain of lies leads to Sima being truthful.)
+
+Be sure to follow this reasoning pattern when analyzing the text.
+
+# Here are some examples:
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Rashida tells the truth. Jim says Rashida lies. Tamika says Jim tells the truth. Lorine says Tamika tells the truth. Vina says Lorine tells the truth. Does Vina tell the truth?
+Label: No
+Text: Question: Jerry lies. Millicent says Jerry tells the truth. Sal says Millicent tells the truth. Amberly says Sal tells the truth. Shenna says Amberly lies. Does Shenna tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66 | Penalized score: 0.4450546266751457
+Test accuracy: 0.5133333333333333
