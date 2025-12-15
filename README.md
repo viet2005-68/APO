@@ -1,4 +1,4 @@
-# Automatic Prompt Optimization with "Gradient Descent" and Beam Search
+# Extending Automatic Prompt Optimization with "Gradient Descent" and Beam Search: Exemplar Optimization for Prompting
 
 This repository presents an extension to the paper  
 **Automatic Prompt Optimization with "Gradient Descent" and Beam Search**  
@@ -34,31 +34,55 @@ Each individual in the genetic population represents a **candidate exemplar set*
 
 ## Results
 
-### Qwen3-14B
+<table>
+<tr>
+<td valign="top">
 
-| Task        | ProTeGi | Ours |
-|-------------|---------|------|
-| Liar        | 0.57    | **0.61** |
-| Casual      | 0.63    | **0.68** |
-| Clickbait   | **0.95** | 0.94 |
-| Ethos       | 0.85    | **0.88** |
-| Web of lies | 0.50    | **0.51** |
-| **Average** | 0.70    | **0.73** |
+<h3>Qwen3-14B</h3>
 
----
+<table>
+  <tr>
+    <th>Task</th>
+    <th>ProTeGi</th>
+    <th>Ours</th>
+  </tr>
+  <tr><td>Liar</td><td>0.57</td><td><b>0.61</b></td></tr>
+  <tr><td>Ethos</td><td>0.85</td><td><b>0.88</b></td></tr>
+  <tr><td>Casual judgement</td><td>0.63</td><td><b>0.68</b></td></tr>
+  <tr><td>Web of lies</td><td>0.50</td><td><b>0.51</b></td></tr>
+  <tr><td>Sports understanding</td><td><b>0.85</b></td><td>0.81</td></tr>
+  <tr><td>Boolean expressions</td><td>0.85</td><td><b>0.91</b></td></tr>
+  <tr><td><b>Average</b></td><td>0.71</td><td><b>0.73</b></td></tr>
+</table>
 
-### Qwen2.5-32B-Instruct-AWQ
+</td>
 
-| Task        | ProTeGi | Ours |
-|-------------|---------|------|
-| Liar        | 0.64    | **0.67** |
-| Casual      | nan     | nan |
-| Clickbait   | nan     | nan |
-| Ethos       | nan     | nan |
-| Web of lies | 0.66    | **0.72** |
-| **Average** | 0.65    | **0.70** |
+<td style="width:20px;"></td>
 
-*All results are reported using accuracy.*
+<td valign="top">
+
+<h3>Qwen2.5-32B-Instruct-AWQ</h3>
+
+<table>
+  <tr>
+    <th>Task</th>
+    <th>ProTeGi</th>
+    <th>Ours</th>
+  </tr>
+  <tr><td>Liar</td><td>0.64</td><td><b>0.67</b></td></tr>
+  <tr><td>Ethos</td><td>0.89</td><td><b>0.90</b></td></tr>
+  <tr><td>Casual judgement</td><td><b>0.69</b></td><td><b>0.69</b></td></tr>
+  <tr><td>Web of lies</td><td>0.66</td><td><b>0.72</b></td></tr>
+  <tr><td>Sports understanding</td><td>0.80</td><td><b>0.83</b></td></tr>
+  <tr><td>Boolean expressions</td><td>0.83</td><td><b>0.90</b></td></tr>
+  <tr><td><b>Average</b></td><td>0.75</td><td><b>0.78</b></td></tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+<p><i>*All results are reported using accuracy.</i></p>
 
 ---
 
