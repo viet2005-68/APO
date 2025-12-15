@@ -122,7 +122,7 @@ python main.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 3
+  --rounds 6
 
 # Boolean expressions (BBH)
 python main.py \

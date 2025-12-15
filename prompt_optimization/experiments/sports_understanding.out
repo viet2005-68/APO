@@ -1,155 +1,21 @@
-{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 4.669872045516968
+Time: 3.6123898029327393
 Prompt: ('# Task\nIs the following sentence plausible?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
-Training accuracy: (np.float64(0.71),)
-Test accuracy: [0.74]
+Training accuracy: (np.float64(0.65),)
+Test accuracy: [0.66]
 ======== ROUND 1
-Time: 34.30412983894348
-Prompt: ('# Task\n"Does the given sentence reflect a realistic action or scenario within the context of the specified sport? Respond with Yes if it aligns with typical occurrences in the sport, otherwise, provide No."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the following sentence plausible?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the given statement reasonable?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Does the given sentence accurately represent a typical action or scenario within the context of the described sport? Respond with Yes if it aligns with common occurrences in the sport, otherwise respond with No."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (np.float64(0.71), np.float64(0.71), np.float64(0.7), np.float64(0.69))
-Test accuracy: [0.7266666666666667, 0.74, 0.74, 0.6533333333333333]
+Time: 74.19530153274536
+Prompt: ('# Task\nIs the following sentence plausible?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the following sentence a plausible description of an event that could have occurred in a professional basketball game? Answer \'Yes\' if the event is likely to have happened in a real game, and \'No\' if it is not a plausible event in the context of professional basketball."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that keeps the same semantic meaning:\n\n**Input:** ` & `\n\n**Output:**\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction while preserving its semantic meaning:\n\n**Input:** ` & `\n\n**Output:**\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.65), np.float64(0.61), np.float64(0.6), np.float64(0.59))
+Test accuracy: [0.6666666666666666, 0.6133333333333333, 0.5133333333333333, 0.5133333333333333]
 ======== ROUND 2
-Time: 172.09279227256775
-Prompt: ('# Task\n"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"In the given sentence about a sport, is the specified action or event something that typically happens during a game or as part of regular practice? Respond with Yes for a usual occurrence and No for an uncommon sight in that sport."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"In the given sentence about a specific sport, determine if the described action or event is typically observed during the game or part of regular practices. Respond with Yes for a usual occurrence and No for something not commonly seen in that sport."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the given sentence representative of a typical action or situation in the specified sport, considering the distinct jargon and standard occurrences within that sport? Respond with "Yes" if it aligns with usual sporting activities, and "No" if it does not match.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (np.float64(0.83), np.float64(0.79), np.float64(0.79), np.float64(0.78))
-Test accuracy: [0.78, 0.7466666666666667, 0.76, 0.7133333333333334]
+Time: 299.82604932785034
+Prompt: ('# Task\n"Based on your knowledge of sports rules and common events, is the following sentence a plausible event in a professional sports game?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the following sentence describing a possible event that could realistically happen in a sports game?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning:\n\n**Input:** Determine whether the following text should be labeled "Yes" if it refers to a **play in a team sport**, or "No" if it does not. A play in a team sport involves actions such as passing, catching, hitting, running, tackling, or any other movement performed by a player during a game.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the following sentence a plausible description of an event that could have occurred in a professional sports game? Answer \'Yes\' if the event is likely to have happened in a real professional sports game (any sport), and \'No\' if it is not a plausible event in the context of professional sports."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.76), np.float64(0.71), np.float64(0.7), np.float64(0.69))
+Test accuracy: [0.8066666666666666, 0.7333333333333333, 0.6666666666666666, 0.74]
 ======== ROUND 3
-Time: 209.93776607513428
-Prompt: ('# Task\n"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Given a sentence describing an action or event in a particular sport, assess whether this activity commonly takes place during actual games or standard training sessions of that sport. For instance, in basketball, making a shot is routine, but being penalized with a flag is not pertinent. In football, being tackled is a regular occurrence, while outscoring the clock does not apply. Indicate if the described action is typical (Yes) or atypical (No) for the sport in question."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Determine if the sentence describes an activity or occurrence that is typically seen in the context of the named sport. Consider both specialized terminology and usual actions. Respond with \'Yes\' if it aligns with standard situations in the sport, and \'No\' for anything else."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Examine the provided sentence related to a specific sport and decide whether the described action or scenario usually takes place during the sport’s matches or routine training sessions. For instance, in basketball, making a shot is standard practice, but being penalized with a flag is not applicable. In football, being tackled is common, while hitting the buzzer is not pertinent. Indicate if the action is characteristic (Yes) or uncharacteristic (No) of the sport in question."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (np.float64(0.83), np.float64(0.81), np.float64(0.8), np.float64(0.8))
-Test accuracy: [0.78, 0.78, 0.7866666666666666, 0.7866666666666666]
-======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 34.618950843811035
-Prompt: # Task
-"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."
-
-# Here are some examples:
-Text: "Khyri Thomas  changed direction in the backfield in the NFC championship."
-Label: No
-Text: "Jayson Tatum nutmegged the defender."
-Label: No
-Text: "Chris Godwin crossed the blue line in the Stanley Cup."
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.79 | Penalized score: 0.5871063400292864
-Test accuracy: 0.7733333333333333
-======== EXEMPLAR OPTIMIZATION ROUND 1
-Time: 16.185078859329224
-Prompt: # Task
-"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."
-
-# Here are some examples:
-Text: "Khyri Thomas  changed direction in the backfield in the NFC championship."
-Label: No
-Text: "Sonny Gray was out at second."
-Label: Yes
-Text: "Chris Godwin crossed the blue line in the Stanley Cup."
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.82 | Penalized score: 0.6153122670024218
-Test accuracy: 0.78
-======== EXEMPLAR OPTIMIZATION ROUND 2
-Time: 12.13515567779541
-Prompt: # Task
-"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."
-
-# Here are some examples:
-Text: "Khyri Thomas  changed direction in the backfield in the NFC championship."
-Label: No
-Text: "Sonny Gray was out at second."
-Label: Yes
-Text: "Chris Godwin crossed the blue line in the Stanley Cup."
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.82 | Penalized score: 0.6153122670024218
-Test accuracy: 0.78
-======== EXEMPLAR OPTIMIZATION ROUND 3
-Time: 14.86276912689209
-Prompt: # Task
-"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."
-
-# Here are some examples:
-Text: "Khyri Thomas  changed direction in the backfield in the NFC championship."
-Label: No
-Text: "Sonny Gray was out at second."
-Label: Yes
-Text: "Chris Godwin crossed the blue line in the Stanley Cup."
-Label: No
-Text: "Carson Wentz took to the ice."
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.84 | Penalized score: 0.6207757633132829
-Test accuracy: 0.8133333333333334
-======== EXEMPLAR OPTIMIZATION ROUND 4
-Time: 13.874924421310425
-Prompt: # Task
-"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."
-
-# Here are some examples:
-Text: "Sonny Gray was out at second."
-Label: Yes
-Text: "Chris Godwin crossed the blue line in the Stanley Cup."
-Label: No
-Text: "Carson Wentz took to the ice."
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.84 | Penalized score: 0.6242930172983271
-Test accuracy: 0.7866666666666666
-======== EXEMPLAR OPTIMIZATION ROUND 5
-Time: 18.01677370071411
-Prompt: # Task
-"In the given sentence about a specific sport, determine if the described action or event is typical during a game or part of routine practices. Respond with Yes for a common occurrence and No if it is uncommon in that sport."
-
-# Here are some examples:
-Text: "Sonny Gray was out at second."
-Label: Yes
-Text: "Chris Godwin crossed the blue line in the Stanley Cup."
-Label: No
-Text: "Carson Wentz took to the ice."
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.84 | Penalized score: 0.6242930172983271
-Test accuracy: 0.7866666666666666
+Time: 331.83735394477844
+Prompt: ('# Task\n"Given the sport referenced in the sentence, assess whether the event described could reasonably occur in a professional setting of that sport. If no specific sport is mentioned, assume the most commonly associated professional sport with the player or event."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning but uses different phrasing:\n\n---\n\nInput: "Determine whether the following sentence describes an event that could reasonably occur in a professional sports game **in the sport that the sentence refers to or implies**. Respond with \'Yes\' if the event is something that could plausibly happen in a real professional game of that specific sport, and \'No\' if it is not a realistic occurrence within that sport\'s rules or context.\n\nExample: \'Ryan O\'Reilly hit the wheel route.\' — While this sentence references hockey, \'hit the wheel route\' is not a recognized play in the sport. Answer \'No\'."\n\n--- \n\nLet me know if you\'d like additional variations!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Using your understanding of sports rules and typical occurrences, assess whether the given sentence portrays a realistic scenario in a **professional sports game**. If the event includes actions or terminology associated with a sport different from the one suggested by the context (such as hockey, baseball, basketball), then it is considered implausible."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning:\n\n"Using your understanding of sports rules and typical occurrences, assess whether the given sentence portrays a realistic scenario in a **professional sports game**. If the situation includes actions or terminology associated with a sport different from the one suggested by the context (such as hockey, baseball, basketball), then it is considered implausible."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.82), np.float64(0.81), np.float64(0.8), np.float64(0.79))
+Test accuracy: [0.8333333333333334, 0.8133333333333334, 0.8133333333333334, 0.82]
