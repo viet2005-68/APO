@@ -19,3 +19,172 @@ Time: 331.83735394477844
 Prompt: ('# Task\n"Given the sport referenced in the sentence, assess whether the event described could reasonably occur in a professional setting of that sport. If no specific sport is mentioned, assume the most commonly associated professional sport with the player or event."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning but uses different phrasing:\n\n---\n\nInput: "Determine whether the following sentence describes an event that could reasonably occur in a professional sports game **in the sport that the sentence refers to or implies**. Respond with \'Yes\' if the event is something that could plausibly happen in a real professional game of that specific sport, and \'No\' if it is not a realistic occurrence within that sport\'s rules or context.\n\nExample: \'Ryan O\'Reilly hit the wheel route.\' — While this sentence references hockey, \'hit the wheel route\' is not a recognized play in the sport. Answer \'No\'."\n\n--- \n\nLet me know if you\'d like additional variations!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Using your understanding of sports rules and typical occurrences, assess whether the given sentence portrays a realistic scenario in a **professional sports game**. If the event includes actions or terminology associated with a sport different from the one suggested by the context (such as hockey, baseball, basketball), then it is considered implausible."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning:\n\n"Using your understanding of sports rules and typical occurrences, assess whether the given sentence portrays a realistic scenario in a **professional sports game**. If the situation includes actions or terminology associated with a sport different from the one suggested by the context (such as hockey, baseball, basketball), then it is considered implausible."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
 Training accuracy: (np.float64(0.82), np.float64(0.81), np.float64(0.8), np.float64(0.79))
 Test accuracy: [0.8333333333333334, 0.8133333333333334, 0.8133333333333334, 0.82]
+======== ROUND 4
+Time: 662.9197175502777
+Prompt: ('# Task\nGenerate a variation of the following instruction while keeping the semantic meaning.\n\nInput: "Evaluate the sentence to see if it portrays a **realistic situation in a professional sports game**. Begin by **determining the sport implied by the context or specific terminology** (e.g., \'full count\' suggests baseball, \'eurostep\' suggests basketball, \'Stanley Cup\' suggests hockey). Next, **check whether the actions, terms, or events described are common and in line with that sport**. If the sentence includes terms or actions that are characteristic of a different sport than the one implied, the scenario is considered **unrealistic**. Respond with **\'Yes\'** if the scenario is realistic, and **\'No\'** if it is not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Based on the sport mentioned in the sentence, determine if the described event is plausible within a **professional** context of that sport. If no sport is explicitly named, default to the most commonly associated professional sport with the player or event. Exercise care: not every event involving professional athletes necessarily takes place in a professional setting — evaluate the specific action and surrounding context of the event."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Given the sport referenced in the sentence, assess whether the event described could reasonably occur in a **professional** setting of that sport. If no specific sport is mentioned, assume the most commonly associated professional sport with the player or event. Be cautious: not all events involving professional athletes are professional in nature — consider the specific action and context of the event."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Identify the sport being referenced based on the context (e.g., player names, leagues, or events), then evaluate whether the described action is a realistic and rule-compliant event in that specific professional sport. If the action is not typically performed in that sport or involves terminology from a different sport, classify the scenario as implausible."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.86), np.float64(0.84), np.float64(0.84), np.float64(0.83))
+Test accuracy: [0.7866666666666666, 0.8066666666666666, 0.8266666666666667, 0.8]
+======== ROUND 5
+Time: 574.4416463375092
+Prompt: ('# Task\n**Revised Instruction:**  \n"Based on the sport mentioned in the sentence, determine if the described event could plausibly take place in an **official professional competition** within that sport. If no sport is explicitly named, assume the most commonly associated professional sport with the player or event. Exercise care: not every event involving professional athletes occurs in a professional setting — evaluate the specific action, context, and whether the event is part of an officially sanctioned match or competition."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a variation of the following instruction while preserving its core meaning.\n\nInput: "Determine if the provided sentence reflects a **plausible scenario in a professional athletic competition**. In doing so, take into account **both direct and indirect indicators**. Direct indicators might be specific terminology such as \'full count\' (baseball), \'eurostep\' (basketball), or \'Stanley Cup\' (hockey). Indirect indicators could include **names of athletes** (e.g., \'Luka Modric\' is a soccer player, \'Blake Snell\' is a baseball pitcher), **names of leagues or tournaments** (e.g., \'FA Cup\' relates to soccer), and **typical actions** associated with a particular sport. If the sentence contains **elements that are more representative of a different sport than the one suggested by the context or athlete names**, the scenario is deemed **implausible**. Reply with **\'Yes\'** if the scenario is plausible, and **\'No\'** if it is not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a variation of the following instruction while keeping the semantic meaning.\n\nInput: "Evaluate the sentence to see if it portrays a **realistic situation in a professional sports game**. Begin by **determining the sport implied by the context or specific terminology** (e.g., \'full count\' suggests baseball, \'eurostep\' suggests basketball, \'Stanley Cup\' suggests hockey). Next, **check whether the actions, terms, or events described are common and in line with that sport**. If the sentence includes terms or actions that are characteristic of a different sport than the one implied, the scenario is considered **unrealistic**. Respond with **\'Yes\'** if the scenario is realistic, and **\'No\'** if it is not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Given the sport referenced in the sentence, assess whether the described event could reasonably occur within a **professional** setting of that sport. If no specific sport is mentioned, assume the most commonly associated professional sport with the player or event. Be cautious: not all events involving professional athletes take place in a professional environment — carefully consider the specific action and the broader context of the event."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.88), np.float64(0.87), np.float64(0.86), np.float64(0.84))
+Test accuracy: [0.7933333333333333, 0.7666666666666667, 0.7866666666666666, 0.8533333333333334]
+======== ROUND 6
+Time: 872.094232082367
+Prompt: ('# Task\nGenerate a rephrased version of the following instruction while maintaining its essential meaning.\n\nInput: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete\'s sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete\'s name mentioned, the scenario may be deemed **unrealistic**. Respond with **\'Yes\'** if the scenario is realistic, and **\'No\'** if it is not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Revised Instruction:**  \n"Based on the sport mentioned in the sentence, determine if the described event could plausibly take place in an **official professional competition** within that sport. If no sport is explicitly named, assume the most commonly associated professional sport with the player or event. Exercise care: not every event involving professional athletes occurs in a professional setting — evaluate the specific action, context, and whether the event is part of an officially sanctioned match or competition."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a rephrased version of the following instruction while maintaining its essential meaning.\n\nInput: "Assess whether the given sentence describes a **realistic situation within a professional athletic competition**. Take into account the **broader context and meaning of the sentence**, such as the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered **realistic** even if it includes terms from another sport, as long as the **overall context fits the athlete\'s sport or the typical events associated with it**. On the other hand, if the sentence includes **features that are more typical of a different sport**, regardless of the athlete\'s name, the scenario might be deemed **unrealistic**. Respond with **\'Yes\'** if the scenario is realistic, and **\'No\'** if it is not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Given the sport referenced in the sentence, assess whether the described event could reasonably occur in an **official professional competition** within that sport. If no specific sport is named, identify the most commonly associated professional sport with the player or event. **Avoid assuming that any action performed by a professional athlete necessarily takes place in a professional context.** Thoroughly examine the specific action, surrounding context, and whether the event is part of an officially sanctioned match or competition. Also consider the possibility that the event might occur during practice, exhibition, amateur play, or another non-competitive scenario."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.91), np.float64(0.88), np.float64(0.87), np.float64(0.87))
+Test accuracy: [0.8466666666666667, 0.7933333333333333, 0.8466666666666667, 0.7533333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 24.449162483215332
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Andres Iniesta performed a give and go."
+Label: Yes
+Text: "Tyler Glasnow watched the pitch go by."
+Label: Yes
+Text: "Ryan O'Reilly hit the wheel route."
+Label: No
+Text: "Marvin Jones lost control of the puck."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6268625619361743
+Test accuracy: 0.8133333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 12.356470346450806
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Andres Iniesta performed a give and go."
+Label: Yes
+Text: "Tyler Glasnow watched the pitch go by."
+Label: Yes
+Text: "Marvin Jones lost control of the puck."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84 | Penalized score: 0.6296847463200904
+Test accuracy: 0.8
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 12.353387117385864
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Andrei Svechnikov took ball four."
+Label: No
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+Text: "Draymond Green threw a touchdown."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6393271821603327
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 10.436928987503052
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Andrei Svechnikov took ball four."
+Label: No
+Text: "Amari Cooper scored a penalty kick."
+Label: No
+Text: "Draymond Green threw a touchdown."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6393271821603327
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 14.247505187988281
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Andres Iniesta performed a give and go."
+Label: Yes
+Text: "A.J. Green scored in the third period."
+Label: No
+Text: "Brandon Lowe took a left footed shot."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6576028944999923
+Test accuracy: 0.74
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 12.151256322860718
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Andres Iniesta performed a give and go."
+Label: Yes
+Text: "A.J. Green scored in the third period."
+Label: No
+Text: "Brandon Lowe took a left footed shot."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6576028944999923
+Test accuracy: 0.74
