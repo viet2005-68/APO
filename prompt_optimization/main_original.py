@@ -9,7 +9,10 @@ import argparse
 import scorers
 import tasks
 import predictors
-import moe_optimizers
+import optimizers
+import my_optimizer_v2
+import optimizers_fewshot
+import optimizers_logits
 import numpy as np
 import sys
 import random
@@ -17,11 +20,6 @@ import utils
 from models import Prompt
 import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-import embedder
-from sklearn.preprocessing import normalize
-from sklearn.cluster import KMeans
-from collections import defaultdict
-from sklearn.metrics.pairwise import cosine_similarity
 
 def get_task_class(task_name):
     if task_name == "ethos":
@@ -106,6 +104,41 @@ def get_args():
     parser.add_argument("--knn_k", default=2, type=int)
     parser.add_argument("--knn_t", default=0.993, type=float)
     parser.add_argument("--reject_on_errors", action="store_true")
+    parser.add_argument(
+        "--reflect_gradients",
+        action="store_true",
+        help="apply reflection to textual gradients before editing prompts",
+    )
+    parser.add_argument(
+        "--reflect_candidates",
+        action="store_true",
+        help="filter generated prompts using reflection scores",
+    )
+    parser.add_argument(
+        "--reflection_candidate_threshold",
+        default=0.5,
+        type=float,
+        help="minimum reflection score to keep a candidate prompt",
+    )
+    parser.add_argument(
+        "--reflection_gradient_passes",
+        default=1,
+        type=int,
+        help="number of reflection passes to run over gradients when --reflect_gradients is enabled",
+    )
+    parser.add_argument(
+        "--reflection_candidate_passes",
+        default=1,
+        type=int,
+        help="number of reflection passes to run over generated prompts when --reflect_candidates is enabled",
+    )
+    parser.add_argument(
+        "--reflection_temperature",
+        default=0.0,
+        type=float,
+        help="temperature used for reflection LLM calls",
+    )
+    parser.add_argument("--ea-samples-per-step", default=4, type=int)
 
     args = parser.parse_args()
 
@@ -128,11 +161,16 @@ if __name__ == "__main__":
     evaluator = get_evaluator(args.evaluator)(config)
     bf_eval = get_evaluator("bf")(config)
     gpt4 = predictors.BinaryPredictor(config)
-    embedder = embedder.Embedder()
 
-    optimizer = moe_optimizers.MOEProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    optimizer = optimizers.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    # optimizer = optimizers_fewshot.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    # optimizer = optimizers_logits.ProTeGi(config, evaluator, scorer, args.max_threads, bf_eval)
+    # optimizer = my_optimizer_v2.MyOptimizer(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
+    val_size = int(0.2 * len(train_exs))
+    val_exs = random.sample(train_exs, val_size)
+    # train_exs = [ex for ex in train_exs if ex not in val_exs]
 
     test_exs = task.get_test_examples()
 
@@ -143,176 +181,48 @@ if __name__ == "__main__":
 
     with open(args.out, "a") as outf:
         outf.write(json.dumps(config) + "\n")
-    EXPERT_NUM = 3
+
     candidates = [open(fp.strip()).read() for fp in args.prompts.split(",")]
-    experts = defaultdict(list)
-    for i in range(EXPERT_NUM):
-        experts[i] = candidates
+    # candidates = [Prompt(open(fp.strip()).read(), set(), set(), 0, 0.5) for fp in args.prompts.split(",")]
+    # sampled_examples = random.sample(train_exs, 5)
+    # candidates = [optimizer.init_prompt_generation(i, sampled_examples) for i in candidates]
 
     # Instruction Optimization
     for round in tqdm(range(config["rounds"] + 1), desc="Instruction Optimization"):
         print("STARTING ROUND ", round)
         start = time.time()
         # expand candidates
-        if round == 1:
-            _, texts, labels, preds = task.evaluate(gpt4, candidates[0], train_exs)
-            error_items = []
-            for t, l, p in zip(texts, labels, preds):
-                if l != p:
-                    error_items.append({
-                        "text": t,
-                        "label": l,
-                        "pred": p,
-                        "error_string": (
-                            f"Input text:\n{t.strip()}\n\n"
-                            f"Model prediction: {task.stringify_prediction(p)}\n"
-                            f"Correct answer: {task.stringify_prediction(l)}"
-                        )
-                    })
-            error_strings = [e["error_string"] for e in error_items]
-            embeddings = embedder.embed_texts(error_strings)
-            X = normalize(embeddings)
-            all_texts = [t for t in texts]
-            all_embeds = embedder.embed_texts(all_texts)
-            all_X = normalize(all_embeds)
-            kmeans = KMeans(
-                n_clusters=EXPERT_NUM,
-                n_init=20,
-                random_state=42
-            )
-            cluster_ids = kmeans.fit_predict(X)
-            clusters = defaultdict(lambda: {
-                "texts": [],
-                "labels": [],
-                "preds": []
-            })
-            for idx, cid in enumerate(cluster_ids):
-                clusters[cid]["texts"].append(error_items[idx]['text'])
-                clusters[cid]["labels"].append(error_items[idx]['label'])
-                clusters[cid]["preds"].append(error_items[idx]['pred'])
-            # Reassign exs to cluster
-            centroids = kmeans.cluster_centers_
-            centroids = normalize(centroids)
-            assignments = defaultdict(list)
-            for idx, (l, p) in enumerate(zip(labels, preds)):
-                if l == p:
-                    sims = cosine_similarity(
-                        all_X[idx].reshape(1, -1),
-                        centroids
-                    )[0]
-                    best_cid = np.argmax(sims)
-                    assignments[best_cid].append(idx)
-            expert_exs = defaultdict(list)
-            # add errors
-            for cid, items in clusters.items():
-                for e in items:
-                    expert_exs[cid].append({
-                        "text": e["text"],
-                        "label": e["label"]
-                    })
-            # add corrects
-            for cid, idxs in assignments.items():
-                for idx in idxs:
-                    expert_exs[cid].append({
-                        "text": texts[idx],
-                        "label": labels[idx]
-                    })
-            for i in tqdm(range(EXPERT_NUM), desc=f"Optimizing expert {i}"):
-                start = time.time()
-                candidates = optimizer.expand_candidates(experts[i], task, gpt4, clusters[i])
-                scores = optimizer.score_candidates(candidates, task, gpt4, expert_exs[i])
-                [scores, candidates] = list(
-                    zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
-                )
-                experts[i] = candidates[: config["beam_size"]]
-                scores = scores[: config["beam_size"]]
-                with open(args.out, "a") as outf:
-                    outf.write(f"======== ROUND {round} | EXPERT {i}\n")
-                    outf.write(f"Time: {time.time() - start}\n")
-                    outf.write(f"Prompt: {experts[i]}\n")
-                    outf.write(f"Training accuracy: {scores}\n")
+        if round > 0:
+            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs)
 
-        elif round > 1:
-            # embed all experts' best prompts
-            expert_prompts = [experts[i][0] for i in range(EXPERT_NUM)]
-            expert_embeds = embedder.embed_texts(expert_prompts)
-            expert_embeds = normalize(expert_embeds)
-            # route each example
-            expert_buffers = defaultdict(list)
-            for idx, x_embed in enumerate(all_X):
-                sims = cosine_similarity(x_embed.reshape(1, -1), expert_embeds)[0]
-                best_expert = np.argmax(sims)
-                expert_buffers[best_expert].append(train_exs[idx])
+        # score candidates
+        scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
+        [scores, candidates] = list(
+            zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
+        )
 
-            for i in tqdm(range(EXPERT_NUM), desc=f"Opimizing expert {i}"):
-                start = time.time()
-                exs_i = expert_buffers[i]
-                if len(exs_i) == 0:
-                    continue
-                candidates = optimizer.expand_candidates(experts[i], task, gpt4, exs_i)
-                scores = optimizer.score_candidates(candidates, task, gpt4, exs_i)
-                [scores, candidates] = list(
-                    zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
-                )
-                experts[i] = candidates[: config["beam_size"]]
-                experts[i] = candidates[: config["beam_size"]]
-                scores = scores[: config["beam_size"]]
-                with open(args.out, "a") as outf:
-                    outf.write(f"======== ROUND {round} | EXPERT {i}\n")
-                    outf.write(f"Time: {time.time() - start}\n")
-                    outf.write(f"Prompt: {experts[i]}\n")
-                    outf.write(f"Training accuracy: {scores}\n")
-
-        # Expert distillation
-        routed_expert_ids = []  # store which expert each example would be routed to
-        routed_preds = []       # store the expert's prediction
-
-        for idx, ex in enumerate(train_exs):
-            # embed example
-            x_embed = embedder.embed_text(ex["text"])
-            # compute similarity to each expert's prompt embedding
-            sims = cosine_similarity(x_embed.reshape(1, -1), expert_embeds)[0]
-            expert_id = np.argmax(sims)
-            
-            routed_expert_ids.append(expert_id)
-            
-            # get the prediction from that expert
-            _, _, _, preds = task.evaluate(gpt4, experts[expert_id][0], [ex])
-            routed_preds.append(preds[0])
-
-        distill_data = [
-            {"text": ex["text"], "label": pred}
-            for ex, pred in zip(train_exs, routed_preds)
-        ]
-        distill_exs = random.sample(distill_data, min(10, len(distill_data)))
-        distill_exs_str = [utils.format_exemplar(ex) for ex in distill_exs]
-        distill_str = "\n".join(distill_exs_str)
-        experts_str = ""
-        for expert in experts:
-            sections = utils.parse_sectioned_prompt(expert[0])
-            task_section = sections['task'].strip()
-            experts_str += f"\n{task_section}"
-        final_prompt = optimizer.distill_moe(experts=experts_str, distill_examples=distill_str)
-
+        # select candidates
+        candidates = candidates[: config["beam_size"]]
+        scores = scores[: config["beam_size"]]
 
         # record candidates, estimated scores, and true scores
         with open(args.out, "a") as outf:
             outf.write(f"======== ROUND {round}\n")
             outf.write(f"Time: {time.time() - start}\n")
-            outf.write(f"Prompt: {final_prompt}\n")
+            outf.write(f"Prompt: {candidates}\n")
+            outf.write(f"Training accuracy: {scores}\n")
+        val_metrics = []
         test_metrics = []
-        f1, texts, labels, preds = task.evaluate(
-            gpt4, final_prompt, test_exs, n=len(test_exs)
-        )
+        for candidate, score in zip(candidates, scores):
+            f1, texts, labels, preds = task.evaluate(
+                gpt4, candidate, test_exs, n=len(test_exs)
+            )
+            test_metrics.append(f1)
         with open(args.out, "a") as outf:
-            outf.write(f"Test accuracy: {f1}\n")
+            outf.write(f"Test accuracy: {test_metrics}\n")
             
     # Exemplar Optimization
-    val_size = int(0.2 * len(train_exs))
-    val_exs = random.sample(train_exs, val_size)
-    train_exs = [ex for ex in train_exs if ex not in val_exs]
-
-    best_prompt = final_prompt
+    best_prompt = candidates[0]
     Q = 12 # Population Size
     k_min = 3 # Min exemplars
     k_max = 6 # Max exemplars
@@ -345,7 +255,7 @@ if __name__ == "__main__":
                 final_prompt = best_prompt[:task_line_end] + tmp + "\n" + best_prompt[end_idx:]
                 final_prompts.append(final_prompt)
 
-        scores = optimizer.score_candidates(final_prompts, task, gpt4, val_exs)
+        scores = optimizer.score_candidates(final_prompts, task, gpt4, train_exs)
         scores_after_regularize = [
             s - (lambda_len * len(pop)) - (lambda_div * optimizer.diversity_penalize(pop))
             for s, pop in zip(scores, populations)
