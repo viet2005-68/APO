@@ -42,7 +42,7 @@ python main.py \
   --rounds 0
 
 # Ethos Task
-python main.py \
+python main_original.py \
   --task ethos \
   --prompts prompts/ethos.md \
   --data_dir data/ethos \
@@ -94,7 +94,7 @@ python main.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 3
+  --rounds 2
 
 # Web of lies (BBH)
 python main.py \

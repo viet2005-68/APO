@@ -125,24 +125,29 @@ class MOEProTeGi(PromptOptimizer):
             new_prompts += self.parse_tagged_text(r, "<START>", "<END>")
         return new_prompts
 
-    def distill_moe(self, experts, distill_examples):
+    def distill_moe(self, experts):
         transformation_prompt = f"""
-        You are tasked with creating a single prompt that mimics a Mixture-of-Experts system. 
-        In the original system, each input is routed to a specialized expert based on the content, and the expert produces a prediction. 
-        Your goal is to produce a single prompt that approximates this behavior without explicit routing.
+        You are an expert prompt engineer.
 
-        Instructions:
-        - Consider the input text carefully and implicitly decide which “expert” would handle it.
-        - Produce the same prediction that the routed expert would have produced.
-        - Use the examples below as guidance.
+        I will provide three expert prompts.
 
-        Experts:
+        Your task is NOT to select, rank, or optimize between them.
+
+        Instead, you must:
+        1. Preserve ALL instructions, constraints, goals, and assumptions from all three prompts.
+        2. Combine them into a single unified prompt where every requirement from each prompt is included.
+        3. Resolve conflicts ONLY by restructuring or clarifying — not by removing or weakening any instruction.
+        4. If two instructions overlap, explicitly integrate them rather than choosing one.
+        5. Maintain the original intent, rigor, and scope of all three prompts.
+
+        Do NOT summarize, simplify, or drop content.
+
+        Here are the prompts:
         {experts}
 
-        Training Examples:
-        {distill_examples}
-        Output only the prompt, NO explainations.
+        Output ONLY the final combined prompt, NO further explainations, start now.
         """
+        print(transformation_prompt)
         transformation_prompt = '\n'.join([line.lstrip() for line in transformation_prompt.split('\n')])
         res = utils.chatgpt(transformation_prompt, n=1)
         return res[0]

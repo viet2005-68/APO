@@ -154,7 +154,7 @@ if __name__ == "__main__":
         print("STARTING ROUND ", round)
         start = time.time()
         # expand candidates
-        if round == 1:
+        if round == 0:
             _, texts, labels, preds = task.evaluate(gpt4, candidates[0], train_exs)
             error_items = []
             for t, l, p in zip(texts, labels, preds):
@@ -205,10 +205,10 @@ if __name__ == "__main__":
             expert_exs = defaultdict(list)
             # add errors
             for cid, items in clusters.items():
-                for e in items:
+                for text, label in zip(items["texts"], items["labels"]):
                     expert_exs[cid].append({
-                        "text": e["text"],
-                        "label": e["label"]
+                        "text": text,
+                        "label": label
                     })
             # add corrects
             for cid, idxs in assignments.items():
@@ -217,9 +217,9 @@ if __name__ == "__main__":
                         "text": texts[idx],
                         "label": labels[idx]
                     })
-            for i in tqdm(range(EXPERT_NUM), desc=f"Optimizing expert {i}"):
+            for i in tqdm(range(EXPERT_NUM), desc=f"Optimizing expert"):
                 start = time.time()
-                candidates = optimizer.expand_candidates(experts[i], task, gpt4, clusters[i])
+                candidates = optimizer.expand_candidates(experts[i], task, gpt4, expert_exs[i])
                 scores = optimizer.score_candidates(candidates, task, gpt4, expert_exs[i])
                 [scores, candidates] = list(
                     zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
@@ -232,7 +232,7 @@ if __name__ == "__main__":
                     outf.write(f"Prompt: {experts[i]}\n")
                     outf.write(f"Training accuracy: {scores}\n")
 
-        elif round > 1:
+        elif round > 0:
             # embed all experts' best prompts
             expert_prompts = [experts[i][0] for i in range(EXPERT_NUM)]
             expert_embeds = embedder.embed_texts(expert_prompts)
@@ -255,7 +255,6 @@ if __name__ == "__main__":
                     zip(*sorted(list(zip(scores, candidates)),key=lambda x: x[0], reverse=True))
                 )
                 experts[i] = candidates[: config["beam_size"]]
-                experts[i] = candidates[: config["beam_size"]]
                 scores = scores[: config["beam_size"]]
                 with open(args.out, "a") as outf:
                     outf.write(f"======== ROUND {round} | EXPERT {i}\n")
@@ -264,36 +263,27 @@ if __name__ == "__main__":
                     outf.write(f"Training accuracy: {scores}\n")
 
         # Expert distillation
-        routed_expert_ids = []  # store which expert each example would be routed to
-        routed_preds = []       # store the expert's prediction
-
-        for idx, ex in enumerate(train_exs):
-            # embed example
-            x_embed = embedder.embed_text(ex["text"])
-            # compute similarity to each expert's prompt embedding
-            sims = cosine_similarity(x_embed.reshape(1, -1), expert_embeds)[0]
-            expert_id = np.argmax(sims)
-            
-            routed_expert_ids.append(expert_id)
-            
-            # get the prediction from that expert
-            _, _, _, preds = task.evaluate(gpt4, experts[expert_id][0], [ex])
-            routed_preds.append(preds[0])
-
-        distill_data = [
-            {"text": ex["text"], "label": pred}
-            for ex, pred in zip(train_exs, routed_preds)
-        ]
-        distill_exs = random.sample(distill_data, min(10, len(distill_data)))
-        distill_exs_str = [utils.format_exemplar(ex) for ex in distill_exs]
-        distill_str = "\n".join(distill_exs_str)
+        expert_prompts = [experts[i][0] for i in range(EXPERT_NUM)]
         experts_str = ""
-        for expert in experts:
-            sections = utils.parse_sectioned_prompt(expert[0])
-            task_section = sections['task'].strip()
-            experts_str += f"\n{task_section}"
-        final_prompt = optimizer.distill_moe(experts=experts_str, distill_examples=distill_str)
+        for i in range(EXPERT_NUM):
+            sections = utils.parse_sectioned_prompt(expert_prompts[i])
+            task_section = sections["task"].strip()
 
+            experts_str += (
+                f"\n### Expert {i}\n"
+                f"{task_section}\n"
+            )
+
+        final_prompt = optimizer.distill_moe(experts=experts_str)
+
+        start_marker = "# Task"
+        end_marker = "# Output format"
+        start_idx = candidates[0].find(start_marker)
+        end_idx = candidates[0].rfind(end_marker)
+        if start_idx != -1 and end_idx != -1:
+            task_line_end = candidates[0].find("\n", start_idx) + 1
+            final_prompt = candidates[0][:task_line_end] + final_prompt + "\n" + candidates[0][end_idx:]
+        print(final_prompt)
 
         # record candidates, estimated scores, and true scores
         with open(args.out, "a") as outf:
