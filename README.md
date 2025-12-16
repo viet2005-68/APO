@@ -1,4 +1,4 @@
-# Extending Automatic Prompt Optimization with "Gradient Descent" and Beam Search: Exemplar Optimization for Prompting
+# Extending "Automatic Prompt Optimization with "Gradient Descent" and Beam Search": Exemplar Optimization for Prompting
 
 This repository presents an extension to the paper  
 **Automatic Prompt Optimization with "Gradient Descent" and Beam Search**  
