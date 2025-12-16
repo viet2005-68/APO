@@ -49,10 +49,10 @@ Each individual in the genetic population represents a **candidate exemplar set*
   <tr><td>Liar</td><td>0.57</td><td><b>0.61</b></td></tr>
   <tr><td>Ethos</td><td>0.85</td><td><b>0.88</b></td></tr>
   <tr><td>Casual judgement</td><td>0.63</td><td><b>0.68</b></td></tr>
-  <tr><td>Web of lies</td><td>0.50</td><td><b>0.51</b></td></tr>
-  <tr><td>Sports understanding</td><td><b>0.85</b></td><td>0.81</td></tr>
-  <tr><td>Boolean expressions</td><td>0.85</td><td><b>0.91</b></td></tr>
-  <tr><td><b>Average</b></td><td>0.71</td><td><b>0.73</b></td></tr>
+  <tr><td>Web of lies</td><td><b>0.54</b></td><td>0.53</td></tr>
+  <tr><td>Sports understanding</td><td><b>0.82</b></td><td>0.80</td></tr>
+  <tr><td>Boolean expressions</td><td>0.82</td><td><b>0.89</b></td></tr>
+  <tr><td><b>Average</b></td><td>0.70</td><td><b>0.73</b></td></tr>
 </table>
 
 </td>
