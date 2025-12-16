@@ -108,7 +108,7 @@ python main.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 0
+  --rounds 6
 
 # Sports understanding (BBH)
 python main.py \
@@ -122,7 +122,7 @@ python main.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 6
+  --rounds 3
 
 # Boolean expressions (BBH)
 python main.py \
