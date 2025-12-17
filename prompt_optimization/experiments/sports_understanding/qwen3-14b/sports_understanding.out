@@ -1,0 +1,146 @@
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.5368807315826416
+Prompt: ('# Task\nDetermine if the given statement refers to an action that could reasonably take place in the sport most closely associated with the athlete, taking into account the official rules and standard gameplay of that sport. Focus on the athlete\'s primary sport and assess whether the described action is feasible within that context, regardless of whether it is a common or historically documented occurrence.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.85),)
+Test accuracy: [0.7933333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 25.21949791908264
+Prompt: # Task
+Determine if the given statement refers to an action that could reasonably take place in the sport most closely associated with the athlete, taking into account the official rules and standard gameplay of that sport. Focus on the athlete's primary sport and assess whether the described action is feasible within that context, regardless of whether it is a common or historically documented occurrence.
+
+# Here are some examples:
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Marcell Ozuna scored a touchdown."
+Label: No
+Text: "Vincent Kompany comitted a three second violation."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6168259558158973
+Test accuracy: 0.8133333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 10.597506523132324
+Prompt: # Task
+Determine if the given statement refers to an action that could reasonably take place in the sport most closely associated with the athlete, taking into account the official rules and standard gameplay of that sport. Focus on the athlete's primary sport and assess whether the described action is feasible within that context, regardless of whether it is a common or historically documented occurrence.
+
+# Here are some examples:
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Marcell Ozuna scored a touchdown."
+Label: No
+Text: "Vincent Kompany comitted a three second violation."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6168259558158973
+Test accuracy: 0.8133333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 14.439931869506836
+Prompt: # Task
+Determine if the given statement refers to an action that could reasonably take place in the sport most closely associated with the athlete, taking into account the official rules and standard gameplay of that sport. Focus on the athlete's primary sport and assess whether the described action is feasible within that context, regardless of whether it is a common or historically documented occurrence.
+
+# Here are some examples:
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Marcell Ozuna scored a touchdown."
+Label: No
+Text: "Vincent Kompany comitted a three second violation."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6168259558158973
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 12.09644603729248
+Prompt: # Task
+Determine if the given statement refers to an action that could reasonably take place in the sport most closely associated with the athlete, taking into account the official rules and standard gameplay of that sport. Focus on the athlete's primary sport and assess whether the described action is feasible within that context, regardless of whether it is a common or historically documented occurrence.
+
+# Here are some examples:
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Marcell Ozuna scored a touchdown."
+Label: No
+Text: "Vincent Kompany comitted a three second violation."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6168259558158973
+Test accuracy: 0.8133333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 12.123220920562744
+Prompt: # Task
+Determine if the given statement refers to an action that could reasonably take place in the sport most closely associated with the athlete, taking into account the official rules and standard gameplay of that sport. Focus on the athlete's primary sport and assess whether the described action is feasible within that context, regardless of whether it is a common or historically documented occurrence.
+
+# Here are some examples:
+Text: "Juan Soto shot from beyond the arc."
+Label: No
+Text: "A.J. Green scored in the third period."
+Label: No
+Text: "Pete Alonso hit a triple in the World Series."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.633018445458069
+Test accuracy: 0.8
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 13.929054021835327
+Prompt: # Task
+Determine if the given statement refers to an action that could reasonably take place in the sport most closely associated with the athlete, taking into account the official rules and standard gameplay of that sport. Focus on the athlete's primary sport and assess whether the described action is feasible within that context, regardless of whether it is a common or historically documented occurrence.
+
+# Here are some examples:
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Tyler Glasnow watched the pitch go by."
+Label: Yes
+Text: "Nazem Kadri was out at home."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.653618809583999
+Test accuracy: 0.8

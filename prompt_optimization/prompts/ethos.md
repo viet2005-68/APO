@@ -2,7 +2,9 @@
 Is the following text hate speech?
 
 # Output format
-Answer Yes or No as labels
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
 
 # Prediction
 Text: {{ text }}

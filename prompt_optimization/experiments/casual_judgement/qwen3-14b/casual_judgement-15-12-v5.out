@@ -1,0 +1,160 @@
+{"task": "casual_judgement", "data_dir": "data/casual_judgement", "prompts": "prompts/casual_judgement.md", "out": "experiments/casual_judgement-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 4.682180643081665
+Prompt: ('# Task\n**Revised Instruction:**\n\n"For each question about causation, classify the event in question as an **actual cause**, **not a cause**, or **a contributing factor** in relation to the outcome. An actual cause is an event that directly and necessarily contributed to the outcome, even if other events could have also played a role. A contributing factor is an event that played a role in bringing about the outcome but was neither strictly necessary nor sufficient on its own. If the event did not directly contribute to the outcome, even though it may have occurred simultaneously, it should be classified as **not a cause**. Take into account the **logical relationships between the conditions** (such as whether the event functioned as a sufficient condition, a necessary condition, or one of several sufficient conditions), and whether the event **inevitably resulted in the outcome** within the specific context. Refrain from assuming intent or assigning direct responsibility unless clearly indicated. Provide a response that is **clear, logical, and consistent** with the information given."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.6621621621621622),)
+Test accuracy: [0.6283185840707964]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 36.528281688690186
+Prompt: # Task
+**Revised Instruction:**
+
+"For each question about causation, classify the event in question as an **actual cause**, **not a cause**, or **a contributing factor** in relation to the outcome. An actual cause is an event that directly and necessarily contributed to the outcome, even if other events could have also played a role. A contributing factor is an event that played a role in bringing about the outcome but was neither strictly necessary nor sufficient on its own. If the event did not directly contribute to the outcome, even though it may have occurred simultaneously, it should be classified as **not a cause**. Take into account the **logical relationships between the conditions** (such as whether the event functioned as a sufficient condition, a necessary condition, or one of several sufficient conditions), and whether the event **inevitably resulted in the outcome** within the specific context. Refrain from assuming intent or assigning direct responsibility unless clearly indicated. Provide a response that is **clear, logical, and consistent** with the information given."
+
+# Here are some examples:
+Text: Jake desperately wants to win the rifle contest. He knows that he will only win the contest if he hits the bulls-eye. He raises the rifle, gets the bull's-eye in the sights, and presses the trigger. Jake is an expert marksman. His hands are steady. The gun is aimed perfectly. The bullet lands directly on the bull's-eye. Jake wins the contest. Did Jake intentionally hit the bull's-eye?
+Label: Yes
+Text: David has a new dryer in his apartment. David's clothes will dry in sixty minutes if either the cycle is set to MAX DRY or the temperature is set to HIGH. Today, the cycle is already set to MAX DRY, and the temperature is set on HIGH. David checks the dryer's settings, and he sees that the temperature is set on HIGH. He does not change the setting at all, and he leaves the temperature set to HIGH. He then turns on the dryer. Because the dryer would dry David's clothes in sixty minutes if either the cycle is set to MAX DRY or the temperature is set to HIGH, the dryer dries David's clothes in sixty minutes. Did David's clothes dry in sixty minutes because David did not change the temperature setting?
+Label: Yes
+Text: Alex is playing a board game. Every turn in the game, you simultaneously roll two six-sided dice and spin a spinner. Alex will either win or lose the game on his next turn. Alex will only win the game if the total of dice roll is greater than 11 or the spinner lands on green. It is very unlikely that he will roll higher than 11. Normally, the spinner does land on green. Alex rolls his dice and spins the spinner at exactly the same time. He rolls a 12, so amazingly, he rolled greater than 11, and the spinner lands on green. Alex wins the game. Did Alex spinning result cause him to win the game?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6216216216216216 | Penalized score: 0.45821827422845274
+Test accuracy: 0.6283185840707964
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 15.89939546585083
+Prompt: # Task
+**Revised Instruction:**
+
+"For each question about causation, classify the event in question as an **actual cause**, **not a cause**, or **a contributing factor** in relation to the outcome. An actual cause is an event that directly and necessarily contributed to the outcome, even if other events could have also played a role. A contributing factor is an event that played a role in bringing about the outcome but was neither strictly necessary nor sufficient on its own. If the event did not directly contribute to the outcome, even though it may have occurred simultaneously, it should be classified as **not a cause**. Take into account the **logical relationships between the conditions** (such as whether the event functioned as a sufficient condition, a necessary condition, or one of several sufficient conditions), and whether the event **inevitably resulted in the outcome** within the specific context. Refrain from assuming intent or assigning direct responsibility unless clearly indicated. Provide a response that is **clear, logical, and consistent** with the information given."
+
+# Here are some examples:
+Text: Susan is the president of a major computer corporation. One day, her assistant comes to her and says, "We are thinking of implementing a new program. If we actually do implement it, we will be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Susan thinks, "According to my calculations, increasing the prominence of the Atlantic division compared to the Pacific division should not affect our other programs, and we will be making gains in the Atlantic division. I guess the best course of action would be to approve the program." "All right," she says. "Let's implement the program. So we'll be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Did Susan intentionally increase the prominence of the Atlantic division?
+Label: Yes
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will turn on when the people who work at the travel agency or the people who work in the design studio arrive for work. Each office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45am, but the design studio employees almost always arrive at 10 am. Today, the travel agency employees arrived at 8:45 am. Unexpectedly, the design studio employees also arrived at 8:45 am to meet a deadline. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Billy and Suzy are freight train conductors. One day, they happen to approach an old two-way rail bridge from opposite directions at the same time. There are signals on either side of the bridge. Billy's signal is green, so he is supposed to drive across the bridge immediately. Suzy's signal is green, so she is also supposed to drive across immediately. Neither of them realizes that the bridge is on the verge of collapse. If they both drive their trains onto the bridge at the same time, it will collapse. Neither train is heavy enough on its own to break the bridge, but both together will be too heavy for it. Billy follows his signal and drives his train onto the bridge immediately at the same time that Suzy follows her signal and drives her train onto the bridge. Both trains move onto the bridge at the same time, and at that moment the bridge collapses. Did Billy cause the bridge to collapse?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6756756756756757 | Penalized score: 0.5130888960322535
+Test accuracy: 0.6637168141592921
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 12.794365882873535
+Prompt: # Task
+**Revised Instruction:**
+
+"For each question about causation, classify the event in question as an **actual cause**, **not a cause**, or **a contributing factor** in relation to the outcome. An actual cause is an event that directly and necessarily contributed to the outcome, even if other events could have also played a role. A contributing factor is an event that played a role in bringing about the outcome but was neither strictly necessary nor sufficient on its own. If the event did not directly contribute to the outcome, even though it may have occurred simultaneously, it should be classified as **not a cause**. Take into account the **logical relationships between the conditions** (such as whether the event functioned as a sufficient condition, a necessary condition, or one of several sufficient conditions), and whether the event **inevitably resulted in the outcome** within the specific context. Refrain from assuming intent or assigning direct responsibility unless clearly indicated. Provide a response that is **clear, logical, and consistent** with the information given."
+
+# Here are some examples:
+Text: Susan is the president of a major computer corporation. One day, her assistant comes to her and says, "We are thinking of implementing a new program. If we actually do implement it, we will be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Susan thinks, "According to my calculations, increasing the prominence of the Atlantic division compared to the Pacific division should not affect our other programs, and we will be making gains in the Atlantic division. I guess the best course of action would be to approve the program." "All right," she says. "Let's implement the program. So we'll be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Did Susan intentionally increase the prominence of the Atlantic division?
+Label: Yes
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will turn on when the people who work at the travel agency or the people who work in the design studio arrive for work. Each office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45am, but the design studio employees almost always arrive at 10 am. Today, the travel agency employees arrived at 8:45 am. Unexpectedly, the design studio employees also arrived at 8:45 am to meet a deadline. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Billy and Suzy are freight train conductors. One day, they happen to approach an old two-way rail bridge from opposite directions at the same time. There are signals on either side of the bridge. Billy's signal is green, so he is supposed to drive across the bridge immediately. Suzy's signal is green, so she is also supposed to drive across immediately. Neither of them realizes that the bridge is on the verge of collapse. If they both drive their trains onto the bridge at the same time, it will collapse. Neither train is heavy enough on its own to break the bridge, but both together will be too heavy for it. Billy follows his signal and drives his train onto the bridge immediately at the same time that Suzy follows her signal and drives her train onto the bridge. Both trains move onto the bridge at the same time, and at that moment the bridge collapses. Did Billy cause the bridge to collapse?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6756756756756757 | Penalized score: 0.5130888960322535
+Test accuracy: 0.6548672566371682
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 9.415510892868042
+Prompt: # Task
+**Revised Instruction:**
+
+"For each question about causation, classify the event in question as an **actual cause**, **not a cause**, or **a contributing factor** in relation to the outcome. An actual cause is an event that directly and necessarily contributed to the outcome, even if other events could have also played a role. A contributing factor is an event that played a role in bringing about the outcome but was neither strictly necessary nor sufficient on its own. If the event did not directly contribute to the outcome, even though it may have occurred simultaneously, it should be classified as **not a cause**. Take into account the **logical relationships between the conditions** (such as whether the event functioned as a sufficient condition, a necessary condition, or one of several sufficient conditions), and whether the event **inevitably resulted in the outcome** within the specific context. Refrain from assuming intent or assigning direct responsibility unless clearly indicated. Provide a response that is **clear, logical, and consistent** with the information given."
+
+# Here are some examples:
+Text: Susan is the president of a major computer corporation. One day, her assistant comes to her and says, "We are thinking of implementing a new program. If we actually do implement it, we will be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Susan thinks, "According to my calculations, increasing the prominence of the Atlantic division compared to the Pacific division should not affect our other programs, and we will be making gains in the Atlantic division. I guess the best course of action would be to approve the program." "All right," she says. "Let's implement the program. So we'll be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Did Susan intentionally increase the prominence of the Atlantic division?
+Label: Yes
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will turn on when the people who work at the travel agency or the people who work in the design studio arrive for work. Each office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45am, but the design studio employees almost always arrive at 10 am. Today, the travel agency employees arrived at 8:45 am. Unexpectedly, the design studio employees also arrived at 8:45 am to meet a deadline. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Billy and Suzy are freight train conductors. One day, they happen to approach an old two-way rail bridge from opposite directions at the same time. There are signals on either side of the bridge. Billy's signal is green, so he is supposed to drive across the bridge immediately. Suzy's signal is green, so she is also supposed to drive across immediately. Neither of them realizes that the bridge is on the verge of collapse. If they both drive their trains onto the bridge at the same time, it will collapse. Neither train is heavy enough on its own to break the bridge, but both together will be too heavy for it. Billy follows his signal and drives his train onto the bridge immediately at the same time that Suzy follows her signal and drives her train onto the bridge. Both trains move onto the bridge at the same time, and at that moment the bridge collapses. Did Billy cause the bridge to collapse?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6756756756756757 | Penalized score: 0.5130888960322535
+Test accuracy: 0.6637168141592921
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 19.37384581565857
+Prompt: # Task
+**Revised Instruction:**
+
+"For each question about causation, classify the event in question as an **actual cause**, **not a cause**, or **a contributing factor** in relation to the outcome. An actual cause is an event that directly and necessarily contributed to the outcome, even if other events could have also played a role. A contributing factor is an event that played a role in bringing about the outcome but was neither strictly necessary nor sufficient on its own. If the event did not directly contribute to the outcome, even though it may have occurred simultaneously, it should be classified as **not a cause**. Take into account the **logical relationships between the conditions** (such as whether the event functioned as a sufficient condition, a necessary condition, or one of several sufficient conditions), and whether the event **inevitably resulted in the outcome** within the specific context. Refrain from assuming intent or assigning direct responsibility unless clearly indicated. Provide a response that is **clear, logical, and consistent** with the information given."
+
+# Here are some examples:
+Text: Susan is the president of a major computer corporation. One day, her assistant comes to her and says, "We are thinking of implementing a new program. If we actually do implement it, we will be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Susan thinks, "According to my calculations, increasing the prominence of the Atlantic division compared to the Pacific division should not affect our other programs, and we will be making gains in the Atlantic division. I guess the best course of action would be to approve the program." "All right," she says. "Let's implement the program. So we'll be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Did Susan intentionally increase the prominence of the Atlantic division?
+Label: Yes
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will turn on when the people who work at the travel agency or the people who work in the design studio arrive for work. Each office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45am, but the design studio employees almost always arrive at 10 am. Today, the travel agency employees arrived at 8:45 am. Unexpectedly, the design studio employees also arrived at 8:45 am to meet a deadline. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Billy and Suzy are freight train conductors. One day, they happen to approach an old two-way rail bridge from opposite directions at the same time. There are signals on either side of the bridge. Billy's signal is green, so he is supposed to drive across the bridge immediately. Suzy's signal is green, so she is also supposed to drive across immediately. Neither of them realizes that the bridge is on the verge of collapse. If they both drive their trains onto the bridge at the same time, it will collapse. Neither train is heavy enough on its own to break the bridge, but both together will be too heavy for it. Billy follows his signal and drives his train onto the bridge immediately at the same time that Suzy follows her signal and drives her train onto the bridge. Both trains move onto the bridge at the same time, and at that moment the bridge collapses. Did Billy cause the bridge to collapse?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6756756756756757 | Penalized score: 0.5130888960322535
+Test accuracy: 0.6637168141592921
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 15.876454591751099
+Prompt: # Task
+**Revised Instruction:**
+
+"For each question about causation, classify the event in question as an **actual cause**, **not a cause**, or **a contributing factor** in relation to the outcome. An actual cause is an event that directly and necessarily contributed to the outcome, even if other events could have also played a role. A contributing factor is an event that played a role in bringing about the outcome but was neither strictly necessary nor sufficient on its own. If the event did not directly contribute to the outcome, even though it may have occurred simultaneously, it should be classified as **not a cause**. Take into account the **logical relationships between the conditions** (such as whether the event functioned as a sufficient condition, a necessary condition, or one of several sufficient conditions), and whether the event **inevitably resulted in the outcome** within the specific context. Refrain from assuming intent or assigning direct responsibility unless clearly indicated. Provide a response that is **clear, logical, and consistent** with the information given."
+
+# Here are some examples:
+Text: Susan is the president of a major computer corporation. One day, her assistant comes to her and says, "We are thinking of implementing a new program. If we actually do implement it, we will be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Susan thinks, "According to my calculations, increasing the prominence of the Atlantic division compared to the Pacific division should not affect our other programs, and we will be making gains in the Atlantic division. I guess the best course of action would be to approve the program." "All right," she says. "Let's implement the program. So we'll be increasing sales in our Atlantic division, but this will also increase the prominence of the Atlantic division compared to the Pacific division." Did Susan intentionally increase the prominence of the Atlantic division?
+Label: Yes
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will turn on when the people who work at the travel agency or the people who work in the design studio arrive for work. Each office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45am, but the design studio employees almost always arrive at 10 am. Today, the travel agency employees arrived at 8:45 am. Unexpectedly, the design studio employees also arrived at 8:45 am to meet a deadline. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Billy and Suzy are freight train conductors. One day, they happen to approach an old two-way rail bridge from opposite directions at the same time. There are signals on either side of the bridge. Billy's signal is green, so he is supposed to drive across the bridge immediately. Suzy's signal is green, so she is also supposed to drive across immediately. Neither of them realizes that the bridge is on the verge of collapse. If they both drive their trains onto the bridge at the same time, it will collapse. Neither train is heavy enough on its own to break the bridge, but both together will be too heavy for it. Billy follows his signal and drives his train onto the bridge immediately at the same time that Suzy follows her signal and drives her train onto the bridge. Both trains move onto the bridge at the same time, and at that moment the bridge collapses. Did Billy cause the bridge to collapse?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6756756756756757 | Penalized score: 0.5130888960322535
+Test accuracy: 0.6637168141592921

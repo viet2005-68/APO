@@ -1,0 +1,537 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY + FEW SHOT + BATCH GRADIENT DESCENT STRATEGY
+======== MODEL: GPT-0SS-20B
+
+======== ROUND 0
+Time: 9.386126279830933
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.87),)
+Training accuracy: (np.float64(0.87),)
+Validation accuracy: [0.84]
+Test accuracy: [0.9]
+======== ROUND 1
+Time: 228.062340259552
+Prompt: (Prompt(
+  prompt: # Task
+You are a moderation assistant. Flag whether the following passage contains hate speech. Hate speech is any language that attacks or dehumanizes a protected group (by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits) or that encourages violence or discrimination against such a group. The passage may use sarcasm, rhetorical questions, or coded language; consider context and intent. Respond with the single word **Yes** if it meets the definition, otherwise respond with **No**.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 0.9285714285714286), Prompt(
+  prompt: # Task
+You are a content moderation assistant. Determine whether the following text contains hate speech. Hate speech is defined as language that attacks or dehumanizes a protected group based on race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected characteristic, or that encourages violence or discrimination against such a group. The text may include sarcasm, rhetorical questions, or coded language; consider context and intent. If the text contains any language that meets the definition, answer "Yes", otherwise answer "No". Provide only the single word "Yes" or "No".
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.87,
+  score: 0.9107142857142857), Prompt(
+  prompt: # Task
+You are a content‑moderation assistant. Your job is to decide whether the following passage contains hate speech. Hate speech is any language that attacks or dehumanizes a protected group—based on race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or another protected characteristic—or that encourages violence or discrimination against that group. The passage may include sarcasm, rhetorical questions, or coded language; consider the overall context and intent. If the passage includes any such language, reply with “Yes”; otherwise reply with “No”. Respond with only that single word.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 0.8928571428571429), Prompt(
+  prompt: # Task
+**Revised Prompt**
+
+Read the passage below and determine whether it contains hate speech. Hate speech includes any remark that encourages violence or discrimination against a protected group, dehumanizes or marginalizes them, or otherwise degrades them. This encompasses direct threats, calls for harm, or language that fuels hostility toward a protected class.  
+
+The passage may use sarcasm, rhetorical questions, coded language, or stylistic flourishes, so evaluate the overall intent, context, and potential to incite hostility or marginalization—not just surface words. For example, “I hate all X” would be hate speech, whereas “I dislike X” would not.  
+
+Respond with a single word: **Yes** or **No**, followed by a brief explanation of your reasoning. Do not default to a generic interpretation, avoid over‑penalizing language that references marginalized identities, and do not rely on internal training biases.  
+
+**Text to evaluate:** <TEXT>
+
+# Exemplar
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0,
+  score: 0.8928571428571429))
+Training accuracy: (np.float64(0.9285714285714286), np.float64(0.9107142857142857), np.float64(0.8928571428571429), np.float64(0.8928571428571429))
+Validation accuracy: [0.92, 0.88, 0.9, 0.9]
+Test accuracy: [0.89, 0.89, 0.88, 0.87]
+======== ROUND 2
+Time: 491.58161425590515
+Prompt: (Prompt(
+  prompt: # Task
+You are a moderation assistant. Your task is to determine whether the following passage contains hate speech. Hate speech is defined as any language that attacks or dehumanizes a protected group—by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits—or that encourages violence or discrimination against such a group. When evaluating the passage, consider context, intent, and the vulnerability of the target group. Pay special attention to subtle or implicit expressions, including sarcasm, rhetorical questions, coded language, or rhetorical flourish that may conceal hateful intent. Respond with the single word **Yes** if the passage meets this definition, otherwise respond with **No**. The passage to evaluate is: <passage>.
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(6), np.int64(8)},
+  parent_score: 0.9285714285714286,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a moderation assistant. Your task is to determine whether the following passage contains hate speech. Hate speech is any language that attacks or dehumanizes a protected group—by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits—or that encourages violence or discrimination against such a group. The passage may use sarcasm, rhetorical questions, coded language, or other rhetorical devices; you must consider the overall context and the speaker’s intent. If the passage meets the definition above, respond with the single word **Yes**; otherwise respond with **No**. Examples of hate speech include: “All [protected group] are worthless and should be eliminated,” or “I hate [protected group] so much I want to kill them.” Examples of non‑hate speech include: “I think the policy is unfair to [protected group] but I do not want to harm them,” or “I’m joking about [protected group] but I respect them.” Pay special attention to subtle or implicit hateful content that may be masked by sarcasm or coded language, and avoid false positives by ensuring the content truly dehumanizes or encourages violence or discrimination.
+
+# Exemplar
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0.9285714285714286,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a moderation assistant. Your task is to decide whether the following passage contains hate speech. Hate speech is any language that attacks or dehumanizes a protected group (by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits) or that encourages violence or discrimination against such a group. The passage may use sarcasm, rhetorical questions, coded language, or other rhetorical devices; consider the intent, context, and any subtle cues that might indicate hostility toward a protected group. For example, a statement that says “People of X should be removed from society” is hate speech, whereas a statement that says “I think X is a problem” is not. First, write a brief justification that explains whether the passage meets the definition, citing specific elements or lack thereof. Then, answer with a single word: **Yes** if the passage is hate speech, **No** otherwise.
+
+# Exemplar
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0.9285714285714286,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a moderation assistant. Determine whether the following passage contains hate speech. Hate speech is any language that attacks or dehumanizes a protected group (by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits) or that encourages violence or discrimination against such a group. Consider context, intent, sarcasm, rhetorical questions, coded language, and subtle or implicit hate. For example, “All [group] are idiots” is hate speech; “I hate that they exist” is hate speech; “They are weird but okay” is not. Respond with the single word **Yes** if the passage meets the definition, otherwise respond with **No**.
+
+# Exemplar
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(5), np.int64(6), np.int64(8)},
+  parent_score: 0.9285714285714286,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.86, 0.84, 0.82, 0.88]
+Test accuracy: [0.92, 0.92, 0.83, 0.9]
+======== ROUND 3
+Time: 513.1924602985382
+Prompt: (Prompt(
+  prompt: # Task
+You are a moderation assistant whose job is to decide whether a given text contains hate speech. Hate speech is any language that attacks or dehumanizes a protected group—by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected characteristics—or that encourages violence or discrimination against such a group. When evaluating, take into account the overall context, the speaker’s intent, the use of sarcasm or rhetorical questions, coded or euphemistic expressions, and any subtle or implicit hateful content. For example, “All [group] are idiots” or “I hate that they exist” qualify as hate speech, whereas “They are weird but okay” or a neutral mention of a protected identity does not. Respond **only** with the word **Yes** if the passage meets the definition, otherwise respond **No**.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a moderation assistant performing a zero‑shot classification task. Your job is to determine whether a given text contains hate speech. Hate speech is defined as any language that attacks or dehumanizes a protected group—where a protected group is any group that is legally protected because of race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected characteristics—or any language that encourages violence or discrimination against such a group. When reviewing a passage, take into account the overall context, the speaker’s intent, the use of sarcasm or rhetorical questions, coded or euphemistic wording, and any subtle or implicit hateful content. For instance, “All [group] are idiots” is hate speech; “I hate that they exist” is hate speech; “They are weird but okay” is not. If the passage satisfies the definition above, answer with the single word **Yes**; otherwise answer with **No**. Do not use your internal training data or general assumptions—focus only on the definition, the examples given, and the specific content of the passage.
+
+# Exemplar
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a moderation assistant. Your task is to determine whether the following passage contains hate speech. Hate speech is defined as any language that attacks or dehumanizes a protected group—by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits—or that encourages violence or discrimination against such a group. When evaluating the passage, consider context, intent, the vulnerability of the target group, and any subtle or implicit expressions, including sarcasm, rhetorical questions, coded language, or rhetorical flourish that may conceal hateful intent. For example, a statement that says “They are all a bunch of idiots” could be hateful if the target is a protected group, but not if it refers to a non‑protected group. A sarcastic remark like “Oh great, another genius” could be hateful if the target is a protected group and the sarcasm is used to dehumanize. A coded phrase that is known to target a protected group might also be hateful. Respond with the single word **Yes** if the passage meets this definition, otherwise respond with **No**. The passage to evaluate is: <passage>.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 1.0,
+  score: 0.9166666666666666), Prompt(
+  prompt: # Task
+You are a moderation assistant. Your task is to determine whether the following passage contains hate speech. Hate speech is defined as any language that attacks or dehumanizes a protected group—by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits—or that encourages violence or discrimination against such a group. When evaluating a passage, consider the context, intent, tone, and the vulnerability of the target group. Pay special attention to subtle or implicit expressions, including sarcasm, rhetorical questions, coded language, or rhetorical flourish that may conceal hateful intent. For example, a statement that says “I hate all [protected group] because they are so [negative stereotype]” is hate speech, whereas a sarcastic remark like “Oh great, another [protected group] doing that stupid thing” is not if it is clearly mocking and not dehumanizing. Respond with the single word **Yes** if the passage meets this definition, otherwise respond with **No**. The passage to evaluate is: <passage>.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 1.0,
+  score: 0.9166666666666666))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(0.9166666666666666), np.float64(0.9166666666666666))
+Validation accuracy: [0.86, 0.82, 0.88, 0.82]
+Test accuracy: [0.89, 0.92, 0.89, 0.92]
+======== ROUND 4
+Time: 525.6299498081207
+Prompt: (Prompt(
+  prompt: # Task
+You are a moderation assistant whose job is to decide whether a given passage contains hate speech. Hate speech is any language that attacks or dehumanizes a protected group—whether defined by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits—or that encourages violence or discrimination against such a group. When reviewing a text, take into account the overall context, the speaker’s intent, sarcasm or rhetorical questions, coded or euphemistic language, and any subtle or implicit hateful content. For example, phrases like “All [group] are idiots” or “I hate that they exist” would be considered hate speech, while “They are weird but okay” or a neutral mention of a protected identity would not. Respond with only “Yes” if the passage meets this definition, otherwise respond with “No”.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0,
+  score: 0.9166666666666666), Prompt(
+  prompt: # Task
+You are a moderation aide whose job is to decide if a supplied text contains hate speech. Hate speech includes any language that attacks or dehumanizes a protected group—by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or any other protected characteristic—or that incites violence or discrimination toward such a group. When evaluating, take into account the overall context, the speaker’s intent, sarcasm or rhetorical devices, coded or euphemistic wording, and any subtle or implied hateful content. For example, “All [group] are idiots” or “I hate that they exist” are hate speech, whereas a neutral reference to a protected identity or a statement like “They are weird but okay” is not. Respond **only** with the word **Yes** if the passage matches the definition above, otherwise respond **No**.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0,
+  score: 0.9166666666666666), Prompt(
+  prompt: # Task
+**Revised Prompt**
+
+You are an assistant whose job is to decide whether a supplied passage contains hate speech. Hate speech is any expression that attacks or dehumanizes a protected group—defined by race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected attributes—or that promotes violence or discrimination against such a group. When evaluating, take into account the overall context, the speaker’s intent, sarcasm or rhetorical questions, coded or euphemistic language, and any subtle or implied hateful content. For example, statements like “All [group] are idiots” or “I hate that they exist” are hate speech, whereas a neutral reference to a protected identity or a comment such as “They are weird but okay” is not.  
+**Answer only with the word “Yes” if the passage meets the definition above; otherwise answer “No.”**
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0,
+  score: 0.9166666666666666), Prompt(
+  prompt: # Task
+You are a moderation assistant whose job is to perform a zero‑shot classification of hate speech.  
+**Definition to use:** Any expression that attacks or dehumanizes a protected group—where a protected group is defined as any group safeguarded by law on the basis of race, ethnicity, nationality, religion, gender, sexual orientation, gender identity, disability, or other protected traits—or any expression that encourages violence or discrimination against such a group.  
+
+When judging a passage, examine the overall context, the speaker’s intent, the presence of sarcasm, rhetorical questions, coded or euphemistic language, and any subtle or implicit hateful content.  
+
+**Examples for reference:**  
+- “All [group] are idiots” → hate speech  
+- “I hate that they exist” → hate speech  
+- “They are weird but okay” → not hate speech  
+
+If the passage satisfies the definition above, reply with the single word **Yes**; otherwise reply with **No**.  
+Do not use any external knowledge or assumptions—only the definition, the examples, and the passage itself.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(8)},
+  parent_score: 0,
+  score: 0.9166666666666666))
+Training accuracy: (np.float64(0.9166666666666666), np.float64(0.9166666666666666), np.float64(0.9166666666666666), np.float64(0.9166666666666666))
+Validation accuracy: [0.92, 0.86, 0.88, 0.88]
+Test accuracy: [0.92, 0.9, 0.91, 0.89]

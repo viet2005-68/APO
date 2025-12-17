@@ -1,0 +1,1078 @@
+{"task": "ethos", "data_dir": "data/ar_sarcasm", "prompts": "prompts/ar_sarcasm.md", "out": "experiments/ar_sarcasm.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 23.767532348632812
+Prompt: (Prompt(
+  prompt: # Task
+Is this tweet sarcastic?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.7265625),)
+Training accuracy: (0.7265625,)
+Validation accuracy: [0.78]
+Test accuracy: [0.7491638795986622]
+======== ROUND 1
+Time: 153.8613998889923
+Prompt: (Prompt(
+  prompt: # Task
+To assess whether this tweet employs sarcasm or verbal irony, analyze the language used, any cultural allusions made, and any inconsistencies between the content of the tweet and its setting. Conclude if the tweet uses sarcasm considering these aspects.
+
+# Exemplar
+Text: "كان اجمل من كل شيء،但现在一切都变了，这真是令人难过。"
+Label: No
+
+Text: "رغم كل التحديات، اليوم هو يوم فخر لبلدي. نسير بخطى ثابتة نحو المستقبل. 🇪🇬💪"
+Label: No
+
+Text: "@s8nscookie @ilxne الله معاي ياكوكي ومعاي تعاويذ هاري بوتر السحريه "
+Label: Yes
+
+Text: "عزلة الانقلاب عالميا تتزايد وكل دول العالم تمنع مواطنيها من الذهاب الى مصر حتى حقراء الخليج من ممولى الانقلاب يمنعون أهلهم"
+Label: No
+
+Text: "صفعة لناشطة هي صفعة على وجوهنا جميعا، اعتداءات وحشية أمام مقر جماعة غير شرعية تخرج على القانون وتحكم لتفكيك الدولة، الإخوان في مواجهة مصر!"
+Label: No
+
+Text: "لمّا أقول ليا خاطر قلبي تيجي ليه تقولي أنا تعبانة! 🤦‍♀️🤷‍♀️"
+Label: No
+
+Text: ""عم بحكي مع حالي #نوال_الزغبي https://t.co/EVvOFQhSw3""
+Label: No
+
+Text: ""#غرد_كانك_في_التسعينياتكانتْ نوال الزٌغبي عمْ بيشلٌوها بالسيارة 💖""
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(6), np.int64(8), np.int64(9), np.int64(10), 12, np.int64(13), 14, 15, 16},
+  parent_score: 0.7265625,
+  score: 0.8214285714285714), Prompt(
+  prompt: # Task
+In the context of Arabic social media, does this tweet employ irony or mockery to convey a message that differs from its literal interpretation? Pay attention to signs such as exaggerated expressions, surprising turns, and allusions to cultural standards that could imply sarcastic intent.
+
+# Exemplar
+Text: "كان اجمل من كل شيء،但现在一切都变了，这真是令人难过。"
+Label: No
+
+Text: ""@amrmsalama @EGYPTAIR يا عمرو بيه اعمل زيي واركب النيل جميلة 😂😂😂""
+Label: No
+
+Text: "@s8nscookie @ilxne الله معاي ياكوكي ومعاي تعاويذ هاري بوتر السحريه "
+Label: Yes
+
+Text: ""هما لغوا خاصية switch account في تحديثات فيسبوك ماسينجر الجديدة عند كل الناس؟ ولا ده غباء من الأبليكيشن اللي معايا بس ولا ايه اللي بيحصل؟""
+Label: Yes
+
+Text: "لمّا أقول ليا خاطر قلبي تيجي ليه تقولي أنا تعبانة! 🤦‍♀️🤷‍♀️"
+Label: No
+
+Text: ""#غرد_كانك_في_التسعينياتكانتْ نوال الزٌغبي عمْ بيشلٌوها بالسيارة 💖""
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+Text: "آه الناس حواليك بتحب مرسي وماله؟ بس مرسي ماهواش أغلى عند الناس دي من رزق عيالها ومن مستقبلها ولو حست إنه فاشل مش عارف يحل هتقلب عليه وعليك"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(11), 12, 13, np.int64(14), np.int64(15), 16},
+  parent_score: 0.7265625,
+  score: 0.81640625), Prompt(
+  prompt: # Task
+In the context of Arabic social media, does this tweet employ irony or sarcasm to convey a message that contradicts its literal interpretation? Pay attention to overly dramatic expressions, surprising turns, and allusions to local customs that could imply a sarcastic tone.
+
+# Exemplar
+Text: "كان اجمل من كل شيء،但现在一切都变了，这真是令人难过。"
+Label: No
+
+Text: ""@amrmsalama @EGYPTAIR يا عمرو بيه اعمل زيي واركب النيل جميلة 😂😂😂""
+Label: No
+
+Text: "@s8nscookie @ilxne الله معاي ياكوكي ومعاي تعاويذ هاري بوتر السحريه "
+Label: Yes
+
+Text: ""هما لغوا خاصية switch account في تحديثات فيسبوك ماسينجر الجديدة عند كل الناس؟ ولا ده غباء من الأبليكيشن اللي معايا بس ولا ايه اللي بيحصل؟""
+Label: Yes
+
+Text: "لمّا أقول ليا خاطر قلبي تيجي ليه تقولي أنا تعبانة! 🤦‍♀️🤷‍♀️"
+Label: No
+
+Text: ""#غرد_كانك_في_التسعينياتكانتْ نوال الزٌغبي عمْ بيشلٌوها بالسيارة 💖""
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+Text: "آه الناس حواليك بتحب مرسي وماله؟ بس مرسي ماهواش أغلى عند الناس دي من رزق عيالها ومن مستقبلها ولو حست إنه فاشل مش عارف يحل هتقلب عليه وعليك"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(11), 12, 13, np.int64(14), np.int64(15), 16},
+  parent_score: 0.7265625,
+  score: 0.8125), Prompt(
+  prompt: # Task
+Given the backdrop of Arabic social media, does this tweet employ irony or mockery to convey a message that differs from its literal interpretation? Take into account the presence of hyperbolic expressions, surprising contrasts, and allusions to cultural standards that could hint at sarcasm.
+
+# Exemplar
+Text: "كان اجمل من كل شيء،但现在一切都变了，这真是令人难过。"
+Label: No
+
+Text: ""@amrmsalama @EGYPTAIR يا عمرو بيه اعمل زيي واركب النيل جميلة 😂😂😂""
+Label: No
+
+Text: "@s8nscookie @ilxne الله معاي ياكوكي ومعاي تعاويذ هاري بوتر السحريه "
+Label: Yes
+
+Text: ""هما لغوا خاصية switch account في تحديثات فيسبوك ماسينجر الجديدة عند كل الناس؟ ولا ده غباء من الأبليكيشن اللي معايا بس ولا ايه اللي بيحصل؟""
+Label: Yes
+
+Text: "لمّا أقول ليا خاطر قلبي تيجي ليه تقولي أنا تعبانة! 🤦‍♀️🤷‍♀️"
+Label: No
+
+Text: ""#غرد_كانك_في_التسعينياتكانتْ نوال الزٌغبي عمْ بيشلٌوها بالسيارة 💖""
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+Text: "آه الناس حواليك بتحب مرسي وماله؟ بس مرسي ماهواش أغلى عند الناس دي من رزق عيالها ومن مستقبلها ولو حست إنه فاشل مش عارف يحل هتقلب عليه وعليك"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(2), np.int64(11), 12, 13, np.int64(14), np.int64(15), 16},
+  parent_score: 0.7265625,
+  score: 0.8046875))
+Training accuracy: (0.8214285714285714, 0.81640625, 0.8125, 0.8046875)
+Validation accuracy: [0.8166666666666667, 0.8033333333333333, 0.8233333333333334, 0.8066666666666666]
+Test accuracy: [0.7892976588628763, 0.8093645484949833, 0.8093645484949833, 0.7993311036789298]
+======== ROUND 2
+Time: 348.8563759326935
+Prompt: (Prompt(
+  prompt: # Task
+In the context of Arabic social media, determine whether this tweet employs irony or sarcasm by examining if the literal interpretation is intentionally contradicted by the implied sentiment. Look for explicit contradictions, where the literal meaning is the opposite of what the author intends. Also, consider the use of certain idiomatic expressions or emojis that are commonly used sarcastically in Arabic social media. Overly dramatic expressions or allusions to local customs can be signs of sarcasm but should be evaluated alongside other contextual clues to avoid false detections.
+
+# Exemplar
+Text: "@TOFFEE_2 @ladyattorny حاسباني شكون ؟شي بوكيمونألف مليونوحدة ليا تتمنى" Label: No
+
+Text: "أهلاً بكم في رمضان، الشهر الذي لا ينتهي إلا بالصيام حتى الموت!"
+Label: Yes
+
+Text: "الله يوفق الجميع ويحفظ مصر من كل مكروه" Label: No
+
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "تَحَدَثوآ عَن أيْ شَيء ~ — #المدارس بالمجموع #والكليات بالواسطة #والجواز بالفلوس # والصحوبية بالمصلحة #"
+Label: No
+
+Text: "@tishallaa @DAVIDOFF565 الكاثوليك عيدهم ١/٦ 😝الجماعة غير هذيل قوم بوتن 😝😝😝"
+Label: No
+
+Text: "عزلة الانقلاب عالميا تتزايد وكل دول العالم تمنع مواطنيها من الذهاب الى مصر حتى حقراء الخليج من ممولى الانقلاب يمنعون أهلهم"
+Label: No
+
+Text: "أنا متأكد أن هذا الامتحان سهل جداً 🤣🤣🤣"
+Label: Yes
+
+Text: ""@f5jtt @IBENALNAJAF دعك من هذا السفيه اخي الحبيب. فوالله حججه لاوهن من الجامعة العربية. كل العلماء و الادباء المسلمين عبر التاريخ من السنة""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {39, 40, 41, 42, np.int64(43), np.int64(8), np.int64(17), np.int64(27), np.int64(29)},
+  parent_score: 0.8125,
+  score: 0.90625), Prompt(
+  prompt: # Task
+In the setting of Arabic social media, assess if this tweet makes use of irony or sarcasm by analyzing whether the direct meaning is deliberately flipped by the underlying tone. Pay attention to clear contrasts, where the stated message is the reverse of the intended meaning. Additionally, take into account the presence of specific idioms or emojis that are frequently utilized sarcastically within Arabic social platforms. Exaggerated statements or references to local traditions might hint at sarcasm; however, they should be considered in conjunction with additional context to prevent incorrect interpretations.
+
+# Exemplar
+Text: "@TOFFEE_2 @ladyattorny حاسباني شكون ؟شي بوكيمونألف مليونوحدة ليا تتمنى" Label: No
+
+Text: "أهلاً بكم في رمضان، الشهر الذي لا ينتهي إلا بالصيام حتى الموت!"
+Label: Yes
+
+Text: "الله يوفق الجميع ويحفظ مصر من كل مكروه" Label: No
+
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "تَحَدَثوآ عَن أيْ شَيء ~ — #المدارس بالمجموع #والكليات بالواسطة #والجواز بالفلوس # والصحوبية بالمصلحة #"
+Label: No
+
+Text: "@tishallaa @DAVIDOFF565 الكاثوليك عيدهم ١/٦ 😝الجماعة غير هذيل قوم بوتن 😝😝😝"
+Label: No
+
+Text: "عزلة الانقلاب عالميا تتزايد وكل دول العالم تمنع مواطنيها من الذهاب الى مصر حتى حقراء الخليج من ممولى الانقلاب يمنعون أهلهم"
+Label: No
+
+Text: "أنا متأكد أن هذا الامتحان سهل جداً 🤣🤣🤣"
+Label: Yes
+
+Text: ""@f5jtt @IBENALNAJAF دعك من هذا السفيه اخي الحبيب. فوالله حججه لاوهن من الجامعة العربية. كل العلماء و الادباء المسلمين عبر التاريخ من السنة""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {39, 40, 41, 42, np.int64(43), np.int64(8), np.int64(17), np.int64(27), np.int64(29)},
+  parent_score: 0.8125,
+  score: 0.8958333333333334), Prompt(
+  prompt: # Task
+In the realm of Arabic social media, assess if this particular tweet makes use of irony or sarcasm by analyzing whether the apparent message is deliberately at odds with the underlying sentiment. Pay attention to direct contradictions, where the surface-level interpretation contrasts with the author's true intention. Additionally, take into account the presence of specific idioms or emojis that are frequently employed in a sarcastic manner within Arabic social media. Exaggerated expressions or references to local traditions might indicate sarcasm; however, these should be interpreted in conjunction with additional context to prevent incorrect conclusions.
+
+# Exemplar
+Text: "@TOFFEE_2 @ladyattorny حاسباني شكون ؟شي بوكيمونألف مليونوحدة ليا تتمنى" Label: No
+
+Text: "أهلاً بكم في رمضان، الشهر الذي لا ينتهي إلا بالصيام حتى الموت!"
+Label: Yes
+
+Text: "الله يوفق الجميع ويحفظ مصر من كل مكروه" Label: No
+
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "تَحَدَثوآ عَن أيْ شَيء ~ — #المدارس بالمجموع #والكليات بالواسطة #والجواز بالفلوس # والصحوبية بالمصلحة #"
+Label: No
+
+Text: "@tishallaa @DAVIDOFF565 الكاثوليك عيدهم ١/٦ 😝الجماعة غير هذيل قوم بوتن 😝😝😝"
+Label: No
+
+Text: "عزلة الانقلاب عالميا تتزايد وكل دول العالم تمنع مواطنيها من الذهاب الى مصر حتى حقراء الخليج من ممولى الانقلاب يمنعون أهلهم"
+Label: No
+
+Text: "أنا متأكد أن هذا الامتحان سهل جداً 🤣🤣🤣"
+Label: Yes
+
+Text: ""@f5jtt @IBENALNAJAF دعك من هذا السفيه اخي الحبيب. فوالله حججه لاوهن من الجامعة العربية. كل العلماء و الادباء المسلمين عبر التاريخ من السنة""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {39, 40, 41, 42, np.int64(43), np.int64(8), np.int64(17), np.int64(27), np.int64(29)},
+  parent_score: 0.8125,
+  score: 0.8958333333333334), Prompt(
+  prompt: # Task
+In the setting of Arabic social media, determine if this tweet utilizes irony or ridicule to convey a message that differs from its literal meaning. Look for exaggerated statements, unexpected contrasts, and references to cultural norms that may hint at sarcasm. Also, take into account the general tone and bluntness of the message to discern if the author aims to mock or critique through apparently affirmative wording.
+
+# Exemplar
+Text: "أهلاً بكم في رمضان، الشهر الذي لا ينتهي إلا بالصيام حتى الموت!"
+Label: Yes
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: ""RT @12soondos: الإسلام دين الرحمة وإكرام النفس ولم يأمر بهذه الأفعال التي لايفعلها إلا مجنون#شرك_الرافضه_في_عاشورا  https://t.co/ENQ1sPQ…"
+Label: No
+
+Text: "المشكلة انك تفكر بالطريقة نفسها وتحلم بنتيجة مختلفة 😂😂"
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+Text: ""اذا كانت الغربة تقتل فيمكنها ان تنعش أيضاً""
+Label: No
+
+Text: ""بهذه الخطوات تطبقين #مكياج #غوتشي لموسم خريف شتاء 2016 / 2017موقع #حياتيhttps://t.co/rnIJwyeuX4#راح_نفلسكم_٢… https://t.co/KjOQDBF6oJ""
+Label: No
+
+Text: "@testuser123 انظروا الى هذا الفوز الكبير، ما أجمل الهزيمة!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(43), np.int64(44), 45, np.int64(14), 47, 46, np.int64(21), np.int64(22)},
+  parent_score: 0.8046875,
+  score: 0.875))
+Training accuracy: (0.90625, 0.8958333333333334, 0.8958333333333334, 0.875)
+Validation accuracy: [0.81, 0.8133333333333334, 0.81, 0.82]
+Test accuracy: [0.8093645484949833, 0.7926421404682275, 0.7926421404682275, 0.8093645484949833]
+======== ROUND 3
+Time: 388.5763192176819
+Prompt: (Prompt(
+  prompt: # Task
+In the setting of Arabic social media, determine if this tweet utilizes irony or ridicule to convey a message that differs from its literal meaning. Look for exaggerated statements, unexpected contrasts, and references to cultural norms that may hint at sarcasm. Also, take into account the general tone and bluntness of the message to discern if the author aims to mock or critique through apparently affirmative wording.
+
+# Exemplar
+Text: "أهلاً بكم في رمضان، الشهر الذي لا ينتهي إلا بالصيام حتى الموت!"
+Label: Yes
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: ""RT @12soondos: الإسلام دين الرحمة وإكرام النفس ولم يأمر بهذه الأفعال التي لايفعلها إلا مجنون#شرك_الرافضه_في_عاشورا  https://t.co/ENQ1sPQ…"
+Label: No
+
+Text: "المشكلة انك تفكر بالطريقة نفسها وتحلم بنتيجة مختلفة 😂😂"
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+Text: ""اذا كانت الغربة تقتل فيمكنها ان تنعش أيضاً""
+Label: No
+
+Text: ""بهذه الخطوات تطبقين #مكياج #غوتشي لموسم خريف شتاء 2016 / 2017موقع #حياتيhttps://t.co/rnIJwyeuX4#راح_نفلسكم_٢… https://t.co/KjOQDBF6oJ""
+Label: No
+
+Text: "@testuser123 انظروا الى هذا الفوز الكبير، ما أجمل الهزيمة!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(43), np.int64(44), 45, np.int64(14), 47, 46, np.int64(21), np.int64(22)},
+  parent_score: 0.8046875,
+  score: 0.85), Prompt(
+  prompt: # Task
+In the realm of Arabic social media, evaluate if a tweet uses irony or ridicule to convey a message that differs from its literal interpretation. Pay close attention to detecting hyperbole, contradictions, cultural allusions, and puns that hint at an underlying critique or derision. Also, scrutinize the tone and directness of the tweet to ascertain if it aims to satirize or criticize via seemingly affirmative language. Take into account the implicit response of the audience and the wider cultural backdrop to accurately interpret the tweet’s real purpose.
+
+# Exemplar
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "لم لا تحاول أن تفهم ما أقول، دائماً تتجاهل الحقيقة الواضحة؟"
+Label: Yes
+
+Text: "RT @user: أكيد الحكومة بتصرف على الشعب! كل ما الناس تتألم يزيدوا العلاوات والحوافز!"
+Label: Yes
+
+Text: "الوقت اللي فات كان نومة واللي جاي راح نستفيق عليه ونعرف الحقيقة"
+Label: No
+
+Text: "#أوقفوا_الفحم :)"
+Label: No
+
+Text: ""بوب ديلان الفائز بـ"نوبل في الأدب" لن يحضر مراسم تسلُّم الجائزة.. ليس لديه وقت فراغ!""
+Label: No
+
+Text: ""للاهلاويين حــطوا هالصوره خلفيــه لجوالاتكم راح تحس بفخامة غير مسبوقه حتى لو جوالك جالكسي S2محدثكم رازها في نوت 2 و… https://t.co/NxU6V9877p""
+Label: No
+
+Text: ""@_iRalbert ايه اقتباس من جستن بيبر الشاذ اةةة""
+Label: Yes
+
+Text: "ياخواتي الي بتعملوا كده شوفي مين بياخد بجد 🤭🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔"
+Label: No
+
+Text: "صراحة، الناس اللي بتشتكي من الازمة الاقتصادية دي اكيد ماشفوش العصر الذهبي اللي كنا فيه! #فروض_الزمان"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(67), np.int64(40), 75, 76, 77, 78, 79, np.int64(20), np.int64(59), np.int64(31)},
+  parent_score: 0.875,
+  score: 0.8229166666666666), Prompt(
+  prompt: # Task
+In the context of Arabic social media, determine whether a tweet uses irony or ridicule to imply a meaning different from its literal one. Irony often involves exaggeration, contrasts, or cultural references to suggest a mocking or critical stance contrary to the apparent message. Ridicule typically involves blunt, harsh tones meant to belittle or criticize. To discern irony, look for exaggerated statements or unexpected contrasts that hint at sarcasm rather than straightforward humor. Ridicule is often identified by bluntness and harshness in the language used. Cultural norms and local idioms can also provide clues; consider how local expressions might be used to convey a hidden meaning. Additionally, assess the overall tone of the message to determine whether it aims to mock or criticize through seemingly positive or neutral wording.
+
+# Exemplar
+Text: "لا استطيع انام بسبب الضجة حول #MannequinChallenge 😂😂"
+Label: No
+
+Text: "لم لا تحاول أن تفهم ما أقول، دائماً تتجاهل الحقيقة الواضحة؟"
+Label: Yes
+
+Text: "RT @user: أكيد الحكومة بتصرف على الشعب! كل ما الناس تتألم يزيدوا العلاوات والحوافز!"
+Label: Yes
+
+Text: "#انتخبوا_العرص المفوضية الأفريقية تقبل دعوى ترفض أحكام إعدام بمصر #مصر"
+Label: Yes
+
+Text: "رغم كل التحديات، اليوم هو يوم فخر لبلدي. نسير بخطى ثابتة نحو المستقبل. 🇪🇬💪"
+Label: No
+
+Text: "_ لو قرأتي ما كتبت هتلاقيني قولت إخلاء سبيل ومش براءة باين عليكي مناضلة جامدة"
+Label: No
+
+Text: ""بوب ديلان الفائز بـ"نوبل في الأدب" لن يحضر مراسم تسلُّم الجائزة.. ليس لديه وقت فراغ!""
+Label: No
+
+Text: ""@_iRalbert ايه اقتباس من جستن بيبر الشاذ اةةة""
+Label: Yes
+
+Text: "ياخواتي الي بتعملوا كده شوفي مين بياخد بجد 🤭🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔"
+Label: No
+
+Text: "صراحة، الناس اللي بتشتكي من الازمة الاقتصادية دي اكيد ماشفوش العصر الذهبي اللي كنا فيه! #فروض_الزمان"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(26), np.int64(9), 75, 76, 77, 78, 79, np.int64(58), np.int64(59), np.int64(30)},
+  parent_score: 0.875,
+  score: 0.8125), Prompt(
+  prompt: # Task
+In the realm of Arabic social media, assess if this tweet utilizes irony or sarcasm by analyzing whether its literal meaning markedly diverges from the underlying sentiment it aims to convey. Sarcasm often manifests through an intentional disconnect between the words chosen and the message being communicated, frequently appearing in the form of overexaggerated remarks or unanticipated responses. Pay attention to the setting and the interplay between the stated feeling and what the audience would conventionally expect. Also, consider the presence of particular idiomatic phrases, emojis, or culturally-specific allusions that are commonly used in a sarcastic manner. There should be a noticeable disparity between the overt sentiment and the predictable audience reaction within the given context. If such a disparity does not exist, classify the tweet as not using sarcasm or irony.
+
+# Exemplar
+Text: ""ده #MannequinChallenge  بس بطريقه محترفه 😂😂 https://t.co/FohO57PM0t""
+Label: No
+
+Text: ""@najahmali اهل الكفر والزندقة في خندق واحد لقتال المسلمينمسيرة البراءة من المشركين ولا ادري هل بوتن مسلم ؟!#بوتين_روحاني""
+Label: Yes
+
+Text: "ع سبيل النكد #باسم مش جاى النهاردة :("
+Label: No
+
+Text: ""هما لغوا خاصية switch account في تحديثات فيسبوك ماسينجر الجديدة عند كل الناس؟ ولا ده غباء من الأبليكيشن اللي معايا بس ولا ايه اللي بيحصل؟""
+Label: Yes
+
+Text: "يارب تكون نكتة 😂😂😂"
+Label: No
+
+Text: ""عم بحكي مع حالي #نوال_الزغبي https://t.co/EVvOFQhSw3""
+Label: No
+
+Text: ""بوب ديلان الفائز بـ"نوبل في الأدب" لن يحضر مراسم تسلُّم الجائزة.. ليس لديه وقت فراغ!""
+Label: No
+
+Text: ""لا أستطيع أن أصدق أنني أشاهد هذا المسرحيه مرة أخرى، حقاً لقد وصلت إلى القمة 🎉🎉""
+Label: Yes
+
+Text: "@testuser123 انظروا الى هذا الفوز الكبير، ما أجمل الهزيمة!"
+Label: Yes
+
+Text: "آه الناس حواليك بتحب مرسي وماله؟ بس مرسي ماهواش أغلى عند الناس دي من رزق عيالها ومن مستقبلها ولو حست إنه فاشل مش عارف يحل هتقلب عليه وعليك"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(10), np.int64(11), np.int64(18), np.int64(21), 58, 59, 60, 61, 62},
+  parent_score: 0.90625,
+  score: 0.8020833333333334))
+Training accuracy: (0.85, 0.8229166666666666, 0.8125, 0.8020833333333334)
+Validation accuracy: [0.82, 0.8, 0.8066666666666666, 0.8033333333333333]
+Test accuracy: [0.8093645484949833, 0.7926421404682275, 0.7993311036789298, 0.7959866220735786]
+======== ROUND 4
+Time: 454.68206810951233
+Prompt: (Prompt(
+  prompt: # Task
+In the context of Arabic social media, assess whether this tweet employs irony or ridicule to communicate a message that diverges from its literal content. Irony or ridicule typically involves a calculated and nuanced use of words where the actual meaning contradicts the literal one, often employed to convey disapproval or mockery indirectly. Pay attention to overly dramatic claims, surprising juxtapositions, and allusions to cultural standards that could suggest sarcasm. Additionally, consider the overall tone and directness of the tweet to identify if the author intends to satirize or criticize by using seemingly positive expressions. Make sure not to mistake plain criticism or commentary for irony or sarcasm; strong opinions or contentious remarks alone do not inherently signify an ironic or sarcastic purpose.
+
+# Exemplar
+Text: ""بس حضرت الحلقة تمنيت اكون ربيع معذور من جمال نادين مش عارف يركز 😂😂 @nadinenjeim  #نادين_نسيب_نجيم""
+Label: No
+
+Text: ""الحزب اليمين المتطرف في ايطاليا فازوا طبعاً حزب بيرلسكوني " و ٩٠ ٪ منهم مع الخروج من الاتحاد الاوروبي  لكثيرة المهاجرين طبعاً ايطاليا " بوابة""
+Label: No
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: "اللي بيحب يروح السينما ياخد ورق الغRaCe ويشيلها للسينما 😂😂😂"
+Label: No
+
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "المدارس الخاصة بتاخد الفلوس وتخلينا نذاكر على شرفنا 😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂"
+Label: No
+
+Text: ""ودي احط صورة بوتن واكتب " اخرجوا المشركين من جزيرة العرب ". #مشاريع_صغيره""
+Label: No
+
+Text: "#الداخلية_بلطجية #جهلة_والقمع_حياتهم"
+Label: Yes
+
+Text: "محاكمة المدنيين عسكرياً مش مسألة حريات ده شيء يخص العدالة والحقوق العدالة بيتقال عليها حريات؟"
+Label: No
+
+Text: "@testuser123 انظروا الى هذا الفوز الكبير، ما أجمل الهزيمة!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(40), np.int64(45), np.int64(80), np.int64(53), np.int64(21), 90, 91, 92, 93, 94},
+  parent_score: 0.85,
+  score: 0.90625), Prompt(
+  prompt: # Task
+In the context of Arabic social media, assess whether this tweet employs irony or derision to express a meaning contrary to its literal content. Irony or derision typically involves a careful and nuanced use of language where the actual message runs counter to the words used, often to convey criticism or scorn indirectly. Pay attention to hyperbolic claims, surprising juxtapositions, and allusions to cultural standards that might suggest a sarcastic undertone. Additionally, consider the overall mood and directness of the post to decide if the author intends to ridicule or challenge using seemingly supportive phrasing. Be cautious not to mistake plain criticism or commentary for ironic or sarcastic content; unambiguous viewpoints or contentious assertions do not inherently signify ironic or sarcastic purpose.
+
+# Exemplar
+Text: ""بس حضرت الحلقة تمنيت اكون ربيع معذور من جمال نادين مش عارف يركز 😂😂 @nadinenjeim  #نادين_نسيب_نجيم""
+Label: No
+
+Text: ""الحزب اليمين المتطرف في ايطاليا فازوا طبعاً حزب بيرلسكوني " و ٩٠ ٪ منهم مع الخروج من الاتحاد الاوروبي  لكثيرة المهاجرين طبعاً ايطاليا " بوابة""
+Label: No
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: "اللي بيحب يروح السينما ياخد ورق الغRaCe ويشيلها للسينما 😂😂😂"
+Label: No
+
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "المدارس الخاصة بتاخد الفلوس وتخلينا نذاكر على شرفنا 😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂"
+Label: No
+
+Text: ""ودي احط صورة بوتن واكتب " اخرجوا المشركين من جزيرة العرب ". #مشاريع_صغيره""
+Label: No
+
+Text: "#الداخلية_بلطجية #جهلة_والقمع_حياتهم"
+Label: Yes
+
+Text: "محاكمة المدنيين عسكرياً مش مسألة حريات ده شيء يخص العدالة والحقوق العدالة بيتقال عليها حريات؟"
+Label: No
+
+Text: "@testuser123 انظروا الى هذا الفوز الكبير، ما أجمل الهزيمة!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(40), np.int64(45), np.int64(80), np.int64(53), np.int64(21), 90, 91, 92, 93, 94},
+  parent_score: 0.85,
+  score: 0.90625), Prompt(
+  prompt: # Task
+In the setting of Arabic social media, determine if this tweet utilizes irony or ridicule to convey a message that differs from its literal meaning. Irony or ridicule involves a deliberate and subtle use of language where the literal meaning is opposite to the intended meaning, often used to express disapproval or mockery without directly stating so. Look for exaggerated statements, unexpected contrasts, and references to cultural norms that may hint at sarcasm. Also, take into account the general tone and bluntness of the message to discern if the author aims to mock or critique through apparently affirmative wording. Ensure that you do not confuse straightforward criticism or commentary with irony or sarcasm; mere strong opinions or controversial statements do not necessarily imply ironic or sarcastic intent.
+
+# Exemplar
+Text: ""بس حضرت الحلقة تمنيت اكون ربيع معذور من جمال نادين مش عارف يركز 😂😂 @nadinenjeim  #نادين_نسيب_نجيم""
+Label: No
+
+Text: ""الحزب اليمين المتطرف في ايطاليا فازوا طبعاً حزب بيرلسكوني " و ٩٠ ٪ منهم مع الخروج من الاتحاد الاوروبي  لكثيرة المهاجرين طبعاً ايطاليا " بوابة""
+Label: No
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: "اللي بيحب يروح السينما ياخد ورق الغRaCe ويشيلها للسينما 😂😂😂"
+Label: No
+
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "المدارس الخاصة بتاخد الفلوس وتخلينا نذاكر على شرفنا 😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂"
+Label: No
+
+Text: ""ودي احط صورة بوتن واكتب " اخرجوا المشركين من جزيرة العرب ". #مشاريع_صغيره""
+Label: No
+
+Text: "#الداخلية_بلطجية #جهلة_والقمع_حياتهم"
+Label: Yes
+
+Text: "محاكمة المدنيين عسكرياً مش مسألة حريات ده شيء يخص العدالة والحقوق العدالة بيتقال عليها حريات؟"
+Label: No
+
+Text: "@testuser123 انظروا الى هذا الفوز الكبير، ما أجمل الهزيمة!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(40), np.int64(45), np.int64(80), np.int64(53), np.int64(21), 90, 91, 92, 93, 94},
+  parent_score: 0.85,
+  score: 0.90625), Prompt(
+  prompt: # Task
+In the realm of Arabic social media, analyze a tweet to identify if it uses irony or ridicule to convey a meaning other than its literal content. Note that irony frequently incorporates delicate exaggerations, stark contrasts, and cultural allusions that subtly criticize or mock without being overtly hostile. On the other hand, ridicule usually involves harsh, direct language aimed at demeaning or criticizing targets explicitly. To spot irony, pay attention to sophisticated exaggerations or surprising contrasts that point towards sarcasm, not just plain amusement. Ridicule can be recognized by its blatantly negative language and pointed critiques. Take into account both cultural background and word usage to understand the underlying purpose of the tweet. Also, scrutinize the general tone and chosen words to decide whether the tweet employs ostensibly benign or neutral language to mock or criticize. It’s essential to distinguish when cultural phrases are employed simply for descriptive or humorous purposes without carrying any ironic or derisive intentions.
+
+# Exemplar
+Text: "#نطلب_المجتمع_الدولي_اخراج_الشيعة_من_المدن_السنية في العراق وسوريا وتسليمهاالى اهلها السنة وعدم تغيير جغرافية المدن السنية وعلى الشيعةالخروج"
+Label: No
+
+Text: ""#بروباجندا | #الدنمارك تسحب مقاتلاتها بسبب قتلى #الجيش_السوريالتفاصيل على الرابط التالي https://t.co/EO7bxa8UaS""
+Label: No
+
+Text: ""كل هذا عشان جستن بيبر 😒 https://t.co/lbTPsvROIi""
+Label: No
+
+Text: ""تصادف رحيل د.صادق العظم مع ترحيل أهالي حلب الشرقية، وما عرفنا نقول له مع السلامة وين رايح، مع السلامة يا مسك فايح.""
+Label: No
+
+Text: "@famous_celebrity هذا الحساب الأصلي للشخصية الشهيرة! 😂😂😂"
+Label: Yes
+
+Text: "أهلاً بك في فنادقنا الفاخرة، حيث الخدمة الأسوأ والمطابخ الغير نظيفة! 🤪"
+Label: Yes
+
+Text: "البنات اللى بيقولو ألفاظ خارجه دول خصاره فيهم يتسموا بنات اصلاً!!"
+Label: No
+
+Text: "الناس بتقول العدالة الاجتماعية دي موجودة في بلدنا، لكن لما تروح تشوف بالعين المجردة مش شايف حاجة!"
+Label: Yes
+
+Text: "#العرص فى #نيويورك"
+Label: No
+
+Text: "لما إنت عارف مجموعة الشيوعيين بالإسم ابقى قدم فيهم بلاغ ولاتنشر الكلام على عواهنهكلامك واضح يارجل الحوار"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(101), 110, 111, 112, 113, 114, np.int64(52), np.int64(23), np.int64(95)},
+  parent_score: 0.8125,
+  score: 0.8958333333333334))
+Training accuracy: (0.90625, 0.90625, 0.90625, 0.8958333333333334)
+Validation accuracy: [0.8033333333333333, 0.82, 0.8133333333333334, 0.8233333333333334]
+Test accuracy: [0.822742474916388, 0.8060200668896321, 0.8160535117056856, 0.8260869565217391]
+======== ROUND 5
+Time: 396.01928997039795
+Prompt: (Prompt(
+  prompt: # Task
+In the realm of Arabic social media, determine if the tweet uses irony or sarcasm to deliver a message that differs from its literal content. These elements usually entail a nuanced linguistic style where the apparent meaning clashes significantly with the intended message, frequently used to express criticism or mockery discreetly. Search for traits like exaggeration, inconsistency, and cultural references that hint at a deeper meaning beneath the surface words. Also, take into account the general mood and purpose of the message. Distinguish between ironic or sarcastic statements and direct opinions or criticisms by looking for an underlying layer of meaning that questions established norms or expectations. Refrain from labeling plain critiques or contentious remarks as ironic or sarcastic unless they obviously contain a concealed, indirect critique wrapped in apparently positive or neutral language. Focus on how the text engages with or overturns widely accepted ideas or cultural norms to assess the existence of irony or sarcasm.
+
+# Exemplar
+Text: ""@AhmedSayed172 لا يوجد حياة بدون صداقة. الصداقة هي روح الحياة. بدونها، نصبح مجرد أشياء خامدة. 😶‍🌫️""
+Label: No
+
+Text: ""@alexandriamoham @BoAdly @YouTube أنت تافه ومجمع قاذورات وحاب أضحك عليك وعلى أمك قحبة بوتن ولو فيك ذرة رجولة وابن شرف كان ماتحط ابوك بوتن""
+Label: Yes
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: "يا ترى هل أصبحنا نتحدث بـ 'لغة السوشيال ميديا' أكثر مما نتكلم العربية؟! 😂"
+Label: Yes
+
+Text: "@MusicArabi اسلوب جستن بيبر ؟？？"
+Label: No
+
+Text: "RT @user: أكيد الحكومة بتصرف على الشعب! كل ما الناس تتألم يزيدوا العلاوات والحوافز!"
+Label: Yes
+
+Text: "يجب على الحكومة المصرية أن تركز على التطور الاقتصادي بدلاً من القمع السياسي"
+Label: No
+
+Text: "المادة 139: 16 معترض وبعد نقاش 8 دقائق يعاد التصويت على النص يعترض 4 فقط لمنع تأجيل 48 ساعة بحسب اللائحة! #سلق_الدستور"
+Label: Yes
+
+Text: "من المعيب أن نرى القادة السياسيين يمجدون العنف في الوقت الذي يدعون فيه السلام والتنمية #مصر"
+Label: No
+
+Text: "آه الناس حواليك بتحب مرسي وماله؟ بس مرسي ماهواش أغلى عند الناس دي من رزق عيالها ومن مستقبلها ولو حست إنه فاشل مش عارف يحل هتقلب عليه وعليك"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(99), 138, 139, 140, np.int64(45), 142, 141, np.int64(77), np.int64(11), np.int64(24)},
+  parent_score: 0.90625,
+  score: 0.90625), Prompt(
+  prompt: # Task
+In the realm of Arabic social media, analyze a tweet to identify if it uses irony or ridicule to convey a meaning other than its literal content. Note that irony often involves subtle exaggerations, stark contrasts, and cultural allusions that cleverly criticize or mock without being overtly hostile. On the other hand, ridicule involves harsh, direct language aimed at demeaning or criticizing targets explicitly. To spot irony, consider the use of sophisticated exaggerations or surprising contrasts that suggest sarcasm, not just plain amusement. However, ensure that the tone and context do not merely reflect cultural expressions of humor without ironic undertones.
+
+Ridicule can be recognized by its blatantly negative language and pointed critiques. When analyzing a tweet, take into account both cultural background and word usage to understand the underlying intent. Scrutinize the general tone and chosen words to decide whether the tweet employs ostensibly benign or neutral language to mock or criticize. Additionally, consider the broader context of the conversation and the typical usage of phrases within the local culture to avoid misinterpreting genuinely humorous or lighthearted expressions as ironic or derisive.
+
+To further refine your analysis, remember that irony often relies on shared knowledge or inside jokes between the speaker and the audience, while ridicule tends to be more straightforward in its criticism. By distinguishing these nuances, you can more accurately classify tweets as either employing irony or ridicule or neither.
+
+# Exemplar
+Text: ""الحزب اليمين المتطرف في ايطاليا فازوا طبعاً حزب بيرلسكوني " و ٩٠ ٪ منهم مع الخروج من الاتحاد الاوروبي  لكثرة المهاجرين طبعاً ايطاليا " بوابة""
+Label: No
+
+Text: ""@KhaledElSha3er ولد احمد الشيخ ينزل ومؤمن وبقيت الرجاله موجودين هتكفر ؟!"
+Label: No
+
+Text: ""@AhmedSayed172 لا يوجد حياة بدون صداقة. الصداقة هي روح الحياة. بدونها، نصبح مجرد أشياء خامدة. 😶‍🌫️""
+Label: No
+
+Text: "الحياة كلها هزل و لا شيء جدي يا صديقي"
+Label: Yes
+
+Text: ""#اوبر اسعار افضل من اوبر https://t.co/Tva6XDSSsi""
+Label: No
+
+Text: "هل تعلم أن أكل الفشار هو الحل الأفضل للقضاء على الجوع والحفاظ على الصحة؟ 🍿💪🏼"
+Label: No
+
+Text: "في ظل هذه الأوضاع المتردية، أقول بكل ثقة: نعم، الوضع الاقتصادي في البلاد رائع حقاً! #الاقتصاد_الصحي"
+Label: Yes
+
+Text: """إنه لمطر غزير سوف يهطل". | بوب ديلان https://t.co/LlgsSdgPGm""
+Label: No
+
+Text: ""ودي احط صورة بوتن واكتب " اخرجوا المشركين من جزيرة العرب ". #مشاريع_صغيره""
+Label: No
+
+Text: ""الله معنا في كل خطوة، نصره قريب، دعونا نثبت إيماننا بقوة""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(134), np.int64(105), 142, 143, 144, 145, 146, np.int64(84), np.int64(91), np.int64(93)},
+  parent_score: 0.8958333333333334,
+  score: 0.90625), Prompt(
+  prompt: # Task
+In the setting of Arabic social media platforms, analyze whether this tweet utilizes irony or ridicule to impart a meaning that goes beyond its literal words. Note that irony or ridicule is characterized by the purposeful contradiction between the stated and implied meanings, often employed to express criticism or mockery in a veiled manner. Identify signs such as hyperbolic claims, surprising juxtapositions, and culturally-specific allusions that may point towards sarcastic intent. Also, reflect on the overall tone, directness, and emotional undertones to ascertain if the tweet aims to mock or criticize using ostensibly affirming language. Factor in regional speech patterns, informal language, and local cultural references that can greatly affect how messages are interpreted. Be cautious not to mistake plain criticism or commentary for irony or sarcasm; strong views or contentious remarks alone do not automatically signify an ironic or sarcastic purpose. Focus particularly on idiomatic expressions and regional humor, as they are key elements in conveying the nuances of sarcastic or ironic tweets.
+
+# Exemplar
+Text: "كان اجمل من كل شيء،但现在一切都变了，这真是令人难过。"
+Label: No
+
+Text: ""@AhmedSayed172 لا يوجد حياة بدون صداقة. الصداقة هي روح الحياة. بدونها، نصبح مجرد أشياء خامدة. 😶‍🌫️""
+Label: No
+
+Text: "يا ترى هل أصبحنا نتحدث بـ 'لغة السوشيال ميديا' أكثر مما نتكلم العربية؟! 😂"
+Label: Yes
+
+Text: "يجب على الحكومة المصرية أن تركز على التطور الاقتصادي بدلاً من القمع السياسي"
+Label: No
+
+Text: "المادة 139: 16 معترض وبعد نقاش 8 دقائق يعاد التصويت على النص يعترض 4 فقط لمنع تأجيل 48 ساعة بحسب اللائحة! #سلق_الدستور"
+Label: Yes
+
+Text: "من المعيب أن نرى القادة السياسيين يمجدون العنف في الوقت الذي يدعون فيه السلام والتنمية #مصر"
+Label: No
+
+Text: "يعني فعلاً راح نعيش في السعادة والازدهار بعد كل تلك القوانين الجديدة!"
+Label: No
+
+Text: "@famous_celebrity هذا الحساب الأصلي للشخصية الشهيرة! 😂😂😂"
+Label: Yes
+
+Text: "صفعة لناشطة هي صفعة على وجوهنا جميعا، اعتداءات وحشية أمام مقر جماعة غير شرعية تخرج على القانون وتحكم لتفكيك الدولة، الإخوان في مواجهة مصر!"
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(6), 138, 139, 140, 141, 142, np.int64(111), np.int64(16), np.int64(14), np.int64(116)},
+  parent_score: 0.90625,
+  score: 0.8958333333333334), Prompt(
+  prompt: # Task
+In the context of Arabic social media, assess whether this tweet employs irony or derision to express a meaning contrary to its literal content. Irony or derision typically involves a careful and nuanced use of language where the actual message runs counter to the words used, often to convey criticism or scorn indirectly. Pay attention to hyperbolic claims, surprising juxtapositions, and allusions to cultural standards that might suggest a sarcastic undertone. Additionally, consider the overall mood and directness of the post to decide if the author intends to ridicule or challenge using seemingly supportive phrasing. Be cautious not to mistake plain criticism or commentary for ironic or sarcastic content; unambiguous viewpoints or contentious assertions do not inherently signify ironic or sarcastic purpose.
+
+# Exemplar
+Text: ""بس حضرت الحلقة تمنيت اكون ربيع معذور من جمال نادين مش عارف يركز 😂😂 @nadinenjeim  #نادين_نسيب_نجيم""
+Label: No
+
+Text: ""الحزب اليمين المتطرف في ايطاليا فازوا طبعاً حزب بيرلسكوني " و ٩٠ ٪ منهم مع الخروج من الاتحاد الاوروبي  لكثيرة المهاجرين طبعاً ايطاليا " بوابة""
+Label: No
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: "اللي بيحب يروح السينما ياخد ورق الغRaCe ويشيلها للسينما 😂😂😂"
+Label: No
+
+Text: "لأول مرة أرى شخصاً يفطر في رمضان علناً دون أن يخاف أو يشعر بالخجل! #إما_أنهم_صحيحون_أو_نحن_مخطئون"
+Label: Yes
+
+Text: "المدارس الخاصة بتاخد الفلوس وتخلينا نذاكر على شرفنا 😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂"
+Label: No
+
+Text: ""ودي احط صورة بوتن واكتب " اخرجوا المشركين من جزيرة العرب ". #مشاريع_صغيره""
+Label: No
+
+Text: "#الداخلية_بلطجية #جهلة_والقمع_حياتهم"
+Label: Yes
+
+Text: "محاكمة المدنيين عسكرياً مش مسألة حريات ده شيء يخص العدالة والحقوق العدالة بيتقال عليها حريات؟"
+Label: No
+
+Text: "@testuser123 انظروا الى هذا الفوز الكبير، ما أجمل الهزيمة!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(40), np.int64(45), np.int64(80), np.int64(53), np.int64(21), 90, 91, 92, 93, 94},
+  parent_score: 0.85,
+  score: 0.8958333333333334))
+Training accuracy: (0.90625, 0.90625, 0.8958333333333334, 0.8958333333333334)
+Validation accuracy: [0.8133333333333334, 0.8166666666666667, 0.79, 0.82]
+Test accuracy: [0.7959866220735786, 0.7959866220735786, 0.8093645484949833, 0.8093645484949833]
+======== ROUND 6
+Time: 470.12013363838196
+Prompt: (Prompt(
+  prompt: # Task
+In the realm of Arabic social media, determine if the tweet employs irony or sarcasm by identifying a clear contradiction between the literal meaning and the intended message, typically conveyed through exaggerated language or cultural allusions. Irony and sarcasm are characterized by a nuanced linguistic style where the apparent meaning clashes significantly with the intended message, often used to express criticism or mockery discreetly. Look for specific traits such as exaggeration, inconsistency, and cultural references that suggest a deeper meaning beneath the surface words. Additionally, consider the general mood and purpose of the message. Distinguish between ironic or sarcastic statements and direct opinions or criticisms by focusing on whether there is a concealed, indirect critique wrapped in apparently positive or neutral language. Refrain from labeling plain critiques or contentious remarks as ironic or sarcastic unless they clearly demonstrate a discrepancy between the surface words and the underlying meaning. Ensure that the text actively engages with or overturns widely accepted ideas or cultural norms to accurately assess the presence of irony or sarcasm.
+
+# Exemplar
+Text: ""@KhaledElSha3er ولد احمد الشيخ ينزل ومؤمن وبقيت الرجاله موجودين هتكفر ؟!"
+Label: No
+
+Text: "__ مش قصدي عليك يا سلامة"
+Label: No
+
+Text: "يا ترى هل أصبحنا نتحدث بـ 'لغة السوشيال ميديا' أكثر مما نتكلم العربية؟! 😂"
+Label: Yes
+
+Text: "عبدالله السلمان مال الخطر معاهم يخرج احسن منّك #ارحل انت الآخر"
+Label: No
+
+Text: ""انهى اروش ف مسكة السيجارة بوب ديلان ولا ديفيد بوى؟!""
+Label: No
+
+Text: "كلام الناس كله حق لكن الحق بيكون في القلب"
+Label: No
+
+Text: """إنه لمطر غزير سوف يهطل". | بوب ديلان https://t.co/LlgsSdgPGm""
+Label: No
+
+Text: "يا خبر اليوم! فلان تقدم لرئاسة البلدية وهو معروف بعدمهامشية للمصلحة العامة!"
+Label: No
+
+Text: "المذيع المحترم بتاع مصر ٢٥ بيقول فيه مظاهرات في شبرا بتهتف "بالطول بالعرض حنجيب الاسلام الارض" ثم يتسائل ما دخل الدين في صراع سياسي"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(160), 161, 162, 163, np.int64(105), np.int64(141), np.int64(144), np.int64(123), 159},
+  parent_score: 0.90625,
+  score: 0.90625), Prompt(
+  prompt: # Task
+In the realm of Arabic social media, assess if a tweet utilizes irony or derision to express a meaning beyond its literal content. Irony or derision often entails deliberate contrasts between explicit statements and implied intentions, employed to subtly communicate criticism or jest. Watch out for indicators like hyperbolic assertions, surprising analogies, and culturally-specific allusions that hint at the use of sarcasm. Take into account the general mood, bluntness, and underlying sentiments to discern if the tweet aims to mock or critique using ostensibly favorable wording. Give special consideration to regional linguistic styles, casual expressions, and local cultural references, as they play a crucial role in interpreting the message. Do not mistake outright criticism or discussion for irony or sarcasm; forceful viewpoints or contentious comments do not necessarily imply an ironic or mocking aim. Essential aspects in recognizing complex sarcastic or ironic tweets involve idioms and local humor. Furthermore, concentrate on situational hints embedded within the tweet, along with the wider dialogue it contributes to, to accurately pinpoint instances of irony or derision. Recognize that indirect or delicate forms of hidden criticism might not always exhibit obvious traits, necessitating meticulous scrutiny of implicit communication and cultural nuances.
+
+# Exemplar
+Text: ""فيه ناس بتقول إن الرياضة بتحسن صحتك، بصراحة دي أكيد مزحة! يعني تعب نفسك وتعرق وتشوف إنك مش هتنقص وزنك! هههه""
+Label: Yes
+
+Text: ""RT @hadeelOueiss: "اذا فزت فسأرمي بمنافستي في السجن " ليس السيسي او بشار الأسد بل المرشح لرئاسة الولايات المتحدة الأميركية دونالد ترامب.""
+Label: Yes
+
+Text: "في ظل هذه الأوضاع المتردية، أقول بكل ثقة: نعم، الوضع الاقتصادي في البلاد رائع حقاً! #الاقتصاد_الصحي"
+Label: Yes
+
+Text: "تَحَدَثوآ عَن أيْ شَيء ~ — #المدارس بالمجموع #والكليات بالواسطة #والجواز بالفلوس # والصحوبية بالمصلحة #"
+Label: No
+
+Text: "_ لو قرأتي ما كتبت هتلاقيني قولت إخلاء سبيل ومش براءة باين عليكي مناضلة جامدة"
+Label: No
+
+Text: "بيونسيه دي حلوه فاهشخ يا ديني"
+Label: No
+
+Text: ""واحد يسيب جوجل علشان يمسك شركة كريم و يعمل البيزنس بتاعه .. دا واحد مجنون فعلا و عنده تحدي ان لازم يعمل حاجة لنفسه مش لازم يكون موظف دايما""
+Label: No
+
+Text: "RT @random_user: #حالة_الอากาศ اليوم ماطر، انتبهوا من الانزلاقات! 🌦️🌧️"
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+Text: "انا فرحان جداً انك جيت، انت جاي تهيننا ولا شنو؟"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(134), np.int64(14), 177, 178, 179, 180, 181, np.int64(27), np.int64(30)},
+  parent_score: 0.8958333333333334,
+  score: 0.875), Prompt(
+  prompt: # Task
+On an Arabic social media platform, your job is to identify if a tweet uses irony or sarcasm to express a meaning opposite to its literal words. These rhetorical devices often employ complex language strategies where the explicit content significantly differs from the implied message, usually with a purpose to implicitly criticize or mock. When looking for these elements, pay attention to hyperbole, inconsistencies, and cultural references that hint at a secondary layer of meaning. However, avoid mistaking these for plain, unambiguous criticisms or opinions.
+
+To effectively distinguish irony and sarcasm, follow these pointers:
+1. Exaggeration: While hyperbole can signal sarcasm, it needs to be part of a larger critique or jest.
+2. Misalignment: If the literal reading of the statement conflicts with its cultural or situational background, this might point to sarcasm.
+3. Local Nuances: Grasping regional expressions and cultural subtleties is key to uncovering underlying implications.
+4. Emotional Tone: Assess the overarching sentiment of the message. Irony and sarcasm frequently include a hint of derision or ridicule.
+5. Surrounding Indicators: Consider hashtags, links, and other contextual details; they can reveal the true intention behind the message.
+6. Plain Assertions: Unadorned criticisms or comments should not be labeled as sarcastic or ironic without evident hidden connotations.
+
+Irony and sarcasm are known for undermining conventional thoughts or social standards in a discreet way. Make sure these traits are present when categorizing a statement as ironic or sarcastic. Refrain from interpreting routine criticisms or straightforward assertions as covertly sarcastic or ironic.
+
+# Exemplar
+Text: ""حلب وثوارها مخوزقي بوتن وجيشه الكافر ولن تسقط  وهي مقبرة الفرس المجوس والشيعه الخنازير https://t.co/kKeAsDe3vH""
+Label: Yes
+
+Text: "__ مش قصدي عليك يا سلامة"
+Label: No
+
+Text: ""الحياة جميلة ولكنها مليئة بالتحديات، مثل البحث عن موقف في المall أثناء العيد! 🛒💥""
+Label: No
+
+Text: "عبدالله السلمان مال الخطر معاهم يخرج احسن منّك #ارحل انت الآخر"
+Label: No
+
+Text: "في ظل هذه الأوضاع المتردية، أقول بكل ثقة: نعم، الوضع الاقتصادي في البلاد رائع حقاً! #الاقتصاد_الصحي"
+Label: Yes
+
+Text: "كلام الناس كله حق لكن الحق بيكون في القلب"
+Label: No
+
+Text: ""#غرد_كانك_في_التسعينياتكانتْ نوال الزٌغبي عمْ بيشلٌوها بالسيارة 💖""
+Label: No
+
+Text: "يا خبر اليوم! فلان تقدم لرئاسة البلدية وهو معروف بعدمهامشية للمصلحة العامة!"
+Label: No
+
+Text: "محاكمة المدنيين عسكرياً مش مسألة حريات ده شيء يخص العدالة والحقوق العدالة بيتقال عليها حريات؟"
+Label: No
+
+Text: "المذيع المحترم بتاع مصر ٢٥ بيقول فيه مظاهرات في شبرا بتهتف "بالطول بالعرض حنجيب الاسلام الارض" ثم يتسائل ما دخل الدين في صراع سياسي"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {160, 161, 162, 163, np.int64(134), np.int64(12), np.int64(45), np.int64(86), np.int64(90), 159},
+  parent_score: 0.90625,
+  score: 0.859375), Prompt(
+  prompt: # Task
+In the context of Arabic social media, evaluate whether a tweet employs irony or ridicule to convey a deeper meaning than its surface-level words. Irony or ridicule typically involves intentional contradictions between stated and implied meanings, used to articulate criticism or mockery subtly. Look for signs such as exaggerated claims, unexpected comparisons, and culturally-specific references that suggest the presence of sarcasm. Consider the overall tone, directness, and underlying emotions to determine if the tweet intends to mock or criticize through seemingly positive language. Pay close attention to regional speech patterns, informal language, and local cultural references, as these significantly influence message interpretation. Avoid confusing straightforward criticism or commentary with irony or sarcasm; strong opinions or controversial remarks do not inherently indicate an ironic or sarcastic purpose. Key elements in conveying nuanced sarcastic or ironic tweets include idiomatic expressions and regional humor. Additionally, focus on contextual clues within the tweet, considering the broader conversation it is part of, to ensure accurate identification of irony or ridicule. Be aware that indirect or subtle forms of veiled criticism may not always align with overt characteristics, thus requiring careful examination of implicit messaging and cultural subtleties.
+
+# Exemplar
+Text: ""فيه ناس بتقول إن الرياضة بتحسن صحتك، بصراحة دي أكيد مزحة! يعني تعب نفسك وتعرق وتشوف إنك مش هتنقص وزنك! هههه""
+Label: Yes
+
+Text: ""RT @hadeelOueiss: "اذا فزت فسأرمي بمنافستي في السجن " ليس السيسي او بشار الأسد بل المرشح لرئاسة الولايات المتحدة الأميركية دونالد ترامب.""
+Label: Yes
+
+Text: "في ظل هذه الأوضاع المتردية، أقول بكل ثقة: نعم، الوضع الاقتصادي في البلاد رائع حقاً! #الاقتصاد_الصحي"
+Label: Yes
+
+Text: "تَحَدَثوآ عَن أيْ شَيء ~ — #المدارس بالمجموع #والكليات بالواسطة #والجواز بالفلوس # والصحوبية بالمصلحة #"
+Label: No
+
+Text: "_ لو قرأتي ما كتبت هتلاقيني قولت إخلاء سبيل ومش براءة باين عليكي مناضلة جامدة"
+Label: No
+
+Text: "بيونسيه دي حلوه فاهشخ يا ديني"
+Label: No
+
+Text: ""واحد يسيب جوجل علشان يمسك شركة كريم و يعمل البيزنس بتاعه .. دا واحد مجنون فعلا و عنده تحدي ان لازم يعمل حاجة لنفسه مش لازم يكون موظف دايما""
+Label: No
+
+Text: "RT @random_user: #حالة_الอากาศ اليوم ماطر، انتبهوا من الانزلاقات! 🌦️🌧️"
+Label: No
+
+Text: ""#الزمن_الجميل #نوال_الزغبي   كانت تعحبني جدا انيقه وجميله واغانيها تهبل طفى بريقها الحين خساره 💔 https://t.co/fX2tkvWsea""
+Label: No
+
+Text: "انا فرحان جداً انك جيت، انت جاي تهيننا ولا شنو؟"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(134), np.int64(14), 177, 178, 179, 180, 181, np.int64(27), np.int64(30)},
+  parent_score: 0.8958333333333334,
+  score: 0.859375))
+Training accuracy: (0.90625, 0.875, 0.859375, 0.859375)
+Validation accuracy: [0.81, 0.8333333333333334, 0.82, 0.8233333333333334]
+Test accuracy: [0.7959866220735786, 0.8327759197324415, 0.8260869565217391, 0.822742474916388]

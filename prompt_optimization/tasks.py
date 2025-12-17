@@ -17,6 +17,10 @@ class DataProcessor(ABC):
         pass
 
     @abstractmethod
+    def get_validation_examples(self):
+        pass
+
+    @abstractmethod
     def get_test_examples(self):
         pass
 
@@ -32,9 +36,15 @@ class DataProcessor(ABC):
 
 
 def process_example(ex, predictor, prompt):
-    pred = predictor.inference(ex, prompt)
-    return ex, pred
+    try:
+        pred = predictor.inference(ex, prompt)
+        return ex, pred
+    except Exception as e:
+        return ex, 0
 
+def process_example_with_conf(ex, predictor, prompt):
+    pred, conf = predictor.inference_with_conf(ex, prompt)
+    return ex, pred, conf
 
 class ClassificationTask(DataProcessor):
 
@@ -49,10 +59,26 @@ class ClassificationTask(DataProcessor):
                 texts.append(ex['text'])
                 labels.append(ex['label'])
                 preds.append(pred)
-
         accuracy = accuracy_score(labels, preds)
         f1 = f1_score(labels, preds, average='micro')
-        return f1, texts, labels, preds
+        return accuracy, texts, labels, preds
+
+    def run_evaluate_with_conf(self, predictor, prompt, test_exs, n=100):
+        labels = []
+        preds = []
+        confs = []
+        texts = []
+        with concurrent.futures.ProcessPoolExecutor(max_workers=self.max_threads) as executor:
+            futures = [executor.submit(process_example_with_conf, ex, predictor, prompt) for ex in test_exs[:n]]
+            for i, future in tqdm(enumerate(concurrent.futures.as_completed(futures)), total=len(futures), desc='running evaluate'):
+                ex, pred, conf = future.result()
+                texts.append(ex['text'])
+                labels.append(ex['label'])
+                preds.append(pred)
+                confs.append(conf)
+        accuracy = accuracy_score(labels, preds)
+        f1 = f1_score(labels, preds, average='micro')
+        return accuracy, texts, labels, preds, confs
 
     def evaluate(self, predictor, prompt, test_exs, n=100):
         while True:
@@ -62,6 +88,15 @@ class ClassificationTask(DataProcessor):
             except (concurrent.futures.process.BrokenProcessPool, requests.exceptions.SSLError):
                 pass
         return f1, texts, labels, preds
+
+    def evaluate_with_conf(self, predictor, prompt, test_exs, n=100):
+        while True:
+            try:
+                f1, texts, labels, preds, confs = self.run_evaluate_with_conf(predictor, prompt, test_exs, n=n)
+                break
+            except (concurrent.futures.process.BrokenProcessPool, requests.exceptions.SSLError):
+                pass
+        return f1, texts, labels, preds, confs
 
 
 class BinaryClassificationTask(ClassificationTask):
@@ -109,6 +144,27 @@ class JailbreakBinaryTask(BinaryClassificationTask):
             text = ' '.join([x['text'].strip() for x in json.loads(convo) if x['role'] == 'user'])
             exs.append({'id': i, 'text': text, 'label': label})
         return exs
+    
+class ArSacarsmBinaryTask(BinaryClassificationTask):
+    categories = ['No', 'Yes']
+
+    def get_train_examples(self):
+        exs = []
+        for i, l in enumerate(open(self.data_dir + '/train.tsv')):
+            convo, label = l.strip().split('\t')
+            label = int(label)
+            text = ' '.join([x['text'].strip() for x in json.loads(convo) if x['role'] == 'user'])
+            exs.append({'id': i, 'text': text, 'label': label})
+        return exs
+    
+    def get_test_examples(self):
+        exs = []
+        for i, l in enumerate(open(self.data_dir + '/test.tsv')):
+            convo, label = l.strip().split('\t')
+            label = int(label)
+            text = ' '.join([x['text'].strip() for x in json.loads(convo) if x['role'] == 'user'])
+            exs.append({'id': i, 'text': text, 'label': label})
+        return exs
 
 
 class DefaultHFBinaryTask(BinaryClassificationTask):
@@ -119,6 +175,13 @@ class DefaultHFBinaryTask(BinaryClassificationTask):
         for i, row in enumerate(open(self.data_dir + '/train.jsonl')):
             row = json.loads(row.strip())
             exs.append({'id': f'train-{i}', 'label': row['label'], 'text': row['text']})
+        return exs
+    
+    def get_validation_examples(self):
+        exs = []
+        for i, row in enumerate(open(self.data_dir + '/validation.jsonl')):
+            row = json.loads(row.strip())
+            exs.append({'id': f'val-{i}', 'label': row['label'], 'text': row['text']})
         return exs
     
     def get_test_examples(self):

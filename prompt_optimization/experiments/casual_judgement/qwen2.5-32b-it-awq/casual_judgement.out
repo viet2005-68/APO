@@ -1,0 +1,142 @@
+{"task": "casual_judgement", "data_dir": "data/casual_judgement", "prompts": "prompts/casual_judgement.md", "out": "experiments/casual_judgement.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 12.168367385864258
+Prompt: ('# Task\nDetermine the causal relationships within the given situations, including indirect causes and the consequences of inaction. Analyze each scenario carefully, considering the sequence of events and how various factors contribute to the final outcome. Avoid making personal assumptions or biased judgments.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.7297297297297297),)
+Test accuracy: [0.6991150442477876]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 153.84826350212097
+Prompt: # Task
+Determine the causal relationships within the given situations, including indirect causes and the consequences of inaction. Analyze each scenario carefully, considering the sequence of events and how various factors contribute to the final outcome. Avoid making personal assumptions or biased judgments.
+
+# Here are some examples:
+Text: Long ago, when John was only 17 years old, he got a job working for a large manufacturing company. He started out working on an assembly line for minimum wage, but after a few years at the company, he was given a choice between two line manager positions. He could stay in the woodwork division, which is where he was currently working. Or he could move to the plastics division. John was unsure what to do because he liked working in the woodwork division, but he also thought it might be worth trying something different. He finally decided to switch to the plastics division and try something new. For the last 30 years, John has worked as a production line supervisor in the plastics division. After the first year there, the plastics division was moved to a different building with more space. Unfortunately, through the many years he worked there, John was exposed to asbestos, a highly carcinogenic substance. Most of the plastics division was quite safe, but the small part in which John worked was exposed to asbestos fibers. And now, although John has never smoked a cigarette in his life and otherwise lives a healthy lifestyle, he has a highly progressed and incurable case of lung cancer at the age of 50. John had seen three cancer specialists, all of whom confirmed the worst: that, except for pain, John's cancer was untreatable and he was absolutely certain to die from it very soon (the doctors estimated no more than 2 months). Yesterday, while John was in the hospital for a routine medical appointment, a new nurse accidentally administered the wrong medication to him. John was allergic to the drug and he immediately went into shock and experienced cardiac arrest (a heart attack). Doctors attempted to resuscitate him but he died minutes after the medication was administered. Did cancer cause John's premature death?
+Label: Yes
+Text: Louie is playing a game of basketball, and he made a bet with his friends who are watching on the sidelines. If Louie either makes a layup or makes a 3-point shot during the game, then he'll win $100. Just when the game started, Louie immediately got the ball at the 3-point line. He looked to the basket, focused his shot, and made a 3-point shot right at the beginning of the game. Louie and his friends continued playing, but as hard as he tried, Louie couldn't make another shot. And then right at the end of the game as the clock was winding down, Louie got the ball at the 3-point line. He looked to the basket, dribbled in, and then made a layup right at the buzzer. Then the game ended. Because Louie would win $100 if he either made a layup or a 3-point shot, Louie won $100. Did Louie win the $100 bet because he made the layup?
+Label: No
+Text: Joe was about to go pick up his child from a school in the suburbs. In the parking lot, he stopped to help a person who was injured while exercising. Because of this delay in picking up his son, Joe's neighbor, who waited 15 min for Joe to show up, took the child home in his car. On the way home, the neighbor's car was struck by a drunk driver. Joe's son, the only seriously hurt victim, received severe leg injuries. Joe's behavior was due to his generosity. Joe is the type of person who wants to do good things for others in need. Sometimes his friends are bothered by his seemingly excessive generosity and they even complain about it occasionally. But, after they got to know him better, they realized his generosity was a basic trait of his personality. Thus, it was something he could not help, even when he tried hard. Did the drunk driver cause injury to Joe's son?
+Label: Yes
+Text: Jim, Carol, Bob, and Nancy are researchers in a remote area, and they have a limited supply of electricity. Because of their limited supply, the electricity only comes on in the evenings from 8-9 PM, and they have to restrict who can use power on certain days. If three people turn on their lamps at the same time, the breaker will fail. The breaker will not fail if fewer people turn on their lamps at the same time. Jim, Carol, Bob, and Nancy are all allowed to use their lamps on Thursdays. This Thursday Jim turns on his lamp at 8 PM. Just then, Carol turns on her lamp, and Bob also turns on his lamp. Since three people turned on their lamps at the same time, the circuit breaker failed. Did Jim turning on his lamp at 8 PM cause the circuit breaker to fail?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7297297297297297 | Penalized score: 0.5715286416366555
+Test accuracy: 0.672566371681416
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 57.647350549697876
+Prompt: # Task
+Determine the causal relationships within the given situations, including indirect causes and the consequences of inaction. Analyze each scenario carefully, considering the sequence of events and how various factors contribute to the final outcome. Avoid making personal assumptions or biased judgments.
+
+# Here are some examples:
+Text: Long ago, when John was only 17 years old, he got a job working for a large manufacturing company. He started out working on an assembly line for minimum wage, but after a few years at the company, he was given a choice between two line manager positions. He could stay in the woodwork division, which is where he was currently working. Or he could move to the plastics division. John was unsure what to do because he liked working in the woodwork division, but he also thought it might be worth trying something different. He finally decided to switch to the plastics division and try something new. For the last 30 years, John has worked as a production line supervisor in the plastics division. After the first year there, the plastics division was moved to a different building with more space. Unfortunately, through the many years he worked there, John was exposed to asbestos, a highly carcinogenic substance. Most of the plastics division was quite safe, but the small part in which John worked was exposed to asbestos fibers. And now, although John has never smoked a cigarette in his life and otherwise lives a healthy lifestyle, he has a highly progressed and incurable case of lung cancer at the age of 50. John had seen three cancer specialists, all of whom confirmed the worst: that, except for pain, John's cancer was untreatable and he was absolutely certain to die from it very soon (the doctors estimated no more than 2 months). Yesterday, while John was in the hospital for a routine medical appointment, a new nurse accidentally administered the wrong medication to him. John was allergic to the drug and he immediately went into shock and experienced cardiac arrest (a heart attack). Doctors attempted to resuscitate him but he died minutes after the medication was administered. Did cancer cause John's premature death?
+Label: Yes
+Text: Louie is playing a game of basketball, and he made a bet with his friends who are watching on the sidelines. If Louie either makes a layup or makes a 3-point shot during the game, then he'll win $100. Just when the game started, Louie immediately got the ball at the 3-point line. He looked to the basket, focused his shot, and made a 3-point shot right at the beginning of the game. Louie and his friends continued playing, but as hard as he tried, Louie couldn't make another shot. And then right at the end of the game as the clock was winding down, Louie got the ball at the 3-point line. He looked to the basket, dribbled in, and then made a layup right at the buzzer. Then the game ended. Because Louie would win $100 if he either made a layup or a 3-point shot, Louie won $100. Did Louie win the $100 bet because he made the layup?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will turn on when the people who work at the travel agency or the people who work in the design studio arrive for work. Each office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45am, but the design studio employees almost always arrive at 10 am. Today, the travel agency employees arrived at 8:45 am. Unexpectedly, the design studio employees also arrived at 8:45 am to meet a deadline. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Jim, Carol, Bob, and Nancy are researchers in a remote area, and they have a limited supply of electricity. Because of their limited supply, the electricity only comes on in the evenings from 8-9 PM, and they have to restrict who can use power on certain days. If three people turn on their lamps at the same time, the breaker will fail. The breaker will not fail if fewer people turn on their lamps at the same time. Jim, Carol, Bob, and Nancy are all allowed to use their lamps on Thursdays. This Thursday Jim turns on his lamp at 8 PM. Just then, Carol turns on her lamp, and Bob also turns on his lamp. Since three people turned on their lamps at the same time, the circuit breaker failed. Did Jim turning on his lamp at 8 PM cause the circuit breaker to fail?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7297297297297297 | Penalized score: 0.5740139027597656
+Test accuracy: 0.6548672566371682
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 70.96793389320374
+Prompt: # Task
+Determine the causal relationships within the given situations, including indirect causes and the consequences of inaction. Analyze each scenario carefully, considering the sequence of events and how various factors contribute to the final outcome. Avoid making personal assumptions or biased judgments.
+
+# Here are some examples:
+Text: Long ago, when John was only 17 years old, he got a job working for a large manufacturing company. He started out working on an assembly line for minimum wage, but after a few years at the company, he was given a choice between two line manager positions. He could stay in the woodwork division, which is where he was currently working. Or he could move to the plastics division. John was unsure what to do because he liked working in the woodwork division, but he also thought it might be worth trying something different. He finally decided to switch to the plastics division and try something new. For the last 30 years, John has worked as a production line supervisor in the plastics division. After the first year there, the plastics division was moved to a different building with more space. Unfortunately, through the many years he worked there, John was exposed to asbestos, a highly carcinogenic substance. Most of the plastics division was quite safe, but the small part in which John worked was exposed to asbestos fibers. And now, although John has never smoked a cigarette in his life and otherwise lives a healthy lifestyle, he has a highly progressed and incurable case of lung cancer at the age of 50. John had seen three cancer specialists, all of whom confirmed the worst: that, except for pain, John's cancer was untreatable and he was absolutely certain to die from it very soon (the doctors estimated no more than 2 months). Yesterday, while John was in the hospital for a routine medical appointment, a new nurse accidentally administered the wrong medication to him. John was allergic to the drug and he immediately went into shock and experienced cardiac arrest (a heart attack). Doctors attempted to resuscitate him but he died minutes after the medication was administered. Did cancer cause John's premature death?
+Label: Yes
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will turn on when the people who work at the travel agency or the people who work in the design studio arrive for work. Each office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45am, but the design studio employees almost always arrive at 10 am. Today, the travel agency employees arrived at 8:45 am. Unexpectedly, the design studio employees also arrived at 8:45 am to meet a deadline. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Jim, Carol, Bob, and Nancy are researchers in a remote area, and they have a limited supply of electricity. Because of their limited supply, the electricity only comes on in the evenings from 8-9 PM, and they have to restrict who can use power on certain days. If three people turn on their lamps at the same time, the breaker will fail. The breaker will not fail if fewer people turn on their lamps at the same time. Jim, Carol, Bob, and Nancy are all allowed to use their lamps on Thursdays. This Thursday Jim turns on his lamp at 8 PM. Just then, Carol turns on her lamp, and Bob also turns on his lamp. Since three people turned on their lamps at the same time, the circuit breaker failed. Did Jim turning on his lamp at 8 PM cause the circuit breaker to fail?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7432432432432432 | Penalized score: 0.5856161704335887
+Test accuracy: 0.6548672566371682
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 70.5754668712616
+Prompt: # Task
+Determine the causal relationships within the given situations, including indirect causes and the consequences of inaction. Analyze each scenario carefully, considering the sequence of events and how various factors contribute to the final outcome. Avoid making personal assumptions or biased judgments.
+
+# Here are some examples:
+Text: Louie is playing a game of basketball, and he made a bet with his friends who are watching on the sidelines. If Louie either makes a layup or makes a 3-point shot during the game, then he'll win $100. Just when the game started, Louie immediately got the ball at the 3-point line. He looked to the basket, focused his shot, and made a 3-point shot right at the beginning of the game. Louie and his friends continued playing, but as hard as he tried, Louie couldn't make another shot. And then right at the end of the game as the clock was winding down, Louie got the ball at the 3-point line. He looked to the basket, dribbled in, and then made a layup right at the buzzer. Then the game ended. Because Louie would win $100 if he either made a layup or a 3-point shot, Louie won $100. Did Louie win the $100 bet because he made the layup?
+Label: No
+Text: Joe was about to go pick up his child from a school in the suburbs. In the parking lot, he stopped to help a person who was injured while exercising. Because of this delay in picking up his son, Joe's neighbor, who waited 15 min for Joe to show up, took the child home in his car. On the way home, the neighbor's car was struck by a drunk driver. Joe's son, the only seriously hurt victim, received severe leg injuries. Joe's behavior was due to his generosity. Joe is the type of person who wants to do good things for others in need. Sometimes his friends are bothered by his seemingly excessive generosity and they even complain about it occasionally. But, after they got to know him better, they realized his generosity was a basic trait of his personality. Thus, it was something he could not help, even when he tried hard. Did the drunk driver cause injury to Joe's son?
+Label: Yes
+Text: Jim, Carol, Bob, and Nancy are researchers in a remote area, and they have a limited supply of electricity. Because of their limited supply, the electricity only comes on in the evenings from 8-9 PM, and they have to restrict who can use power on certain days. If three people turn on their lamps at the same time, the breaker will fail. The breaker will not fail if fewer people turn on their lamps at the same time. Jim, Carol, Bob, and Nancy are all allowed to use their lamps on Thursdays. This Thursday Jim turns on his lamp at 8 PM. Just then, Carol turns on her lamp, and Bob also turns on his lamp. Since three people turned on their lamps at the same time, the circuit breaker failed. Did Jim turning on his lamp at 8 PM cause the circuit breaker to fail?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7567567567567568 | Penalized score: 0.603764969403927
+Test accuracy: 0.6991150442477876
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 69.38061165809631
+Prompt: # Task
+Determine the causal relationships within the given situations, including indirect causes and the consequences of inaction. Analyze each scenario carefully, considering the sequence of events and how various factors contribute to the final outcome. Avoid making personal assumptions or biased judgments.
+
+# Here are some examples:
+Text: Louie is playing a game of basketball, and he made a bet with his friends who are watching on the sidelines. If Louie either makes a layup or makes a 3-point shot during the game, then he'll win $100. Just when the game started, Louie immediately got the ball at the 3-point line. He looked to the basket, focused his shot, and made a 3-point shot right at the beginning of the game. Louie and his friends continued playing, but as hard as he tried, Louie couldn't make another shot. And then right at the end of the game as the clock was winding down, Louie got the ball at the 3-point line. He looked to the basket, dribbled in, and then made a layup right at the buzzer. Then the game ended. Because Louie would win $100 if he either made a layup or a 3-point shot, Louie won $100. Did Louie win the $100 bet because he made the layup?
+Label: No
+Text: Joe was about to go pick up his child from a school in the suburbs. In the parking lot, he stopped to help a person who was injured while exercising. Because of this delay in picking up his son, Joe's neighbor, who waited 15 min for Joe to show up, took the child home in his car. On the way home, the neighbor's car was struck by a drunk driver. Joe's son, the only seriously hurt victim, received severe leg injuries. Joe's behavior was due to his generosity. Joe is the type of person who wants to do good things for others in need. Sometimes his friends are bothered by his seemingly excessive generosity and they even complain about it occasionally. But, after they got to know him better, they realized his generosity was a basic trait of his personality. Thus, it was something he could not help, even when he tried hard. Did the drunk driver cause injury to Joe's son?
+Label: Yes
+Text: Jim, Carol, Bob, and Nancy are researchers in a remote area, and they have a limited supply of electricity. Because of their limited supply, the electricity only comes on in the evenings from 8-9 PM, and they have to restrict who can use power on certain days. If three people turn on their lamps at the same time, the breaker will fail. The breaker will not fail if fewer people turn on their lamps at the same time. Jim, Carol, Bob, and Nancy are all allowed to use their lamps on Thursdays. This Thursday Jim turns on his lamp at 8 PM. Just then, Carol turns on her lamp, and Bob also turns on his lamp. Since three people turned on their lamps at the same time, the circuit breaker failed. Did Jim turning on his lamp at 8 PM cause the circuit breaker to fail?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7567567567567568 | Penalized score: 0.603764969403927
+Test accuracy: 0.6991150442477876
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 47.142657995224
+Prompt: # Task
+Determine the causal relationships within the given situations, including indirect causes and the consequences of inaction. Analyze each scenario carefully, considering the sequence of events and how various factors contribute to the final outcome. Avoid making personal assumptions or biased judgments.
+
+# Here are some examples:
+Text: Louie is playing a game of basketball, and he made a bet with his friends who are watching on the sidelines. If Louie either makes a layup or makes a 3-point shot during the game, then he'll win $100. Just when the game started, Louie immediately got the ball at the 3-point line. He looked to the basket, focused his shot, and made a 3-point shot right at the beginning of the game. Louie and his friends continued playing, but as hard as he tried, Louie couldn't make another shot. And then right at the end of the game as the clock was winding down, Louie got the ball at the 3-point line. He looked to the basket, dribbled in, and then made a layup right at the buzzer. Then the game ended. Because Louie would win $100 if he either made a layup or a 3-point shot, Louie won $100. Did Louie win the $100 bet because he made the layup?
+Label: No
+Text: Joe was about to go pick up his child from a school in the suburbs. In the parking lot, he stopped to help a person who was injured while exercising. Because of this delay in picking up his son, Joe's neighbor, who waited 15 min for Joe to show up, took the child home in his car. On the way home, the neighbor's car was struck by a drunk driver. Joe's son, the only seriously hurt victim, received severe leg injuries. Joe's behavior was due to his generosity. Joe is the type of person who wants to do good things for others in need. Sometimes his friends are bothered by his seemingly excessive generosity and they even complain about it occasionally. But, after they got to know him better, they realized his generosity was a basic trait of his personality. Thus, it was something he could not help, even when he tried hard. Did the drunk driver cause injury to Joe's son?
+Label: Yes
+Text: Jim, Carol, Bob, and Nancy are researchers in a remote area, and they have a limited supply of electricity. Because of their limited supply, the electricity only comes on in the evenings from 8-9 PM, and they have to restrict who can use power on certain days. If three people turn on their lamps at the same time, the breaker will fail. The breaker will not fail if fewer people turn on their lamps at the same time. Jim, Carol, Bob, and Nancy are all allowed to use their lamps on Thursdays. This Thursday Jim turns on his lamp at 8 PM. Just then, Carol turns on her lamp, and Bob also turns on his lamp. Since three people turned on their lamps at the same time, the circuit breaker failed. Did Jim turning on his lamp at 8 PM cause the circuit breaker to fail?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7567567567567568 | Penalized score: 0.603764969403927
+Test accuracy: 0.7079646017699115

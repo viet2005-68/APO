@@ -1,0 +1,142 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies-1.out", "max_threads": 96, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 50, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 9.24323582649231
+Prompt: ('# Task\nDetermine whether the final person mentioned is telling the truth.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.66),)
+Test accuracy: [0.6266666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 77.6919493675232
+Prompt: # Task
+Determine whether the final person mentioned is telling the truth.
+
+# Here are some examples:
+Text: Question: Shalonda lies. Jaymie says Shalonda tells the truth. Raymond says Jaymie lies. Audrie says Raymond lies. Sherrie says Audrie lies. Does Sherrie tell the truth?
+Label: Yes
+Text: Question: Fidel lies. Millicent says Fidel tells the truth. Crista says Millicent lies. Leda says Crista lies. Tamika says Leda tells the truth. Does Tamika tell the truth?
+Label: No
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.72 | Penalized score: 0.5063818056954752
+Test accuracy: 0.7066666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 42.31648063659668
+Prompt: # Task
+Determine whether the final person mentioned is telling the truth.
+
+# Here are some examples:
+Text: Question: Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?
+Label: Yes
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+Text: Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75 | Penalized score: 0.5202141160155999
+Test accuracy: 0.7066666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 35.53963303565979
+Prompt: # Task
+Determine whether the final person mentioned is telling the truth.
+
+# Here are some examples:
+Text: Question: Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?
+Label: Yes
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+Text: Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75 | Penalized score: 0.5202141160155999
+Test accuracy: 0.7066666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 23.085107803344727
+Prompt: # Task
+Determine whether the final person mentioned is telling the truth.
+
+# Here are some examples:
+Text: Question: Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?
+Label: Yes
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+Text: Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.74 | Penalized score: 0.5234260570998748
+Test accuracy: 0.7266666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 29.110389232635498
+Prompt: # Task
+Determine whether the final person mentioned is telling the truth.
+
+# Here are some examples:
+Text: Question: Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?
+Label: Yes
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+Text: Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.74 | Penalized score: 0.5234260570998748
+Test accuracy: 0.7333333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 35.2800087928772
+Prompt: # Task
+Determine whether the final person mentioned is telling the truth.
+
+# Here are some examples:
+Text: Question: Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?
+Label: Yes
+Text: Question: Willian lies. Fidel says Willian tells the truth. Crista says Fidel tells the truth. Inga says Crista tells the truth. Dallas says Inga lies. Does Dallas tell the truth?
+Label: Yes
+Text: Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.74 | Penalized score: 0.5234260570998748
+Test accuracy: 0.7333333333333333

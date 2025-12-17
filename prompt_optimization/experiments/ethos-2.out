@@ -1,0 +1,157 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos-2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 1, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.779569387435913
+Prompt: ('# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.83),)
+Test accuracy: [0.8266666666666667]
+======== ROUND 1
+Time: 96.70474410057068
+Prompt: ('# Task\nSure! Here\'s a variation of the instruction that retains the same semantic meaning:\n\n**Input:** Determine whether the text should be labeled "Yes" if it includes hate speech directed at an individual or group due to race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language but does not specifically target a group or person with hate.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning:\n\n---\n\n**Instruction:** Determine whether the given text should be labeled "Yes" if it includes hate speech directed at an individual or group based on race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language, but does not specifically target a group or individual with hate speech.\n\n**Examples:**\n- "Why the fuck would you ask Trump?" → "No" (offensive in tone but not hate speech)\n- "Should have been sterilised upon arrival." → "Yes" (clearly hateful and directed at a group)\n- "Id beat the fuck out of his ass if he wasnt an actor" → "No" (aggressive but not hate speech)\n\n--- \n\nLet me know if you\'d like further variations or adjustments!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInstruction Variation:\n\nDetermine whether the given text should be labeled as "Yes" if it includes hate speech directed at an individual or group based on race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label as "No" if the text includes aggressive, offensive, or strong language but does not specifically target a group or person with hate speech.\n\nExamples:\n- "Why the fuck would you ask Trump?" → "No" (aggressive language but not hate speech)\n- "Should have been sterilised upon arrival." → "Yes" (clearly hateful and directed at a group)\n- "I\'d beat the fuck out of his ass if he wasn\'t an actor" → "No" (violent in tone but not hate speech)\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that preserves the original semantic meaning:\n\n---\n\n**Instruction:** Determine whether the given text should be labeled "Yes" if it includes hate speech directed at an individual or group based on race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is hostile, vulgar, or uses harsh language, but does not specifically target a group or person with hate speech.\n\n**Examples:**  \n- "Why the fuck would you ask Trump?" → "No" (offensive language but not hate speech)  \n- "Should have been sterilised upon arrival." → "Yes" (hateful and directed at a group)  \n- "Id beat the fuck out of his ass if he wasnt an actor" → "No" (aggressive but not hate speech)  \n\n--- \n\nLet me know if you\'d like further variations or adjustments!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.89), np.float64(0.88), np.float64(0.88), np.float64(0.88))
+Test accuracy: [0.8533333333333334, 0.8466666666666667, 0.86, 0.84]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 34.87739181518555
+Prompt: # Task
+Sure! Here's a variation of the instruction that retains the same semantic meaning:
+
+**Input:** Determine whether the text should be labeled "Yes" if it includes hate speech directed at an individual or group due to race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language but does not specifically target a group or person with hate.
+
+# Here are some examples:
+Text: Has anyone cried in front of their parents and feel totally ashamed and invaded afterwards ?
+Label: No
+Text: Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass.
+Label: No
+Text: Indians are shit but burgers only have broken English and ebonics to learn and still fail. Second thread in a row where a burger can't figure out you're and your
+Label: Yes
+Text: you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6917517796778722
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 18.29358720779419
+Prompt: # Task
+Sure! Here's a variation of the instruction that retains the same semantic meaning:
+
+**Input:** Determine whether the text should be labeled "Yes" if it includes hate speech directed at an individual or group due to race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language but does not specifically target a group or person with hate.
+
+# Here are some examples:
+Text: So how long have you lived in your mother's basement?
+Label: No
+Text: Depends on whether or not Ryan Reynolds is in the room
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6926077507693471
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 18.41853928565979
+Prompt: # Task
+Sure! Here's a variation of the instruction that retains the same semantic meaning:
+
+**Input:** Determine whether the text should be labeled "Yes" if it includes hate speech directed at an individual or group due to race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language but does not specifically target a group or person with hate.
+
+# Here are some examples:
+Text: So how long have you lived in your mother's basement?
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: Syria war is over they can go back its safe now.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.89 | Penalized score: 0.7128269977518636
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 16.97818422317505
+Prompt: # Task
+Sure! Here's a variation of the instruction that retains the same semantic meaning:
+
+**Input:** Determine whether the text should be labeled "Yes" if it includes hate speech directed at an individual or group due to race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language but does not specifically target a group or person with hate.
+
+# Here are some examples:
+Text: So how long have you lived in your mother's basement?
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+Text: Syria war is over they can go back its safe now.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.89 | Penalized score: 0.7128269977518636
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 20.02246642112732
+Prompt: # Task
+Sure! Here's a variation of the instruction that retains the same semantic meaning:
+
+**Input:** Determine whether the text should be labeled "Yes" if it includes hate speech directed at an individual or group due to race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language but does not specifically target a group or person with hate.
+
+# Here are some examples:
+Text: ive been trying to figure out which common american voter is more uniformed republican or democrat for years democrats do any of you have the slightest clue that obama has deported more mexicans than any other president in history
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: Is this world filled by those stupid female bitches?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.9 | Penalized score: 0.7276100148524993
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 13.541326999664307
+Prompt: # Task
+Sure! Here's a variation of the instruction that retains the same semantic meaning:
+
+**Input:** Determine whether the text should be labeled "Yes" if it includes hate speech directed at an individual or group due to race, religion, ethnicity, gender, sexual orientation, disability, or other protected characteristics. Label it "No" if the text is harsh, offensive, or uses strong language but does not specifically target a group or person with hate.
+
+# Here are some examples:
+Text: ive been trying to figure out which common american voter is more uniformed republican or democrat for years democrats do any of you have the slightest clue that obama has deported more mexicans than any other president in history
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: Is this world filled by those stupid female bitches?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.9 | Penalized score: 0.7276100148524993
+Test accuracy: 0.9

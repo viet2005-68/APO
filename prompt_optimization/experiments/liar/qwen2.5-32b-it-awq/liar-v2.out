@@ -1,0 +1,222 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 24.05837392807007
+Prompt: ('# Task\nReview the given statement by rigorously analyzing its content, verifying its factual accuracy, and comparing it against established knowledge. Disregard aspects such as the speaker’s occupation, location, political stance, and situational context. Assess if the statement is supported by verifiable facts from credible, publicly available resources, recognized research findings, or expert insights. Also, evaluate the logical integrity and cohesion of the statement in relation to other relevant claims and occurrences. Reach a conclusion about the statement’s truthfulness based on the robustness of the evidence found, and determine if the statement should be considered fabricated (Yes) or truly accurate (No).\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.61328125,)
+Test accuracy: [0.6464208242950108]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 146.81514286994934
+Prompt: # Task
+Review the given statement by rigorously analyzing its content, verifying its factual accuracy, and comparing it against established knowledge. Disregard aspects such as the speaker’s occupation, location, political stance, and situational context. Assess if the statement is supported by verifiable facts from credible, publicly available resources, recognized research findings, or expert insights. Also, evaluate the logical integrity and cohesion of the statement in relation to other relevant claims and occurrences. Reach a conclusion about the statement’s truthfulness based on the robustness of the evidence found, and determine if the statement should be considered fabricated (Yes) or truly accurate (No).
+
+# Here are some examples:
+Text: Statement: Says the Congressional Budget Office estimates a cap-and-trade program would cost the average family the equivalent of a postage stamp a day.
+Job title: 
+State: 
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: Says Scott Walker rejected legislation to make college loan payments tax deductible and the result was to raise taxes on students.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech
+Label: Yes
+Text: Statement: Ben Franklin once quipped that only two things in life were certain: death and taxes. I think even he didnt envision that the tax man would visit on the day of your death.
+Job title: State representative
+State: Ohio
+Party: republican
+Context: a speech in the Ohio House of Representatives
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65234375 | Penalized score: 0.4791787756945324
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 143.9266803264618
+Prompt: # Task
+Review the given statement by rigorously analyzing its content, verifying its factual accuracy, and comparing it against established knowledge. Disregard aspects such as the speaker’s occupation, location, political stance, and situational context. Assess if the statement is supported by verifiable facts from credible, publicly available resources, recognized research findings, or expert insights. Also, evaluate the logical integrity and cohesion of the statement in relation to other relevant claims and occurrences. Reach a conclusion about the statement’s truthfulness based on the robustness of the evidence found, and determine if the statement should be considered fabricated (Yes) or truly accurate (No).
+
+# Here are some examples:
+Text: Statement: Says the Congressional Budget Office estimates a cap-and-trade program would cost the average family the equivalent of a postage stamp a day.
+Job title: 
+State: 
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: Says Scott Walker rejected legislation to make college loan payments tax deductible and the result was to raise taxes on students.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech
+Label: Yes
+Text: Statement: Ben Franklin once quipped that only two things in life were certain: death and taxes. I think even he didnt envision that the tax man would visit on the day of your death.
+Job title: State representative
+State: Ohio
+Party: republican
+Context: a speech in the Ohio House of Representatives
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66796875 | Penalized score: 0.4948037756945324
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 130.37779211997986
+Prompt: # Task
+Review the given statement by rigorously analyzing its content, verifying its factual accuracy, and comparing it against established knowledge. Disregard aspects such as the speaker’s occupation, location, political stance, and situational context. Assess if the statement is supported by verifiable facts from credible, publicly available resources, recognized research findings, or expert insights. Also, evaluate the logical integrity and cohesion of the statement in relation to other relevant claims and occurrences. Reach a conclusion about the statement’s truthfulness based on the robustness of the evidence found, and determine if the statement should be considered fabricated (Yes) or truly accurate (No).
+
+# Here are some examples:
+Text: Statement: Says the Congressional Budget Office estimates a cap-and-trade program would cost the average family the equivalent of a postage stamp a day.
+Job title: 
+State: 
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: Says Scott Walker rejected legislation to make college loan payments tax deductible and the result was to raise taxes on students.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech
+Label: Yes
+Text: Statement: Ben Franklin once quipped that only two things in life were certain: death and taxes. I think even he didnt envision that the tax man would visit on the day of your death.
+Job title: State representative
+State: Ohio
+Party: republican
+Context: a speech in the Ohio House of Representatives
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.71875 | Penalized score: 0.5455850256945324
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 142.6908392906189
+Prompt: # Task
+Review the given statement by rigorously analyzing its content, verifying its factual accuracy, and comparing it against established knowledge. Disregard aspects such as the speaker’s occupation, location, political stance, and situational context. Assess if the statement is supported by verifiable facts from credible, publicly available resources, recognized research findings, or expert insights. Also, evaluate the logical integrity and cohesion of the statement in relation to other relevant claims and occurrences. Reach a conclusion about the statement’s truthfulness based on the robustness of the evidence found, and determine if the statement should be considered fabricated (Yes) or truly accurate (No).
+
+# Here are some examples:
+Text: Statement: Says Oregons high minimum wage is the reason why by 2011, Oregons restaurants employed an average of only 13.8 workers, or 2.6 fewer employees than they did before the states minimum wage began rising above the federal level in 1997.
+Job title: 
+State: New Jersey
+Party: organization
+Context: a U.S. Senate hearing 
+Label: Yes
+Text: Statement: Says Kay Bailey Hutchison voted for sanctuary cities.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a debate.
+Label: Yes
+Text: Statement: Says carpet bombing means bombing not a city, but the location of the troops, with embedded special forces to direct the air power.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a Republican presidential debate in Las Vegas
+Label: Yes
+Text: Statement: Says the Texas Education Agency follows up to make sure undocumented immigrants paying in-state tuition at Texas colleges are applying for permanent residency.
+Job title: Governor
+State: Texas
+Party: republican
+Context: a debate
+Label: Yes
+Text: Statement: You cant build a Christian church in Saudi Arabia.
+Job title: Radio/TV host
+State: 
+Party: none
+Context: a broadcast the Sean Hannity radio show
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.63671875 | Penalized score: 0.4365443318135924
+Test accuracy: 0.7114967462039046
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 145.34987211227417
+Prompt: # Task
+Review the given statement by rigorously analyzing its content, verifying its factual accuracy, and comparing it against established knowledge. Disregard aspects such as the speaker’s occupation, location, political stance, and situational context. Assess if the statement is supported by verifiable facts from credible, publicly available resources, recognized research findings, or expert insights. Also, evaluate the logical integrity and cohesion of the statement in relation to other relevant claims and occurrences. Reach a conclusion about the statement’s truthfulness based on the robustness of the evidence found, and determine if the statement should be considered fabricated (Yes) or truly accurate (No).
+
+# Here are some examples:
+Text: Statement: The Ukraine Orange Revolution in 2004 was the first color revolution.
+Job title: Editor, the Weekly Standard
+State: Washington, D.C.
+Party: none
+Context: comments on ABC's "This Week"
+Label: Yes
+Text: Statement: Says Scott Walker rejected legislation to make college loan payments tax deductible and the result was to raise taxes on students.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech
+Label: Yes
+Text: Statement: Ben Franklin once quipped that only two things in life were certain: death and taxes. I think even he didnt envision that the tax man would visit on the day of your death.
+Job title: State representative
+State: Ohio
+Party: republican
+Context: a speech in the Ohio House of Representatives
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6822916666666666 | Penalized score: 0.5238794505401021
+Test accuracy: 0.6941431670281996
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 238.6973340511322
+Prompt: # Task
+Review the given statement by rigorously analyzing its content, verifying its factual accuracy, and comparing it against established knowledge. Disregard aspects such as the speaker’s occupation, location, political stance, and situational context. Assess if the statement is supported by verifiable facts from credible, publicly available resources, recognized research findings, or expert insights. Also, evaluate the logical integrity and cohesion of the statement in relation to other relevant claims and occurrences. Reach a conclusion about the statement’s truthfulness based on the robustness of the evidence found, and determine if the statement should be considered fabricated (Yes) or truly accurate (No).
+
+# Here are some examples:
+Text: Statement: The Ukraine Orange Revolution in 2004 was the first color revolution.
+Job title: Editor, the Weekly Standard
+State: Washington, D.C.
+Party: none
+Context: comments on ABC's "This Week"
+Label: Yes
+Text: Statement: Says Scott Walker rejected legislation to make college loan payments tax deductible and the result was to raise taxes on students.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: a speech
+Label: Yes
+Text: Statement: Ben Franklin once quipped that only two things in life were certain: death and taxes. I think even he didnt envision that the tax man would visit on the day of your death.
+Job title: State representative
+State: Ohio
+Party: republican
+Context: a speech in the Ohio House of Representatives
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6614583333333334 | Penalized score: 0.5030461172067688
+Test accuracy: 0.6963123644251626

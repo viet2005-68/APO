@@ -8,7 +8,13 @@ import concurrent.futures
 
 def predict_on_example(inputs):
     ex, predictor, prompt = inputs
-    pred = predictor.inference(ex, prompt)
+    try:
+        pred = predictor.inference(ex, prompt)
+    except Exception as e:
+        # You can log or ignore the error
+        print(f"Error in predict_on_example: {e}")
+        pred = None   # Mark prediction as failed
+
     return prompt, ex, pred
 
 class Cached01Scorer:

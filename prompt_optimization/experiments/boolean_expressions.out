@@ -1,0 +1,177 @@
+{"task": "boolean_expressions", "data_dir": "data/boolean_expressions", "prompts": "prompts/boolean_expressions.md", "out": "experiments/boolean_expressions.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.300290584564209
+Prompt: ('# Task\nDoes the following boolean expressions return True? Answer Yes if it return True, otherwise No\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.73),)
+Test accuracy: [0.7933333333333333]
+======== ROUND 1
+Time: 88.90323257446289
+Prompt: ('# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are evaluating a boolean expression. Use standard operator precedence rules: "not" has the highest precedence, followed by "and", then "or". Parentheses override precedence. Evaluate the expression and answer "Yes" if the result is True, "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it evaluates to True, or "No" if it evaluates to False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a logical expression analyzer. Given a boolean expression phrased in natural language, assess its outcome **based on standard operator precedence guidelines**:  \n- `not` takes priority over all other operators  \n- `and` is prioritized over `or`  \n- When operators share the same precedence, the expression is processed from left to right  \n\nYour job: Ascertain whether the expression resolves to **True** or **False**.  \nRespond with **"Yes"** if the outcome is **True**, and **"No"** if the outcome is **False**.  \n\nExample:  \nInput: "not False or True and False"  \nOutput: No  \n\nNow analyze the following expression:  \n<expression>  \n**  \nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.84), np.float64(0.84), np.float64(0.83), np.float64(0.78))
+Test accuracy: [0.7866666666666666, 0.78, 0.78, 0.78]
+======== ROUND 2
+Time: 347.9322772026062
+Prompt: ('# Task\nInput: You are analyzing a logical expression. Adhere to the standard order of operations: "not" is processed first, followed by "and", and then "or". Parentheses can override this default order. You must **break the expression down into steps**, showing intermediate outcomes as necessary. Do **not** use intuition — strictly follow the rules of logical evaluation and parentheses. Once the full expression has been evaluated, reply with "Yes" if the result is True, and "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are evaluating a boolean expression. Use standard operator precedence rules: "not" has the highest precedence, followed by "and", then "or". Parentheses override precedence. Evaluate the expression and answer "Yes" if the result is True, "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: You are evaluating a logical statement that concludes with "is". The word "is" signifies the outcome of the expression preceding it. Adhere to standard operator precedence: "not" is processed first, followed by "and", and then "or". Parentheses may alter the evaluation order. Determine the truth value of the logical expression and reply with "Yes" if it evaluates to True, and "No" if it evaluates to False. Do not treat "is" as part of the logical expression — it serves only to mark the end of the statement.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.84), np.float64(0.84), np.float64(0.84), np.float64(0.83))
+Test accuracy: [0.7666666666666667, 0.78, 0.78, 0.7733333333333333]
+======== ROUND 3
+Time: 384.4113872051239
+Prompt: ('# Task\nInput: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: You are analyzing a logical expression. Adhere to the standard order of operations: "not" is processed first, followed by "and", and then "or". Parentheses can override this default order. You must **break the expression down into steps**, showing intermediate outcomes as necessary. Do **not** use intuition — strictly follow the rules of logical evaluation and parentheses. Once the full expression has been evaluated, reply with "Yes" if the result is True, and "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are evaluating a boolean expression. Use standard operator precedence rules: "not" has the highest precedence, followed by "and", then "or". Parentheses override precedence. Evaluate the expression and answer "Yes" if the result is True, "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.86), np.float64(0.84), np.float64(0.84), np.float64(0.84))
+Test accuracy: [0.7866666666666666, 0.7533333333333333, 0.78, 0.78]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 23.830196380615234
+Prompt: # Task
+Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+
+# Here are some examples:
+Text: not not True and not False or True is
+Label: Yes
+Text: ( True ) and True and not True is
+Label: No
+Text: not True and True or True and False is
+Label: No
+Text: ( not ( False ) and False ) is
+Label: No
+Text: False and not ( ( True ) ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.5818426465262038
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 10.427772521972656
+Prompt: # Task
+Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+
+# Here are some examples:
+Text: not not True and not False or True is
+Label: Yes
+Text: ( True ) and True and not True is
+Label: No
+Text: not True and True or True and False is
+Label: No
+Text: ( not ( False ) and False ) is
+Label: No
+Text: False and not ( ( True ) ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.5818426465262038
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 10.612338066101074
+Prompt: # Task
+Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+
+# Here are some examples:
+Text: not not True and not False or True is
+Label: Yes
+Text: ( True ) and True and not True is
+Label: No
+Text: not True and True or True and False is
+Label: No
+Text: ( not ( False ) and False ) is
+Label: No
+Text: False and not ( ( True ) ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.5818426465262038
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 10.4331214427948
+Prompt: # Task
+Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+
+# Here are some examples:
+Text: not not True and not False or True is
+Label: Yes
+Text: ( True ) and True and not True is
+Label: No
+Text: not True and True or True and False is
+Label: No
+Text: ( not ( False ) and False ) is
+Label: No
+Text: False and not ( ( True ) ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.5818426465262038
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 12.235456466674805
+Prompt: # Task
+Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+
+# Here are some examples:
+Text: not not True and not False or True is
+Label: Yes
+Text: ( True ) and True and not True is
+Label: No
+Text: not True and True or True and False is
+Label: No
+Text: ( not ( False ) and False ) is
+Label: No
+Text: False and not ( ( True ) ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.5818426465262038
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 12.032289743423462
+Prompt: # Task
+Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+
+# Here are some examples:
+Text: not not True and not False or True is
+Label: Yes
+Text: ( True ) and True and not True is
+Label: No
+Text: not True and True or True and False is
+Label: No
+Text: ( not ( False ) and False ) is
+Label: No
+Text: False and not ( ( True ) ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.5818426465262038
+Test accuracy: 0.8733333333333333

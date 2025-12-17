@@ -1,0 +1,486 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.9194350242614746
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.85),)
+Training accuracy: (np.float64(0.85),)
+Validation accuracy: [0.82]
+Test accuracy: [0.88]
+======== ROUND 1
+Time: 136.32698464393616
+Prompt: (Prompt(
+  prompt: # Task
+Does this piece of writing explicitly show hatred toward a specific protected class or an individual, or endorse violence? Respond with Yes if there is clear evidence of abusive language directed at a particular group or individual, or if there's a call for harm. Otherwise, respond with No. Take into account if the writing includes insulting terms, shows harmful intentions, or encourages prejudice against someone due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected trait. If the text critiques ideas, views, or behaviors without using abusive language toward a protected group or individual, it generally should be marked as No. Furthermore, ensure that aggressive or crude language alone, absent of explicit targeting of a protected group, does not result in a classification of Yes.
+
+# Exemplar
+Text: "If they were anyone else, I'd kick their ass myself."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(11), np.int64(12)},
+  parent_score: 0.85,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does the text explicitly exhibit hatred toward a protected group or individual, or promote violence? Respond with Yes if it clearly singles out a group or individual using abusive language or advocating for harm; otherwise, respond with No. Take into account if the text employs derogatory expressions, shows ill will, or encourages prejudice against someone due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected characteristic. If the text critiques ideas, beliefs, or actions without directing abusive language at a protected group or individual, it should typically be categorized as No. Also, make sure that aggressive or crude language alone, in the absence of explicit targeting of a protected group, does not result in a classification of Yes.
+
+# Exemplar
+Text: "If they were anyone else, I'd kick their ass myself."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(11), np.int64(12)},
+  parent_score: 0.85,
+  score: 0.94), Prompt(
+  prompt: # Task
+To determine if a piece of text constitutes hate speech, adhere to the following criteria: Hate speech refers to communication that expresses hostility toward a particular group distinguished by traits including race, ethnicity, nationality, religious beliefs, gender, sexual identity, disability, or other safeguarded features. Such speech frequently encompasses terms that diminish humanity, incitements to violence directed at the group, or scathing insults. Although the presence of harsh or provocative language might be noted, it only qualifies as hate speech when it specifically aims at a protected group and seeks to propagate animosity or violence toward them. Begin by pinpointing whether the text singles out any of these safeguarded groups, and subsequently evaluate if the employed language intends to foster hatred or encourage violence. Should both elements be present, categorize the text as hate speech.
+
+# Exemplar
+Text: "If they were anyone else, I'd kick their ass myself."
+Label: No
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(11)},
+  parent_score: 0.85,
+  score: 0.93), Prompt(
+  prompt: # Task
+Does this text express explicit hatred towards a protected group or individual, or advocate violence? Answer Yes if it clearly targets a group or individual with abusive language or calls for harm; otherwise, answer No. Consider whether the text uses derogatory terms, expresses malicious intent, or promotes discrimination against someone based on race, ethnicity, nationality, religion, gender, sexual orientation, disability, or other protected characteristics. If the text criticizes ideas, beliefs, or actions without targeting a protected group or individual with abusive language, it should generally be classified as No. Additionally, ensure that the presence of aggressive or vulgar language alone, without explicit targeting of a protected group, does not lead to a classification of Yes.
+
+# Exemplar
+Text: "If they were anyone else, I'd kick their ass myself."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(11), np.int64(12)},
+  parent_score: 0.85,
+  score: 0.93))
+Training accuracy: (np.float64(0.95), np.float64(0.94), np.float64(0.93), np.float64(0.93))
+Validation accuracy: [0.9, 0.88, 0.84, 0.88]
+Test accuracy: [0.91, 0.91, 0.91, 0.9]
+======== ROUND 2
+Time: 600.2159914970398
+Prompt: (Prompt(
+  prompt: # Task
+Does this piece of writing explicitly show hatred toward a specific protected class or an individual, or endorse violence? Respond with Yes if there is clear evidence of abusive language directed at a particular group or individual, or if there's a call for harm. Otherwise, respond with No. Take into account if the writing includes insulting terms, shows harmful intentions, or encourages prejudice against someone due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected trait. If the text critiques ideas, views, or behaviors without using abusive language toward a protected group or individual, it generally should be marked as No. Furthermore, ensure that aggressive or crude language alone, absent of explicit targeting of a protected group, does not result in a classification of Yes.
+
+# Exemplar
+Text: "If they were anyone else, I'd kick their ass myself."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(11), np.int64(12)},
+  parent_score: 0.85,
+  score: 0.95), Prompt(
+  prompt: # Task
+Is the text employing explicit hate speech targeting a protected group or individual, or advocating for violence? Answer with Yes if it clearly identifies and uses abusive language toward a specific group or individual, or promotes harm; otherwise, answer with No. Consider whether the text includes derogatory terms, displays hostility, or incites prejudice towards someone because of their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or other protected traits. Abusive language involves terms or phrases that dehumanize, insult, or demean individuals based on their protected traits. If the text criticizes ideas, beliefs, or actions without using abusive language directed at a protected group or individual, it should generally be categorized as No. Also, aggressive or crude language without explicitly targeting a protected group should not be classified as Yes. Determine if the text extends beyond mere criticism to use language that directly dehumanizes or insults protected groups, which would suggest a higher probability of promoting hatred or violence.
+
+For clarity, if the text includes language that expresses a wish to inflict physical or emotional harm on members of a protected group, it should be classified as Yes. But if the language is focused on criticizing specific actions or ideas without engaging in hate speech, it should be classified as No. Protected groups encompass, but are not limited to, those identified by race, ethnicity, nationality, religion, gender, sexual orientation, and disability. Language that targets these groups with the intent to harm or degrade them should be marked as potentially spreading hatred or violence.
+
+# Exemplar
+Text: "The whole political system is rigged, controlled by corrupt rich white men who don't care about anyone but themselves."
+Label: No
+
+Text: "I can’t understand why anyone would support a religion that preaches peace one minute and violence the next."
+Label: Yes
+
+Text: "With her nose she can detect an immigration officer from 70 yards"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(30), np.int64(47)},
+  parent_score: 0.94,
+  score: 0.94), Prompt(
+  prompt: # Task
+Does this passage contain explicit language or content that expresses hatred towards a protected category of individuals or advocates for violence? Answer with Yes if it specifically identifies a group or individual with abusive language or promotes harm; otherwise, answer with No. Evaluate whether the passage uses derogatory terms, displays hostility, or encourages discrimination towards someone based on their race, ethnicity, country of origin, religious beliefs, gender, sexual identity, disability, or another protected trait. Language that degrades, insults, or dehumanizes a person based on these traits counts as abusive. If the passage criticizes ideas or actions without resorting to abusive language directed at a protected group, it generally falls under No. Moreover, simply using aggressive or crude language, without specifically targeting a protected group, does not warrant a Yes classification. Determine if the passage moves beyond criticism into language that directly dehumanizes or insults protected groups, which would suggest a heightened risk of promoting hatred or violence.
+
+For clarity, if the text suggests an intention to inflict physical or emotional harm on members of a protected group, categorize it as Yes. Conversely, if the language is critical of particular behaviors or beliefs without engaging in hate speech, it should be categorized as No. Keep in mind that protected groups encompass, but are not limited to, those defined by race, ethnicity, nationality, religion, gender, sexual orientation, and disability. Any language that targets these groups with harmful intentions or degrading terms should be flagged as indicative of promoting hatred or violence.
+
+# Exemplar
+Text: "The whole political system is rigged, controlled by corrupt rich white men who don't care about anyone but themselves."
+Label: No
+
+Text: "I can’t understand why anyone would support a religion that preaches peace one minute and violence the next."
+Label: Yes
+
+Text: "With her nose she can detect an immigration officer from 70 yards"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(30), np.int64(47)},
+  parent_score: 0.94,
+  score: 0.94), Prompt(
+  prompt: # Task
+Does the text explicitly exhibit hatred toward a protected group or individual, or promote violence? Respond with Yes if it clearly singles out a group or individual using abusive language or advocating for harm; otherwise, respond with No. Take into account if the text employs derogatory expressions, shows ill will, or encourages prejudice against someone due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected characteristic. Abusive language is determined by the presence of terms or phrases that dehumanize, insult, or degrade a person based on their protected characteristics. If the text critiques ideas, beliefs, or actions without directing abusive language at a protected group or individual, it should typically be categorized as No. Additionally, aggressive or crude language alone, in the absence of explicit targeting of a protected group, does not result in a classification of Yes. Consider whether the text goes beyond mere criticism, crossing into language that directly dehumanizes or insults protected groups, thereby indicating a higher likelihood of promoting hatred or violence.
+
+To further clarify, if the text contains language that suggests a desire to cause physical or emotional harm to members of a protected group, it should be classified as Yes. However, if the language is critical of specific behaviors or ideas without resorting to hate speech, it should be classified as No. Remember that protected groups include, but are not limited to, those defined by race, ethnicity, nationality, religion, gender, sexual orientation, and disability. Any language that targets these groups with harmful intent or degrading terms should be flagged as potentially promoting hatred or violence.
+
+# Exemplar
+Text: "The whole political system is rigged, controlled by corrupt rich white men who don't care about anyone but themselves."
+Label: No
+
+Text: "I can’t understand why anyone would support a religion that preaches peace one minute and violence the next."
+Label: Yes
+
+Text: "With her nose she can detect an immigration officer from 70 yards"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(30), np.int64(47)},
+  parent_score: 0.94,
+  score: 0.94))
+Training accuracy: (np.float64(0.95), np.float64(0.94), np.float64(0.94), np.float64(0.94))
+Validation accuracy: [0.9, 0.86, 0.88, 0.88]
+Test accuracy: [0.91, 0.9, 0.9, 0.91]
+======== ROUND 3
+Time: 761.1391582489014
+Prompt: (Prompt(
+  prompt: # Task
+Does this piece of writing explicitly show hatred toward a specific protected class or an individual, or endorse violence? Respond with Yes if there is clear evidence of abusive language directed at a particular group or individual, or if there's a call for harm. Otherwise, respond with No. Take into account if the writing includes insulting terms, shows harmful intentions, or encourages prejudice against someone due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected trait. If the text critiques ideas, views, or behaviors without using abusive language toward a protected group or individual, it generally should be marked as No. Furthermore, ensure that aggressive or crude language alone, absent of explicit targeting of a protected group, does not result in a classification of Yes.
+
+# Exemplar
+Text: "If they were anyone else, I'd kick their ass myself."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(11), np.int64(12)},
+  parent_score: 0.85,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this text contain explicit abusive language that targets a specific protected class or individual, or promotes violence? Answer with Yes if it contains clear examples of insulting terms aimed at a particular group or person, or advocates for harm. Otherwise, answer with No. Evaluate if the text uses derogatory expressions, indicates harmful intent, or fosters discrimination against someone based on characteristics such as race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected status. For a response of Yes, the offensive language must directly relate to one of the protected characteristics listed. If the writing critiques beliefs, actions, or behavior without directing abusive language towards a protected group or individual, it should typically be classified as No. Additionally, even if the language is harsh or crude, but does not specifically target a protected group, it should not be categorized as Yes. The emphasis is on the explicit connection between the abusive language and a protected attribute, rather than the general tone or intensity of the text.
+
+# Exemplar
+Text: "Those illegal aliens think they can just waltz in and take our jobs. What a disgrace."
+Label: No
+
+Text: "If I could, I'd punch him in the face just for looking at me."
+Label: No
+
+Text: "Women who refuse to wear hijabs are ignorant of their own culture and are letting Western ideals influence them."
+Label: Yes
+
+Text: "All Muslims should know their place and not impose their backward beliefs on us."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(48), np.int64(75), np.int64(76), np.int64(4)},
+  parent_score: 0.95,
+  score: 0.94), Prompt(
+  prompt: # Task
+Is the text employing explicit hate speech targeting a protected group or individual, or advocating for violence? Answer with Yes if it clearly identifies and uses abusive language toward a specific group or individual, or promotes harm; otherwise, answer with No. Consider whether the text includes derogatory terms, displays hostility, or incites prejudice towards someone because of their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or other protected traits. Abusive language involves terms or phrases that dehumanize, insult, or demean individuals based on their protected traits. If the text criticizes ideas, beliefs, or actions without using abusive language directed at a protected group or individual, it should generally be categorized as No. Also, aggressive or crude language without explicitly targeting a protected group should not be classified as Yes.
+
+To further clarify, language expressing a wish to inflict physical or emotional harm specifically on members of a protected group should be classified as Yes. However, if the language focuses on criticizing specific actions or ideas without engaging in hate speech, it should be classified as No. Protected groups encompass, but are not limited to, those identified by race, ethnicity, nationality, religion, gender, sexual orientation, and disability. Language that targets these groups with the intent to harm or degrade them should be marked as potentially spreading hatred or violence.
+
+Additionally, consider whether the text contains explicit calls for violence or dehumanizing language aimed at a protected group. General criticism, negative opinions, or even aggressive statements that do not specifically target a protected group or advocate for harm should not be classified as Yes. The key is to ensure that the language being analyzed goes beyond mere disagreement or frustration into clear, targeted abusive language or advocacy for violence.
+
+New rule: Ensure that every classification decision is made with consideration of the broader social context to avoid misidentifying critical or satirical commentary as hate speech. This means distinguishing between language that is intended to critique or expose harmful attitudes and language that actively promotes prejudiced views or violence.
+
+# Exemplar
+Text: "Those damned immigrants ruining our country"
+Label: Yes
+
+Text: "They think they can just walk in and take what they want, but we'll show them who's boss"
+Label: No
+
+Text: "They think we’re all the same because of our skin color, but it’s because we have to stick together as Black people in this messed-up society."
+Label: No
+
+Text: "Those filthy jews, always scheming to control everything they can."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(40), np.int64(85), np.int64(78), np.int64(87)},
+  parent_score: 0.94,
+  score: 0.94), Prompt(
+  prompt: # Task
+Does the content use clear and direct hate speech against a protected group or an individual, or advocate for violent acts? Respond with Yes if it specifically identifies and employs abusive language towards a particular group or person, or encourages harmful actions. Otherwise, respond with No. Evaluate if the content contains derogatory expressions, shows hostility, or stirs up prejudice against someone due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or other protected attributes. Abusive language refers to terms or phrases that portray individuals from protected categories as inferior, insulting, or belittling. If the content critiques ideas, doctrines, or behaviors without utilizing abusive language directed at a protected group or individual, it should usually be categorized as No. Harsh or crude language that does not explicitly target a protected group should likewise be classified as No.
+
+For further clarification, explicit hate speech entails direct mentions of or allusions to protected groups in a way that clearly aims to demean, dehumanize, or provoke harm. Indirect or euphemistic language that suggests hostility towards a protected group may also count as hate speech if it fits the criteria outlined above. However, if the content is aggressive or uses strong language without making a direct link to a protected group, it should not be classified as Yes.
+
+Ascertain if the content transcends mere criticism into language that directly dehumanizes or insults protected groups. This indicates a higher likelihood of fostering hatred or violence. If the content includes language expressing a desire to cause physical or psychological harm to members of a protected group, it should be classified as Yes. Conversely, if the language centers on criticizing specific actions or opinions without resorting to hate speech, it should be classified as No. Protected groups include, but are not limited to, those defined by race, ethnicity, nationality, religion, gender, sexual orientation, and disability. Language that targets these groups with the intent to harm or degrade them should be flagged as potentially disseminating hatred or violence.
+
+Additional criterion: If the content makes a direct reference to a specific historical event where a protected group faced harm, and the content uses this reference to imply ongoing hostility or to justify harm against that group, it should be classified as Yes. This ensures that contextual suggestions of hostility are also taken into account during classification.
+
+# Exemplar
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Those filthy jews, always scheming to control everything they can."
+Label: No
+
+Text: "Why do white people think they're so special, they've caused so much suffering in history."
+Label: Yes
+
+Text: "Women who refuse to wear hijabs are ignorant of their own culture and are letting Western ideals influence them."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(48), np.int64(59), np.int64(85), np.int64(6)},
+  parent_score: 0.94,
+  score: 0.94))
+Training accuracy: (np.float64(0.95), np.float64(0.94), np.float64(0.94), np.float64(0.94))
+Validation accuracy: [0.9, 0.88, 0.84, 0.86]
+Test accuracy: [0.91, 0.9, 0.91, 0.91]
+======== ROUND 4
+Time: 798.3550674915314
+Prompt: (Prompt(
+  prompt: # Task
+Does the text contain explicit hate speech targeting a protected group or an individual, or advocate violence? Answer with Yes if it singles out and uses abusive language toward a specific group or person, or promotes harmful actions. Otherwise, answer with No. Determine if the content includes derogatory terms, displays hostility, or incites prejudice against someone because of their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or other protected traits. Abusive language involves terms that represent individuals from protected categories as inferior, insulting, or belittling. If the content critiques ideas, doctrines, or behaviors without resorting to abusive language aimed at a protected group or individual, it is generally classified as No. Harsh or coarse language not explicitly directed at a protected group should also be categorized as No.
+
+Explicit hate speech involves direct mentions or allusions to protected groups in a manner clearly intended to demean, dehumanize, or provoke harm. Indirect or euphemistic language hinting at hostility towards a protected group can also be considered hate speech if it meets the outlined criteria. However, if the content is aggressive or uses strong language without establishing a direct connection to a protected group, it should not be classified as Yes.
+
+To determine if the content moves beyond mere criticism into language that directly dehumanizes or insults protected groups, look for explicit and unambiguous references to protected categories combined with language clearly aiming to harm or degrade. If the content includes language expressing a desire to inflict physical or psychological harm on members of a protected group, it should be classified as Yes. On the other hand, if the language focuses on criticizing specific actions or opinions without descending into hate speech, it should be classified as No.
+
+Protected groups encompass, but are not limited to, those categorized by race, ethnicity, nationality, religion, gender, sexual orientation, and disability. Language targeting these groups with the intent to harm or degrade them should be flagged as potentially spreading hatred or violence.
+
+Consider also whether the content references a specific historical event where a protected group suffered harm and uses this reference to imply ongoing hostility or to justify harm against that group. Such content should be classified as Yes to ensure that contextual hints of hostility are evaluated. Additionally, if the content criticizes a cultural or religious practice in a way that attacks the group as a whole rather than addressing specific actions, it should be classified as Yes.
+
+A guiding principle is to evaluate whether the language fosters understanding or division. Content that encourages empathy, mutual respect, and understanding among individuals irrespective of their background should be categorized as No. Conversely, content that seeks to divide people along lines of protected attributes and employs abusive language to do so should be classified as Yes.
+
+# Exemplar
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." Label: No
+
+Text: "Bro just delete yo shit off YouTube rn. Fuck outta here with yo clout chasing ass."
+Label: No
+
+Text: "It's unbelievable how some people still think LGBT is a choice, don't they understand the pain and discrimination these individuals face every day?"
+Label: No
+
+Text: "Why do we even bother with affirmative action? Just let natural selection take its course."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(99), np.int64(8), np.int64(105), np.int64(82), np.int64(58)},
+  parent_score: 0.94,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this piece of writing explicitly show hatred toward a specific protected class or an individual, or endorse violence? Respond with Yes if there is clear evidence of abusive language directed at a particular group or individual, or if there's a call for harm. Otherwise, respond with No. Take into account if the writing includes insulting terms, shows harmful intentions, or encourages prejudice against someone due to their race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected trait. If the text critiques ideas, views, or behaviors without using abusive language toward a protected group or individual, it generally should be marked as No. Furthermore, ensure that aggressive or crude language alone, absent of explicit targeting of a protected group, does not result in a classification of Yes.
+
+# Exemplar
+Text: "If they were anyone else, I'd kick their ass myself."
+Label: No
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(11), np.int64(12)},
+  parent_score: 0.85,
+  score: 0.95), Prompt(
+  prompt: # Task
+Does this passage include clearly abusive language that singles out a specific protected category or individual, or incites violence? Respond with Yes if it includes obvious examples of insulting words directed at a particular group or person based on qualities such as race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected status, and if it encourages harm or discrimination against them. Otherwise, respond with No. Assess whether the text employs derogatory expressions, shows harmful intent, or advances discrimination against someone because of their protected characteristics. To answer Yes, the abusive language must be directly connected to one of the protected features mentioned and must be explicitly abusive towards that group. If the text criticizes beliefs, actions, or behaviors without resorting to abusive language toward a protected group or individual, it should generally be classified as No. Despite the language being harsh or crude, if it does not specifically target a protected group, it should not be categorized as Yes. Concentrate on the direct connection between the abusive language and a protected attribute, rather than the overall tone or intensity of the text.
+
+For consistent categorization, determine whether the text deliberately uses slurs or derogatory terms that are intrinsically tied to the protected status of an individual or group. This entails recognizing language that aims to demean, insult, or promote harm based purely on a protected characteristic. For instance, language that calls for the removal or harm of an individual due to their nationality or ethnic background would be deemed abusive. Furthermore, make sure that the analysis centers on the language itself instead of the underlying ideas or beliefs being challenged, provided that the challenge does not escalate into abusive language aimed at protected characteristics.
+
+# Exemplar
+Text: "They think they can just walk in and take what they want, but we'll show them who's boss"
+Label: No
+
+Text: "It's ridiculous how people think wearing a certain piece of clothing should be allowed in public. What next? Allowing chaos?"
+Label: Yes
+
+Text: "Why do they always have to complain about everything? Can't they just adapt and shut up?"
+Label: No
+
+Text: "They are all the same, can't trust them, always causing problems wherever they go."
+Label: No
+
+Text: "Women should never be allowed to hold positions of power over men. It’s unnatural."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(97), np.int64(77), np.int64(45), np.int64(87), np.int64(88)},
+  parent_score: 0.94,
+  score: 0.94), Prompt(
+  prompt: # Task
+Does this piece of text include overtly abusive language that singles out a specific protected category or individual, or incites violence? Respond with Yes if there are clear instances of insulting terms directed at a specific group or person because of characteristics like race, ethnicity, nationality, religion, gender, sexual orientation, disability, or any other protected attribute, and if it calls for harm or discriminatory treatment against them. Otherwise, respond with No. Assess whether the text utilizes derogatory expressions, conveys harmful intentions, or encourages discrimination against someone based on their protected traits. A Yes response requires that the abusive language directly connects to one of the listed protected characteristics and is explicitly hostile towards that group. If the content critiques beliefs, actions, or behaviors without resorting to abusive language towards a protected group or individual, it should generally be classified as No. Even if the language is harsh or crude but does not particularly target a protected group, it should not be classified as Yes. The emphasis should be on the direct connection between the abusive language and a protected attribute, rather than the overall tone or intensity of the text.
+
+To maintain consistent categorization, determine if the text explicitly uses slurs or derogatory terms that are intrinsically tied to the protected status of an individual or group. This involves recognizing language that is deliberately intended to demean, insult, or encourage harm based purely on a protected characteristic. For instance, language advocating for deportation or violence towards someone because of their nationality or ethnicity would be deemed abusive. Furthermore, ensure that the analysis centers on the language itself rather than the underlying ideas or beliefs under critique, provided that the critique does not escalate into abusive language targeting protected attributes.
+
+# Exemplar
+Text: "They think they can just walk in and take what they want, but we'll show them who's boss"
+Label: No
+
+Text: "It's ridiculous how people think wearing a certain piece of clothing should be allowed in public. What next? Allowing chaos?"
+Label: Yes
+
+Text: "Why do they always have to complain about everything? Can't they just adapt and shut up?"
+Label: No
+
+Text: "They are all the same, can't trust them, always causing problems wherever they go."
+Label: No
+
+Text: "Women should never be allowed to hold positions of power over men. It’s unnatural."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(97), np.int64(77), np.int64(45), np.int64(87), np.int64(88)},
+  parent_score: 0.94,
+  score: 0.94))
+Training accuracy: (np.float64(0.95), np.float64(0.95), np.float64(0.94), np.float64(0.94))
+Validation accuracy: [0.84, 0.9, 0.84, 0.84]
+Test accuracy: [0.89, 0.91, 0.9, 0.9]

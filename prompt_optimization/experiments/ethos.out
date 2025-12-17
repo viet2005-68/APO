@@ -1,0 +1,175 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.768474817276001
+Prompt: ('# Task\nIs the following text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.88),)
+Test accuracy: [0.8666666666666667]
+======== ROUND 1
+Time: 60.5971519947052
+Prompt: ('# Task\n"Is the given text expressing explicit hatred toward any group categorized by race, religion, ethnicity, nationality, gender, or sexual orientation? Determine if it qualifies as hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the given text expressing explicit hatred toward any specific group based on race, religion, ethnicity, nationality, gender, or sexual orientation? Determine if it qualifies as hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Does the following text explicitly express hatred towards a particular group defined by race, religion, ethnicity, nationality, gender, or sexual orientation? Identify if it is hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine if the given text constitutes hate speech. Define hate speech as expressing hostility against an individual or group based on their race, ethnicity, nationality, religion, sex, gender identity, or sexual orientation. Respond with \'Yes\' if it qualifies as hate speech, and \'No\' otherwise.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.93), np.float64(0.92), np.float64(0.92), np.float64(0.92))
+Test accuracy: [0.8533333333333334, 0.8466666666666667, 0.8466666666666667, 0.8466666666666667]
+======== ROUND 2
+Time: 249.04906392097473
+Prompt: ('# Task\nDetermine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the given text expressing explicit hatred toward any group categorized by race, religion, ethnicity, nationality, gender, or sexual orientation? Determine if it qualifies as hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the given text expressing explicit hatred toward any specific group based on race, religion, ethnicity, nationality, gender, or sexual orientation? Determine if it qualifies as hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Does the following text explicitly express hatred towards a particular group defined by race, religion, ethnicity, nationality, gender, or sexual orientation? Identify if it is hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.93), np.float64(0.93), np.float64(0.92), np.float64(0.92))
+Test accuracy: [0.8533333333333334, 0.8533333333333334, 0.8466666666666667, 0.8466666666666667]
+======== ROUND 3
+Time: 251.63285732269287
+Prompt: ('# Task\nDetermine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Determine if the given text directly conveys hatred toward any particular group defined by race, religion, ethnicity, nationality, gender, or sexual orientation. Hate speech is characterized by obvious and straightforward assaults or language that degrades such groups. Specify whether it fits the definition of hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the given text expressing explicit hatred toward any group categorized by race, religion, ethnicity, nationality, gender, or sexual orientation? Determine if it qualifies as hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the given text expressing explicit hatred toward any specific group based on race, religion, ethnicity, nationality, gender, or sexual orientation? Determine if it qualifies as hate speech."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.93), np.float64(0.93), np.float64(0.93), np.float64(0.92))
+Test accuracy: [0.8533333333333334, 0.8533333333333334, 0.8533333333333334, 0.8466666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 49.58347201347351
+Prompt: # Task
+Determine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.
+
+# Here are some examples:
+Text: They should have beat his ass. He deserves it.
+Label: No
+Text: I would love to watch tearing apart every christian or muslim
+Label: Yes
+Text: hahahahahahahahaha europ fuck you fucking nazis
+Label: Yes
+Text: Your life isn't that wonderful. That room tells me that you're clearly an alcoholic, and you drink shit beer. Maybe stop wasting your money on shit like that Apple watch, and you could afford some clothes that dont come from Walmart, and get someone other than your mom to cut your hair.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95 | Penalized score: 0.7449255608856051
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 27.555652618408203
+Prompt: # Task
+Determine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.
+
+# Here are some examples:
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+Text: ADIDAS for you means "All Day I Dream About Snacks"
+Label: No
+Text: we take everyone, sudanese niggers, egyptian shitskins, palirats, syrian and iraqi scums, they're all dogs that behave like niggers, they cost too much, especially syrians, there is way too many of them here, they are arrogant ungrateful backstabbing apes.
+Label: Yes
+Text: If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”.
+Label: Yes
+Text: I'd get my money back if I were you. Your sex change was a complete failure.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94 | Penalized score: 0.7513593518004075
+Test accuracy: 0.9066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 23.559754371643066
+Prompt: # Task
+Determine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.
+
+# Here are some examples:
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+Text: ADIDAS for you means "All Day I Dream About Snacks"
+Label: No
+Text: we take everyone, sudanese niggers, egyptian shitskins, palirats, syrian and iraqi scums, they're all dogs that behave like niggers, they cost too much, especially syrians, there is way too many of them here, they are arrogant ungrateful backstabbing apes.
+Label: Yes
+Text: If I were your dad, I'd Google "Abortions at 30 years old mentally handicapped”.
+Label: Yes
+Text: I'd get my money back if I were you. Your sex change was a complete failure.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94 | Penalized score: 0.7513593518004075
+Test accuracy: 0.9066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 22.190587282180786
+Prompt: # Task
+Determine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.
+
+# Here are some examples:
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: OMG Lucas !! Such a great kid, such a big grow
+Label: No
+Text: I wonder why they didn' throw the fire booms in that cult when those Muslims were inside. That would have been one hell of a BBQ.
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: ive been trying to figure out which common american voter is more uniformed republican or democrat for years democrats do any of you have the slightest clue that obama has deported more mexicans than any other president in history
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95 | Penalized score: 0.7639650789627837
+Test accuracy: 0.9066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 26.981064796447754
+Prompt: # Task
+Determine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.
+
+# Here are some examples:
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: OMG Lucas !! Such a great kid, such a big grow
+Label: No
+Text: I wonder why they didn' throw the fire booms in that cult when those Muslims were inside. That would have been one hell of a BBQ.
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: ive been trying to figure out which common american voter is more uniformed republican or democrat for years democrats do any of you have the slightest clue that obama has deported more mexicans than any other president in history
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95 | Penalized score: 0.7639650789627837
+Test accuracy: 0.9066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 23.724319458007812
+Prompt: # Task
+Determine if the provided text explicitly promotes violence, discrimination, or severe hostility towards any group based on race, religion, ethnicity, nationality, gender, or sexual orientation. Label the text as hate speech only if it clearly and unambiguously fits this criterion.
+
+# Here are some examples:
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: OMG Lucas !! Such a great kid, such a big grow
+Label: No
+Text: I wonder why they didn' throw the fire booms in that cult when those Muslims were inside. That would have been one hell of a BBQ.
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: ive been trying to figure out which common american voter is more uniformed republican or democrat for years democrats do any of you have the slightest clue that obama has deported more mexicans than any other president in history
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95 | Penalized score: 0.7639650789627837
+Test accuracy: 0.9066666666666666

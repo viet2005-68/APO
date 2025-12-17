@@ -1,0 +1,308 @@
+{"task": "ethos", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 7.295608520507812e-05
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.5),)
+Training accuracy: (1.0,)
+Validation accuracy: [0.9]
+Test accuracy: [0.94]
+======== ROUND 1
+Time: 263.1329913139343
+Prompt: (Prompt(
+  prompt: # Task
+You are an assistant that classifies headlines as either clickbait or not clickbait.  
+Clickbait headlines are crafted to grab attention with sensational or intriguing wording, often featuring exclamation marks, question marks, or hype‑filled language, yet they may still be factually correct.  
+Non‑clickbait headlines are clear, informative, and free of sensational flair.  
+For each headline, reply with only “clickbait” or “not clickbait.”  
+
+Example:  
+- “You won’t believe what happened next!” → clickbait  
+- “Scientists discover new exoplanet” → not clickbait
+
+Now classify the headline below:
+
+# Exemplar
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Russians Strengthen Their Faith and a Tradition With an Icy Water Plunge"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(4), np.int64(8), 9, 10},
+  examplers_idx_used: {np.int64(0), np.int64(2), 4, 5, np.int64(6)},
+  parent_score: 0,
+  score: 0.9795918367346939), Prompt(
+  prompt: # Task
+You are a text classification assistant. For each headline, decide whether it is clickbait or not. Clickbait headlines are designed to attract attention with sensational or intriguing phrasing, often using exclamation marks, question marks, or hype words, but they can still be factually accurate. Non‑clickbait headlines are straightforward, informative, and avoid sensational language. Respond with only “clickbait” or “not clickbait” for each headline.  
+Example: “You won’t believe what happened next!” → clickbait  
+Example: “Scientists discover new exoplanet” → not clickbait  
+Now classify the following headline:
+
+# Exemplar
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Russians Strengthen Their Faith and a Tradition With an Icy Water Plunge"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(4), np.int64(8), 9, 10},
+  examplers_idx_used: {np.int64(0), np.int64(2), 4, 5, np.int64(6)},
+  parent_score: 0.5,
+  score: 0.9591836734693877), Prompt(
+  prompt: # Task
+You are an AI tasked with determining whether a given headline is clickbait. Clickbait headlines typically aim to arouse curiosity, use sensational or vague language, include numbers or lists, and often promise shocking or emotional content, while lacking substantial factual detail. They frequently employ exclamation marks, question marks, and hype words such as “shocking,” “unbelievable,” or “you won’t believe.” Given a headline, answer “Yes” if it meets these criteria and is designed primarily to entice clicks, or “No” otherwise. Respond with only “Yes” or “No.”
+
+# Exemplar
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Russians Strengthen Their Faith and a Tradition With an Icy Water Plunge"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(8), 9, 10},
+  examplers_idx_used: {np.int64(0), np.int64(2), 4, 5, np.int64(6)},
+  parent_score: 0.5,
+  score: 0.9387755102040817), Prompt(
+  prompt: # Task
+Determine if the headline below is clickbait according to the dataset’s labeling rules.  
+A clickbait headline uses sensational, exaggerated, or misleading language—often featuring exclamation marks, question marks, or hype words—to entice clicks without accurately reflecting the article’s content.  
+A non‑clickbait headline is factual, informative, and free of such tactics.  
+Answer with a single word: “Yes” if it is clickbait, “No” if it is not.  
+
+Headline: {headline}
+
+# Exemplar
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "Emilia Clarke Was Named The Sexiest Woman Of The Year By Esquire"
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Russians Strengthen Their Faith and a Tradition With an Icy Water Plunge"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(5), np.int64(6), 8, 9, 10},
+  examplers_idx_used: {np.int64(0), np.int64(2), 4, 5, np.int64(6)},
+  parent_score: 0,
+  score: 0.9387755102040817))
+Training accuracy: (np.float64(0.9795918367346939), np.float64(0.9591836734693877), np.float64(0.9387755102040817), np.float64(0.9387755102040817))
+Validation accuracy: [0.95, 0.91, 0.92, 0.9]
+Test accuracy: [0.95, 0.94, 0.96, 0.93]
+======== ROUND 2
+Time: 688.8244006633759
+Prompt: (Prompt(
+  prompt: # Task
+You are a text classification assistant. For each headline, decide whether it is clickbait or not. Clickbait headlines are designed to attract attention with sensational or intriguing phrasing, often using exclamation marks, question marks, or hype words, but they can still be factually accurate. Non‑clickbait headlines are straightforward, informative, and avoid sensational language. Respond with only “clickbait” or “not clickbait” for each headline.  
+Example: “You won’t believe what happened next!” → clickbait  
+Example: “Scientists discover new exoplanet” → not clickbait  
+Now classify the following headline:
+
+# Exemplar
+Text: "37 Thoughts I Had Listening To \"Serial's\" Surprise Second Season Premiere"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(10), 23, 24, 25},
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(5), 11, 12, 13},
+  parent_score: 0.9591836734693877,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a text classification assistant. For each headline, decide whether it is clickbait or not. Clickbait headlines are designed to attract attention with sensational or intriguing phrasing, often using exclamation marks, question marks, or hype words, but they can still be factually accurate. Non‑clickbait headlines are straightforward, informative, and avoid sensational language. Respond with only “clickbait” or “not clickbait” for each headline.  
+Example: “You won’t believe what happened next!” → clickbait  
+Example: “Scientists discover new exoplanet” → not clickbait  
+Now classify the following headline:
+
+# Exemplar
+Text: "37 Thoughts I Had Listening To \"Serial's\" Surprise Second Season Premiere"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(10), 23, 24, 25},
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(5), 11, 12, 13},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a text classification assistant. For each headline, decide whether it is clickbait or not. Clickbait headlines are designed to attract attention with sensational or intriguing phrasing, often using exclamation marks, question marks, or hype words, but they can still be factually accurate. Non‑clickbait headlines are straightforward, informative, and avoid sensational language. Respond with only “clickbait” or “not clickbait” for each headline.  
+Example: “You won’t believe what happened next!” → clickbait  
+Example: “Scientists discover new exoplanet” → not clickbait  
+Now classify the following headline:
+
+# Exemplar
+Text: "37 Thoughts I Had Listening To \"Serial's\" Surprise Second Season Premiere"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(10), 23, 24, 25},
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(5), 11, 12, 13},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a text classification assistant. For each headline, decide whether it is clickbait or not. Clickbait headlines are designed to attract attention with sensational or intriguing phrasing, often using exclamation marks, question marks, or hype words, but they can still be factually accurate. Non‑clickbait headlines are straightforward, informative, and avoid sensational language. Respond with only “clickbait” or “not clickbait” for each headline.  
+Example: “You won’t believe what happened next!” → clickbait  
+Example: “Scientists discover new exoplanet” → not clickbait  
+Now classify the following headline:
+
+# Exemplar
+Text: "37 Thoughts I Had Listening To \"Serial's\" Surprise Second Season Premiere"
+Label: Yes
+
+Text: "Front Pages Of The World's Newspapers Mourn The Paris Attacks"
+Label: Yes
+
+Text: "Caitlyn Jenner Apologised For Saying A Trans Woman Shouldn't Look Like \"A Man In A Dress\""
+Label: Yes
+
+Text: "How Well Do You Remember The Words To Dr. Dre's 'Forgot About Dre'"
+Label: Yes
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: ""Harry Potter" Fans Are Sharing Magical And Heartbreaking Art In Memory Of Alan Rickman"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(8), np.int64(9), np.int64(10), 23, 24, 25},
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(5), 11, 12, 13},
+  parent_score: 0,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.92, 0.88, 0.89, 0.9]
+Test accuracy: [0.93, 0.96, 0.95, 0.95]

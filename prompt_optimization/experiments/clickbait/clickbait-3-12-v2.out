@@ -1,0 +1,1020 @@
+{"task": "ethos", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+
+======== MEMORY + BATCH GD + SELECT ON VALIDATION GTP OSS 20B
+
+======== ROUND 0
+Time: 20.781488180160522
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.9140625),)
+Training accuracy: (0.9140625,)
+Validation accuracy: [0.89]
+Test accuracy: [0.895]
+======== ROUND 1
+Time: 323.5243606567383
+Prompt: (Prompt(
+  prompt: # Task
+**Task:**  
+Decide if a given headline or short passage is clickbait. Use a conditional, step‑by‑step process that adapts to the type of content and the tone it employs.
+
+---
+
+### 1. Identify the Domain & Tone  
+- **News** – mentions a public event, official statement, or factual report.  
+- **Entertainment/Marketing** – focuses on pop culture, lifestyle, health tips, or promotional material.  
+- **Education/Puzzle** – presents a question, riddle, or learning prompt.  
+
+Write down the domain you’ve chosen; it will guide the next steps.
+
+---
+
+### 2. Scan for Surface‑Level Signals  
+- Look for excessive punctuation (!!!, …), all‑caps words, or hyperbolic adjectives (“the best”, “you’ll never believe”).  
+- If any of these are present, label the piece as **Potential Clickbait**; otherwise, move to the next stage.
+
+---
+
+### 3. Examine Content & Context  
+- **Education/Puzzle**: A clear, fact‑answerable question (e.g., “Can you identify these pop artists by an anagram?”) → **Non‑Clickbait**.  
+- **News/Politics**: A question or exclamation that states a fact without sensational framing (e.g., “Iraq on verge of…”) → **Non‑Clickbait**.  
+- **Entertainment/Marketing**: A question or exclamation lacking a factual basis (e.g., “Up your breakfast game with these hacks”) → **Clickbait**.
+
+---
+
+### 4. Resolve Ambiguity with a Scoring Rubric  
+| Score | Description |
+|-------|-------------|
+| 1 | No clickbait cues at all. |
+| 2 | Minor sensational language, overall factual. |
+| 3 | Mixed signals, unclear intent. |
+| 4 | Strong clickbait traits but some factual content. |
+| 5 | Clear, deliberate clickbait. |
+
+- If surface cues are present **and** factual detail is also provided, give **3 or 4**.  
+- If it relies only on sensational cues, give **5**.
+
+When unsure, choose the lower end of the scale and record your reasoning.
+
+---
+
+### 5. Practical Tips  
+- Don’t judge solely on capitalization or punctuation; consider the whole context.  
+- High‑frequency clickbait words (“discover”, “secret”) are not automatically clickbait if the piece is genuinely informative.  
+- In urgent news or political contexts, differentiate urgency from clickbait.  
+- For ambiguous texts, err on the side of caution and explain the uncertainty.
+
+---
+
+**Deliverable:**  
+Follow the above structure to produce a consistent, nuanced classification for each headline or brief text you evaluate. Include the domain label, any surface‑level flags, the final classification (Non‑Clickbait / Clickbait / Potential Clickbait) and, if scored, the numeric value with a brief justification.
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "Local bakery uses secret ingredient to create the best bread in town"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "You Won't Believe What Happens Next in This Video!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), 5, np.int64(6), 7},
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(8), 13, 14, 15},
+  parent_score: 0,
+  score: 0.9166666666666666), Prompt(
+  prompt: # Task
+**Task:**  
+Decide if the given headline or short paragraph is click‑bait. Use a step‑by‑step, conditional method that adapts to the type of content and its style.
+
+---
+
+### Step 1 – Identify the domain and tone  
+| Domain | What to look for |
+|--------|------------------|
+| **News** | Mentions of a current event, official statement, or factual report. |
+| **Entertainment/Marketing** | Topics on pop culture, wellness, lifestyle, or promotional material. |
+| **Education/Puzzle** | Puzzles, riddles, quizzes, or instructional prompts. |
+
+*Keep the identified domain in mind for the next steps.*
+
+---
+
+### Step 2 – Scan for surface‑level red flags  
+*If any of the following appear, mark the piece as **Potential Click‑bait** and jump to Step 4. Otherwise, continue to Step 3.*
+
+- Over‑use of punctuation (!!!, …)
+- All‑caps words
+- Hyperbolic adjectives (“the best”, “you’ll never believe”, etc.)
+
+---
+
+### Step 3 – Evaluate the core content and context  
+
+| Situation | Decision |
+|-----------|----------|
+| Headline is a clear, answerable question **and** the domain is *Education/Puzzle* | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *News* or *Politics*, presenting a factual claim without sensational framing | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *Entertainment/Marketing*, lacking a clear factual basis | **Click‑bait** |
+
+---
+
+### Step 4 – Resolve uncertainty with a score (1 – 5)
+
+| Score | Description |
+|-------|-------------|
+| 1 | No click‑bait elements at all |
+| 2 | Minor sensational language, overall factual |
+| 3 | Ambiguous intent, mixed signals |
+| 4 | Strong click‑bait cues but some factual content |
+| 5 | Clear, deliberate click‑bait |
+
+*If Step 2 flagged potential click‑bait but factual detail is present, choose 3 or 4. If the text relies solely on sensational cues, choose 5.*
+
+---
+
+### Tips & Cautions  
+- Don’t base the decision only on capitalization or punctuation; consider overall context and domain.  
+- Avoid over‑labeling headlines that use common click‑bait words (e.g., “discover”, “secret”) when they belong to legitimate information pieces.  
+- For political or breaking‑news content, treat urgency carefully—urgency alone isn’t click‑bait.  
+- When ambiguous, lean toward a lower score and explain the uncertainty in your reasoning.
+
+**Follow this structure to produce a consistent, nuanced classification for each input.**
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "Local bakery uses secret ingredient to create the best bread in town"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "You Won't Believe What Happens Next in This Video!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), 5, np.int64(6), 7},
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(8), 13, 14, 15},
+  parent_score: 0,
+  score: 0.90625), Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.90625), Prompt(
+  prompt: # Task
+**Task**  
+Determine whether the supplied text is clickbait and give a brief justification.
+
+**Procedure**  
+1. Identify the text’s domain or genre (e.g., news, entertainment, marketing). If it’s not clear, treat it as general media.  
+2. Look for common clickbait markers:  
+   * Excessive or sensational punctuation,  
+   * All‑caps wording,  
+   * Phrases such as “you won’t believe,” “shocking,” “must see,” or promises of hidden revelations.  
+3. If any of these cues appear, evaluate whether the headline uses a curiosity‑driven hook without providing concrete information or offers an exaggerated payoff.  
+4. If the statement is straightforward and lacks a sensational hook, classify it as non‑clickbait.  
+5. Take context into account: political or urgent news may use strong language but isn’t necessarily clickbait; marketing copy may be sensational yet not manipulative if it directly advertises a product.  
+6. When uncertainty persists, default to “No” unless the headline clearly seeks to manipulate curiosity.  
+
+**Answer Format**  
+Return a single word, “Yes” or “No,” followed by one sentence explaining the decision. Avoid relying solely on capitalization or punctuation; instead focus on the intent to attract attention. If the text contains high‑frequency clickbait words but lacks emotional or curiosity‑driven content, classify it as non‑clickbait.
+
+# Exemplar
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "Scientists Discover New Planet That Could Be Home to Life!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(2), np.int64(3), 5, 6, 7},
+  examplers_idx_used: {np.int64(10), 13, np.int64(14), np.int64(15)},
+  parent_score: 0,
+  score: 0.890625))
+Training accuracy: (0.9166666666666666, 0.90625, 0.90625, 0.890625)
+Validation accuracy: [0.92, 0.87, 0.89, 0.83]
+Test accuracy: [0.92, 0.9, 0.915, 0.81]
+======== ROUND 2
+Time: 800.7371053695679
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.96875), Prompt(
+  prompt: # Task
+**Task:**  
+Decide if the given headline or short paragraph is click‑bait. Use a step‑by‑step, conditional method that adapts to the type of content and its style.
+
+---
+
+### Step 1 – Identify the domain and tone  
+| Domain | What to look for |
+|--------|------------------|
+| **News** | Mentions of a current event, official statement, or factual report. |
+| **Entertainment/Marketing** | Topics on pop culture, wellness, lifestyle, or promotional material. |
+| **Education/Puzzle** | Puzzles, riddles, quizzes, or instructional prompts. |
+
+*Keep the identified domain in mind for the next steps.*
+
+---
+
+### Step 2 – Scan for surface‑level red flags  
+*If any of the following appear, mark the piece as **Potential Click‑bait** and jump to Step 4. Otherwise, continue to Step 3.*
+
+- Over‑use of punctuation (!!!, …)
+- All‑caps words
+- Hyperbolic adjectives (“the best”, “you’ll never believe”, etc.)
+
+---
+
+### Step 3 – Evaluate the core content and context  
+
+| Situation | Decision |
+|-----------|----------|
+| Headline is a clear, answerable question **and** the domain is *Education/Puzzle* | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *News* or *Politics*, presenting a factual claim without sensational framing | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *Entertainment/Marketing*, lacking a clear factual basis | **Click‑bait** |
+
+---
+
+### Step 4 – Resolve uncertainty with a score (1 – 5)
+
+| Score | Description |
+|-------|-------------|
+| 1 | No click‑bait elements at all |
+| 2 | Minor sensational language, overall factual |
+| 3 | Ambiguous intent, mixed signals |
+| 4 | Strong click‑bait cues but some factual content |
+| 5 | Clear, deliberate click‑bait |
+
+*If Step 2 flagged potential click‑bait but factual detail is present, choose 3 or 4. If the text relies solely on sensational cues, choose 5.*
+
+---
+
+### Tips & Cautions  
+- Don’t base the decision only on capitalization or punctuation; consider overall context and domain.  
+- Avoid over‑labeling headlines that use common click‑bait words (e.g., “discover”, “secret”) when they belong to legitimate information pieces.  
+- For political or breaking‑news content, treat urgency carefully—urgency alone isn’t click‑bait.  
+- When ambiguous, lean toward a lower score and explain the uncertainty in your reasoning.
+
+**Follow this structure to produce a consistent, nuanced classification for each input.**
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "Local bakery uses secret ingredient to create the best bread in town"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "Can You Identify These Pop Artists By An Anagram Of Their Name"
+Label: Yes
+
+Text: "You Won't Believe What Happens Next in This Video!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), 5, np.int64(6), 7},
+  examplers_idx_used: {np.int64(0), np.int64(5), np.int64(8), 13, 14, 15},
+  parent_score: 0,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Task**  
+Determine whether the supplied text is clickbait and give a brief justification.
+
+**Procedure**  
+1. Identify the text’s domain or genre (e.g., news, entertainment, marketing). If it’s not clear, treat it as general media.  
+2. Look for common clickbait markers:  
+   * Excessive or sensational punctuation,  
+   * All‑caps wording,  
+   * Phrases such as “you won’t believe,” “shocking,” “must see,” or promises of hidden revelations.  
+3. If any of these cues appear, evaluate whether the headline uses a curiosity‑driven hook without providing concrete information or offers an exaggerated payoff.  
+4. If the statement is straightforward and lacks a sensational hook, classify it as non‑clickbait.  
+5. Take context into account: political or urgent news may use strong language but isn’t necessarily clickbait; marketing copy may be sensational yet not manipulative if it directly advertises a product.  
+6. When uncertainty persists, default to “No” unless the headline clearly seeks to manipulate curiosity.  
+
+**Answer Format**  
+Return a single word, “Yes” or “No,” followed by one sentence explaining the decision. Avoid relying solely on capitalization or punctuation; instead focus on the intent to attract attention. If the text contains high‑frequency clickbait words but lacks emotional or curiosity‑driven content, classify it as non‑clickbait.
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "What Happens When You Stop Checking Your Phone for 24 Hours?"
+Label: Yes
+
+Text: "12 Signs You Grew Up Next To A Slate Quarry"
+Label: Yes
+
+Text: "Wiz Khalifa Sang Over Adele's \"Hello\" To Create The Perfect Stoner Anthem"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(5), np.int64(6), 44, 45, 46},
+  examplers_idx_used: {34, 35, 36, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0.890625,
+  score: 0.90625), Prompt(
+  prompt: # Task
+**Task**  
+Determine whether the supplied text is clickbait and give a brief justification.
+
+**Procedure**  
+1. Identify the text’s domain or genre (e.g., news, entertainment, marketing). If it’s not clear, treat it as general media.  
+2. Look for common clickbait markers:  
+   * Excessive or sensational punctuation,  
+   * All‑caps wording,  
+   * Phrases such as “you won’t believe,” “shocking,” “must see,” or promises of hidden revelations.  
+3. If any of these cues appear, evaluate whether the headline uses a curiosity‑driven hook without providing concrete information or offers an exaggerated payoff.  
+4. If the statement is straightforward and lacks a sensational hook, classify it as non‑clickbait.  
+5. Take context into account: political or urgent news may use strong language but isn’t necessarily clickbait; marketing copy may be sensational yet not manipulative if it directly advertises a product.  
+6. When uncertainty persists, default to “No” unless the headline clearly seeks to manipulate curiosity.  
+
+**Answer Format**  
+Return a single word, “Yes” or “No,” followed by one sentence explaining the decision. Avoid relying solely on capitalization or punctuation; instead focus on the intent to attract attention. If the text contains high‑frequency clickbait words but lacks emotional or curiosity‑driven content, classify it as non‑clickbait.
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "What Happens When You Stop Checking Your Phone for 24 Hours?"
+Label: Yes
+
+Text: "12 Signs You Grew Up Next To A Slate Quarry"
+Label: Yes
+
+Text: "Wiz Khalifa Sang Over Adele's \"Hello\" To Create The Perfect Stoner Anthem"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(7), 44, 45, 46},
+  examplers_idx_used: {34, 35, 36, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0.890625,
+  score: 0.90625))
+Training accuracy: (0.96875, 0.9375, 0.90625, 0.90625)
+Validation accuracy: [0.91, 0.86, 0.83, 0.85]
+Test accuracy: [0.91, 0.88, 0.88, 0.875]
+======== ROUND 3
+Time: 773.6634805202484
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.9375), Prompt(
+  prompt: # Task
+**Task**  
+Determine whether the supplied text is clickbait and give a brief justification.
+
+**Procedure**  
+1. Identify the text’s domain or genre (e.g., news, entertainment, marketing). If it’s not clear, treat it as general media.  
+2. Look for common clickbait markers:  
+   * Excessive or sensational punctuation,  
+   * All‑caps wording,  
+   * Phrases such as “you won’t believe,” “shocking,” “must see,” or promises of hidden revelations.  
+3. If any of these cues appear, evaluate whether the headline uses a curiosity‑driven hook without providing concrete information or offers an exaggerated payoff.  
+4. If the statement is straightforward and lacks a sensational hook, classify it as non‑clickbait.  
+5. Take context into account: political or urgent news may use strong language but isn’t necessarily clickbait; marketing copy may be sensational yet not manipulative if it directly advertises a product.  
+6. When uncertainty persists, default to “No” unless the headline clearly seeks to manipulate curiosity.  
+
+**Answer Format**  
+Return a single word, “Yes” or “No,” followed by one sentence explaining the decision. Avoid relying solely on capitalization or punctuation; instead focus on the intent to attract attention. If the text contains high‑frequency clickbait words but lacks emotional or curiosity‑driven content, classify it as non‑clickbait.
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "What Happens When You Stop Checking Your Phone for 24 Hours?"
+Label: Yes
+
+Text: "12 Signs You Grew Up Next To A Slate Quarry"
+Label: Yes
+
+Text: "Wiz Khalifa Sang Over Adele's \"Hello\" To Create The Perfect Stoner Anthem"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(5), np.int64(6), 44, 45, 46},
+  examplers_idx_used: {34, 35, 36, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0.890625,
+  score: 0.90625), Prompt(
+  prompt: # Task
+**Task**  
+Determine whether the supplied text is clickbait and give a brief justification.
+
+**Procedure**  
+1. Identify the text’s domain or genre (e.g., news, entertainment, marketing). If it’s not clear, treat it as general media.  
+2. Look for common clickbait markers:  
+   * Excessive or sensational punctuation,  
+   * All‑caps wording,  
+   * Phrases such as “you won’t believe,” “shocking,” “must see,” or promises of hidden revelations.  
+3. If any of these cues appear, evaluate whether the headline uses a curiosity‑driven hook without providing concrete information or offers an exaggerated payoff.  
+4. If the statement is straightforward and lacks a sensational hook, classify it as non‑clickbait.  
+5. Take context into account: political or urgent news may use strong language but isn’t necessarily clickbait; marketing copy may be sensational yet not manipulative if it directly advertises a product.  
+6. When uncertainty persists, default to “No” unless the headline clearly seeks to manipulate curiosity.  
+
+**Answer Format**  
+Return a single word, “Yes” or “No,” followed by one sentence explaining the decision. Avoid relying solely on capitalization or punctuation; instead focus on the intent to attract attention. If the text contains high‑frequency clickbait words but lacks emotional or curiosity‑driven content, classify it as non‑clickbait.
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "What Happens When You Stop Checking Your Phone for 24 Hours?"
+Label: Yes
+
+Text: "12 Signs You Grew Up Next To A Slate Quarry"
+Label: Yes
+
+Text: "Wiz Khalifa Sang Over Adele's \"Hello\" To Create The Perfect Stoner Anthem"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(7), 44, 45, 46},
+  examplers_idx_used: {34, 35, 36, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0.890625,
+  score: 0.90625), Prompt(
+  prompt: # Task
+**Task:**  
+Decide if the given headline or short paragraph is click‑bait. Use a step‑by‑step, conditional method that adapts to the type of content and its style.
+
+---
+
+### Step 1 – Identify the domain and tone  
+| Domain | What to look for |
+|--------|------------------|
+| **News** | Mentions of a current event, official statement, or factual report. |
+| **Entertainment/Marketing** | Topics on pop culture, wellness, lifestyle, or promotional material. |
+| **Education/Puzzle** | Puzzles, riddles, quizzes, or instructional prompts. |
+
+*Keep the identified domain in mind for the next steps.*
+
+---
+
+### Step 2 – Scan for surface‑level red flags  
+*If any of the following appear, mark the piece as **Potential Click‑bait** and jump to Step 4. Otherwise, continue to Step 3.*
+
+- Over‑use of punctuation (!!!, …)
+- All‑caps words
+- Hyperbolic adjectives (“the best”, “you’ll never believe”, etc.)
+
+---
+
+### Step 3 – Evaluate the core content and context  
+
+| Situation | Decision |
+|-----------|----------|
+| Headline is a clear, answerable question **and** the domain is *Education/Puzzle* | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *News* or *Politics*, presenting a factual claim without sensational framing | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *Entertainment/Marketing*, lacking a clear factual basis | **Click‑bait** |
+
+---
+
+### Step 4 – Resolve uncertainty with a score (1 – 5)
+
+| Score | Description |
+|-------|-------------|
+| 1 | No click‑bait elements at all |
+| 2 | Minor sensational language, overall factual |
+| 3 | Ambiguous intent, mixed signals |
+| 4 | Strong click‑bait cues but some factual content |
+| 5 | Clear, deliberate click‑bait |
+
+*If Step 2 flagged potential click‑bait but factual detail is present, choose 3 or 4. If the text relies solely on sensational cues, choose 5.*
+
+---
+
+### Tips & Cautions  
+- Don’t base the decision only on capitalization or punctuation; consider overall context and domain.  
+- Avoid over‑labeling headlines that use common click‑bait words (e.g., “discover”, “secret”) when they belong to legitimate information pieces.  
+- For political or breaking‑news content, treat urgency carefully—urgency alone isn’t click‑bait.  
+- When ambiguous, lean toward a lower score and explain the uncertainty in your reasoning.
+
+**Follow this structure to produce a consistent, nuanced classification for each input.**
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "What Happened To This Guy On \"First Dates\" Will Give Hope To Socially Anxious People Everywhere"
+Label: Yes
+
+Text: "Everybody Watching The GOP Debates Made The Same CNN Plane Joke"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "24 Times Angela Was The Funniest Character On \"The Office\""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(7), 61, 62, 63},
+  examplers_idx_used: {41, 42, 43, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0,
+  score: 0.84375))
+Training accuracy: (0.9375, 0.90625, 0.90625, 0.84375)
+Validation accuracy: [0.89, 0.84, 0.87, 0.86]
+Test accuracy: [0.91, 0.86, 0.87, 0.91]
+======== ROUND 4
+Time: 789.3974690437317
+Prompt: (Prompt(
+  prompt: # Task
+**Task:**  
+Decide if the given headline or short paragraph is click‑bait. Use a step‑by‑step, conditional method that adapts to the type of content and its style.
+
+---
+
+### Step 1 – Identify the domain and tone  
+| Domain | What to look for |
+|--------|------------------|
+| **News** | Mentions of a current event, official statement, or factual report. |
+| **Entertainment/Marketing** | Topics on pop culture, wellness, lifestyle, or promotional material. |
+| **Education/Puzzle** | Puzzles, riddles, quizzes, or instructional prompts. |
+
+*Keep the identified domain in mind for the next steps.*
+
+---
+
+### Step 2 – Scan for surface‑level red flags  
+*If any of the following appear, mark the piece as **Potential Click‑bait** and jump to Step 4. Otherwise, continue to Step 3.*
+
+- Over‑use of punctuation (!!!, …)
+- All‑caps words
+- Hyperbolic adjectives (“the best”, “you’ll never believe”, etc.)
+
+---
+
+### Step 3 – Evaluate the core content and context  
+
+| Situation | Decision |
+|-----------|----------|
+| Headline is a clear, answerable question **and** the domain is *Education/Puzzle* | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *News* or *Politics*, presenting a factual claim without sensational framing | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *Entertainment/Marketing*, lacking a clear factual basis | **Click‑bait** |
+
+---
+
+### Step 4 – Resolve uncertainty with a score (1 – 5)
+
+| Score | Description |
+|-------|-------------|
+| 1 | No click‑bait elements at all |
+| 2 | Minor sensational language, overall factual |
+| 3 | Ambiguous intent, mixed signals |
+| 4 | Strong click‑bait cues but some factual content |
+| 5 | Clear, deliberate click‑bait |
+
+*If Step 2 flagged potential click‑bait but factual detail is present, choose 3 or 4. If the text relies solely on sensational cues, choose 5.*
+
+---
+
+### Tips & Cautions  
+- Don’t base the decision only on capitalization or punctuation; consider overall context and domain.  
+- Avoid over‑labeling headlines that use common click‑bait words (e.g., “discover”, “secret”) when they belong to legitimate information pieces.  
+- For political or breaking‑news content, treat urgency carefully—urgency alone isn’t click‑bait.  
+- When ambiguous, lean toward a lower score and explain the uncertainty in your reasoning.
+
+**Follow this structure to produce a consistent, nuanced classification for each input.**
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "This Woman Had The Best Response When Her Husband Asked What Was On Her Mind"
+Label: Yes
+
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(44), 89, 90, 91},
+  examplers_idx_used: {66, 67, 68, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0,
+  score: 0.96875), Prompt(
+  prompt: # Task
+**Task:**  
+Decide if the given headline or short paragraph is click‑bait. Use a step‑by‑step, conditional method that adapts to the type of content and its style.
+
+---
+
+### Step 1 – Identify the domain and tone  
+| Domain | What to look for |
+|--------|------------------|
+| **News** | Mentions of a current event, official statement, or factual report. |
+| **Entertainment/Marketing** | Topics on pop culture, wellness, lifestyle, or promotional material. |
+| **Education/Puzzle** | Puzzles, riddles, quizzes, or instructional prompts. |
+
+*Keep the identified domain in mind for the next steps.*
+
+---
+
+### Step 2 – Scan for surface‑level red flags  
+*If any of the following appear, mark the piece as **Potential Click‑bait** and jump to Step 4. Otherwise, continue to Step 3.*
+
+- Over‑use of punctuation (!!!, …)
+- All‑caps words
+- Hyperbolic adjectives (“the best”, “you’ll never believe”, etc.)
+
+---
+
+### Step 3 – Evaluate the core content and context  
+
+| Situation | Decision |
+|-----------|----------|
+| Headline is a clear, answerable question **and** the domain is *Education/Puzzle* | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *News* or *Politics*, presenting a factual claim without sensational framing | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *Entertainment/Marketing*, lacking a clear factual basis | **Click‑bait** |
+
+---
+
+### Step 4 – Resolve uncertainty with a score (1 – 5)
+
+| Score | Description |
+|-------|-------------|
+| 1 | No click‑bait elements at all |
+| 2 | Minor sensational language, overall factual |
+| 3 | Ambiguous intent, mixed signals |
+| 4 | Strong click‑bait cues but some factual content |
+| 5 | Clear, deliberate click‑bait |
+
+*If Step 2 flagged potential click‑bait but factual detail is present, choose 3 or 4. If the text relies solely on sensational cues, choose 5.*
+
+---
+
+### Tips & Cautions  
+- Don’t base the decision only on capitalization or punctuation; consider overall context and domain.  
+- Avoid over‑labeling headlines that use common click‑bait words (e.g., “discover”, “secret”) when they belong to legitimate information pieces.  
+- For political or breaking‑news content, treat urgency carefully—urgency alone isn’t click‑bait.  
+- When ambiguous, lean toward a lower score and explain the uncertainty in your reasoning.
+
+**Follow this structure to produce a consistent, nuanced classification for each input.**
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "This Woman Had The Best Response When Her Husband Asked What Was On Her Mind"
+Label: Yes
+
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(44), 89, 90, 91},
+  examplers_idx_used: {66, 67, 68, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0,
+  score: 0.96875), Prompt(
+  prompt: # Task
+**Task:**  
+Decide if the given headline or short paragraph is click‑bait. Use a step‑by‑step, conditional method that adapts to the type of content and its style.
+
+---
+
+### Step 1 – Identify the domain and tone  
+| Domain | What to look for |
+|--------|------------------|
+| **News** | Mentions of a current event, official statement, or factual report. |
+| **Entertainment/Marketing** | Topics on pop culture, wellness, lifestyle, or promotional material. |
+| **Education/Puzzle** | Puzzles, riddles, quizzes, or instructional prompts. |
+
+*Keep the identified domain in mind for the next steps.*
+
+---
+
+### Step 2 – Scan for surface‑level red flags  
+*If any of the following appear, mark the piece as **Potential Click‑bait** and jump to Step 4. Otherwise, continue to Step 3.*
+
+- Over‑use of punctuation (!!!, …)
+- All‑caps words
+- Hyperbolic adjectives (“the best”, “you’ll never believe”, etc.)
+
+---
+
+### Step 3 – Evaluate the core content and context  
+
+| Situation | Decision |
+|-----------|----------|
+| Headline is a clear, answerable question **and** the domain is *Education/Puzzle* | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *News* or *Politics*, presenting a factual claim without sensational framing | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *Entertainment/Marketing*, lacking a clear factual basis | **Click‑bait** |
+
+---
+
+### Step 4 – Resolve uncertainty with a score (1 – 5)
+
+| Score | Description |
+|-------|-------------|
+| 1 | No click‑bait elements at all |
+| 2 | Minor sensational language, overall factual |
+| 3 | Ambiguous intent, mixed signals |
+| 4 | Strong click‑bait cues but some factual content |
+| 5 | Clear, deliberate click‑bait |
+
+*If Step 2 flagged potential click‑bait but factual detail is present, choose 3 or 4. If the text relies solely on sensational cues, choose 5.*
+
+---
+
+### Tips & Cautions  
+- Don’t base the decision only on capitalization or punctuation; consider overall context and domain.  
+- Avoid over‑labeling headlines that use common click‑bait words (e.g., “discover”, “secret”) when they belong to legitimate information pieces.  
+- For political or breaking‑news content, treat urgency carefully—urgency alone isn’t click‑bait.  
+- When ambiguous, lean toward a lower score and explain the uncertainty in your reasoning.
+
+**Follow this structure to produce a consistent, nuanced classification for each input.**
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "This Woman Had The Best Response When Her Husband Asked What Was On Her Mind"
+Label: Yes
+
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(44), 89, 90, 91},
+  examplers_idx_used: {66, 67, 68, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0,
+  score: 0.96875), Prompt(
+  prompt: # Task
+**Task:**  
+Decide if the given headline or short paragraph is click‑bait. Use a step‑by‑step, conditional method that adapts to the type of content and its style.
+
+---
+
+### Step 1 – Identify the domain and tone  
+| Domain | What to look for |
+|--------|------------------|
+| **News** | Mentions of a current event, official statement, or factual report. |
+| **Entertainment/Marketing** | Topics on pop culture, wellness, lifestyle, or promotional material. |
+| **Education/Puzzle** | Puzzles, riddles, quizzes, or instructional prompts. |
+
+*Keep the identified domain in mind for the next steps.*
+
+---
+
+### Step 2 – Scan for surface‑level red flags  
+*If any of the following appear, mark the piece as **Potential Click‑bait** and jump to Step 4. Otherwise, continue to Step 3.*
+
+- Over‑use of punctuation (!!!, …)
+- All‑caps words
+- Hyperbolic adjectives (“the best”, “you’ll never believe”, etc.)
+
+---
+
+### Step 3 – Evaluate the core content and context  
+
+| Situation | Decision |
+|-----------|----------|
+| Headline is a clear, answerable question **and** the domain is *Education/Puzzle* | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *News* or *Politics*, presenting a factual claim without sensational framing | **Non‑Click‑bait** |
+| Headline is a question or exclamation **and** the domain is *Entertainment/Marketing*, lacking a clear factual basis | **Click‑bait** |
+
+---
+
+### Step 4 – Resolve uncertainty with a score (1 – 5)
+
+| Score | Description |
+|-------|-------------|
+| 1 | No click‑bait elements at all |
+| 2 | Minor sensational language, overall factual |
+| 3 | Ambiguous intent, mixed signals |
+| 4 | Strong click‑bait cues but some factual content |
+| 5 | Clear, deliberate click‑bait |
+
+*If Step 2 flagged potential click‑bait but factual detail is present, choose 3 or 4. If the text relies solely on sensational cues, choose 5.*
+
+---
+
+### Tips & Cautions  
+- Don’t base the decision only on capitalization or punctuation; consider overall context and domain.  
+- Avoid over‑labeling headlines that use common click‑bait words (e.g., “discover”, “secret”) when they belong to legitimate information pieces.  
+- For political or breaking‑news content, treat urgency carefully—urgency alone isn’t click‑bait.  
+- When ambiguous, lean toward a lower score and explain the uncertainty in your reasoning.
+
+**Follow this structure to produce a consistent, nuanced classification for each input.**
+
+# Exemplar
+Text: "How to Make $10,000 a Day from Home Without Any Experience"
+Label: Yes
+
+Text: "This New App Is Changing the Way We Communicate – Find Out How"
+Label: Yes
+
+Text: "Here's How To Do Therapy On Yourself, According To A Therapist"
+Label: Yes
+
+Text: "The History of the Olympic Games: From Ancient Greece to Today"
+Label: No
+
+Text: "This Woman Had The Best Response When Her Husband Asked What Was On Her Mind"
+Label: Yes
+
+Text: "22 Words That Have A Totally Different Meaning In Austin"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(44), 89, 90, 91},
+  examplers_idx_used: {66, 67, 68, np.int64(13), np.int64(14), np.int64(15)},
+  parent_score: 0,
+  score: 0.96875))
+Training accuracy: (0.96875, 0.96875, 0.96875, 0.96875)
+Validation accuracy: [0.88, 0.86, 0.89, 0.86]
+Test accuracy: [0.9, 0.915, 0.91, 0.925]

@@ -1,0 +1,1425 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-9-12.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 14.346127986907959
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.54296875),)
+Training accuracy: (0.54296875,)
+Validation accuracy: [0.5555555555555556]
+Test accuracy: [0.561822125813449]
+======== ROUND 1
+Time: 139.07830429077148
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the Statement includes a falsehood (Yes) or conveys accurate information (No), taking into account the Context, the speaker's position, political leaning, and general understanding of related topics. Focus especially on the interpretation of statistical assertions and broad generalizations, making sure the assessment considers possible overstatements or distortions. Also, be aware that statements within political or economic debates might contain subjective views or cherry-picked facts, and categorize them appropriately.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(10), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.54296875,
+  score: 0.6484375), Prompt(
+  prompt: # Task
+Assess if the Statement includes a falsehood (Yes) or conveys accurate information (No), taking into account the Context, the speaker's position, their political affiliation, and general understanding of related topics. Carefully analyze statistical assertions and broad claims to ensure that any possible inflation or misrepresentation is identified. Also, understand that in discussions about politics or economics, statements might reflect subjective viewpoints or selectively presented facts; classify them appropriately based on this understanding.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(10), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.54296875,
+  score: 0.640625), Prompt(
+  prompt: # Task
+Assess if the Statement includes a falsehood (Yes) or conveys accurate data (No), taking into account the Scenario, the speaker’s position, their affiliation with any groups, and general understanding of related topics. Be especially careful with how statistical assertions and broad claims are interpreted, making sure the assessment takes into consideration any possible overstatements or distortions. Also, be aware that declarations within political or financial talks might include personal judgments or cherry-picked details, and categorize them appropriately.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(10), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.54296875,
+  score: 0.63671875), Prompt(
+  prompt: # Task
+Assess whether the Statement is designed to deliberately mislead or contains factual errors (Yes), or it is accurate (No), by referencing the provided Context and other verifiable information. Take into account the purpose of the Statement and determine if there has been any intentional omission or alteration of facts to deceive.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), 11, np.int64(12), np.int64(13), np.int64(14), 15},
+  parent_score: 0.54296875,
+  score: 0.6302083333333334))
+Training accuracy: (0.6484375, 0.640625, 0.63671875, 0.6302083333333334)
+Validation accuracy: [0.6368563685636857, 0.6395663956639567, 0.6341463414634146, 0.6287262872628726]
+Test accuracy: [0.6225596529284165, 0.6073752711496746, 0.6073752711496746, 0.6073752711496746]
+======== ROUND 2
+Time: 313.36779284477234
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the Statement includes a falsehood (Yes) or conveys accurate data (No), taking into account the Scenario, the speaker’s position, their affiliation with any groups, and general understanding of related topics. Be especially careful with how statistical assertions and broad claims are interpreted, making sure the assessment takes into consideration any possible overstatements or distortions. Also, be aware that declarations within political or financial talks might include personal judgments or cherry-picked details, and categorize them appropriately.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(10), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.54296875,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Assess if the Statement includes a falsehood (Yes) or conveys accurate information (No), taking into account the Context, the speaker's position, political leaning, and general understanding of related topics. Focus especially on the interpretation of statistical assertions and broad generalizations, making sure the assessment considers possible overstatements or distortions. Also, be aware that statements within political or economic debates might contain subjective views or cherry-picked facts, and categorize them appropriately.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(10), np.int64(11), np.int64(12), 13, 14, 15},
+  parent_score: 0.54296875,
+  score: 0.6796875), Prompt(
+  prompt: # Task
+Assess whether the Statement includes deliberate misdirection or factual errors (Yes), or if it is based on correct facts (No). Use the given Context along with trustworthy data sources for your assessment. Take into account if the Statement leaves out pertinent details, twists the truth, or provides information in a potentially confusing or deceptive manner. Also, scrutinize the reliability of the source and the overall setting of the Statement to achieve an accurate and impartial evaluation.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(32), np.int64(2), 65, np.int64(8), np.int64(17), 62, 61, np.int64(30), 63},
+  parent_score: 0.6302083333333334,
+  score: 0.6770833333333334), Prompt(
+  prompt: # Task
+Assess whether the Statement contains a falsehood (Yes) or presents accurate information (No), considering the provided Context, the speaker’s role, their political affiliation, and general knowledge of relevant topics. Carefully examine statistical claims and broad statements to identify any misrepresentation or exaggeration. When evaluating a statement, focus on verifiable facts rather than subjective viewpoints or selective presentation of data. A falsehood occurs when there is a clear discrepancy between the statement and factual evidence, or when critical information is omitted to create a misleading impression. Ensure your assessment reflects the balance between factual accuracy and the speaker's potential bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), 41, 42, 43, 44, 45, np.int64(17), np.int64(21), np.int64(28), np.int64(29)},
+  parent_score: 0.640625,
+  score: 0.671875))
+Training accuracy: (0.6875, 0.6796875, 0.6770833333333334, 0.671875)
+Validation accuracy: [0.6341463414634146, 0.6368563685636857, 0.6178861788617886, 0.6341463414634146]
+Test accuracy: [0.6073752711496746, 0.6225596529284165, 0.6052060737527115, 0.6268980477223427]
+======== ROUND 3
+Time: 369.2051661014557
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the Statement is factually correct (No) or misleading (Yes), taking into account the Context, the speaker's role, connections, and expertise in relevant areas. Scrutinize sweeping or statistical assertions, yet acknowledge when supporting evidence confirms the accuracy of the statement. Maintain an equilibrium in your evaluation, being neither overly trusting nor suspicious without solid grounds for doubt. Be mindful of how political or economic environments might shape the presentation of facts, though refrain from presuming that such influences inherently indicate bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(34), np.int64(7), np.int64(78), 79, 80, 81, 82, np.int64(57), np.int64(62)},
+  parent_score: 0.6875,
+  score: 0.6666666666666666), Prompt(
+  prompt: # Task
+Evaluate whether the given Statement contains an inaccuracy (Yes) or presents factual information (No), considering the Scenario, the role of the speaker, their association with specific organizations, and general knowledge about pertinent subjects. Particularly, examine how the Speaker's Occupation, Geographic Region, and Membership in a Political Party might affect the interpretation of the Statement. Scrutinize statistical claims and sweeping assertions for potential exaggeration or misrepresentation. Acknowledge that statements in political or economic contexts may incorporate subjective perspectives or be tailored with selectivity, and classify them appropriately. Furthermore, give careful thought to the Setting in which the Statement was uttered, such as during media coverage, interviews, or formal announcements, as these scenarios offer essential context that can influence the Statement's reliability.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(36), np.int64(73), 78, 79, 80, np.int64(81), 82, np.int64(50)},
+  parent_score: 0.6875,
+  score: 0.640625), Prompt(
+  prompt: # Task
+Assess if the Statement is factually accurate (No) or includes inaccuracies (Yes), taking into account the Context, the Speaker's role, Affiliations, and expertise in relevant areas. Scrutinize general or statistical claims critically, while acknowledging when there is substantial support for the statement's accuracy. Strive for an evaluation that is neither overly skeptical nor blindly accepting, only concluding with inaccuracies when there is definitive proof. Be mindful of how political or economic backgrounds might shape the presentation of information without presuming such backgrounds necessarily imply bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(34), np.int64(7), np.int64(78), 79, 80, 81, 82, np.int64(57), np.int64(62)},
+  parent_score: 0.6875,
+  score: 0.640625), Prompt(
+  prompt: # Task
+Determine if the Claim contains an untruth (Yes) or presents factual information (No), taking into account the Situation, the speaker’s standpoint, political inclination, and overall expertise in relevant areas. Pay particular attention to the interpretation of statistical claims and sweeping generalizations, ensuring your judgment accounts for potential exaggerations or misrepresentations. Analyze whether the claim represents a biased view of the facts or an outright lie. Consider the reliability of the source and the kind of assertion made (subjective or objective). Recognize that political or economic discussions frequently encompass personal opinions or selectively chosen data; classify these statements accordingly based on their consistency with proven facts.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(81), np.int64(30), np.int64(23), 90, 91, 92, 93, 94, np.int64(63)},
+  parent_score: 0.6796875,
+  score: 0.640625))
+Training accuracy: (0.6666666666666666, 0.640625, 0.640625, 0.640625)
+Validation accuracy: [0.6666666666666666, 0.6368563685636857, 0.6476964769647696, 0.6395663956639567]
+Test accuracy: [0.6616052060737527, 0.6182212581344902, 0.6247288503253796, 0.6637744034707158]
+======== ROUND 4
+Time: 349.09871459007263
+Prompt: (Prompt(
+  prompt: # Task
+Determine if the Claim contains an untruth (Yes) or presents factual information (No), taking into account the Situation, the speaker’s standpoint, political inclination, and overall expertise in relevant areas. Pay particular attention to the interpretation of statistical claims and sweeping generalizations, ensuring your judgment accounts for potential exaggerations or misrepresentations. Analyze whether the claim represents a biased view of the facts or an outright lie. Consider the reliability of the source and the kind of assertion made (subjective or objective). Recognize that political or economic discussions frequently encompass personal opinions or selectively chosen data; classify these statements accordingly based on their consistency with proven facts.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(5), np.int64(81), np.int64(30), np.int64(23), 90, 91, 92, 93, 94, np.int64(63)},
+  parent_score: 0.6796875,
+  score: 0.6785714285714286), Prompt(
+  prompt: # Task
+Evaluate whether the Statement is accurately presented (No) or potentially deceptive (Yes), considering the Background, the speaker’s position, associations, and knowledge in pertinent fields. Examine broad or data-based claims critically, and also weigh the reliability of the origin and its consistency with established truths. In your assessment, take into account the possible impact of political or economic scenarios, without presuming that these automatically signify prejudice. Strive for an impartial review that refrains from automatic acceptance or skepticism of the Statement without clear justification.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(114), 116, 117, 118, 119, 120, np.int64(56), np.int64(27), np.int64(93)},
+  parent_score: 0.6666666666666666,
+  score: 0.6625), Prompt(
+  prompt: # Task
+Evaluate whether the Statement is accurate (No) or deceptive (Yes), considering the Context, the speaker’s position, relationships, and competence in pertinent fields. Carefully examine broad or statistical claims, also weighing the reliability of the source and consistency with established truths. In your assessment, take into account the potential impact of political or economic settings without assuming that these automatically imply bias. Strive for an impartial judgment that neither accepts nor rejects the statement without appropriate justification.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(10), np.int64(114), 116, 117, 118, 119, 120, np.int64(56), np.int64(27), np.int64(93)},
+  parent_score: 0.6666666666666666,
+  score: 0.6607142857142857), Prompt(
+  prompt: # Task
+Assess if the Statement is factually accurate (No) or includes inaccuracies (Yes), taking into account the Context, the Speaker's role, Affiliations, and expertise in relevant areas. Scrutinize general or statistical claims critically, while acknowledging when there is substantial support for the statement's accuracy. Strive for an evaluation that is neither overly skeptical nor blindly accepting, only concluding with inaccuracies when there is definitive proof. Be mindful of how political or economic backgrounds might shape the presentation of information without presuming such backgrounds necessarily imply bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(34), np.int64(7), np.int64(78), 79, 80, 81, 82, np.int64(57), np.int64(62)},
+  parent_score: 0.6875,
+  score: 0.6607142857142857))
+Training accuracy: (0.6785714285714286, 0.6625, 0.6607142857142857, 0.6607142857142857)
+Validation accuracy: [0.6395663956639567, 0.6287262872628726, 0.6504065040650406, 0.6476964769647696]
+Test accuracy: [0.6637744034707158, 0.6117136659436009, 0.6377440347071583, 0.6247288503253796]
+======== ROUND 5
+Time: 268.1204466819763
+Prompt: (Prompt(
+  prompt: # Task
+Determine if the Statement is factually correct (No) or contains errors (Yes), considering the Context, the Speaker’s position, Connections, and knowledge in related fields. Examine both the backing evidence and possible prejudices to make a fair assessment, steering clear of excessive doubt or unthinking acceptance. Acknowledge that some statements might have subtleties where partial truth or situational relevance can affect their overall accuracy. Take into account how political or economic contexts could influence how information is presented but do not presume this necessarily indicates bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {196, 197, 198, 199, 200, np.int64(101), np.int64(171), np.int64(114), np.int64(84), np.int64(186)},
+  parent_score: 0.6607142857142857,
+  score: 0.671875), Prompt(
+  prompt: # Task
+Evaluate if the Statement is factually correct (No) or contains errors (Yes), considering the Context, the Speaker's position, Connections, and knowledge in related fields. Analyze both supporting data and possible biases to make a fair assessment, steering clear of excessive doubt or automatic approval. Acknowledge that some statements may have subtleties where partial correctness or situational applicability can affect their overall accuracy. Take into account how political or economic settings might influence information delivery without presuming this always indicates bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {196, 197, 198, 199, 200, np.int64(101), np.int64(171), np.int64(114), np.int64(84), np.int64(186)},
+  parent_score: 0.6607142857142857,
+  score: 0.66796875), Prompt(
+  prompt: # Task
+Assess if the Statement is factually accurate (No) or includes inaccuracies (Yes), taking into account the Context, the Speaker's role, Affiliations, and expertise in relevant areas. Scrutinize general or statistical claims critically, while acknowledging when there is substantial support for the statement's accuracy. Strive for an evaluation that is neither overly skeptical nor blindly accepting, only concluding with inaccuracies when there is definitive proof. Be mindful of how political or economic backgrounds might shape the presentation of information without presuming such backgrounds necessarily imply bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(34), np.int64(7), np.int64(78), 79, 80, 81, 82, np.int64(57), np.int64(62)},
+  parent_score: 0.6875,
+  score: 0.66796875), Prompt(
+  prompt: # Task
+Assess whether the Statement is factually accurate (No) or includes inaccuracies (Yes), taking into account the Context, the Speaker's role, Affiliations, and expertise in relevant areas. Evaluate both supporting evidence and potential biases to form a balanced judgment, avoiding undue skepticism or blind acceptance. Recognize that some statements may have nuances where partial accuracy or contextual relevance can influence their overall accuracy. Consider how political or economic backgrounds might shape information presentation but do not automatically assume these imply bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {196, 197, 198, 199, 200, np.int64(101), np.int64(171), np.int64(114), np.int64(84), np.int64(186)},
+  parent_score: 0.6607142857142857,
+  score: 0.6640625))
+Training accuracy: (0.671875, 0.66796875, 0.66796875, 0.6640625)
+Validation accuracy: [0.6558265582655827, 0.6558265582655827, 0.6449864498644986, 0.6612466124661247]
+Test accuracy: [0.6355748373101953, 0.6442516268980477, 0.6247288503253796, 0.6442516268980477]
+======== ROUND 6
+Time: 362.0093231201172
+Prompt: (Prompt(
+  prompt: # Task
+Determine if the Statement is factually correct (No) or contains errors (Yes), considering the Context, the Speaker’s position, Connections, and knowledge in pertinent fields. Examine both backing data and possible prejudices to reach an impartial conclusion, being careful not to overly question or automatically believe the statement. Understand that certain statements might have subtleties where partial truthfulness or situational relevance could affect their overall accuracy. Take into account how political or economic circumstances might influence the way information is presented, but do not assume bias solely based on these contexts. Also, recognize when robust evidence confirms the factual accuracy of the statement and refrain from marking it as inaccurate out of mere skepticism.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(137), np.int64(237), 238, 239, np.int64(176), 241, 242, 240, np.int64(22)},
+  parent_score: 0.6640625,
+  score: 0.734375), Prompt(
+  prompt: # Task
+Evaluate whether the Statement is factually correct (No) or contains errors (Yes), taking into account the Context, the Role of the Speaker, their Affiliations, and their level of expertise in related fields. Examine broad or statistical assertions critically, yet recognize when there is adequate support for the statement's accuracy. Do not automatically dismiss comparative data or rankings unless there is conclusive evidence they are incorrect. Strive for a balanced approach, avoiding both extreme skepticism and uncritical acceptance; only conclude that errors exist when supported by solid proof. Consider how political or economic contexts might shape the information presented, but do not assume these contexts inevitably imply bias.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(234), 235, np.int64(204), 236, 237, np.int64(12), 238, np.int64(182), np.int64(221)},
+  parent_score: 0.66796875,
+  score: 0.7291666666666666), Prompt(
+  prompt: # Task
+Assess whether the Statement is factually accurate (No) or includes inaccuracies (Yes), taking into account the Context, the Speaker's role, Affiliations, and expertise in relevant areas. Evaluate both supporting evidence and potential biases to form a balanced judgment, ensuring to neither unduly doubt nor blindly accept the statement. Recognize that some statements may have nuances where partial accuracy or contextual relevance can influence their overall accuracy. Consider how political or economic backgrounds might shape information presentation but ensure that these factors alone do not lead to automatic assumptions of bias. Additionally, acknowledge when strong evidence supports the statement's factual accuracy and avoid labeling it as inaccurate due to skepticism alone.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(137), np.int64(237), 238, 239, np.int64(176), 241, 242, 240, np.int64(22)},
+  parent_score: 0.6640625,
+  score: 0.7265625), Prompt(
+  prompt: # Task
+Evaluate if the given Statement is factually correct (No) or contains errors (Yes), considering the Context, the Speaker’s position, Connections, and knowledge in pertinent fields. Examine the supporting data and possible prejudices to make an unbiased assessment, carefully avoiding unwarranted doubts or unquestioning acceptance of the statement. Be aware that certain statements might have subtleties where partial correctness or situational applicability could affect their overall accuracy. Take into account how political or economic contexts might influence how information is presented, but prevent these contexts from solely dictating assumptions about bias. Furthermore, recognize when solid proof substantiates the factual accuracy of the statement and refrain from incorrectly identifying it as inaccurate based on mere skepticism.
+
+# Exemplar
+Text: "Statement: All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board." Job title: Democratic National Committee chairman State: Vermont Party: democrat Context: an interview on the Rachel Maddow Show Label: Yes
+
+Text: "Statement: I have had to fill out FEC reports for the past six years now, and they're much more detailed than a tax return...
+Job title: U.S. representative
+State: Pennsylvania
+Party: republican
+Context: In an MSNBC interview"
+Label: Yes
+
+Text: "Statement: The moon is made of green cheese.
+Job title: Amateur astronomer
+State: New York
+Party: none
+Context: An online blog post."
+Label: Yes
+
+Text: "Statement: Attorney General Eric Holder is involved in the dismissal of the criminal charges against the New Black Panther Party for voter intimidation
+Job title: Fox News Channel host
+State: 
+Party: none
+Context: an online column"
+Label: Yes
+
+Text: "Statement: There are at least twice as many licensed firearm dealers in California as there are McDonalds.
+Job title: 
+State: California 
+Party: none
+Context: an email."
+Label: No
+
+Text: "Statement: The current economic policies have overwhelmingly benefited the middle class and reduced overall income inequality." Job title: Economic Adviser State: Maryland Party: democrat Context: a press conference Label: Yes
+
+Text: "Statement: Fidel (Castro) has made his preferences known in the campaign and had some very unkind things to say about me." Job title: U.S. senator State: Arizona Party: republican Context: a TV interview Label: No
+
+Text: "Statement: Says the United States is the only nation that affords citizenship to anyone born here, whether you are here legally or illegally.
+Job title: U.S. House of Representatives
+State: Texas
+Party: republican
+Context: a conference call with reporters."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(137), np.int64(237), 238, 239, np.int64(176), 241, 242, 240, np.int64(22)},
+  parent_score: 0.6640625,
+  score: 0.7265625))
+Training accuracy: (0.734375, 0.7291666666666666, 0.7265625, 0.7265625)
+Validation accuracy: [0.6666666666666666, 0.6639566395663956, 0.6558265582655827, 0.6666666666666666]
+Test accuracy: [0.6550976138828634, 0.6420824295010846, 0.648590021691974, 0.6594360086767896]

@@ -1,189 +1,110 @@
-# Automatic Prompt Optimization with "Gradient Descent" and Beam Search
+# Extending "Automatic Prompt Optimization with "Gradient Descent" and Beam Search": Exemplar Optimization for Prompting
 
-[![EMNLP 2023](https://img.shields.io/badge/EMNLP-2023-blue)](https://arxiv.org/abs/2305.03495)
+This repository presents an extension to the paper  
+**Automatic Prompt Optimization with "Gradient Descent" and Beam Search**  
+([EMNLP 2023](https://arxiv.org/abs/2305.03495)).
 
-## Overview
+Our work builds on the original **ProTeGi** framework by introducing an explicit **exemplar optimization stage**, aiming to further improve prompt effectiveness while controlling prompt length and redundancy.
 
-This is the official implementation of [Automatic Prompt Optimization with "Gradient Descent" and Beam Search](https://arxiv.org/abs/2305.03495) (EMNLP 2023).
+---
 
-The ProTeGi program provides a comprehensive framework for optimizing and evaluating prompts in text generation tasks. The program supports:
+## Background
 
-## Quick Start
+The original ProTeGi framework provides a principled pipeline for automatic prompt optimization, combining:
+- Gradient-based instruction refinement
+- Beam search over prompt candidates
+- Evaluation-driven optimization
 
-### Installation
+While effective, ProTeGi does not explicitly optimize exemplars. The original ProTeGi framework focuses on optimizing the instruction prompt via gradient-based updates and beam search. Exemplar selection, when used, is treated as fixed or externally provided and is not part of the optimization objective.
 
-```bash
-# Clone the repository
-git clone <repository-url>
-cd <repository-name>
+---
 
-# Install dependencies
-pip install -r requirements.txt
-```
+## Our Contribution: Exemplar Optimization via Genetic Search
 
-### Basic Usage
+We augment the original pipeline with a **genetic algorithm–based exemplar selection module**.
 
-Run an experiment with UCB bandits for candidate selection:
+The goal is to select a set of exemplars that:
+- Maximizes downstream task performance
+- Penalizes excessive prompt length
+- Encourages diversity among exemplars to reduce redundancy and overfitting
 
-```bash
-time python main.py \
-  --task ethos \
-  --prompts prompts/ethos.md \
-  --data_dir data/ethos \
-  --out expt7_datasets/treatment.ucb.ethos.out \
-  --evaluator ucb
-```
+Each individual in the genetic population represents a **candidate exemplar set**, which is evolved using selection and mutation operators.
 
-This command will:
+---
 
-- Run an optimization experiment using UCB bandits
-- Print configuration settings
-- Provide progress updates for each optimization round
-- Write results (candidate prompts and scores) to the specified output file
+## Results
 
-## Command Line Arguments
+<table>
+<tr>
+<td valign="top">
 
-### Required Arguments
+<h3>Qwen3-14B</h3>
 
-| Argument     | Description                    | Example                                  |
-| ------------ | ------------------------------ | ---------------------------------------- |
-| `--task`     | Task name                      | `ethos`, `jailbreak`                     |
-| `--prompts`  | Path to prompt markdown file   | `prompts/ethos.md`                       |
-| `--data_dir` | Directory containing task data | `data/ethos`                             |
-| `--out`      | Output file path for results   | `expt7_datasets/treatment.ucb.ethos.out` |
+<table>
+  <tr>
+    <th>Task</th>
+    <th>ProTeGi</th>
+    <th>Ours</th>
+  </tr>
+  <tr><td>Liar</td><td>0.57</td><td><b>0.61</b></td></tr>
+  <tr><td>Ethos</td><td>0.85</td><td><b>0.88</b></td></tr>
+  <tr><td>Casual judgement</td><td>0.63</td><td><b>0.68</b></td></tr>
+  <tr><td>Web of lies</td><td><b>0.54</b></td><td>0.53</td></tr>
+  <tr><td>Sports understanding</td><td><b>0.82</b></td><td>0.80</td></tr>
+  <tr><td>Boolean expressions</td><td>0.82</td><td><b>0.89</b></td></tr>
+  <tr><td><b>Average</b></td><td>0.70</td><td><b>0.73</b></td></tr>
+</table>
 
-### Optional Arguments
+</td>
 
-| Argument        | Description                   | Default        |
-| --------------- | ----------------------------- | -------------- |
-| `--evaluator`   | Evaluation strategy           | `ucb`          |
-| `--max_threads` | Maximum number of threads     | System default |
-| `--beam_size`   | Beam size for search          | -              |
-| `--num_rounds`  | Number of optimization rounds | -              |
+<td style="width:20px;"></td>
 
-### View All Options
+<td valign="top">
 
-To see the complete list of available arguments:
+<h3>Qwen2.5-32B-Instruct-AWQ</h3>
 
-```bash
-python main.py --help
-```
+<table>
+  <tr>
+    <th>Task</th>
+    <th>ProTeGi</th>
+    <th>Ours</th>
+  </tr>
+  <tr><td>Liar</td><td>0.64</td><td><b>0.67</b></td></tr>
+  <tr><td>Ethos</td><td>0.89</td><td><b>0.90</b></td></tr>
+  <tr><td>Casual judgement</td><td><b>0.70</b></td><td>0.69</td></tr>
+  <tr><td>Web of lies</td><td>0.66</td><td><b>0.72</b></td></tr>
+  <tr><td>Sports understanding</td><td>0.79</td><td><b>0.82</b></td></tr>
+  <tr><td>Boolean expressions</td><td>0.83</td><td><b>0.90</b></td></tr>
+  <tr><td><b>Average</b></td><td>0.75</td><td><b>0.78</b></td></tr>
+</table>
 
-## Project Structure
+</td>
+</tr>
+</table>
 
-```
-.
-├── main.py              # Main entry point
-├── prompts/             # Prompt templates
-│   └── ethos.md
-├── data/                # Task datasets
-│   └── ethos/
-└── expt7_datasets/      # Experiment outputs
-```
+<p><i>*All results are reported using accuracy.</i></p>
 
-## Output
+---
 
-The program generates results including:
+## Notes
 
-- Optimized candidate prompts
-- Associated performance scores
-- Optimization progress metrics
-- Detailed logs and statistics
+- This repository is **not an official ProTeGi implementation**.
+- The code is intended as a **research exploration** of exemplar optimization.
 
-## Examples
+---
 
-### Example 1: Ethos Task with UCB
+## Acknowledgements
 
-```bash
-python main.py \
-  --task ethos \
-  --prompts prompts/ethos.md \
-  --data_dir data/ethos \
-  --out results/ethos_ucb.out \
-  --evaluator ucb
-```
+This work is inspired by and builds upon:
 
-### Example 2: Jailbreak Task
+> **Automatic Prompt Optimization with "Gradient Descent" and Beam Search**  
+> EMNLP 2023  
+> https://arxiv.org/abs/2305.03495
 
-```bash
-python main.py \
-  --task jailbreak \
-  --prompts prompts/jailbreak.md \
-  --data_dir data/jailbreak \
-  --out results/jailbreak.out
-```
+We thank the original authors for making their work publicly available.
+
+---
 
 ## Citation
 
-If you use this code in your research, please cite:
-
-```bibtex
-@inproceedings{protegi2023,
-  title={Automatic Prompt Optimization with "Gradient Descent" and Beam Search},
-  author={Your Name},
-  booktitle={EMNLP},
-  year={2023}
-}
-```
-
-## License
-
-[Add your license information here]
-
-## Contact
-
-[Add contact information or links to issues/discussions]
-
-## Acknowledgments
-
-[Add any acknowledgments here]
-
-## Running Reflection-based Optimization (But not optimization huhuhu)
-
-### Basic Usage with Reflection
-
-```bash
-python main.py \
-  --task ethos \
-  --prompts prompts/ethos.md \
-  --data_dir data/ethos \
-  --reflect_gradients \
-  --reflect_candidates \
-  --reflection_candidate_threshold 0.5 \
-  --reflection_gradient_passes 1
-```
-
-### Reflection Parameters
-
-| Argument                           | Description                            | Default |
-| ---------------------------------- | -------------------------------------- | ------- |
-| `--reflect_gradients`              | Apply reflection to textual gradients  | `False` |
-| `--reflect_candidates`             | Filter prompts using reflection scores | `False` |
-| `--reflection_candidate_threshold` | Minimum score to keep prompt           | `0.5`   |
-| `--reflection_gradient_passes`     | Number of gradient reflection passes   | `1`     |
-| `--reflection_temperature`         | Temperature for reflection calls       | `0.0`   |
-
-### ⚠️ Overfitting Considerations
-
-The reflection process can lead to overfitting issues:
-
-1. **Performance Gap**
-
-   - High scores on training data (>90%)
-   - Significantly lower performance on test set
-   - Gap increases with more reflection passes
-
-2. **Common Issues**
-   - Reflection becomes too specific to training examples
-   - Reduced generalization on unseen cases
-   - Over-optimization of reflection scores
-
-### Best Practices
-
-To minimize overfitting:
-
-- Use lower reflection thresholds (0.3-0.4)
-- Limit reflection passes to 1
-- Implement cross-validation
-- Regular test set performance monitoring
-- Balance reflection intensity with generalization needs
+If you find this work useful, please consider citing the original ProTeGi paper.

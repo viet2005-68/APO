@@ -1,0 +1,150 @@
+{"task": "casual_judgement", "data_dir": "data/casual_judgement", "prompts": "prompts/casual_judgement.md", "out": "experiments/casual_judgement.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 12.492202043533325
+Prompt: ('# Task\nExamine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.7432432432432432),)
+Test accuracy: [0.6814159292035398]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 154.2681164741516
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is not on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it's not. So, he changes the position of the device, and he puts it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne changed the position of the device?
+Label: Yes
+Text: Drew, Kylie, Oliver, and Jen are regular customers at a small, local coffee shop. Given the selling price of the coffee and the cost of daily operation, the coffee shop will turn a profit if anyone orders coffee on a given day. Only one person ordering coffee is needed for the coffee shop to turn a profit that day. Drew, Kylie, Oliver, and Jen all usually order coffee on Tuesdays. This Tuesday, as usual, Drew ordered coffee. The same day, Kylie ordered coffee, Oliver ordered coffee, and Jen also ordered coffee. Since at least one person ordered coffee on Tuesday, the coffee shop made a profit that day. Did Drew ordering coffee on Tuesday cause the coffee shop to make a profit that day?
+Label: Yes
+Text: There is a man who gets paid for pumping water into a cistern thereby replenishing the supply of drinking water in a nearby house. Unfortunately for the inhabitants of the house, the water that the man is pumping into the cistern today has been systematically contaminated with a lethal poison whose effects are unnoticeable until they can no longer be cured. Even though the man pumping the water had nothing to do with poisoning the water, he knows that the water has been poisoned. Nevertheless, the man pumps the water into the cistern knowing that it will poison and kill the inhabitants. But, he neither wants to kill them nor does he aim to do so, he simply wants to do his job and get paid. He views the death of the inhabitants as an unfortunate by-product of his pumping water into the cistern. Did the man intentionally poison the inhabitants?
+Label: Yes
+Text: Todd, Anne, Jason, and Steph all share an account for a popular online television streaming service. In addition to keeping the account constantly logged in on their TV, they also use the same account on their laptops. Because the provider of this streaming service wants to increase the amount of active accounts in order to increase profits, they have begun to monitor the number of devices using a single account at once. Given that the account is always logged in on their TV, the streaming service will suspend their account if three people log into the account from their laptops at the same time. Todd, Anne, and Jason regularly use their account from their laptops on Saturdays. This Saturday, as usual, Todd logged into their account from his laptop to watch TV. Just then, Anne also logged into their account from her laptop, and Jason also logged into their account from his laptop to watch TV. Sure enough, since three people logged into the streaming account at the same time, the account was suspended. Did Todd logging into the streaming account from his laptop cause the account to be suspended?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will only turn on when the people who work at the travel agency and the people who work in the design studio arrive for work. Neither office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45 am, and the design studio employees almost always arrive at 8:45 am. Today, the travel agency employees arrived at 8:45 am. The design studio employees also arrived at 8:45 am, as usual. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838 | Penalized score: 0.6079942281329767
+Test accuracy: 0.6637168141592921
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 71.40822172164917
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is not on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it's not. So, he changes the position of the device, and he puts it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne changed the position of the device?
+Label: Yes
+Text: Drew, Kylie, Oliver, and Jen are regular customers at a small, local coffee shop. Given the selling price of the coffee and the cost of daily operation, the coffee shop will turn a profit if anyone orders coffee on a given day. Only one person ordering coffee is needed for the coffee shop to turn a profit that day. Drew, Kylie, Oliver, and Jen all usually order coffee on Tuesdays. This Tuesday, as usual, Drew ordered coffee. The same day, Kylie ordered coffee, Oliver ordered coffee, and Jen also ordered coffee. Since at least one person ordered coffee on Tuesday, the coffee shop made a profit that day. Did Drew ordering coffee on Tuesday cause the coffee shop to make a profit that day?
+Label: Yes
+Text: There is a man who gets paid for pumping water into a cistern thereby replenishing the supply of drinking water in a nearby house. Unfortunately for the inhabitants of the house, the water that the man is pumping into the cistern today has been systematically contaminated with a lethal poison whose effects are unnoticeable until they can no longer be cured. Even though the man pumping the water had nothing to do with poisoning the water, he knows that the water has been poisoned. Nevertheless, the man pumps the water into the cistern knowing that it will poison and kill the inhabitants. But, he neither wants to kill them nor does he aim to do so, he simply wants to do his job and get paid. He views the death of the inhabitants as an unfortunate by-product of his pumping water into the cistern. Did the man intentionally poison the inhabitants?
+Label: Yes
+Text: Todd, Anne, Jason, and Steph all share an account for a popular online television streaming service. In addition to keeping the account constantly logged in on their TV, they also use the same account on their laptops. Because the provider of this streaming service wants to increase the amount of active accounts in order to increase profits, they have begun to monitor the number of devices using a single account at once. Given that the account is always logged in on their TV, the streaming service will suspend their account if three people log into the account from their laptops at the same time. Todd, Anne, and Jason regularly use their account from their laptops on Saturdays. This Saturday, as usual, Todd logged into their account from his laptop to watch TV. Just then, Anne also logged into their account from her laptop, and Jason also logged into their account from his laptop to watch TV. Sure enough, since three people logged into the streaming account at the same time, the account was suspended. Did Todd logging into the streaming account from his laptop cause the account to be suspended?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will only turn on when the people who work at the travel agency and the people who work in the design studio arrive for work. Neither office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45 am, and the design studio employees almost always arrive at 8:45 am. Today, the travel agency employees arrived at 8:45 am. The design studio employees also arrived at 8:45 am, as usual. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838 | Penalized score: 0.6079942281329767
+Test accuracy: 0.6637168141592921
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 59.37714624404907
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: Drew, Kylie, Oliver, and Jen are regular customers at a small, local coffee shop. Given the selling price of the coffee and the cost of daily operation, the coffee shop will turn a profit if anyone orders coffee on a given day. Only one person ordering coffee is needed for the coffee shop to turn a profit that day. Drew, Kylie, Oliver, and Jen all usually order coffee on Tuesdays. This Tuesday, as usual, Drew ordered coffee. The same day, Kylie ordered coffee, Oliver ordered coffee, and Jen also ordered coffee. Since at least one person ordered coffee on Tuesday, the coffee shop made a profit that day. Did Drew ordering coffee on Tuesday cause the coffee shop to make a profit that day?
+Label: Yes
+Text: Todd, Anne, Jason, and Steph all share an account for a popular online television streaming service. In addition to keeping the account constantly logged in on their TV, they also use the same account on their laptops. Because the provider of this streaming service wants to increase the amount of active accounts in order to increase profits, they have begun to monitor the number of devices using a single account at once. Given that the account is always logged in on their TV, the streaming service will suspend their account if three people log into the account from their laptops at the same time. Todd, Anne, and Jason regularly use their account from their laptops on Saturdays. This Saturday, as usual, Todd logged into their account from his laptop to watch TV. Just then, Anne also logged into their account from her laptop, and Jason also logged into their account from his laptop to watch TV. Sure enough, since three people logged into the streaming account at the same time, the account was suspended. Did Todd logging into the streaming account from his laptop cause the account to be suspended?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will only turn on when the people who work at the travel agency and the people who work in the design studio arrive for work. Neither office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45 am, and the design studio employees almost always arrive at 8:45 am. Today, the travel agency employees arrived at 8:45 am. The design studio employees also arrived at 8:45 am, as usual. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838 | Penalized score: 0.6221524748018614
+Test accuracy: 0.6460176991150443
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 48.599546670913696
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: Drew, Kylie, Oliver, and Jen are regular customers at a small, local coffee shop. Given the selling price of the coffee and the cost of daily operation, the coffee shop will turn a profit if anyone orders coffee on a given day. Only one person ordering coffee is needed for the coffee shop to turn a profit that day. Drew, Kylie, Oliver, and Jen all usually order coffee on Tuesdays. This Tuesday, as usual, Drew ordered coffee. The same day, Kylie ordered coffee, Oliver ordered coffee, and Jen also ordered coffee. Since at least one person ordered coffee on Tuesday, the coffee shop made a profit that day. Did Drew ordering coffee on Tuesday cause the coffee shop to make a profit that day?
+Label: Yes
+Text: Todd, Anne, Jason, and Steph all share an account for a popular online television streaming service. In addition to keeping the account constantly logged in on their TV, they also use the same account on their laptops. Because the provider of this streaming service wants to increase the amount of active accounts in order to increase profits, they have begun to monitor the number of devices using a single account at once. Given that the account is always logged in on their TV, the streaming service will suspend their account if three people log into the account from their laptops at the same time. Todd, Anne, and Jason regularly use their account from their laptops on Saturdays. This Saturday, as usual, Todd logged into their account from his laptop to watch TV. Just then, Anne also logged into their account from her laptop, and Jason also logged into their account from his laptop to watch TV. Sure enough, since three people logged into the streaming account at the same time, the account was suspended. Did Todd logging into the streaming account from his laptop cause the account to be suspended?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will only turn on when the people who work at the travel agency and the people who work in the design studio arrive for work. Neither office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45 am, and the design studio employees almost always arrive at 8:45 am. Today, the travel agency employees arrived at 8:45 am. The design studio employees also arrived at 8:45 am, as usual. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838 | Penalized score: 0.6221524748018614
+Test accuracy: 0.6460176991150443
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 47.52902030944824
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: In Nazi Germany, there was a law called the 'racial identification law.' The purpose of the law was to help identify people of certain races so that they could be rounded up and sent to concentration camps. Shortly after this law was passed, the CEO of a small corporation decided to make certain organizational changes. The Vice-President of the corporation said: "By making those changes, you'll definitely be increasing our profits. But you'll also be fulfilling the requirements of the racial identification law." The CEO said: "Look, I know that I'll be fulfilling the requirements of the law, but I don't care one bit about that. All I care about is making as much profit as I can. Let's make those organizational changes!" As soon as the CEO gave this order, the corporation began making the organizational changes. Did the CEO intentionally fulfill the requirements of the law?
+Label: No
+Text: Laurie likes GC brand coffee. GC is doing a new promotion for their new coffee flavor where customers can receive a free sample. Customers will receive a free sample if either they have previously purchased coffee beans from GC or they are subscribed to the GC email list. Laurie has previously purchased coffee beans from GC, and she is subscribed to the GC email list. When she hears about the promotion, Laurie checks to see if she is subscribed to the email list, and she sees that she is. So, she does not change her subscription status, and she remains subscribed to the email list. Because customers will receive a free sample if either they have previously purchased coffee beans from GC or they are subscribed to the GC email list, Laurie receives a free sample. Did Laurie receive a free sample because she did not change her subscription status?
+Label: Yes
+Text: Karen was an assistant editor for a small publishing firm. She had a rare hereditary disease called Karpinson's hemotrysoma, characterized by the lack of an enzyme that normally breaks down certain proteins in the digestive system. Because of this, fermented drinks such as wine and liqueurs can cause a severe allergic reaction in someone with the disease. Karen had just received a promotion so her boss, Mr. Carlson, took her to an expensive French restaurant to celebrate. Mr. Carlson had been to this restaurant several times, so he ordered for both of them. As he looked over the menu, Mr. Carlson considered what to order for Karen. He first thought about ordering the Coquilles Saint-Jacques, but at the last moment decided on the Moules Mariniere instead. Although Mr. Carlson did not know this, both of these dishes were made with a wine sauce. Karen enjoyed her meal greatly, but began to feel ill shortly after finishing. Within minutes, she went into convulsions and was rushed away in an ambulance. She died on the way to the hospital. Did Mr. Carlson's choice of dish cause Karen's death?
+Label: No
+Text: Eugene and Tina were a young married couple who lived in the country. Both were partially paralyzed and confined to wheelchairs. They had met four years before when Tina was a counsellor with the Canadian Paraplegic Association, had fallen in love, and were married one year later. On this particular evening, Eugene had phoned to request a cab to take them downtown. When the taxi driver arrived, Eugene and Tina were waiting by the street. On seeing that they were both in wheelchairs, the taxi driver refused their fare because he thought it would be too crowded in the taxi with both of them and the wheelchairs. So the taxi driver headed back downtown without them. Because there was no time to call another cab, Eugene and Tina took Tina's car, which was equipped with special hand controls. In order to get downtown from their house, they had to travel across a bridge over Rupert River. A severe storm the night before had weakened the structure of the bridge. About 5 minutes before Eugene and Tina reached it, a section of the bridge collapsed. The taxi driver had reached the bridge shortly before them, and had driven off the collapsed bridge. He barely managed to escape from his taxi before it sank in the river. In the dark, Eugene and Tina drove off the collapsed bridge and their car plummeted into the river below. They both drowned. Their bodies were retrieved from the car the next morning. Did the taxi driver's refusal to take Eugene and Tina cause their death?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838 | Penalized score: 0.6270185053298197
+Test accuracy: 0.6637168141592921
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 59.06092190742493
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: In Nazi Germany, there was a law called the 'racial identification law.' The purpose of the law was to help identify people of certain races so that they could be rounded up and sent to concentration camps. Shortly after this law was passed, the CEO of a small corporation decided to make certain organizational changes. The Vice-President of the corporation said: "By making those changes, you'll definitely be increasing our profits. But you'll also be fulfilling the requirements of the racial identification law." The CEO said: "Look, I know that I'll be fulfilling the requirements of the law, but I don't care one bit about that. All I care about is making as much profit as I can. Let's make those organizational changes!" As soon as the CEO gave this order, the corporation began making the organizational changes. Did the CEO intentionally fulfill the requirements of the law?
+Label: No
+Text: Laurie likes GC brand coffee. GC is doing a new promotion for their new coffee flavor where customers can receive a free sample. Customers will receive a free sample if either they have previously purchased coffee beans from GC or they are subscribed to the GC email list. Laurie has previously purchased coffee beans from GC, and she is subscribed to the GC email list. When she hears about the promotion, Laurie checks to see if she is subscribed to the email list, and she sees that she is. So, she does not change her subscription status, and she remains subscribed to the email list. Because customers will receive a free sample if either they have previously purchased coffee beans from GC or they are subscribed to the GC email list, Laurie receives a free sample. Did Laurie receive a free sample because she did not change her subscription status?
+Label: Yes
+Text: Karen was an assistant editor for a small publishing firm. She had a rare hereditary disease called Karpinson's hemotrysoma, characterized by the lack of an enzyme that normally breaks down certain proteins in the digestive system. Because of this, fermented drinks such as wine and liqueurs can cause a severe allergic reaction in someone with the disease. Karen had just received a promotion so her boss, Mr. Carlson, took her to an expensive French restaurant to celebrate. Mr. Carlson had been to this restaurant several times, so he ordered for both of them. As he looked over the menu, Mr. Carlson considered what to order for Karen. He first thought about ordering the Coquilles Saint-Jacques, but at the last moment decided on the Moules Mariniere instead. Although Mr. Carlson did not know this, both of these dishes were made with a wine sauce. Karen enjoyed her meal greatly, but began to feel ill shortly after finishing. Within minutes, she went into convulsions and was rushed away in an ambulance. She died on the way to the hospital. Did Mr. Carlson's choice of dish cause Karen's death?
+Label: No
+Text: Eugene and Tina were a young married couple who lived in the country. Both were partially paralyzed and confined to wheelchairs. They had met four years before when Tina was a counsellor with the Canadian Paraplegic Association, had fallen in love, and were married one year later. On this particular evening, Eugene had phoned to request a cab to take them downtown. When the taxi driver arrived, Eugene and Tina were waiting by the street. On seeing that they were both in wheelchairs, the taxi driver refused their fare because he thought it would be too crowded in the taxi with both of them and the wheelchairs. So the taxi driver headed back downtown without them. Because there was no time to call another cab, Eugene and Tina took Tina's car, which was equipped with special hand controls. In order to get downtown from their house, they had to travel across a bridge over Rupert River. A severe storm the night before had weakened the structure of the bridge. About 5 minutes before Eugene and Tina reached it, a section of the bridge collapsed. The taxi driver had reached the bridge shortly before them, and had driven off the collapsed bridge. He barely managed to escape from his taxi before it sank in the river. In the dark, Eugene and Tina drove off the collapsed bridge and their car plummeted into the river below. They both drowned. Their bodies were retrieved from the car the next morning. Did the taxi driver's refusal to take Eugene and Tina cause their death?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838 | Penalized score: 0.6270185053298197
+Test accuracy: 0.6637168141592921

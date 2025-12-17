@@ -1,0 +1,1234 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 10.087000131607056
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.828125),)
+Training accuracy: (0.828125,)
+Validation accuracy: [0.82]
+Test accuracy: [0.88]
+======== ROUND 1
+Time: 81.3314573764801
+Prompt: (Prompt(
+  prompt: # Task
+Is the given text using abusive language that targets a specific protected group like race, ethnicity, religion, nationality, gender, or sexual orientation in a manner that could be classified as hate speech?
+
+# Exemplar
+Text: "To all the lazy people who just sit around and complain about their lives: get off your ass and do something about it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "If you can't even speak proper English, what good are you?"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "He’s just another one of those lazy welfare queens who never worked a day in their life."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(3), np.int64(4), 5, np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.828125,
+  score: 0.9375), Prompt(
+  prompt: # Task
+To categorize the provided text, adhere to these rules: Determine if the content openly displays hostility or aggression towards an individual or group due to their race, ethnicity, nationality, religion, gender, or sexual orientation. If the text fulfills this condition, label it as 'Hate Speech'. If not, mark it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "To all the lazy people who just sit around and complain about their lives: get off your ass and do something about it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "If you can't even speak proper English, what good are you?"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "He’s just another one of those lazy welfare queens who never worked a day in their life."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(3), 4, 5, np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.828125,
+  score: 0.9296875), Prompt(
+  prompt: # Task
+To categorize the provided text, adhere to the following rules: Determine if the content conveys overt hostility or aggression towards an individual or group due to their race, ethnicity, nationality, religion, gender, or sexual orientation. If the text fits this description, label it as 'Hate Speech'. If not, mark it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "To all the lazy people who just sit around and complain about their lives: get off your ass and do something about it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "If you can't even speak proper English, what good are you?"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "He’s just another one of those lazy welfare queens who never worked a day in their life."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(3), 4, 5, np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.828125,
+  score: 0.9296875), Prompt(
+  prompt: # Task
+To classify the given text, follow these guidelines: Identify whether the text expresses explicit hostility or aggression that targets a person or group based on their race, ethnicity, nationality, religion, gender, or sexual orientation. If the text meets this criterion, classify it as 'Hate Speech'. Otherwise, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "To all the lazy people who just sit around and complain about their lives: get off your ass and do something about it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are."
+Label: No
+
+Text: "If you can't even speak proper English, what good are you?"
+Label: No
+
+Text: "To the lady that can barely speak English and then look down upon her own people, that's disgraceful."
+Label: No
+
+Text: "He’s just another one of those lazy welfare queens who never worked a day in their life."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(3), 4, 5, np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.828125,
+  score: 0.9296875))
+Training accuracy: (0.9375, 0.9296875, 0.9296875, 0.9296875)
+Validation accuracy: [0.88, 0.88, 0.88, 0.86]
+Test accuracy: [0.86, 0.86, 0.86, 0.86]
+======== ROUND 2
+Time: 281.004670381546
+Prompt: (Prompt(
+  prompt: # Task
+To classify the provided text, adhere to the following rules: Determine if the text contains clear and overt expressions of hostility or aggression towards individuals or groups due to their race, ethnicity, nationality, religion, gender, or sexual orientation. Explicit hostility means the language must be direct and unmistakable, such as explicit hate, disdain, or incitements to violence against a particular group. Statements that imply hostility without directly naming or attacking a group should not be considered hate speech. Label the text as 'Hate Speech' only if it fulfills the stringent conditions of containing explicit hostility. If it does not meet these conditions, categorize it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Why are you still here? Go back to where you came from, trash."
+Label: Yes
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Those immigrants only bring crime and should be deported immediately."
+Label: No
+
+Text: "Women are not fit for leadership roles and should stick to traditional jobs."
+Label: Yes
+
+Text: "They came here to take our jobs and our women. We need to keep them out at all costs."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Those people coming across the border are nothing but criminals and rapists."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(9), np.int64(10), np.int64(14), 17, 18, 19, 20, 21},
+  parent_score: 0.9296875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To classify the provided text, adhere to the following instructions closely: Determine if the content clearly demonstrates hostility or aggression towards individuals or groups because of their race, ethnicity, nationality, religion, gender, or sexual orientation. Explicit hostility means outright and clear expressions of hatred, disrespect, or advocating violence towards a particular group. Statements that imply negativity without directly naming a group and expressing hostility should not be considered as hate speech. Label the text as 'Hate Speech' only if it strictly fits the definition of explicit hostility. Otherwise, categorize it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Why are you still here? Go back to where you came from, trash."
+Label: Yes
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Those immigrants only bring crime and should be deported immediately."
+Label: No
+
+Text: "Women are not fit for leadership roles and should stick to traditional jobs."
+Label: Yes
+
+Text: "They came here to take our jobs and our women. We need to keep them out at all costs."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Those people coming across the border are nothing but criminals and rapists."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(9), np.int64(10), np.int64(14), 17, 18, 19, 20, 21},
+  parent_score: 0.9296875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To categorize the given text, follow these guidelines carefully: Identify whether the content explicitly shows hostility or aggression toward individuals or groups based on their race, ethnicity, nationality, religion, gender, or sexual orientation. Explicit hostility is defined as direct, unambiguous expressions of hatred, contempt, or calls for violence against a protected group. Indirect or veiled statements that do not include specific hostile language directed at a group should not be classified as hate speech. If the text meets the strict criteria for explicit hostility, label it as 'Hate Speech'. Otherwise, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Why are you still here? Go back to where you came from, trash."
+Label: Yes
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Those immigrants only bring crime and should be deported immediately."
+Label: No
+
+Text: "Women are not fit for leadership roles and should stick to traditional jobs."
+Label: Yes
+
+Text: "They came here to take our jobs and our women. We need to keep them out at all costs."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Those people coming across the border are nothing but criminals and rapists."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(9), np.int64(10), np.int64(14), 17, 18, 19, 20, 21},
+  parent_score: 0.9296875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To classify the provided text, adhere to the following rules: Determine if the material contains clear expressions of hostility or aggression towards individuals or groups because of their race, ethnicity, nationality, religion, gender, or sexual orientation. Explicit hostility refers to straightforward and unmistakable demonstrations of hatred, scorn, or incitements to violence towards a particular group. Statements that imply but do not directly express hostility towards a group are not to be considered as hate speech. Label the text as 'Hate Speech' only if it fully satisfies the conditions for explicit hostility. Otherwise, mark it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Why are you still here? Go back to where you came from, trash."
+Label: Yes
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Those immigrants only bring crime and should be deported immediately."
+Label: No
+
+Text: "Women are not fit for leadership roles and should stick to traditional jobs."
+Label: Yes
+
+Text: "They came here to take our jobs and our women. We need to keep them out at all costs."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Those people coming across the border are nothing but criminals and rapists."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(9), np.int64(10), np.int64(14), 17, 18, 19, 20, 21},
+  parent_score: 0.9296875,
+  score: 0.96875))
+Training accuracy: (0.96875, 0.96875, 0.96875, 0.96875)
+Validation accuracy: [0.86, 0.86, 0.88, 0.88]
+Test accuracy: [0.87, 0.87, 0.88, 0.89]
+======== ROUND 3
+Time: 278.44414472579956
+Prompt: (Prompt(
+  prompt: # Task
+To categorize the given text, follow these precise rules: Identify whether the text includes explicit and clear indications of hatred or aggression targeted at individuals or groups because of their race, ethnicity, nationality, religious beliefs, gender, or sexual orientation. For the text to be considered explicitly hostile, it must articulate hate, contempt, or urge violence against a particular group in a straightforward and unequivocal way. Expressions that are derogatory or offensive but do not directly target or assault a specific group should not be classified as hate speech according to this rigorous definition. Similarly, remarks that imply hostility without explicitly naming or attacking a group should not be classified as hate speech. Only label the text as 'Hate Speech' if it fully satisfies all the stringent criteria mentioned. If the text does not meet these exact standards, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Those Asian students are just cheating their way to the top."
+Label: Not Hate Speech
+
+Text: "Those immigrants only bring crime and should be deported immediately."
+Label: No
+
+Text: "They think they can come here and take our jobs."
+Label: Not Hate Speech
+
+Text: "Why do women always have to complain? Can't they just shut up for once?"
+Label: Not Hate Speech
+
+Text: "All Muslims are terrorists, get out!"
+Label: Hate Speech
+
+Text: "All [nationality] people are liars."
+Label: Not Hate Speech
+
+Text: "That's what happens when you let illegal immigrants into your country."
+Label: Not Hate Speech
+
+Text: "I'd get my money back if I were you. Your sex change was a complete failure."
+Label: Yes
+
+Text: "That culture has nothing to offer, they should just disappear from the face of the earth."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(33), np.int64(38), 39, 40, 41, 42, np.int64(12), np.int64(17), np.int64(28)},
+  parent_score: 0.96875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To categorize the given text, follow these guidelines carefully: Determine whether the content includes direct and clear expressions of hostility or aggression towards people or groups due to their race, ethnicity, nationality, religion, gender, or sexual orientation. Direct hostility means overt statements showing hatred, disrespect, or advocating violence against a specific group. Also, ensure that statements suggesting negativity without naming a group or expressing obvious hostility are classified as 'Non-Hate Speech'. Language that subtly belittles based on protected traits but does not clearly promote violence or hate should also be labeled as 'Non-Hate Speech'. Mark the text as 'Hate Speech' only if it clearly matches the definition of direct hostility. In all other cases, designate it as 'Non-Hate Speech'.
+
+# Exemplar
+Text: "It's a shame that the LGBTQ+ community feels the need to push their lifestyle on others."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "This is what happens when you let [religion] take over."
+Label: Not Hate Speech
+
+Text: "Why do they always stick together in groups, can't they integrate?"
+Label: Not Hate Speech
+
+Text: "The way some people act, you'd think they were better than everyone else just because of their skin color."
+Label: No
+
+Text: "I can't believe he's gay, that's just a phase."
+Label: Not Hate Speech
+
+Text: "That's what happens when you let illegal immigrants into your country."
+Label: Not Hate Speech
+
+Text: "They think they can just come over and expect us to welcome them? They're not wanted here."
+Label: No
+
+Text: "Women in leadership positions are often overrated."
+Label: Not Hate Speech
+
+Text: "Women are just not as competent at tech stuff as men are."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(35), np.int64(7), np.int64(42), np.int64(47), 53, 54, 55, 56, 57, np.int64(25)},
+  parent_score: 0.96875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To evaluate the given text, adhere to the following steps to determine its classification accurately: Assess if the material exhibits clear signs of hostility or aggressive attitudes toward people based on their race, ethnicity, nationality, religious beliefs, gender, or sexual orientation. Explicit hostility entails straightforward and unequivocal displays of hatred, lack of respect, or endorsement of violence directed at a specific group. Apply these directives to reach your conclusion:
+
+1. If the language contains direct appeals for harm or disrespect toward a group, it should be labeled as 'Hate Speech'.
+2. When the text uses racial slurs or other clearly derogatory expressions targeting a specific group with an overtly harmful intent, it should also be classified as 'Hate Speech'.
+3. Phrases that hint at negative sentiments without specifically identifying a group or explicitly showing hostility should be marked as 'Not Hate Speech'.
+
+Assign the label 'Hate Speech' only when the content fulfills the outlined conditions for explicit hostility. In all other cases, the text should be categorized as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "To all the lazy people who just sit around and complain about their lives: get off your ass and do something about it."
+Label: No
+
+Text: "It's a shame that the LGBTQ+ community feels the need to push their lifestyle on others."
+Label: No
+
+Text: "The manager who always favors white candidates over equally qualified black ones."
+Label: No
+
+Text: "Why do they always stick together in groups, can't they integrate?"
+Label: Not Hate Speech
+
+Text: "They always steal jobs from hardworking citizens."
+Label: Not Hate Speech
+
+Text: "I can't believe he's gay, that's just a phase."
+Label: Not Hate Speech
+
+Text: "The way some people act, you'd think they were better than everyone else just because of their skin color."
+Label: No
+
+Text: "Women in leadership positions are often overrated."
+Label: Not Hate Speech
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(34), np.int64(6), np.int64(11), np.int64(46), 53, 54, 55, 56, np.int64(57)},
+  parent_score: 0.96875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To categorize the given text, follow these guidelines carefully: Identify whether the content explicitly shows hostility or aggression toward individuals or groups based on their race, ethnicity, nationality, religion, gender, or sexual orientation. Explicit hostility is defined as direct, unambiguous expressions of hatred, contempt, or calls for violence against a protected group. Indirect or veiled statements that do not include specific hostile language directed at a group should not be classified as hate speech. If the text meets the strict criteria for explicit hostility, label it as 'Hate Speech'. Otherwise, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Why are you still here? Go back to where you came from, trash."
+Label: Yes
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Those immigrants only bring crime and should be deported immediately."
+Label: No
+
+Text: "Women are not fit for leadership roles and should stick to traditional jobs."
+Label: Yes
+
+Text: "They came here to take our jobs and our women. We need to keep them out at all costs."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Those people coming across the border are nothing but criminals and rapists."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(9), np.int64(10), np.int64(14), 17, 18, 19, 20, 21},
+  parent_score: 0.9296875,
+  score: 0.96875))
+Training accuracy: (0.96875, 0.96875, 0.96875, 0.96875)
+Validation accuracy: [0.88, 0.88, 0.92, 0.88]
+Test accuracy: [0.87, 0.87, 0.9, 0.88]
+======== ROUND 4
+Time: 304.88810539245605
+Prompt: (Prompt(
+  prompt: # Task
+To categorize the given text, follow these guidelines carefully: Identify whether the content explicitly shows hostility or aggression toward individuals or groups based on their race, ethnicity, nationality, religion, gender, or sexual orientation. Explicit hostility is defined as direct, unambiguous expressions of hatred, contempt, or calls for violence against a protected group. Indirect or veiled statements that do not include specific hostile language directed at a group should not be classified as hate speech. If the text meets the strict criteria for explicit hostility, label it as 'Hate Speech'. Otherwise, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Why are you still here? Go back to where you came from, trash."
+Label: Yes
+
+Text: "They should have beat his ass. He deserves it."
+Label: No
+
+Text: "He just doesn't understand anything about our culture, why don't they just go back where they came from?"
+Label: No
+
+Text: "Those immigrants only bring crime and should be deported immediately."
+Label: No
+
+Text: "Women are not fit for leadership roles and should stick to traditional jobs."
+Label: Yes
+
+Text: "They came here to take our jobs and our women. We need to keep them out at all costs."
+Label: No
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Those people coming across the border are nothing but criminals and rapists."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(7), np.int64(9), np.int64(10), np.int64(14), 17, 18, 19, 20, 21},
+  parent_score: 0.9296875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To classify the provided text as either 'Hate Speech' or 'Not Hate Speech', follow these rules:
+
+1. Determine if the text contains clear signs of hatred or aggressive intent directed at individuals or groups based on attributes such as race, ethnicity, nationality, religion, gender, or sexual orientation. The expression of hate, disdain, or calls for violence towards a specific group must be unambiguous to be classified as explicit hate speech.
+
+2. Take into account subtle or indirect expressions of hostility. Even though direct targeting of a group is a key factor, indirect allusions that hint at hostility toward protected characteristics may also be categorized as hate speech. However, avoid labeling general negative remarks that do not exhibit clear hostility towards a protected attribute as hate speech.
+
+3. Statements that suggest hostility towards a group, even when the group isn't named explicitly, might still be classified as hate speech if the implied hostility is evident and targets a protected characteristic.
+
+Classify the text as 'Hate Speech' if it satisfies any of the above conditions. Otherwise, label it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "The racism displayed towards immigrants is a clear sign of ignorance and fear of the unknown."
+Label: No
+
+Text: "All immigrants are thieves and liars!"
+Label: Hate Speech
+
+Text: "Women drivers, can't they just let the men handle the cars?"
+Label: Not Hate Speech
+
+Text: "Women should stay at home and not bother with careers."
+Label: No
+
+Text: "All feminists are crazy and need to be locked up!"
+Label: Hate Speech
+
+Text: "Women are the root of all problems in society. They must be controlled."
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Muslims are peaceful people; I don't understand why some think otherwise."
+Label: Not Hate Speech
+
+Text: "The only good [group] is a dead [group]."
+Label: Yes
+
+Text: "I'd get my money back if I were you. Your sex change was a complete failure."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(33), np.int64(44), np.int64(12), 78, 79, 80, 81, np.int64(15), 82},
+  parent_score: 0.96875,
+  score: 0.953125), Prompt(
+  prompt: # Task
+To classify the provided text as either 'Hate Speech' or 'Not Hate Speech', follow these rules:
+
+1. Determine if the text clearly shows signs of hatred or aggressive intent aimed at individuals or groups due to their race, ethnicity, nationality, religion, gender, or sexual orientation. The text would only be classified as explicitly hateful if it plainly expresses hate, disdain, or advocates for violence against a specific group.
+
+2. Take indirect hints of hostility into account. Indirect references that imply hostility towards protected characteristics may also be considered hate speech. However, avoid labeling general insults or remarks lacking clear hostility towards a protected characteristic as hate speech.
+
+3. Statements that hint at hostility towards a group, even if they don't specifically name the group, should be categorized as hate speech if the hostility is evident and directed toward a protected characteristic.
+
+Classify the text as 'Hate Speech' if it satisfies any of the conditions described above. If not, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "The racism displayed towards immigrants is a clear sign of ignorance and fear of the unknown."
+Label: No
+
+Text: "All immigrants are thieves and liars!"
+Label: Hate Speech
+
+Text: "Women drivers, can't they just let the men handle the cars?"
+Label: Not Hate Speech
+
+Text: "Women should stay at home and not bother with careers."
+Label: No
+
+Text: "All feminists are crazy and need to be locked up!"
+Label: Hate Speech
+
+Text: "Women are the root of all problems in society. They must be controlled."
+Label: No
+
+Text: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide."
+Label: No
+
+Text: "Muslims are peaceful people; I don't understand why some think otherwise."
+Label: Not Hate Speech
+
+Text: "The only good [group] is a dead [group]."
+Label: Yes
+
+Text: "I'd get my money back if I were you. Your sex change was a complete failure."
+Label: Yes
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), np.int64(33), np.int64(44), np.int64(12), 78, 79, 80, 81, np.int64(15), 82},
+  parent_score: 0.96875,
+  score: 0.953125), Prompt(
+  prompt: # Task
+To classify the provided text, adhere closely to the following instructions: Determine if the material contains explicit and unambiguous indications of hostility or aggressive sentiments toward individuals or groups because of their race, ethnicity, nationality, religion, gender, or sexual orientation. Explicit hostility is characterized by openly expressed hatred, disrespect, or advocacy for violence directed at a particular group. Implicit hostility may be detected through the use of pejorative terms, prejudicial stereotypes, or veiled suggestions regarding the inferiority or threat posed by a group based on their protected attributes. Statements that imply negativity without specifically identifying a group or showing clear signs of hostility should be categorized as 'Non-Hate Speech'. Language that subtly diminishes based on protected characteristics but does not clearly foster violence or hate should also be marked as 'Non-Hate Speech'. Label the text as 'Hate Speech' solely when it unmistakably aligns with the criteria for direct or indirect hostility. All other instances should be labeled as 'Non-Hate Speech'.
+
+# Exemplar
+Text: "All immigrants are just trying to take advantage of our system. We need to stop them."
+Label: No
+
+Text: "I can't stand these people, they think they're better than everyone else just because of where they come from."
+Label: Hate Speech
+
+Text: "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum"
+Label: No
+
+Text: "They want everything free, yet refuse to work or contribute in any meaningful way."
+Label: Non-Hate Speech
+
+Text: "They think they can come here and take our jobs."
+Label: Not Hate Speech
+
+Text: "The way some people act, you'd think they were better than everyone else just because of their skin color."
+Label: No
+
+Text: "Muslims are peaceful people; I don't understand why some think otherwise."
+Label: Not Hate Speech
+
+Text: "The only good [group] is a dead [group]."
+Label: Yes
+
+Text: "If you're born in this country, you should speak the language, not bring your own. It's for your own good."
+Label: No
+
+Text: "Dalit? Is this a name of religion or an atom of poo composition"
+Label: Hate Speech
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(68), np.int64(40), np.int64(78), 82, 83, 84, 85, 86, np.int64(53)},
+  parent_score: 0.96875,
+  score: 0.953125))
+Training accuracy: (0.96875, 0.953125, 0.953125, 0.953125)
+Validation accuracy: [0.88, 0.88, 0.86, 0.88]
+Test accuracy: [0.88, 0.91, 0.92, 0.89]
+======== ROUND 5
+Time: 314.7097990512848
+Prompt: (Prompt(
+  prompt: # Task
+To determine whether the given text qualifies as 'Hate Speech' or 'Not Hate Speech', adhere to the following comprehensive criteria:
+
+1. **Explicit Indicators**: Determine if the text includes unmistakable indications of hatred or aggressive behavior aimed at individuals or groups due to their race, ethnicity, nationality, religion, gender, or sexual orientation. The hate must be distinctly expressed as contemptuous, hostile, or advocating violence toward a particular group.
+
+2. **Subtle Indications and Contextual Antagonism**: Examine indirect hints or references that may suggest animosity towards protected traits. Confirm that the context unequivocally indicates antagonism towards a specific group. General negative comments without a clear display of hostility towards a protected trait should not be categorized as hate speech.
+
+3. **Inferred Antagonism**: Assess whether the text conveys antagonism towards a group even if the group isn't specifically mentioned. For a piece of text to be considered hate speech, the inferred antagonism must be obvious and related to a protected trait within a context that clearly shows antagonism.
+
+4. **General Criticism**: Refrain from defining general criticisms of societal issues (like historical events or cultural practices) as hate speech unless they directly criticize a protected trait in a hostile manner.
+
+5. **Prevent Misclassification**: Make sure to classify text only when it clearly demonstrates hostility toward a protected trait. Avoid labeling critical statements that don’t express hatred or aggression as hate speech.
+
+Apply these criteria to decide if the text should be labeled as 'Hate Speech'. If none of the aforementioned conditions are met, categorize it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "I just don't get why anyone would support that kind of lifestyle. It’s so unnatural."
+Label: No
+
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Why can't they just go back where they came from?"
+Label: No
+
+Text: "Those who refuse to acknowledge history are doomed to repeat it; let’s not forget the injustices of the past."
+Label: No
+
+Text: "Why can't certain groups accept others for who they are without resorting to baseless prejudices?"
+Label: No
+
+Text: "Women belong at home, not in the boardroom or in leadership positions."
+Label: Hate Speech
+
+Text: "Why do we even have to listen to these immigrants? They should just go back where they came from."
+Label: Not Hate Speech
+
+Text: "They say all Muslims are terrorists, but I guess only some people are too stupid to understand the difference."
+Label: No
+
+Text: "What's wrong with those stupid foreigners? Always messing up everything they touch."
+Label: Hate Speech
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), 104, np.int64(72), 106, np.int64(11), 107, np.int64(45), 103, 105, np.int64(63)},
+  parent_score: 0.953125,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To determine whether the given text should be categorized as 'Hate Speech' or 'Not Hate Speech', adhere to the following comprehensive criteria:
+
+1. **Explicit Hatred**: Check if the text features unmistakable indications of hatred or aggressive intentions aimed at people or groups because of their race, ethnicity, nationality, religion, gender, or sexual orientation. The hatred or aggression must be obvious and directed at a particular group.
+
+2. **Subtle Indications and Context-Specific Hatred**: Examine the presence of subtle hints of hostility or allusions related to protected characteristics. Ensure that the context strongly suggests hostility towards a specific group. General negativity that does not clearly indicate hostility towards a protected attribute should not be considered hate speech.
+
+3. **Inferred Hostility**: Assess whether the statements imply hostility towards a group, even if the group isn't directly named. For a text to qualify as hate speech due to implied hostility, the hostility must be apparent and directed at a protected characteristic within a clear context that indicates hostility.
+
+4. **Non-targeted Criticism**: Do not categorize general negative comments or criticisms about social issues (like historical events or cultural practices) as hate speech unless they clearly target a protected attribute with a hostile intent.
+
+5. **Prevent Over-Classification**: Make sure that the text is only labeled as hate speech when there is a clear and unambiguous expression of hostility towards a protected attribute. Avoid tagging expressions that are merely critical without expressing hatred or aggression as hate speech.
+
+Using these criteria, label the text as 'Hate Speech' if it satisfies any of the outlined conditions. Otherwise, it should be labeled as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "I just don't get why anyone would support that kind of lifestyle. It’s so unnatural."
+Label: No
+
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Why can't they just go back where they came from?"
+Label: No
+
+Text: "Those who refuse to acknowledge history are doomed to repeat it; let’s not forget the injustices of the past."
+Label: No
+
+Text: "Why can't certain groups accept others for who they are without resorting to baseless prejudices?"
+Label: No
+
+Text: "Women belong at home, not in the boardroom or in leadership positions."
+Label: Hate Speech
+
+Text: "Why do we even have to listen to these immigrants? They should just go back where they came from."
+Label: Not Hate Speech
+
+Text: "They say all Muslims are terrorists, but I guess only some people are too stupid to understand the difference."
+Label: No
+
+Text: "What's wrong with those stupid foreigners? Always messing up everything they touch."
+Label: Hate Speech
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), 104, np.int64(72), 106, np.int64(11), 107, np.int64(45), 103, 105, np.int64(63)},
+  parent_score: 0.953125,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To classify the provided text as either 'Hate Speech' or 'Not Hate Speech', follow these detailed guidelines:
+
+1. **Direct Expression**: Identify if the text contains clear, direct signs of hatred or aggressive intent directed at individuals or groups based on attributes such as race, ethnicity, nationality, religion, gender, or sexual orientation. The expression must be unambiguously hateful, disdainful, or call for violence against a specific group.
+
+2. **Indirect Expressions and Contextual Hostility**: Look for indirect expressions or allusions that hint at hostility towards protected characteristics. However, ensure that the context clearly implies hostility towards a specific group. General negative remarks that do not exhibit clear hostility towards a protected attribute should not be labeled as hate speech.
+
+3. **Implied Hostility**: Evaluate whether statements suggest hostility towards a group, even if the group is not explicitly named. For a statement to be classified as hate speech, the implied hostility must be evident and must target a protected characteristic with a clear context indicating hostility.
+
+4. **General Negative Remarks**: Do not classify general negative remarks or criticisms about societal issues (such as historical events or cultural practices) as hate speech unless they explicitly target a protected attribute with hostile intent.
+
+5. **Avoid Over-Classification**: Ensure that the classification is made only when there is a clear, unambiguous indication of hostility towards a protected attribute. Avoid labeling expressions that are critical but do not express hatred or aggression as hate speech.
+
+By following these guidelines, classify the text as 'Hate Speech' if it meets any of the conditions outlined above. Otherwise, label it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "I just don't get why anyone would support that kind of lifestyle. It’s so unnatural."
+Label: No
+
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Why can't they just go back where they came from?"
+Label: No
+
+Text: "Those who refuse to acknowledge history are doomed to repeat it; let’s not forget the injustices of the past."
+Label: No
+
+Text: "Why can't certain groups accept others for who they are without resorting to baseless prejudices?"
+Label: No
+
+Text: "Women belong at home, not in the boardroom or in leadership positions."
+Label: Hate Speech
+
+Text: "Why do we even have to listen to these immigrants? They should just go back where they came from."
+Label: Not Hate Speech
+
+Text: "They say all Muslims are terrorists, but I guess only some people are too stupid to understand the difference."
+Label: No
+
+Text: "What's wrong with those stupid foreigners? Always messing up everything they touch."
+Label: Hate Speech
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), 104, np.int64(72), 106, np.int64(11), 107, np.int64(45), 103, 105, np.int64(63)},
+  parent_score: 0.953125,
+  score: 0.953125), Prompt(
+  prompt: # Task
+To determine whether the given text should be categorized as 'Hate Speech' or 'Not Hate Speech', adhere to the following instructions closely:
+
+1. **Explicit Hatred**: Check if the text includes obvious and direct instances of hatred or violent intentions aimed at individuals or groups due to their race, ethnicity, nationality, religion, gender, or sexual orientation. The expression should convey clear disdain or calls for violence toward a particular group.
+
+2. **Subtle Indications and Contextual Hatred**: Search for any subtle indications or hints at hostility towards individuals based on their protected attributes. However, ensure that the context unmistakably conveys hostility towards a specific group. General negative comments that lack clear hostility towards a protected attribute should not be considered hate speech.
+
+3. **Implications of Hostility**: Assess if the statements suggest hostility towards a group, even if the group isn't directly named. For a text to be deemed hate speech, the implied hostility must be evident and target a protected characteristic within a clear context of hostility.
+
+4. **General Negative Statements**: Refrain from categorizing general negative commentary or criticisms of social issues (like historical events or cultural practices) as hate speech unless they specifically target a protected attribute with hostile intent.
+
+5. **Prevent Misclassification**: Make sure the classification is only applied when there is an unequivocal sign of hostility towards a protected attribute. Avoid classifying expressions that are critical but do not express hatred or aggression as hate speech.
+
+If the text fulfills any of the criteria described above, categorize it as 'Hate Speech'. Otherwise, label it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "Should have been sterilised upon arrival. Now your future doesn't exist."
+Label: No
+
+Text: "I just don't get why anyone would support that kind of lifestyle. It’s so unnatural."
+Label: No
+
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Why can't they just go back where they came from?"
+Label: No
+
+Text: "Those who refuse to acknowledge history are doomed to repeat it; let’s not forget the injustices of the past."
+Label: No
+
+Text: "Why can't certain groups accept others for who they are without resorting to baseless prejudices?"
+Label: No
+
+Text: "Women belong at home, not in the boardroom or in leadership positions."
+Label: Hate Speech
+
+Text: "Why do we even have to listen to these immigrants? They should just go back where they came from."
+Label: Not Hate Speech
+
+Text: "They say all Muslims are terrorists, but I guess only some people are too stupid to understand the difference."
+Label: No
+
+Text: "What's wrong with those stupid foreigners? Always messing up everything they touch."
+Label: Hate Speech
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(7), 104, np.int64(72), 106, np.int64(11), 107, np.int64(45), 103, 105, np.int64(63)},
+  parent_score: 0.953125,
+  score: 0.9479166666666666))
+Training accuracy: (0.96875, 0.96875, 0.953125, 0.9479166666666666)
+Validation accuracy: [0.86, 0.88, 0.86, 0.88]
+Test accuracy: [0.88, 0.87, 0.88, 0.89]
+======== ROUND 6
+Time: 467.6066780090332
+Prompt: (Prompt(
+  prompt: # Task
+To determine whether the given text qualifies as 'Hate Speech' or 'Not Hate Speech', adhere to the following comprehensive criteria:
+
+1. **Explicit Indicators**: Determine if the text includes unmistakable indications of hatred or aggressive behavior aimed at individuals or groups due to their race, ethnicity, nationality, religion, gender, or sexual orientation. The hate must be distinctly expressed as contemptuous, hostile, or advocating violence toward a particular group.
+
+2. **Subtle Indications and Contextual Antagonism**: Examine indirect hints or references that may suggest animosity towards protected traits. Confirm that the context unequivocally indicates antagonism towards a specific group. General negative comments without a clear display of hostility towards a protected trait should not be categorized as hate speech. Consider the overall tone and intent to identify subtle forms of hate speech.
+
+3. **Inferred Antagonism**: Assess whether the text conveys antagonism towards a group even if the group isn't specifically mentioned. This requires evaluating the broader context and underlying message. The inferred antagonism must be obvious and related to a protected trait within a context that clearly shows antagonism.
+
+4. **General Criticism**: Refrain from defining general criticisms of societal issues (like historical events or cultural practices) as hate speech unless they directly criticize a protected trait in a hostile manner.
+
+5. **Aggressive Language vs. Hostility**: Aggressive language alone does not constitute hate speech if it lacks hostility towards a protected trait. Ensure that the presence of aggressive language is evaluated alongside the presence of hostility towards a protected trait.
+
+6. **Contextual Nuance**: Pay close attention to the context and intent behind the text. Consider the potential impact of the text on specific groups and the broader community. Evaluate whether the text has the potential to incite violence, discrimination, or prejudice against protected traits.
+
+By applying these criteria, decide if the text should be labeled as 'Hate Speech'. If none of the aforementioned conditions are met, categorize it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Can you believe these anti-immigrant folks? It’s like they live in a completely different world."
+Label: No
+
+Text: "This culture is just a burden on society, we need to get rid of it completely."
+Label: No
+
+Text: "Why can't we just live in peace? Why do some people keep coming and ruining everything?"
+Label: No
+
+Text: "I can't stand the way some so-called Christians treat LGBT folks; it’s just plain wrong."
+Label: No
+
+Text: "Those people only come here to take our jobs and resources. They should just go back."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "This tradition should have been abandoned long ago. It's time it ends. Shame on those who still support it."
+Label: Yes
+
+Text: "I really cannot stand people who celebrate Easter. They are just wasting their time."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(128), 129, 130, 131, 132, np.int64(72), np.int64(10), np.int64(113), np.int64(117)},
+  parent_score: 0.96875,
+  score: 0.9791666666666666), Prompt(
+  prompt: # Task
+To assess whether a piece of text is classified as 'Hate Speech' or 'Not Hate Speech', follow this set of detailed guidelines closely:
+
+1. **Direct Evidence of Hate**: Identify if the text contains clear expressions of hatred or aggressive actions targeting individuals or groups based on their race, ethnicity, national origin, religion, sex, or sexual orientation. The hatred must be explicitly stated as disdainful, adversarial, or promoting violence towards a specific group.
+
+2. **Indirect Signs and Contextual Hatred**: Look for indirect signs or allusions that could imply dislike towards protected traits. Ensure that the context clearly denotes enmity towards a specific group. Negative remarks without a direct expression of animosity towards a protected characteristic should not be labeled as hate speech. Take into account the overall tone and purpose to recognize more subtle types of hate speech.
+
+3. **Implied Animosity**: Evaluate whether the text expresses hostility towards a group even if the group is not directly named. This involves analyzing the broader context and underlying message. The implied hostility must be apparent and tied to a protected trait within a context that unambiguously displays hostility.
+
+4. **Critical Commentary**: Avoid classifying general critiques of societal issues (such as historical events or cultural practices) as hate speech unless they directly and aggressively criticize a protected trait.
+
+5. **Harsh Words vs. Hostile Intentions**: Harsh language alone does not qualify as hate speech if it does not express hostility towards a protected trait. Make sure that the use of harsh language is considered along with any hostility directed at a protected trait.
+
+6. **Contextual Sensitivity**: Carefully consider the context and the author's intent behind the text. Reflect on the possible effects of the text on specific groups and the larger community. Determine if the text could potentially encourage violence, discrimination, or prejudice against protected traits.
+
+Using these guidelines, conclude whether the text should be classified as 'Hate Speech'. If none of the above conditions apply, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Can you believe these anti-immigrant folks? It’s like they live in a completely different world."
+Label: No
+
+Text: "This culture is just a burden on society, we need to get rid of it completely."
+Label: No
+
+Text: "Why can't we just live in peace? Why do some people keep coming and ruining everything?"
+Label: No
+
+Text: "I can't stand the way some so-called Christians treat LGBT folks; it’s just plain wrong."
+Label: No
+
+Text: "Those people only come here to take our jobs and resources. They should just go back."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "This tradition should have been abandoned long ago. It's time it ends. Shame on those who still support it."
+Label: Yes
+
+Text: "I really cannot stand people who celebrate Easter. They are just wasting their time."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(128), 129, 130, 131, 132, np.int64(72), np.int64(10), np.int64(113), np.int64(117)},
+  parent_score: 0.96875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To assess if a given text should be classified as 'Hate Speech' or 'Not Hate Speech', follow these detailed guidelines:
+
+1. **Clear Signs of Hatred**: Identify if the text contains explicit expressions of hatred or aggressive actions targeting individuals or groups based on characteristics such as race, ethnicity, nationality, religion, gender, or sexual orientation. The expression of hatred should be clearly visible through contempt, hostility, or advocacy for violence against a specific group.
+
+2. **Indirect Signs and Contextual Hostility**: Analyze indirect suggestions or allusions that might indicate hostility towards any protected group. Ensure that the context clearly demonstrates hostility towards a specific group. General negative statements that don't show a clear bias against a protected group should not be considered hate speech. Use the overall tone and intention to detect more subtle instances of hate speech.
+
+3. **Implied Hostility**: Evaluate if the text suggests hostility towards a group even when the group is not explicitly named. This involves interpreting the broader context and implied message. Implied hostility should be evident and linked to a protected characteristic within a context that clearly shows hostility.
+
+4. **General Criticism of Social Issues**: Avoid labeling general critiques of social problems (such as historical events or cultural customs) as hate speech unless they directly and negatively target a protected group in a hostile fashion.
+
+5. **Aggressive Language and Intent**: Aggressive language alone doesn’t qualify as hate speech if there's no underlying hostility towards a protected group. Make sure to consider the presence of aggressive language together with any hostility directed at a protected group.
+
+6. **Context and Intention**: Carefully consider the context and purpose behind the text. Think about the possible effects of the text on certain groups and society at large. Determine if the text is likely to encourage violence, discrimination, or prejudice against a protected group.
+
+Using these guidelines, decide whether the text should be identified as 'Hate Speech'. If none of the above conditions apply, classify it as 'Not Hate Speech'.
+
+# Exemplar
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Can you believe these anti-immigrant folks? It’s like they live in a completely different world."
+Label: No
+
+Text: "This culture is just a burden on society, we need to get rid of it completely."
+Label: No
+
+Text: "Why can't we just live in peace? Why do some people keep coming and ruining everything?"
+Label: No
+
+Text: "I can't stand the way some so-called Christians treat LGBT folks; it’s just plain wrong."
+Label: No
+
+Text: "Those people only come here to take our jobs and resources. They should just go back."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "This tradition should have been abandoned long ago. It's time it ends. Shame on those who still support it."
+Label: Yes
+
+Text: "I really cannot stand people who celebrate Easter. They are just wasting their time."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(128), 129, 130, 131, 132, np.int64(72), np.int64(10), np.int64(113), np.int64(117)},
+  parent_score: 0.96875,
+  score: 0.96875), Prompt(
+  prompt: # Task
+To assess whether the provided text constitutes 'Hate Speech' or 'Not Hate Speech', follow this detailed guideline:
+
+1. **Clear Signs of Hatred**: Identify whether the text exhibits clear signs of hatred or aggressive conduct directed at individuals or groups based on their race, ethnicity, national origin, religion, gender, or sexual orientation. The expression of such attitudes must clearly demonstrate contempt, hostility, or promote violence towards a particular group.
+
+2. **Indirect Hints and Contextual Hostility**: Look for indirect suggestions or allusions that might imply hostility towards protected characteristics. Verify that the context clearly points to hostility towards a specific group. General negative remarks lacking explicit hostility towards a protected trait should not be considered hate speech. Take into account the entire tone and purpose to recognize more subtle versions of hate speech.
+
+3. **Implied Hostility**: Decide if the text expresses hostility towards a group even when the group is not explicitly named. This involves analyzing the wider context and implied message. Any implied hostility must be evident and tied to a protected characteristic in a context that clearly indicates hostility.
+
+4. **General Commentary**: Avoid labeling general critiques of societal issues (such as past events or cultural customs) as hate speech unless they directly and disparagingly target a protected trait.
+
+5. **Harsh Words vs. Hostile Intent**: Harsh language alone is insufficient to classify something as hate speech if it does not exhibit hostility towards a protected trait. Ensure that any harsh language is analyzed in conjunction with the presence of hostility towards a protected trait.
+
+6. **Contextual Sensitivity**: Carefully consider the context and intention behind the text. Reflect on how the text could affect specific groups and the larger community. Determine if the text might inspire violence, discrimination, or prejudice against protected traits.
+
+Apply these guidelines to determine if the text can be classified as 'Hate Speech'. If none of the above criteria apply, it should be classified as 'Not Hate Speech'.
+
+# Exemplar
+Text: "All [specific nationality] people are the same, always causing problems wherever they go."
+Label: Yes
+
+Text: "Can you believe these anti-immigrant folks? It’s like they live in a completely different world."
+Label: No
+
+Text: "This culture is just a burden on society, we need to get rid of it completely."
+Label: No
+
+Text: "Why can't we just live in peace? Why do some people keep coming and ruining everything?"
+Label: No
+
+Text: "I can't stand the way some so-called Christians treat LGBT folks; it’s just plain wrong."
+Label: No
+
+Text: "Those people only come here to take our jobs and resources. They should just go back."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "This tradition should have been abandoned long ago. It's time it ends. Shame on those who still support it."
+Label: Yes
+
+Text: "I really cannot stand people who celebrate Easter. They are just wasting their time."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(128), 129, 130, 131, 132, np.int64(72), np.int64(10), np.int64(113), np.int64(117)},
+  parent_score: 0.96875,
+  score: 0.96875))
+Training accuracy: (0.9791666666666666, 0.96875, 0.96875, 0.96875)
+Validation accuracy: [0.88, 0.88, 0.88, 0.88]
+Test accuracy: [0.9, 0.9, 0.9, 0.9]

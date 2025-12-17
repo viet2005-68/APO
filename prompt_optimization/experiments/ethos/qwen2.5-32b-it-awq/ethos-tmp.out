@@ -1,0 +1,140 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos-tmp.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.952919006347656
+Prompt: ('# Task\nDetermine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.96),)
+Test accuracy: [0.8866666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 50.488698959350586
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: They must be really suffering if they're throwing food all over the ground for the pigeons.
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: I like big thick bitches to serve me my cocktail. They are good only for such things
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92 | Penalized score: 0.732503997577022
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 17.797470092773438
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
+Text: OMG Lucas !! Such a great kid, such a big grow
+Label: No
+Text: this man is an inspiration. Has killed 900 people raped 250 women. I want to be like him. He is not scared of death. Not scared of anything.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.7414448874769621
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 21.895073652267456
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: Statistics show that if you support don lemon or you agree with him or if you think he's intelligent then you're overwhelmingly ignorant. Don't blame me that's just facts
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: I like big thick bitches to serve me my cocktail. They are good only for such things
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.7461248512458523
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 24.659382104873657
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: Statistics show that if you support don lemon or you agree with him or if you think he's intelligent then you're overwhelmingly ignorant. Don't blame me that's just facts
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: I like big thick bitches to serve me my cocktail. They are good only for such things
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.7461248512458523
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 19.530277252197266
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: Statistics show that if you support don lemon or you agree with him or if you think he's intelligent then you're overwhelmingly ignorant. Don't blame me that's just facts
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: I like big thick bitches to serve me my cocktail. They are good only for such things
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.7461248512458523
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 23.64970064163208
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: Statistics show that if you support don lemon or you agree with him or if you think he's intelligent then you're overwhelmingly ignorant. Don't blame me that's just facts
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+Text: I like big thick bitches to serve me my cocktail. They are good only for such things
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.7461248512458523
+Test accuracy: 0.9

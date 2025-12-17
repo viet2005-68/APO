@@ -1,0 +1,171 @@
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 4.369521141052246
+Prompt: ('# Task\nIs the following sentence plausible?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.71),)
+Test accuracy: [0.74]
+======== ROUND 1
+Time: 45.3053183555603
+Prompt: ('# Task\n"Does the given sentence align with common sports activities and terminology?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the following sentence consistent with typical sports actions and terminology?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the following sentence accurate in terms of sports terminology and events? Consider the specific actions and roles mentioned in the context of professional sports."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Does the given sentence align with common sports activities and jargon?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.75), np.float64(0.74), np.float64(0.74), np.float64(0.73))
+Test accuracy: [0.7866666666666666, 0.7266666666666667, 0.68, 0.78]
+======== ROUND 2
+Time: 188.2070710659027
+Prompt: ('# Task\n"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the provided sentence using terminology that is specific to a particular sport, such as baseball, basketball, soccer, or any other well-known sport?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the provided sentence specifically addressing activities and terms typically associated with well-known sports like soccer, basketball, American football, and baseball?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the provided sentence specifically addressing activities and terms typically associated with well-known sports including soccer, basketball, American football, and baseball?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.8), np.float64(0.79), np.float64(0.79), np.float64(0.79))
+Test accuracy: [0.76, 0.8, 0.8, 0.8066666666666666]
+======== ROUND 3
+Time: 202.0077257156372
+Prompt: ('# Task\n"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Is the provided sentence using terminology that is specific to a particular sport, such as baseball, basketball, soccer, or any other well-known sport?"\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the provided sentence specifically addressing activities and terms typically associated with well-known sports like soccer, basketball, American football, and baseball?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the provided sentence specifically addressing activities and terms typically associated with well-known sports including soccer, basketball, American football, and baseball?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.8), np.float64(0.79), np.float64(0.79), np.float64(0.79))
+Test accuracy: [0.76, 0.8, 0.8, 0.8066666666666666]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 34.80576848983765
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Mario Gomez scored a reverse layup."
+Label: No
+Text: "Frederik Andersen crossed the blue line in the Stanley Cup."
+Label: Yes
+Text: "T.Y. Hilton threw a touchdown in the AFC divisional round."
+Label: Yes
+Text: "Vincent Kompany comitted a three second violation."
+Label: No
+Text: "Kevin Durant hit a walkoff homer."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6270344209992812
+Test accuracy: 0.7466666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 15.56055998802185
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Mario Gomez scored a reverse layup."
+Label: No
+Text: "Frederik Andersen crossed the blue line in the Stanley Cup."
+Label: Yes
+Text: "T.Y. Hilton threw a touchdown in the AFC divisional round."
+Label: Yes
+Text: "Vincent Kompany comitted a three second violation."
+Label: No
+Text: "Kevin Durant hit a walkoff homer."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6270344209992812
+Test accuracy: 0.7466666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 15.935638904571533
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Mario Gomez scored a reverse layup."
+Label: No
+Text: "Frederik Andersen crossed the blue line in the Stanley Cup."
+Label: Yes
+Text: "T.Y. Hilton threw a touchdown in the AFC divisional round."
+Label: Yes
+Text: "Vincent Kompany comitted a three second violation."
+Label: No
+Text: "Kevin Durant hit a walkoff homer."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6270344209992812
+Test accuracy: 0.7533333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 16.665701150894165
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Tom Brady was safe at first."
+Label: No
+Text: "T.Y. Hilton threw a touchdown in the AFC divisional round."
+Label: Yes
+Text: "Edinson Cavani caught the screen pass."
+Label: No
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6381279252048885
+Test accuracy: 0.8
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 15.00559115409851
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Tom Brady was safe at first."
+Label: No
+Text: "T.Y. Hilton threw a touchdown in the AFC divisional round."
+Label: Yes
+Text: "Edinson Cavani caught the screen pass."
+Label: No
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6381279252048885
+Test accuracy: 0.8
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 13.165708541870117
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Tom Brady was safe at first."
+Label: No
+Text: "T.Y. Hilton threw a touchdown in the AFC divisional round."
+Label: Yes
+Text: "Edinson Cavani caught the screen pass."
+Label: No
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6381279252048885
+Test accuracy: 0.8066666666666666

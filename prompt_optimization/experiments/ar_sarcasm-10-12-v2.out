@@ -1,0 +1,1092 @@
+{"task": "ethos", "data_dir": "data/ar_sarcasm", "prompts": "prompts/ar_sarcasm.md", "out": "experiments/ar_sarcasm.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 24.485648155212402
+Prompt: (Prompt(
+  prompt: # Task
+Is this tweet sarcastic?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.7421875),)
+Training accuracy: (0.7421875,)
+Validation accuracy: [0.78]
+Test accuracy: [0.7491638795986622]
+======== ROUND 1
+Time: 218.08902859687805
+Prompt: (Prompt(
+  prompt: # Task
+To assess whether the given tweet exhibits sarcasm, look for elements such as ironic phrasing, unusual word selections, conflicting statements, and language that suggests a meaning contrary to its literal sense. Also, consider the role of emojis, punctuation, and the general mood conveyed in the tweet.
+
+# Exemplar
+Text: "كيف الحال! اليوم هو يوم ممطر وبارد جداً، تمامًا كما أحب!"
+Label: No
+
+Text: "الحياة تكذب المتفائلين وتثبت حق المتشائمين كل يوم!"
+Label: No
+
+Text: ""لا لا مو جذي هههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههه… https://t.co/wu3GYWxUM6""
+Label: No
+
+Text: "أولا: الموضوع مش فيه تفاصيل ثانيا: اللينك لا يعمل ثالثا: التعليق ع الصورة خاص بمقال مختلف تماماً الخلاصة: مفيش فايدة #22"
+Label: No
+
+Text: "لو كان هذا المطر سعره كأس من الماء، لما استغنى عنه أحد!"
+Label: Yes
+
+Text: ""@najahmali اهل الكفر والزندقة في خندق واحد لقتال المسلمينمسيرة البراءة من المشركين ولا ادري هل بوتن مسلم ؟!#بوتين_روحاني""
+Label: Yes
+
+Text: ""@NI3NA3 اقلها اليمن مستقره نوعاً ما ،اما حلب فكم دوله تحارب سوريا ولا زال السوريين يدافعون عن بلادهم اللتي تدمرت بسبب روسيا""
+Label: No
+
+Text: "كيف يسمح الشعب الامريكي بانتخاب رئيس مثل ترامب ، بعد ان هدد هيلاري كلنتون بالسجن اذا انتخب رئيس ، يجب ان يحاكم ...!."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(8), 12, 13, np.int64(14), 15, np.int64(16)},
+  parent_score: 0.7421875,
+  score: 0.8489583333333334), Prompt(
+  prompt: # Task
+To assess whether the given tweet exhibits sarcasm, look for indicators such as ironic phrasing, unusual word selections, contradictory statements, and phrases that suggest a meaning different from their literal sense. Also, consider the role of emojis, punctuation marks, and the general mood conveyed in the tweet.
+
+# Exemplar
+Text: "كيف الحال! اليوم هو يوم ممطر وبارد جداً، تمامًا كما أحب!"
+Label: No
+
+Text: "الحياة تكذب المتفائلين وتثبت حق المتشائمين كل يوم!"
+Label: No
+
+Text: ""لا لا مو جذي هههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههه… https://t.co/wu3GYWxUM6""
+Label: No
+
+Text: "أولا: الموضوع مش فيه تفاصيل ثانيا: اللينك لا يعمل ثالثا: التعليق ع الصورة خاص بمقال مختلف تماماً الخلاصة: مفيش فايدة #22"
+Label: No
+
+Text: "لو كان هذا المطر سعره كأس من الماء، لما استغنى عنه أحد!"
+Label: Yes
+
+Text: ""@najahmali اهل الكفر والزندقة في خندق واحد لقتال المسلمينمسيرة البراءة من المشركين ولا ادري هل بوتن مسلم ؟!#بوتين_روحاني""
+Label: Yes
+
+Text: ""@NI3NA3 اقلها اليمن مستقره نوعاً ما ،اما حلب فكم دوله تحارب سوريا ولا زال السوريين يدافعون عن بلادهم اللتي تدمرت بسبب روسيا""
+Label: No
+
+Text: "كيف يسمح الشعب الامريكي بانتخاب رئيس مثل ترامب ، بعد ان هدد هيلاري كلنتون بالسجن اذا انتخب رئيس ، يجب ان يحاكم ...!."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(8), 12, 13, np.int64(14), 15, np.int64(16)},
+  parent_score: 0.7421875,
+  score: 0.83984375), Prompt(
+  prompt: # Task
+To assess whether the given tweet exhibits sarcasm, look for indicators such as ironic statements, surprising word selections, contradictions, and phrases that suggest a meaning different from their literal sense. Also, consider the role of emojis, punctuation marks, and the general mood conveyed in the tweet.
+
+# Exemplar
+Text: "كيف الحال! اليوم هو يوم ممطر وبارد جداً، تمامًا كما أحب!"
+Label: No
+
+Text: "الحياة تكذب المتفائلين وتثبت حق المتشائمين كل يوم!"
+Label: No
+
+Text: ""لا لا مو جذي هههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههه… https://t.co/wu3GYWxUM6""
+Label: No
+
+Text: "أولا: الموضوع مش فيه تفاصيل ثانيا: اللينك لا يعمل ثالثا: التعليق ع الصورة خاص بمقال مختلف تماماً الخلاصة: مفيش فايدة #22"
+Label: No
+
+Text: "لو كان هذا المطر سعره كأس من الماء، لما استغنى عنه أحد!"
+Label: Yes
+
+Text: ""@najahmali اهل الكفر والزندقة في خندق واحد لقتال المسلمينمسيرة البراءة من المشركين ولا ادري هل بوتن مسلم ؟!#بوتين_روحاني""
+Label: Yes
+
+Text: ""@NI3NA3 اقلها اليمن مستقره نوعاً ما ،اما حلب فكم دوله تحارب سوريا ولا زال السوريين يدافعون عن بلادهم اللتي تدمرت بسبب روسيا""
+Label: No
+
+Text: "كيف يسمح الشعب الامريكي بانتخاب رئيس مثل ترامب ، بعد ان هدد هيلاري كلنتون بالسجن اذا انتخب رئيس ، يجب ان يحاكم ...!."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(8), 12, 13, np.int64(14), 15, np.int64(16)},
+  parent_score: 0.7421875,
+  score: 0.828125), Prompt(
+  prompt: # Task
+To assess whether the given tweet exhibits sarcasm, look for elements such as ironic statements, unusual word selections, conflicting messages, and phrases that suggest meanings contrary to their literal sense. Also, consider the role of emojis, punctuation marks, and the general tone in the tweet's content.
+
+# Exemplar
+Text: "كيف الحال! اليوم هو يوم ممطر وبارد جداً، تمامًا كما أحب!"
+Label: No
+
+Text: "الحياة تكذب المتفائلين وتثبت حق المتشائمين كل يوم!"
+Label: No
+
+Text: ""لا لا مو جذي هههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههههه… https://t.co/wu3GYWxUM6""
+Label: No
+
+Text: "أولا: الموضوع مش فيه تفاصيل ثانيا: اللينك لا يعمل ثالثا: التعليق ع الصورة خاص بمقال مختلف تماماً الخلاصة: مفيش فايدة #22"
+Label: No
+
+Text: "لو كان هذا المطر سعره كأس من الماء، لما استغنى عنه أحد!"
+Label: Yes
+
+Text: ""@najahmali اهل الكفر والزندقة في خندق واحد لقتال المسلمينمسيرة البراءة من المشركين ولا ادري هل بوتن مسلم ؟!#بوتين_روحاني""
+Label: Yes
+
+Text: ""@NI3NA3 اقلها اليمن مستقره نوعاً ما ،اما حلب فكم دوله تحارب سوريا ولا زال السوريين يدافعون عن بلادهم اللتي تدمرت بسبب روسيا""
+Label: No
+
+Text: "كيف يسمح الشعب الامريكي بانتخاب رئيس مثل ترامب ، بعد ان هدد هيلاري كلنتون بالسجن اذا انتخب رئيس ، يجب ان يحاكم ...!."
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(8), 12, 13, np.int64(14), 15, np.int64(16)},
+  parent_score: 0.7421875,
+  score: 0.82421875))
+Training accuracy: (0.8489583333333334, 0.83984375, 0.828125, 0.82421875)
+Validation accuracy: [0.7933333333333333, 0.7866666666666666, 0.7866666666666666, 0.7933333333333333]
+Test accuracy: [0.7993311036789298, 0.7859531772575251, 0.7926421404682275, 0.802675585284281]
+======== ROUND 2
+Time: 382.50441431999207
+Prompt: (Prompt(
+  prompt: # Task
+To assess whether the given tweet exhibits sarcasm, look for a combination of elements such as ironic phrasing, unusual word selections, conflicting statements, and language that suggests a meaning contrary to its literal sense. Consider the presence of emojis, punctuation, and the general mood conveyed in the tweet, but do not rely solely on these indicators. Ensure multiple clear signs of sarcasm are present before concluding that the tweet is sarcastic. A single ambiguous indicator like an emoji or general negative sentiment is insufficient to classify the tweet as sarcastic.
+</ANSIDER>
+user
+
+It looks like there was a typo at the end tag of your last response, it should be "
+
+# Exemplar
+Text: ""#Christmas By The Lake… كي لا ننسى الطابع الانساني في عجقة العيد...https://t.co/NIEhjBPT0d""
+Label: No
+
+Text: ""جستن بيييبر؟؟؟؟؟؟ اهاااااااااا اوكي https://t.co/OFRQyLn4wi""
+Label: No
+
+Text: "إذا كان هذا هو التقدم، فأنا لا أريد أن أعرف ما هو البقاء كما في الماضي!"
+Label: No
+
+Text: "أولا: الموضوع مش فيه تفاصيل ثانيا: اللينك لا يعمل ثالثا: التعليق ع الصورة خاص بمقال مختلف تماماً الخلاصة: مفيش فايدة #22"
+Label: No
+
+Text: ""الجو مال اتلحف بكشه ميريام فارس""
+Label: No
+
+Text: "احترامًا للبيئة، يجب علينا جميعًا أن نستخدم الأكياس القابلة للتحلل البيولوجي! 🌱💚"
+Label: No
+
+Text: "يا حكومة البطىء "أرجوكم سرعوا (المارش) شوية #يوسف_الحسيني"
+Label: No
+
+Text: "الأسواني للرئيس: لا تظن أن الكذب يضركبالعكسالكذب اذا تكرر بكثافة سيؤدى الى تشويش أذهان الناس حتى المقال كاملاً >>"
+Label: No
+
+Text: "الفرق بين مليونية اليوم ومليونية غيرها ، إن المحلات كانت فاتحة وبتبيع وتكسب فى محيط رابعة العدوية ، بخلاف المحلات"
+Label: No
+
+Text: ""#مليارات_العمره_على_هوى_مصرالشعب المصري النبيل الشقيق صاحب الموافق العظيمة إخوتنا وأشقائناآما سيسي فهو زائل قريباً قريباًبإذن الله...""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(5), np.int64(11), np.int64(14), np.int64(22), 26, 27, 28, 29, 30},
+  parent_score: 0.8489583333333334,
+  score: 0.9), Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, analyze it for features including ironic phrasing, unexpected word choices, contradictory statements, and language that implies a meaning opposite to its literal interpretation. Take into account the use of emojis, punctuation, and the overall tone expressed in the tweet, though none of these alone should be conclusive. Conclude that the tweet is sarcastic only when several clear indicators of sarcasm are evident. The presence of a single ambiguous element, such as an emoji or a generally negative tone, is not enough to categorize the tweet as sarcastic.
+
+# Exemplar
+Text: ""#Christmas By The Lake… كي لا ننسى الطابع الانساني في عجقة العيد...https://t.co/NIEhjBPT0d""
+Label: No
+
+Text: ""جستن بيييبر؟؟؟؟؟؟ اهاااااااااا اوكي https://t.co/OFRQyLn4wi""
+Label: No
+
+Text: "إذا كان هذا هو التقدم، فأنا لا أريد أن أعرف ما هو البقاء كما في الماضي!"
+Label: No
+
+Text: "أولا: الموضوع مش فيه تفاصيل ثانيا: اللينك لا يعمل ثالثا: التعليق ع الصورة خاص بمقال مختلف تماماً الخلاصة: مفيش فايدة #22"
+Label: No
+
+Text: ""الجو مال اتلحف بكشه ميريام فارس""
+Label: No
+
+Text: "احترامًا للبيئة، يجب علينا جميعًا أن نستخدم الأكياس القابلة للتحلل البيولوجي! 🌱💚"
+Label: No
+
+Text: "يا حكومة البطىء "أرجوكم سرعوا (المارش) شوية #يوسف_الحسيني"
+Label: No
+
+Text: "الأسواني للرئيس: لا تظن أن الكذب يضركبالعكسالكذب اذا تكرر بكثافة سيؤدى الى تشويش أذهان الناس حتى المقال كاملاً >>"
+Label: No
+
+Text: "الفرق بين مليونية اليوم ومليونية غيرها ، إن المحلات كانت فاتحة وبتبيع وتكسب فى محيط رابعة العدوية ، بخلاف المحلات"
+Label: No
+
+Text: ""#مليارات_العمره_على_هوى_مصرالشعب المصري النبيل الشقيق صاحب الموافق العظيمة إخوتنا وأشقائناآما سيسي فهو زائل قريباً قريباًبإذن الله...""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(5), np.int64(11), np.int64(14), np.int64(22), 26, 27, 28, 29, 30},
+  parent_score: 0.8489583333333334,
+  score: 0.89375), Prompt(
+  prompt: # Task
+To determine if a tweet is sarcastic, examine for several key features including ironic expressions, unconventional word choices, contradictory claims, and language hinting at a meaning opposite to its literal one. Take into account the use of emojis, punctuation, and the overall tone expressed in the tweet, although these alone shouldn't be decisive. Conclude that the tweet is sarcastic only if there are multiple evident signs pointing towards sarcasm. The presence of a single ambiguous element, such as an emoji or a generally negative sentiment, is not enough to label the tweet as sarcastic.
+
+# Exemplar
+Text: ""#Christmas By The Lake… كي لا ننسى الطابع الانساني في عجقة العيد...https://t.co/NIEhjBPT0d""
+Label: No
+
+Text: ""جستن بيييبر؟؟؟؟؟؟ اهاااااااااا اوكي https://t.co/OFRQyLn4wi""
+Label: No
+
+Text: "إذا كان هذا هو التقدم، فأنا لا أريد أن أعرف ما هو البقاء كما في الماضي!"
+Label: No
+
+Text: "أولا: الموضوع مش فيه تفاصيل ثانيا: اللينك لا يعمل ثالثا: التعليق ع الصورة خاص بمقال مختلف تماماً الخلاصة: مفيش فايدة #22"
+Label: No
+
+Text: ""الجو مال اتلحف بكشه ميريام فارس""
+Label: No
+
+Text: "احترامًا للبيئة، يجب علينا جميعًا أن نستخدم الأكياس القابلة للتحلل البيولوجي! 🌱💚"
+Label: No
+
+Text: "يا حكومة البطىء "أرجوكم سرعوا (المارش) شوية #يوسف_الحسيني"
+Label: No
+
+Text: "الأسواني للرئيس: لا تظن أن الكذب يضركبالعكسالكذب اذا تكرر بكثافة سيؤدى الى تشويش أذهان الناس حتى المقال كاملاً >>"
+Label: No
+
+Text: "الفرق بين مليونية اليوم ومليونية غيرها ، إن المحلات كانت فاتحة وبتبيع وتكسب فى محيط رابعة العدوية ، بخلاف المحلات"
+Label: No
+
+Text: ""#مليارات_العمره_على_هوى_مصرالشعب المصري النبيل الشقيق صاحب الموافق العظيمة إخوتنا وأشقائناآما سيسي فهو زائل قريباً قريباًبإذن الله...""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(5), np.int64(11), np.int64(14), np.int64(22), 26, 27, 28, 29, 30},
+  parent_score: 0.8489583333333334,
+  score: 0.8671875), Prompt(
+  prompt: # Task
+To assess whether a tweet includes sarcasm, look for particular patterns indicating an underlying meaning that contrasts with the literal one. Pay attention to ironic remarks, unexpected vocabulary, contradictions, and expressions where the implied message contradicts the actual wording. Nonetheless, take into account the tweet’s overall consistency and purpose. Some tweets may utilize hyperbole, non-standard punctuation, or emojis without being sarcastic. It’s essential to find clear evidence that the tweet’s intended message doesn’t align with its surface-level meaning. Analyze the context and the general sentiment of the tweet, and only label it as sarcastic if it unmistakably employs language to convey the opposite of what it literally says.
+
+# Exemplar
+Text: "الحياة مثل البحر، كلما اعتقدت أنك فهمت كل شيء، يأتيك الموج التالي ليذكرك بأنك لا تزال في بداية الطريق."
+Label: Yes
+
+Text: "_ع منطق حقير ولا يتبعه سوى الجبناء هذه نفس تقتل عارف يعني ايه؟ يمكن لو أخوك أو أمك كنت تفهم"
+Label: No
+
+Text: "قال الرئيس المتصهين #محمود_عباس إن ما حدث لـ #اليهود في "#الهولوكوست" هو أبشع جريمة عرفتها البشرية في العصر الحديث #أخبار #ف…"
+Label: No
+
+Text: "الحياة تكذب المتفائلين وتثبت حق المتشائمين كل يوم!"
+Label: No
+
+Text: "الحياة عادلة حقاً، كلما تمنيت سيارة جديدة، دائماً ما يأتي زميلي بسيارته الجديدة!"
+Label: Yes
+
+Text: ""عندي امتحان كبير غداً وأنا متأكد أنني سأحصل على أعلى الدرجات بدون حتى مراجعة! 😂""
+Label: Yes
+
+Text: "واو، حقاً مدهش كيف أصبحت حياتنا أفضل بفضل التكنولوجيا الحديثة 😒"
+Label: Yes
+
+Text: ""ده #MannequinChallenge  بس بطريقه محترفه 😂😂 https://t.co/FohO57PM0t""
+Label: No
+
+Text: ""@almthdt @naji1290 بريطانيا تعترف ومصره على بيع الأسلحة والصواريخ للسعودية !!!!!! ماذا نرتجي اذا؟""
+Label: No
+
+Text: "RT @someone: @anotherperson حقاً نحتاج إلى التوقف عن استخدام هذه الأداة الغبية التي لا تستحق كل هذا العناء #หมดหวัง"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(37), np.int64(39), 42, 43, 44, np.int64(13), 46, 45, np.int64(23), np.int64(25)},
+  parent_score: 0.828125,
+  score: 0.8645833333333334))
+Training accuracy: (0.9, 0.89375, 0.8671875, 0.8645833333333334)
+Validation accuracy: [0.8266666666666667, 0.83, 0.8166666666666667, 0.8366666666666667]
+Test accuracy: [0.8160535117056856, 0.822742474916388, 0.822742474916388, 0.782608695652174]
+======== ROUND 3
+Time: 492.0177059173584
+Prompt: (Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, analyze it for features like ironic expressions, unconventional vocabulary choices, contradictory claims, and wording that implies a meaning opposite to its literal one. Take note of emojis, punctuation marks, and the overall sentiment expressed in the tweet, though avoid basing your assessment solely on these aspects. Preferably, conclude that the tweet is sarcastic only when several obvious indications of sarcasm are present. However, remember that sarcasm can manifest subtly, particularly when shaped by cultural or linguistic specifics. Thus, consider the wider context and implied purpose of the message, understanding that even a solitary ambiguous clue could suggest sarcasm when reinforced by additional contextual information.
+
+# Exemplar
+Text: ""RT @username: #المال_يدور_في_البلاد_وحش_الجوع_بينا كلنا بنتكلم عن الثروات لكن البني آدمين ما بينفعوش""
+Label: Yes
+
+Text: "الفرق بين مليونية اليوم ومليونية غيرها ، إن المحلات كانت فاتحة وبتبيع وتكسب فى محيط رابعة العدوية ، بخلاف المحلات"
+Label: No
+
+Text: "يا له من يوم سعيد عندما أرى كل هذه التطورات الرائعة في بلدي! 😭"
+Label: Yes
+
+Text: "واو، حقاً مدهش كيف أصبحت حياتنا أفضل بفضل التكنولوجيا الحديثة 😒"
+Label: Yes
+
+Text: "الثورة مكملة #ثورة_25_يناير #باسم_رئيسا_لمصر #انتخبوا_العرص"
+Label: Yes
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "بهذه الخطوات تطبقين #مكياج #غوتشي لموسم خريف شتاء 2016 / 2017 موقع #حياتي https://t.co/rnIJwyeuX4 #راح_نفلسكم_٢… https://t.co/KjOQDBF6oJ"
+Label: No
+
+Text: ""RT @Moka__7: و دا واحد باع كليته عشان ايفون 7 https://t.co/OcQtJr5WF0""
+Label: No
+
+Text: "ليش وزير شؤون المرأه رجل؟ لان بكل بساطه لو كانت امرأه بدنا ١٠ حقائب جديده مقابلها لنفهم شو بدها وزيرة شؤون المراه😅 #حكومه_لبنان"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(65), np.int64(17), np.int64(24), np.int64(25), np.int64(28), 61, 62, 63},
+  parent_score: 0.9,
+  score: 0.90625), Prompt(
+  prompt: # Task
+To assess whether the given tweet exhibits sarcasm, look for a combination of elements such as ironic phrasing, unusual word selections, conflicting statements, and language that suggests a meaning contrary to its literal sense. Consider the presence of emojis, punctuation, and the general mood conveyed in the tweet, but do not rely solely on these indicators. While multiple clear signs of sarcasm are preferred before concluding that the tweet is sarcastic, recognize that sarcasm can also be present in subtle forms, especially when influenced by cultural or linguistic nuances. Therefore, take into account the broader context and intent behind the text, acknowledging that even a single ambiguous indicator might contribute to the overall perception of sarcasm if supported by other contextual clues.
+
+# Exemplar
+Text: ""RT @username: #المال_يدور_في_البلاد_وحش_الجوع_بينا كلنا بنتكلم عن الثروات لكن البني آدمين ما بينفعوش""
+Label: Yes
+
+Text: "الفرق بين مليونية اليوم ومليونية غيرها ، إن المحلات كانت فاتحة وبتبيع وتكسب فى محيط رابعة العدوية ، بخلاف المحلات"
+Label: No
+
+Text: "يا له من يوم سعيد عندما أرى كل هذه التطورات الرائعة في بلدي! 😭"
+Label: Yes
+
+Text: "واو، حقاً مدهش كيف أصبحت حياتنا أفضل بفضل التكنولوجيا الحديثة 😒"
+Label: Yes
+
+Text: "الثورة مكملة #ثورة_25_يناير #باسم_رئيسا_لمصر #انتخبوا_العرص"
+Label: Yes
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "بهذه الخطوات تطبقين #مكياج #غوتشي لموسم خريف شتاء 2016 / 2017 موقع #حياتي https://t.co/rnIJwyeuX4 #راح_نفلسكم_٢… https://t.co/KjOQDBF6oJ"
+Label: No
+
+Text: ""RT @Moka__7: و دا واحد باع كليته عشان ايفون 7 https://t.co/OcQtJr5WF0""
+Label: No
+
+Text: "ليش وزير شؤون المرأه رجل؟ لان بكل بساطه لو كانت امرأه بدنا ١٠ حقائب جديده مقابلها لنفهم شو بدها وزيرة شؤون المراه😅 #حكومه_لبنان"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(65), np.int64(17), np.int64(24), np.int64(25), np.int64(28), 61, 62, 63},
+  parent_score: 0.9,
+  score: 0.875), Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, analyze it for features including ironic phrases, unexpected word choices, contradictory statements, and expressions that imply a meaning opposite to their literal interpretation. Take into account emojis, punctuation, and the emotional tone of the tweet; however, avoid basing your judgment exclusively on these aspects. Although several obvious indicators of sarcasm are preferable, remember that even a solitary, nuanced clue, when understood within the proper context or cultural background, might sufficiently convey sarcasm. Focus on how the explicit words contrast with the underlying implications. Conclude that the tweet employs sarcasm only if the overall context strongly supports this interpretation. Do not label a tweet as sarcastic based merely on a single ambiguous element such as an emoji or vague negativity.
+
+# Exemplar
+Text: "كيف الحال! اليوم هو يوم ممطر وبارد جداً، تمامًا كما أحب!"
+Label: No
+
+Text: ""RT @username: #المال_يدور_في_البلاد_وحش_الجوع_بينا كلنا بنتكلم عن الثروات لكن البني آدمين ما بينفعوش""
+Label: Yes
+
+Text: "3 الحتة بتاعة تستبيح خداعي دي دايما باشوف فيها صورة واحدة بشراب شبيكة وسيجارة بمبسم وميك آب تقيل وغمازة عيرة وإنت فاهم بقى"
+Label: Yes
+
+Text: ""@NI3NA3 اقلها اليمن مستقره نوعاً ما ،اما حلب فكم دوله تحارب سوريا ولا زال السوريين يدافعون عن بلادهم اللتي تدمرت بسبب روسيا""
+Label: No
+
+Text: "الثورة مكملة #ثورة_25_يناير #باسم_رئيسا_لمصر #انتخبوا_العرص"
+Label: Yes
+
+Text: "يا له من يوم سعيد عندما أرى كل هذه التطورات الرائعة في بلدي! 😭"
+Label: Yes
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "ليش وزير شؤون المرأه رجل؟ لان بكل بساطه لو كانت امرأه بدنا ١٠ حقائب جديده مقابلها لنفهم شو بدها وزيرة شؤون المراه😅 #حكومه_لبنان"
+Label: No
+
+Text: ""كل هذا عشان جستن بيبر 😒 https://t.co/lbTPsvROIi""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(64), 65, np.int64(2), np.int64(4), np.int64(7), np.int64(22), 61, 62, 63},
+  parent_score: 0.9,
+  score: 0.875), Prompt(
+  prompt: # Task
+To assess whether a tweet includes sarcasm, look for particular patterns indicating an underlying meaning that contrasts with the literal one. Pay attention to ironic remarks, unexpected vocabulary, contradictions, and expressions where the implied message contradicts the actual wording. In different languages, including Arabic, sarcasm can manifest through specific vocabulary choices, inconsistent emotional tone, or contrasting statements. Consider these elements across all linguistic contexts. Moreover, examine the use of hyperbole, non-standard punctuation, and emojis, but recognize that their presence alone does not necessarily indicate sarcasm. It is crucial to find clear evidence that the tweet’s intended message doesn’t align with its surface-level meaning. Analyze the context and the general sentiment of the tweet, and only label it as sarcastic if it unmistakably employs language to convey the opposite of what it literally says.
+
+# Exemplar
+Text: "قال الرئيس المتصهين #محمود_عباس إن ما حدث لـ #اليهود في "#الهولوكوست" هو أبشع جريمة عرفتها البشرية في العصر الحديث #أخبار #ف…"
+Label: No
+
+Text: "لا تجبر الإنسان ولا تخيره يكفيه ما فيه من عقل بيحيره اللي النهارده بيطلبه ويشتهيه هو اللي بكره ح يشتهي يغيره عجبي !! #صلاح_جاهين"
+Label: No
+
+Text: "وانت بتتكلم عن الشتاء وكأنك في الصيف، يا صاحب القميص القصير! 🌞"
+Label: Yes
+
+Text: "الثورة مكملة #ثورة_25_يناير #باسم_رئيسا_لمصر #انتخبوا_العرص"
+Label: Yes
+
+Text: "واو، حقاً مدهش كيف أصبحت حياتنا أفضل بفضل التكنولوجيا الحديثة 😒"
+Label: Yes
+
+Text: "ياليت كل اللي بيكتبوا على التويتر عن الكرامة والعرض ماكانش فيهم عيب"
+Label: Yes
+
+Text: ""@Muhamed3amr عايزين يلموا اي ابن متناكة يوزرز اللي هو خد انستجرام ستوريز و لو عايز في فيسبوك برضه و حوار اللايف برضه""
+Label: Yes
+
+Text: ""@almthdt @naji1290 بريطانيا تعترف ومصره على بيع الأسلحة والصواريخ للسعودية !!!!!! ماذا نرتجي اذا؟""
+Label: No
+
+Text: ""احب ميريام فارس ومايا دياب الاخ واضح انه من جماعة هزي يانواعم يبي امتع نظره 💃👌""
+Label: Yes
+
+Text: "@some_user اللي فات خلاص انتهى، ما تقلش لازم ترجع وتصحح الامور، المهم الآن هو انك تتقدم للأمام وتعتبر أن كل شيء جديد 🍀✨"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(39), np.int64(43), 78, 79, 80, 81, 82, np.int64(25), np.int64(60), np.int64(63)},
+  parent_score: 0.8645833333333334,
+  score: 0.875))
+Training accuracy: (0.90625, 0.875, 0.875, 0.875)
+Validation accuracy: [0.8133333333333334, 0.8033333333333333, 0.8066666666666666, 0.83]
+Test accuracy: [0.8127090301003345, 0.8060200668896321, 0.8160535117056856, 0.8127090301003345]
+======== ROUND 4
+Time: 454.58013439178467
+Prompt: (Prompt(
+  prompt: # Task
+To assess whether a tweet includes sarcasm, look for elements like ironic expressions, unusual vocabulary selections, conflicting assertions, and language that suggests meanings contrary to their literal sense. Also, consider the role of emojis, punctuation marks, and the tweet’s emotional undertone. Nevertheless, refrain from relying solely on these elements for your conclusion. It's crucial to also consider the wider social and cultural backdrop in which the tweet was posted, as this can offer valuable insights into the author's actual intentions. When analyzing a tweet for sarcasm, make sure that several indicators are present and consistent with the author’s probable intent. A slight hint might indicate sarcasm when viewed within the right context. Keep in mind that sarcasm frequently depends on mutual knowledge or expectations between the writer and reader, so interpret each tweet within its correct social and cultural setting. Conclude that a tweet uses sarcasm only when the overall context provides strong support for this interpretation. Do not label a tweet as sarcastic based merely on a single ambiguous feature, such as an emoji or vague negative sentiment, unless it is clearly reinforced by the surrounding context.
+
+# Exemplar
+Text: "أنا متأكد أنك ستستمتع بوقتك في المستشفى! 🏥"
+Label: Yes
+
+Text: ""@i_FHD0 مو اعلان حتى، كده سلفي""
+Label: No
+
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: ""لم تعد #حماس من جسدالأمةلتشعرو بألمه  فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى  https://t.co/yrziktbQ4a""
+Label: No
+
+Text: "لا أستطيع أن أصدق أن هذا هو أفضل ما لدينا، حقاً 💯💯💯"
+Label: No
+
+Text: ""الجو مال اتلحف بكشه ميريام فارس""
+Label: No
+
+Text: "أنا سعيد جداً بأن الشمس لا تظهر اليوم."
+Label: Yes
+
+Text: "أنا سعيد جداً بأن الشمس لا ت出来了就不合适，我需要调整策略，确保回答完全符合您的要求，仅使用指定的标签（"Yes"和"No"），并且只包含您请求的信息：
+
+<ANSWER>
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: "ليش وزير شؤون المرأه رجل؟ لان بكل بساطه لو كانت امرأه بدنا ١٠ حقائب جديده مقابلها لنفهم شو بدها وزيرة شؤون المراه😅 #حكومه_لبنان"
+Label: No
+
+Text: "بس عادي، أنا صراحة مريت بظروف أصعب من كدة كتير 🙄 #مصر #الامارات"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(64), np.int64(104), 108, 109, 110, 111, np.int64(48), 112, np.int64(26)},
+  parent_score: 0.875,
+  score: 0.90625), Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, closely examine it for features such as ironic phrases, unexpected word choices, contradictory statements, and expressions that imply a meaning opposite to their literal interpretation. Pay attention to emojis, punctuation, and the emotional tone, but do not base your judgment solely on these elements. Ensure that the tweet does not employ sarcasm based on isolated or ambiguous indicators like single emojis or vague negativity. Instead, look for a combination of explicit wording and implied meaning that contrasts significantly and is supported by the overall context. Additionally, consider the cultural background and specific linguistic cues that might indicate sarcasm. Sarcasm should only be identified if there are clear and consistent contradictions or implications that suggest a hidden or contrary meaning, and these should be well-supported by the context of the tweet.
+
+# Exemplar
+Text: "أنا متأكد أنك ستستمتع بوقتك في المستشفى! 🏥"
+Label: Yes
+
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: ""لم تعد #حماس من جسدالأمةلتشعرو بألمه  فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى  https://t.co/yrziktbQ4a""
+Label: No
+
+Text: "لا أستطيع أن أصدق أن هذا هو أفضل ما لدينا، حقاً 💯💯💯"
+Label: No
+
+Text: "أيام كنا صغار، كل ما نشوف فرقة في الشارع نقول نغني معاهما، الآن كل ما نشوفهم نقول نروح بعيد 😂"
+Label: Yes
+
+Text: "احقر انسان هو اللي سكت عن الانقلاب في مصر وعقبها قال ما يجوز الخروج على السيسي لانه ولي أمر #إنصاف_الإخوان"
+Label: Yes
+
+Text: ""RT @hassahQ8: وطني الحبيب. وهل أحب. سواه.   الوطن. غالي مايحس بغلاته  الا. ألي فاقده. ياالله. ياكريم ترجع. سوريا  مثل. قبل. وأحسن 🌹🌹""
+Label: No
+
+Text: "أنا سعيد جداً بأن الشمس لا تظهر اليوم."
+Label: Yes
+
+Text: "أنا سعيد جداً بأن الشمس لا ت出来了就不合适，我需要调整策略，确保回答完全符合您的要求，仅使用指定的标签（"Yes"和"No"），并且只包含您请求的信息：
+
+<ANSWER>
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: "بس عادي، أنا صراحة مريت بظروف أصعب من كدة كتير 🙄 #مصر #الامارات"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(101), np.int64(104), 108, 109, 110, 111, 112, np.int64(50), np.int64(54)},
+  parent_score: 0.875,
+  score: 0.90625), Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, analyze it for features like ironic expressions, unconventional vocabulary choices, contradictory claims, and wording that implies a meaning opposite to its literal one. Take note of emojis, punctuation marks, and the overall sentiment expressed in the tweet, though avoid basing your assessment solely on these aspects. Preferably, conclude that the tweet is sarcastic only when several obvious indications of sarcasm are present. However, remember that sarcasm can manifest subtly, particularly when shaped by cultural or linguistic specifics. Thus, consider the wider context and implied purpose of the message, understanding that even a solitary ambiguous clue could suggest sarcasm when reinforced by additional contextual information.
+
+# Exemplar
+Text: ""RT @username: #المال_يدور_في_البلاد_وحش_الجوع_بينا كلنا بنتكلم عن الثروات لكن البني آدمين ما بينفعوش""
+Label: Yes
+
+Text: "الفرق بين مليونية اليوم ومليونية غيرها ، إن المحلات كانت فاتحة وبتبيع وتكسب فى محيط رابعة العدوية ، بخلاف المحلات"
+Label: No
+
+Text: "يا له من يوم سعيد عندما أرى كل هذه التطورات الرائعة في بلدي! 😭"
+Label: Yes
+
+Text: "واو، حقاً مدهش كيف أصبحت حياتنا أفضل بفضل التكنولوجيا الحديثة 😒"
+Label: Yes
+
+Text: "الثورة مكملة #ثورة_25_يناير #باسم_رئيسا_لمصر #انتخبوا_العرص"
+Label: Yes
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "بهذه الخطوات تطبقين #مكياج #غوتشي لموسم خريف شتاء 2016 / 2017 موقع #حياتي https://t.co/rnIJwyeuX4 #راح_نفلسكم_٢… https://t.co/KjOQDBF6oJ"
+Label: No
+
+Text: ""RT @Moka__7: و دا واحد باع كليته عشان ايفون 7 https://t.co/OcQtJr5WF0""
+Label: No
+
+Text: "ليش وزير شؤون المرأه رجل؟ لان بكل بساطه لو كانت امرأه بدنا ١٠ حقائب جديده مقابلها لنفهم شو بدها وزيرة شؤون المراه😅 #حكومه_لبنان"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(65), np.int64(17), np.int64(24), np.int64(25), np.int64(28), 61, 62, 63},
+  parent_score: 0.9,
+  score: 0.90625), Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, carefully analyze it for features such as ironic expressions, unconventional vocabulary choices, contradictory claims, and wording that implies a meaning opposite to its literal one. Pay attention to emojis, punctuation marks, and the overall sentiment expressed in the tweet, but do not base your assessment solely on these aspects. Even a single subtle cue, if strongly reinforced by contextual information, can be sufficient to classify a message as sarcastic. Sarcasm can manifest subtly, particularly when shaped by cultural or linguistic specifics, so consider the wider context and the implied purpose of the message. When evaluating the tweet, also take into account the broader conversation or background knowledge that might provide further context to support your conclusion.
+
+# Exemplar
+Text: ""جمهوري ايراني اسلامي ليست اسلامية#كلمه_للناس_البارده#مصر #السعوديه #الامارات #سوريا #العراق #اليمن https://t.co/cCGW1yrEat""
+Label: No
+
+Text: "الحياة مليئة بالمفاجآت، أحيانا تجد نفسك في مكان لم تكن تتوقع أن تكون فيه قبل عام واحد. #احلام_تتحول_لواقع"
+Label: No
+
+Text: ""@Molybes فرنسا ..هولاند ماشى وجى اليمن المتطرف بقيادة مارى لوبان زى ترامب كده""
+Label: No
+
+Text: ""اصبحت الغارات ممله جدا #اليمن #صنعاء""
+Label: Yes
+
+Text: ""@najahmali اهل الكفر والزندقة في خندق واحد لقتال المسلمينمسيرة البراءة من المشركين ولا ادري هل بوتن مسلم ؟!#بوتين_روحاني""
+Label: Yes
+
+Text: ""@sawabcenter داعش مجرمين قتلة ولكن النظام السوري من أحد الصناع لهم ويقتل أضعاف مايقتلون ويدمر كل سوريا  مارايكم به""
+Label: Yes
+
+Text: "للعلم ده مهرجان درجة أولى ما لو بالفلوس ما كانش حد غلب"
+Label: No
+
+Text: "أيام قليلة وسترى كيف سأصبح مليونيراً بفضل هذه الخطة السرية! 🤑 #نصائح_مالية #خطة_مليونير"
+Label: No
+
+Text: "أنا فعلاً سعيد بالطقس البارد اليوم. 😃"
+Label: Yes
+
+Text: ""RT @Shensawee: مصادري اكلتها الصخول والله عاد كيفي مو عاجبك في مكتبات في كتب في جوجل محرك بحث مخك نص ربية ندور بدالك مثلا""
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {96, np.int64(71), np.int64(15), np.int64(84), np.int64(21), np.int64(86), 92, 93, 94, 95},
+  parent_score: 0.90625,
+  score: 0.8854166666666666))
+Training accuracy: (0.90625, 0.90625, 0.90625, 0.8854166666666666)
+Validation accuracy: [0.84, 0.8366666666666667, 0.8133333333333334, 0.82]
+Test accuracy: [0.822742474916388, 0.822742474916388, 0.8093645484949833, 0.8160535117056856]
+======== ROUND 5
+Time: 389.887451171875
+Prompt: (Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, closely examine it for features such as ironic phrases, unexpected word choices, contradictory statements, and expressions that imply a meaning opposite to their literal interpretation. Pay attention to emojis, punctuation, and the emotional tone, but do not base your judgment solely on these elements. Ensure that the tweet does not employ sarcasm based on isolated or ambiguous indicators like single emojis or vague negativity. Instead, look for a combination of explicit wording and implied meaning that contrasts significantly and is supported by the overall context. Additionally, consider the cultural background and specific linguistic cues that might indicate sarcasm. Sarcasm should only be identified if there are clear and consistent contradictions or implications that suggest a hidden or contrary meaning, and these should be well-supported by the context of the tweet.
+
+# Exemplar
+Text: "أنا متأكد أنك ستستمتع بوقتك في المستشفى! 🏥"
+Label: Yes
+
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: ""لم تعد #حماس من جسدالأمةلتشعرو بألمه  فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى  https://t.co/yrziktbQ4a""
+Label: No
+
+Text: "لا أستطيع أن أصدق أن هذا هو أفضل ما لدينا، حقاً 💯💯💯"
+Label: No
+
+Text: "أيام كنا صغار، كل ما نشوف فرقة في الشارع نقول نغني معاهما، الآن كل ما نشوفهم نقول نروح بعيد 😂"
+Label: Yes
+
+Text: "احقر انسان هو اللي سكت عن الانقلاب في مصر وعقبها قال ما يجوز الخروج على السيسي لانه ولي أمر #إنصاف_الإخوان"
+Label: Yes
+
+Text: ""RT @hassahQ8: وطني الحبيب. وهل أحب. سواه.   الوطن. غالي مايحس بغلاته  الا. ألي فاقده. ياالله. ياكريم ترجع. سوريا  مثل. قبل. وأحسن 🌹🌹""
+Label: No
+
+Text: "أنا سعيد جداً بأن الشمس لا تظهر اليوم."
+Label: Yes
+
+Text: "أنا سعيد جداً بأن الشمس لا ت出来了就不合适，我需要调整策略，确保回答完全符合您的要求，仅使用指定的标签（"Yes"和"No"），并且只包含您请求的信息：
+
+<ANSWER>
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: "بس عادي، أنا صراحة مريت بظروف أصعب من كدة كتير 🙄 #مصر #الامارات"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(101), np.int64(104), 108, 109, 110, 111, 112, np.int64(50), np.int64(54)},
+  parent_score: 0.875,
+  score: 0.8489583333333334), Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, analyze it for features like ironic expressions, unconventional vocabulary choices, contradictory claims, and wording that implies a meaning opposite to its literal one. Take note of emojis, punctuation marks, and the overall sentiment expressed in the tweet, though avoid basing your assessment solely on these aspects. Preferably, conclude that the tweet is sarcastic only when several obvious indications of sarcasm are present. However, remember that sarcasm can manifest subtly, particularly when shaped by cultural or linguistic specifics. Thus, consider the wider context and implied purpose of the message, understanding that even a solitary ambiguous clue could suggest sarcasm when reinforced by additional contextual information.
+
+# Exemplar
+Text: ""RT @username: #المال_يدور_في_البلاد_وحش_الجوع_بينا كلنا بنتكلم عن الثروات لكن البني آدمين ما بينفعوش""
+Label: Yes
+
+Text: "الفرق بين مليونية اليوم ومليونية غيرها ، إن المحلات كانت فاتحة وبتبيع وتكسب فى محيط رابعة العدوية ، بخلاف المحلات"
+Label: No
+
+Text: "يا له من يوم سعيد عندما أرى كل هذه التطورات الرائعة في بلدي! 😭"
+Label: Yes
+
+Text: "واو، حقاً مدهش كيف أصبحت حياتنا أفضل بفضل التكنولوجيا الحديثة 😒"
+Label: Yes
+
+Text: "الثورة مكملة #ثورة_25_يناير #باسم_رئيسا_لمصر #انتخبوا_العرص"
+Label: Yes
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "بهذه الخطوات تطبقين #مكياج #غوتشي لموسم خريف شتاء 2016 / 2017 موقع #حياتي https://t.co/rnIJwyeuX4 #راح_نفلسكم_٢… https://t.co/KjOQDBF6oJ"
+Label: No
+
+Text: ""RT @Moka__7: و دا واحد باع كليته عشان ايفون 7 https://t.co/OcQtJr5WF0""
+Label: No
+
+Text: "ليش وزير شؤون المرأه رجل؟ لان بكل بساطه لو كانت امرأه بدنا ١٠ حقائب جديده مقابلها لنفهم شو بدها وزيرة شؤون المراه😅 #حكومه_لبنان"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {64, np.int64(65), np.int64(17), np.int64(24), np.int64(25), np.int64(28), 61, 62, 63},
+  parent_score: 0.9,
+  score: 0.8375), Prompt(
+  prompt: # Task
+To assess whether a tweet includes sarcasm, look for elements like ironic expressions, unusual vocabulary selections, conflicting assertions, and language that suggests meanings contrary to their literal sense. Also, consider the role of emojis, punctuation marks, and the tweet’s emotional undertone. Nevertheless, refrain from relying solely on these elements for your conclusion. It's crucial to also consider the wider social and cultural backdrop in which the tweet was posted, as this can offer valuable insights into the author's actual intentions. When analyzing a tweet for sarcasm, make sure that several indicators are present and consistent with the author’s probable intent. A slight hint might indicate sarcasm when viewed within the right context. Keep in mind that sarcasm frequently depends on mutual knowledge or expectations between the writer and reader, so interpret each tweet within its correct social and cultural setting. Conclude that a tweet uses sarcasm only when the overall context provides strong support for this interpretation. Do not label a tweet as sarcastic based merely on a single ambiguous feature, such as an emoji or vague negative sentiment, unless it is clearly reinforced by the surrounding context.
+
+# Exemplar
+Text: "أنا متأكد أنك ستستمتع بوقتك في المستشفى! 🏥"
+Label: Yes
+
+Text: ""@i_FHD0 مو اعلان حتى، كده سلفي""
+Label: No
+
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: ""لم تعد #حماس من جسدالأمةلتشعرو بألمه  فهل باتت اقرب للجسد الصفوي النجاسه باتت اكثرمن الطهرفي حماس #حلب_الملحمة_الكبرى  https://t.co/yrziktbQ4a""
+Label: No
+
+Text: "لا أستطيع أن أصدق أن هذا هو أفضل ما لدينا، حقاً 💯💯💯"
+Label: No
+
+Text: ""الجو مال اتلحف بكشه ميريام فارس""
+Label: No
+
+Text: "أنا سعيد جداً بأن الشمس لا تظهر اليوم."
+Label: Yes
+
+Text: "أنا سعيد جداً بأن الشمس لا ت出来了就不合适，我需要调整策略，确保回答完全符合您的要求，仅使用指定的标签（"Yes"和"No"），并且只包含您请求的信息：
+
+<ANSWER>
+Text: ""RT @islam_attia16: #واي_فاي_بيدور_عالبوكيمون امين انت ممكن تزعل منى عشان بوكيمون https://t.co/frqbYZVAIG""
+Label: No
+
+Text: "ليش وزير شؤون المرأه رجل؟ لان بكل بساطه لو كانت امرأه بدنا ١٠ حقائب جديده مقابلها لنفهم شو بدها وزيرة شؤون المراه😅 #حكومه_لبنان"
+Label: No
+
+Text: "بس عادي، أنا صراحة مريت بظروف أصعب من كدة كتير 🙄 #مصر #الامارات"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(64), np.int64(104), 108, 109, 110, 111, np.int64(48), 112, np.int64(26)},
+  parent_score: 0.875,
+  score: 0.825), Prompt(
+  prompt: # Task
+To identify sarcasm in a tweet, look closely for characteristics like irony, unusual word selections, and conflicting statements. Take into account punctuation and emojis, though don’t depend only on them. Focus particularly on whether the words suggest a meaning contrary to their literal sense. To prevent confusing other types of language with sarcasm, make sure there are several distinct signs of sarcasm evident. Moreover, acknowledge that cultural or linguistic subtleties can make sarcasm hard to detect, so take the wider context and underlying meaning of the message into consideration. Keep in mind, a solitary hint, even if vague, might point towards sarcasm if backed up by further context. Nonetheless, exercise caution in differentiating sarcastic from non-sarcastic content, particularly where expressive or emotional language is used without any ironic intention.
+
+# Exemplar
+Text: ""RT @aaww99d: #ترامب : لو أصبحت رئيساً #لامريكا سوف ارسل #هيلاري_كلنتون للسجن🏃🏽😂 #ثور_قادح 😅""
+Label: No
+
+Text: "لا أستطيع الانتظار لرؤية الفيلم الجديد! خذوني إلى السينما الآن!"
+Label: No
+
+Text: ""مع كل يوم يمر وإخواننا في سجون #حماس المرتدة تتضاعف فاتورة الحساب التي ستدفعها الكلاب الحمساوية،،#وعد_صادق#حماس_تحتضر#حماس_تعتقل_السلفيين""
+Label: Yes
+
+Text: ""ما رأي #حماس في مقابلة خليفة المسلمين أسد أهل السنة اردوغان مع القناة 2 الإسرائيلية التي تبث غدا؟ ألا زالت القدس تن… https://t.co/IcQzqIRSSU""
+Label: Yes
+
+Text: ""عم بحكي عن الاستقلال اللي تعمد بالدم وحما لبنان من الخطر الإرهابي وعن تحرير الجنوبعن حزب الله عم بحكي  #عن_اي_استقلال_عم_تحكي""
+Label: No
+
+Text: ""@najahmali اهل الكفر والزندقة في خندق واحد لقتال المسلمينمسيرة البراءة من المشركين ولا ادري هل بوتن مسلم ؟!#بوتين_روحاني""
+Label: Yes
+
+Text: ""RT @hassahQ8: وطني الحبيب. وهل أحب. سواه.   الوطن. غالي مايحس بغلاته  الا. ألي فاقده. ياالله. ياكريم ترجع. سوريا  مثل. قبل. وأحسن 🌹🌹""
+Label: No
+
+Text: ""@binsalah كنسلت هناكاليمين المتطرف انتشر""
+Label: No
+
+Text: "اوعى تقول عسكرى غلبان هوا و سيده فضوا ميدان #الداخلية_بلطجية"
+Label: Yes
+
+Text: ""عم بحكي بجد عن الاستقلال والحرية ولكن يعني حرفياً بس 😂""
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(100), np.int64(101), 143, 144, 145, 146, np.int64(15), np.int64(52), 147, np.int64(56)},
+  parent_score: 0.90625,
+  score: 0.8046875))
+Training accuracy: (0.8489583333333334, 0.8375, 0.825, 0.8046875)
+Validation accuracy: [0.8366666666666667, 0.8133333333333334, 0.84, 0.7933333333333333]
+Test accuracy: [0.822742474916388, 0.8093645484949833, 0.822742474916388, 0.8093645484949833]
+======== ROUND 6
+Time: 385.5213141441345
+Prompt: (Prompt(
+  prompt: # Task
+To determine if a tweet contains sarcasm, carefully analyze it for elements such as ironic expressions, unconventional vocabulary choices, contradictory claims, and wording that implies a meaning opposite to its literal one. Consider the use of emojis, punctuation marks, and the overall sentiment, but do not base your assessment solely on these aspects. Pay particular attention to subtle cultural or personal references, shifts in tone, and underlying implications, even if they seem less direct. Sarcasm can often manifest through indirect, layered meanings that may not align with typical surface-level indicators. When evaluating a tweet, also consider the broader context and implied purpose of the message, recognizing that even a single ambiguous clue could suggest sarcasm when reinforced by additional contextual information. Conclude that the tweet is sarcastic only when several clear indications are present, but remain open to the nuanced ways sarcasm can appear across different cultures and linguistic backgrounds.
+
+# Exemplar
+Text: ""@i_FHD0 مو اعلان حتى، كده سلفي""
+Label: No
+
+Text: "راسك برضو يا حوده #انتخبوا_العرص #فيفي_عبده"
+Label: Yes
+
+Text: "حتى الدور المشرف الذي لعبه الإخوان في حماية الميدان في موقعة الجمل لطخوه عندما قرروا أن يصنعوا موقعة جمل في كل حتة في مصر من أجل مرسي الكذاب"
+Label: Yes
+
+Text: "تبااااااااااااااااااااا لك ياااااااااااااااااااا #مارك وأخير استطعت تغيير إسمي دعواتكم أصدقائي كي أتمكن من استرجاع إسمي الأول"
+Label: No
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "ترينت بلانت: لست متأكد إذا كان هناك أي شخص غيري يعتقد أنه يمكننا العودة إلى القمة بسهولة، ولكن هذا لا يعني أنها لن تكون كذلك."
+Label: No
+
+Text: "ي قلب لا تعشق مليحاً واحدا ، تحتار فيه تدللاً و تذللاً واهوى الملاح جميعهم تلقاهم إن صد هذا كان ذلك مقبلاً *~ #بالعربي اقلب فندق ههههه"
+Label: No
+
+Text: "RT @username: أهلا بك في مدينة العجائب، حيث السحر يصبح واقعاً كل يوم! 🌟✨"
+Label: No
+
+Text: "بس عادي، أنا صراحة مريت بظروف أصعب من كدة كتير 🙄 #مصر #الامارات"
+Label: No
+
+Text: "ليست كوميديا حقًا، ولكن إذا كنت لا تستطيع العثور على عمل جيد لإضحاك الناس، فعليك أن تكون ملك الوجع!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(104), np.int64(139), 174, 175, np.int64(48), 177, 178, 176, np.int64(156), np.int64(61)},
+  parent_score: 0.8375,
+  score: 0.8541666666666666), Prompt(
+  prompt: # Task
+To identify sarcasm in a tweet, scrutinize it for signs like ironic statements, unusual word selections, conflicting assertions, and language that suggests an opposite meaning from what is literally stated. Take into account the employment of emojis, punctuation, and overall mood, though avoid relying exclusively on these features. Focus especially on subtle cultural or personal allusions, changes in tone, and hidden implications, even when they are not immediately apparent. Sarcasm frequently appears through complex, multi-layered meanings that might not clearly match common superficial signals. In assessing a tweet, also reflect on the wider context and the hidden intent behind the words, acknowledging that even a faintly ambiguous detail might hint at sarcasm when supported by other contextual details. Only conclude that a tweet is sarcastic when multiple strong clues are evident, yet stay aware of how sarcasm manifests differently across various cultural and linguistic contexts.
+
+# Exemplar
+Text: ""@i_FHD0 مو اعلان حتى، كده سلفي""
+Label: No
+
+Text: "راسك برضو يا حوده #انتخبوا_العرص #فيفي_عبده"
+Label: Yes
+
+Text: "حتى الدور المشرف الذي لعبه الإخوان في حماية الميدان في موقعة الجمل لطخوه عندما قرروا أن يصنعوا موقعة جمل في كل حتة في مصر من أجل مرسي الكذاب"
+Label: Yes
+
+Text: "تبااااااااااااااااااااا لك ياااااااااااااااااااا #مارك وأخير استطعت تغيير إسمي دعواتكم أصدقائي كي أتمكن من استرجاع إسمي الأول"
+Label: No
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "ترينت بلانت: لست متأكد إذا كان هناك أي شخص غيري يعتقد أنه يمكننا العودة إلى القمة بسهولة، ولكن هذا لا يعني أنها لن تكون كذلك."
+Label: No
+
+Text: "ي قلب لا تعشق مليحاً واحدا ، تحتار فيه تدللاً و تذللاً واهوى الملاح جميعهم تلقاهم إن صد هذا كان ذلك مقبلاً *~ #بالعربي اقلب فندق ههههه"
+Label: No
+
+Text: "RT @username: أهلا بك في مدينة العجائب، حيث السحر يصبح واقعاً كل يوم! 🌟✨"
+Label: No
+
+Text: "بس عادي، أنا صراحة مريت بظروف أصعب من كدة كتير 🙄 #مصر #الامارات"
+Label: No
+
+Text: "ليست كوميديا حقًا، ولكن إذا كنت لا تستطيع العثور على عمل جيد لإضحاك الناس، فعليك أن تكون ملك الوجع!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(104), np.int64(139), 174, 175, np.int64(48), 177, 178, 176, np.int64(156), np.int64(61)},
+  parent_score: 0.8375,
+  score: 0.8333333333333334), Prompt(
+  prompt: # Task
+To identify sarcasm in a tweet, scrutinize it for signs like ironic phrasing, unusual word selection, conflicting statements, and language hinting at a meaning different from its literal sense. Take into account emojis, punctuation, and general sentiment, though avoid relying exclusively on these features. Be attentive to subtle cultural or personal allusions, tonal changes, and underlying suggestions, even when they're not explicitly stated. Sarcasm frequently appears through complex, multi-layered meanings that might not match straightforward indicators. In assessing a tweet, also reflect on its wider context and implicit intent, understanding that a single vague clue might indicate sarcasm when combined with other context-specific details. Only conclude that a tweet is sarcastic when multiple strong signals are evident, yet stay aware of the varied ways sarcasm can be expressed across diverse cultures and languages.
+
+# Exemplar
+Text: ""@i_FHD0 مو اعلان حتى، كده سلفي""
+Label: No
+
+Text: "راسك برضو يا حوده #انتخبوا_العرص #فيفي_عبده"
+Label: Yes
+
+Text: "حتى الدور المشرف الذي لعبه الإخوان في حماية الميدان في موقعة الجمل لطخوه عندما قرروا أن يصنعوا موقعة جمل في كل حتة في مصر من أجل مرسي الكذاب"
+Label: Yes
+
+Text: "تبااااااااااااااااااااا لك ياااااااااااااااااااا #مارك وأخير استطعت تغيير إسمي دعواتكم أصدقائي كي أتمكن من استرجاع إسمي الأول"
+Label: No
+
+Text: ""RT @alir20091: #مليارات_العمره_على_هوى_مصر سقوط بشار الكلب معناة سقوط سيسي""
+Label: Yes
+
+Text: "ترينت بلانت: لست متأكد إذا كان هناك أي شخص غيري يعتقد أنه يمكننا العودة إلى القمة بسهولة، ولكن هذا لا يعني أنها لن تكون كذلك."
+Label: No
+
+Text: "ي قلب لا تعشق مليحاً واحدا ، تحتار فيه تدللاً و تذللاً واهوى الملاح جميعهم تلقاهم إن صد هذا كان ذلك مقبلاً *~ #بالعربي اقلب فندق ههههه"
+Label: No
+
+Text: "RT @username: أهلا بك في مدينة العجائب، حيث السحر يصبح واقعاً كل يوم! 🌟✨"
+Label: No
+
+Text: "بس عادي، أنا صراحة مريت بظروف أصعب من كدة كتير 🙄 #مصر #الامارات"
+Label: No
+
+Text: "ليست كوميديا حقًا، ولكن إذا كنت لا تستطيع العثور على عمل جيد لإضحاك الناس، فعليك أن تكون ملك الوجع!"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(104), np.int64(139), 174, 175, np.int64(48), 177, 178, 176, np.int64(156), np.int64(61)},
+  parent_score: 0.8375,
+  score: 0.8125), Prompt(
+  prompt: # Task
+To assess whether a tweet includes sarcasm, look for elements like ironic expressions, unusual vocabulary selections, conflicting assertions, and language that suggests meanings contrary to their literal sense. In Arabic-language tweets, be aware of specific idioms and phrases commonly used to convey sarcasm, such as "بس هيك" (just like that) or "مشكلتنا..." (our problem is...). Additionally, pay attention to political and social commentary that uses a satirical tone, often embedded within discussions about current events. Consider the role of emojis, punctuation marks, and the tweet’s emotional undertone. Nevertheless, refrain from relying solely on these elements for your conclusion. It's crucial to also consider the wider social and cultural backdrop in which the tweet was posted, as this can offer valuable insights into the author's actual intentions. When analyzing a tweet for sarcasm, ensure that several indicators are present and consistent with the author’s probable intent. A slight hint might indicate sarcasm when viewed within the right context. Keep in mind that sarcasm frequently depends on mutual knowledge or expectations between the writer and reader, so interpret each tweet within its correct social and cultural setting. Conclude that a tweet uses sarcasm only when the overall context provides strong support for this interpretation. Do not label a tweet as sarcastic based merely on a single ambiguous feature, such as an emoji or vague negative sentiment, unless it is clearly reinforced by the surrounding context.
+
+# Exemplar
+Text: "انا فعلاً مشتاق للسياحة في بلدان عجيبة جداً، بالتأكيد لن اذهب الى اي مكان قريب!"
+Label: Yes
+
+Text: "تبااااااااااااااااااااا لك ياااااااااااااااااااا #مارك وأخير استطعت تغيير إسمي دعواتكم أصدقائي كي أتمكن من استرجاع إسمي الأول"
+Label: No
+
+Text: "يا حكومة البطىء "أرجوكم سرعوا (المارش) شوية #يوسف_الحسيني"
+Label: No
+
+Text: ""RT @Mima_RF: #افضل_طقم_لروجر_فيدرروفي الطقم البنك https://t.co/v9PfDMAZqq""
+Label: No
+
+Text: "ياليت كل اللي بيكتبوا على التويتر عن الكرامة والعرض ماكانش فيهم عيب"
+Label: Yes
+
+Text: "ترينت بلانت: لست متأكد إذا كان هناك أي شخص غيري يعتقد أنه يمكننا العودة إلى القمة بسهولة، ولكن هذا لا يعني أنها لن تكون كذلك."
+Label: No
+
+Text: ""@Muhamed3amr عايزين يلموا اي ابن متناكة يوزرز اللي هو خد انستجرام ستوريز و لو عايز في فيسبوك برضه و حوار اللايف برضه""
+Label: Yes
+
+Text: "بس ممكن #العرص يموت وساعتها #حمدين_صباحي ينجح بالتزكية ساعتها حيكون له تلات معارضين #الاخوان و #الفلول و #مؤيدين_السيسى_بيعملوا_فولو_لبعض"
+Label: Yes
+
+Text: ""عم بحكي بجد عن الاستقلال والحرية ولكن يعني حرفياً بس 😂""
+Label: Yes
+
+Text: "لم يعد هناك وقت للانتظار، إما أن نقدم التغيير الآن أو نظل عاجزين عن تحقيق أي تقدم!"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(137), 177, np.int64(82), 179, 178, 180, np.int64(147), 181, np.int64(60), np.int64(29)},
+  parent_score: 0.825,
+  score: 0.8125))
+Training accuracy: (0.8541666666666666, 0.8333333333333334, 0.8125, 0.8125)
+Validation accuracy: [0.79, 0.7866666666666666, 0.7933333333333333, 0.7766666666666666]
+Test accuracy: [0.7993311036789298, 0.802675585284281, 0.7926421404682275, 0.7692307692307693]

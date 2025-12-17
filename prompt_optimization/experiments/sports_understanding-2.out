@@ -1,0 +1,152 @@
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding-2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.336907148361206
+Prompt: ('# Task\nGenerate a rephrased version of the following instruction while maintaining its essential meaning.\n\nInput: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete\'s sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete\'s name mentioned, the scenario may be deemed **unrealistic**. Respond with **\'Yes\'** if the scenario is realistic, and **\'No\'** if it is not."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.9),)
+Test accuracy: [0.8466666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 24.83744740486145
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Andres Iniesta performed a give and go."
+Label: Yes
+Text: "Willian killed the powerplay."
+Label: No
+Text: "Aaron Nola converted the first down."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6245154274148723
+Test accuracy: 0.8133333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 12.28913402557373
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Edinson Cavani caught the screen pass."
+Label: No
+Text: "Tuukka Rask hit a double."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84 | Penalized score: 0.6295504475616419
+Test accuracy: 0.7666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 12.240160465240479
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Edinson Cavani caught the screen pass."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6580362169277298
+Test accuracy: 0.7933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 13.85022234916687
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6764924299995508
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 8.507404088973999
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6764924299995508
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 8.546318769454956
+Prompt: # Task
+Generate a rephrased version of the following instruction while maintaining its essential meaning.
+
+Input: "Assess whether the given sentence describes a **realistic situation in a professional athletic event**. Take into account the **broader context and intent of the sentence**, including the **sport commonly linked to the athlete**, the **actions being performed**, and the **language used**. A sentence may still be considered realistic even if it includes terms from another sport, as long as the **overall context fits within the athlete's sport or the usual occurrences in that sport**. On the other hand, if the sentence includes **features that are more typical of a different sport**, even with the athlete's name mentioned, the scenario may be deemed **unrealistic**. Respond with **'Yes'** if the scenario is realistic, and **'No'** if it is not."
+
+# Here are some examples:
+Text: "Jesus Luzardo was called for slashing."
+Label: No
+Text: "Toni Kroos took a throw in in the Champions Leage Semifinal."
+Label: Yes
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87 | Penalized score: 0.6764924299995508
+Test accuracy: 0.8066666666666666

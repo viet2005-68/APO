@@ -1,0 +1,132 @@
+{"task": "casual_judgement", "data_dir": "data/casual_judgement", "prompts": "prompts/casual_judgement.md", "out": "experiments/casual_judgement.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.355881690979004
+Prompt: ('# Task\nHow would a typical person answer each of the following questions about causation?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.5945945945945946),)
+Test accuracy: [0.6017699115044248]
+======== ROUND 1
+Time: 91.21473932266235
+Prompt: ('# Task\nFor each text, decide if the agent *intentionally* caused the event in question.  \nAn intentional cause means the agent acted with the purpose or at least with the knowledge that the outcome would occur.  \nRespond only with Yes or No.  \n\nScenario 1: [John’s trolley switch]  \nQ: Did John intentionally cause the death of the workman on the side tracks?  \n\nScenario 2: [Tom’s gardeners]  \nQ: Did Alex cause the plant to dry out?  \n\nScenario 3: [Water‑pumping man, no objection]  \nQ: Did the man intentionally poison the inhabitants?  \n\nScenario 4: [Water‑pumping man, claims no intent]  \nQ: Did the man intentionally poison the inhabitants?  \n\nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a moral evaluator.  \nFor each brief story, determine whether the highlighted person *caused* the damage mentioned.  \nFollow this checklist:\n\n1. **Causal Connection** – Is there an obvious, time‑sequential link between the person’s action and the damage?  \n2. **Predictability** – Could an ordinary person anticipate that the damage would result from that action?  \n3. **Intent or Awareness** – Did the person *intend* or *know* that the damage would occur?  \n4. **Weight of Responsibility** – Did the action form a *major* cause, or only a *minor* one?\n\nIf all four criteria are met, write “Yes”; otherwise write “No”.  \nRespond solely with “Yes” or “No”.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHow would a typical person answer each of the following questions about causation?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHow might an average person respond to each of these questions concerning causation?\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.6351351351351351), np.float64(0.6216216216216216), np.float64(0.5945945945945946), np.float64(0.5945945945945946))
+Test accuracy: [0.5929203539823009, 0.6106194690265486, 0.584070796460177, 0.6017699115044248]
+======== ROUND 2
+Time: 278.0639896392822
+Prompt: ('# Task\n`/`\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:**  \nRead the narrative below and respond to the question with just one word: use “Yes” if the event mentioned in the question **caused** the outcome, or “No” if it did not.  \n\n**Question:** *Did X cause Y?*  \n\n**Story:**  \n<Story text here>  \n\n**Answer:**\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n/ (the same slash symbol, which represents division or a path separator)\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nUse the forward‑slash symbol (“/”).\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.6891891891891891), np.float64(0.6756756756756757), np.float64(0.6756756756756757), np.float64(0.6756756756756757))
+Test accuracy: [0.6548672566371682, 0.6991150442477876, 0.6460176991150443, 0.6371681415929203]
+======== ROUND 3
+Time: 294.8749759197235
+Prompt: ('# Task\n**Prompt:**\nExamine the passage below and reply with a single word: answer “Yes” if the event referenced in the question **was the cause** of the outcome, or “No” if it was not.\n\n**Question:** *Did X cause Y?*\n\n**Narrative:**\n<Story text here>\n\n**Response:**\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n` … `\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Judge whether the person’s action was responsible for the outcome mentioned.\n\nA paragraph ends with a yes/no question.  \nReply **only** with `Yes` or `No`.\n\n*Example 1*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Assess whether the subject’s action caused the outcome mentioned.\n\nYou will receive a paragraph that ends with a yes/no question.  \nRespond **only** with `Yes` or `No`.\n\n*Example 1:*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2:*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7027027027027027))
+Test accuracy: [0.6371681415929203, 0.6460176991150443, 0.6902654867256637, 0.6548672566371682]
+======== ROUND 4
+Time: 279.7535808086395
+Prompt: ('# Task\n**Prompt:**\nExamine the passage below and reply with a single word: answer “Yes” if the event referenced in the question **was the cause** of the outcome, or “No” if it was not.\n\n**Question:** *Did X cause Y?*\n\n**Narrative:**\n<Story text here>\n\n**Response:**\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n` … `\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Judge whether the person’s action was responsible for the outcome mentioned.\n\nA paragraph ends with a yes/no question.  \nReply **only** with `Yes` or `No`.\n\n*Example 1*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Assess whether the subject’s action caused the outcome mentioned.\n\nYou will receive a paragraph that ends with a yes/no question.  \nRespond **only** with `Yes` or `No`.\n\n*Example 1:*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2:*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7027027027027027))
+Test accuracy: [0.6371681415929203, 0.6371681415929203, 0.6902654867256637, 0.6460176991150443]
+======== ROUND 5
+Time: 298.3750331401825
+Prompt: ('# Task\n**Prompt:**\nExamine the passage below and reply with a single word: answer “Yes” if the event referenced in the question **was the cause** of the outcome, or “No” if it was not.\n\n**Question:** *Did X cause Y?*\n\n**Narrative:**\n<Story text here>\n\n**Response:**\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n` … `\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Judge whether the person’s action was responsible for the outcome mentioned.\n\nA paragraph ends with a yes/no question.  \nReply **only** with `Yes` or `No`.\n\n*Example 1*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Assess whether the subject’s action caused the outcome mentioned.\n\nYou will receive a paragraph that ends with a yes/no question.  \nRespond **only** with `Yes` or `No`.\n\n*Example 1:*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2:*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7027027027027027))
+Test accuracy: [0.6283185840707964, 0.6637168141592921, 0.6991150442477876, 0.6548672566371682]
+======== ROUND 6
+Time: 272.08220863342285
+Prompt: ('# Task\n**Prompt:**\nExamine the passage below and reply with a single word: answer “Yes” if the event referenced in the question **was the cause** of the outcome, or “No” if it was not.\n\n**Question:** *Did X cause Y?*\n\n**Narrative:**\n<Story text here>\n\n**Response:**\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n` … `\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Judge whether the person’s action was responsible for the outcome mentioned.\n\nA paragraph ends with a yes/no question.  \nReply **only** with `Yes` or `No`.\n\n*Example 1*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n**Task:** Assess whether the subject’s action caused the outcome mentioned.\n\nYou will receive a paragraph that ends with a yes/no question.  \nRespond **only** with `Yes` or `No`.\n\n*Example 1:*  \nText: “Billy and Suzy both log into the central computer at 9:27\u202fam. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?”  \nAnswer: No\n\n*Example 2:*  \nText: “The man pumps poisoned water into a cistern. The inhabitants die. Did the man intentionally poison the inhabitants?”  \nAnswer: Yes\n\nNow classify:\n\nText: {TEXT}  \nAnswer:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7162162162162162), np.float64(0.7027027027027027))
+Test accuracy: [0.6460176991150443, 0.6637168141592921, 0.6548672566371682, 0.672566371681416]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 34.422558546066284
+Prompt: # Task
+**Prompt:**
+Examine the passage below and reply with a single word: answer “Yes” if the event referenced in the question **was the cause** of the outcome, or “No” if it was not.
+
+**Question:** *Did X cause Y?*
+
+**Narrative:**
+<Story text here>
+
+**Response:**
+
+Output:
+
+# Exemplar
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is either plugged in or on the charging pad. At 2:00 PM, the device is plugged in, and the device is not on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it's not. So, he changes the position of the device, and he puts it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne changed the position of the device?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will only turn on when the people who work at the travel agency and the people who work in the design studio arrive for work. Neither office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45 am, and the design studio employees almost always arrive at 8:45 am. Today, the travel agency employees arrived at 8:45 am. The design studio employees also arrived at 8:45 am, as usual. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Tom has a huge garden and loves flowers. He employed two gardeners who take care of the plants on his 30 flower beds: Alex and Benni. Both can independently decide on their working hours and arrange who cares for which flower beds. Alex and Benni are very reliable and Tom is satisfied with their work. Nevertheless he wants to optimize the plant growth. Since Tom has read in a magazine that plants grow better when they are fertilized, he decides to let Alex and Benni fertilize his plants. The magazine recommends the use of the chemicals A X200R or B Y33R, since both are especially effective. However, Tom also read that it can damage plants when they are exposed to multiple different types of chemicals. Tom therefore decides that he only wants to use one fertilizer. He goes for A X200R. Tom instructs Alex and Benni to buy the chemical A X200R and to use only this fertilizer. Alex volunteers for buying several bottles of this chemical for Benni and himself. After a few weeks, Tom goes for a walk in his garden. He realizes that some of his plants are much prettier and bigger than before. However, he also realizes that some of his plants have lost their beautiful color and are dried up. That makes Tom very sad and reflective. He wonders whether the drying of his plants might have something to do with the fertilization. He wants to investigate this matter and talks to Alex and Benni. Alex tells him that he followed Tom's instructions and only bought and used the chemical A X200R. However, Benni tells him that he had used the chemical B Y33R instead. He still had some bottles of this chemical in stock at home and wanted to use them up. Tom realizes that the plants dried up in the flower beds on which both A X200R and B Y33R were applied by the gardeners. Did Benni cause the plant to dry out?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6756756756756757
+Test accuracy: 0.672566371681416
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 17.486719369888306
+Prompt: # Task
+**Prompt:**
+Examine the passage below and reply with a single word: answer “Yes” if the event referenced in the question **was the cause** of the outcome, or “No” if it was not.
+
+**Question:** *Did X cause Y?*
+
+**Narrative:**
+<Story text here>
+
+**Response:**
+
+Output:
+
+# Exemplar
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is either plugged in or on the charging pad. At 2:00 PM, the device is plugged in, and the device is not on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it's not. So, he changes the position of the device, and he puts it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne changed the position of the device?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will only turn on when the people who work at the travel agency and the people who work in the design studio arrive for work. Neither office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45 am, and the design studio employees almost always arrive at 8:45 am. Today, the travel agency employees arrived at 8:45 am. The design studio employees also arrived at 8:45 am, as usual. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7162162162162162
+Test accuracy: 0.672566371681416
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 17.511892557144165
+Prompt: # Task
+**Prompt:**
+Examine the passage below and reply with a single word: answer “Yes” if the event referenced in the question **was the cause** of the outcome, or “No” if it was not.
+
+**Question:** *Did X cause Y?*
+
+**Narrative:**
+<Story text here>
+
+**Response:**
+
+Output:
+
+# Exemplar
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is either plugged in or on the charging pad. At 2:00 PM, the device is plugged in, and the device is not on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it's not. So, he changes the position of the device, and he puts it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne changed the position of the device?
+Label: No
+Text: In a particular building there are two businesses, a travel agency and a graphic design studio. The building's climate control system is a new design that saves energy by keeping track of the number of people in the building, and only turning on when enough people have entered the building. The climate control system will only turn on when the people who work at the travel agency and the people who work in the design studio arrive for work. Neither office has enough employees to turn on the climate control system on their own. The travel agency employees almost always arrive at 8:45 am, and the design studio employees almost always arrive at 8:45 am. Today, the travel agency employees arrived at 8:45 am. The design studio employees also arrived at 8:45 am, as usual. So, today, the climate control system turned on at 8:45 am. Did the design studio agents cause the climate control system to turn on at 8:45 am?
+Label: No
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7162162162162162
+Test accuracy: 0.6814159292035398

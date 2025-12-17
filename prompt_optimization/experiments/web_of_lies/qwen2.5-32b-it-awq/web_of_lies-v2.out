@@ -1,0 +1,173 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies-2-ga.out", "max_threads": 96, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 50, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.896308660507202
+Prompt: ('# Task\nDetermine whether the final person mentioned is telling the truth.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.66),)
+Test accuracy: [0.6266666666666667]
+======== ROUND 1
+Time: 96.80393171310425
+Prompt: ('# Task\nEstablish the veracity of the last individual referenced through logical inference based on the opening statement and the sequence of assertions about others’ honesty.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEstablish the veracity of the last individual referenced through logical inference based on the opening assertion and the sequence of statements about others\' honesty.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine the truthfulness of the final person mentioned by logically deducing from the initial statement and the chain of claims made about others\' truthfulness.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEstablish the veracity of the last individual referenced through logical inference based on the original statement and the series of assertions about others\' honesty.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.69), np.float64(0.69), np.float64(0.68), np.float64(0.68))
+Test accuracy: [0.66, 0.6666666666666666, 0.6466666666666666, 0.64]
+======== ROUND 2
+Time: 385.22523951530457
+Prompt: ('# Task\nDetermine the truthfulness of the last person mentioned by using logical reasoning, based on the initial statement and the series of claims regarding other individuals\' honesty.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Starting with a series of assertions regarding people\'s honesty, apply logical reasoning to follow the progression of these statements, taking into account both positive and negative claims. Conclude whether the last individual’s statement about someone else’s truthfulness is accurate or not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEstablish the veracity of the last individual referenced through logical inference based on the opening assertion and the sequence of statements about others\' honesty.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Examine the series of statements given to ascertain whether the last individual discussed is being truthful. Begin with the initial claim and employ each following statement to deduce the honesty of the persons involved up to the final one. Maintain a record of who is lying and who is telling the truth as you progress through the statements."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.7), np.float64(0.69), np.float64(0.69), np.float64(0.69))
+Test accuracy: [0.68, 0.6733333333333333, 0.6666666666666666, 0.62]
+======== ROUND 3
+Time: 396.04084062576294
+Prompt: ('# Task\nDetermine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals\' honesty.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Analyze each statement in the given text sequentially to determine the truthfulness of each person mentioned. Start with the first assertion as your base truth. For each subsequent statement, update your understanding of who is telling the truth and who is lying. Use this step-by-step analysis to conclude whether the last person mentioned is telling the truth or not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Examine the series of declarations regarding people either being honest or deceptive. Deduce logically step by step, starting from the initial statement to the final one, to ascertain whether the last individual is truthful."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine the truthfulness of the last person mentioned by using logical reasoning, based on the initial statement and the series of claims regarding other individuals\' honesty.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.71), np.float64(0.71), np.float64(0.7), np.float64(0.7))
+Test accuracy: [0.6866666666666666, 0.6666666666666666, 0.64, 0.6733333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 78.04669451713562
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Kristian lies. Sherrie says Kristian lies. Delbert says Sherrie lies. Jerry says Delbert tells the truth. Shalonda says Jerry tells the truth. Does Shalonda tell the truth?
+Label: No
+Text: Question: Teressa tells the truth. Lorine says Teressa lies. Antwan says Lorine tells the truth. Fidel says Antwan tells the truth. Phoebe says Fidel lies. Does Phoebe tell the truth?
+Label: Yes
+Text: Question: Millie tells the truth. Millicent says Millie lies. Phoebe says Millicent tells the truth. Sherrie says Phoebe lies. Raymond says Sherrie tells the truth. Does Raymond tell the truth?
+Label: Yes
+Text: Question: Sima lies. Millie says Sima tells the truth. Jerry says Millie tells the truth. Vina says Jerry lies. Maybelle says Vina tells the truth. Does Maybelle tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.76 | Penalized score: 0.5165233655765537
+Test accuracy: 0.7266666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 41.31024169921875
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Ryan lies. Christie says Ryan lies. Amberly says Christie tells the truth. Shenna says Amberly tells the truth. Jamey says Shenna lies. Does Jamey tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Ka tells the truth. Fletcher says Ka tells the truth. Maybelle says Fletcher lies. Lorine says Maybelle lies. Crista says Lorine tells the truth. Does Crista tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.77 | Penalized score: 0.5189012557903319
+Test accuracy: 0.6866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 35.11078906059265
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Ryan lies. Christie says Ryan lies. Amberly says Christie tells the truth. Shenna says Amberly tells the truth. Jamey says Shenna lies. Does Jamey tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Ka tells the truth. Fletcher says Ka tells the truth. Maybelle says Fletcher lies. Lorine says Maybelle lies. Crista says Lorine tells the truth. Does Crista tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.77 | Penalized score: 0.5189012557903319
+Test accuracy: 0.6866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 40.87514328956604
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Ryan lies. Christie says Ryan lies. Amberly says Christie tells the truth. Shenna says Amberly tells the truth. Jamey says Shenna lies. Does Jamey tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Ka tells the truth. Fletcher says Ka tells the truth. Maybelle says Fletcher lies. Lorine says Maybelle lies. Crista says Lorine tells the truth. Does Crista tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.77 | Penalized score: 0.5189012557903319
+Test accuracy: 0.6933333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 42.39916372299194
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Ryan lies. Christie says Ryan lies. Amberly says Christie tells the truth. Shenna says Amberly tells the truth. Jamey says Shenna lies. Does Jamey tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Ka tells the truth. Fletcher says Ka tells the truth. Maybelle says Fletcher lies. Lorine says Maybelle lies. Crista says Lorine tells the truth. Does Crista tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.77 | Penalized score: 0.5292729777965269
+Test accuracy: 0.7133333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 34.39581537246704
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Ryan lies. Christie says Ryan lies. Amberly says Christie tells the truth. Shenna says Amberly tells the truth. Jamey says Shenna lies. Does Jamey tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Ka tells the truth. Fletcher says Ka tells the truth. Maybelle says Fletcher lies. Lorine says Maybelle lies. Crista says Lorine tells the truth. Does Crista tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.77 | Penalized score: 0.5292729777965269
+Test accuracy: 0.7133333333333334

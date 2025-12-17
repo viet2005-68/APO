@@ -220,7 +220,8 @@ class BruteForceEvaluator:
 
     def __call__(self, prompts, exs, task, predictor, scorer,
 rounds=40, num_prompts_per_round=10, c=2.0, samples_per_eval=5, max_threads=1, verbose=True):
-        sample_size = min(len(exs), int(self.config['eval_budget'] / len(prompts)))
+        # sample_size = min(len(exs), int(self.config['eval_budget'] / len(prompts)))
+        sample_size = len(exs)
         eval_exs = random.sample(exs, sample_size)
 
         while True:

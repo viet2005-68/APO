@@ -1,0 +1,395 @@
+{"task": "ethos", "data_dir": "data/clickbait", "prompts": "prompts/clickbait.md", "out": "experiments/clickbait.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 7.646564245223999
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.91),)
+Training accuracy: (np.float64(0.91),)
+Validation accuracy: [0.88]
+Test accuracy: [0.92]
+======== ROUND 1
+Time: 422.3781042098999
+Prompt: (Prompt(
+  prompt: # Task
+Is this text clickbait?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.91), Prompt(
+  prompt: # Task
+You are presented with a headline or short excerpt. Your goal is to determine whether it is click‑bait. Follow these guidelines:
+
+1. **Identify click‑bait cues**  
+   Scan the headline for common structural signals such as:  
+   * **Superlatives or hyperbolic adjectives** – e.g., “incredible,” “unbelievable.”  
+   * **Promising questions** – e.g., “What happens next?”  
+   * **Curiosity‑gap or benefit phrases** – e.g., “You won’t believe what happens,” “How to….”  
+   * **Emotional or sensational wording** – e.g., “shocking,” “life‑changing.”  
+
+2. **Decision rules**  
+   - If any cue appears, answer **YES** and give a single‑sentence explanation that cites the cue.  
+   - If no cue is found, check whether the headline is a plain, neutral statement. If so, answer **NO** and explain that it lacks typical click‑bait tactics.  
+   - For ambiguous cases, consider whether the headline makes a vague promise that the article could satisfy. If uncertainty remains, lean toward **NO** but note the ambiguity in the explanation.
+
+3. **Additional tips**  
+   - Focus on patterns, not just specific words.  
+   - Keep explanations brief (one sentence).  
+   - For region‑specific slang, map it to known click‑bait structures before deciding.
+
+**Answer format**  
+```
+YES: [brief explanation]
+```
+or
+```
+NO: [brief explanation]
+```
+
+Proceed.
+
+# Exemplar
+Text: "Is Your Smartphone Actually Telling You Secrets? The Shocking Truth Revealed"
+Label: Yes
+
+Text: "Is this the end of the world? Scientists warn about impending asteroid."
+Label: Yes
+
+Text: "Local Man Wins Lottery After 20 Years of Saving"
+Label: No
+
+Text: "The One Trick That Will Double Your Reading Speed Overnight—Try It Now!"
+Label: Yes
+
+Text: "Top 10 Foods That Will Make You Lose Weight Fast"
+Label: Yes
+
+Text: "Your Daily Coffee Routine Might Be Sabotaging Your Health—What Experts Are Saying"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(3), 5, np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(2), np.int64(8), np.int64(11), 15, 16, 17},
+  parent_score: 0,
+  score: 0.9), Prompt(
+  prompt: # Task
+You are a content‑analysis assistant. Your job is to determine whether a headline is clickbait. Evaluate the headline for indicators that it is crafted to draw clicks, following this adjustable procedure:
+
+1. Look for obvious clickbait cues such as “shocking,” “unbelievable,” “you’ll never believe,” “secret,” “mind‑blowing,” “amazing,” etc. If any appear, answer “Yes” and give a brief explanation citing the cue.
+
+2. If no obvious cues exist, examine the structure.  
+   • If the headline is a question that promises a revelation, especially ending with a question mark and phrasing like “What happens when…,” “Why did this happen?” etc., say “Yes” unless it is clearly a plain factual question.  
+   • If the headline contains an exaggerated claim—words like “the best,” “the most,” “top 10,” “ultimate” that seem overstated for the topic—say “Yes” when the claim feels sensational.  
+   • If the headline offers a benefit or reward, such as “How to…,” “You’ll learn how to…,” “Get the secret to…,” say “Yes” when the promise appears overly promotional.
+
+3. If none of the above cues are present, consider tone.  
+   • If the headline is playful, ambiguous, or uses word‑play that sparks curiosity, say “Yes” only if the curiosity seems intended to lure readers rather than inform.  
+   • If the headline is straightforward and factual, say “No.”
+
+Always provide a single‑sentence justification and no extra commentary. Treat the headline as a marketing claim; focus on click‑attraction intent, not factual correctness. When a headline could be read either way, lean toward “Yes” because subtle intrigue often signals clickbait. End your answer with “Yes” or “No” followed by the justification.
+
+# Exemplar
+Text: "How to Get a Free iPhone With This One Trick"
+Label: Yes
+
+Text: "Is Your Smartphone Actually Telling You Secrets? The Shocking Truth Revealed"
+Label: Yes
+
+Text: "Is this the end of the world? Scientists warn about impending asteroid."
+Label: Yes
+
+Text: "The One Trick That Will Double Your Reading Speed Overnight—Try It Now!"
+Label: Yes
+
+Text: "Your Daily Coffee Routine Might Be Sabotaging Your Health—What Experts Are Saying"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(4), np.int64(5), 6, 7},
+  examplers_idx_used: {np.int64(4), np.int64(8), 15, np.int64(16), 17},
+  parent_score: 0,
+  score: 0.9), Prompt(
+  prompt: # Task
+**New Instruction**
+
+You will receive a headline or a very short piece of text. Your job is to determine whether it is clickbait. Follow the process below:
+
+1. **Inspect for typical clickbait markers**  
+   - Look for superlatives or over‑the‑top adjectives (e.g., “incredible,” “unbelievable,” “amazing”).  
+   - Spot questions that hint at a forthcoming revelation (e.g., “What happens next?”).  
+   - Detect curiosity‑gap phrases that promise hidden information or a benefit (“You won’t believe what happens,” “How to…”).  
+   - Notice emotional or sensational wording (e.g., “shocking,” “heart‑warming,” “life‑changing”).  
+
+2. **If any of those markers appear**  
+   - Reply with “YES” followed by a single‑sentence explanation that cites the specific cue.  
+
+3. **If none of the markers are found**  
+   - Check if the headline is a plain, neutral statement.  
+   - If it is, reply with “NO” and explain that it does not use typical clickbait tactics.  
+
+4. **For borderline cases**  
+   - Ask:  
+     * Does the headline promise something vague that could be fulfilled?  
+     * Does it contain a question or superlative but the content would likely satisfy it?  
+   - If you’re unsure, lean toward “NO” but note the uncertainty in your explanation.  
+
+**Guidelines**  
+- Don’t get stuck on exact wording; focus on structural patterns.  
+- Keep explanations brief—just one sentence.  
+- If the headline contains regional slang or is location‑specific, map it to known clickbait patterns before deciding.  
+
+**Answer format**  
+```
+YES: [one‑sentence explanation]
+```
+or
+```
+NO: [one‑sentence explanation]
+```
+
+Proceed.
+
+# Exemplar
+Text: "Is Your Smartphone Actually Telling You Secrets? The Shocking Truth Revealed"
+Label: Yes
+
+Text: "Is this the end of the world? Scientists warn about impending asteroid."
+Label: Yes
+
+Text: "Local Man Wins Lottery After 20 Years of Saving"
+Label: No
+
+Text: "The One Trick That Will Double Your Reading Speed Overnight—Try It Now!"
+Label: Yes
+
+Text: "Top 10 Foods That Will Make You Lose Weight Fast"
+Label: Yes
+
+Text: "Your Daily Coffee Routine Might Be Sabotaging Your Health—What Experts Are Saying"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(3), 5, np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(2), np.int64(8), np.int64(11), 15, 16, 17},
+  parent_score: 0,
+  score: 0.87))
+Training accuracy: (np.float64(0.91), np.float64(0.9), np.float64(0.9), np.float64(0.87))
+Validation accuracy: [0.88, 0.86, 0.88, 0.87]
+Test accuracy: [0.925, 0.885, 0.88, 0.87]
+======== ROUND 2
+Time: 1628.5280849933624
+Prompt: (Prompt(
+  prompt: # Task
+**Input:**  
+Determine whether the following headline is clickbait.  
+Begin by checking for classic clickbait cues such as superlatives (“best,” “most,” “ultimate”), sensational verbs (“shocking,” “unbelievable”), or curiosity‑prompting questions. A headline that includes any of these patterns strongly suggests clickbait.  
+Still, assess the source: if it appears to come from a reputable news outlet, the presence of a question or superlative alone may not be enough to label it clickbait.  
+If the headline misses obvious high‑frequency signals but still feels designed to attract attention—perhaps through emotional diction, odd noun pairings, or a playful tone—look for subtler persuasive tricks like hints of hidden information or urgency.  When such subtle cues exist, treat the headline as clickbait unless there is clear evidence of factual reporting.  
+If the headline contains no superlatives, questions, or sensational wording, and the style is plain, factual, and devoid of emotional exaggeration, classify it as non‑clickbait.  Remember that the lack of obvious markers does not guarantee the headline is free of persuasion; consider the overall tone and context.  
+When uncertain, choose “No” only if the headline is plainly objective and free of persuasive framing; otherwise, err on the side of “Yes.” Balance the criteria so that ordinary headlines aren’t mistakenly flagged, while cleverly crafted ones aren’t missed.  
+Avoid relying solely on a handful of trigger words; evaluate the headline’s structure, tone, source implication, and overall intent to make your decision.
+
+**Output:**
+
+# Exemplar
+Text: "Is Your Smartphone Actually Telling You Secrets? The Shocking Truth Revealed"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "Sunday Times says Israel is planning nuclear strike against Iran"
+Label: No
+
+Text: "The One Trick That Will Double Your Reading Speed Overnight—Try It Now!"
+Label: Yes
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Your Daily Coffee Routine Might Be Sabotaging Your Health—What Experts Are Saying"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(7), 11, 12, 13},
+  examplers_idx_used: {np.int64(15), np.int64(16), np.int64(17), 22, 23, 24},
+  parent_score: 0,
+  score: 0.93), Prompt(
+  prompt: # Task
+Determine whether this headline is clickbait.  
+1. Scan the headline for typical clickbait signals—such as superlatives, questions, emotional language, or odd punctuation. If any are present, treat this as a strong indicator.  
+2. Assess the source: a well‑known news outlet lowers the probability; a marketing or social‑media post raises it.  
+3. Check if the headline promises a surprising or emotional payoff—raise the likelihood if it does.  
+4. Answer with a single word: “Yes” if you think it is clickbait, “No” otherwise, and follow with a one‑sentence justification.  
+Remember to balance high‑frequency phrases with structural clues and source credibility. If the headline is unclear, default to “No” unless clear sensational cues exist.
+
+# Exemplar
+Text: "Is Your Smartphone Actually Telling You Secrets? The Shocking Truth Revealed"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "Sunday Times says Israel is planning nuclear strike against Iran"
+Label: No
+
+Text: "The One Trick That Will Double Your Reading Speed Overnight—Try It Now!"
+Label: Yes
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Your Daily Coffee Routine Might Be Sabotaging Your Health—What Experts Are Saying"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(7), 11, 12, 13},
+  examplers_idx_used: {np.int64(15), np.int64(16), np.int64(17), 22, 23, 24},
+  parent_score: 0,
+  score: 0.93), Prompt(
+  prompt: # Task
+Is this text clickbait?  
+Start by examining whether the headline uses common clickbait tactics such as superlatives, questions, or sensational phrases. If it contains any of the following patterns—words like “best,” “most,” “ultimate,” “shocking,” or “you’ll never believe,” or a question mark that invites curiosity—note that this is a strong indicator of clickbait.  However, before concluding, check whether the headline appears to come from a reputable news outlet or a marketing source; if it is from a credible news organization, the presence of a question or superlatives alone may not suffice to label it clickbait.  
+If the headline lacks obvious high‑frequency clickbait cues but still feels attention‑grabbing—perhaps through emotional language, an unusual pairing of nouns, or a playful tone—then consider whether it uses subtle persuasive techniques such as implying hidden information or creating a sense of urgency.  If such subtle cues are present, treat the headline as clickbait unless evidence suggests it is factual reporting.  
+If the headline contains no superlatives, questions, or sensational phrasing, and the tone is straightforward, factual, and lacks emotional exaggeration, then classify it as non‑clickbait.  Remember that the absence of explicit clickbait markers does not automatically rule out subtle persuasion, so weigh the overall style and context.  
+When in doubt, default to “No” only if the headline is clearly objective and devoid of any persuasive framing; otherwise, lean toward “Yes.”  Keep these rules balanced so the model does not over‑apply clickbait heuristics to ordinary headlines or under‑apply them to cleverly crafted ones.  
+Be cautious not to rely solely on the presence of a few trigger words; instead, evaluate the headline’s structure, tone, source implication, and overall intent to decide whether it is clickbait.
+
+# Exemplar
+Text: "Is Your Smartphone Actually Telling You Secrets? The Shocking Truth Revealed"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "Sunday Times says Israel is planning nuclear strike against Iran"
+Label: No
+
+Text: "The One Trick That Will Double Your Reading Speed Overnight—Try It Now!"
+Label: Yes
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Your Daily Coffee Routine Might Be Sabotaging Your Health—What Experts Are Saying"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(7), 11, 12, 13},
+  examplers_idx_used: {np.int64(15), np.int64(16), np.int64(17), 22, 23, 24},
+  parent_score: 0.91,
+  score: 0.91), Prompt(
+  prompt: # Task
+**Prompt:**  
+Determine whether the following headline is clickbait.
+
+**Guidelines**
+
+1. **Initial Scan**  
+   - Look for classic clickbait signals: superlatives (“best,” “ultimate,” “most”), sensational adjectives (“shocking,” “unbelievable”), or a question that sparks curiosity.  
+   - If any of these appear, flag it as a strong clickbait indicator.
+
+2. **Source Check**  
+   - Verify the outlet. A headline from a trustworthy news organization may use a question or superlatives without being clickbait.  
+   - If the source is reputable, a single trigger word is insufficient for a clickbait label.
+
+3. **Subtle Persuasion**  
+   - If obvious cues are missing yet the headline feels gimmicky—through emotional wording, odd noun combinations, or a playful vibe—examine for hidden‑information or urgency tactics.  
+   - Presence of such subtle cues warrants a clickbait classification unless the content clearly reports facts.
+
+4. **Plain and Factual**  
+   - Headlines that lack superlatives, questions, sensational language, and maintain a straightforward, factual tone should be marked as non‑clickbait.  
+   - Remember that absence of overt markers does not automatically mean no persuasion; consider overall style and context.
+
+5. **Decision Rule**  
+   - When in doubt, answer “No” only if the headline is unmistakably objective and free of persuasive framing.  
+   - Otherwise, lean toward “Yes.”  
+   - Balance the rules so the model neither over‑labels ordinary headlines nor misses cleverly crafted ones.
+
+**Output**: Return “Yes” if the headline is clickbait, “No” if it is not.
+
+# Exemplar
+Text: "Is Your Smartphone Actually Telling You Secrets? The Shocking Truth Revealed"
+Label: Yes
+
+Text: "Here Are Some GIFs I Drew About Having Period Rage"
+Label: Yes
+
+Text: "Sunday Times says Israel is planning nuclear strike against Iran"
+Label: No
+
+Text: "The One Trick That Will Double Your Reading Speed Overnight—Try It Now!"
+Label: Yes
+
+Text: "Find Your Next Healthy Recipe With The BuzzFeed Food Newsletter"
+Label: Yes
+
+Text: "Your Daily Coffee Routine Might Be Sabotaging Your Health—What Experts Are Saying"
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(5), np.int64(6), np.int64(7), 11, 12, 13},
+  examplers_idx_used: {np.int64(15), np.int64(16), np.int64(17), 22, 23, 24},
+  parent_score: 0,
+  score: 0.91))
+Training accuracy: (np.float64(0.93), np.float64(0.93), np.float64(0.91), np.float64(0.91))
+Validation accuracy: [0.93, 0.91, 0.89, 0.87]
+Test accuracy: [0.925, 0.91, 0.915, 0.905]

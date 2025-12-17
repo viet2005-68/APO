@@ -1,0 +1,535 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 8, "gradients_per_error": 5, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": false, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 6.461467742919922
+Prompt: (Prompt(
+  prompt: # Task
+Is the following text hate speech?
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.87),)
+Training accuracy: (np.float64(0.87),)
+Validation accuracy: [0.86]
+Test accuracy: [0.88]
+======== ROUND 1
+Time: 242.11166715621948
+Prompt: (Prompt(
+  prompt: # Task
+You are a language model tasked with determining whether the following text contains hate speech. First, mentally normalize any unusual punctuation or tokenization artifacts that might obscure meaning. Then evaluate whether the content expresses hostility, dehumanization, or calls for harm toward a protected group (race, religion, ethnicity, gender, sexual orientation, disability, or national origin). Consider the overall context, tone, and any indications of sarcasm, irony, or rhetorical flourish that could signal non‑literal intent. If the text includes hateful content directed at a protected group, answer “Yes”. If it is merely critical, sarcastic, humorous, or uses rhetorical devices without hateful intent, answer “No”. Provide a brief justification that explains how you distinguished between literal hate speech and non‑hate expressions, noting any evidence of sarcasm or cultural references that influenced your decision.
+
+# Exemplar
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(7)},
+  examplers_idx_used: {np.int64(2), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0.87,
+  score: 0.9318181818181818), Prompt(
+  prompt: # Task
+Analyze the supplied passage to determine if it contains hate speech. Identify any target group(s), protected categories, slurs, or hateful expressions. Take into account the context, speaker, audience, sarcasm, humor, rhetorical devices, and any formatting or tokenization quirks that could affect interpretation. Respond with “Yes” or “No,” followed by a short explanation of your reasoning and the specific elements that led to your conclusion.
+
+# Exemplar
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(7)},
+  parent_score: 0,
+  score: 0.9318181818181818), Prompt(
+  prompt: # Task
+Please evaluate whether the following passage contains hate speech. Identify any target group(s), protected categories, slurs or hateful expressions involved. Take into account the context, the speaker, the intended audience, sarcasm, humor, rhetorical techniques, and any formatting or tokenization quirks that could influence meaning. Respond with “Yes” or “No,” followed by a concise explanation of your reasoning and the specific elements that led to your conclusion.
+
+# Exemplar
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(5), np.int64(7)},
+  parent_score: 0,
+  score: 0.9318181818181818), Prompt(
+  prompt: # Task
+You are a moderation assistant whose job is to decide whether a given text contains hate speech. Follow these steps:
+
+1. Determine the target(s) of the passage—such as race, ethnicity, religion, gender, sexual orientation, disability, national origin, or any other protected group.
+2. Scan for explicit or implicit slurs, demeaning or dehumanizing language aimed at those targets. Be alert for coded or euphemistic expressions, and for cultural or niche references that might not be obvious to a general audience.
+3. Examine contextual clues—sarcasm, irony, rhetorical questions, hyperbole, etc.—that could change the speaker’s intent. A comment that seems merely critical or humorous can still be hateful if it is directed at a protected group.
+4. If the text contains a direct or indirect attack on a protected group, or it promotes violence or discrimination against such a group, label it as hate speech.
+5. If no protected group is targeted, or the language is neutral, respectful, or simply critical without hateful intent, label it as not hate speech.
+
+Give a brief verdict: “Yes, this is hate speech” or “No, this is not hate speech.”
+
+# Exemplar
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Deport him in military aircraft and dump him back where he is originated from. Him and his family"
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(3), np.int64(4), np.int64(6)},
+  examplers_idx_used: {np.int64(0), np.int64(2), np.int64(4), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 0.9318181818181818))
+Training accuracy: (np.float64(0.9318181818181818), np.float64(0.9318181818181818), np.float64(0.9318181818181818), np.float64(0.9318181818181818))
+Validation accuracy: [0.88, 0.88, 0.82, 0.9]
+Test accuracy: [0.91, 0.89, 0.86, 0.91]
+======== ROUND 2
+Time: 609.0130958557129
+Prompt: (Prompt(
+  prompt: # Task
+Analyze the following passage and determine whether it contains hate speech. Identify any target group(s) or protected categories (e.g., race, ethnicity, religion, gender, sexual orientation, disability, national origin, etc.), any slurs, coded language, or hateful expressions. Explicitly consider the speaker’s identity, the intended audience, contextual cues such as sarcasm, irony, humor, rhetorical devices, and any formatting or tokenization quirks that may influence interpretation. Respond with “Yes” or “No,” followed by a concise explanation of your reasoning and the specific elements that led to your conclusion, including the identified target(s) and any relevant contextual factors.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "you should be allowed to be gay you should also be allowed to hate gay people thats freedom i can be myself and people can hate me for it i believe it is my full right to jack off to chris hemsworth and i believe it is a businesss right to not serve me for that it might not be right but its fair and freedom doesnt discriminate on ethics"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(2), np.int64(4), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(3), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0.9318181818181818,
+  score: 1.0), Prompt(
+  prompt: # Task
+Examine the given text. Determine if it mentions or alludes to any protected group (e.g., race, religion, ethnicity, gender, sexual orientation, disability, etc.) and spot any explicit or coded hate language. Then consider the speaker, the intended audience, and the overall situation—looking for sarcasm, humor, rhetorical tricks, exaggeration, or satire that could alter the meaning. Based on this analysis, decide whether the passage qualifies as hate speech. Reply with “Yes” or “No,” followed by a brief explanation that references the target group(s), slurs, contextual cues, and rhetorical devices you used to make your decision.
+
+# Exemplar
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(4), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a moderation assistant tasked with determining whether a given text contains hate speech. First, identify any protected group(s) mentioned in the text (race, ethnicity, religion, gender, sexual orientation, disability, national origin, etc.). Next, examine the language for explicit or coded slurs, demeaning or dehumanizing remarks directed at those groups, and consider whether the wording could be interpreted as an attack or encouragement of violence or discrimination. Pay close attention to contextual cues such as sarcasm, irony, rhetorical questions, hyperbole, or satire, which may alter the speaker’s intent; a seemingly harsh comment might be a critique or joke rather than hate. Also be aware that special characters, unusual punctuation, or tokenization artifacts can obscure meaning, so treat such noise carefully. If the text contains a direct or indirect attack on a protected group, or promotes violence or discrimination, label it as hate speech; otherwise, label it as not hate speech. Provide a brief verdict: “Yes, this is hate speech” or “No, this is not hate speech.”
+
+# Exemplar
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Didn’t know shitted coloured like you could talk"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(4), np.int64(5), np.int64(6), np.int64(7), np.int64(8)},
+  parent_score: 0.9318181818181818,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a moderation assistant tasked with determining whether a given text contains hate speech. First, identify any protected group(s) mentioned or implied—such as race, ethnicity, religion, gender, sexual orientation, disability, national origin, or other protected categories. Next, examine the language for explicit or coded slurs, dehumanizing remarks, or rhetoric that could be interpreted as demeaning toward the identified group, while also noting any contextual cues—sarcasm, irony, hyperbole, rhetorical questions, or satirical framing—that may alter intent. Take into account formatting quirks or special characters that could obscure meaning. If the text includes any direct or indirect attack on a protected group, or encourages violence or discrimination against that group, label it as hate speech; otherwise label it as not hate speech. Provide a concise verdict: “Yes, this is hate speech” or “No, this is not hate speech.”
+
+# Exemplar
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Magnificient. Contrary to what the media reports, I have hope for the people of Europe to expel these leeches."
+Label: Yes
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(1), np.int64(2), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(0), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0.9318181818181818,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.86, 0.88, 0.86, 0.88]
+Test accuracy: [0.9, 0.88, 0.9, 0.89]
+======== ROUND 3
+Time: 548.6420233249664
+Prompt: (Prompt(
+  prompt: # Task
+Read the passage below. Identify any hate speech, including subtle or coded slurs, and specify the target groups or protected categories affected. Consider the speaker’s identity, intended audience, contextual cues such as sarcasm, irony, humor, rhetorical devices, and any formatting or tokenization quirks that may influence interpretation. Then answer with “Yes” or “No” followed by a concise explanation of your reasoning and the specific elements that led to your conclusion, including the identified target(s) and any relevant contextual factors.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+**Rewritten Instruction**
+
+Read the passage below and determine whether it contains hate speech—whether overt or hidden, including encoded slurs. Identify the protected group(s) or category(ies) targeted. Take into account the speaker’s background, the intended audience, contextual clues (sarcasm, irony, humor, rhetorical flourishes), and any formatting or tokenization oddities that might affect meaning. Then reply with “Yes” or “No”, followed by a brief justification that explains your reasoning, cites the specific hateful content, names the target(s), and notes any relevant contextual or stylistic factors.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+Read the following passage. Determine whether it contains any hate speech, including hidden or coded slurs, and identify the protected groups or categories that are targeted. Take into account the speaker’s background, the intended audience, contextual clues such as sarcasm, irony, humor, rhetorical techniques, and any formatting or tokenization oddities that could affect meaning. Respond with “Yes” or “No” and a short explanation of your reasoning, noting the specific elements that informed your decision, the identified target(s), and relevant contextual details.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 1.0), Prompt(
+  prompt: # Task
+Read the passage below and determine whether it contains hate speech. Identify any protected target group(s) (such as race, ethnicity, religion, gender, sexual orientation, disability, national origin, etc.), slurs, coded language, or other hateful expressions. Take into account the speaker’s identity, the intended audience, contextual cues like sarcasm, irony, humor, rhetorical devices, and any formatting or tokenization quirks that could affect interpretation. If the text includes both supportive and hostile references, assess the overall intent and concentration of hateful content. Respond with “Yes” or “No,” followed by a brief explanation that outlines your reasoning, the target(s) identified, the specific elements that led to your conclusion, and any relevant contextual factors.
+
+# Exemplar
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(2), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 0,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.92, 0.86, 0.94, 0.86]
+Test accuracy: [0.9, 0.88, 0.88, 0.89]
+======== ROUND 4
+Time: 596.7212781906128
+Prompt: (Prompt(
+  prompt: # Task
+Read the passage below.  
+You are to determine whether it contains hate speech, taking into account all contextual clues that may influence meaning.  Specifically:  
+
+- Identify the speaker’s identity (e.g., demographic background, role, or affiliation) and the intended audience.  
+- Note any sarcasm, irony, humor, satire, rhetorical devices, or other stylistic elements that could transform a seemingly hateful statement into a non‑hate‑speech commentary.  
+- Detect any target group or protected category (race, ethnicity, religion, nationality, gender, sexual orientation, disability, age, etc.) that the text aims at, even if the language is coded, euphemistic, or ambiguous.  
+- Consider tokenization or formatting quirks (e.g., excessive punctuation, special characters, or unconventional spacing) that could alter the interpretation of key terms.  
+- Highlight non‑targeted insults or general profanity that do not constitute hate speech.  
+
+After this analysis, answer with “Yes” or “No” followed by a concise explanation that includes:  
+1. Whether hate speech is present.  
+2. The specific reasoning and elements that led to your conclusion.  
+3. The identified target(s) or protected categories.  
+4. Any relevant contextual factors that influenced the judgment.  
+Ensure that the response is brief but comprehensive, and that you do not make assumptions beyond the information provided.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+You are a zero‑shot classifier tasked with detecting hate speech in a given passage. Read the passage carefully. Identify any hateful or harassing language, including direct or coded slurs, and specify the protected group(s) (e.g., race, ethnicity, gender, sexual orientation, religion, disability, age, nationality, etc.) that the text targets. Take into account the speaker’s identity, the intended audience, and any contextual clues such as sarcasm, irony, humor, satire, rhetorical devices, or formatting and tokenization quirks that could alter meaning. Then answer only with “Yes” or “No” followed by a brief explanation that includes: (1) the reason for your judgment, (2) the specific target(s) identified, and (3) any contextual factors that influenced your conclusion. Do not mention or rely on a generic definition of hate speech; instead, justify your decision using the content and context of the passage.
+
+# Exemplar
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+Read the following passage. Determine whether it contains hate speech. For each instance of hateful content, identify the protected group targeted (e.g., race, religion, gender, sexual orientation, disability, etc.) and note any coded or subtle slurs. Take into account the speaker’s identity, intended audience, contextual cues such as sarcasm, irony, humor, rhetorical devices, and any formatting or tokenization quirks that might affect interpretation. Respond with “Yes” or “No” followed by a brief explanation of your reasoning, specifying the target(s) and the contextual factors that influenced your decision. If no hate speech is present, answer “No” and explain why the passage is not hateful.
+
+# Exemplar
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 1.0,
+  score: 1.0), Prompt(
+  prompt: # Task
+Read the passage below. Identify whether it contains hate speech, including subtle or coded slurs, and determine which protected categories or target groups are implicated. Take into account the speaker’s identity, intended audience, contextual cues such as sarcasm, irony, humor, rhetorical devices, formatting quirks, or tokenization noise that could alter meaning, as well as the possibility that the hateful content is embedded within a larger narrative. After analysis, answer with “Yes” or “No” followed by a concise explanation that cites the evidence, the identified target(s), and any contextual factors that influenced your judgment.
+
+# Exemplar
+Text: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead"
+Label: Yes
+
+Text: "All theses people talking about Nigeria, since when have they cared about nigeria?  They find it now to care about Nigeria to be relevenat, those who were killed were farmers and Nigeria is living peacefully with it's Muslims.  Sure there are terrorist attacks every now and then, but we must remember that those who do kill the innocent are not Muslims.  Many terrorists or groups use religion as an excuse. How come Isis are killing their own people?  How come Iraqi forces are trying to drive isis Muslims out?  Why? Cause they are scum who are not Muslims."
+Label: No
+
+Text: "If I were your dad, I'd Google \"Abortions at 30 years old mentally handicapped\"."
+Label: Yes
+
+Text: "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame"
+Label: Yes
+
+Text: "Humiliating this Str8 guy. str8 guys like him doing dumb things"
+Label: No
+
+# Output format
+Answer ONLY Yes or No as labels
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: {np.int64(0), np.int64(1), np.int64(5), np.int64(6), np.int64(7)},
+  examplers_idx_used: {np.int64(1), np.int64(4), np.int64(5), np.int64(7), np.int64(8)},
+  parent_score: 1.0,
+  score: 1.0))
+Training accuracy: (np.float64(1.0), np.float64(1.0), np.float64(1.0), np.float64(1.0))
+Validation accuracy: [0.88, 0.9, 0.88, 0.82]
+Test accuracy: [0.9, 0.87, 0.88, 0.89]

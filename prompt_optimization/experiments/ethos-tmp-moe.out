@@ -1,0 +1,142 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos-tmp.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 100, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 5.907074928283691
+Prompt: ('# Task\nDetermine if the provided text includes explicit hate speech or clear expressions of bias or animosity toward any protected group, including race, ethnicity, religion, nationality, gender, sexual orientation, disability, or military service. Evaluate whether the text contains hostile language, abusive remarks, pejorative comments, or direct and unambiguous indications of hatred or contempt directed at individuals or groups because of these immutable characteristics. This also encompasses manifestations of intense negativity or disdain toward cultural rituals, festivals, or convictions linked to particular religions or nationalities, such as overt advocacy for violence, prejudiced conduct, epithets, encouragement of detrimental behavior against a group, mockery of religious rites, or severe reproach of specific traditions or celebrations. However, anger, dissatisfaction, robust criticism, sarcasm, or general mockery that do not specifically target or attack a protected category or group should not be considered as hate speech. Does the following text qualify as hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.93),)
+Test accuracy: [0.9]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 49.75705099105835
+Prompt: # Task
+Determine if the provided text includes explicit hate speech or clear expressions of bias or animosity toward any protected group, including race, ethnicity, religion, nationality, gender, sexual orientation, disability, or military service. Evaluate whether the text contains hostile language, abusive remarks, pejorative comments, or direct and unambiguous indications of hatred or contempt directed at individuals or groups because of these immutable characteristics. This also encompasses manifestations of intense negativity or disdain toward cultural rituals, festivals, or convictions linked to particular religions or nationalities, such as overt advocacy for violence, prejudiced conduct, epithets, encouragement of detrimental behavior against a group, mockery of religious rites, or severe reproach of specific traditions or celebrations. However, anger, dissatisfaction, robust criticism, sarcasm, or general mockery that do not specifically target or attack a protected category or group should not be considered as hate speech. Does the following text qualify as hate speech?
+
+# Here are some examples:
+Text: Pale cancer! Back to your west pacific ocean
+Label: Yes
+Text: Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum 
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92 | Penalized score: 0.751326476547458
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 22.034265756607056
+Prompt: # Task
+Determine if the provided text includes explicit hate speech or clear expressions of bias or animosity toward any protected group, including race, ethnicity, religion, nationality, gender, sexual orientation, disability, or military service. Evaluate whether the text contains hostile language, abusive remarks, pejorative comments, or direct and unambiguous indications of hatred or contempt directed at individuals or groups because of these immutable characteristics. This also encompasses manifestations of intense negativity or disdain toward cultural rituals, festivals, or convictions linked to particular religions or nationalities, such as overt advocacy for violence, prejudiced conduct, epithets, encouragement of detrimental behavior against a group, mockery of religious rites, or severe reproach of specific traditions or celebrations. However, anger, dissatisfaction, robust criticism, sarcasm, or general mockery that do not specifically target or attack a protected category or group should not be considered as hate speech. Does the following text qualify as hate speech?
+
+# Here are some examples:
+Text: Pale cancer! Back to your west pacific ocean
+Label: Yes
+Text: Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum 
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92 | Penalized score: 0.751326476547458
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 22.52734088897705
+Prompt: # Task
+Determine if the provided text includes explicit hate speech or clear expressions of bias or animosity toward any protected group, including race, ethnicity, religion, nationality, gender, sexual orientation, disability, or military service. Evaluate whether the text contains hostile language, abusive remarks, pejorative comments, or direct and unambiguous indications of hatred or contempt directed at individuals or groups because of these immutable characteristics. This also encompasses manifestations of intense negativity or disdain toward cultural rituals, festivals, or convictions linked to particular religions or nationalities, such as overt advocacy for violence, prejudiced conduct, epithets, encouragement of detrimental behavior against a group, mockery of religious rites, or severe reproach of specific traditions or celebrations. However, anger, dissatisfaction, robust criticism, sarcasm, or general mockery that do not specifically target or attack a protected category or group should not be considered as hate speech. Does the following text qualify as hate speech?
+
+# Here are some examples:
+Text: Pale cancer! Back to your west pacific ocean
+Label: Yes
+Text: Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum 
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92 | Penalized score: 0.751326476547458
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 22.660196781158447
+Prompt: # Task
+Determine if the provided text includes explicit hate speech or clear expressions of bias or animosity toward any protected group, including race, ethnicity, religion, nationality, gender, sexual orientation, disability, or military service. Evaluate whether the text contains hostile language, abusive remarks, pejorative comments, or direct and unambiguous indications of hatred or contempt directed at individuals or groups because of these immutable characteristics. This also encompasses manifestations of intense negativity or disdain toward cultural rituals, festivals, or convictions linked to particular religions or nationalities, such as overt advocacy for violence, prejudiced conduct, epithets, encouragement of detrimental behavior against a group, mockery of religious rites, or severe reproach of specific traditions or celebrations. However, anger, dissatisfaction, robust criticism, sarcasm, or general mockery that do not specifically target or attack a protected category or group should not be considered as hate speech. Does the following text qualify as hate speech?
+
+# Here are some examples:
+Text: Pale cancer! Back to your west pacific ocean
+Label: Yes
+Text: Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum 
+Label: No
+Text: Trace, I would ask you to rethink the out of Africa myth. Since the out of Africa theory was proposed, there have been many discoveries that prove modern humans existed in other parts of the world much earlier than what was thought when the OOA theory was proposed. For instance, there have been skeletal remains of humans found in Asia that are many thousands of years older than the oldest found on the African Content. It amazes me that there is so much information out there that shows older humans elsewhere on Earth but people still adhere to the falls narrative that modern humans evolved on the African continent
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92 | Penalized score: 0.751326476547458
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 23.546365976333618
+Prompt: # Task
+Determine if the provided text includes explicit hate speech or clear expressions of bias or animosity toward any protected group, including race, ethnicity, religion, nationality, gender, sexual orientation, disability, or military service. Evaluate whether the text contains hostile language, abusive remarks, pejorative comments, or direct and unambiguous indications of hatred or contempt directed at individuals or groups because of these immutable characteristics. This also encompasses manifestations of intense negativity or disdain toward cultural rituals, festivals, or convictions linked to particular religions or nationalities, such as overt advocacy for violence, prejudiced conduct, epithets, encouragement of detrimental behavior against a group, mockery of religious rites, or severe reproach of specific traditions or celebrations. However, anger, dissatisfaction, robust criticism, sarcasm, or general mockery that do not specifically target or attack a protected category or group should not be considered as hate speech. Does the following text qualify as hate speech?
+
+# Here are some examples:
+Text: So can I put a wig and run with girls?
+Label: No
+Text: To the lady that can barely speak English and then look down upon her own people, that's disgraceful.
+Label: No
+Text: Okay first of all Drag is not a fetish.  It can be but it's not inherently  meant to be.  It's performance art.  Its  a mature form of  performance art.  Its  literally grown ups playing dress up .  But yes it's highly sexualised as with anything catered to an adult audience so i think it's downright disgusting to bring your 5 year old child to a drag convention where literally companies  have booths selling sex toys.  Its not progressive to let your kids perform seductively infront of an audience, its creepy.
+Label: No
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93 | Penalized score: 0.752425138707275
+Test accuracy: 0.9
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 14.386059045791626
+Prompt: # Task
+Determine if the provided text includes explicit hate speech or clear expressions of bias or animosity toward any protected group, including race, ethnicity, religion, nationality, gender, sexual orientation, disability, or military service. Evaluate whether the text contains hostile language, abusive remarks, pejorative comments, or direct and unambiguous indications of hatred or contempt directed at individuals or groups because of these immutable characteristics. This also encompasses manifestations of intense negativity or disdain toward cultural rituals, festivals, or convictions linked to particular religions or nationalities, such as overt advocacy for violence, prejudiced conduct, epithets, encouragement of detrimental behavior against a group, mockery of religious rites, or severe reproach of specific traditions or celebrations. However, anger, dissatisfaction, robust criticism, sarcasm, or general mockery that do not specifically target or attack a protected category or group should not be considered as hate speech. Does the following text qualify as hate speech?
+
+# Here are some examples:
+Text: So can I put a wig and run with girls?
+Label: No
+Text: To the lady that can barely speak English and then look down upon her own people, that's disgraceful.
+Label: No
+Text: Okay first of all Drag is not a fetish.  It can be but it's not inherently  meant to be.  It's performance art.  Its  a mature form of  performance art.  Its  literally grown ups playing dress up .  But yes it's highly sexualised as with anything catered to an adult audience so i think it's downright disgusting to bring your 5 year old child to a drag convention where literally companies  have booths selling sex toys.  Its not progressive to let your kids perform seductively infront of an audience, its creepy.
+Label: No
+Text: Dalit? Is this a name of religion or an atom of poo composition
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93 | Penalized score: 0.752425138707275
+Test accuracy: 0.9

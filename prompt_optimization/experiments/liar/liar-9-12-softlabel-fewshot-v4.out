@@ -1,0 +1,1956 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-9-12.out", "max_threads": 32, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 16.80399179458618
+Prompt: (Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context and other information.
+
+# Exemplar
+Example goes here
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: set(),
+  parent_score: 0,
+  score: 0.609375),)
+Training accuracy: (0.609375,)
+Validation accuracy: [0.5582655826558266]
+Test accuracy: [0.561822125813449]
+======== ROUND 1
+Time: 157.3050401210785
+Prompt: (Prompt(
+  prompt: # Task
+Assess whether the Statement is false (Yes) or true (No), based on its coherence with the given Job role, State, Political Party, and Scenario. Examine how well the Statement aligns with the typical duties and expertise of the Job role, the contextual significance of the State and Political Party, and the particular elements of the Scenario. Judge the likelihood and confirmability of the Statement in light of these factors to reach your decision.
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(8), np.int64(13), 14, np.int64(15), np.int64(16), 17},
+  parent_score: 0.609375,
+  score: 0.6041666666666666), Prompt(
+  prompt: # Task
+Determine whether the Statement is a lie (Yes) or not (No) based on the Context provided and historical facts. Consider the following guidelines:
+- Evaluate whether the statement aligns with known facts or official records related to the Context.
+- Analyze if the statement misrepresents data, statistics, or events, even if not entirely false.
+- Assess if the statement omits crucial information that changes the interpretation of the facts presented.
+- Consider the speaker's role and typical rhetoric style when determining the truthfulness of the statement.
+
+When making a decision, ensure that all aspects of the statement are thoroughly examined against the available information.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(0), np.int64(1), np.int64(9), np.int64(13), np.int64(14), 15, 16, 17},
+  parent_score: 0.609375,
+  score: 0.59765625), Prompt(
+  prompt: # Task
+Evaluate whether the given Statement is false (Yes) or true (No) based on its coherence with the provided Job title, State, Party, and Context. Examine how well the Statement aligns with the typical duties and information relevant to the Job title, the political and geographical specifics of the State and Party, as well as the precise information in the Context. Use this analysis to judge the Statement's believability and confirmability, guiding your decision accordingly.
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(8), np.int64(13), 14, np.int64(15), np.int64(16), 17},
+  parent_score: 0.609375,
+  score: 0.59375), Prompt(
+  prompt: # Task
+Assess whether the Statement is false (Yes) or true (No), taking into account its coherence with the given Job role, State, Party affiliation, and Context. Analyze how well the Statement aligns with the typical duties and expertise linked to the Job role, as well as its fit within the specified State and Party's political and geographic landscape. Use the specifics from the Context to gauge the Statement's realism and confirmability, which will guide your assessment.
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(1), np.int64(8), np.int64(13), 14, np.int64(15), np.int64(16), 17},
+  parent_score: 0.609375,
+  score: 0.58984375))
+Training accuracy: (0.6041666666666666, 0.59765625, 0.59375, 0.58984375)
+Validation accuracy: [0.6151761517615176, 0.6449864498644986, 0.5799457994579946, 0.6124661246612466]
+Test accuracy: [0.6355748373101953, 0.6334056399132321, 0.648590021691974, 0.6377440347071583]
+======== ROUND 2
+Time: 415.45639538764954
+Prompt: (Prompt(
+  prompt: # Task
+To determine if the Statement is false (Yes) or true (No), take into account the following factors rigorously:
+
+1. **Occupational Role**: Analyze how well the Statement corresponds with the regular tasks and knowledge base expected of someone in the described job. Is it plausible for an individual in this position to be involved in the activities or conversations mentioned in the Statement?
+
+2. **State Environment**: Reflect on the current political and social atmosphere of the State. Would the events or statements detailed in the Statement reasonably happen within this State’s conditions?
+
+3. **Party Positioning**: Review the compatibility between the Statement and the general attitudes and behaviors typical of the Political Party. Does the Statement match the party’s common assertions or policies?
+
+4. **Contextual Elements**: Scrutinize the specifics provided in the Scenario. Are there relevant historical occurrences, recent changes, or current affairs that might affect the Statement’s validity?
+
+Make your assessment using these guidelines. Check if every part of the Statement coherently fits with the Occupational role, State environment, Party positioning, and Scenario. If inconsistencies are found or the Statement appears improbable considering the context, label it as false (Yes). Otherwise, mark it as true (No).
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, 33, 34, 35, 36, np.int64(5), np.int64(13), np.int64(16), np.int64(18), np.int64(29)},
+  parent_score: 0.6041666666666666,
+  score: 0.6770833333333334), Prompt(
+  prompt: # Task
+Evaluate if the Statement contradicts (Yes) or supports (No) the given Job role, State, Political Party, and Scenario by considering the following factors:
+
+1. **Job Role**: Examine whether the statement is consistent with the responsibilities and knowledge base of the job role. For example, a statement concerning judicial matters would be fitting for a Judge but less so for a Librarian.
+
+2. **State**: Determine if the statement is pertinent to the specific state provided. Statements about state-specific issues, such as education reform laws, should be aligned with the policies and concerns of states like California or Florida.
+
+3. **Political Party**: Assess the alignment of the statement with the ideological and policy positions of the political party mentioned. For instance, a statement on healthcare could differ significantly between discussions within the Republican Party versus the Democratic Party.
+
+4. **Scenario**: Consider the appropriateness of the statement within the described situation, such as a town hall meeting or a debate. The tone and content should match the expected discourse for the given scenario.
+
+Integrate these considerations to decide the plausibility of the statement. Mark it as false (Yes) if the statement diverges from the expectations set by the job role, state, political party, or scenario. Otherwise, mark it as true (No).
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, 33, 34, np.int64(35), 36, np.int64(20), np.int64(21), np.int64(26), np.int64(29)},
+  parent_score: 0.6041666666666666,
+  score: 0.6770833333333334), Prompt(
+  prompt: # Task
+Evaluate if the Statement is accurate (No) or inaccurate (Yes) in relation to the provided Job role, State, Political Party, and Context. In your evaluation, take into account the following factors:
+
+1. **Job Role**: Check if the statement is consistent with the usual responsibilities and knowledge base of the position. A statement regarding legal matters would typically be expected from a Lawyer rather than an Environmental Scientist.
+
+2. **State**: Consider whether the statement is relevant to the particular state mentioned. Issues concerning local education initiatives are often more applicable to a specific state, like California or Florida.
+
+3. **Political Party**: See if the statement aligns with the ideologies, policies, and common rhetoric of the stated political party. Statements on healthcare reform might reflect different perspectives depending on whether the speaker is affiliated with the Republican or Democratic party.
+
+4. **Context**: Examine the appropriateness of the statement within the given situation, such as a town hall meeting, a debate, or a policy announcement. Think about the speaker's purpose and the audience they are addressing in this context.
+
+Use these criteria together to determine the plausibility and validity of the statement. If the statement significantly deviates from what is expected for the job role, state, political party, or context, mark it as inaccurate (Yes). Otherwise, consider it accurate (No).
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {32, 33, 34, np.int64(35), 36, np.int64(20), np.int64(21), np.int64(26), np.int64(29)},
+  parent_score: 0.6041666666666666,
+  score: 0.671875), Prompt(
+  prompt: # Task
+Assess if the Statement constitutes a falsehood (Yes) or represents an accurate claim (No) by utilizing the Context given and historical data. Adhere to these evaluation criteria:
+- Confirm if the statement is consistent with established facts and official documentation pertinent to the Context.
+- Scrutinize the statement for any distortion of data, statistics, or events, even if it maintains a semblance of truth.
+- Examine if vital information is omitted, which could alter the understanding of the facts presented.
+- Factor in the speaker’s position and their usual rhetorical patterns when gauging the veracity of the statement.
+- In political scenarios, contrast the speaker’s usual conduct and campaign pledges against formal legislative actions to discern between political speaking and factual assertions.
+- Be mindful of the nature of the event (such as election speeches, debates, or parliamentary sessions) and its impact on interpreting the statement.
+
+In your judgment, make sure to critically analyze all facets of the statement in light of the relevant information at hand.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(4), np.int64(10), np.int64(12), 46, np.int64(47), 48, 49, 50, np.int64(27)},
+  parent_score: 0.59765625,
+  score: 0.671875))
+Training accuracy: (0.6770833333333334, 0.6770833333333334, 0.671875, 0.671875)
+Validation accuracy: [0.5853658536585366, 0.5609756097560976, 0.5745257452574526, 0.6422764227642277]
+Test accuracy: [0.6334056399132321, 0.5986984815618221, 0.6117136659436009, 0.6399132321041214]
+======== ROUND 3
+Time: 468.8313498497009
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the Statement constitutes a falsehood (Yes) or represents an accurate claim (No) by utilizing the Context given and historical data. Adhere to these evaluation criteria:
+- Confirm if the statement is consistent with established facts and official documentation pertinent to the Context.
+- Scrutinize the statement for any distortion of data, statistics, or events, even if it maintains a semblance of truth.
+- Examine if vital information is omitted, which could alter the understanding of the facts presented.
+- Factor in the speaker’s position and their usual rhetorical patterns when gauging the veracity of the statement. Pay special attention to figurative language commonly used in political rhetoric.
+- In political scenarios, contrast the speaker’s usual conduct and campaign pledges against formal legislative actions to discern between political speaking and factual assertions.
+- Be mindful of the nature of the event (such as election speeches, debates, or parliamentary sessions) and its impact on interpreting the statement.
+- Understand that statements made in hyperbole or metaphor do not automatically constitute falsehoods unless they misrepresent established facts or omit critical context.
+
+In your judgment, make sure to critically analyze all facets of the statement in light of the relevant information at hand.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(65), 107, np.int64(108), np.int64(12), 110, 111, 109, np.int64(18), np.int64(86)},
+  parent_score: 0.671875,
+  score: 0.6875), Prompt(
+  prompt: # Task
+Assess whether the Statement aligns with or deviates from the Job role, State context, Political Party stance, and Scenario by closely examining the details below:
+
+1. **Job Role**: Determine if the Statement is consistent with the typical duties and expertise associated with the specified job. For example, a statement regarding judicial procedures is suitable coming from a Judge but less so from a School Principal.
+
+2. **State**: Verify if the Statement addresses issues pertinent to the designated state. It should resonate with the particular state’s policies, challenges, and initiatives, like environmental regulations specific to Oregon or education funding in Texas.
+
+3. **Political Party**: Scrutinize if the Statement reflects the principles, beliefs, and policy preferences of the stated political party. A statement concerning tax cuts needs to align with the Republican platform, whereas one advocating for social welfare might align better with the Democratic agenda.
+
+4. **Scenario**: Confirm that the Statement fits the context of the described event or situation. The Statement’s tone and content should suitably match the setting, such as a mayor’s address on municipal infrastructure or a senator’s discussion on international trade agreements.
+
+Moreover, be mindful of how certain roles and situations may influence the alignment of a statement. For example:
+- When a President comments on state-level concerns, they must pertain to national significance or directly impact the state within their jurisdiction.
+- A Democratic Representative’s critique of federal overreach into state governance can be justified within their job role and party alignment.
+
+Utilize these guidelines to gauge the statement's appropriateness. Mark it as contradicting (Yes) if it significantly deviates from what is expected based on the job role, state relevance, political party position, or scenario context. Otherwise, mark it as supporting (No).
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(66), np.int64(6), np.int64(74), np.int64(42), 89, np.int64(90), 91, 92, 93},
+  parent_score: 0.6770833333333334,
+  score: 0.6666666666666666), Prompt(
+  prompt: # Task
+Assess whether the given Statement is correct (No) or incorrect (Yes) based on the provided Job role, State, Political Party, and Scenario. Your assessment should include:
+
+1. **Job Role**: Check if the statement aligns with the usual responsibilities and expertise associated with the position. For instance, statements regarding legislation should come from someone like a Politician, not a Biologist.
+
+2. **State**: Determine if the statement is relevant to the particular state specified. Issues such as tax laws may differ significantly; a statement about property taxes might be more fitting for Texas than for New York.
+
+3. **Political Party**: Analyze if the statement is in line with the principles, policies, and typical statements of the identified political party. Discussions about immigration policy could differ substantially between statements by members of the Democratic Party and the Republican Party.
+
+4. **Scenario**: Examine if the statement is appropriate for the described scenario, such as a press conference, a campaign speech, or a legislative session. Consider the speaker’s purpose and the audience they are addressing.
+
+Additionally, verify the factual accuracy of the statement. Cross-check any figures or specific assertions with reliable data or generally accepted truths. Statements that contain misleading or false information should be marked as incorrect, irrespective of their alignment with the job role, state, political party, or scenario.
+
+Apply these considerations together to evaluate the statement's credibility and correctness. If the statement deviates considerably from what would be expected for the job role, state, political party, or scenario, or contains factual errors, indicate it as incorrect (Yes). Otherwise, consider it correct (No).
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {98, 99, np.int64(67), 100, 102, 101, np.int64(10), np.int64(76), np.int64(57), np.int64(25)},
+  parent_score: 0.671875,
+  score: 0.6666666666666666), Prompt(
+  prompt: # Task
+Evaluate if the Statement is accurate (No) or inaccurate (Yes) in relation to the provided Job role, State, Political Party, and Context. In your evaluation, take into account the following factors:
+
+1. **Job Role**: Check if the statement is consistent with the usual responsibilities and knowledge base of the position. A statement regarding legal matters would typically be expected from a Lawyer rather than an Environmental Scientist.
+
+2. **State**: Consider whether the statement is relevant to the particular state mentioned. Issues concerning local education initiatives are often more applicable to a specific state, like California or Florida.
+
+3. **Political Party**: See if the statement aligns with the ideologies, policies, and common rhetoric of the stated political party. Statements on healthcare reform might reflect different perspectives depending on whether the speaker is affiliated with the Republican or Democratic party.
+
+4. **Context**: Examine the appropriateness of the statement within the given situation, such as a town hall meeting, a debate, or a policy announcement. Think about the speaker's purpose and the audience they are addressing in this context.
+
+5. **Factual Accuracy**: Verify the truthfulness of the factual claims made in the statement, irrespective of the job role, state, political party, or context. Use available information to check the accuracy of statistics, historical facts, and specific assertions.
+
+If the statement significantly deviates from what is expected for the job role, state, political party, context, or contains false factual information, mark it as inaccurate (Yes). Otherwise, consider it accurate (No).
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(97), 98, 99, 100, 101, 102, np.int64(71), np.int64(15), np.int64(83), np.int64(20)},
+  parent_score: 0.671875,
+  score: 0.6666666666666666))
+Training accuracy: (0.6875, 0.6666666666666666, 0.6666666666666666, 0.6666666666666666)
+Validation accuracy: [0.6287262872628726, 0.5989159891598916, 0.5745257452574526, 0.5880758807588076]
+Test accuracy: [0.6377440347071583, 0.6203904555314533, 0.6203904555314533, 0.6225596529284165]
+======== ROUND 4
+Time: 506.0305497646332
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the Statement constitutes a falsehood (Yes) or represents an accurate claim (No) by utilizing the Context given and historical data. Adhere to these evaluation criteria:
+- Confirm if the statement is consistent with established facts and official documentation pertinent to the Context.
+- Scrutinize the statement for any distortion of data, statistics, or events, even if it maintains a semblance of truth.
+- Examine if vital information is omitted, which could alter the understanding of the facts presented.
+- Factor in the speaker’s position and their usual rhetorical patterns when gauging the veracity of the statement. Pay special attention to figurative language commonly used in political rhetoric.
+- In political scenarios, contrast the speaker’s usual conduct and campaign pledges against formal legislative actions to discern between political speaking and factual assertions.
+- Be mindful of the nature of the event (such as election speeches, debates, or parliamentary sessions) and its impact on interpreting the statement.
+- Understand that statements made in hyperbole or metaphor do not automatically constitute falsehoods unless they misrepresent established facts or omit critical context.
+
+In your judgment, make sure to critically analyze all facets of the statement in light of the relevant information at hand.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(65), 107, np.int64(108), np.int64(12), 110, 111, 109, np.int64(18), np.int64(86)},
+  parent_score: 0.671875,
+  score: 0.65625), Prompt(
+  prompt: # Task
+Evaluate whether the given Statement is false (Yes) or true (No) based on the provided Context and historical records. Follow these assessment guidelines:
+- Verify the Statement's alignment with known facts and official documents related to the Context.
+- Check for any manipulation or misrepresentation of data, statistics, or events within the Statement, even if partially true.
+- Consider whether essential details that affect the interpretation of the facts are left out.
+- Take into account the speaker's standing and typical communication style, particularly in the context of political rhetoric.
+- For political contexts, compare the Statement with the speaker's past promises and official political activities to differentiate between political speech and factual claims.
+- Recognize the type of occasion (like a political rally, debate, or parliament discussion) and how it influences the interpretation of the Statement.
+- Remember that hyperbolic or metaphorical language does not necessarily imply falsehoods unless they distort established facts or lack necessary context.
+- Tilt towards truthfulness for Statements that simply state facts or comparisons when there is insufficient evidence of misrepresentation or omission.
+
+Ensure your evaluation thoroughly examines every aspect of the Statement using the available relevant information.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {128, np.int64(9), np.int64(107), np.int64(11), np.int64(114), np.int64(88), 124, 125, 126, 127},
+  parent_score: 0.6875,
+  score: 0.6354166666666666), Prompt(
+  prompt: # Task
+Evaluate the alignment or divergence of the Statement with respect to the Job role, State context, Political Party stance, and Scenario using the information provided:
+
+1. **Job Role**: Examine if the Statement is in line with the job’s standard responsibilities and expertise. For instance, a statement about court proceedings would be appropriate coming from a Judge, but not necessarily from a School Principal. Reflect on whether the statement accurately represents the duties and actions expected from an individual in this role.
+
+2. **State Context**: Investigate whether the Statement pertains to issues significant to the specified state. The statement should align with the state’s policies, challenges, and initiatives, similar to environmental regulations in Oregon or education funding in Texas. Analyze how the statement corresponds with the unique conditions of the state.
+
+3. **Political Party Stance**: Scrutinize if the Statement mirrors the political party's foundational beliefs and policy preferences. For example, a statement on tax cuts should align with the Republican platform, while advocacy for social welfare programs might fit the Democratic agenda. Assess the degree to which the statement resonates with the political party's core values and initiatives.
+
+4. **Scenario**: Ensure the Statement is contextually appropriate to the described event or situation. The statement should match the setting, such as a mayor discussing city infrastructure improvements or a senator addressing international trade agreements. Consider the statement’s appropriateness in terms of content and timing within the scenario.
+
+Additionally, take into account these supplementary considerations during your evaluation:
+- **Contextual Relevance**: Ensure the statement is factually sound and relevant to the job role, state context, and political party stance. Even if accurate, a statement can be irrelevant or misplaced within its broader context.
+- **Consistency**: Verify that the statement is consistent with the job holder’s typical duties and the established positions of the political party. Any deviation from expected norms should be carefully assessed.
+- **Contribution to State and Party Goals**: Assess whether the statement advances the goals and priorities of the state and political party. Statements that do not support these objectives may be seen as contradictory.
+
+Use these guidelines to determine the statement's appropriateness. Label it as "Contradicting" (Yes) if it significantly diverges from expectations based on the job role, state relevance, political party position, or scenario context. If not, label it as "Supporting" (No).
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(69), 137, 138, 139, 140, 141, np.int64(49), np.int64(55), np.int64(24), np.int64(63)},
+  parent_score: 0.6666666666666666,
+  score: 0.6354166666666666), Prompt(
+  prompt: # Task
+Evaluate if the Statement conforms to or diverges from expectations based on the Job role, State context, Political Party perspective, and Scenario provided through a meticulous analysis of the given information:
+
+1. **Job Role**: Determine if the Statement matches the usual duties and expertise associated with the mentioned job. For instance, a statement about judicial matters is fitting for a Judge but not for a School Principal.
+
+2. **State Context**: Check if the Statement pertains to issues pertinent to the specified state, reflecting its policies, challenges, and activities, like Oregon's environmental rules or Texas’s educational financing.
+
+3. **Political Party Perspective**: Assess whether the Statement embodies the ideologies, priorities, and policies of the named political party. A statement on tax reductions should align with Republicans, whereas one promoting social welfare programs should resonate with Democrats.
+
+4. **Scenario**: Confirm that the Statement is suitable for the described situation or event, aligning both in content and tone. Examples include a mayor addressing city infrastructure or a senator discussing trade agreements.
+
+Consider also how the job role and scenario might influence the alignment of the statement:
+- When a President addresses state-specific issues, the statement should involve matters of national importance or issues under federal jurisdiction.
+- The criticism of federal interference in state governance by a Democratic Representative is legitimate within their job and party context.
+- For statements on topics peripheral to the job role or state context, ensure they still reflect the overarching duties and responsibilities of the role and state.
+
+For clear and uniform evaluation:
+- Examine each criterion separately before reaching a conclusion.
+- Begin with the job role, then move to the state context, followed by the political party perspective.
+- If the statement intersects multiple criteria, confirm that there are no significant contradictions among them.
+
+Label the statement as contradictory (Yes) if it markedly strays from what is expected based on the job role, state relevance, political party viewpoint, or scenario. Conversely, label it as supportive (No) if it aligns well.
+
+# Exemplar
+Text: "Statement: Did you know that the U.S. is one of the very few nations in the world without an official language?
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a blog."
+Label: No
+
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(72), 137, 138, 139, 140, np.int64(76), np.int64(105), 141, np.int64(20), np.int64(59)},
+  parent_score: 0.6666666666666666,
+  score: 0.609375))
+Training accuracy: (0.65625, 0.6354166666666666, 0.6354166666666666, 0.609375)
+Validation accuracy: [0.6287262872628726, 0.6341463414634146, 0.5718157181571816, 0.5962059620596206]
+Test accuracy: [0.6399132321041214, 0.6550976138828634, 0.6117136659436009, 0.6052060737527115]
+======== ROUND 5
+Time: 563.0887136459351
+Prompt: (Prompt(
+  prompt: # Task
+Assess if the provided Statement is inaccurate (Yes) or accurate (No) in relation to the Context and historical evidence by adhering to these evaluation criteria:
+- Confirm the Statement’s consistency with well-documented facts and formal records associated with the Context.
+- Scrutinize the Statement for any alteration or misleading presentation of data, statistics, or events, even when partly true.
+- Take into consideration any significant details omitted from the Statement that could influence its interpretation.
+- Factor in the speaker’s credibility and habitual communication manner, especially within political discussions.
+- In political settings, juxtapose the Statement against the speaker’s previous commitments and political actions to distinguish between political statements and factual assertions.
+- Acknowledge the nature of the event where the Statement was made (such as a political rally, debate, or parliamentary session), and how this setting can impact the interpretation of what was said.
+- Realize that exaggerated or figurative language does not automatically render a statement false, unless it skews recognized facts or lacks pertinent context.
+- Recognize that political dialogue frequently employs rhetorical techniques and selective information that may not be inherently deceptive, and assess accordingly.
+- In your assessment, contemplate the comprehensive environment and whether the Statement reflects the speaker's characteristic approach and purpose in the specific scenario.
+
+Your evaluation should meticulously review all elements of the Statement, utilizing all pertinent information available.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(171), np.int64(11), np.int64(13), np.int64(176), 179, 180, 181, 182, 183},
+  parent_score: 0.6354166666666666,
+  score: 0.7291666666666666), Prompt(
+  prompt: # Task
+Assess if the provided Statement is inaccurate (mark as Yes) or accurate (mark as No), considering the supplied Context and historical evidence. Adhere to the following criteria for your assessment:
+
+- Confirm the consistency of the Statement with established facts and official sources pertinent to the Context.
+- Scrutinize the Statement for any form of data manipulation or misrepresentation, even when parts of it may be truthful.
+- Reflect on whether key elements that could alter the perception of the facts have been omitted.
+- Factor in the credibility and typical communication patterns of the speaker, especially within the realm of political discourse.
+- In cases involving politics, contrast the Statement with the speaker’s previous commitments and formal political actions to distinguish between political rhetoric and factual assertions.
+- Identify the nature of the event (such as a political rally, debate, or parliamentary session) and its potential impact on interpreting the Statement.
+- Acknowledge that exaggerated or figurative language does not automatically signify inaccuracy, unless it contradicts confirmed truths or lacks essential context.
+- Realize that political dialogue frequently employs rhetorical strategies and selective information, which should not be conflated with deliberate falsification.
+- During evaluation, take into consideration the broader setting and the probability that the Statement resonates with the speaker's habitual approach and objectives under the circumstances.
+
+Your analysis should meticulously address all dimensions of the Statement using all available pertinent details.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(32), np.int64(171), np.int64(11), np.int64(13), np.int64(176), 179, 180, 181, 182, 183},
+  parent_score: 0.6354166666666666,
+  score: 0.7083333333333334), Prompt(
+  prompt: # Task
+Assess if the provided Statement is incorrect (mark as Yes) or accurate (mark as No), using the supplied Context and historical evidence. Adhere to the following criteria for your assessment:
+
+- Confirm the accuracy of the Statement against well-established facts and official records pertinent to the Context.
+- Scrutinize the Statement for manipulations or misrepresentations of figures, data, or events, even when parts of it may be truthful.
+- Determine if crucial details that impact the interpretation of the facts have been omitted.
+- Factor in the credibility and usual communicative habits of the speaker, especially in scenarios involving political discourse.
+- In political settings, contrast the Statement with previous commitments and actual political actions of the speaker to discern between political statements and factual assertions.
+- Be mindful of the event type (such as political gatherings, debates, or parliamentary discussions) and its potential influence on interpreting the Statement.
+- Acknowledge that hyperbolic or figurative language might not inherently indicate falsehoods unless they alter known facts or context is missing.
+- When analyzing political rhetoric, recognize the tactical use of exaggeration and selective information as part of the speaker's approach and not exclusively as signs of falsehood.
+- Assume truthfulness for Statements that are straightforward factual claims or comparisons when there isn’t enough proof of misrepresentation or omission.
+
+Your assessment should meticulously consider all facets of the Statement utilizing the accessible pertinent data.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(97), np.int64(46), 179, 180, 181, 182, np.int64(119), np.int64(56), 183, np.int64(26)},
+  parent_score: 0.6354166666666666,
+  score: 0.703125), Prompt(
+  prompt: # Task
+Determine whether the provided Statement is misleading (Yes) or truthful (No) based on the Context and historical records. Your analysis should follow these steps:
+
+- Verify that the statement aligns with verified facts and official documents associated with the Context.
+- Inspect for any manipulation or selective presentation of statistics, events, or data, even when there is an element of truth present.
+- Investigate if crucial details have been left out, potentially altering the interpretation of the facts.
+- Consider the speaker’s reputation and typical communication style, especially within political rhetoric.
+- In political settings, compare the speaker’s public promises and regular discourse with concrete policy outcomes to distinguish between political speech and factual claims.
+- Take into account the type of occasion (like election speeches, debates, or parliamentary discussions) and how this influences the interpretation of the statement.
+- Recognize that hyperbolic or figurative expressions are not inherently deceptive unless they distort well-established facts or lack essential context.
+
+Furthermore, adhere to these additional principles:
+- Distinguish between literal and figurative language. The statement’s intended meaning should reflect the speaker’s habitual linguistic style and the general atmosphere of the event.
+- Place the statement within a wider context that includes relevant laws, past practices, and ongoing events.
+- Refrain from deeming a statement false simply due to exaggeration unless such embellishment significantly skews the claim’s accuracy.
+
+Conduct a thorough examination of the statement by integrating all available pertinent information during your assessment.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(128), np.int64(3), np.int64(166), np.int64(134), np.int64(73), 170, 171, 172, 173, 174},
+  parent_score: 0.65625,
+  score: 0.6875))
+Training accuracy: (0.7291666666666666, 0.7083333333333334, 0.703125, 0.6875)
+Validation accuracy: [0.6341463414634146, 0.6341463414634146, 0.6395663956639567, 0.6368563685636857]
+Test accuracy: [0.6442516268980477, 0.6399132321041214, 0.6399132321041214, 0.6334056399132321]
+======== ROUND 6
+Time: 500.3696393966675
+Prompt: (Prompt(
+  prompt: # Task
+Evaluate if the provided Statement is incorrect (indicate with Yes) or correct (indicate with No), based on the given Context and established historical data. Adhere to the following steps:
+
+- Cross-check the Statement with recognized facts and official sources pertinent to the Context.
+- Scrutinize the Statement for any distortion of statistics, data, or occurrences, taking into account potential half-truths.
+- Judge if key elements impacting the understanding of the facts have been left out.
+- Take into account the reliability and usual manner of expression of the speaker, especially in political scenarios.
+- Compare the Statement with the speaker’s previous behaviors and promises in political arenas.
+- Be aware of the kind of event (for example, political gatherings, debates, legislative sessions) and its effect on interpreting the Statement.
+- Acknowledge that exaggerated or metaphorical speech doesn't automatically mean deception if they don’t conflict with known realities or fail to provide adequate context.
+- Grasp that in political discourse, techniques such as overstatement and selective disclosure don’t inherently signify untruths.
+- Deem a Statement as accurate if it makes plain factual assertions or contrasts and there isn't enough proof to suggest distortion or omission.
+
+Make sure your judgment thoughtfully takes into account all facets of the Statement using pertinent available information.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {228, 229, 230, 231, 232, np.int64(105), np.int64(170), np.int64(76), np.int64(206), np.int64(117)},
+  parent_score: 0.703125,
+  score: 0.6796875), Prompt(
+  prompt: # Task
+Evaluate whether the given Statement is incorrect (mark as Yes) or correct (mark as No) based on the provided Context and historical evidence. Adhere strictly to these guidelines during your evaluation:
+
+- Confirm that the Statement aligns with well-established facts and authoritative sources pertinent to the Context.
+- Thoroughly investigate the Statement for instances of manipulated, misrepresented, or selectively presented information, even when partially true.
+- Examine if crucial details that might influence the interpretation of the facts have been intentionally left out.
+- Assess the reliability and usual communication style of the speaker, especially within the sphere of political discussions.
+- In cases of political Statements, contrast them with prior commitments and official political actions of the speaker to differentiate between rhetorical claims and factual statements.
+- Take into account the type of event (such as a political gathering, debate, or legislative meeting) and its possible effect on interpreting the Statement.
+- Exercise caution with hyperbolic or metaphorical language that doesn't inherently imply inaccuracy, but ensure it doesn't contradict established facts or omit necessary context.
+- Acknowledge that political speech frequently involves rhetorical techniques and selective information, but avoid mistaking this for intentional falsehood.
+- During examination, consider the larger backdrop and the probability that the Statement corresponds with the speaker's typical behavior and goals under those conditions.
+- Pay particular attention to warning signs like exaggerated assertions, isolated statistics, and contradictions with confirmed truths to thoroughly assess the accuracy.
+
+Your assessment must carefully cover all aspects of the Statement using all relevant available information.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(132), np.int64(200), np.int64(111), np.int64(145), np.int64(212), 218, 219, 220, 221, 222},
+  parent_score: 0.7083333333333334,
+  score: 0.65625), Prompt(
+  prompt: # Task
+Determine whether the given Statement is incorrect (indicate with Yes) or correct (indicate with No) by comparing it against the provided Context and historical evidence. Your evaluation should adhere to the following criteria:
+
+- Verify that the Statement is consistent with established facts and credible references associated with the Context.
+- Scrutinize the Statement for any signs of data distortion or misrepresentation, regardless of its partially true elements.
+- Examine if key information has been left out, possibly leading to a different understanding of the facts.
+- Take into account the reliability of the source and their typical mode of expression, particularly in political scenarios.
+- In cases of political Statements, contrast them with the speaker’s previous pledges and official conduct to distinguish between political talk and factual assertions.
+- Analyze the nature of the event (such as a political rally, debate, or parliamentary discussion) and its potential impact on interpreting the Statement.
+- Acknowledge that hyperbole or figurative expressions do not inherently imply inaccuracy unless they contradict verified truths or lack necessary context.
+- Be aware that political discourse frequently employs rhetorical strategies and selective disclosure, which should not be assumed to be intentional lies.
+- Factor in the wider context and assess whether the Statement is aligned with the speaker's customary behavior and objectives.
+
+Your assessment should thoroughly cover all facets of the Statement, leveraging all pertinent details.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(199), np.int64(8), np.int64(170), np.int64(12), np.int64(89), 218, 219, 220, 221, 222},
+  parent_score: 0.7083333333333334,
+  score: 0.6458333333333334), Prompt(
+  prompt: # Task
+Determine whether the given Statement is incorrect (label as Yes) or correct (label as No) in relation to the provided Context and pertinent historical records. Conduct your evaluation according to these criteria:
+
+- Confirm that the Statement corresponds with established facts and authoritative references linked to the Context.
+- Scrutinize the Statement for any signs of data distortion or misinterpretation, even if certain elements may hold truth.
+- Look out for significant omissions from the Statement that could change the understanding of the facts.
+- Take into account the reliability of the individual making the Statement and their typical way of communicating, particularly in political scenarios.
+- In cases of political Statements, juxtapose them with the speaker's previous pledges and official actions to discern between political talk and factual assertions.
+- Take note of the kind of event (such as a political rally, debate, or legislative meeting) and its potential effect on interpreting the Statement.
+- Be aware that hyperbole or metaphorical speech do not inherently signify inaccuracy, unless they clash with substantiated facts or lack vital context.
+- Acknowledge that political conversations frequently employ rhetorical strategies and selective disclosure, which should not be wrongly interpreted as intentional untruthfulness.
+- While assessing, bear in mind the wider Context and whether the Statement fits with the speaker’s habitual manner and objectives.
+
+Your assessment must methodically cover every angle of the Statement using all pertinent details.
+
+# Exemplar
+Text: "Statement: "In North Carolina, they used stimulus money to hire one new state worker. His job, apply for more stimulus funds from the taxpayers by the way of the federal government."
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a Web ad"
+Label: Yes
+
+Text: "Statement: "All the really great programs in American history, Social Security, was done without Republicans. Medicare was done without Republican support until the last vote where they realized they had to get on board."
+Job title: Democratic National Committee chairman
+State: Vermont
+Party: democrat
+Context: an interview on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: When he was young, he used to play baseball every day after school.
+Job title: Senator
+State: Texas
+Party: republican
+Context: a radio interview"
+Label: Yes
+
+Text: "Statement: The infrastructure bill will lead to immediate improvements in our roads and bridges.
+Job title: Governor
+State: California
+Party: democrat
+Context: a press conference"
+Label: No
+
+Text: "Statement: Teachers are working their third consecutive year -- some longer than that -- without salary increases."
+Job title: President, Virginia Education Association
+State: Virginia
+Party: none
+Context: a news conference
+Label: Yes
+
+Text: "Statement: We spend twice as much per capita on health care as any other nation on Earth.
+Job title: U.S. Senator
+State: Vermont
+Party: independent
+Context: an appearance on the Rachel Maddow Show"
+Label: Yes
+
+Text: "Statement: Says she condemned violence at a campaign stop in Arizona in March.
+Job title: 
+State: Alaska
+Party: republican
+Context: a video statement on Facebook"
+Label: No
+
+Text: "Statement: The government has been spending more on defense than on education.
+Job title: Senator
+State: California
+Party: democrat
+Context: an interview on national television."
+Label: No
+
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:,
+  feedbacks_idx_used: set(),
+  examplers_idx_used: {np.int64(199), np.int64(8), np.int64(170), np.int64(12), np.int64(89), 218, 219, 220, 221, 222},
+  parent_score: 0.7083333333333334,
+  score: 0.6354166666666666))
+Training accuracy: (0.6796875, 0.65625, 0.6458333333333334, 0.6354166666666666)
+Validation accuracy: [0.6422764227642277, 0.6341463414634146, 0.6395663956639567, 0.6449864498644986]
+Test accuracy: [0.6616052060737527, 0.6550976138828634, 0.6464208242950108, 0.6399132321041214]
