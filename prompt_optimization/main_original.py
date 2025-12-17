@@ -168,6 +168,8 @@ if __name__ == "__main__":
     # optimizer = my_optimizer_v2.MyOptimizer(config, evaluator, scorer, args.max_threads, bf_eval)
 
     train_exs = task.get_train_examples()
+    error_count = [0 for i in range(len(train_exs))]
+
     val_size = int(0.2 * len(train_exs))
     val_exs = random.sample(train_exs, val_size)
     # train_exs = [ex for ex in train_exs if ex not in val_exs]
@@ -193,8 +195,8 @@ if __name__ == "__main__":
         start = time.time()
         # expand candidates
         if round > 0:
-            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs)
-
+            candidates = optimizer.expand_candidates(candidates, task, gpt4, train_exs, error_count)
+            print("Error count: ", error_count)
         # score candidates
         scores = optimizer.score_candidates(candidates, task, gpt4, train_exs)
         [scores, candidates] = list(
@@ -222,15 +224,39 @@ if __name__ == "__main__":
             outf.write(f"Test accuracy: {test_metrics}\n")
             
     # Exemplar Optimization
-    best_prompt = candidates[0]
+    T = 1 # Temperature
     Q = 12 # Population Size
     k_min = 3 # Min exemplars
     k_max = 6 # Max exemplars
     t = 6 # Optimization rounds
     lambda_len = 0.01 # Length penalize parameter
     lambda_div = 0.3 # Diversity penalize parameter
+
+    # Initialize training exs weight
+    max_err = max(error_count)
+    exps = np.exp((np.array(error_count) - max_err) / T)
+    probs = exps / np.sum(exps)
+
+    def weighted_choice(exs, probs):
+        return random.choices(exs, weights=probs, k=1)[0]
+
+    def weighted_sample_without_replacement(exs, probs, k):
+        selected = []
+        exs = list(exs)
+        probs = list(probs)
+
+        for _ in range(k):
+            choice = random.choices(exs, weights=probs, k=1)[0]
+            idx = exs.index(choice)
+            selected.append(choice)
+            exs.pop(idx)
+            probs.pop(idx)
+
+        return selected
+
+    best_prompt = candidates[0]
     populations = [
-        random.sample(train_exs, random.randint(k_min, k_max))
+        weighted_sample_without_replacement(train_exs, probs, random.randint(k_min, k_max))
         for _ in range(Q)
     ]
     print([len(p) for p in populations])
@@ -282,13 +308,13 @@ if __name__ == "__main__":
             child = list(parent)
             mutation_type = random.choice(["replace", "add", "remove"])
             if mutation_type == "add" and len(child) < k_max:
-                child.append(random.choice(train_exs))
+                child.append(weighted_choice(train_exs, probs))
             elif mutation_type == "remove" and len(child) > k_min:
                 remove_idx = random.randrange(len(child))
                 child.pop(remove_idx)
             elif mutation_type == "replace" and len(child) > 0:
                 replace_idx = random.randrange(len(child))
-                child[replace_idx] = random.choice(train_exs)
+                child[replace_idx] = weighted_choice(train_exs, probs)
             children.append(child)
 
         populations = elites + children

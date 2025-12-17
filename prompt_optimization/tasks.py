@@ -54,11 +54,19 @@ class ClassificationTask(DataProcessor):
         texts = []
         with concurrent.futures.ProcessPoolExecutor(max_workers=self.max_threads) as executor:
             futures = [executor.submit(process_example, ex, predictor, prompt) for ex in test_exs[:n]]
-            for i, future in tqdm(enumerate(concurrent.futures.as_completed(futures)), total=len(futures), desc='running evaluate'):
+            futures = {
+                executor.submit(process_example, ex, predictor, prompt): i
+                for i, ex in enumerate(test_exs[:n])
+            }
+            results = [None] * len(futures)
+            for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), desc='running evaluate'):
+                i = futures[future]
                 ex, pred = future.result()
-                texts.append(ex['text'])
-                labels.append(ex['label'])
-                preds.append(pred)
+                results[i] = (ex['text'], ex['label'], pred)
+        for text, label, pred in results:
+            texts.append(text)
+            labels.append(label)
+            preds.append(pred)
         accuracy = accuracy_score(labels, preds)
         f1 = f1_score(labels, preds, average='micro')
         return accuracy, texts, labels, preds

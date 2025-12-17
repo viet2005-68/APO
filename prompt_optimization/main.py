@@ -237,6 +237,12 @@ if __name__ == "__main__":
             expert_prompts = [experts[i][0] for i in range(EXPERT_NUM)]
             expert_embeds = embedder.embed_texts(expert_prompts)
             expert_embeds = normalize(expert_embeds)
+
+            # embed exs
+            texts = [o['text'] for o in train_exs]
+            all_texts = [t for t in texts]
+            all_embeds = embedder.embed_texts(all_texts)
+            all_X = normalize(all_embeds)
             # route each example
             expert_buffers = defaultdict(list)
             for idx, x_embed in enumerate(all_X):
