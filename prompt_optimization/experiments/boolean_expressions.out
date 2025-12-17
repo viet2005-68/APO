@@ -1,39 +1,78 @@
-{"task": "boolean_expressions", "data_dir": "data/boolean_expressions", "prompts": "prompts/boolean_expressions.md", "out": "experiments/boolean_expressions.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+{"task": "boolean_expressions", "data_dir": "data/boolean_expressions", "prompts": "prompts/boolean_expressions.md", "out": "experiments/boolean_expressions.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 3.300290584564209
+Time: 2.918278932571411
 Prompt: ('# Task\nDoes the following boolean expressions return True? Answer Yes if it return True, otherwise No\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
 Training accuracy: (np.float64(0.73),)
-Test accuracy: [0.7933333333333333]
+Test accuracy: [0.8066666666666666]
 ======== ROUND 1
-Time: 88.90323257446289
-Prompt: ('# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are evaluating a boolean expression. Use standard operator precedence rules: "not" has the highest precedence, followed by "and", then "or". Parentheses override precedence. Evaluate the expression and answer "Yes" if the result is True, "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it evaluates to True, or "No" if it evaluates to False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are a logical expression analyzer. Given a boolean expression phrased in natural language, assess its outcome **based on standard operator precedence guidelines**:  \n- `not` takes priority over all other operators  \n- `and` is prioritized over `or`  \n- When operators share the same precedence, the expression is processed from left to right  \n\nYour job: Ascertain whether the expression resolves to **True** or **False**.  \nRespond with **"Yes"** if the outcome is **True**, and **"No"** if the outcome is **False**.  \n\nExample:  \nInput: "not False or True and False"  \nOutput: No  \n\nNow analyze the following expression:  \n<expression>  \n**  \nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (np.float64(0.84), np.float64(0.84), np.float64(0.83), np.float64(0.78))
-Test accuracy: [0.7866666666666666, 0.78, 0.78, 0.78]
+Time: 70.00002431869507
+Prompt: ('# Task\nInput: Assess the truth value of the given boolean expression. Keep in mind the standard order of operations: `not` is evaluated before `and`, which is evaluated before `or`. Parentheses can change this order. Respond with "Yes" if the expression is true, and "No" if it is false.\n\nExample:  \nInput: "not True or (True or False) is"  \nOutput: Yes\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a rephrased version of the following instruction while preserving its meaning.\n\nInput: Assess the given boolean expression and decide if it results in True. Keep in mind standard operator precedence: `not` takes priority over `and`, which takes priority over `or`. Parentheses can change the order of evaluation. Respond with "Yes" if the expression is True, and "No" if it is False.\n\nExample:  \nInput: "not True or (True or False) is"  \nOutput: Yes\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEvaluate the following boolean expression and determine whether it evaluates to True. Consider standard operator precedence: `not` has higher precedence than `and`, which has higher precedence than `or`. Parentheses override precedence. Answer "Yes" if the expression evaluates to True, and "No" otherwise.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEvaluate the following Boolean expression. Follow the correct order of operations: `not` has higher precedence than `and`, which has higher precedence than `or`. Use parentheses if needed to group operations. Answer "Yes" if the final result of the expression is `True`, otherwise "No".\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.86), np.float64(0.84), np.float64(0.83), np.float64(0.81))
+Test accuracy: [0.8266666666666667, 0.7866666666666666, 0.7866666666666666, 0.78]
 ======== ROUND 2
-Time: 347.9322772026062
-Prompt: ('# Task\nInput: You are analyzing a logical expression. Adhere to the standard order of operations: "not" is processed first, followed by "and", and then "or". Parentheses can override this default order. You must **break the expression down into steps**, showing intermediate outcomes as necessary. Do **not** use intuition — strictly follow the rules of logical evaluation and parentheses. Once the full expression has been evaluated, reply with "Yes" if the result is True, and "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are evaluating a boolean expression. Use standard operator precedence rules: "not" has the highest precedence, followed by "and", then "or". Parentheses override precedence. Evaluate the expression and answer "Yes" if the result is True, "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: You are evaluating a logical statement that concludes with "is". The word "is" signifies the outcome of the expression preceding it. Adhere to standard operator precedence: "not" is processed first, followed by "and", and then "or". Parentheses may alter the evaluation order. Determine the truth value of the logical expression and reply with "Yes" if it evaluates to True, and "No" if it evaluates to False. Do not treat "is" as part of the logical expression — it serves only to mark the end of the statement.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (np.float64(0.84), np.float64(0.84), np.float64(0.84), np.float64(0.83))
-Test accuracy: [0.7666666666666667, 0.78, 0.78, 0.7733333333333333]
+Time: 345.21183943748474
+Prompt: ('# Task\nInput: You are provided with a logical expression that includes the boolean operators `not`, `and`, and `or`, and may contain parentheses. The word "is" at the end of the input is not part of the logical expression but signals the end of the statement. Your task is to determine the truth value of the expression preceding "is" according to standard logical evaluation rules: `not` takes precedence over `and`, which in turn takes precedence over `or`. Parentheses override these precedence rules as in standard mathematical notation. If the expression evaluates to true, output "Yes". If it evaluates to false, output "No".\n\nExample:  \nInput: "not True or (True or False) is"  \nOutput: Yes\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Assess the truth value of the given boolean expression. Keep in mind the standard order of operations: `not` is evaluated before `and`, which is evaluated before `or`. Parentheses can change this order. Respond with "Yes" if the expression is true, and "No" if it is false.\n\nExample:  \nInput: "not True or (True or False) is"  \nOutput: Yes\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction with the same semantic meaning:\n\nInput: Assess the truth value of the given boolean expression. Keep in mind the standard order of operations: `not` is evaluated before `and`, which comes before `or`. Parentheses can change this order. Respond with "Yes" if the result is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGenerate a rephrased version of the following instruction while preserving its meaning.\n\nInput: Assess the given boolean expression and decide if it results in True. Keep in mind standard operator precedence: `not` takes priority over `and`, which takes priority over `or`. Parentheses can change the order of evaluation. Respond with "Yes" if the expression is True, and "No" if it is False.\n\nExample:  \nInput: "not True or (True or False) is"  \nOutput: Yes\n\nOutput:\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.87), np.float64(0.86), np.float64(0.85), np.float64(0.84))
+Test accuracy: [0.8066666666666666, 0.8266666666666667, 0.8333333333333334, 0.7933333333333333]
 ======== ROUND 3
-Time: 384.4113872051239
-Prompt: ('# Task\nInput: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: You are analyzing a logical expression. Adhere to the standard order of operations: "not" is processed first, followed by "and", and then "or". Parentheses can override this default order. You must **break the expression down into steps**, showing intermediate outcomes as necessary. Do **not** use intuition — strictly follow the rules of logical evaluation and parentheses. Once the full expression has been evaluated, reply with "Yes" if the result is True, and "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", followed by "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nYou are evaluating a boolean expression. Use standard operator precedence rules: "not" has the highest precedence, followed by "and", then "or". Parentheses override precedence. Evaluate the expression and answer "Yes" if the result is True, "No" if the result is False.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
-Training accuracy: (np.float64(0.86), np.float64(0.84), np.float64(0.84), np.float64(0.84))
-Test accuracy: [0.7866666666666666, 0.7533333333333333, 0.78, 0.78]
+Time: 354.42517948150635
+Prompt: ('# Task\nHere is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:\n\n---\n\nYou are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.\n\nYour task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:\n\n1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.\n2. Parentheses override the default precedence, just as in standard mathematical expressions.\n3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.\n\nIf the result of the evaluation is **true**, output **"Yes"**.  \nIf the result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nUse the specified rules to evaluate each input accordingly.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere is a variation of the instruction with the same semantic meaning, rephrased for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, along with optional parentheses. The word "is" at the end of the input does **not** form part of the logical expression—it simply signals the end of the statement.\n\nYour task is to **evaluate the logical expression strictly according to standard operator precedence rules**:\n\n1. `not` takes precedence over `and`, which in turn takes precedence over `or`.\n2. Parentheses can change the order of evaluation, overriding the default precedence, similar to standard mathematical operations.\n3. You must evaluate the entire expression that appears before "is" and determine its truth value.\n\nIf the evaluated result is **true**, output **"Yes"**.  \nIf the evaluated result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nFollow these rules precisely when evaluating each input.\n\n---\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere\'s a variation of the given instruction with the same semantic meaning, rephrased for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, along with parentheses. The word **"is"** at the end of the input does **not** form part of the logical expression—it is simply a marker indicating the end of the statement.\n\nYour task is to **evaluate the logical expression strictly according to standard precedence rules**:\n\n1. `not` has higher precedence than `and`, which in turn has higher precedence than `or`.\n2. Parentheses can override the default precedence, just as in standard mathematical expressions.\n3. You must evaluate the entire expression that appears before "is" to determine its truth value.\n\nIf the expression evaluates to **true**, output **"Yes"**.  \nIf the expression evaluates to **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nUse these rules to evaluate each input accordingly.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nEvaluate the truth value of the given boolean expression. The input is a logical expression, and the word "is" at the end is not part of the actual logical expression. You should ignore it when evaluating. Use standard order of operations: `not` is evaluated before `and`, which is evaluated before `or`. Parentheses can change this order. Respond with "Yes" if the expression is true, and "No" if it is false.\n\nExample:\nInput: "not True or (True or False) is"\nOutput: Yes\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.9), np.float64(0.89), np.float64(0.88), np.float64(0.87))
+Test accuracy: [0.8733333333333333, 0.8866666666666667, 0.88, 0.82]
+======== ROUND 4
+Time: 645.855030298233
+Prompt: ('# Task\nHere is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:\n\n---\n\nYou are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.\n\nYour task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:\n\n1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.\n2. Parentheses override the default precedence, just as in standard mathematical expressions.\n3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.\n\nIf the result of the evaluation is **true**, output **"Yes"**.  \nIf the result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nUse the specified rules to evaluate each input accordingly.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere\'s a variation of the instruction that retains the original semantic meaning, but rephrases the language for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, as well as parentheses. The word **"is"** at the end of the input is **not** part of the logical expression—it serves only as an indicator of the statement\'s conclusion.\n\nYour task is to **evaluate the logical expression strictly based on standard precedence rules**, following this hierarchy:\n\n1. **Parentheses** have the highest priority. Always resolve the innermost parentheses first.\n2. **`not`** has precedence over `and`, which in turn has precedence over `or`.\n3. When multiple `not` operators appear, they are evaluated **from right to left** (i.e., right-associative).\n4. You must determine the truth value of the entire expression that appears before the word "is".\n\nIf the evaluated result is **true**, output **"Yes"**.  \nIf the evaluated result is **false**, output **"No"**.\n\nExamples:\n\n- Input: `"not True or (True or False) is"` → Output: `"Yes"`\n- Input: `"( False or not False and False ) is"` → Output: `"No"`\n- Input: `"not not ( not True ) or False is"` → Output: `"No"`\n- Input: `"False and not ( True ) or True is"` → Output: `"Yes"`\n- Input: `"not not not not True and not True is"` → Output: `"No"`\n\n**Clarification**: When dealing with multiple `not`s like in `not not not not True`, evaluate them in a right-to-left order. Never assume that `and` has higher precedence than `not`, unless explicitly grouped by parentheses.\n\nUse these rules consistently to evaluate each input.\n\n--- \n\nLet me know if you\'d like a version with even more formal or informal tone!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere is a variation of the instruction with the same semantic meaning, rephrased for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, along with optional parentheses. The word "is" at the end of the input does **not** form part of the logical expression—it simply signals the end of the statement.\n\nYour task is to **evaluate the logical expression strictly according to standard operator precedence rules**:\n\n1. `not` takes precedence over `and`, which in turn takes precedence over `or`.\n2. Parentheses can change the order of evaluation, overriding the default precedence, similar to standard mathematical operations.\n3. You must evaluate the entire expression that appears before "is" and determine its truth value.\n\nIf the evaluated result is **true**, output **"Yes"**.  \nIf the evaluated result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nFollow these rules precisely when evaluating each input.\n\n---\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere\'s a variation of the given instruction with the same semantic meaning, rephrased for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, along with parentheses. The word **"is"** at the end of the input does **not** form part of the logical expression—it is simply a marker indicating the end of the statement.\n\nYour task is to **evaluate the logical expression strictly according to standard precedence rules**:\n\n1. `not` has higher precedence than `and`, which in turn has higher precedence than `or`.\n2. Parentheses can override the default precedence, just as in standard mathematical expressions.\n3. You must evaluate the entire expression that appears before "is" to determine its truth value.\n\nIf the expression evaluates to **true**, output **"Yes"**.  \nIf the expression evaluates to **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nUse these rules to evaluate each input accordingly.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.9), np.float64(0.89), np.float64(0.89), np.float64(0.88))
+Test accuracy: [0.8733333333333333, 0.8666666666666667, 0.8866666666666667, 0.88]
+======== ROUND 5
+Time: 832.0505290031433
+Prompt: ('# Task\nHere is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:\n\n---\n\nYou are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.\n\nYour task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:\n\n1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.\n2. Parentheses override the default precedence, just as in standard mathematical expressions.\n3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.\n\nIf the result of the evaluation is **true**, output **"Yes"**.  \nIf the result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nUse the specified rules to evaluate each input accordingly.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning but uses slightly different wording and structure:\n\n---\n\nYou are provided with a logical expression that may contain the boolean operators `not`, `and`, and `or`, as well as parentheses. Note that the word **"is"** at the end of the input is **not part of the logical expression** — it is only used to indicate the conclusion of the statement.\n\nYou are required to **evaluate the expression strictly according to a defined order of operations**:\n\n1. **Parentheses** are evaluated first.\n2. **Operator precedence** is applied as follows:  \n   - `not` has the **highest precedence**  \n   - `and` has **higher precedence** than `or`\n3. After precedence is respected, the expression is evaluated **from left to right**.\n\nFor example:\n- `not True or (True or False)` is evaluated as:  \n    - `not True` → `False`  \n    - `True or False` → `True`  \n    - Then: `False or True` → `True` → Output: `"Yes"`\n\nIf the final result of the expression is **true**, output **"Yes"**.  \nIf the final result is **false**, output **"No"**.\n\nExamples:\n- Input: `"not True or (True or False) is"` → Output: `"Yes"`\n- Input: `"(False or not False) and False is"` → Output: `"No"`\n- Input: `"not not (not True) or False is"` → Output: `"No"`\n- Input: `"False and not (True) or True is"` → Output: `"Yes"`\n- Input: `"not not not not True and not True is"` → Output: `"No"`\n\nUse the above rules to evaluate each input accordingly.\n\n--- \n\nLet me know if you\'d like it further rephrased or adapted for a specific format!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere\'s a variation of the instruction that retains the original semantic meaning, but rephrases the language for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, as well as parentheses. The word **"is"** at the end of the input is **not** part of the logical expression—it serves only as an indicator of the statement\'s conclusion.\n\nYour task is to **evaluate the logical expression strictly based on standard precedence rules**, following this hierarchy:\n\n1. **Parentheses** have the highest priority. Always resolve the innermost parentheses first.\n2. **`not`** has precedence over `and`, which in turn has precedence over `or`.\n3. When multiple `not` operators appear, they are evaluated **from right to left** (i.e., right-associative).\n4. You must determine the truth value of the entire expression that appears before the word "is".\n\nIf the evaluated result is **true**, output **"Yes"**.  \nIf the evaluated result is **false**, output **"No"**.\n\nExamples:\n\n- Input: `"not True or (True or False) is"` → Output: `"Yes"`\n- Input: `"( False or not False and False ) is"` → Output: `"No"`\n- Input: `"not not ( not True ) or False is"` → Output: `"No"`\n- Input: `"False and not ( True ) or True is"` → Output: `"Yes"`\n- Input: `"not not not not True and not True is"` → Output: `"No"`\n\n**Clarification**: When dealing with multiple `not`s like in `not not not not True`, evaluate them in a right-to-left order. Never assume that `and` has higher precedence than `not`, unless explicitly grouped by parentheses.\n\nUse these rules consistently to evaluate each input.\n\n--- \n\nLet me know if you\'d like a version with even more formal or informal tone!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere is a variation of the instruction with the same semantic meaning, rephrased for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, along with optional parentheses. The word "is" at the end of the input does **not** form part of the logical expression—it simply signals the end of the statement.\n\nYour task is to **evaluate the logical expression strictly according to standard operator precedence rules**:\n\n1. `not` takes precedence over `and`, which in turn takes precedence over `or`.\n2. Parentheses can change the order of evaluation, overriding the default precedence, similar to standard mathematical operations.\n3. You must evaluate the entire expression that appears before "is" and determine its truth value.\n\nIf the evaluated result is **true**, output **"Yes"**.  \nIf the evaluated result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nFollow these rules precisely when evaluating each input.\n\n---\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.9), np.float64(0.89), np.float64(0.89), np.float64(0.89))
+Test accuracy: [0.8666666666666667, 0.82, 0.8866666666666667, 0.8866666666666667]
+======== ROUND 6
+Time: 1205.1841371059418
+Prompt: ('# Task\nHere is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:\n\n---\n\nYou are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.\n\nYour task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:\n\n1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.\n2. Parentheses override the default precedence, just as in standard mathematical expressions.\n3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.\n\nIf the result of the evaluation is **true**, output **"Yes"**.  \nIf the result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nUse the specified rules to evaluate each input accordingly.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning but uses slightly different wording and structure:\n\n---\n\nYou are provided with a logical expression that may contain the boolean operators `not`, `and`, and `or`, as well as parentheses. Note that the word **"is"** at the end of the input is **not part of the logical expression** — it is only used to indicate the conclusion of the statement.\n\nYou are required to **evaluate the expression strictly according to a defined order of operations**:\n\n1. **Parentheses** are evaluated first.\n2. **Operator precedence** is applied as follows:  \n   - `not` has the **highest precedence**  \n   - `and` has **higher precedence** than `or`\n3. After precedence is respected, the expression is evaluated **from left to right**.\n\nFor example:\n- `not True or (True or False)` is evaluated as:  \n    - `not True` → `False`  \n    - `True or False` → `True`  \n    - Then: `False or True` → `True` → Output: `"Yes"`\n\nIf the final result of the expression is **true**, output **"Yes"**.  \nIf the final result is **false**, output **"No"**.\n\nExamples:\n- Input: `"not True or (True or False) is"` → Output: `"Yes"`\n- Input: `"(False or not False) and False is"` → Output: `"No"`\n- Input: `"not not (not True) or False is"` → Output: `"No"`\n- Input: `"False and not (True) or True is"` → Output: `"Yes"`\n- Input: `"not not not not True and not True is"` → Output: `"No"`\n\nUse the above rules to evaluate each input accordingly.\n\n--- \n\nLet me know if you\'d like it further rephrased or adapted for a specific format!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere\'s a variation of the instruction that retains the original semantic meaning, but rephrases the language for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, as well as parentheses. The word **"is"** at the end of the input is **not** part of the logical expression—it serves only as an indicator of the statement\'s conclusion.\n\nYour task is to **evaluate the logical expression strictly based on standard precedence rules**, following this hierarchy:\n\n1. **Parentheses** have the highest priority. Always resolve the innermost parentheses first.\n2. **`not`** has precedence over `and`, which in turn has precedence over `or`.\n3. When multiple `not` operators appear, they are evaluated **from right to left** (i.e., right-associative).\n4. You must determine the truth value of the entire expression that appears before the word "is".\n\nIf the evaluated result is **true**, output **"Yes"**.  \nIf the evaluated result is **false**, output **"No"**.\n\nExamples:\n\n- Input: `"not True or (True or False) is"` → Output: `"Yes"`\n- Input: `"( False or not False and False ) is"` → Output: `"No"`\n- Input: `"not not ( not True ) or False is"` → Output: `"No"`\n- Input: `"False and not ( True ) or True is"` → Output: `"Yes"`\n- Input: `"not not not not True and not True is"` → Output: `"No"`\n\n**Clarification**: When dealing with multiple `not`s like in `not not not not True`, evaluate them in a right-to-left order. Never assume that `and` has higher precedence than `not`, unless explicitly grouped by parentheses.\n\nUse these rules consistently to evaluate each input.\n\n--- \n\nLet me know if you\'d like a version with even more formal or informal tone!\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nHere is a variation of the instruction with the same semantic meaning, rephrased for clarity and style:\n\n---\n\nYou are provided with a logical expression that may include the boolean operators `not`, `and`, and `or`, along with optional parentheses. The word "is" at the end of the input does **not** form part of the logical expression—it simply signals the end of the statement.\n\nYour task is to **evaluate the logical expression strictly according to standard operator precedence rules**:\n\n1. `not` takes precedence over `and`, which in turn takes precedence over `or`.\n2. Parentheses can change the order of evaluation, overriding the default precedence, similar to standard mathematical operations.\n3. You must evaluate the entire expression that appears before "is" and determine its truth value.\n\nIf the evaluated result is **true**, output **"Yes"**.  \nIf the evaluated result is **false**, output **"No"**.\n\nExamples:\n- Input: "not True or (True or False) is" → Output: "Yes"\n- Input: "( False or not False and False ) is" → Output: "No"\n- Input: "not not ( not True ) or False is" → Output: "No"\n- Input: "False and not ( True ) or True is" → Output: "Yes"\n- Input: "not not not not True and not True is" → Output: "No"\n\nFollow these rules precisely when evaluating each input.\n\n---\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.9), np.float64(0.89), np.float64(0.89), np.float64(0.89))
+Test accuracy: [0.8733333333333333, 0.82, 0.8866666666666667, 0.8866666666666667]
 ======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 23.830196380615234
+Time: 25.240084886550903
 Prompt: # Task
-Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+Here is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:
+
+---
+
+You are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.
+
+Your task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:
+
+1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.
+2. Parentheses override the default precedence, just as in standard mathematical expressions.
+3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.
+
+If the result of the evaluation is **true**, output **"Yes"**.
+If the result is **false**, output **"No"**.
+
+Examples:
+- Input: "not True or (True or False) is" → Output: "Yes"
+- Input: "( False or not False and False ) is" → Output: "No"
+- Input: "not not ( not True ) or False is" → Output: "No"
+- Input: "False and not ( True ) or True is" → Output: "Yes"
+- Input: "not not not not True and not True is" → Output: "No"
+
+Use the specified rules to evaluate each input accordingly.
 
 # Here are some examples:
-Text: not not True and not False or True is
+Text: True and False or ( not False ) is
 Label: Yes
-Text: ( True ) and True and not True is
+Text: True and ( not True or False ) is
 Label: No
-Text: not True and True or True and False is
+Text: not not not not True and not True is
 Label: No
-Text: ( not ( False ) and False ) is
+Text: False or ( not not not True ) is
 Label: No
-Text: False and not ( ( True ) ) is
+Text: not False and not True and not False is
+Label: No
+Text: not ( not not True ) or False is
 Label: No
 # Output format
 Answer ONLY "Yes" or "No".
@@ -43,23 +82,47 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.91 | Penalized score: 0.5818426465262038
-Test accuracy: 0.8733333333333333
+Training accuracy: 0.92 | Penalized score: 0.576293077152551
+Test accuracy: 0.8933333333333333
 ======== EXEMPLAR OPTIMIZATION ROUND 1
-Time: 10.427772521972656
+Time: 8.64589786529541
 Prompt: # Task
-Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+Here is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:
+
+---
+
+You are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.
+
+Your task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:
+
+1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.
+2. Parentheses override the default precedence, just as in standard mathematical expressions.
+3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.
+
+If the result of the evaluation is **true**, output **"Yes"**.
+If the result is **false**, output **"No"**.
+
+Examples:
+- Input: "not True or (True or False) is" → Output: "Yes"
+- Input: "( False or not False and False ) is" → Output: "No"
+- Input: "not not ( not True ) or False is" → Output: "No"
+- Input: "False and not ( True ) or True is" → Output: "Yes"
+- Input: "not not not not True and not True is" → Output: "No"
+
+Use the specified rules to evaluate each input accordingly.
 
 # Here are some examples:
-Text: not not True and not False or True is
+Text: True and False or ( not False ) is
 Label: Yes
-Text: ( True ) and True and not True is
+Text: True and ( not True or False ) is
 Label: No
-Text: not True and True or True and False is
+Text: not not not not True and not True is
 Label: No
-Text: ( not ( False ) and False ) is
+Text: False or ( not not not True ) is
 Label: No
-Text: False and not ( ( True ) ) is
+Text: not False and not True and not False is
+Label: No
+Text: not ( not not True ) or False is
 Label: No
 # Output format
 Answer ONLY "Yes" or "No".
@@ -69,24 +132,44 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.91 | Penalized score: 0.5818426465262038
-Test accuracy: 0.8733333333333333
+Training accuracy: 0.92 | Penalized score: 0.576293077152551
+Test accuracy: 0.8933333333333333
 ======== EXEMPLAR OPTIMIZATION ROUND 2
-Time: 10.612338066101074
+Time: 10.162837505340576
 Prompt: # Task
-Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+Here is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:
+
+---
+
+You are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.
+
+Your task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:
+
+1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.
+2. Parentheses override the default precedence, just as in standard mathematical expressions.
+3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.
+
+If the result of the evaluation is **true**, output **"Yes"**.
+If the result is **false**, output **"No"**.
+
+Examples:
+- Input: "not True or (True or False) is" → Output: "Yes"
+- Input: "( False or not False and False ) is" → Output: "No"
+- Input: "not not ( not True ) or False is" → Output: "No"
+- Input: "False and not ( True ) or True is" → Output: "Yes"
+- Input: "not not not not True and not True is" → Output: "No"
+
+Use the specified rules to evaluate each input accordingly.
 
 # Here are some examples:
-Text: not not True and not False or True is
+Text: True and ( not True or False ) is
+Label: No
+Text: True and False or ( not False ) is
 Label: Yes
-Text: ( True ) and True and not True is
+Text: False or ( False ) and not False is
 Label: No
-Text: not True and True or True and False is
-Label: No
-Text: ( not ( False ) and False ) is
-Label: No
-Text: False and not ( ( True ) ) is
-Label: No
+Text: True and False or ( not False ) is
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -95,76 +178,44 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.91 | Penalized score: 0.5818426465262038
-Test accuracy: 0.8733333333333333
-======== EXEMPLAR OPTIMIZATION ROUND 3
-Time: 10.4331214427948
-Prompt: # Task
-Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
-
-# Here are some examples:
-Text: not not True and not False or True is
-Label: Yes
-Text: ( True ) and True and not True is
-Label: No
-Text: not True and True or True and False is
-Label: No
-Text: ( not ( False ) and False ) is
-Label: No
-Text: False and not ( ( True ) ) is
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.91 | Penalized score: 0.5818426465262038
-Test accuracy: 0.8733333333333333
-======== EXEMPLAR OPTIMIZATION ROUND 4
-Time: 12.235456466674805
-Prompt: # Task
-Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
-
-# Here are some examples:
-Text: not not True and not False or True is
-Label: Yes
-Text: ( True ) and True and not True is
-Label: No
-Text: not True and True or True and False is
-Label: No
-Text: ( not ( False ) and False ) is
-Label: No
-Text: False and not ( ( True ) ) is
-Label: No
-# Output format
-Answer ONLY "Yes" or "No".
-NO explanations.
-No other words.
-
-# Prediction
-Text: {{ text }}
-Label:
-Training accuracy: 0.91 | Penalized score: 0.5818426465262038
+Training accuracy: 0.91 | Penalized score: 0.579952291625947
 Test accuracy: 0.88
-======== EXEMPLAR OPTIMIZATION ROUND 5
-Time: 12.032289743423462
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 8.74466848373413
 Prompt: # Task
-Input: You are assessing a logical expression. Follow standard operator precedence: "not" is evaluated first, then "and", and finally "or". Parentheses can change the order of evaluation. Determine the outcome of the expression and respond with "Yes" if it is True, and "No" if it is False.
+Here is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:
+
+---
+
+You are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.
+
+Your task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:
+
+1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.
+2. Parentheses override the default precedence, just as in standard mathematical expressions.
+3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.
+
+If the result of the evaluation is **true**, output **"Yes"**.
+If the result is **false**, output **"No"**.
+
+Examples:
+- Input: "not True or (True or False) is" → Output: "Yes"
+- Input: "( False or not False and False ) is" → Output: "No"
+- Input: "not not ( not True ) or False is" → Output: "No"
+- Input: "False and not ( True ) or True is" → Output: "Yes"
+- Input: "not not not not True and not True is" → Output: "No"
+
+Use the specified rules to evaluate each input accordingly.
 
 # Here are some examples:
-Text: not not True and not False or True is
+Text: True and ( not True or False ) is
+Label: No
+Text: True and False or ( not False ) is
 Label: Yes
-Text: ( True ) and True and not True is
+Text: False or ( False ) and not False is
 Label: No
-Text: not True and True or True and False is
-Label: No
-Text: ( not ( False ) and False ) is
-Label: No
-Text: False and not ( ( True ) ) is
-Label: No
+Text: True and False or ( not False ) is
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -173,5 +224,97 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.91 | Penalized score: 0.5818426465262038
-Test accuracy: 0.8733333333333333
+Training accuracy: 0.91 | Penalized score: 0.579952291625947
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 10.641539573669434
+Prompt: # Task
+Here is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:
+
+---
+
+You are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.
+
+Your task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:
+
+1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.
+2. Parentheses override the default precedence, just as in standard mathematical expressions.
+3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.
+
+If the result of the evaluation is **true**, output **"Yes"**.
+If the result is **false**, output **"No"**.
+
+Examples:
+- Input: "not True or (True or False) is" → Output: "Yes"
+- Input: "( False or not False and False ) is" → Output: "No"
+- Input: "not not ( not True ) or False is" → Output: "No"
+- Input: "False and not ( True ) or True is" → Output: "Yes"
+- Input: "not not not not True and not True is" → Output: "No"
+
+Use the specified rules to evaluate each input accordingly.
+
+# Here are some examples:
+Text: True and ( not True or False ) is
+Label: No
+Text: True and False or ( not False ) is
+Label: Yes
+Text: False or ( False ) and not False is
+Label: No
+Text: True and False or ( not False ) is
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.579952291625947
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 6.926170110702515
+Prompt: # Task
+Here is a variation of the instruction with the same semantic meaning but rephrased for clarity and style:
+
+---
+
+You are given a logical expression that includes the boolean operators `not`, `and`, and `or`, and may also contain parentheses. Note that the word "is" at the end of the input is **not** part of the logical expression—it is merely a delimiter marking the end of the statement.
+
+Your task is to evaluate the logical expression that appears **before** the word "is" using **standard logic rules**:
+
+1. The operator precedence is as follows: `not` has higher precedence than `and`, which has higher precedence than `or`.
+2. Parentheses override the default precedence, just as in standard mathematical expressions.
+3. You must evaluate the **entire expression** up to (but not including) "is" to determine its truth value.
+
+If the result of the evaluation is **true**, output **"Yes"**.
+If the result is **false**, output **"No"**.
+
+Examples:
+- Input: "not True or (True or False) is" → Output: "Yes"
+- Input: "( False or not False and False ) is" → Output: "No"
+- Input: "not not ( not True ) or False is" → Output: "No"
+- Input: "False and not ( True ) or True is" → Output: "Yes"
+- Input: "not not not not True and not True is" → Output: "No"
+
+Use the specified rules to evaluate each input accordingly.
+
+# Here are some examples:
+Text: True and ( not True or False ) is
+Label: No
+Text: True and False or ( not False ) is
+Label: Yes
+Text: False or ( False ) and not False is
+Label: No
+Text: True and False or ( not False ) is
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91 | Penalized score: 0.579952291625947
+Test accuracy: 0.88

@@ -125,7 +125,7 @@ python main_original.py \
   --rounds 3
 
 # Boolean expressions (BBH)
-python main.py \
+python main_original.py \
   --task boolean_expressions \
   --prompts prompts/boolean_expressions.md \
   --data_dir data/boolean_expressions \
@@ -136,4 +136,4 @@ python main.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 3
+  --rounds 6
