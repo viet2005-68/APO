@@ -97,7 +97,7 @@ python main.py \
   --rounds 2
 
 # Web of lies (BBH)
-python main.py \
+python main_original.py \
   --task web_of_lies \
   --prompts prompts/web_of_lies.md \
   --data_dir data/web_of_lies \
@@ -108,10 +108,10 @@ python main.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 6
+  --rounds 3
 
 # Sports understanding (BBH)
-python main.py \
+python main_original.py \
   --task sports_understanding \
   --prompts prompts/sports_understanding.md \
   --data_dir data/sports_understanding \
