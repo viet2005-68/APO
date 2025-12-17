@@ -69,12 +69,12 @@ Each individual in the genetic population represents a **candidate exemplar set*
     <th>ProTeGi</th>
     <th>Ours</th>
   </tr>
-  <tr><td>Liar</td><td>0.64</td><td><b>0.67</b></td></tr>
-  <tr><td>Ethos</td><td>0.89</td><td><b>0.90</b></td></tr>
+  <tr><td>Liar</td><td>0.65</td><td><b>0.67</b></td></tr>
+  <tr><td>Ethos</td><td>0.87</td><td><b>0.90</b></td></tr>
   <tr><td>Casual judgement</td><td><b>0.70</b></td><td>0.69</td></tr>
   <tr><td>Web of lies</td><td>0.66</td><td><b>0.72</b></td></tr>
   <tr><td>Sports understanding</td><td>0.79</td><td><b>0.82</b></td></tr>
-  <tr><td>Boolean expressions</td><td>0.83</td><td><b>0.90</b></td></tr>
+  <tr><td>Boolean expressions</td><td>0.84</td><td><b>0.90</b></td></tr>
   <tr><td><b>Average</b></td><td>0.75</td><td><b>0.78</b></td></tr>
 </table>
 
