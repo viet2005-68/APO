@@ -144,11 +144,15 @@ class ProTeGi(PromptOptimizer):
             prompt_feedbacks += [(t, error_string) for t in gradients]
         return prompt_feedbacks
 
-    def expand_candidates(self, prompts, task, gpt4, train_exs):
+    def expand_candidates(self, prompts, task, gpt4, train_exs, error_count):
         """ Expand a list of prompts by generating gradient-based successors and 
             synonyms for each section.
         """
-        minibatch = random.sample(train_exs, k=min(self.opt["minibatch_size"], len(train_exs)))
+        minibatch_indices = random.sample(
+            range(len(train_exs)),
+            k=min(self.opt["minibatch_size"], len(train_exs))
+        )
+        minibatch = [train_exs[i] for i in minibatch_indices]
 
 
         new_prompts = []
@@ -157,7 +161,11 @@ class ProTeGi(PromptOptimizer):
             task_section = sections['task'].strip()
 
             # evaluate prompt on minibatch
-            _, texts, labels, preds = task.evaluate(gpt4, prompt, minibatch)
+            _, texts, labels, preds = task.evaluate(gpt4, prompt, minibatch, len(minibatch))
+            for i, (l, p) in enumerate(zip(labels, preds)):
+                if l != p:
+                    original_i = minibatch_indices[i]
+                    error_count[original_i] += 1
 
             # get gradients
             new_task_sections = []
