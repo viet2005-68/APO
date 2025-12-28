@@ -1,0 +1,366 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.394913673400879
+Prompt: ('# Task\nPrompt: # Task\n**Revised Instruction (Improved Version - v2):**\n\nClassify the given text as either **"Hate Speech"** or **"Not Hate Speech"** based on **whether the text directly or indirectly attacks or devalues an individual or group based on protected characteristics** such as race, religion, gender, sexual orientation, disability, national origin, or other similar attributes.\n\nWhen making your classification, consider the following:\n\n- **Targeting**: Is the statement directed at a specific **group or individual** based on one or more **protected characteristics**? General complaints, fears, or discomfort with behavior that does not reference identity or protected attributes do **not** constitute hate speech.\n- **Intent**: Does the speaker express **hatred, contempt, dehumanization, or encouragement of violence** against a specific group or individual?\n- **Language**: Are there **slurs, derogatory terms, or repeated expressions of disdain** aimed at a protected group or individual?\n- **Context and Tone**: Is the statement **contextually or tonally** directed at a group or individual in a way that reflects **bias or hostility**?\n\nDo **not** classify as hate speech:\n- General expressions of **discomfort, fear, or dislike** of **behavior or appearance**, unless tied to a protected group.\n- Criticisms of **ideas or policies**, not people or groups.\n- Language that is **not clearly aimed at a protected group** or **does not express hatred or dehumanization**.\n- **Political or geopolitical criticism**, even if it involves violence or dehumanizing language, **unless it explicitly targets individuals or groups based on protected attributes** and expresses hatred or dehumanization.\n\n**Examples:**\n- "Anti-LGBT people, How sad and ignorant...I can\'t believe it...How how ??? can they not see how STUPID they are?????" → **Hate Speech** (targets a protected group with offensive and derogatory language)\n- "To the lady that can barely speak English and then look down upon her own people, that’s disgraceful." → **Not Hate Speech** (targets behavior, not a protected attribute)\n- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." → **Hate Speech** (expresses contempt toward a religious group)\n- "Deport him in military aircraft and dump him back where he is originated from. Him and his family." → **Hate Speech** (calls for violence and dehumanizes individuals based on origin)\n- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → **Not Hate Speech** (expresses fear or discomfort, but does not clearly target a protected group)\n- "Id beat the fuck out of his ass if he wasnt an actor" → **Not Hate Speech** (expresses aggression, but not based on protected attributes)\n- "Humiliating this Str8 guy. str8 guys like him doing dumb things" → **Not Hate Speech** (targets behavior and identity, but lacks clear dehumanization or hate)\n- "Dalit? Is this a name of religion or an atom of poo composition" → **Hate Speech** (uses derogatory language and dehumanizes a group based on caste, which is a protected characteristic in many contexts)\n\n**Additional Clarification for Political or Geopolitical Contexts:**\n- Statements that describe **state-sponsored violence**, **group-based persecution**, or **systemic oppression** should still be evaluated based on **whether the language used expresses hatred, dehumanization, or violence toward individuals or groups based on protected characteristics**, not just based on the **political context**.\n- Example: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → **Not Hate Speech** (describes political conflict or state violence, but does not express hatred or dehumanization toward a specific **group** in a **personalized or targeted** way)\n- Example: "Should have been sterilised upon arrival. Now your future doesn\'t exist." → **Not Hate Speech** (expresses a harsh opinion but does not clearly target a **protected group** with **hatred or dehumanization**)\n- Example: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead" → **Hate Speech** (expresses dehumanizing rhetoric and calls for violence, targeting individuals based on **national origin**)\n\nBe **specific and cautious** in your classification—only label as hate speech when a **protected group or individual is clearly targeted with hatred, contempt, or dehumanization**, and the **language is not merely political critique or geopolitical commentary**.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.98),)
+Test accuracy: [0.8466666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 23.221988201141357
+Prompt: # Task
+Prompt: # Task
+**Revised Instruction (Improved Version - v2):**
+
+Classify the given text as either **"Hate Speech"** or **"Not Hate Speech"** based on **whether the text directly or indirectly attacks or devalues an individual or group based on protected characteristics** such as race, religion, gender, sexual orientation, disability, national origin, or other similar attributes.
+
+When making your classification, consider the following:
+
+- **Targeting**: Is the statement directed at a specific **group or individual** based on one or more **protected characteristics**? General complaints, fears, or discomfort with behavior that does not reference identity or protected attributes do **not** constitute hate speech.
+- **Intent**: Does the speaker express **hatred, contempt, dehumanization, or encouragement of violence** against a specific group or individual?
+- **Language**: Are there **slurs, derogatory terms, or repeated expressions of disdain** aimed at a protected group or individual?
+- **Context and Tone**: Is the statement **contextually or tonally** directed at a group or individual in a way that reflects **bias or hostility**?
+
+Do **not** classify as hate speech:
+- General expressions of **discomfort, fear, or dislike** of **behavior or appearance**, unless tied to a protected group.
+- Criticisms of **ideas or policies**, not people or groups.
+- Language that is **not clearly aimed at a protected group** or **does not express hatred or dehumanization**.
+- **Political or geopolitical criticism**, even if it involves violence or dehumanizing language, **unless it explicitly targets individuals or groups based on protected attributes** and expresses hatred or dehumanization.
+
+**Examples:**
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → **Hate Speech** (targets a protected group with offensive and derogatory language)
+- "To the lady that can barely speak English and then look down upon her own people, that’s disgraceful." → **Not Hate Speech** (targets behavior, not a protected attribute)
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." → **Hate Speech** (expresses contempt toward a religious group)
+- "Deport him in military aircraft and dump him back where he is originated from. Him and his family." → **Hate Speech** (calls for violence and dehumanizes individuals based on origin)
+- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → **Not Hate Speech** (expresses fear or discomfort, but does not clearly target a protected group)
+- "Id beat the fuck out of his ass if he wasnt an actor" → **Not Hate Speech** (expresses aggression, but not based on protected attributes)
+- "Humiliating this Str8 guy. str8 guys like him doing dumb things" → **Not Hate Speech** (targets behavior and identity, but lacks clear dehumanization or hate)
+- "Dalit? Is this a name of religion or an atom of poo composition" → **Hate Speech** (uses derogatory language and dehumanizes a group based on caste, which is a protected characteristic in many contexts)
+
+**Additional Clarification for Political or Geopolitical Contexts:**
+- Statements that describe **state-sponsored violence**, **group-based persecution**, or **systemic oppression** should still be evaluated based on **whether the language used expresses hatred, dehumanization, or violence toward individuals or groups based on protected characteristics**, not just based on the **political context**.
+- Example: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → **Not Hate Speech** (describes political conflict or state violence, but does not express hatred or dehumanization toward a specific **group** in a **personalized or targeted** way)
+- Example: "Should have been sterilised upon arrival. Now your future doesn't exist." → **Not Hate Speech** (expresses a harsh opinion but does not clearly target a **protected group** with **hatred or dehumanization**)
+- Example: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead" → **Hate Speech** (expresses dehumanizing rhetoric and calls for violence, targeting individuals based on **national origin**)
+
+Be **specific and cautious** in your classification—only label as hate speech when a **protected group or individual is clearly targeted with hatred, contempt, or dehumanization**, and the **language is not merely political critique or geopolitical commentary**.
+
+# Here are some examples:
+Text: You deserve way more subscribers . The shit you say is fucking gold.
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.98
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 43.53029155731201
+Prompt: # Task
+Prompt: # Task
+**Revised Instruction (Improved Version - v2):**
+
+Classify the given text as either **"Hate Speech"** or **"Not Hate Speech"** based on **whether the text directly or indirectly attacks or devalues an individual or group based on protected characteristics** such as race, religion, gender, sexual orientation, disability, national origin, or other similar attributes.
+
+When making your classification, consider the following:
+
+- **Targeting**: Is the statement directed at a specific **group or individual** based on one or more **protected characteristics**? General complaints, fears, or discomfort with behavior that does not reference identity or protected attributes do **not** constitute hate speech.
+- **Intent**: Does the speaker express **hatred, contempt, dehumanization, or encouragement of violence** against a specific group or individual?
+- **Language**: Are there **slurs, derogatory terms, or repeated expressions of disdain** aimed at a protected group or individual?
+- **Context and Tone**: Is the statement **contextually or tonally** directed at a group or individual in a way that reflects **bias or hostility**?
+
+Do **not** classify as hate speech:
+- General expressions of **discomfort, fear, or dislike** of **behavior or appearance**, unless tied to a protected group.
+- Criticisms of **ideas or policies**, not people or groups.
+- Language that is **not clearly aimed at a protected group** or **does not express hatred or dehumanization**.
+- **Political or geopolitical criticism**, even if it involves violence or dehumanizing language, **unless it explicitly targets individuals or groups based on protected attributes** and expresses hatred or dehumanization.
+
+**Examples:**
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → **Hate Speech** (targets a protected group with offensive and derogatory language)
+- "To the lady that can barely speak English and then look down upon her own people, that’s disgraceful." → **Not Hate Speech** (targets behavior, not a protected attribute)
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." → **Hate Speech** (expresses contempt toward a religious group)
+- "Deport him in military aircraft and dump him back where he is originated from. Him and his family." → **Hate Speech** (calls for violence and dehumanizes individuals based on origin)
+- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → **Not Hate Speech** (expresses fear or discomfort, but does not clearly target a protected group)
+- "Id beat the fuck out of his ass if he wasnt an actor" → **Not Hate Speech** (expresses aggression, but not based on protected attributes)
+- "Humiliating this Str8 guy. str8 guys like him doing dumb things" → **Not Hate Speech** (targets behavior and identity, but lacks clear dehumanization or hate)
+- "Dalit? Is this a name of religion or an atom of poo composition" → **Hate Speech** (uses derogatory language and dehumanizes a group based on caste, which is a protected characteristic in many contexts)
+
+**Additional Clarification for Political or Geopolitical Contexts:**
+- Statements that describe **state-sponsored violence**, **group-based persecution**, or **systemic oppression** should still be evaluated based on **whether the language used expresses hatred, dehumanization, or violence toward individuals or groups based on protected characteristics**, not just based on the **political context**.
+- Example: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → **Not Hate Speech** (describes political conflict or state violence, but does not express hatred or dehumanization toward a specific **group** in a **personalized or targeted** way)
+- Example: "Should have been sterilised upon arrival. Now your future doesn't exist." → **Not Hate Speech** (expresses a harsh opinion but does not clearly target a **protected group** with **hatred or dehumanization**)
+- Example: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead" → **Hate Speech** (expresses dehumanizing rhetoric and calls for violence, targeting individuals based on **national origin**)
+
+Be **specific and cautious** in your classification—only label as hate speech when a **protected group or individual is clearly targeted with hatred, contempt, or dehumanization**, and the **language is not merely political critique or geopolitical commentary**.
+
+# Here are some examples:
+Text: You deserve way more subscribers . The shit you say is fucking gold.
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.98
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 63.04218792915344
+Prompt: # Task
+Prompt: # Task
+**Revised Instruction (Improved Version - v2):**
+
+Classify the given text as either **"Hate Speech"** or **"Not Hate Speech"** based on **whether the text directly or indirectly attacks or devalues an individual or group based on protected characteristics** such as race, religion, gender, sexual orientation, disability, national origin, or other similar attributes.
+
+When making your classification, consider the following:
+
+- **Targeting**: Is the statement directed at a specific **group or individual** based on one or more **protected characteristics**? General complaints, fears, or discomfort with behavior that does not reference identity or protected attributes do **not** constitute hate speech.
+- **Intent**: Does the speaker express **hatred, contempt, dehumanization, or encouragement of violence** against a specific group or individual?
+- **Language**: Are there **slurs, derogatory terms, or repeated expressions of disdain** aimed at a protected group or individual?
+- **Context and Tone**: Is the statement **contextually or tonally** directed at a group or individual in a way that reflects **bias or hostility**?
+
+Do **not** classify as hate speech:
+- General expressions of **discomfort, fear, or dislike** of **behavior or appearance**, unless tied to a protected group.
+- Criticisms of **ideas or policies**, not people or groups.
+- Language that is **not clearly aimed at a protected group** or **does not express hatred or dehumanization**.
+- **Political or geopolitical criticism**, even if it involves violence or dehumanizing language, **unless it explicitly targets individuals or groups based on protected attributes** and expresses hatred or dehumanization.
+
+**Examples:**
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → **Hate Speech** (targets a protected group with offensive and derogatory language)
+- "To the lady that can barely speak English and then look down upon her own people, that’s disgraceful." → **Not Hate Speech** (targets behavior, not a protected attribute)
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." → **Hate Speech** (expresses contempt toward a religious group)
+- "Deport him in military aircraft and dump him back where he is originated from. Him and his family." → **Hate Speech** (calls for violence and dehumanizes individuals based on origin)
+- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → **Not Hate Speech** (expresses fear or discomfort, but does not clearly target a protected group)
+- "Id beat the fuck out of his ass if he wasnt an actor" → **Not Hate Speech** (expresses aggression, but not based on protected attributes)
+- "Humiliating this Str8 guy. str8 guys like him doing dumb things" → **Not Hate Speech** (targets behavior and identity, but lacks clear dehumanization or hate)
+- "Dalit? Is this a name of religion or an atom of poo composition" → **Hate Speech** (uses derogatory language and dehumanizes a group based on caste, which is a protected characteristic in many contexts)
+
+**Additional Clarification for Political or Geopolitical Contexts:**
+- Statements that describe **state-sponsored violence**, **group-based persecution**, or **systemic oppression** should still be evaluated based on **whether the language used expresses hatred, dehumanization, or violence toward individuals or groups based on protected characteristics**, not just based on the **political context**.
+- Example: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → **Not Hate Speech** (describes political conflict or state violence, but does not express hatred or dehumanization toward a specific **group** in a **personalized or targeted** way)
+- Example: "Should have been sterilised upon arrival. Now your future doesn't exist." → **Not Hate Speech** (expresses a harsh opinion but does not clearly target a **protected group** with **hatred or dehumanization**)
+- Example: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead" → **Hate Speech** (expresses dehumanizing rhetoric and calls for violence, targeting individuals based on **national origin**)
+
+Be **specific and cautious** in your classification—only label as hate speech when a **protected group or individual is clearly targeted with hatred, contempt, or dehumanization**, and the **language is not merely political critique or geopolitical commentary**.
+
+# Here are some examples:
+Text: You deserve way more subscribers . The shit you say is fucking gold.
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.98
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 82.53342795372009
+Prompt: # Task
+Prompt: # Task
+**Revised Instruction (Improved Version - v2):**
+
+Classify the given text as either **"Hate Speech"** or **"Not Hate Speech"** based on **whether the text directly or indirectly attacks or devalues an individual or group based on protected characteristics** such as race, religion, gender, sexual orientation, disability, national origin, or other similar attributes.
+
+When making your classification, consider the following:
+
+- **Targeting**: Is the statement directed at a specific **group or individual** based on one or more **protected characteristics**? General complaints, fears, or discomfort with behavior that does not reference identity or protected attributes do **not** constitute hate speech.
+- **Intent**: Does the speaker express **hatred, contempt, dehumanization, or encouragement of violence** against a specific group or individual?
+- **Language**: Are there **slurs, derogatory terms, or repeated expressions of disdain** aimed at a protected group or individual?
+- **Context and Tone**: Is the statement **contextually or tonally** directed at a group or individual in a way that reflects **bias or hostility**?
+
+Do **not** classify as hate speech:
+- General expressions of **discomfort, fear, or dislike** of **behavior or appearance**, unless tied to a protected group.
+- Criticisms of **ideas or policies**, not people or groups.
+- Language that is **not clearly aimed at a protected group** or **does not express hatred or dehumanization**.
+- **Political or geopolitical criticism**, even if it involves violence or dehumanizing language, **unless it explicitly targets individuals or groups based on protected attributes** and expresses hatred or dehumanization.
+
+**Examples:**
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → **Hate Speech** (targets a protected group with offensive and derogatory language)
+- "To the lady that can barely speak English and then look down upon her own people, that’s disgraceful." → **Not Hate Speech** (targets behavior, not a protected attribute)
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." → **Hate Speech** (expresses contempt toward a religious group)
+- "Deport him in military aircraft and dump him back where he is originated from. Him and his family." → **Hate Speech** (calls for violence and dehumanizes individuals based on origin)
+- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → **Not Hate Speech** (expresses fear or discomfort, but does not clearly target a protected group)
+- "Id beat the fuck out of his ass if he wasnt an actor" → **Not Hate Speech** (expresses aggression, but not based on protected attributes)
+- "Humiliating this Str8 guy. str8 guys like him doing dumb things" → **Not Hate Speech** (targets behavior and identity, but lacks clear dehumanization or hate)
+- "Dalit? Is this a name of religion or an atom of poo composition" → **Hate Speech** (uses derogatory language and dehumanizes a group based on caste, which is a protected characteristic in many contexts)
+
+**Additional Clarification for Political or Geopolitical Contexts:**
+- Statements that describe **state-sponsored violence**, **group-based persecution**, or **systemic oppression** should still be evaluated based on **whether the language used expresses hatred, dehumanization, or violence toward individuals or groups based on protected characteristics**, not just based on the **political context**.
+- Example: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → **Not Hate Speech** (describes political conflict or state violence, but does not express hatred or dehumanization toward a specific **group** in a **personalized or targeted** way)
+- Example: "Should have been sterilised upon arrival. Now your future doesn't exist." → **Not Hate Speech** (expresses a harsh opinion but does not clearly target a **protected group** with **hatred or dehumanization**)
+- Example: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead" → **Hate Speech** (expresses dehumanizing rhetoric and calls for violence, targeting individuals based on **national origin**)
+
+Be **specific and cautious** in your classification—only label as hate speech when a **protected group or individual is clearly targeted with hatred, contempt, or dehumanization**, and the **language is not merely political critique or geopolitical commentary**.
+
+# Here are some examples:
+Text: You deserve way more subscribers . The shit you say is fucking gold.
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.98
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 102.1381299495697
+Prompt: # Task
+Prompt: # Task
+**Revised Instruction (Improved Version - v2):**
+
+Classify the given text as either **"Hate Speech"** or **"Not Hate Speech"** based on **whether the text directly or indirectly attacks or devalues an individual or group based on protected characteristics** such as race, religion, gender, sexual orientation, disability, national origin, or other similar attributes.
+
+When making your classification, consider the following:
+
+- **Targeting**: Is the statement directed at a specific **group or individual** based on one or more **protected characteristics**? General complaints, fears, or discomfort with behavior that does not reference identity or protected attributes do **not** constitute hate speech.
+- **Intent**: Does the speaker express **hatred, contempt, dehumanization, or encouragement of violence** against a specific group or individual?
+- **Language**: Are there **slurs, derogatory terms, or repeated expressions of disdain** aimed at a protected group or individual?
+- **Context and Tone**: Is the statement **contextually or tonally** directed at a group or individual in a way that reflects **bias or hostility**?
+
+Do **not** classify as hate speech:
+- General expressions of **discomfort, fear, or dislike** of **behavior or appearance**, unless tied to a protected group.
+- Criticisms of **ideas or policies**, not people or groups.
+- Language that is **not clearly aimed at a protected group** or **does not express hatred or dehumanization**.
+- **Political or geopolitical criticism**, even if it involves violence or dehumanizing language, **unless it explicitly targets individuals or groups based on protected attributes** and expresses hatred or dehumanization.
+
+**Examples:**
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → **Hate Speech** (targets a protected group with offensive and derogatory language)
+- "To the lady that can barely speak English and then look down upon her own people, that’s disgraceful." → **Not Hate Speech** (targets behavior, not a protected attribute)
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." → **Hate Speech** (expresses contempt toward a religious group)
+- "Deport him in military aircraft and dump him back where he is originated from. Him and his family." → **Hate Speech** (calls for violence and dehumanizes individuals based on origin)
+- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → **Not Hate Speech** (expresses fear or discomfort, but does not clearly target a protected group)
+- "Id beat the fuck out of his ass if he wasnt an actor" → **Not Hate Speech** (expresses aggression, but not based on protected attributes)
+- "Humiliating this Str8 guy. str8 guys like him doing dumb things" → **Not Hate Speech** (targets behavior and identity, but lacks clear dehumanization or hate)
+- "Dalit? Is this a name of religion or an atom of poo composition" → **Hate Speech** (uses derogatory language and dehumanizes a group based on caste, which is a protected characteristic in many contexts)
+
+**Additional Clarification for Political or Geopolitical Contexts:**
+- Statements that describe **state-sponsored violence**, **group-based persecution**, or **systemic oppression** should still be evaluated based on **whether the language used expresses hatred, dehumanization, or violence toward individuals or groups based on protected characteristics**, not just based on the **political context**.
+- Example: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → **Not Hate Speech** (describes political conflict or state violence, but does not express hatred or dehumanization toward a specific **group** in a **personalized or targeted** way)
+- Example: "Should have been sterilised upon arrival. Now your future doesn't exist." → **Not Hate Speech** (expresses a harsh opinion but does not clearly target a **protected group** with **hatred or dehumanization**)
+- Example: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead" → **Hate Speech** (expresses dehumanizing rhetoric and calls for violence, targeting individuals based on **national origin**)
+
+Be **specific and cautious** in your classification—only label as hate speech when a **protected group or individual is clearly targeted with hatred, contempt, or dehumanization**, and the **language is not merely political critique or geopolitical commentary**.
+
+# Here are some examples:
+Text: You deserve way more subscribers . The shit you say is fucking gold.
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.98
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 122.11622071266174
+Prompt: # Task
+Prompt: # Task
+**Revised Instruction (Improved Version - v2):**
+
+Classify the given text as either **"Hate Speech"** or **"Not Hate Speech"** based on **whether the text directly or indirectly attacks or devalues an individual or group based on protected characteristics** such as race, religion, gender, sexual orientation, disability, national origin, or other similar attributes.
+
+When making your classification, consider the following:
+
+- **Targeting**: Is the statement directed at a specific **group or individual** based on one or more **protected characteristics**? General complaints, fears, or discomfort with behavior that does not reference identity or protected attributes do **not** constitute hate speech.
+- **Intent**: Does the speaker express **hatred, contempt, dehumanization, or encouragement of violence** against a specific group or individual?
+- **Language**: Are there **slurs, derogatory terms, or repeated expressions of disdain** aimed at a protected group or individual?
+- **Context and Tone**: Is the statement **contextually or tonally** directed at a group or individual in a way that reflects **bias or hostility**?
+
+Do **not** classify as hate speech:
+- General expressions of **discomfort, fear, or dislike** of **behavior or appearance**, unless tied to a protected group.
+- Criticisms of **ideas or policies**, not people or groups.
+- Language that is **not clearly aimed at a protected group** or **does not express hatred or dehumanization**.
+- **Political or geopolitical criticism**, even if it involves violence or dehumanizing language, **unless it explicitly targets individuals or groups based on protected attributes** and expresses hatred or dehumanization.
+
+**Examples:**
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → **Hate Speech** (targets a protected group with offensive and derogatory language)
+- "To the lady that can barely speak English and then look down upon her own people, that’s disgraceful." → **Not Hate Speech** (targets behavior, not a protected attribute)
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame." → **Hate Speech** (expresses contempt toward a religious group)
+- "Deport him in military aircraft and dump him back where he is originated from. Him and his family." → **Hate Speech** (calls for violence and dehumanizes individuals based on origin)
+- "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum" → **Not Hate Speech** (expresses fear or discomfort, but does not clearly target a protected group)
+- "Id beat the fuck out of his ass if he wasnt an actor" → **Not Hate Speech** (expresses aggression, but not based on protected attributes)
+- "Humiliating this Str8 guy. str8 guys like him doing dumb things" → **Not Hate Speech** (targets behavior and identity, but lacks clear dehumanization or hate)
+- "Dalit? Is this a name of religion or an atom of poo composition" → **Hate Speech** (uses derogatory language and dehumanizes a group based on caste, which is a protected characteristic in many contexts)
+
+**Additional Clarification for Political or Geopolitical Contexts:**
+- Statements that describe **state-sponsored violence**, **group-based persecution**, or **systemic oppression** should still be evaluated based on **whether the language used expresses hatred, dehumanization, or violence toward individuals or groups based on protected characteristics**, not just based on the **political context**.
+- Example: "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → **Not Hate Speech** (describes political conflict or state violence, but does not express hatred or dehumanization toward a specific **group** in a **personalized or targeted** way)
+- Example: "Should have been sterilised upon arrival. Now your future doesn't exist." → **Not Hate Speech** (expresses a harsh opinion but does not clearly target a **protected group** with **hatred or dehumanization**)
+- Example: "its a good thing im not a commander or so in the police force,specially not during something like this,because the jail would be full of ppl waiting to be deported,if not dead" → **Hate Speech** (expresses dehumanizing rhetoric and calls for violence, targeting individuals based on **national origin**)
+
+Be **specific and cautious** in your classification—only label as hate speech when a **protected group or individual is clearly targeted with hatred, contempt, or dehumanization**, and the **language is not merely political critique or geopolitical commentary**.
+
+# Here are some examples:
+Text: You deserve way more subscribers . The shit you say is fucking gold.
+Label: No
+Text: Deport him in military aircraft and dump him back where he is originated from. Him and his family
+Label: No
+Text: the only thing that annoys me is noisy neighbours and their music.
+Label: No
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.98
+Test accuracy: 0.8666666666666667

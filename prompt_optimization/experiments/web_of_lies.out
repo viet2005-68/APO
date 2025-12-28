@@ -1,23 +1,55 @@
-{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 6, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 3.7727789878845215
-Prompt: ('# Task\nAnalyze a sequence of related declarations concerning the veracity of individuals\' statements. Follow the logical progression of each person\'s claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
-Training accuracy: (np.float64(0.71),)
-Test accuracy: [0.66]
+Time: 2.428029775619507
+Prompt: ('# Task\nDetermine whether the final person mentioned is telling the truth.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.56),)
+Test accuracy: [0.52]
+======== ROUND 1
+Time: 49.89823079109192
+Prompt: ('# Task\nInput: Examine the logical connections between the statements given by each individual. Decide whether the last person referenced is being truthful, taking into account that if someone claims another person is truthful, they can only be truthful themselves if that other person is actually truthful, and similarly for false statements. Use this logical chain to reach a conclusion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction with the same semantic meaning:\n\n**Input:** Assess if the last individual referenced is being truthful.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Examine the logical connections between the claims made by each individual. Decide if the last person referenced is being truthful, taking into account that if someone asserts that another person is truthful, they can only be truthful themselves if that other person is indeed truthful, and similarly for claims about lies. Use this logical sequence to reach a conclusion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nDetermine whether the final person mentioned is telling the truth.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.6), np.float64(0.59), np.float64(0.57), np.float64(0.56))
+Test accuracy: [0.54, 0.5066666666666667, 0.5466666666666666, 0.5133333333333333]
+======== ROUND 2
+Time: 251.99742555618286
+Prompt: ('# Task\nAnalyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: "Process the statements sequentially, beginning with the first individual mentioned and moving through each person in order. For each individual, assess whether their statement is truthful based on the prior evaluations. If someone asserts that another person is truthful, that assertion is only valid if the referenced person is indeed truthful. Similarly, if someone claims another is lying, that claim is only valid if the referenced person is actually lying. Continue this logical analysis through the entire sequence until you reach the final individual. Then, determine whether the last person mentioned is truthful based on your findings."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Examine the logical connections between the statements given by each individual. Decide whether the last person referenced is being truthful, taking into account that if someone claims another person is truthful, they can only be truthful themselves if that other person is actually truthful, and similarly for false statements. Use this logical chain to reach a conclusion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction with the same semantic meaning:\n\n**Input:** Assess if the last individual referenced is being truthful.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.62), np.float64(0.6), np.float64(0.6), np.float64(0.59))
+Test accuracy: [0.5333333333333333, 0.5733333333333334, 0.54, 0.52]
+======== ROUND 3
+Time: 283.9159026145935
+Prompt: ('# Task\nAnalyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: "Process the statements sequentially, beginning with the first individual mentioned and moving through each person in order. For each individual, assess whether their statement is truthful based on the prior evaluations. If someone asserts that another person is truthful, that assertion is only valid if the referenced person is indeed truthful. Similarly, if someone claims another is lying, that claim is only valid if the referenced person is actually lying. Continue this logical analysis through the entire sequence until you reach the final individual. Then, determine whether the last person mentioned is truthful based on your findings."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Examine the logical connections between the statements given by each individual. Decide whether the last person referenced is being truthful, taking into account that if someone claims another person is truthful, they can only be truthful themselves if that other person is actually truthful, and similarly for false statements. Use this logical chain to reach a conclusion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction with the same semantic meaning:\n\n**Input:** Assess if the last individual referenced is being truthful.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.62), np.float64(0.6), np.float64(0.6), np.float64(0.59))
+Test accuracy: [0.5533333333333333, 0.58, 0.54, 0.52]
+======== ROUND 4
+Time: 296.22637248039246
+Prompt: ('# Task\nAnalyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the original semantic meaning:\n\n**Input:** Examine the statements given by each person in the text. Evaluate whether the final person referenced is truthful or deceptive, using the logical coherence of all statements as a basis. Take into account the relationships and consequences of each claim. Give a clear response: "Yes" if the last individual is being truthful, and "No" if they are not.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: "Process the statements sequentially, beginning with the first individual mentioned and moving through each person in order. For each individual, assess whether their statement is truthful based on the prior evaluations. If someone asserts that another person is truthful, that assertion is only valid if the referenced person is indeed truthful. Similarly, if someone claims another is lying, that claim is only valid if the referenced person is actually lying. Continue this logical analysis through the entire sequence until you reach the final individual. Then, determine whether the last person mentioned is truthful based on your findings."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Examine the logical connections between the statements given by each individual. Decide whether the last person referenced is being truthful, taking into account that if someone claims another person is truthful, they can only be truthful themselves if that other person is actually truthful, and similarly for false statements. Use this logical chain to reach a conclusion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.62), np.float64(0.6), np.float64(0.6), np.float64(0.6))
+Test accuracy: [0.5466666666666666, 0.5466666666666666, 0.5733333333333334, 0.56]
+======== ROUND 5
+Time: 301.8237624168396
+Prompt: ('# Task\nAnalyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Examine the logical connections between the statements given by each individual. Decide whether the last person referenced is being truthful, taking into account that if someone claims another person is truthful, they can only be truthful themselves if that other person is actually truthful, and similarly for false statements. Use this logical chain to reach a conclusion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the original semantic meaning:\n\n**Input:** Examine the statements given by each person in the text. Evaluate whether the final person referenced is truthful or deceptive, using the logical coherence of all statements as a basis. Take into account the relationships and consequences of each claim. Give a clear response: "Yes" if the last individual is being truthful, and "No" if they are not.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nCertainly! Here\'s a variation of the instruction that maintains the original semantic meaning but uses different phrasing and structure:\n\n---\n\n**Input (Revised Version):**  \n"Analyze the sequence of statements in the order they appear, beginning with the first individual named. Assume that each person is either truthful or deceptive, and determine the truthfulness of each person based on these guidelines:\n\n1. **Referential Claims**: If a person asserts that another is truthful, this claim is valid only if the other person is indeed truthful. Conversely, if a person claims another is lying, this is valid only if the other person is actually lying.\n2. **Consistency Check**: If a statement leads to a contradiction (for example, a person says another is lying, but that person has already been confirmed as truthful), then the speaker must be lying.\n3. **Truth Influence**: Once the truth status of a person is determined, use that information to assess any subsequent statements about them, even if those statements come later in the sequence.\n4. **Final Evaluation**: After processing all individuals in the sequence, determine the truthfulness of the last person mentioned based on how all previous statements logically affect their status.\n\nIf any contradictions arise during this analysis, resolve them by assuming the speaker is deceptive, and adjust the truth values accordingly. Continue this process until a logically consistent assignment of truth values is achieved. Then, answer the final question with \'Yes\' or \'No\' based on whether the last person is truthful."\n\n--- \n\nLet me know if you\'d like a version tailored to a specific context or audience.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.62), np.float64(0.6), np.float64(0.6), np.float64(0.6))
+Test accuracy: [0.54, 0.5266666666666666, 0.5533333333333333, 0.5066666666666667]
+======== ROUND 6
+Time: 308.61736583709717
+Prompt: ('# Task\nAnalyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nInput: Examine the logical connections between the statements given by each individual. Decide whether the last person referenced is being truthful, taking into account that if someone claims another person is truthful, they can only be truthful themselves if that other person is actually truthful, and similarly for false statements. Use this logical chain to reach a conclusion.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nSure! Here\'s a variation of the instruction that maintains the original semantic meaning:\n\n**Input:** Examine the statements given by each person in the text. Evaluate whether the final person referenced is truthful or deceptive, using the logical coherence of all statements as a basis. Take into account the relationships and consequences of each claim. Give a clear response: "Yes" if the last individual is being truthful, and "No" if they are not.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nCertainly! Here\'s a variation of the instruction that maintains the original semantic meaning but uses different phrasing and structure:\n\n---\n\n**Input (Revised Version):**  \n"Analyze the sequence of statements in the order they appear, beginning with the first individual named. Assume that each person is either truthful or deceptive, and determine the truthfulness of each person based on these guidelines:\n\n1. **Referential Claims**: If a person asserts that another is truthful, this claim is valid only if the other person is indeed truthful. Conversely, if a person claims another is lying, this is valid only if the other person is actually lying.\n2. **Consistency Check**: If a statement leads to a contradiction (for example, a person says another is lying, but that person has already been confirmed as truthful), then the speaker must be lying.\n3. **Truth Influence**: Once the truth status of a person is determined, use that information to assess any subsequent statements about them, even if those statements come later in the sequence.\n4. **Final Evaluation**: After processing all individuals in the sequence, determine the truthfulness of the last person mentioned based on how all previous statements logically affect their status.\n\nIf any contradictions arise during this analysis, resolve them by assuming the speaker is deceptive, and adjust the truth values accordingly. Continue this process until a logically consistent assignment of truth values is achieved. Then, answer the final question with \'Yes\' or \'No\' based on whether the last person is truthful."\n\n--- \n\nLet me know if you\'d like a version tailored to a specific context or audience.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.62), np.float64(0.6), np.float64(0.6), np.float64(0.6))
+Test accuracy: [0.5466666666666666, 0.5466666666666666, 0.56, 0.5]
 ======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 46.38652729988098
+Time: 21.066390991210938
 Prompt: # Task
-Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+Analyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.
 
 # Here are some examples:
-Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Text: Question: Elanor tells the truth. Crista says Elanor lies. Vernell says Crista lies. Shalonda says Vernell lies. Teressa says Shalonda lies. Does Teressa tell the truth?
 Label: Yes
-Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
 Label: Yes
-Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
 Label: Yes
-Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
-Label: No
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima lies. Millie says Sima tells the truth. Jerry says Millie tells the truth. Vina says Jerry lies. Maybelle says Vina tells the truth. Does Maybelle tell the truth?
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -26,22 +58,24 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.78
-Test accuracy: 0.7
-======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 90.17267274856567
+Training accuracy: 0.69 | Penalized score: 0.4377416478276578
+Test accuracy: 0.5066666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 7.209090948104858
 Prompt: # Task
-Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+Analyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.
 
 # Here are some examples:
-Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Text: Question: Elanor tells the truth. Crista says Elanor lies. Vernell says Crista lies. Shalonda says Vernell lies. Teressa says Shalonda lies. Does Teressa tell the truth?
 Label: Yes
-Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
 Label: Yes
-Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
 Label: Yes
-Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
-Label: No
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima lies. Millie says Sima tells the truth. Jerry says Millie tells the truth. Vina says Jerry lies. Maybelle says Vina tells the truth. Does Maybelle tell the truth?
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -50,22 +84,24 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.78
-Test accuracy: 0.7
-======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 130.58977603912354
+Training accuracy: 0.69 | Penalized score: 0.4377416478276578
+Test accuracy: 0.5266666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 8.570141553878784
 Prompt: # Task
-Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+Analyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.
 
 # Here are some examples:
-Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Text: Question: Elanor tells the truth. Crista says Elanor lies. Vernell says Crista lies. Shalonda says Vernell lies. Teressa says Shalonda lies. Does Teressa tell the truth?
 Label: Yes
-Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
 Label: Yes
-Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
 Label: Yes
-Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
-Label: No
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima lies. Millie says Sima tells the truth. Jerry says Millie tells the truth. Vina says Jerry lies. Maybelle says Vina tells the truth. Does Maybelle tell the truth?
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -74,22 +110,24 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.78
-Test accuracy: 0.7
-======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 170.4044930934906
+Training accuracy: 0.69 | Penalized score: 0.4377416478276578
+Test accuracy: 0.5133333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 8.733898878097534
 Prompt: # Task
-Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+Analyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.
 
 # Here are some examples:
-Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Text: Question: Elanor tells the truth. Crista says Elanor lies. Vernell says Crista lies. Shalonda says Vernell lies. Teressa says Shalonda lies. Does Teressa tell the truth?
 Label: Yes
-Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
 Label: Yes
-Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
 Label: Yes
-Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
-Label: No
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima lies. Millie says Sima tells the truth. Jerry says Millie tells the truth. Vina says Jerry lies. Maybelle says Vina tells the truth. Does Maybelle tell the truth?
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -98,22 +136,24 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.78
-Test accuracy: 0.7
-======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 210.29732203483582
+Training accuracy: 0.69 | Penalized score: 0.4377416478276578
+Test accuracy: 0.5133333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 10.207621335983276
 Prompt: # Task
-Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+Analyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.
 
 # Here are some examples:
-Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Text: Question: Elanor tells the truth. Crista says Elanor lies. Vernell says Crista lies. Shalonda says Vernell lies. Teressa says Shalonda lies. Does Teressa tell the truth?
 Label: Yes
-Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
 Label: Yes
-Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
 Label: Yes
-Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
-Label: No
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima lies. Millie says Sima tells the truth. Jerry says Millie tells the truth. Vina says Jerry lies. Maybelle says Vina tells the truth. Does Maybelle tell the truth?
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -122,22 +162,24 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.78
-Test accuracy: 0.7
-======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 249.7865674495697
+Training accuracy: 0.69 | Penalized score: 0.4377416478276578
+Test accuracy: 0.52
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 10.145138263702393
 Prompt: # Task
-Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+Analyze the statements made by each person in the text. Assume that someone who tells the truth always makes true statements, and someone who lies always makes false statements. Determine whether the final person mentioned in the text is telling the truth based on the logical consistency of the statements.
 
 # Here are some examples:
-Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Text: Question: Elanor tells the truth. Crista says Elanor lies. Vernell says Crista lies. Shalonda says Vernell lies. Teressa says Shalonda lies. Does Teressa tell the truth?
 Label: Yes
-Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
 Label: Yes
-Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
 Label: Yes
-Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
-Label: No
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima lies. Millie says Sima tells the truth. Jerry says Millie tells the truth. Vina says Jerry lies. Maybelle says Vina tells the truth. Does Maybelle tell the truth?
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -146,5 +188,5 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.78
-Test accuracy: 0.7
+Training accuracy: 0.69 | Penalized score: 0.4377416478276578
+Test accuracy: 0.5133333333333333

@@ -1,0 +1,186 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.42029070854187
+Prompt: ('# Task\n**Variation:**\n\n"Examine the statements provided by each individual in the text. Take into account all the connections between them, such as accusations and affirmations, and be ready to address cases where claims depend on one another or form a cycle. If one person accuses another of lying, but the accused is actually telling the truth, then the accuser is not truthful. On the other hand, if someone says another is truthful, but that person is actually lying, then the speaker is also lying. In situations where statements rely on each other or create a loop, you may need to start by assuming a truth value for one individual (for example, assuming they are truthful or lying) and then verify whether this assumption holds true for all other statements. Use this process to determine whether the last person mentioned is being honest. If there is only one consistent way to assign truth values to all individuals that aligns with all the statements, use that configuration to arrive at the final conclusion."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.59),)
+Test accuracy: [0.5533333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 26.912593126296997
+Prompt: # Task
+**Variation:**
+
+"Examine the statements provided by each individual in the text. Take into account all the connections between them, such as accusations and affirmations, and be ready to address cases where claims depend on one another or form a cycle. If one person accuses another of lying, but the accused is actually telling the truth, then the accuser is not truthful. On the other hand, if someone says another is truthful, but that person is actually lying, then the speaker is also lying. In situations where statements rely on each other or create a loop, you may need to start by assuming a truth value for one individual (for example, assuming they are truthful or lying) and then verify whether this assumption holds true for all other statements. Use this process to determine whether the last person mentioned is being honest. If there is only one consistent way to assign truth values to all individuals that aligns with all the statements, use that configuration to arrive at the final conclusion."
+
+# Here are some examples:
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
+Label: Yes
+Text: Question: Kristian tells the truth. Jamey says Kristian tells the truth. Millicent says Jamey lies. Fidel says Millicent lies. Tamika says Fidel lies. Does Tamika tell the truth?
+Label: No
+Text: Question: Fletcher lies. Tamika says Fletcher tells the truth. Ka says Tamika lies. Sima says Ka tells the truth. Ryan says Sima tells the truth. Does Ryan tell the truth?
+Label: Yes
+Text: Question: Osvaldo lies. Ryan says Osvaldo lies. Andree says Ryan tells the truth. Rashida says Andree tells the truth. Millie says Rashida tells the truth. Does Millie tell the truth?
+Label: Yes
+Text: Question: Shalonda lies. Jaymie says Shalonda tells the truth. Raymond says Jaymie lies. Audrie says Raymond lies. Sherrie says Audrie lies. Does Sherrie tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.63
+Test accuracy: 0.5
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 51.746840476989746
+Prompt: # Task
+**Variation:**
+
+"Examine the statements provided by each individual in the text. Take into account all the connections between them, such as accusations and affirmations, and be ready to address cases where claims depend on one another or form a cycle. If one person accuses another of lying, but the accused is actually telling the truth, then the accuser is not truthful. On the other hand, if someone says another is truthful, but that person is actually lying, then the speaker is also lying. In situations where statements rely on each other or create a loop, you may need to start by assuming a truth value for one individual (for example, assuming they are truthful or lying) and then verify whether this assumption holds true for all other statements. Use this process to determine whether the last person mentioned is being honest. If there is only one consistent way to assign truth values to all individuals that aligns with all the statements, use that configuration to arrive at the final conclusion."
+
+# Here are some examples:
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Millicent lies. Shenna says Millicent lies. Willian says Shenna tells the truth. Kandi says Willian lies. Vernell says Kandi lies. Does Vernell tell the truth?
+Label: Yes
+Text: Question: Kristian tells the truth. Jamey says Kristian tells the truth. Millicent says Jamey lies. Fidel says Millicent lies. Tamika says Fidel lies. Does Tamika tell the truth?
+Label: No
+Text: Question: Fletcher lies. Tamika says Fletcher tells the truth. Ka says Tamika lies. Sima says Ka tells the truth. Ryan says Sima tells the truth. Does Ryan tell the truth?
+Label: Yes
+Text: Question: Osvaldo lies. Ryan says Osvaldo lies. Andree says Ryan tells the truth. Rashida says Andree tells the truth. Millie says Rashida tells the truth. Does Millie tell the truth?
+Label: Yes
+Text: Question: Shalonda lies. Jaymie says Shalonda tells the truth. Raymond says Jaymie lies. Audrie says Raymond lies. Sherrie says Audrie lies. Does Sherrie tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.63
+Test accuracy: 0.5
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 74.80790162086487
+Prompt: # Task
+**Variation:**
+
+"Examine the statements provided by each individual in the text. Take into account all the connections between them, such as accusations and affirmations, and be ready to address cases where claims depend on one another or form a cycle. If one person accuses another of lying, but the accused is actually telling the truth, then the accuser is not truthful. On the other hand, if someone says another is truthful, but that person is actually lying, then the speaker is also lying. In situations where statements rely on each other or create a loop, you may need to start by assuming a truth value for one individual (for example, assuming they are truthful or lying) and then verify whether this assumption holds true for all other statements. Use this process to determine whether the last person mentioned is being honest. If there is only one consistent way to assign truth values to all individuals that aligns with all the statements, use that configuration to arrive at the final conclusion."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Christie lies. Amberly says Christie tells the truth. Bernita says Amberly tells the truth. Kristian says Bernita lies. Delfina says Kristian lies. Does Delfina tell the truth?
+Label: No
+Text: Question: Gwenn lies. Maybelle says Gwenn tells the truth. Raymond says Maybelle tells the truth. Jamey says Raymond tells the truth. Andree says Jamey lies. Does Andree tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Jerry tells the truth. Lorine says Jerry lies. Shenna says Lorine lies. Gwenn says Shenna lies. Shaunda says Gwenn lies. Does Shaunda tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.68
+Test accuracy: 0.5266666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 99.6325695514679
+Prompt: # Task
+**Variation:**
+
+"Examine the statements provided by each individual in the text. Take into account all the connections between them, such as accusations and affirmations, and be ready to address cases where claims depend on one another or form a cycle. If one person accuses another of lying, but the accused is actually telling the truth, then the accuser is not truthful. On the other hand, if someone says another is truthful, but that person is actually lying, then the speaker is also lying. In situations where statements rely on each other or create a loop, you may need to start by assuming a truth value for one individual (for example, assuming they are truthful or lying) and then verify whether this assumption holds true for all other statements. Use this process to determine whether the last person mentioned is being honest. If there is only one consistent way to assign truth values to all individuals that aligns with all the statements, use that configuration to arrive at the final conclusion."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Christie lies. Amberly says Christie tells the truth. Bernita says Amberly tells the truth. Kristian says Bernita lies. Delfina says Kristian lies. Does Delfina tell the truth?
+Label: No
+Text: Question: Gwenn lies. Maybelle says Gwenn tells the truth. Raymond says Maybelle tells the truth. Jamey says Raymond tells the truth. Andree says Jamey lies. Does Andree tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Jerry tells the truth. Lorine says Jerry lies. Shenna says Lorine lies. Gwenn says Shenna lies. Shaunda says Gwenn lies. Does Shaunda tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.68
+Test accuracy: 0.5266666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 122.60292029380798
+Prompt: # Task
+**Variation:**
+
+"Examine the statements provided by each individual in the text. Take into account all the connections between them, such as accusations and affirmations, and be ready to address cases where claims depend on one another or form a cycle. If one person accuses another of lying, but the accused is actually telling the truth, then the accuser is not truthful. On the other hand, if someone says another is truthful, but that person is actually lying, then the speaker is also lying. In situations where statements rely on each other or create a loop, you may need to start by assuming a truth value for one individual (for example, assuming they are truthful or lying) and then verify whether this assumption holds true for all other statements. Use this process to determine whether the last person mentioned is being honest. If there is only one consistent way to assign truth values to all individuals that aligns with all the statements, use that configuration to arrive at the final conclusion."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Christie lies. Amberly says Christie tells the truth. Bernita says Amberly tells the truth. Kristian says Bernita lies. Delfina says Kristian lies. Does Delfina tell the truth?
+Label: No
+Text: Question: Gwenn lies. Maybelle says Gwenn tells the truth. Raymond says Maybelle tells the truth. Jamey says Raymond tells the truth. Andree says Jamey lies. Does Andree tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Jerry tells the truth. Lorine says Jerry lies. Shenna says Lorine lies. Gwenn says Shenna lies. Shaunda says Gwenn lies. Does Shaunda tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.68
+Test accuracy: 0.5266666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 145.616516828537
+Prompt: # Task
+**Variation:**
+
+"Examine the statements provided by each individual in the text. Take into account all the connections between them, such as accusations and affirmations, and be ready to address cases where claims depend on one another or form a cycle. If one person accuses another of lying, but the accused is actually telling the truth, then the accuser is not truthful. On the other hand, if someone says another is truthful, but that person is actually lying, then the speaker is also lying. In situations where statements rely on each other or create a loop, you may need to start by assuming a truth value for one individual (for example, assuming they are truthful or lying) and then verify whether this assumption holds true for all other statements. Use this process to determine whether the last person mentioned is being honest. If there is only one consistent way to assign truth values to all individuals that aligns with all the statements, use that configuration to arrive at the final conclusion."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Christie lies. Amberly says Christie tells the truth. Bernita says Amberly tells the truth. Kristian says Bernita lies. Delfina says Kristian lies. Does Delfina tell the truth?
+Label: No
+Text: Question: Gwenn lies. Maybelle says Gwenn tells the truth. Raymond says Maybelle tells the truth. Jamey says Raymond tells the truth. Andree says Jamey lies. Does Andree tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Jerry tells the truth. Lorine says Jerry lies. Shenna says Lorine lies. Gwenn says Shenna lies. Shaunda says Gwenn lies. Does Shaunda tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.68
+Test accuracy: 0.5266666666666666

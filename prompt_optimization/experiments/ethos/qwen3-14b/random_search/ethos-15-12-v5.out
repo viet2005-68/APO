@@ -1,0 +1,294 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.1511716842651367
+Prompt: ('# Task\nPrompt: # Task\nClassify the following text as either \'Hate Speech\' or \'Not Hate Speech\' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.\n\nExamples:\n- "I hate all Muslims" → Hate Speech\n- "I would punch him in the face if he wasn\'t a celebrity" → Not Hate Speech\n- "You\'re so stupid, you\'re like a dog" → Not Hate Speech\n- "All white people are racists" → Hate Speech\n- "You\'re just like the rats I’d expect from your country" → Hate Speech\n- "You\'re third world pieces with no job on this planet" → Hate Speech\n- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech\n- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech\n- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech\n- "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful." → Not Hate Speech\n- "Didn’t know shitted coloured like you could talk" → Not Hate Speech\n- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech\n- "Should have been sterilised upon arrival. Now your future doesn\'t exist." → Not Hate Speech\n- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech\n- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes\n- "We have to take our power back as the superior gender." → Hate Speech\n- "Anti-LGBT people, How sad and ignorant...I can\'t believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech\n\nAnswer only with \'Hate Speech\' or \'Not Hate Speech\' and provide no explanation.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.98),)
+Test accuracy: [0.8866666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 22.184945344924927
+Prompt: # Task
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Here are some examples:
+Text: Beat that tranny's ass
+Label: Yes
+Text: So can I put a wig and run with girls?
+Label: No
+Text: fat bitch....she need that black cucumber up her tight u know what....lmfaooo
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99
+Test accuracy: 0.92
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 41.58413887023926
+Prompt: # Task
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Here are some examples:
+Text: Beat that tranny's ass
+Label: Yes
+Text: So can I put a wig and run with girls?
+Label: No
+Text: fat bitch....she need that black cucumber up her tight u know what....lmfaooo
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99
+Test accuracy: 0.92
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 61.373703956604004
+Prompt: # Task
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Here are some examples:
+Text: Beat that tranny's ass
+Label: Yes
+Text: So can I put a wig and run with girls?
+Label: No
+Text: fat bitch....she need that black cucumber up her tight u know what....lmfaooo
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99
+Test accuracy: 0.92
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 79.97469305992126
+Prompt: # Task
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Here are some examples:
+Text: Beat that tranny's ass
+Label: Yes
+Text: So can I put a wig and run with girls?
+Label: No
+Text: fat bitch....she need that black cucumber up her tight u know what....lmfaooo
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99
+Test accuracy: 0.92
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 99.37796092033386
+Prompt: # Task
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Here are some examples:
+Text: Beat that tranny's ass
+Label: Yes
+Text: So can I put a wig and run with girls?
+Label: No
+Text: fat bitch....she need that black cucumber up her tight u know what....lmfaooo
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99
+Test accuracy: 0.92
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 118.66675353050232
+Prompt: # Task
+Prompt: # Task
+Classify the following text as either 'Hate Speech' or 'Not Hate Speech' according to the given definition: any language that degrades, insults, or shows disrespect toward individuals or groups based on race, ethnicity, religion, gender, sexual orientation, disability, or other protected attributes. This encompasses direct or indirect expressions that dehumanize, use derogatory terms, or imply harm or exclusion based on these factors. Be especially attentive to remarks that advocate for superiority, marginalization, or exclusion of any group, regardless of whether the language is sarcastic, subtle, or context-based.
+
+Examples:
+- "I hate all Muslims" → Hate Speech
+- "I would punch him in the face if he wasn't a celebrity" → Not Hate Speech
+- "You're so stupid, you're like a dog" → Not Hate Speech
+- "All white people are racists" → Hate Speech
+- "You're just like the rats I’d expect from your country" → Hate Speech
+- "You're third world pieces with no job on this planet" → Hate Speech
+- "Deport him in military aircraft and dump him back where he is originated from" → Hate Speech
+- "This man is an inspiration. Has killed 900 people, raped 250 women. I want to be like him" → Hate Speech
+- "Indians are shit but burgers only have broken English and ebonics to learn and still fail" → Hate Speech
+- "To the lady that can barely speak English and then look down upon her own people, that's disgraceful." → Not Hate Speech
+- "Didn’t know shitted coloured like you could talk" → Not Hate Speech
+- "Dalit? Is this a name of religion or an atom of poo composition" → Hate Speech
+- "Should have been sterilised upon arrival. Now your future doesn't exist." → Not Hate Speech
+- "seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide." → Not Hate Speech
+- "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame" → Yes
+- "We have to take our power back as the superior gender." → Hate Speech
+- "Anti-LGBT people, How sad and ignorant...I can't believe it...How how ??? can they not see how STUPID they are?????" → Hate Speech
+
+Answer only with 'Hate Speech' or 'Not Hate Speech' and provide no explanation.
+
+# Here are some examples:
+Text: Beat that tranny's ass
+Label: Yes
+Text: So can I put a wig and run with girls?
+Label: No
+Text: fat bitch....she need that black cucumber up her tight u know what....lmfaooo
+Label: Yes
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+Text: HE SHOT THE KID!?!? HE SHOT THE EFFIN KID!!!! BOI YOU BETTER SLEEP WITH ONE EYE OPEN BECAUSE IMMA WHOOP YOUR STUPID LITTLE BUTT TILL YOU WISH YOU WERE NEVER BORN YA HERE ME!!!! WITHERED SHALL BE AVENGED!!!!
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.99
+Test accuracy: 0.92

@@ -42,7 +42,7 @@ python main_rs.py \
   --rounds 0
 
 # Ethos Task
-python main_rs.py \
+python main_original.py \
   --task ethos \
   --prompts prompts/ethos.md \
   --data_dir data/ethos \
@@ -53,7 +53,7 @@ python main_rs.py \
   --evaluator bf \
   --reject_on_error \
   --max_threads 48 \
-  --rounds 0
+  --rounds 6
 
 # Ar Sacarsm
 python main.py \
@@ -97,7 +97,7 @@ python main_rs.py \
   --rounds 0
 
 # Web of lies (BBH)
-python main_rs.py \
+python main_original.py \
   --task web_of_lies \
   --prompts prompts/web_of_lies.md \
   --data_dir data/web_of_lies \
@@ -108,7 +108,7 @@ python main_rs.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 0
+  --rounds 6
 
 # Sports understanding (BBH)
 python main_original.py \
@@ -136,4 +136,4 @@ python main_original.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 0
+  --rounds 6

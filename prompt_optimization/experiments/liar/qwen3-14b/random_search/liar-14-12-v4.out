@@ -1,0 +1,342 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 10.06194019317627
+Prompt: ('# Task\n**Revised Instruction:**\n\nDetermine whether the Statement qualifies as a lie (Yes) or is not a lie (No) by conducting a comprehensive analysis of its factual accuracy, potential for misrepresentation, and alignment with reliable evidence, the Context provided, the speaker\'s role, and general knowledge. A lie is defined as any statement that is factually incorrect, misleading, or inconsistent with established facts, regardless of the speaker\'s intent. This includes statements that deliberately omit key information that would significantly alter the meaning or truth value of the claim.\n\nTo evaluate the Statement, first assess whether it is supported by objective, publicly available records, official documents, or credible sources. Next, verify whether the Statement logically follows from the Context and is consistent with the speaker’s responsibilities or role. Be especially attentive to claims that may be misleading due to selective omissions, exaggerations, or biased framing.\n\nA critical aspect of the evaluation is the *contextual completeness* of the Statement: any claim that relies on a specific, unstated condition or assumes a particular background must be examined to determine whether that condition or background is accurately represented or omitted in a way that could lead to misunderstanding. The Statement must be judged not only on its own terms but also in relation to all relevant surrounding information that a reasonable person would expect to see for clarity and truthfulness.\n\nTake into account the *plausibility of the claim* in light of the speaker’s known behavior, past actions, or public records. If the Statement contradicts verified facts, lacks credible support, or depends on significant omissions that distort its meaning, it should be classified as a lie. If the Statement is ambiguous or lacks necessary context, use the most reasonable judgment based on factual evidence and logical reasoning to reach a conclusion.\n\nFocus on identifying statements that are misleading or inconsistent with the Context, even if they are not outright factually false. When evaluating statements about specific actions or financial disclosures, require clear documentation or record-keeping as a standard for confirmation. Any claim that cannot be independently verified through official records or trusted sources should be treated with caution, unless it is clearly supported by the Context or the speaker’s documented history.\n\nBe particularly attentive to statements that appear factual but are selectively presented to create a misleading impression of a larger situation. A statement that is technically accurate but omits essential context to distort the overall picture is still considered a lie. Ensure that the evaluation is based on objective evidence rather than assumptions or subjective interpretations.\n\nIn addition, explicitly outline the reasoning process: describe which part of the Statement is misleading or factually inconsistent, which part of the Context supports or contradicts the Statement, and how the speaker’s role or responsibilities influence the interpretation of the Statement. This reasoning must be grounded in objective evidence, logical reasoning, and the Context provided.\n\n**New Structural Requirement:** When assessing a claim, determine whether the Statement is *independent of its source*—that is, whether the Statement could be independently verified without relying solely on the speaker’s credibility or the Context provided. If the Statement cannot be validated without referencing the speaker’s role or the Context, it must be closely examined for potential bias, omission, or framing that could distort its meaning. This step ensures that the evaluation is based on external, verifiable facts rather than internal assumptions or contextual dependencies.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.546875,)
+Test accuracy: [0.5249457700650759]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 63.2805871963501
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement qualifies as a lie (Yes) or is not a lie (No) by conducting a comprehensive analysis of its factual accuracy, potential for misrepresentation, and alignment with reliable evidence, the Context provided, the speaker's role, and general knowledge. A lie is defined as any statement that is factually incorrect, misleading, or inconsistent with established facts, regardless of the speaker's intent. This includes statements that deliberately omit key information that would significantly alter the meaning or truth value of the claim.
+
+To evaluate the Statement, first assess whether it is supported by objective, publicly available records, official documents, or credible sources. Next, verify whether the Statement logically follows from the Context and is consistent with the speaker’s responsibilities or role. Be especially attentive to claims that may be misleading due to selective omissions, exaggerations, or biased framing.
+
+A critical aspect of the evaluation is the *contextual completeness* of the Statement: any claim that relies on a specific, unstated condition or assumes a particular background must be examined to determine whether that condition or background is accurately represented or omitted in a way that could lead to misunderstanding. The Statement must be judged not only on its own terms but also in relation to all relevant surrounding information that a reasonable person would expect to see for clarity and truthfulness.
+
+Take into account the *plausibility of the claim* in light of the speaker’s known behavior, past actions, or public records. If the Statement contradicts verified facts, lacks credible support, or depends on significant omissions that distort its meaning, it should be classified as a lie. If the Statement is ambiguous or lacks necessary context, use the most reasonable judgment based on factual evidence and logical reasoning to reach a conclusion.
+
+Focus on identifying statements that are misleading or inconsistent with the Context, even if they are not outright factually false. When evaluating statements about specific actions or financial disclosures, require clear documentation or record-keeping as a standard for confirmation. Any claim that cannot be independently verified through official records or trusted sources should be treated with caution, unless it is clearly supported by the Context or the speaker’s documented history.
+
+Be particularly attentive to statements that appear factual but are selectively presented to create a misleading impression of a larger situation. A statement that is technically accurate but omits essential context to distort the overall picture is still considered a lie. Ensure that the evaluation is based on objective evidence rather than assumptions or subjective interpretations.
+
+In addition, explicitly outline the reasoning process: describe which part of the Statement is misleading or factually inconsistent, which part of the Context supports or contradicts the Statement, and how the speaker’s role or responsibilities influence the interpretation of the Statement. This reasoning must be grounded in objective evidence, logical reasoning, and the Context provided.
+
+**New Structural Requirement:** When assessing a claim, determine whether the Statement is *independent of its source*—that is, whether the Statement could be independently verified without relying solely on the speaker’s credibility or the Context provided. If the Statement cannot be validated without referencing the speaker’s role or the Context, it must be closely examined for potential bias, omission, or framing that could distort its meaning. This step ensures that the evaluation is based on external, verifiable facts rather than internal assumptions or contextual dependencies.
+
+# Here are some examples:
+Text: Statement: Says Danny Tarkanian wants to defund Planned Parenthood and would outlaw a womans right to choose, even in cases of rape or incest.
+Job title: 
+State: Nevada
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: I released the most extensive financial review of anybody in the history of politics. You dont learn much in a tax return.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: an interview with ABC News
+Label: Yes
+Text: Statement: "Sen. Obama worked on some of the deepest issues we had and was successful in a bipartisan way."
+Job title: President
+State: Illinois
+Party: democrat
+Context: a TV ad, in an endorsement by Illinois State Sen. Kirk Dillard
+Label: No
+Text: Statement: "Nobody has been talking about it (Medicaid fraud), focused on it, or paying attention to it."
+Job title: 
+State: Florida
+Party: democrat
+Context: an interview with interview with the St. Petersburg Times/Miami Herald.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625
+Test accuracy: 0.5661605206073753
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 115.98188877105713
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement qualifies as a lie (Yes) or is not a lie (No) by conducting a comprehensive analysis of its factual accuracy, potential for misrepresentation, and alignment with reliable evidence, the Context provided, the speaker's role, and general knowledge. A lie is defined as any statement that is factually incorrect, misleading, or inconsistent with established facts, regardless of the speaker's intent. This includes statements that deliberately omit key information that would significantly alter the meaning or truth value of the claim.
+
+To evaluate the Statement, first assess whether it is supported by objective, publicly available records, official documents, or credible sources. Next, verify whether the Statement logically follows from the Context and is consistent with the speaker’s responsibilities or role. Be especially attentive to claims that may be misleading due to selective omissions, exaggerations, or biased framing.
+
+A critical aspect of the evaluation is the *contextual completeness* of the Statement: any claim that relies on a specific, unstated condition or assumes a particular background must be examined to determine whether that condition or background is accurately represented or omitted in a way that could lead to misunderstanding. The Statement must be judged not only on its own terms but also in relation to all relevant surrounding information that a reasonable person would expect to see for clarity and truthfulness.
+
+Take into account the *plausibility of the claim* in light of the speaker’s known behavior, past actions, or public records. If the Statement contradicts verified facts, lacks credible support, or depends on significant omissions that distort its meaning, it should be classified as a lie. If the Statement is ambiguous or lacks necessary context, use the most reasonable judgment based on factual evidence and logical reasoning to reach a conclusion.
+
+Focus on identifying statements that are misleading or inconsistent with the Context, even if they are not outright factually false. When evaluating statements about specific actions or financial disclosures, require clear documentation or record-keeping as a standard for confirmation. Any claim that cannot be independently verified through official records or trusted sources should be treated with caution, unless it is clearly supported by the Context or the speaker’s documented history.
+
+Be particularly attentive to statements that appear factual but are selectively presented to create a misleading impression of a larger situation. A statement that is technically accurate but omits essential context to distort the overall picture is still considered a lie. Ensure that the evaluation is based on objective evidence rather than assumptions or subjective interpretations.
+
+In addition, explicitly outline the reasoning process: describe which part of the Statement is misleading or factually inconsistent, which part of the Context supports or contradicts the Statement, and how the speaker’s role or responsibilities influence the interpretation of the Statement. This reasoning must be grounded in objective evidence, logical reasoning, and the Context provided.
+
+**New Structural Requirement:** When assessing a claim, determine whether the Statement is *independent of its source*—that is, whether the Statement could be independently verified without relying solely on the speaker’s credibility or the Context provided. If the Statement cannot be validated without referencing the speaker’s role or the Context, it must be closely examined for potential bias, omission, or framing that could distort its meaning. This step ensures that the evaluation is based on external, verifiable facts rather than internal assumptions or contextual dependencies.
+
+# Here are some examples:
+Text: Statement: Says Danny Tarkanian wants to defund Planned Parenthood and would outlaw a womans right to choose, even in cases of rape or incest.
+Job title: 
+State: Nevada
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: I released the most extensive financial review of anybody in the history of politics. You dont learn much in a tax return.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: an interview with ABC News
+Label: Yes
+Text: Statement: "Sen. Obama worked on some of the deepest issues we had and was successful in a bipartisan way."
+Job title: President
+State: Illinois
+Party: democrat
+Context: a TV ad, in an endorsement by Illinois State Sen. Kirk Dillard
+Label: No
+Text: Statement: "Nobody has been talking about it (Medicaid fraud), focused on it, or paying attention to it."
+Job title: 
+State: Florida
+Party: democrat
+Context: an interview with interview with the St. Petersburg Times/Miami Herald.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625
+Test accuracy: 0.5661605206073753
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 168.78900527954102
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement qualifies as a lie (Yes) or is not a lie (No) by conducting a comprehensive analysis of its factual accuracy, potential for misrepresentation, and alignment with reliable evidence, the Context provided, the speaker's role, and general knowledge. A lie is defined as any statement that is factually incorrect, misleading, or inconsistent with established facts, regardless of the speaker's intent. This includes statements that deliberately omit key information that would significantly alter the meaning or truth value of the claim.
+
+To evaluate the Statement, first assess whether it is supported by objective, publicly available records, official documents, or credible sources. Next, verify whether the Statement logically follows from the Context and is consistent with the speaker’s responsibilities or role. Be especially attentive to claims that may be misleading due to selective omissions, exaggerations, or biased framing.
+
+A critical aspect of the evaluation is the *contextual completeness* of the Statement: any claim that relies on a specific, unstated condition or assumes a particular background must be examined to determine whether that condition or background is accurately represented or omitted in a way that could lead to misunderstanding. The Statement must be judged not only on its own terms but also in relation to all relevant surrounding information that a reasonable person would expect to see for clarity and truthfulness.
+
+Take into account the *plausibility of the claim* in light of the speaker’s known behavior, past actions, or public records. If the Statement contradicts verified facts, lacks credible support, or depends on significant omissions that distort its meaning, it should be classified as a lie. If the Statement is ambiguous or lacks necessary context, use the most reasonable judgment based on factual evidence and logical reasoning to reach a conclusion.
+
+Focus on identifying statements that are misleading or inconsistent with the Context, even if they are not outright factually false. When evaluating statements about specific actions or financial disclosures, require clear documentation or record-keeping as a standard for confirmation. Any claim that cannot be independently verified through official records or trusted sources should be treated with caution, unless it is clearly supported by the Context or the speaker’s documented history.
+
+Be particularly attentive to statements that appear factual but are selectively presented to create a misleading impression of a larger situation. A statement that is technically accurate but omits essential context to distort the overall picture is still considered a lie. Ensure that the evaluation is based on objective evidence rather than assumptions or subjective interpretations.
+
+In addition, explicitly outline the reasoning process: describe which part of the Statement is misleading or factually inconsistent, which part of the Context supports or contradicts the Statement, and how the speaker’s role or responsibilities influence the interpretation of the Statement. This reasoning must be grounded in objective evidence, logical reasoning, and the Context provided.
+
+**New Structural Requirement:** When assessing a claim, determine whether the Statement is *independent of its source*—that is, whether the Statement could be independently verified without relying solely on the speaker’s credibility or the Context provided. If the Statement cannot be validated without referencing the speaker’s role or the Context, it must be closely examined for potential bias, omission, or framing that could distort its meaning. This step ensures that the evaluation is based on external, verifiable facts rather than internal assumptions or contextual dependencies.
+
+# Here are some examples:
+Text: Statement: Says Danny Tarkanian wants to defund Planned Parenthood and would outlaw a womans right to choose, even in cases of rape or incest.
+Job title: 
+State: Nevada
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: I released the most extensive financial review of anybody in the history of politics. You dont learn much in a tax return.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: an interview with ABC News
+Label: Yes
+Text: Statement: "Sen. Obama worked on some of the deepest issues we had and was successful in a bipartisan way."
+Job title: President
+State: Illinois
+Party: democrat
+Context: a TV ad, in an endorsement by Illinois State Sen. Kirk Dillard
+Label: No
+Text: Statement: "Nobody has been talking about it (Medicaid fraud), focused on it, or paying attention to it."
+Job title: 
+State: Florida
+Party: democrat
+Context: an interview with interview with the St. Petersburg Times/Miami Herald.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625
+Test accuracy: 0.5704989154013015
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 220.8545696735382
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement qualifies as a lie (Yes) or is not a lie (No) by conducting a comprehensive analysis of its factual accuracy, potential for misrepresentation, and alignment with reliable evidence, the Context provided, the speaker's role, and general knowledge. A lie is defined as any statement that is factually incorrect, misleading, or inconsistent with established facts, regardless of the speaker's intent. This includes statements that deliberately omit key information that would significantly alter the meaning or truth value of the claim.
+
+To evaluate the Statement, first assess whether it is supported by objective, publicly available records, official documents, or credible sources. Next, verify whether the Statement logically follows from the Context and is consistent with the speaker’s responsibilities or role. Be especially attentive to claims that may be misleading due to selective omissions, exaggerations, or biased framing.
+
+A critical aspect of the evaluation is the *contextual completeness* of the Statement: any claim that relies on a specific, unstated condition or assumes a particular background must be examined to determine whether that condition or background is accurately represented or omitted in a way that could lead to misunderstanding. The Statement must be judged not only on its own terms but also in relation to all relevant surrounding information that a reasonable person would expect to see for clarity and truthfulness.
+
+Take into account the *plausibility of the claim* in light of the speaker’s known behavior, past actions, or public records. If the Statement contradicts verified facts, lacks credible support, or depends on significant omissions that distort its meaning, it should be classified as a lie. If the Statement is ambiguous or lacks necessary context, use the most reasonable judgment based on factual evidence and logical reasoning to reach a conclusion.
+
+Focus on identifying statements that are misleading or inconsistent with the Context, even if they are not outright factually false. When evaluating statements about specific actions or financial disclosures, require clear documentation or record-keeping as a standard for confirmation. Any claim that cannot be independently verified through official records or trusted sources should be treated with caution, unless it is clearly supported by the Context or the speaker’s documented history.
+
+Be particularly attentive to statements that appear factual but are selectively presented to create a misleading impression of a larger situation. A statement that is technically accurate but omits essential context to distort the overall picture is still considered a lie. Ensure that the evaluation is based on objective evidence rather than assumptions or subjective interpretations.
+
+In addition, explicitly outline the reasoning process: describe which part of the Statement is misleading or factually inconsistent, which part of the Context supports or contradicts the Statement, and how the speaker’s role or responsibilities influence the interpretation of the Statement. This reasoning must be grounded in objective evidence, logical reasoning, and the Context provided.
+
+**New Structural Requirement:** When assessing a claim, determine whether the Statement is *independent of its source*—that is, whether the Statement could be independently verified without relying solely on the speaker’s credibility or the Context provided. If the Statement cannot be validated without referencing the speaker’s role or the Context, it must be closely examined for potential bias, omission, or framing that could distort its meaning. This step ensures that the evaluation is based on external, verifiable facts rather than internal assumptions or contextual dependencies.
+
+# Here are some examples:
+Text: Statement: Says Danny Tarkanian wants to defund Planned Parenthood and would outlaw a womans right to choose, even in cases of rape or incest.
+Job title: 
+State: Nevada
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: I released the most extensive financial review of anybody in the history of politics. You dont learn much in a tax return.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: an interview with ABC News
+Label: Yes
+Text: Statement: "Sen. Obama worked on some of the deepest issues we had and was successful in a bipartisan way."
+Job title: President
+State: Illinois
+Party: democrat
+Context: a TV ad, in an endorsement by Illinois State Sen. Kirk Dillard
+Label: No
+Text: Statement: "Nobody has been talking about it (Medicaid fraud), focused on it, or paying attention to it."
+Job title: 
+State: Florida
+Party: democrat
+Context: an interview with interview with the St. Petersburg Times/Miami Herald.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625
+Test accuracy: 0.5661605206073753
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 274.5475580692291
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement qualifies as a lie (Yes) or is not a lie (No) by conducting a comprehensive analysis of its factual accuracy, potential for misrepresentation, and alignment with reliable evidence, the Context provided, the speaker's role, and general knowledge. A lie is defined as any statement that is factually incorrect, misleading, or inconsistent with established facts, regardless of the speaker's intent. This includes statements that deliberately omit key information that would significantly alter the meaning or truth value of the claim.
+
+To evaluate the Statement, first assess whether it is supported by objective, publicly available records, official documents, or credible sources. Next, verify whether the Statement logically follows from the Context and is consistent with the speaker’s responsibilities or role. Be especially attentive to claims that may be misleading due to selective omissions, exaggerations, or biased framing.
+
+A critical aspect of the evaluation is the *contextual completeness* of the Statement: any claim that relies on a specific, unstated condition or assumes a particular background must be examined to determine whether that condition or background is accurately represented or omitted in a way that could lead to misunderstanding. The Statement must be judged not only on its own terms but also in relation to all relevant surrounding information that a reasonable person would expect to see for clarity and truthfulness.
+
+Take into account the *plausibility of the claim* in light of the speaker’s known behavior, past actions, or public records. If the Statement contradicts verified facts, lacks credible support, or depends on significant omissions that distort its meaning, it should be classified as a lie. If the Statement is ambiguous or lacks necessary context, use the most reasonable judgment based on factual evidence and logical reasoning to reach a conclusion.
+
+Focus on identifying statements that are misleading or inconsistent with the Context, even if they are not outright factually false. When evaluating statements about specific actions or financial disclosures, require clear documentation or record-keeping as a standard for confirmation. Any claim that cannot be independently verified through official records or trusted sources should be treated with caution, unless it is clearly supported by the Context or the speaker’s documented history.
+
+Be particularly attentive to statements that appear factual but are selectively presented to create a misleading impression of a larger situation. A statement that is technically accurate but omits essential context to distort the overall picture is still considered a lie. Ensure that the evaluation is based on objective evidence rather than assumptions or subjective interpretations.
+
+In addition, explicitly outline the reasoning process: describe which part of the Statement is misleading or factually inconsistent, which part of the Context supports or contradicts the Statement, and how the speaker’s role or responsibilities influence the interpretation of the Statement. This reasoning must be grounded in objective evidence, logical reasoning, and the Context provided.
+
+**New Structural Requirement:** When assessing a claim, determine whether the Statement is *independent of its source*—that is, whether the Statement could be independently verified without relying solely on the speaker’s credibility or the Context provided. If the Statement cannot be validated without referencing the speaker’s role or the Context, it must be closely examined for potential bias, omission, or framing that could distort its meaning. This step ensures that the evaluation is based on external, verifiable facts rather than internal assumptions or contextual dependencies.
+
+# Here are some examples:
+Text: Statement: Says Danny Tarkanian wants to defund Planned Parenthood and would outlaw a womans right to choose, even in cases of rape or incest.
+Job title: 
+State: Nevada
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: I released the most extensive financial review of anybody in the history of politics. You dont learn much in a tax return.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: an interview with ABC News
+Label: Yes
+Text: Statement: "Sen. Obama worked on some of the deepest issues we had and was successful in a bipartisan way."
+Job title: President
+State: Illinois
+Party: democrat
+Context: a TV ad, in an endorsement by Illinois State Sen. Kirk Dillard
+Label: No
+Text: Statement: "Nobody has been talking about it (Medicaid fraud), focused on it, or paying attention to it."
+Job title: 
+State: Florida
+Party: democrat
+Context: an interview with interview with the St. Petersburg Times/Miami Herald.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625
+Test accuracy: 0.5704989154013015
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 327.25813603401184
+Prompt: # Task
+**Revised Instruction:**
+
+Determine whether the Statement qualifies as a lie (Yes) or is not a lie (No) by conducting a comprehensive analysis of its factual accuracy, potential for misrepresentation, and alignment with reliable evidence, the Context provided, the speaker's role, and general knowledge. A lie is defined as any statement that is factually incorrect, misleading, or inconsistent with established facts, regardless of the speaker's intent. This includes statements that deliberately omit key information that would significantly alter the meaning or truth value of the claim.
+
+To evaluate the Statement, first assess whether it is supported by objective, publicly available records, official documents, or credible sources. Next, verify whether the Statement logically follows from the Context and is consistent with the speaker’s responsibilities or role. Be especially attentive to claims that may be misleading due to selective omissions, exaggerations, or biased framing.
+
+A critical aspect of the evaluation is the *contextual completeness* of the Statement: any claim that relies on a specific, unstated condition or assumes a particular background must be examined to determine whether that condition or background is accurately represented or omitted in a way that could lead to misunderstanding. The Statement must be judged not only on its own terms but also in relation to all relevant surrounding information that a reasonable person would expect to see for clarity and truthfulness.
+
+Take into account the *plausibility of the claim* in light of the speaker’s known behavior, past actions, or public records. If the Statement contradicts verified facts, lacks credible support, or depends on significant omissions that distort its meaning, it should be classified as a lie. If the Statement is ambiguous or lacks necessary context, use the most reasonable judgment based on factual evidence and logical reasoning to reach a conclusion.
+
+Focus on identifying statements that are misleading or inconsistent with the Context, even if they are not outright factually false. When evaluating statements about specific actions or financial disclosures, require clear documentation or record-keeping as a standard for confirmation. Any claim that cannot be independently verified through official records or trusted sources should be treated with caution, unless it is clearly supported by the Context or the speaker’s documented history.
+
+Be particularly attentive to statements that appear factual but are selectively presented to create a misleading impression of a larger situation. A statement that is technically accurate but omits essential context to distort the overall picture is still considered a lie. Ensure that the evaluation is based on objective evidence rather than assumptions or subjective interpretations.
+
+In addition, explicitly outline the reasoning process: describe which part of the Statement is misleading or factually inconsistent, which part of the Context supports or contradicts the Statement, and how the speaker’s role or responsibilities influence the interpretation of the Statement. This reasoning must be grounded in objective evidence, logical reasoning, and the Context provided.
+
+**New Structural Requirement:** When assessing a claim, determine whether the Statement is *independent of its source*—that is, whether the Statement could be independently verified without relying solely on the speaker’s credibility or the Context provided. If the Statement cannot be validated without referencing the speaker’s role or the Context, it must be closely examined for potential bias, omission, or framing that could distort its meaning. This step ensures that the evaluation is based on external, verifiable facts rather than internal assumptions or contextual dependencies.
+
+# Here are some examples:
+Text: Statement: Says Danny Tarkanian wants to defund Planned Parenthood and would outlaw a womans right to choose, even in cases of rape or incest.
+Job title: 
+State: Nevada
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: I released the most extensive financial review of anybody in the history of politics. You dont learn much in a tax return.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: an interview with ABC News
+Label: Yes
+Text: Statement: "Sen. Obama worked on some of the deepest issues we had and was successful in a bipartisan way."
+Job title: President
+State: Illinois
+Party: democrat
+Context: a TV ad, in an endorsement by Illinois State Sen. Kirk Dillard
+Label: No
+Text: Statement: "Nobody has been talking about it (Medicaid fraud), focused on it, or paying attention to it."
+Job title: 
+State: Florida
+Party: democrat
+Context: an interview with interview with the St. Petersburg Times/Miami Herald.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.65625
+Test accuracy: 0.5661605206073753

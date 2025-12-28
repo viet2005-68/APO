@@ -1,22 +1,22 @@
-{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding_v2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
 ======== ROUND 0
-Time: 1.5396430492401123
+Time: 1.5327820777893066
 Prompt: ('# Task\nDetermine if the provided statement corresponds to real-world scenarios within the context of professional sports. Identify the specific sport mentioned and analyze whether the described event is possible according to the official rules and standard procedures of that sport. Consider whether the action could reasonably have occurred during a real match or competition. Avoid assuming the event actually happened, but instead evaluate whether it is consistent with the way the sport is generally played.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
-Training accuracy: (np.float64(0.84),)
+Training accuracy: (np.float64(0.83),)
 Test accuracy: [0.8333333333333334]
 ======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 13.09549355506897
+Time: 16.237090826034546
 Prompt: # Task
 Determine if the provided statement corresponds to real-world scenarios within the context of professional sports. Identify the specific sport mentioned and analyze whether the described event is possible according to the official rules and standard procedures of that sport. Consider whether the action could reasonably have occurred during a real match or competition. Avoid assuming the event actually happened, but instead evaluate whether it is consistent with the way the sport is generally played.
 
 # Here are some examples:
-Text: "Ryan O'Reilly hit the wheel route."
-Label: No
-Text: "Frederik Andersen crossed the blue line in the Stanley Cup."
-Label: Yes
 Text: "Kyle Tucker took a left footed shot."
 Label: No
-Text: "Malcolm Brogdon eurostepped to the basket in the NBA Championship."
+Text: "Robin Lehner launched the desperation heave."
+Label: No
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Juan Mata scored a bicycle kick in the Champions League Final."
 Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
@@ -26,19 +26,21 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.81 | Penalized score: 0.6025768177919741
-Test accuracy: 0.7666666666666667
-======== EXEMPLAR OPTIMIZATION ROUND 1
-Time: 6.739184617996216
+Training accuracy: 0.84
+Test accuracy: 0.7866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 30.065189599990845
 Prompt: # Task
 Determine if the provided statement corresponds to real-world scenarios within the context of professional sports. Identify the specific sport mentioned and analyze whether the described event is possible according to the official rules and standard procedures of that sport. Consider whether the action could reasonably have occurred during a real match or competition. Avoid assuming the event actually happened, but instead evaluate whether it is consistent with the way the sport is generally played.
 
 # Here are some examples:
 Text: "Kyle Tucker took a left footed shot."
 Label: No
-Text: "Jakub Vrana hit a walkoff homer."
+Text: "Robin Lehner launched the desperation heave."
 Label: No
-Text: "Malcolm Brogdon eurostepped to the basket in the NBA Championship."
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Juan Mata scored a bicycle kick in the Champions League Final."
 Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
@@ -48,19 +50,21 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.83 | Penalized score: 0.6336994328541251
-Test accuracy: 0.7933333333333333
-======== EXEMPLAR OPTIMIZATION ROUND 2
-Time: 6.937247276306152
+Training accuracy: 0.84
+Test accuracy: 0.7866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 44.028897762298584
 Prompt: # Task
 Determine if the provided statement corresponds to real-world scenarios within the context of professional sports. Identify the specific sport mentioned and analyze whether the described event is possible according to the official rules and standard procedures of that sport. Consider whether the action could reasonably have occurred during a real match or competition. Avoid assuming the event actually happened, but instead evaluate whether it is consistent with the way the sport is generally played.
 
 # Here are some examples:
 Text: "Kyle Tucker took a left footed shot."
 Label: No
-Text: "Jakub Vrana hit a walkoff homer."
+Text: "Robin Lehner launched the desperation heave."
 Label: No
-Text: "Malcolm Brogdon eurostepped to the basket in the NBA Championship."
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Juan Mata scored a bicycle kick in the Champions League Final."
 Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
@@ -70,21 +74,21 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.83 | Penalized score: 0.6336994328541251
-Test accuracy: 0.7933333333333333
-======== EXEMPLAR OPTIMIZATION ROUND 3
-Time: 5.734313249588013
+Training accuracy: 0.84
+Test accuracy: 0.7866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 57.634153842926025
 Prompt: # Task
 Determine if the provided statement corresponds to real-world scenarios within the context of professional sports. Identify the specific sport mentioned and analyze whether the described event is possible according to the official rules and standard procedures of that sport. Consider whether the action could reasonably have occurred during a real match or competition. Avoid assuming the event actually happened, but instead evaluate whether it is consistent with the way the sport is generally played.
 
 # Here are some examples:
 Text: "Kyle Tucker took a left footed shot."
 Label: No
-Text: "Jakub Vrana hit a walkoff homer."
+Text: "Robin Lehner launched the desperation heave."
 Label: No
-Text: "Malcolm Brogdon eurostepped to the basket in the NBA Championship."
-Label: Yes
-Text: "Frederik Andersen crossed the blue line in the Stanley Cup."
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Juan Mata scored a bicycle kick in the Champions League Final."
 Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
@@ -94,21 +98,21 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.86 | Penalized score: 0.6522797602364544
-Test accuracy: 0.8133333333333334
-======== EXEMPLAR OPTIMIZATION ROUND 4
-Time: 4.890918016433716
+Training accuracy: 0.84
+Test accuracy: 0.7866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 72.02507281303406
 Prompt: # Task
 Determine if the provided statement corresponds to real-world scenarios within the context of professional sports. Identify the specific sport mentioned and analyze whether the described event is possible according to the official rules and standard procedures of that sport. Consider whether the action could reasonably have occurred during a real match or competition. Avoid assuming the event actually happened, but instead evaluate whether it is consistent with the way the sport is generally played.
 
 # Here are some examples:
 Text: "Kyle Tucker took a left footed shot."
 Label: No
-Text: "Jakub Vrana hit a walkoff homer."
+Text: "Robin Lehner launched the desperation heave."
 Label: No
-Text: "Malcolm Brogdon eurostepped to the basket in the NBA Championship."
-Label: Yes
-Text: "Frederik Andersen crossed the blue line in the Stanley Cup."
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Juan Mata scored a bicycle kick in the Champions League Final."
 Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
@@ -118,21 +122,21 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.86 | Penalized score: 0.6522797602364544
-Test accuracy: 0.8133333333333334
-======== EXEMPLAR OPTIMIZATION ROUND 5
-Time: 5.852532148361206
+Training accuracy: 0.84
+Test accuracy: 0.7866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 86.04958939552307
 Prompt: # Task
 Determine if the provided statement corresponds to real-world scenarios within the context of professional sports. Identify the specific sport mentioned and analyze whether the described event is possible according to the official rules and standard procedures of that sport. Consider whether the action could reasonably have occurred during a real match or competition. Avoid assuming the event actually happened, but instead evaluate whether it is consistent with the way the sport is generally played.
 
 # Here are some examples:
 Text: "Kyle Tucker took a left footed shot."
 Label: No
-Text: "Jakub Vrana hit a walkoff homer."
+Text: "Robin Lehner launched the desperation heave."
 Label: No
-Text: "Malcolm Brogdon eurostepped to the basket in the NBA Championship."
-Label: Yes
-Text: "Frederik Andersen crossed the blue line in the Stanley Cup."
+Text: "Deshaun Watson was called for the goal tend in the Eastern Conference Finals."
+Label: No
+Text: "Juan Mata scored a bicycle kick in the Champions League Final."
 Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
@@ -142,5 +146,5 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.86 | Penalized score: 0.6522797602364544
-Test accuracy: 0.8133333333333334
+Training accuracy: 0.84
+Test accuracy: 0.7866666666666666

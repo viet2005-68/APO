@@ -1,0 +1,168 @@
+{"task": "boolean_expressions", "data_dir": "data/boolean_expressions", "prompts": "prompts/boolean_expressions.md", "out": "experiments/boolean_expressions.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 1.7280683517456055
+Prompt: ('# Task\nDetermine the truth value of the given boolean expression by following standard operator precedence: evaluate expressions inside parentheses first, followed by `not`, then `and`, and finally `or`. Respond with "Yes" if the result is `True`, and "No" if the result is `False`.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.85),)
+Test accuracy: [0.82]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 15.038931369781494
+Prompt: # Task
+Determine the truth value of the given boolean expression by following standard operator precedence: evaluate expressions inside parentheses first, followed by `not`, then `and`, and finally `or`. Respond with "Yes" if the result is `True`, and "No" if the result is `False`.
+
+# Here are some examples:
+Text: False and ( True and not False ) is
+Label: No
+Text: False or ( False or not False ) is
+Label: Yes
+Text: True or ( ( not True ) ) is
+Label: Yes
+Text: False or False or True and not False is
+Label: Yes
+Text: ( ( not True and True ) ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.86
+Test accuracy: 0.8266666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 27.6358540058136
+Prompt: # Task
+Determine the truth value of the given boolean expression by following standard operator precedence: evaluate expressions inside parentheses first, followed by `not`, then `and`, and finally `or`. Respond with "Yes" if the result is `True`, and "No" if the result is `False`.
+
+# Here are some examples:
+Text: not not ( False and not True ) is
+Label: No
+Text: not False or not not not not True is
+Label: Yes
+Text: False and False or not ( True ) is
+Label: No
+Text: False or not False or True and True is
+Label: Yes
+Text: False or not ( True ) and False is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87
+Test accuracy: 0.8266666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 40.03250432014465
+Prompt: # Task
+Determine the truth value of the given boolean expression by following standard operator precedence: evaluate expressions inside parentheses first, followed by `not`, then `and`, and finally `or`. Respond with "Yes" if the result is `True`, and "No" if the result is `False`.
+
+# Here are some examples:
+Text: not not ( False and not True ) is
+Label: No
+Text: not False or not not not not True is
+Label: Yes
+Text: False and False or not ( True ) is
+Label: No
+Text: False or not False or True and True is
+Label: Yes
+Text: False or not ( True ) and False is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87
+Test accuracy: 0.8266666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 51.59970450401306
+Prompt: # Task
+Determine the truth value of the given boolean expression by following standard operator precedence: evaluate expressions inside parentheses first, followed by `not`, then `and`, and finally `or`. Respond with "Yes" if the result is `True`, and "No" if the result is `False`.
+
+# Here are some examples:
+Text: not not ( not False or True ) is
+Label: Yes
+Text: False or not ( True ) and False is
+Label: No
+Text: False or not False and ( False ) is
+Label: No
+Text: not not not False or False and False is
+Label: Yes
+Text: False and False and not True and False is
+Label: No
+Text: not not ( False and not True ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.88
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 63.52655839920044
+Prompt: # Task
+Determine the truth value of the given boolean expression by following standard operator precedence: evaluate expressions inside parentheses first, followed by `not`, then `and`, and finally `or`. Respond with "Yes" if the result is `True`, and "No" if the result is `False`.
+
+# Here are some examples:
+Text: not not ( not False or True ) is
+Label: Yes
+Text: False or not ( True ) and False is
+Label: No
+Text: False or not False and ( False ) is
+Label: No
+Text: not not not False or False and False is
+Label: Yes
+Text: False and False and not True and False is
+Label: No
+Text: not not ( False and not True ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.88
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 75.62474751472473
+Prompt: # Task
+Determine the truth value of the given boolean expression by following standard operator precedence: evaluate expressions inside parentheses first, followed by `not`, then `and`, and finally `or`. Respond with "Yes" if the result is `True`, and "No" if the result is `False`.
+
+# Here are some examples:
+Text: not not ( not False or True ) is
+Label: Yes
+Text: False or not ( True ) and False is
+Label: No
+Text: False or not False and ( False ) is
+Label: No
+Text: not not not False or False and False is
+Label: Yes
+Text: False and False and not True and False is
+Label: No
+Text: not not ( False and not True ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.88
+Test accuracy: 0.8666666666666667

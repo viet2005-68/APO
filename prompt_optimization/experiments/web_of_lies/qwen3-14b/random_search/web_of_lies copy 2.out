@@ -1,0 +1,172 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.4743998050689697
+Prompt: ('# Task\nSure! Here\'s a variation of the instruction that maintains the same semantic meaning:\n\n**Input:** Examine the claims made by each individual in the text. Evaluate whether the last person referenced is being truthful, considering the logical coherence and any inconsistencies across all statements. Assume that those who tell the truth make only accurate statements, while those who lie make only false ones. Investigate the relationships and implications of the statements to determine the correct outcome.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.59),)
+Test accuracy: [0.5733333333333334]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 27.380297660827637
+Prompt: # Task
+Sure! Here's a variation of the instruction that maintains the same semantic meaning:
+
+**Input:** Examine the claims made by each individual in the text. Evaluate whether the last person referenced is being truthful, considering the logical coherence and any inconsistencies across all statements. Assume that those who tell the truth make only accurate statements, while those who lie make only false ones. Investigate the relationships and implications of the statements to determine the correct outcome.
+
+# Here are some examples:
+Text: Question: Ryan lies. Christie says Ryan lies. Amberly says Christie tells the truth. Shenna says Amberly tells the truth. Jamey says Shenna lies. Does Jamey tell the truth?
+Label: No
+Text: Question: Delbert lies. Shalonda says Delbert tells the truth. Tamika says Shalonda lies. Sal says Tamika lies. Helene says Sal lies. Does Helene tell the truth?
+Label: Yes
+Text: Question: Teressa tells the truth. Lorine says Teressa lies. Antwan says Lorine tells the truth. Fidel says Antwan tells the truth. Phoebe says Fidel lies. Does Phoebe tell the truth?
+Label: Yes
+Text: Question: Kandi lies. Phoebe says Kandi tells the truth. Yoland says Phoebe tells the truth. Fletcher says Yoland lies. Lorine says Fletcher tells the truth. Does Lorine tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.63
+Test accuracy: 0.5466666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 51.700631618499756
+Prompt: # Task
+Sure! Here's a variation of the instruction that maintains the same semantic meaning:
+
+**Input:** Examine the claims made by each individual in the text. Evaluate whether the last person referenced is being truthful, considering the logical coherence and any inconsistencies across all statements. Assume that those who tell the truth make only accurate statements, while those who lie make only false ones. Investigate the relationships and implications of the statements to determine the correct outcome.
+
+# Here are some examples:
+Text: Question: Alejandro lies. Amberly says Alejandro tells the truth. Osvaldo says Amberly lies. Vernell says Osvaldo lies. Shenna says Vernell lies. Does Shenna tell the truth?
+Label: Yes
+Text: Question: Delbert lies. Shalonda says Delbert tells the truth. Tamika says Shalonda lies. Sal says Tamika lies. Helene says Sal lies. Does Helene tell the truth?
+Label: Yes
+Text: Question: Bernita lies. Jerry says Bernita tells the truth. Delbert says Jerry lies. Jamey says Delbert tells the truth. Shenna says Jamey lies. Does Shenna tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Vernell says Jamey tells the truth. Millicent says Vernell lies. Rashida says Millicent tells the truth. Vina says Rashida tells the truth. Does Vina tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66
+Test accuracy: 0.48
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 75.96939206123352
+Prompt: # Task
+Sure! Here's a variation of the instruction that maintains the same semantic meaning:
+
+**Input:** Examine the claims made by each individual in the text. Evaluate whether the last person referenced is being truthful, considering the logical coherence and any inconsistencies across all statements. Assume that those who tell the truth make only accurate statements, while those who lie make only false ones. Investigate the relationships and implications of the statements to determine the correct outcome.
+
+# Here are some examples:
+Text: Question: Alejandro lies. Amberly says Alejandro tells the truth. Osvaldo says Amberly lies. Vernell says Osvaldo lies. Shenna says Vernell lies. Does Shenna tell the truth?
+Label: Yes
+Text: Question: Delbert lies. Shalonda says Delbert tells the truth. Tamika says Shalonda lies. Sal says Tamika lies. Helene says Sal lies. Does Helene tell the truth?
+Label: Yes
+Text: Question: Bernita lies. Jerry says Bernita tells the truth. Delbert says Jerry lies. Jamey says Delbert tells the truth. Shenna says Jamey lies. Does Shenna tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Vernell says Jamey tells the truth. Millicent says Vernell lies. Rashida says Millicent tells the truth. Vina says Rashida tells the truth. Does Vina tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66
+Test accuracy: 0.4866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 98.70314598083496
+Prompt: # Task
+Sure! Here's a variation of the instruction that maintains the same semantic meaning:
+
+**Input:** Examine the claims made by each individual in the text. Evaluate whether the last person referenced is being truthful, considering the logical coherence and any inconsistencies across all statements. Assume that those who tell the truth make only accurate statements, while those who lie make only false ones. Investigate the relationships and implications of the statements to determine the correct outcome.
+
+# Here are some examples:
+Text: Question: Alejandro lies. Amberly says Alejandro tells the truth. Osvaldo says Amberly lies. Vernell says Osvaldo lies. Shenna says Vernell lies. Does Shenna tell the truth?
+Label: Yes
+Text: Question: Delbert lies. Shalonda says Delbert tells the truth. Tamika says Shalonda lies. Sal says Tamika lies. Helene says Sal lies. Does Helene tell the truth?
+Label: Yes
+Text: Question: Bernita lies. Jerry says Bernita tells the truth. Delbert says Jerry lies. Jamey says Delbert tells the truth. Shenna says Jamey lies. Does Shenna tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Vernell says Jamey tells the truth. Millicent says Vernell lies. Rashida says Millicent tells the truth. Vina says Rashida tells the truth. Does Vina tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66
+Test accuracy: 0.4866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 121.67350888252258
+Prompt: # Task
+Sure! Here's a variation of the instruction that maintains the same semantic meaning:
+
+**Input:** Examine the claims made by each individual in the text. Evaluate whether the last person referenced is being truthful, considering the logical coherence and any inconsistencies across all statements. Assume that those who tell the truth make only accurate statements, while those who lie make only false ones. Investigate the relationships and implications of the statements to determine the correct outcome.
+
+# Here are some examples:
+Text: Question: Alejandro lies. Amberly says Alejandro tells the truth. Osvaldo says Amberly lies. Vernell says Osvaldo lies. Shenna says Vernell lies. Does Shenna tell the truth?
+Label: Yes
+Text: Question: Delbert lies. Shalonda says Delbert tells the truth. Tamika says Shalonda lies. Sal says Tamika lies. Helene says Sal lies. Does Helene tell the truth?
+Label: Yes
+Text: Question: Bernita lies. Jerry says Bernita tells the truth. Delbert says Jerry lies. Jamey says Delbert tells the truth. Shenna says Jamey lies. Does Shenna tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Vernell says Jamey tells the truth. Millicent says Vernell lies. Rashida says Millicent tells the truth. Vina says Rashida tells the truth. Does Vina tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66
+Test accuracy: 0.4866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 144.3851659297943
+Prompt: # Task
+Sure! Here's a variation of the instruction that maintains the same semantic meaning:
+
+**Input:** Examine the claims made by each individual in the text. Evaluate whether the last person referenced is being truthful, considering the logical coherence and any inconsistencies across all statements. Assume that those who tell the truth make only accurate statements, while those who lie make only false ones. Investigate the relationships and implications of the statements to determine the correct outcome.
+
+# Here are some examples:
+Text: Question: Alejandro lies. Amberly says Alejandro tells the truth. Osvaldo says Amberly lies. Vernell says Osvaldo lies. Shenna says Vernell lies. Does Shenna tell the truth?
+Label: Yes
+Text: Question: Delbert lies. Shalonda says Delbert tells the truth. Tamika says Shalonda lies. Sal says Tamika lies. Helene says Sal lies. Does Helene tell the truth?
+Label: Yes
+Text: Question: Bernita lies. Jerry says Bernita tells the truth. Delbert says Jerry lies. Jamey says Delbert tells the truth. Shenna says Jamey lies. Does Shenna tell the truth?
+Label: No
+Text: Question: Vina tells the truth. Alejandro says Vina lies. Maybelle says Alejandro tells the truth. Millicent says Maybelle lies. Elanor says Millicent tells the truth. Does Elanor tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Vernell says Jamey tells the truth. Millicent says Vernell lies. Rashida says Millicent tells the truth. Vina says Rashida tells the truth. Does Vina tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.66
+Test accuracy: 0.49333333333333335

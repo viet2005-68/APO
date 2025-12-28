@@ -1,0 +1,288 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 9.521950960159302
+Prompt: ('# Task\nGenerate a rephrased version of the following instruction, ensuring the meaning remains unchanged.\n\nInput: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.\n\nIn your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.\n\nWhen making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.\n\nIf the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.5625,)
+Test accuracy: [0.5574837310195228]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 61.017879247665405
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Nearly half of all pregnancies in the U.S. are unintended.
+Job title: Rhode Island State Representative
+State: Rhode Island
+Party: democrat
+Context: commentary piece
+Label: No
+Text: Statement: Says he didnt have an involvement withnutritional supplement company Mannatech.
+Job title: 
+State: 
+Party: republican
+Context: a Republican presidential debate in Boulder, Colo.
+Label: Yes
+Text: Statement: "Obama Skips Out On Condemning Left-Wing Attacks On Gen. Petraeus Despite Casting Other 'Important Votes' Earlier And Later In The Day."
+Job title: 
+State: 
+Party: republican
+Context: 
+Label: No
+Text: Statement: On changing the rules for filibusters on presidential nominees
+Job title: Senate minority leader
+State: Kentucky
+Party: republican
+Context: speeches
+Label: Yes
+Text: Statement: Over the last two years since President Obama has taken office, the federal government has added 200,000 new federal jobs.
+Job title: Speaker of the House of Representatives
+State: Ohio
+Party: republican
+Context: a press conference
+Label: Yes
+Text: Statement: Texans eat more catfish than residents of all other states combined.
+Job title: Farmer
+State: Texas
+Party: republican
+Context: an oped column.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6614583333333334
+Test accuracy: 0.5900216919739696
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 110.62179517745972
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Spanish was the first European language spoken in this country.
+Job title: U.S. Senator
+State: Virginia
+Party: democrat
+Context: a speech in Phoenix
+Label: No
+Text: Statement: "He's sued gun manufacturers. He was supportive of Brady. He was supportive of things like assault weapon bans."
+Job title: author
+State: Arkansas
+Party: republican
+Context: an interview on MSNBC
+Label: No
+Text: Statement: Obamacare was patterned after (Mitt Romneys) plan in Massachusetts.
+Job title: 
+State: 
+Party: republican
+Context: a debate in Ames, Iowa
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6651785714285714
+Test accuracy: 0.5878524945770065
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 161.6322145462036
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: The top 1 percent of income earners pay 40 percent of all state income taxes, and those at the bottom pay little or nothing.
+Job title: 
+State: 
+Party: republican
+Context: an opinion piece
+Label: No
+Text: Statement: Only half of the murders in the city of St. Louis get solved.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: Missouri
+Label: No
+Text: Statement: We now do have evidence that Donald Trump is being used as a recruiting tool for terrorists.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on CNN
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6666666666666666
+Test accuracy: 0.5943600867678959
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 214.51406979560852
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: The top 1 percent of income earners pay 40 percent of all state income taxes, and those at the bottom pay little or nothing.
+Job title: 
+State: 
+Party: republican
+Context: an opinion piece
+Label: No
+Text: Statement: Only half of the murders in the city of St. Louis get solved.
+Job title: Candidate for governor of Missouri
+State: Missouri
+Party: republican
+Context: Missouri
+Label: No
+Text: Statement: We now do have evidence that Donald Trump is being used as a recruiting tool for terrorists.
+Job title: Presidential candidate
+State: New York
+Party: democrat
+Context: an interview on CNN
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6666666666666666
+Test accuracy: 0.5943600867678959
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 266.5123519897461
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Abortionists have reduced our black population by more than 25 percent since 1973.
+Job title: Member of Florida House of Representatives
+State: Florida
+Party: republican
+Context: House floor debate on HB 845
+Label: Yes
+Text: Statement: We gave every public employee in the state the freedom to choose whether or not they want to be in a union.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: a television interview
+Label: Yes
+Text: Statement: During the recent global warming summit in Copenhagen, Nancy Pelosi and others stayed at a five-star hotel on a trip costing nearly $10,000 per person.
+Job title: Lieutenant governor
+State: Texas
+Party: republican
+Context: an e-mail blast.
+Label: No
+Text: Statement: On sequestration
+Job title: House Majority Leader
+State: Virginia
+Party: republican
+Context: a debate.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6822916666666666
+Test accuracy: 0.5921908893709328
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 318.3056619167328
+Prompt: # Task
+Generate a rephrased version of the following instruction, ensuring the meaning remains unchanged.
+
+Input: Assess whether the provided statement is misleading (Yes) or not (No). A statement is deemed misleading if it includes factual inaccuracies, is intentionally deceptive, or is phrased in a manner that could reasonably be expected to confuse or mislead the audience.
+
+In your evaluation, take into account **both the content of the statement and the broader context**, including the **identity, role, political leanings, or geographic background of the speaker**, as these factors may offer **insights into the potential reliability or intent** behind the statement, even if they do not directly affect its factual correctness. For instance, a statement that conflicts with established facts, is overly vague, or is issued by someone with a documented bias or agenda could be more likely to be misleading.
+
+When making your judgment, prioritize **objective facts, reliable data, and trustworthy external sources**. However, if a statement seems to be made in bad faith, lacks supporting evidence, or uses a framing that distorts understanding (even if the underlying facts are accurate), it may still qualify as misleading.
+
+If the statement corresponds with verified and reliable information, it is not misleading, regardless of the speaker’s background or level of authority.
+
+# Here are some examples:
+Text: Statement: Abortionists have reduced our black population by more than 25 percent since 1973.
+Job title: Member of Florida House of Representatives
+State: Florida
+Party: republican
+Context: House floor debate on HB 845
+Label: Yes
+Text: Statement: We gave every public employee in the state the freedom to choose whether or not they want to be in a union.
+Job title: Milwaukee County Executive
+State: Wisconsin
+Party: republican
+Context: a television interview
+Label: Yes
+Text: Statement: During the recent global warming summit in Copenhagen, Nancy Pelosi and others stayed at a five-star hotel on a trip costing nearly $10,000 per person.
+Job title: Lieutenant governor
+State: Texas
+Party: republican
+Context: an e-mail blast.
+Label: No
+Text: Statement: On sequestration
+Job title: House Majority Leader
+State: Virginia
+Party: republican
+Context: a debate.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6822916666666666
+Test accuracy: 0.5878524945770065

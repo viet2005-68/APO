@@ -1,0 +1,162 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.1284127235412598
+Prompt: ('# Task\n**Instruction (Variation):** Determine if the given text constitutes hate speech. Hate speech encompasses **language that dehumanizes, expresses prejudice, or encourages hostility**, regardless of whether it directly references a protected group. Consider if the text contains **offensive or biased language**, **overly aggressive or symbolic expressions**, **calls for violence or discrimination**, or **statements that could be used to harm or exclude individuals or groups**. Focus on **intent**—is the language intended to incite hatred or cause damage?\\n\\n**Examples:**\\n\\n**Example 1:**  \\n**Text:** "All white people are stupid."  \\n**Label:** Yes  \\n\\n**Example 2:**  \\n**Text:** "I hate the way some people talk."  \\n**Label:** No  \\n\\n**Example 3:**  \\n**Text:** "It\\\'s a good thing I\\\'m not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead."  \\n**Label:** No  \\n\\n**Example 4:**  \\n**Text:** "Deport him in military aircraft and dump him back where he is originated from. Him and his family."  \\n**Label:** No  \\n\\n**Example 5:**  \\n**Text:** "To the lady that can barely speak English and then look down upon her own people, that\\\'s disgraceful."  \\n**Label:** No  \\n\\n**Example 6:**  \\n**Text:** "Should have been sterilised upon arrival. Now your future doesn\\\'t exist."  \\n**Label:** Yes  \\n\\n**Example 7:**  \\n**Text:** "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame."  \\n**Label:** No  \\n\\n**Example 8:**  \\n**Text:** "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum."  \\n**Label:** No  \\n\\nNow, assess whether the following text is hate speech:\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.93),)
+Test accuracy: [0.8733333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 22.15326476097107
+Prompt: # Task
+**Instruction (Variation):** Determine if the given text constitutes hate speech. Hate speech encompasses **language that dehumanizes, expresses prejudice, or encourages hostility**, regardless of whether it directly references a protected group. Consider if the text contains **offensive or biased language**, **overly aggressive or symbolic expressions**, **calls for violence or discrimination**, or **statements that could be used to harm or exclude individuals or groups**. Focus on **intent**—is the language intended to incite hatred or cause damage?\n\n**Examples:**\n\n**Example 1:**  \n**Text:** "All white people are stupid."  \n**Label:** Yes  \n\n**Example 2:**  \n**Text:** "I hate the way some people talk."  \n**Label:** No  \n\n**Example 3:**  \n**Text:** "It\'s a good thing I\'m not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead."  \n**Label:** No  \n\n**Example 4:**  \n**Text:** "Deport him in military aircraft and dump him back where he is originated from. Him and his family."  \n**Label:** No  \n\n**Example 5:**  \n**Text:** "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful."  \n**Label:** No  \n\n**Example 6:**  \n**Text:** "Should have been sterilised upon arrival. Now your future doesn\'t exist."  \n**Label:** Yes  \n\n**Example 7:**  \n**Text:** "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame."  \n**Label:** No  \n\n**Example 8:**  \n**Text:** "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum."  \n**Label:** No  \n\nNow, assess whether the following text is hate speech:
+
+# Here are some examples:
+Text: Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are.
+Label: No
+Text: Enough is Enough
+Label: No
+Text: I'm glad someone finally also brought light on the pay gap in asian countries (description of video) because frankly often it is only focused on the US where the pay gap is really small already compared to asian countries. (in the US it's about 6%)
+Label: No
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 41.859827280044556
+Prompt: # Task
+**Instruction (Variation):** Determine if the given text constitutes hate speech. Hate speech encompasses **language that dehumanizes, expresses prejudice, or encourages hostility**, regardless of whether it directly references a protected group. Consider if the text contains **offensive or biased language**, **overly aggressive or symbolic expressions**, **calls for violence or discrimination**, or **statements that could be used to harm or exclude individuals or groups**. Focus on **intent**—is the language intended to incite hatred or cause damage?\n\n**Examples:**\n\n**Example 1:**  \n**Text:** "All white people are stupid."  \n**Label:** Yes  \n\n**Example 2:**  \n**Text:** "I hate the way some people talk."  \n**Label:** No  \n\n**Example 3:**  \n**Text:** "It\'s a good thing I\'m not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead."  \n**Label:** No  \n\n**Example 4:**  \n**Text:** "Deport him in military aircraft and dump him back where he is originated from. Him and his family."  \n**Label:** No  \n\n**Example 5:**  \n**Text:** "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful."  \n**Label:** No  \n\n**Example 6:**  \n**Text:** "Should have been sterilised upon arrival. Now your future doesn\'t exist."  \n**Label:** Yes  \n\n**Example 7:**  \n**Text:** "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame."  \n**Label:** No  \n\n**Example 8:**  \n**Text:** "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum."  \n**Label:** No  \n\nNow, assess whether the following text is hate speech:
+
+# Here are some examples:
+Text: Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are.
+Label: No
+Text: Enough is Enough
+Label: No
+Text: I'm glad someone finally also brought light on the pay gap in asian countries (description of video) because frankly often it is only focused on the US where the pay gap is really small already compared to asian countries. (in the US it's about 6%)
+Label: No
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 60.72144389152527
+Prompt: # Task
+**Instruction (Variation):** Determine if the given text constitutes hate speech. Hate speech encompasses **language that dehumanizes, expresses prejudice, or encourages hostility**, regardless of whether it directly references a protected group. Consider if the text contains **offensive or biased language**, **overly aggressive or symbolic expressions**, **calls for violence or discrimination**, or **statements that could be used to harm or exclude individuals or groups**. Focus on **intent**—is the language intended to incite hatred or cause damage?\n\n**Examples:**\n\n**Example 1:**  \n**Text:** "All white people are stupid."  \n**Label:** Yes  \n\n**Example 2:**  \n**Text:** "I hate the way some people talk."  \n**Label:** No  \n\n**Example 3:**  \n**Text:** "It\'s a good thing I\'m not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead."  \n**Label:** No  \n\n**Example 4:**  \n**Text:** "Deport him in military aircraft and dump him back where he is originated from. Him and his family."  \n**Label:** No  \n\n**Example 5:**  \n**Text:** "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful."  \n**Label:** No  \n\n**Example 6:**  \n**Text:** "Should have been sterilised upon arrival. Now your future doesn\'t exist."  \n**Label:** Yes  \n\n**Example 7:**  \n**Text:** "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame."  \n**Label:** No  \n\n**Example 8:**  \n**Text:** "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum."  \n**Label:** No  \n\nNow, assess whether the following text is hate speech:
+
+# Here are some examples:
+Text: Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are.
+Label: No
+Text: Enough is Enough
+Label: No
+Text: I'm glad someone finally also brought light on the pay gap in asian countries (description of video) because frankly often it is only focused on the US where the pay gap is really small already compared to asian countries. (in the US it's about 6%)
+Label: No
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 79.94758176803589
+Prompt: # Task
+**Instruction (Variation):** Determine if the given text constitutes hate speech. Hate speech encompasses **language that dehumanizes, expresses prejudice, or encourages hostility**, regardless of whether it directly references a protected group. Consider if the text contains **offensive or biased language**, **overly aggressive or symbolic expressions**, **calls for violence or discrimination**, or **statements that could be used to harm or exclude individuals or groups**. Focus on **intent**—is the language intended to incite hatred or cause damage?\n\n**Examples:**\n\n**Example 1:**  \n**Text:** "All white people are stupid."  \n**Label:** Yes  \n\n**Example 2:**  \n**Text:** "I hate the way some people talk."  \n**Label:** No  \n\n**Example 3:**  \n**Text:** "It\'s a good thing I\'m not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead."  \n**Label:** No  \n\n**Example 4:**  \n**Text:** "Deport him in military aircraft and dump him back where he is originated from. Him and his family."  \n**Label:** No  \n\n**Example 5:**  \n**Text:** "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful."  \n**Label:** No  \n\n**Example 6:**  \n**Text:** "Should have been sterilised upon arrival. Now your future doesn\'t exist."  \n**Label:** Yes  \n\n**Example 7:**  \n**Text:** "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame."  \n**Label:** No  \n\n**Example 8:**  \n**Text:** "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum."  \n**Label:** No  \n\nNow, assess whether the following text is hate speech:
+
+# Here are some examples:
+Text: Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are.
+Label: No
+Text: Enough is Enough
+Label: No
+Text: I'm glad someone finally also brought light on the pay gap in asian countries (description of video) because frankly often it is only focused on the US where the pay gap is really small already compared to asian countries. (in the US it's about 6%)
+Label: No
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8666666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 99.0426435470581
+Prompt: # Task
+**Instruction (Variation):** Determine if the given text constitutes hate speech. Hate speech encompasses **language that dehumanizes, expresses prejudice, or encourages hostility**, regardless of whether it directly references a protected group. Consider if the text contains **offensive or biased language**, **overly aggressive or symbolic expressions**, **calls for violence or discrimination**, or **statements that could be used to harm or exclude individuals or groups**. Focus on **intent**—is the language intended to incite hatred or cause damage?\n\n**Examples:**\n\n**Example 1:**  \n**Text:** "All white people are stupid."  \n**Label:** Yes  \n\n**Example 2:**  \n**Text:** "I hate the way some people talk."  \n**Label:** No  \n\n**Example 3:**  \n**Text:** "It\'s a good thing I\'m not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead."  \n**Label:** No  \n\n**Example 4:**  \n**Text:** "Deport him in military aircraft and dump him back where he is originated from. Him and his family."  \n**Label:** No  \n\n**Example 5:**  \n**Text:** "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful."  \n**Label:** No  \n\n**Example 6:**  \n**Text:** "Should have been sterilised upon arrival. Now your future doesn\'t exist."  \n**Label:** Yes  \n\n**Example 7:**  \n**Text:** "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame."  \n**Label:** No  \n\n**Example 8:**  \n**Text:** "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum."  \n**Label:** No  \n\nNow, assess whether the following text is hate speech:
+
+# Here are some examples:
+Text: Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are.
+Label: No
+Text: Enough is Enough
+Label: No
+Text: I'm glad someone finally also brought light on the pay gap in asian countries (description of video) because frankly often it is only focused on the US where the pay gap is really small already compared to asian countries. (in the US it's about 6%)
+Label: No
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8733333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 117.62495136260986
+Prompt: # Task
+**Instruction (Variation):** Determine if the given text constitutes hate speech. Hate speech encompasses **language that dehumanizes, expresses prejudice, or encourages hostility**, regardless of whether it directly references a protected group. Consider if the text contains **offensive or biased language**, **overly aggressive or symbolic expressions**, **calls for violence or discrimination**, or **statements that could be used to harm or exclude individuals or groups**. Focus on **intent**—is the language intended to incite hatred or cause damage?\n\n**Examples:**\n\n**Example 1:**  \n**Text:** "All white people are stupid."  \n**Label:** Yes  \n\n**Example 2:**  \n**Text:** "I hate the way some people talk."  \n**Label:** No  \n\n**Example 3:**  \n**Text:** "It\'s a good thing I\'m not a commander or so in the police force, specially not during something like this, because the jail would be full of ppl waiting to be deported, if not dead."  \n**Label:** No  \n\n**Example 4:**  \n**Text:** "Deport him in military aircraft and dump him back where he is originated from. Him and his family."  \n**Label:** No  \n\n**Example 5:**  \n**Text:** "To the lady that can barely speak English and then look down upon her own people, that\'s disgraceful."  \n**Label:** No  \n\n**Example 6:**  \n**Text:** "Should have been sterilised upon arrival. Now your future doesn\'t exist."  \n**Label:** Yes  \n\n**Example 7:**  \n**Text:** "Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame."  \n**Label:** No  \n\n**Example 8:**  \n**Text:** "Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum."  \n**Label:** No  \n\nNow, assess whether the following text is hate speech:
+
+# Here are some examples:
+Text: Germans need to quit blaming themselves for the atrocities committed by the Nazi's. The same thing (shame) is happening here in the U.S. because of the past because of slavery and "stealing" the land from the Indians. People are getting sick of hearing that shit and the left is constantly saying how bad "white" Americans are.
+Label: No
+Text: Enough is Enough
+Label: No
+Text: I'm glad someone finally also brought light on the pay gap in asian countries (description of video) because frankly often it is only focused on the US where the pay gap is really small already compared to asian countries. (in the US it's about 6%)
+Label: No
+Text: People changing their genders left and right and i cant even decide on a tattoo
+Label: No
+Text: I hate mentally disabled people trying to touch my kids.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8733333333333333
