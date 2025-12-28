@@ -1,0 +1,154 @@
+{"task": "casual_judgement", "data_dir": "data/casual_judgement", "prompts": "prompts/casual_judgement.md", "out": "experiments/casual_judgement.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 7.3530662059783936
+Prompt: ('# Task\nExamine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.7432432432432432),)
+Test accuracy: [0.6814159292035398]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 129.79811191558838
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: There is a man who gets paid for pumping water into a cistern thereby replenishing the supply of drinking water in a nearby house. Unfortunately for the inhabitants of the house, the water that the man is pumping into the cistern today has been systematically contaminated with a lethal poison whose effects are unnoticeable until they can no longer be cured. Even though the man pumping the water had nothing to do with poisoning the water, he knows that the water has been poisoned. Nevertheless, the man pumps the water into the cistern knowing that it will poison and kill the inhabitants. But, he doesn't care at all about the inhabitants, he simply wants to do his job and get paid. Did the man intentionally poison the inhabitants?
+Label: Yes
+Text: In Nazi Germany, there was a law called the 'racial identification law.' The purpose of the law was to help identify people of certain races so that they could be rounded up and sent to concentration camps. Shortly after this law was passed, the CEO of a small corporation decided to make certain organizational changes. The Vice-President of the corporation said: "By making those changes, you'll definitely be increasing our profits. But you'll also be fulfilling the requirements of the racial identification law." The CEO said: "Look, I know that I'll be fulfilling the requirements of the law, but I don't care one bit about that. All I care about is making as much profit as I can. Let's make those organizational changes!" As soon as the CEO gave this order, the corporation began making the organizational changes. Did the CEO intentionally fulfill the requirements of the law?
+Label: No
+Text: A company will send its clients a free sample of coffee if you are on their email list. You are already subscribed to the email list. You did not change your subscription status, and then you receive the free sample. Did you receive the free sample because you did not change your subscription status?
+Label: No
+Text: Billy and Suzy work for a company that has a central computer. If two people log in to the central computer at exactly 9:27 am, some work emails will be immediately deleted. In order to make sure that two people are available to answer phone calls during designated calling hours, the company issued the following official policy: Billy and Suzy are both permitted to log in to the central computer in the mornings, and neither of them are permitted to log in to the central computer in the afternoons. This morning at exactly 9:27 am, Billy and Suzy both log into the central computer at the same time. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?
+Label: No
+Text: Long ago, when John was only 17 years old, he got a job working for a large manufacturing company. He started out working on an assembly line for minimum wage, but after a few years at the company, he was given a choice between two line manager positions. He could stay in the woodwork division, which is where he was currently working. Or he could move to the plastics division. John was unsure what to do because he liked working in the woodwork division, but he also thought it might be worth trying something different. He finally decided to switch to the plastics division and try something new. For the last 30 years, John has worked as a production line supervisor in the plastics division. After the first year there, the plastics division was moved to a different building with more space. Unfortunately, through the many years he worked there, John was exposed to asbestos, a highly carcinogenic substance. Most of the plastics division was quite safe, but the small part in which John worked was exposed to asbestos fibers. And now, although John has never smoked a cigarette in his life and otherwise lives a healthy lifestyle, he has a highly progressed and incurable case of lung cancer at the age of 50. John had seen three cancer specialists, all of whom confirmed the worst: that, except for pain, John's cancer was untreatable and he was absolutely certain to die from it very soon (the doctors estimated no more than 2 months). Yesterday, while John was in the hospital for a routine medical appointment, a new nurse accidentally administered the wrong medication to him. John was allergic to the drug and he immediately went into shock and experienced cardiac arrest (a heart attack). Doctors attempted to resuscitate him but he died minutes after the medication was administered. Did cancer cause John's premature death?
+Label: Yes
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, an empty email is immediately sent from the central computer to a non-existent email address. One day, Alice logs in to the central computer at 9 am. The same day, Zoe logs in at 9:30 am, when Alice is already logged in. Immediately, an empty email is sent from the central computer to a non-existent email address. Did Zoe cause an empty email to be sent from the central computer to a non-existent email address?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7162162162162162
+Test accuracy: 0.6371681415929203
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 228.97706151008606
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: A person, Joe, is playing a casino game where he reaches his hand into two boxes and blindly draws a ball from each box. He wins a dollar if and only if he gets a green ball from the left box and a blue ball from the right box. It is unlikely that he gets a green ball from the first box. It is very likely that he gets a blue ball in the second box. Joe closes his eyes, reaches in, and chooses a green ball from the first box and a blue ball from the second box. So Joe wins a dollar. Did Joe's first choice cause him to win a dollar?
+Label: Yes
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, an empty email is immediately sent from the central computer to a non-existent email address. One day, Alice logs in to the central computer at 9 am. The same day, Zoe also logs in at 9 am. Immediately, an empty email is sent from the central computer to a non-existent email address. Did Zoe cause an empty email to be sent from the central computer to a non-existent email address?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838
+Test accuracy: 0.672566371681416
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 325.7819664478302
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: A person, Joe, is playing a casino game where he reaches his hand into two boxes and blindly draws a ball from each box. He wins a dollar if and only if he gets a green ball from the left box and a blue ball from the right box. It is unlikely that he gets a green ball from the first box. It is very likely that he gets a blue ball in the second box. Joe closes his eyes, reaches in, and chooses a green ball from the first box and a blue ball from the second box. So Joe wins a dollar. Did Joe's first choice cause him to win a dollar?
+Label: Yes
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, an empty email is immediately sent from the central computer to a non-existent email address. One day, Alice logs in to the central computer at 9 am. The same day, Zoe also logs in at 9 am. Immediately, an empty email is sent from the central computer to a non-existent email address. Did Zoe cause an empty email to be sent from the central computer to a non-existent email address?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838
+Test accuracy: 0.672566371681416
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 425.9778199195862
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: A person, Joe, is playing a casino game where he reaches his hand into two boxes and blindly draws a ball from each box. He wins a dollar if and only if he gets a green ball from the left box and a blue ball from the right box. It is unlikely that he gets a green ball from the first box. It is very likely that he gets a blue ball in the second box. Joe closes his eyes, reaches in, and chooses a green ball from the first box and a blue ball from the second box. So Joe wins a dollar. Did Joe's first choice cause him to win a dollar?
+Label: Yes
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, an empty email is immediately sent from the central computer to a non-existent email address. One day, Alice logs in to the central computer at 9 am. The same day, Zoe also logs in at 9 am. Immediately, an empty email is sent from the central computer to a non-existent email address. Did Zoe cause an empty email to be sent from the central computer to a non-existent email address?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838
+Test accuracy: 0.672566371681416
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 523.8581247329712
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: A person, Joe, is playing a casino game where he reaches his hand into two boxes and blindly draws a ball from each box. He wins a dollar if and only if he gets a green ball from the left box and a blue ball from the right box. It is unlikely that he gets a green ball from the first box. It is very likely that he gets a blue ball in the second box. Joe closes his eyes, reaches in, and chooses a green ball from the first box and a blue ball from the second box. So Joe wins a dollar. Did Joe's first choice cause him to win a dollar?
+Label: Yes
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, an empty email is immediately sent from the central computer to a non-existent email address. One day, Alice logs in to the central computer at 9 am. The same day, Zoe also logs in at 9 am. Immediately, an empty email is sent from the central computer to a non-existent email address. Did Zoe cause an empty email to be sent from the central computer to a non-existent email address?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838
+Test accuracy: 0.672566371681416
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 624.1681280136108
+Prompt: # Task
+Examine each situation to identify the elements contributing to the particular result. Take into account both immediate and secondary influences, as well as the environment in which the events take place. Determine if any specific element was crucial for the result, understanding that sometimes several elements may contribute equally, and at other times, the existence of a single element (regardless of other elements being present) might be enough to lead to the result.
+
+# Here are some examples:
+Text: A person, Joe, is playing a casino game where he reaches his hand into two boxes and blindly draws a ball from each box. He wins a dollar if and only if he gets a green ball from the left box and a blue ball from the right box. It is unlikely that he gets a green ball from the first box. It is very likely that he gets a blue ball in the second box. Joe closes his eyes, reaches in, and chooses a green ball from the first box and a blue ball from the second box. So Joe wins a dollar. Did Joe's first choice cause him to win a dollar?
+Label: Yes
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, an empty email is immediately sent from the central computer to a non-existent email address. One day, Alice logs in to the central computer at 9 am. The same day, Zoe also logs in at 9 am. Immediately, an empty email is sent from the central computer to a non-existent email address. Did Zoe cause an empty email to be sent from the central computer to a non-existent email address?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7837837837837838
+Test accuracy: 0.672566371681416

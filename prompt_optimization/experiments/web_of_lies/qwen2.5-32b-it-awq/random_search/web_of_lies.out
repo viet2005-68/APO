@@ -1,0 +1,150 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.797919750213623
+Prompt: ('# Task\n"Starting with the first statement, determine the truthfulness of each subsequent statement based on whether the person making the statement is telling the truth or lying, according to the previous statements. Finally, conclude whether the last individual’s statement aligns with this logical progression."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.7),)
+Test accuracy: [0.6266666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 47.899911403656006
+Prompt: # Task
+"Starting with the first statement, determine the truthfulness of each subsequent statement based on whether the person making the statement is telling the truth or lying, according to the previous statements. Finally, conclude whether the last individual’s statement aligns with this logical progression."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Shaunda says Ryan tells the truth. Leda says Shaunda lies. Teressa says Leda lies. Christie says Teressa tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.6866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 91.78246402740479
+Prompt: # Task
+"Starting with the first statement, determine the truthfulness of each subsequent statement based on whether the person making the statement is telling the truth or lying, according to the previous statements. Finally, conclude whether the last individual’s statement aligns with this logical progression."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Shaunda says Ryan tells the truth. Leda says Shaunda lies. Teressa says Leda lies. Christie says Teressa tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.6866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 132.38565397262573
+Prompt: # Task
+"Starting with the first statement, determine the truthfulness of each subsequent statement based on whether the person making the statement is telling the truth or lying, according to the previous statements. Finally, conclude whether the last individual’s statement aligns with this logical progression."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Shaunda says Ryan tells the truth. Leda says Shaunda lies. Teressa says Leda lies. Christie says Teressa tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.6866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 172.9862015247345
+Prompt: # Task
+"Starting with the first statement, determine the truthfulness of each subsequent statement based on whether the person making the statement is telling the truth or lying, according to the previous statements. Finally, conclude whether the last individual’s statement aligns with this logical progression."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Shaunda says Ryan tells the truth. Leda says Shaunda lies. Teressa says Leda lies. Christie says Teressa tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.6866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 212.69892263412476
+Prompt: # Task
+"Starting with the first statement, determine the truthfulness of each subsequent statement based on whether the person making the statement is telling the truth or lying, according to the previous statements. Finally, conclude whether the last individual’s statement aligns with this logical progression."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Shaunda says Ryan tells the truth. Leda says Shaunda lies. Teressa says Leda lies. Christie says Teressa tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.6866666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 252.8880476951599
+Prompt: # Task
+"Starting with the first statement, determine the truthfulness of each subsequent statement based on whether the person making the statement is telling the truth or lying, according to the previous statements. Finally, conclude whether the last individual’s statement aligns with this logical progression."
+
+# Here are some examples:
+Text: Question: Ryan tells the truth. Shaunda says Ryan tells the truth. Leda says Shaunda lies. Teressa says Leda lies. Christie says Teressa tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Bernita tells the truth. Audrie says Bernita lies. Delfina says Audrie tells the truth. Vina says Delfina lies. Sal says Vina tells the truth. Does Sal tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+Text: Question: Sima tells the truth. Yoland says Sima lies. Amberly says Yoland tells the truth. Inga says Amberly lies. Alexis says Inga tells the truth. Does Alexis tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.6866666666666666

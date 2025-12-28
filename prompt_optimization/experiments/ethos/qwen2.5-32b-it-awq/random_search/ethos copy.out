@@ -1,0 +1,164 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 6.519313812255859
+Prompt: ('# Task\nDetermine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.95),)
+Test accuracy: [0.8866666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 83.33112907409668
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: Easter is the most silly holiday ever existed. It must be stopped. Shame shame shame
+Label: Yes
+Text: You deserve way more subscribers . The shit you say is fucking gold.
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+Text: I can smell the failure through my phone screen
+Label: No
+Text: White chocolate and raspberry :)
+Label: No
+Text: Anti-LGBT people ,How sad and ignorant...I cant believe it..How how ??? can they not see how STUPID they are?????
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 161.24624943733215
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: if they hide in the engine they would get killedthat is a stupid way they can smuggle into another country
+Label: No
+Text: Syria war is over they can go back its safe now.
+Label: No
+Text: Did anybody actually know that h3h3 was a reaction channel
+Label: No
+Text: Didn’t know shitted coloured like you could talk
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 238.21595549583435
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: if they hide in the engine they would get killedthat is a stupid way they can smuggle into another country
+Label: No
+Text: Syria war is over they can go back its safe now.
+Label: No
+Text: Did anybody actually know that h3h3 was a reaction channel
+Label: No
+Text: Didn’t know shitted coloured like you could talk
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 317.35352897644043
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: if they hide in the engine they would get killedthat is a stupid way they can smuggle into another country
+Label: No
+Text: Syria war is over they can go back its safe now.
+Label: No
+Text: Did anybody actually know that h3h3 was a reaction channel
+Label: No
+Text: Didn’t know shitted coloured like you could talk
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 389.55075883865356
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: if they hide in the engine they would get killedthat is a stupid way they can smuggle into another country
+Label: No
+Text: Syria war is over they can go back its safe now.
+Label: No
+Text: Did anybody actually know that h3h3 was a reaction channel
+Label: No
+Text: Didn’t know shitted coloured like you could talk
+Label: No
+Text: Why the fuck would you ask Trump?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 460.42206859588623
+Prompt: # Task
+Determine if the text below qualifies as hate speech. Hate speech involves explicit targeting of specific protected groups (such as race, ethnicity, religion, gender, sexual orientation, or disability) with the purpose of fostering prejudice, hostility, or violence towards those groups. Be cautious to avoid classifying exaggerations, satirical comments, or cultural critiques as hate speech unless they clearly intend to harm. Is the provided text hate speech?
+
+# Here are some examples:
+Text: Huh kids like this with crazy eyes and weird moves lurking around are scary. Please mama of this creeper cuff him and sent him to an asylum 
+Label: No
+Text: i like dead refugees on my shore√Ø¬ª¬ø
+Label: Yes
+Text: Syria war is over they can go back its safe now.
+Label: No
+Text: To the lady that can barely speak English and then look down upon her own people, that's disgraceful.
+Label: No
+Text: In the US that same game was called ten little Indians. I know.. It’s boring
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.94
+Test accuracy: 0.8866666666666667

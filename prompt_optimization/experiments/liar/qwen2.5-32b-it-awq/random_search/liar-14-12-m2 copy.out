@@ -1,0 +1,270 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 12.442649126052856
+Prompt: ('# Task\n"Given a statement, along with the speaker\'s occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.59765625,)
+Test accuracy: [0.6355748373101953]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 97.02568101882935
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Millions of Americans are paying more and getting less under Obamacare.
+Job title: 
+State: 
+Party: none
+Context: a political ad
+Label: Yes
+Text: Statement: The claim ... that we plan to set up panels of bureaucrats with the power to kill off senior citizens ... is a lie, plain and simple.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a speech to a joint session of Congress
+Label: No
+Text: Statement: Only 2 percent of public high schools in the country offer PE classes.
+Job title: 
+State: Illinois
+Party: democrat
+Context: an interview with NPR
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6517857142857143
+Test accuracy: 0.6594360086767896
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 183.0379617214203
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Says actor Dwayne The Rock Johnson wore a T-shirt stating: We Stand for the flag, we kneel for the fallen.
+Job title: State agriculture commissioner
+State: Texas
+Party: republican
+Context: a Facebook post of photo and caption on Miller's fan page
+Label: Yes
+Text: Statement: Says U.S. Rep. Tammy Baldwin is backing President Barack Obamas plan to pass a $1.5 trillion tax increase.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: Yes
+Text: Statement: On supporting winner of Democratic primary with her superdelegate vote.
+Job title: 
+State: 
+Party: democrat
+Context: an interview
+Label: Yes
+Text: Statement: A new Colorado law literally allows residents to print ballots from their home computers, then encourages them to turn ballots over to collectors.
+Job title: Host of "The Kelly File"
+State: 
+Party: talk-show-host
+Context: a segment on "The Kelly File"
+Label: Yes
+Text: Statement: Between 1982 and 2007 the cost of a college education increased 439 percent.
+Job title: U.S. Senator
+State: Oregon
+Party: democrat
+Context: a news release
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7135416666666666
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 272.65293884277344
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Says actor Dwayne The Rock Johnson wore a T-shirt stating: We Stand for the flag, we kneel for the fallen.
+Job title: State agriculture commissioner
+State: Texas
+Party: republican
+Context: a Facebook post of photo and caption on Miller's fan page
+Label: Yes
+Text: Statement: Says U.S. Rep. Tammy Baldwin is backing President Barack Obamas plan to pass a $1.5 trillion tax increase.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: Yes
+Text: Statement: On supporting winner of Democratic primary with her superdelegate vote.
+Job title: 
+State: 
+Party: democrat
+Context: an interview
+Label: Yes
+Text: Statement: A new Colorado law literally allows residents to print ballots from their home computers, then encourages them to turn ballots over to collectors.
+Job title: Host of "The Kelly File"
+State: 
+Party: talk-show-host
+Context: a segment on "The Kelly File"
+Label: Yes
+Text: Statement: Between 1982 and 2007 the cost of a college education increased 439 percent.
+Job title: U.S. Senator
+State: Oregon
+Party: democrat
+Context: a news release
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7135416666666666
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 357.8563792705536
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Says actor Dwayne The Rock Johnson wore a T-shirt stating: We Stand for the flag, we kneel for the fallen.
+Job title: State agriculture commissioner
+State: Texas
+Party: republican
+Context: a Facebook post of photo and caption on Miller's fan page
+Label: Yes
+Text: Statement: Says U.S. Rep. Tammy Baldwin is backing President Barack Obamas plan to pass a $1.5 trillion tax increase.
+Job title: 
+State: 
+Party: republican
+Context: a news release
+Label: Yes
+Text: Statement: On supporting winner of Democratic primary with her superdelegate vote.
+Job title: 
+State: 
+Party: democrat
+Context: an interview
+Label: Yes
+Text: Statement: A new Colorado law literally allows residents to print ballots from their home computers, then encourages them to turn ballots over to collectors.
+Job title: Host of "The Kelly File"
+State: 
+Party: talk-show-host
+Context: a segment on "The Kelly File"
+Label: Yes
+Text: Statement: Between 1982 and 2007 the cost of a college education increased 439 percent.
+Job title: U.S. Senator
+State: Oregon
+Party: democrat
+Context: a news release
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7135416666666666
+Test accuracy: 0.665943600867679
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 446.5563597679138
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Fleeing Syria, a million children are now refugees.
+Job title: U.S. senator
+State: Arizona
+Party: republican
+Context: an interview on "Face the Nation"
+Label: No
+Text: Statement: Commerce Secretary nominee John Bryson appears to endorse world government.
+Job title: 
+State: 
+Party: republican
+Context: a web news story
+Label: Yes
+Text: Statement: Florida is one of only three states that require licenses for commercial interior designers.
+Job title: 
+State: Florida
+Party: none
+Context: testimony to Florida House Business and Consumer Affairs Subcommittee.
+Label: No
+Text: Statement: (Jeff) Atwaters busy helping his friends and wasting our tax dollars -- $48 million for a government building so lavish its dubbed the Taj Mahal, $100,000 for a golf musuem, and $110 million to build a private prison to help a big contributor.
+Job title: 
+State: Florida
+Party: democrat
+Context: a TV ad.
+Label: Yes
+Text: Statement: Barack Obama has consistently voted against tougher penalties for criminals.
+Job title: 
+State: 
+Party: republican
+Context: a campaign mailer
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7291666666666666
+Test accuracy: 0.665943600867679
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 535.7637984752655
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Fleeing Syria, a million children are now refugees.
+Job title: U.S. senator
+State: Arizona
+Party: republican
+Context: an interview on "Face the Nation"
+Label: No
+Text: Statement: Commerce Secretary nominee John Bryson appears to endorse world government.
+Job title: 
+State: 
+Party: republican
+Context: a web news story
+Label: Yes
+Text: Statement: Florida is one of only three states that require licenses for commercial interior designers.
+Job title: 
+State: Florida
+Party: none
+Context: testimony to Florida House Business and Consumer Affairs Subcommittee.
+Label: No
+Text: Statement: (Jeff) Atwaters busy helping his friends and wasting our tax dollars -- $48 million for a government building so lavish its dubbed the Taj Mahal, $100,000 for a golf musuem, and $110 million to build a private prison to help a big contributor.
+Job title: 
+State: Florida
+Party: democrat
+Context: a TV ad.
+Label: Yes
+Text: Statement: Barack Obama has consistently voted against tougher penalties for criminals.
+Job title: 
+State: 
+Party: republican
+Context: a campaign mailer
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7291666666666666
+Test accuracy: 0.665943600867679

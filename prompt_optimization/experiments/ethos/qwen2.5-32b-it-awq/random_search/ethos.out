@@ -1,0 +1,156 @@
+{"task": "ethos", "data_dir": "data/ethos", "prompts": "prompts/ethos.md", "out": "experiments/ethos.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 6.777630805969238
+Prompt: ('# Task\nAssess whether the given text contains hate speech by looking for direct expressions of discrimination, hostility, or violence aimed at individuals or groups due to their inherent traits like race, ethnicity, nationality, religion, gender, sexual orientation, or disability. Hate speech is characterized by language that explicitly encourages or condones harm, dehumanization, or biased treatment of people based on these attributes. It\'s important to distinguish this from criticisms of behaviors or ideas that do not target individuals\' identities, which wouldn\'t be considered hate speech unless there is undeniable proof of an aggressive intention toward a person\'s or group\'s essential qualities.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.93),)
+Test accuracy: [0.8866666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 84.56969380378723
+Prompt: # Task
+Assess whether the given text contains hate speech by looking for direct expressions of discrimination, hostility, or violence aimed at individuals or groups due to their inherent traits like race, ethnicity, nationality, religion, gender, sexual orientation, or disability. Hate speech is characterized by language that explicitly encourages or condones harm, dehumanization, or biased treatment of people based on these attributes. It's important to distinguish this from criticisms of behaviors or ideas that do not target individuals' identities, which wouldn't be considered hate speech unless there is undeniable proof of an aggressive intention toward a person's or group's essential qualities.
+
+# Here are some examples:
+Text: All these women have such obvious respect and admiration for each other
+Label: No
+Text: I'm sick and tired of this black and white thing....can't we just stop and let's be happy for just one day.....we are all one let's stop this please... One love and peace.
+Label: No
+Text: I would pull you over for your race, if I was a cop.
+Label: Yes
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: FUCKING NIGGER GO BACK TO AFRICA
+Label: Yes
+Text: Didn’t know shitted coloured like you could talk
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 159.28658318519592
+Prompt: # Task
+Assess whether the given text contains hate speech by looking for direct expressions of discrimination, hostility, or violence aimed at individuals or groups due to their inherent traits like race, ethnicity, nationality, religion, gender, sexual orientation, or disability. Hate speech is characterized by language that explicitly encourages or condones harm, dehumanization, or biased treatment of people based on these attributes. It's important to distinguish this from criticisms of behaviors or ideas that do not target individuals' identities, which wouldn't be considered hate speech unless there is undeniable proof of an aggressive intention toward a person's or group's essential qualities.
+
+# Here are some examples:
+Text: All these women have such obvious respect and admiration for each other
+Label: No
+Text: I'm sick and tired of this black and white thing....can't we just stop and let's be happy for just one day.....we are all one let's stop this please... One love and peace.
+Label: No
+Text: I would pull you over for your race, if I was a cop.
+Label: Yes
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: FUCKING NIGGER GO BACK TO AFRICA
+Label: Yes
+Text: Didn’t know shitted coloured like you could talk
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 231.78846669197083
+Prompt: # Task
+Assess whether the given text contains hate speech by looking for direct expressions of discrimination, hostility, or violence aimed at individuals or groups due to their inherent traits like race, ethnicity, nationality, religion, gender, sexual orientation, or disability. Hate speech is characterized by language that explicitly encourages or condones harm, dehumanization, or biased treatment of people based on these attributes. It's important to distinguish this from criticisms of behaviors or ideas that do not target individuals' identities, which wouldn't be considered hate speech unless there is undeniable proof of an aggressive intention toward a person's or group's essential qualities.
+
+# Here are some examples:
+Text: All these women have such obvious respect and admiration for each other
+Label: No
+Text: I'm sick and tired of this black and white thing....can't we just stop and let's be happy for just one day.....we are all one let's stop this please... One love and peace.
+Label: No
+Text: I would pull you over for your race, if I was a cop.
+Label: Yes
+Text: I really don’t like your accent. I don’t want to call support and call to rats like you. I want a cute lady with British accent to answer my call. You are third world pieces with no job to this planet
+Label: Yes
+Text: FUCKING NIGGER GO BACK TO AFRICA
+Label: Yes
+Text: Didn’t know shitted coloured like you could talk
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 306.8970160484314
+Prompt: # Task
+Assess whether the given text contains hate speech by looking for direct expressions of discrimination, hostility, or violence aimed at individuals or groups due to their inherent traits like race, ethnicity, nationality, religion, gender, sexual orientation, or disability. Hate speech is characterized by language that explicitly encourages or condones harm, dehumanization, or biased treatment of people based on these attributes. It's important to distinguish this from criticisms of behaviors or ideas that do not target individuals' identities, which wouldn't be considered hate speech unless there is undeniable proof of an aggressive intention toward a person's or group's essential qualities.
+
+# Here are some examples:
+Text: Be aware of the girl in class who doesn't know how to control her emotions because she doesn’t understand that it's not socially acceptable for someone her age to have an outburst.
+Label: No
+Text:  I just wanna make you feel okay
+Label: No
+Text: seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 385.60336542129517
+Prompt: # Task
+Assess whether the given text contains hate speech by looking for direct expressions of discrimination, hostility, or violence aimed at individuals or groups due to their inherent traits like race, ethnicity, nationality, religion, gender, sexual orientation, or disability. Hate speech is characterized by language that explicitly encourages or condones harm, dehumanization, or biased treatment of people based on these attributes. It's important to distinguish this from criticisms of behaviors or ideas that do not target individuals' identities, which wouldn't be considered hate speech unless there is undeniable proof of an aggressive intention toward a person's or group's essential qualities.
+
+# Here are some examples:
+Text: Be aware of the girl in class who doesn't know how to control her emotions because she doesn’t understand that it's not socially acceptable for someone her age to have an outburst.
+Label: No
+Text:  I just wanna make you feel okay
+Label: No
+Text: seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95
+Test accuracy: 0.88
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 459.8760085105896
+Prompt: # Task
+Assess whether the given text contains hate speech by looking for direct expressions of discrimination, hostility, or violence aimed at individuals or groups due to their inherent traits like race, ethnicity, nationality, religion, gender, sexual orientation, or disability. Hate speech is characterized by language that explicitly encourages or condones harm, dehumanization, or biased treatment of people based on these attributes. It's important to distinguish this from criticisms of behaviors or ideas that do not target individuals' identities, which wouldn't be considered hate speech unless there is undeniable proof of an aggressive intention toward a person's or group's essential qualities.
+
+# Here are some examples:
+Text: Be aware of the girl in class who doesn't know how to control her emotions because she doesn’t understand that it's not socially acceptable for someone her age to have an outburst.
+Label: No
+Text:  I just wanna make you feel okay
+Label: No
+Text: seen the way the israelis treat the palestinians? slaughter on a weekly basis, very racist are the israelis to the point of genocide.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95
+Test accuracy: 0.88

@@ -20,35 +20,29 @@ Prompt: ('# Task\nAssess whether the Statement is likely to be accurate (No) or 
 Training accuracy: (0.6979166666666666, 0.6875, 0.6875, 0.6875)
 Test accuracy: [0.6594360086767896, 0.6594360086767896, 0.6355748373101953, 0.6637744034707158]
 ======== EXEMPLAR OPTIMIZATION ROUND 0
-Time: 119.04895424842834
+Time: 159.6289324760437
 Prompt: # Task
 Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
 
 # Here are some examples:
-Text: Statement: The U.S. Supreme Court decided in 1982 that non-citizen children must get free K-12 education.
-Job title: Candidate
+Text: Statement: The 2011 Rebuild America Jobs Act would have cost the average American family $1,000 a year while making no significant impact to fix our infrastructure and roads.
+Job title: Pediatric neurosurgeon
+State: Oregon
+Party: republican
+Context: an economic issues statement
+Label: Yes
+Text: Statement: Cell phone numbers go public this month.
+Job title: State House representative
 State: Texas
 Party: republican
-Context: an email blast
-Label: No
-Text: Statement: After today, @GovJayNixon will have been overridden more times than all previous governors in #MO history #moleg
-Job title: Lieutenant governor
-State: Missouri
+Context: Facebook and Twitter posts
+Label: Yes
+Text: Statement: Claims Supreme Court Justice Ruth Bader Ginsburg said she prefers the South African Constitution over the United States Constitution.
+Job title: 
+State: Pennsylvania
 Party: republican
-Context: a tweet
-Label: No
-Text: Statement: "You know we can't just pull out now... The truth of the matter is: If we started today, it would take one year, one year to get 160,000 troops physically out of Iraq, logistically."
-Job title: U.S. senator
-State: Delaware
-Party: democrat
-Context: CNN/YouTube debate in Charleston, S.C.
-Label: No
-Text: Statement: Miller Brewing is not a U.S. company any more. Neither is Anheuser-Busch.
-Job title: U.S. Representative
-State: Wisconsin
-Party: republican
-Context: a speech
-Label: No
+Context: a speech 
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -57,38 +51,32 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.6458333333333334 | Penalized score: 0.4659921255022513
-Test accuracy: 0.6832971800433839
+Training accuracy: 0.625 | Penalized score: 0.45942361265249865
+Test accuracy: 0.6898047722342733
 ======== EXEMPLAR OPTIMIZATION ROUND 1
-Time: 121.88592648506165
+Time: 131.44347667694092
 Prompt: # Task
 Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
 
 # Here are some examples:
-Text: Statement: After today, @GovJayNixon will have been overridden more times than all previous governors in #MO history #moleg
-Job title: Lieutenant governor
-State: Missouri
+Text: Statement: The 2011 Rebuild America Jobs Act would have cost the average American family $1,000 a year while making no significant impact to fix our infrastructure and roads.
+Job title: Pediatric neurosurgeon
+State: Oregon
 Party: republican
-Context: a tweet
-Label: No
-Text: Statement: I stopped requesting earmarks in 2008.
-Job title: congressman
+Context: an economic issues statement
+Label: Yes
+Text: Statement: Cell phone numbers go public this month.
+Job title: State House representative
 State: Texas
 Party: republican
-Context: a newsletter
-Label: No
-Text: Statement: Uncompensated care has gone down by 30 percent just in the first few months of Medicaid expansion in the states that adopted it.
-Job title: State senator
-State: Virginia
-Party: democrat
-Context: statement
-Label: No
-Text: Statement: Deer baiting, planned for Block Island by DEM, is illegal in Rhode Island.
-Job title: talk show host
-State: Rhode Island
-Party: talk-show-host
-Context: a Providence Journal commentary
-Label: No
+Context: Facebook and Twitter posts
+Label: Yes
+Text: Statement: Claims Supreme Court Justice Ruth Bader Ginsburg said she prefers the South African Constitution over the United States Constitution.
+Job title: 
+State: Pennsylvania
+Party: republican
+Context: a speech 
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -97,38 +85,32 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.6979166666666666 | Penalized score: 0.5224171083946904
-Test accuracy: 0.6724511930585684
+Training accuracy: 0.6614583333333334 | Penalized score: 0.495881945985832
+Test accuracy: 0.6898047722342733
 ======== EXEMPLAR OPTIMIZATION ROUND 2
-Time: 119.52657747268677
+Time: 134.48238253593445
 Prompt: # Task
 Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
 
 # Here are some examples:
-Text: Statement: After today, @GovJayNixon will have been overridden more times than all previous governors in #MO history #moleg
-Job title: Lieutenant governor
-State: Missouri
+Text: Statement: The 2011 Rebuild America Jobs Act would have cost the average American family $1,000 a year while making no significant impact to fix our infrastructure and roads.
+Job title: Pediatric neurosurgeon
+State: Oregon
 Party: republican
-Context: a tweet
-Label: No
-Text: Statement: I stopped requesting earmarks in 2008.
-Job title: congressman
+Context: an economic issues statement
+Label: Yes
+Text: Statement: Cell phone numbers go public this month.
+Job title: State House representative
 State: Texas
 Party: republican
-Context: a newsletter
-Label: No
-Text: Statement: Uncompensated care has gone down by 30 percent just in the first few months of Medicaid expansion in the states that adopted it.
-Job title: State senator
-State: Virginia
-Party: democrat
-Context: statement
-Label: No
-Text: Statement: Deer baiting, planned for Block Island by DEM, is illegal in Rhode Island.
-Job title: talk show host
-State: Rhode Island
-Party: talk-show-host
-Context: a Providence Journal commentary
-Label: No
+Context: Facebook and Twitter posts
+Label: Yes
+Text: Statement: Claims Supreme Court Justice Ruth Bader Ginsburg said she prefers the South African Constitution over the United States Constitution.
+Job title: 
+State: Pennsylvania
+Party: republican
+Context: a speech 
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -137,37 +119,37 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.65625 | Penalized score: 0.4807504417280237
-Test accuracy: 0.6724511930585684
+Training accuracy: 0.61328125 | Penalized score: 0.44770486265249865
+Test accuracy: 0.6898047722342733
 ======== EXEMPLAR OPTIMIZATION ROUND 3
-Time: 119.46263098716736
+Time: 122.64922857284546
 Prompt: # Task
 Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
 
 # Here are some examples:
-Text: Statement: After today, @GovJayNixon will have been overridden more times than all previous governors in #MO history #moleg
-Job title: Lieutenant governor
-State: Missouri
+Text: Statement: Amniocentesis, does, in fact, result more often than not in this country in abortion.
+Job title: 
+State: Pennsylvania
 Party: republican
-Context: a tweet
-Label: No
-Text: Statement: I stopped requesting earmarks in 2008.
-Job title: congressman
+Context: an interview on CBS's "Face the Nation"
+Label: Yes
+Text: Statement: "By the end of Governor Rick Perry's term, he will have drained Texas taxpayers ... of more than $360,000 to pay for the rental mansion he has been living in while the historic Governor's Mansion is repaired."
+Job title: Former mayor of Houston
 State: Texas
-Party: republican
-Context: a newsletter
-Label: No
-Text: Statement: Uncompensated care has gone down by 30 percent just in the first few months of Medicaid expansion in the states that adopted it.
-Job title: State senator
-State: Virginia
 Party: democrat
-Context: statement
+Context: a press release
 Label: No
-Text: Statement: Deer baiting, planned for Block Island by DEM, is illegal in Rhode Island.
-Job title: talk show host
-State: Rhode Island
-Party: talk-show-host
-Context: a Providence Journal commentary
+Text: Statement: The Mitchell Park Domes lose about $1 million-plus every year and the number of people going to the Domes has been going down.
+Job title: Philanthropist
+State: Wisconsin
+Party: none
+Context: an interview
+Label: Yes
+Text: Statement: Speakers at the Democratic National Convention made zero mentions of the global terrorist threat posed by ISIS.
+Job title: 
+State: 
+Party: republican
+Context: an email to reporters
 Label: No
 # Output format
 Answer ONLY "Yes" or "No".
@@ -177,32 +159,32 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.6458333333333334 | Penalized score: 0.4703337750613571
-Test accuracy: 0.6724511930585684
+Training accuracy: 0.640625 | Penalized score: 0.4759366355462098
+Test accuracy: 0.7158351409978309
 ======== EXEMPLAR OPTIMIZATION ROUND 4
-Time: 112.25496554374695
+Time: 111.16481828689575
 Prompt: # Task
 Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
 
 # Here are some examples:
-Text: Statement: There are places in America that are among the most dangerous in the world. You go to places like Oakland. Or Ferguson. The crime numbers are worse. Seriously.
-Job title: President-Elect
-State: New York
+Text: Statement: The 2011 Rebuild America Jobs Act would have cost the average American family $1,000 a year while making no significant impact to fix our infrastructure and roads.
+Job title: Pediatric neurosurgeon
+State: Oregon
 Party: republican
-Context: an interview with the New York Times Magazine
+Context: an economic issues statement
 Label: Yes
-Text: Statement: I stopped requesting earmarks in 2008.
-Job title: congressman
+Text: Statement: Cell phone numbers go public this month.
+Job title: State House representative
 State: Texas
 Party: republican
-Context: a newsletter
-Label: No
-Text: Statement: Uncompensated care has gone down by 30 percent just in the first few months of Medicaid expansion in the states that adopted it.
-Job title: State senator
-State: Virginia
-Party: democrat
-Context: statement
-Label: No
+Context: Facebook and Twitter posts
+Label: Yes
+Text: Statement: Claims Supreme Court Justice Ruth Bader Ginsburg said she prefers the South African Constitution over the United States Constitution.
+Job title: 
+State: Pennsylvania
+Party: republican
+Context: a speech 
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -211,32 +193,32 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.6473214285714286 | Penalized score: 0.474307203954205
-Test accuracy: 0.6616052060737527
+Training accuracy: 0.6145833333333334 | Penalized score: 0.449006945985832
+Test accuracy: 0.6898047722342733
 ======== EXEMPLAR OPTIMIZATION ROUND 5
-Time: 111.63776278495789
+Time: 127.46047258377075
 Prompt: # Task
 Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
 
 # Here are some examples:
-Text: Statement: There are places in America that are among the most dangerous in the world. You go to places like Oakland. Or Ferguson. The crime numbers are worse. Seriously.
-Job title: President-Elect
-State: New York
+Text: Statement: The 2011 Rebuild America Jobs Act would have cost the average American family $1,000 a year while making no significant impact to fix our infrastructure and roads.
+Job title: Pediatric neurosurgeon
+State: Oregon
 Party: republican
-Context: an interview with the New York Times Magazine
+Context: an economic issues statement
 Label: Yes
-Text: Statement: I stopped requesting earmarks in 2008.
-Job title: congressman
+Text: Statement: Cell phone numbers go public this month.
+Job title: State House representative
 State: Texas
 Party: republican
-Context: a newsletter
-Label: No
-Text: Statement: Uncompensated care has gone down by 30 percent just in the first few months of Medicaid expansion in the states that adopted it.
-Job title: State senator
-State: Virginia
-Party: democrat
-Context: statement
-Label: No
+Context: Facebook and Twitter posts
+Label: Yes
+Text: Statement: Claims Supreme Court Justice Ruth Bader Ginsburg said she prefers the South African Constitution over the United States Constitution.
+Job title: 
+State: Pennsylvania
+Party: republican
+Context: a speech 
+Label: Yes
 # Output format
 Answer ONLY "Yes" or "No".
 NO explanations.
@@ -245,5 +227,5 @@ No other words.
 # Prediction
 Text: {{ text }}
 Label:
-Training accuracy: 0.671875 | Penalized score: 0.4988607753827764
-Test accuracy: 0.6616052060737527
+Training accuracy: 0.6145833333333334 | Penalized score: 0.449006945985832
+Test accuracy: 0.6898047722342733

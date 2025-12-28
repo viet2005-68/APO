@@ -1,0 +1,170 @@
+{"task": "casual_judgement", "data_dir": "data/casual_judgement", "prompts": "prompts/casual_judgement.md", "out": "experiments/casual_judgement.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 7.20612907409668
+Prompt: ('# Task\n"Identify the direct and indirect causes of the outcome in each scenario, considering any given conditional statements and the intentionality behind the actions taken."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.7297297297297297),)
+Test accuracy: [0.6991150442477876]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 101.34760761260986
+Prompt: # Task
+"Identify the direct and indirect causes of the outcome in each scenario, considering any given conditional statements and the intentionality behind the actions taken."
+
+# Here are some examples:
+Text: Louie and Claire are playing a game of basketball, and they made a bet with their friends who are watching on the sidelines. If either Louie makes a 3-point shot or Claire makes a 3-point shot during the game, then they'll win $100 and split it down the middle. Just when the game started, Claire immediately got the ball at the 3-point line. She looked to the basket, focused her shot, and made a 3-point shot right at the beginning of the game. Louie, Claire, and their friends continued playing, but as hard as they tried, Louie and Claire couldn't make another shot. And then right at the end of the game as the clock was winding down, Louie got the ball at the 3-point line. He looked to the basket, focused his shot, and made a 3-point shot right at the buzzer. Then the game ended. Because they would win $100 if either Louie made a 3-point shot or Claire made a 3- point shot, Louie and Claire won $100 and split it down the middle. Think about what could have been different in the story that you just read. Which event do you imagine happening differently: Claire making the 3-point shot right at the beginning of the game. Louie making the 3-point shot right at the buzzer. Did Louie and Claire win the $100 bet because Louie made the 3-point shot?
+Label: No
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, an empty email is immediately sent from the central computer to a non-existent email address. One day, Alice logs in to the central computer at 9 am. The same day, Zoe logs in at 9:30 am, when Alice is already logged in. Immediately, an empty email is sent from the central computer to a non-existent email address. Did Zoe cause an empty email to be sent from the central computer to a non-existent email address?
+Label: Yes
+Text: Ned has a new motorboat. When Ned turns the key, the motorboat starts if either the gear is in neutral or the motor is in the lock position. Today, the gear is in neutral, and the motor is in the lock position. Ned checks the motor to see if it is in the lock position. He sees that it is in the lock position, and he does not change its position at all. Because the motorboat would start if either the gear is in neutral or the motor is in the lock position, the motorboat starts when Ned turns the key. Did the motorboat start because Ned did not change the position of the motor?
+Label: Yes
+Text: Representatives from the research and development department of a company reported to the board and said, "We are thinking of starting a new program. It will help us increase profits, but it will also help the environment." The board consisted of three members: Benson, Franklin, and Sorel. For various reasons, each of them personally opposed the program and tried to prevent it from being implemented. However, they were obliged to follow the board's standard decision-making protocol, which left no opportunity for their personal views to influence the decision. As a result, in line with the company's business policies and in the interest of maximizing profits, the new program was implemented. Sure enough, the program was highly profitable and the environment was helped. Did the board intentionally help the environment?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7162162162162162
+Test accuracy: 0.6902654867256637
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 202.44211506843567
+Prompt: # Task
+"Identify the direct and indirect causes of the outcome in each scenario, considering any given conditional statements and the intentionality behind the actions taken."
+
+# Here are some examples:
+Text: David has a new dryer in his apartment. David's clothes will dry in sixty minutes if either the cycle is set to MAX DRY or the temperature is set to HIGH. Today, the cycle is already set to MAX DRY, and the temperature is set on HIGH. David checks the dryer's settings, and he sees that the temperature is set on HIGH. He does not change the setting at all, and he leaves the temperature set to HIGH. He then turns on the dryer. Because the dryer would dry David's clothes in sixty minutes if either the cycle is set to MAX DRY or the temperature is set to HIGH, the dryer dries David's clothes in sixty minutes. Did David's clothes dry in sixty minutes because David did not change the temperature setting?
+Label: Yes
+Text: Jake desperately wants to have more money. He knows that he will inherit a lot of money when his aunt dies. One day, he sees his aunt walking by the window. He raises his rifle, gets her in the sights, and presses the trigger. Jake is an expert marksman. His hands are steady. The gun is aimed perfectly. The bullet hits her directly in the heart. She dies instantly. Did Jake shoot his aunt in the heart intentionally?
+Label: Yes
+Text: Alex is playing a board game. Every turn in the game, you simultaneously roll two six-sided dice and spin a spinner. Alex will either win or lose the game on his next turn. Alex will only win the game if the total of dice roll is greater than 11 or the spinner lands on green. It is very unlikely that he will roll higher than 11. Normally, the spinner does land on green. Alex rolls his dice and spins the spinner at exactly the same time. He rolls a 12, so amazingly, he rolled greater than 11, and the spinner lands on green. Alex wins the game. Did Alex spinning result cause him to win the game?
+Label: No
+Text: A company will send its clients a free sample of coffee if you are on their email list. Seeing that you are not subscribed, you change your subscription status by clicking a link, and later you receive the free sample. Did you receive the free sample because you changed your subscription status?
+Label: Yes
+Text: Billy and Suzy work for a company that has a central computer. If two people log in to the central computer at exactly 9:27 am, some work emails will be immediately deleted. In order to make sure that two people are available to answer phone calls during designated calling hours, the company issued the following official policy: Billy and Suzy are both permitted to log in to the central computer in the mornings, and neither of them are permitted to log in to the central computer in the afternoons. This morning at exactly 9:27 am, Billy and Suzy both log into the central computer at the same time. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?
+Label: No
+Text: Ned has a new motorboat. When Ned turns the key, the motorboat starts if either the gear is in neutral or the motor is in the lock position. Today, the gear is in neutral, and the motor is in the lock position. Ned checks the motor to see if it is in the lock position. He sees that it is in the lock position, and he does not change its position at all. Because the motorboat would start if either the gear is in neutral or the motor is in the lock position, the motorboat starts when Ned turns the key. Did the motorboat start because Ned did not change the position of the motor?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7567567567567568
+Test accuracy: 0.7168141592920354
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 335.8362534046173
+Prompt: # Task
+"Identify the direct and indirect causes of the outcome in each scenario, considering any given conditional statements and the intentionality behind the actions taken."
+
+# Here are some examples:
+Text: David has a new dryer in his apartment. David's clothes will dry in sixty minutes if either the cycle is set to MAX DRY or the temperature is set to HIGH. Today, the cycle is already set to MAX DRY, and the temperature is set on HIGH. David checks the dryer's settings, and he sees that the temperature is set on HIGH. He does not change the setting at all, and he leaves the temperature set to HIGH. He then turns on the dryer. Because the dryer would dry David's clothes in sixty minutes if either the cycle is set to MAX DRY or the temperature is set to HIGH, the dryer dries David's clothes in sixty minutes. Did David's clothes dry in sixty minutes because David did not change the temperature setting?
+Label: Yes
+Text: Jake desperately wants to have more money. He knows that he will inherit a lot of money when his aunt dies. One day, he sees his aunt walking by the window. He raises his rifle, gets her in the sights, and presses the trigger. Jake is an expert marksman. His hands are steady. The gun is aimed perfectly. The bullet hits her directly in the heart. She dies instantly. Did Jake shoot his aunt in the heart intentionally?
+Label: Yes
+Text: Alex is playing a board game. Every turn in the game, you simultaneously roll two six-sided dice and spin a spinner. Alex will either win or lose the game on his next turn. Alex will only win the game if the total of dice roll is greater than 11 or the spinner lands on green. It is very unlikely that he will roll higher than 11. Normally, the spinner does land on green. Alex rolls his dice and spins the spinner at exactly the same time. He rolls a 12, so amazingly, he rolled greater than 11, and the spinner lands on green. Alex wins the game. Did Alex spinning result cause him to win the game?
+Label: No
+Text: A company will send its clients a free sample of coffee if you are on their email list. Seeing that you are not subscribed, you change your subscription status by clicking a link, and later you receive the free sample. Did you receive the free sample because you changed your subscription status?
+Label: Yes
+Text: Billy and Suzy work for a company that has a central computer. If two people log in to the central computer at exactly 9:27 am, some work emails will be immediately deleted. In order to make sure that two people are available to answer phone calls during designated calling hours, the company issued the following official policy: Billy and Suzy are both permitted to log in to the central computer in the mornings, and neither of them are permitted to log in to the central computer in the afternoons. This morning at exactly 9:27 am, Billy and Suzy both log into the central computer at the same time. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?
+Label: No
+Text: Ned has a new motorboat. When Ned turns the key, the motorboat starts if either the gear is in neutral or the motor is in the lock position. Today, the gear is in neutral, and the motor is in the lock position. Ned checks the motor to see if it is in the lock position. He sees that it is in the lock position, and he does not change its position at all. Because the motorboat would start if either the gear is in neutral or the motor is in the lock position, the motorboat starts when Ned turns the key. Did the motorboat start because Ned did not change the position of the motor?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7567567567567568
+Test accuracy: 0.7168141592920354
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 434.51403427124023
+Prompt: # Task
+"Identify the direct and indirect causes of the outcome in each scenario, considering any given conditional statements and the intentionality behind the actions taken."
+
+# Here are some examples:
+Text: There is a superhero who has a group of good sidekicks working for him. The superhero and his sidekicks are the best of the best, never passing up a chance to do good. In fact, the superhero and his sidekicks do good things almost exclusively. You are the assistant to the superhero. Your job is to help him choose whom to promote within the ranks of the sidekicks. The job of the good sidekicks is to do maximum good at every opportunity. To make your decision, you've planted secret microphones and video cameras to observe the sidekick in action. Below is an episode that you've observed involving Bob, a sidekick eager to move up the ranks whom you will be asked to evaluate: A rookie sidekick said to Bob: "Sir, we have a plan to stop a bank robbery by releasing neurotoxins in the air, temporarily causing anyone in the vicinity of the bank to be incapacitated. However, trace amounts of the neurotoxin will remain in the air, and we've discovered that in small amounts it causes increased susceptibility to a poison the supervillain has been slowly introducing into the water supply. Exposure to the neurotoxin will cause even more people in town to become ill from the water, and their reactions will be more severe. It will greatly harm the town's quality of life." Bob the sidekick said: "I don't care one way or another about the health of the townspeople. I just want to stop the bank robbery the best I can. Let's go ahead with the plan." They went ahead with the plan, and sure enough Bob the sidekick stopped the bank robbery and many townspeople became severely ill. The health of the townspeople was thus harmed. Your boss, the superhero says: "I need to choose someone to promote up the hero ranks. I have a lot of sidekicks to choose from. All of them have proven that they are capable of doing good, but I want someone who is truly good. What about Bob? I heard he stopped a bank robbery, but made a bunch of townspeople ill." Did Bob intentionally harm the health of the townspeople?
+Label: Yes
+Text: Representatives from the research and development department of a company reported to the board and said, "We are thinking of starting a new program. It will help us increase profits, and it will also help the environment." For various reasons, each individual member of the board personally opposed the program and tried to prevent it from being implemented. Nevertheless, the interests of the company and the shareholders prevailed and the board decided to implement the new program. Sure enough, the program helped the environment. Did the board intentionally help the environment?
+Label: No
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, some spam emails containing dangerous viruses are immediately deleted from the central computer. In order to make sure that one person is always available to answer incoming phone calls, the company issued the following official policy: Alice is the only one permitted to log in to the central computer in the mornings, whereas Zoe is the only one permitted to log in to the central computer in the afternoons. One day, violating the official policy, Zoe logs in to the central computer at 9 am. The same day, Alice also logs in at 9 am. Immediately, some spam emails containing dangerous viruses are deleted from the central computer. Did Alice cause some spam emails containing dangerous viruses to be removed from the central computer?
+Label: No
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Billy and Suzy work for a company that has a central computer. If two people log in to the central computer at exactly 9:27 am, some work emails will be immediately deleted. In order to make sure that two people are available to answer phone calls during designated calling hours, the company issued the following official policy: Billy and Suzy are both permitted to log in to the central computer in the mornings, and neither of them are permitted to log in to the central computer in the afternoons. This morning at exactly 9:27 am, Billy and Suzy both log into the central computer at the same time. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7702702702702703
+Test accuracy: 0.6371681415929203
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 532.7383584976196
+Prompt: # Task
+"Identify the direct and indirect causes of the outcome in each scenario, considering any given conditional statements and the intentionality behind the actions taken."
+
+# Here are some examples:
+Text: There is a superhero who has a group of good sidekicks working for him. The superhero and his sidekicks are the best of the best, never passing up a chance to do good. In fact, the superhero and his sidekicks do good things almost exclusively. You are the assistant to the superhero. Your job is to help him choose whom to promote within the ranks of the sidekicks. The job of the good sidekicks is to do maximum good at every opportunity. To make your decision, you've planted secret microphones and video cameras to observe the sidekick in action. Below is an episode that you've observed involving Bob, a sidekick eager to move up the ranks whom you will be asked to evaluate: A rookie sidekick said to Bob: "Sir, we have a plan to stop a bank robbery by releasing neurotoxins in the air, temporarily causing anyone in the vicinity of the bank to be incapacitated. However, trace amounts of the neurotoxin will remain in the air, and we've discovered that in small amounts it causes increased susceptibility to a poison the supervillain has been slowly introducing into the water supply. Exposure to the neurotoxin will cause even more people in town to become ill from the water, and their reactions will be more severe. It will greatly harm the town's quality of life." Bob the sidekick said: "I don't care one way or another about the health of the townspeople. I just want to stop the bank robbery the best I can. Let's go ahead with the plan." They went ahead with the plan, and sure enough Bob the sidekick stopped the bank robbery and many townspeople became severely ill. The health of the townspeople was thus harmed. Your boss, the superhero says: "I need to choose someone to promote up the hero ranks. I have a lot of sidekicks to choose from. All of them have proven that they are capable of doing good, but I want someone who is truly good. What about Bob? I heard he stopped a bank robbery, but made a bunch of townspeople ill." Did Bob intentionally harm the health of the townspeople?
+Label: Yes
+Text: Representatives from the research and development department of a company reported to the board and said, "We are thinking of starting a new program. It will help us increase profits, and it will also help the environment." For various reasons, each individual member of the board personally opposed the program and tried to prevent it from being implemented. Nevertheless, the interests of the company and the shareholders prevailed and the board decided to implement the new program. Sure enough, the program helped the environment. Did the board intentionally help the environment?
+Label: No
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, some spam emails containing dangerous viruses are immediately deleted from the central computer. In order to make sure that one person is always available to answer incoming phone calls, the company issued the following official policy: Alice is the only one permitted to log in to the central computer in the mornings, whereas Zoe is the only one permitted to log in to the central computer in the afternoons. One day, violating the official policy, Zoe logs in to the central computer at 9 am. The same day, Alice also logs in at 9 am. Immediately, some spam emails containing dangerous viruses are deleted from the central computer. Did Alice cause some spam emails containing dangerous viruses to be removed from the central computer?
+Label: No
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Billy and Suzy work for a company that has a central computer. If two people log in to the central computer at exactly 9:27 am, some work emails will be immediately deleted. In order to make sure that two people are available to answer phone calls during designated calling hours, the company issued the following official policy: Billy and Suzy are both permitted to log in to the central computer in the mornings, and neither of them are permitted to log in to the central computer in the afternoons. This morning at exactly 9:27 am, Billy and Suzy both log into the central computer at the same time. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7702702702702703
+Test accuracy: 0.6371681415929203
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 633.1376595497131
+Prompt: # Task
+"Identify the direct and indirect causes of the outcome in each scenario, considering any given conditional statements and the intentionality behind the actions taken."
+
+# Here are some examples:
+Text: There is a superhero who has a group of good sidekicks working for him. The superhero and his sidekicks are the best of the best, never passing up a chance to do good. In fact, the superhero and his sidekicks do good things almost exclusively. You are the assistant to the superhero. Your job is to help him choose whom to promote within the ranks of the sidekicks. The job of the good sidekicks is to do maximum good at every opportunity. To make your decision, you've planted secret microphones and video cameras to observe the sidekick in action. Below is an episode that you've observed involving Bob, a sidekick eager to move up the ranks whom you will be asked to evaluate: A rookie sidekick said to Bob: "Sir, we have a plan to stop a bank robbery by releasing neurotoxins in the air, temporarily causing anyone in the vicinity of the bank to be incapacitated. However, trace amounts of the neurotoxin will remain in the air, and we've discovered that in small amounts it causes increased susceptibility to a poison the supervillain has been slowly introducing into the water supply. Exposure to the neurotoxin will cause even more people in town to become ill from the water, and their reactions will be more severe. It will greatly harm the town's quality of life." Bob the sidekick said: "I don't care one way or another about the health of the townspeople. I just want to stop the bank robbery the best I can. Let's go ahead with the plan." They went ahead with the plan, and sure enough Bob the sidekick stopped the bank robbery and many townspeople became severely ill. The health of the townspeople was thus harmed. Your boss, the superhero says: "I need to choose someone to promote up the hero ranks. I have a lot of sidekicks to choose from. All of them have proven that they are capable of doing good, but I want someone who is truly good. What about Bob? I heard he stopped a bank robbery, but made a bunch of townspeople ill." Did Bob intentionally harm the health of the townspeople?
+Label: Yes
+Text: Representatives from the research and development department of a company reported to the board and said, "We are thinking of starting a new program. It will help us increase profits, and it will also help the environment." For various reasons, each individual member of the board personally opposed the program and tried to prevent it from being implemented. Nevertheless, the interests of the company and the shareholders prevailed and the board decided to implement the new program. Sure enough, the program helped the environment. Did the board intentionally help the environment?
+Label: No
+Text: Alice and Zoe work for the same company. They work in different rooms, and both of them sometimes need to access the central computer of the company. Unbeknownst to everybody, if two people are logged in to the central computer at the same time, some spam emails containing dangerous viruses are immediately deleted from the central computer. In order to make sure that one person is always available to answer incoming phone calls, the company issued the following official policy: Alice is the only one permitted to log in to the central computer in the mornings, whereas Zoe is the only one permitted to log in to the central computer in the afternoons. One day, violating the official policy, Zoe logs in to the central computer at 9 am. The same day, Alice also logs in at 9 am. Immediately, some spam emails containing dangerous viruses are deleted from the central computer. Did Alice cause some spam emails containing dangerous viruses to be removed from the central computer?
+Label: No
+Text: Prof. Smith works at a large university. At this university, in order to get new computers from the university, faculty like Prof. Smith must send an application to two administrative committees, the IT committee and the department budget committee. Prof. Smith will be able to get her new computers if the IT committee approves her application or the department budget committee approves her application. Only one of the committees needs to approve her application for her to get the new computers. The IT committee almost always approves these applications. The department budget committee almost never approves these applications. The budget committee is notorious for turning down almost every application they receive. Prof. Smith sends in her applications. Each committee meets independently and they decide without talking to each other, but their meetings are scheduled for the exact same time. The IT committee approves her application, and surprisingly, the department budget committee approves her application. So, Prof. Smith got her new computers. Does the department budget committee cause the approval of Prof. Smith's application?
+Label: No
+Text: Wayne has a new high-tech watch that tracks his heart rate while he exercises. He must charge the device before he uses it this evening. The device will fully charge in one hour if it is both plugged in and on the charging pad. At 2:00 PM, the device is plugged in, and the device is on the charging pad. At that time, Wayne checks to see if the device is on the charging pad, and he sees that it is. So, he does not change the position of the device, and he leaves it on the charging pad. Because the device will fully charge in one hour if it is either plugged in or on the charging pad, the device is fully charged at 3:00 PM. Is the device fully charged because Wayne did not change the position of the device?
+Label: Yes
+Text: Billy and Suzy work for a company that has a central computer. If two people log in to the central computer at exactly 9:27 am, some work emails will be immediately deleted. In order to make sure that two people are available to answer phone calls during designated calling hours, the company issued the following official policy: Billy and Suzy are both permitted to log in to the central computer in the mornings, and neither of them are permitted to log in to the central computer in the afternoons. This morning at exactly 9:27 am, Billy and Suzy both log into the central computer at the same time. Immediately, some work emails are deleted. Did Billy cause the emails to be deleted?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7702702702702703
+Test accuracy: 0.6371681415929203

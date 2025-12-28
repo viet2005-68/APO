@@ -1,0 +1,154 @@
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.2048850059509277
+Prompt: ('# Task\nEvaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.79),)
+Test accuracy: [0.82]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 23.721824645996094
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Patrice Bergeron converted the first down."
+Label: No
+Text: "James Karinchak crossed the blue line."
+Label: No
+Text: "Pete Alonso hit a triple in the World Series."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 44.62330198287964
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Patrice Bergeron converted the first down."
+Label: No
+Text: "James Karinchak crossed the blue line."
+Label: No
+Text: "Pete Alonso hit a triple in the World Series."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 64.8261342048645
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Tom Brady was safe at first."
+Label: No
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Nick Foles lost control of the puck."
+Label: No
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Dani Alves took the snap."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87
+Test accuracy: 0.8466666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 87.21397256851196
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Tom Brady was safe at first."
+Label: No
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Nick Foles lost control of the puck."
+Label: No
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Dani Alves took the snap."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87
+Test accuracy: 0.8466666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 108.4267520904541
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Tom Brady was safe at first."
+Label: No
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Nick Foles lost control of the puck."
+Label: No
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Dani Alves took the snap."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87
+Test accuracy: 0.8466666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 129.0079801082611
+Prompt: # Task
+Evaluate whether the provided sentence fits logically within the realm of sports. Take into account typical roles, activities, and specialized language found in different sports to inform your judgment.
+
+# Here are some examples:
+Text: "Tom Brady was safe at first."
+Label: No
+Text: "Chris Godwin crossed the blue line in the Stanley Cup."
+Label: No
+Text: "Nick Foles lost control of the puck."
+Label: No
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Dani Alves took the snap."
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.87
+Test accuracy: 0.8466666666666667

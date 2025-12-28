@@ -1,0 +1,146 @@
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.3791422843933105
+Prompt: ('# Task\n"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.8),)
+Test accuracy: [0.76]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 19.61042618751526
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+Text: "Kyle Tucker took a left footed shot."
+Label: No
+Text: "Joe Burrow gained five yards."
+Label: Yes
+Text: "Ben Simmons was called for the goal tend."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84 | Penalized score: 0.6285964395211698
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 10.572876930236816
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+Text: "Kyle Tucker took a left footed shot."
+Label: No
+Text: "Joe Burrow gained five yards."
+Label: Yes
+Text: "Ben Simmons was called for the goal tend."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84 | Penalized score: 0.6285964395211698
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 6.57219934463501
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+Text: "Kyle Tucker took a left footed shot."
+Label: No
+Text: "Joe Burrow gained five yards."
+Label: Yes
+Text: "Ben Simmons was called for the goal tend."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84 | Penalized score: 0.6285964395211698
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 8.075498104095459
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Nazem Kadri took a charge in the NBA Championship."
+Label: No
+Text: "Kyle Tucker took a left footed shot."
+Label: No
+Text: "Joe Burrow gained five yards."
+Label: Yes
+Text: "Ben Simmons was called for the goal tend."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.84 | Penalized score: 0.6285964395211698
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 11.047129154205322
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Carson Wentz took to the ice."
+Label: No
+Text: "Fernando Tatis Jr. earned a red card."
+Label: No
+Text: "Sterling Shepard converted the first down."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.85 | Penalized score: 0.6488324262181614
+Test accuracy: 0.8066666666666666
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 9.079680442810059
+Prompt: # Task
+"Does the given sentence contain terms that are characteristic of a specific sport like baseball, basketball, soccer, or another popular sport?"
+
+# Here are some examples:
+Text: "Carson Wentz took to the ice."
+Label: No
+Text: "Jerry Jeudy killed the powerplay."
+Label: No
+Text: "Sterling Shepard converted the first down."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.9 | Penalized score: 0.6999620902500164
+Test accuracy: 0.8133333333333334

@@ -28,7 +28,7 @@ For usage instructions. Some of the arguments include:
 * `...`: Various other parameters related to optimization and evaluation.
 
 # Liar Task
-python main.py \
+python main_rs.py \
   --task liar \
   --prompts prompts/liar.md \
   --data_dir data/liar \
@@ -42,7 +42,7 @@ python main.py \
   --rounds 0
 
 # Ethos Task
-python main_original.py \
+python main_rs.py \
   --task ethos \
   --prompts prompts/ethos.md \
   --data_dir data/ethos \
@@ -53,7 +53,7 @@ python main_original.py \
   --evaluator bf \
   --reject_on_error \
   --max_threads 48 \
-  --rounds 3
+  --rounds 0
 
 # Ar Sacarsm
 python main.py \
@@ -83,7 +83,7 @@ python main.py \
   --max_threads 48
 
 # Casual Judgement (BBH)
-python main.py \
+python main_rs.py \
   --task casual_judgement \
   --prompts prompts/casual_judgement.md \
   --data_dir data/casual_judgement \
@@ -94,10 +94,10 @@ python main.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 2
+  --rounds 0
 
 # Web of lies (BBH)
-python main_original.py \
+python main_rs.py \
   --task web_of_lies \
   --prompts prompts/web_of_lies.md \
   --data_dir data/web_of_lies \
@@ -108,7 +108,7 @@ python main_original.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 3
+  --rounds 0
 
 # Sports understanding (BBH)
 python main_original.py \
@@ -136,4 +136,4 @@ python main_original.py \
   --evaluator bf \
   --max_threads 48 \
   --reject_on_error \
-  --rounds 6
+  --rounds 0

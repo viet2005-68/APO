@@ -1,0 +1,210 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 21.614051342010498
+Prompt: ('# Task\n"Given a statement, along with the speaker\'s occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.6171875,)
+Test accuracy: [0.6355748373101953]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 70.28046989440918
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: We, the bishops of the United States -- can you believe it -- in 1919 came out for more affordable, more comprehensive, more universal health care.
+Job title: Cardinal
+State: New York
+Party: none
+Context: an interview on NBC's "Meet the Press"
+Label: No
+Text: Statement: 92 percent of President Barack Obamas administration has never worked outside government.
+Job title: U.S. Representative, Florida District 2
+State: Florida
+Party: republican
+Context: comments at the Liberty County Chamber of Commerce annual dinner.
+Label: Yes
+Text: Statement: Over 200 years ago, the United States had declared war on Islam, and Thomas Jefferson led the charge!
+Job title: 
+State: 
+Party: none
+Context: a chain email
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.671875 | Penalized score: 0.49324592198868933
+Test accuracy: 0.6572668112798264
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 70.14242148399353
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: We, the bishops of the United States -- can you believe it -- in 1919 came out for more affordable, more comprehensive, more universal health care.
+Job title: Cardinal
+State: New York
+Party: none
+Context: an interview on NBC's "Meet the Press"
+Label: No
+Text: Statement: 92 percent of President Barack Obamas administration has never worked outside government.
+Job title: U.S. Representative, Florida District 2
+State: Florida
+Party: republican
+Context: comments at the Liberty County Chamber of Commerce annual dinner.
+Label: Yes
+Text: Statement: Over 200 years ago, the United States had declared war on Islam, and Thomas Jefferson led the charge!
+Job title: 
+State: 
+Party: none
+Context: a chain email
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6785714285714286 | Penalized score: 0.49994235056011793
+Test accuracy: 0.6572668112798264
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 63.99850606918335
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Says award-winning Milwaukee Public Schools teacher Megan Sampson was laid off because Gov. Scott Walker cut state aid to education.
+Job title: Columnist for the New York Times
+State: New York
+Party: journalist
+Context: a column
+Label: Yes
+Text: Statement: The Northwest Corridor highway project in Cobb and Cherokee counties is expected to create over 9,700 jobs statewide.
+Job title: 
+State: 
+Party: none
+Context: a press release
+Label: Yes
+Text: Statement: Failure to raise the debt limit does not force a U.S. default on debt payments.
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a statement.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7291666666666666 | Penalized score: 0.5732984226478344
+Test accuracy: 0.6724511930585684
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 56.91158938407898
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Rep. Paul Ryans budget proposal cuts nothing from Medicare, Social Security or defense in the next two to three years, and in three years, he does not cut one dime from the debt.
+Job title: 
+State: Connecticut
+Party: republican
+Context: an interview on 'This Week with Christiane Amanpour'
+Label: No
+Text: Statement: The Northwest Corridor highway project in Cobb and Cherokee counties is expected to create over 9,700 jobs statewide.
+Job title: 
+State: 
+Party: none
+Context: a press release
+Label: Yes
+Text: Statement: Failure to raise the debt limit does not force a U.S. default on debt payments.
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a statement.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.640625 | Penalized score: 0.46933311131081856
+Test accuracy: 0.6876355748373102
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 61.04344892501831
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Says award-winning Milwaukee Public Schools teacher Megan Sampson was laid off because Gov. Scott Walker cut state aid to education.
+Job title: Columnist for the New York Times
+State: New York
+Party: journalist
+Context: a column
+Label: Yes
+Text: Statement: The Northwest Corridor highway project in Cobb and Cherokee counties is expected to create over 9,700 jobs statewide.
+Job title: 
+State: 
+Party: none
+Context: a press release
+Label: Yes
+Text: Statement: Failure to raise the debt limit does not force a U.S. default on debt payments.
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a statement.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6614583333333334 | Penalized score: 0.5055900893145011
+Test accuracy: 0.6724511930585684
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 54.835416078567505
+Prompt: # Task
+"Given a statement, along with the speaker's occupation, location, political affiliation, and context, determine if the statement is likely true (No) or false (Yes). Consider the speaker’s background and position, the geographical and political landscape they represent, and any contextual clues about the situation in which the statement was made. Also, critically examine the content of the statement itself, including statistics, claims, and logical consistency, to make a well-rounded judgment."
+
+# Here are some examples:
+Text: Statement: Says award-winning Milwaukee Public Schools teacher Megan Sampson was laid off because Gov. Scott Walker cut state aid to education.
+Job title: Columnist for the New York Times
+State: New York
+Party: journalist
+Context: a column
+Label: Yes
+Text: Statement: The Northwest Corridor highway project in Cobb and Cherokee counties is expected to create over 9,700 jobs statewide.
+Job title: 
+State: 
+Party: none
+Context: a press release
+Label: Yes
+Text: Statement: Failure to raise the debt limit does not force a U.S. default on debt payments.
+Job title: Representative
+State: Virginia
+Party: republican
+Context: a statement.
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6927083333333334 | Penalized score: 0.5368400893145011
+Test accuracy: 0.6724511930585684

@@ -1,0 +1,246 @@
+{"task": "liar", "data_dir": "data/liar", "prompts": "prompts/liar.md", "out": "experiments/liar-14-12-m2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 256, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "ucb", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 23.9454824924469
+Prompt: ('# Task\nAssess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker\'s possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (0.65625,)
+Test accuracy: [0.6572668112798264]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 215.66623616218567
+Prompt: # Task
+Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
+
+# Here are some examples:
+Text: Statement: Twenty two years ago, when he was running for governor, Bill Nelson missed 56 percent of his votes in the U.S. House.
+Job title: U.S. representative from Fort Myers
+State: Florida
+Party: republican
+Context: a letter from the campaign to the Tampa Bay Times
+Label: No
+Text: Statement: Two thirds of the people in Wisconsin strongly disagree with this idea of permanently taking away peoples rights to collective bargaining.
+Job title: State Representative
+State: Wisconsin
+Party: democrat
+Context: a television interview
+Label: Yes
+Text: Statement: The House of Delegates budget bill cuts $50 million from education.
+Job title: 
+State: Virginia
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: Says a poll shows that without a name attached, Democrats are just one point behind Gov. John Kasich.
+Job title: Chairman of the  Ohio Democratic Party
+State: Ohio
+Party: democrat
+Context: a news conference
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6964285714285714
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 415.23178482055664
+Prompt: # Task
+Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
+
+# Here are some examples:
+Text: Statement: Twenty two years ago, when he was running for governor, Bill Nelson missed 56 percent of his votes in the U.S. House.
+Job title: U.S. representative from Fort Myers
+State: Florida
+Party: republican
+Context: a letter from the campaign to the Tampa Bay Times
+Label: No
+Text: Statement: Two thirds of the people in Wisconsin strongly disagree with this idea of permanently taking away peoples rights to collective bargaining.
+Job title: State Representative
+State: Wisconsin
+Party: democrat
+Context: a television interview
+Label: Yes
+Text: Statement: The House of Delegates budget bill cuts $50 million from education.
+Job title: 
+State: Virginia
+Party: democrat
+Context: a press release.
+Label: No
+Text: Statement: Says a poll shows that without a name attached, Democrats are just one point behind Gov. John Kasich.
+Job title: Chairman of the  Ohio Democratic Party
+State: Ohio
+Party: democrat
+Context: a news conference
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.6964285714285714
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 611.3578495979309
+Prompt: # Task
+Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
+
+# Here are some examples:
+Text: Statement: Says his comment about extremists being a JV team wasnt specifically referring to Islamic State.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on "Meet the Press."
+Label: Yes
+Text: Statement: The Democrats plan to raise your tax rates to 70 or 80 percent.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: the fourth GOP undercard debate.
+Label: Yes
+Text: Statement: President Barack Obama reduced the cost of prescription drugs for nearly 3.6 million Americans in 2011.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a web video ad
+Label: No
+Text: Statement: Just look at what the FBI director said about her (Hillary Clinton) her misconduct is a disgrace and embarrassment to our country.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech
+Label: Yes
+Text: Statement: When I came into office, our vaccination rate in Texas was 65 percent. When I left two weeks ago, it was 95 percent.
+Job title: Governor
+State: Texas
+Party: republican
+Context: an interview with the Texas Tribune and Washington Post.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7083333333333334
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 811.3330504894257
+Prompt: # Task
+Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
+
+# Here are some examples:
+Text: Statement: Says his comment about extremists being a JV team wasnt specifically referring to Islamic State.
+Job title: President
+State: Illinois
+Party: democrat
+Context: an interview on "Meet the Press."
+Label: Yes
+Text: Statement: The Democrats plan to raise your tax rates to 70 or 80 percent.
+Job title: Governor of New Jersey
+State: New Jersey
+Party: republican
+Context: the fourth GOP undercard debate.
+Label: Yes
+Text: Statement: President Barack Obama reduced the cost of prescription drugs for nearly 3.6 million Americans in 2011.
+Job title: President
+State: Illinois
+Party: democrat
+Context: a web video ad
+Label: No
+Text: Statement: Just look at what the FBI director said about her (Hillary Clinton) her misconduct is a disgrace and embarrassment to our country.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: a speech
+Label: Yes
+Text: Statement: When I came into office, our vaccination rate in Texas was 65 percent. When I left two weeks ago, it was 95 percent.
+Job title: Governor
+State: Texas
+Party: republican
+Context: an interview with the Texas Tribune and Washington Post.
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.7083333333333334
+Test accuracy: 0.6681127982646421
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 1011.0490942001343
+Prompt: # Task
+Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
+
+# Here are some examples:
+Text: Statement: Virginia now is the number one exporter of (agricultural) products to Cuba. We have now jumped to number one.
+Job title: Governor
+State: Virginia
+Party: democrat
+Context: an interview
+Label: No
+Text: Statement: Wisconsin lost more jobs over the past 12 months than any other state.
+Job title: State Senator
+State: New Jersey
+Party: democrat
+Context: a news release
+Label: No
+Text: Statement: The five Guantanamo detainees swapped for Bowe Bergdahl are back on the battlefield.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: Ottumwa, Iowa, on NBC's "Meet the Press"
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.71875
+Test accuracy: 0.6637744034707158
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 1208.026398897171
+Prompt: # Task
+Assess whether the Statement is likely to be accurate (No) or misleading (Yes), considering the Context, Position, Location, and Affiliation. Use these elements to gauge the speaker's possible bias or trustworthiness. Keep in mind that individuals from diverse backgrounds or roles may still make truthful statements, despite their potential biases.
+
+# Here are some examples:
+Text: Statement: Virginia now is the number one exporter of (agricultural) products to Cuba. We have now jumped to number one.
+Job title: Governor
+State: Virginia
+Party: democrat
+Context: an interview
+Label: No
+Text: Statement: Wisconsin lost more jobs over the past 12 months than any other state.
+Job title: State Senator
+State: New Jersey
+Party: democrat
+Context: a news release
+Label: No
+Text: Statement: The five Guantanamo detainees swapped for Bowe Bergdahl are back on the battlefield.
+Job title: President-Elect
+State: New York
+Party: republican
+Context: Ottumwa, Iowa, on NBC's "Meet the Press"
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.71875
+Test accuracy: 0.6637744034707158

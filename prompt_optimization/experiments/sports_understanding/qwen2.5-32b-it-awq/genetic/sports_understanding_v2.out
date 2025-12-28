@@ -1,0 +1,153 @@
+{"task": "sports_understanding", "data_dir": "data/sports_understanding", "prompts": "prompts/sports_understanding.md", "out": "experiments/sports_understanding_v2.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 3, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 2.447378396987915
+Prompt: ('# Task\nIs the following sentence plausible?\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.71),)
+Test accuracy: [0.74]
+======== ROUND 1
+Time: 33.092803716659546
+Prompt: ('# Task\n"Does the given sentence reflect a realistic scenario based on the standard roles and behaviors of the mentioned athletes? Answer with \'Yes\' if it matches their typical sports activities and responsibilities, and \'No\' if it does not."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIn the setting of professional athletics, assess if the following statement could plausibly happen in real life.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nAssess whether the given sports-related statement is reasonable according to general understanding of sports events and terms.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nGiven the context of professional sports, evaluate whether the following statement is likely to occur in reality.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.73), np.float64(0.72), np.float64(0.72), np.float64(0.71))
+Test accuracy: [0.74, 0.74, 0.7333333333333333, 0.7133333333333334]
+======== ROUND 2
+Time: 118.80026006698608
+Prompt: ('# Task\nIn the context of professional sports, evaluate whether the given statement could realistically occur in actual scenarios.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIs the described scenario in the given sentence a believable situation for the athlete, taking into account their main sport activities as well as any plausible variations or extensions of their usual roles and behaviors? Respond with \'Yes\' if the situation appears credible, even if it somewhat diverges from their usual professional actions, and \'No\' if it conflicts with their recognized roles and behaviors.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nIn the realm of professional sports, assess if the given statement is plausible in real-world scenarios.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nAssess the likelihood of the following statement in the realm of professional sports, considering the usual duties and common activities related to the athlete\'s particular sport.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.76), np.float64(0.75), np.float64(0.74), np.float64(0.74))
+Test accuracy: [0.78, 0.7866666666666666, 0.7866666666666666, 0.72]
+======== ROUND 3
+Time: 125.81908249855042
+Prompt: ('# Task\nFor a given statement concerning professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Determine if the provided statement corresponds to common situations and terminology used in a particular professional sport. Focus on sport-specific expressions and activities to evaluate its accuracy."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\nFor a given statement regarding professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:', '# Task\n"Determine if the given statement describes a usual occurrence or activity within professional sports, taking into account the particular responsibilities and frequent actions relevant to the athlete\'s specific sport."\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:')
+Training accuracy: (np.float64(0.79), np.float64(0.79), np.float64(0.78), np.float64(0.78))
+Test accuracy: [0.78, 0.8066666666666666, 0.78, 0.7266666666666667]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 21.11364459991455
+Prompt: # Task
+For a given statement concerning professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.
+
+# Here are some examples:
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Jayson Tatum was called for the goal tend."
+Label: Yes
+Text: "Tyler Boyd hit the screen pass in the NFC divisional round."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6252522706138116
+Test accuracy: 0.82
+======== EXEMPLAR OPTIMIZATION ROUND 1
+Time: 6.530001401901245
+Prompt: # Task
+For a given statement concerning professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.
+
+# Here are some examples:
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Jayson Tatum was called for the goal tend."
+Label: Yes
+Text: "Tyler Boyd hit the screen pass in the NFC divisional round."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6252522706138116
+Test accuracy: 0.82
+======== EXEMPLAR OPTIMIZATION ROUND 2
+Time: 7.568679332733154
+Prompt: # Task
+For a given statement concerning professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.
+
+# Here are some examples:
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Jayson Tatum was called for the goal tend."
+Label: Yes
+Text: "Tyler Boyd hit the screen pass in the NFC divisional round."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6252522706138116
+Test accuracy: 0.82
+======== EXEMPLAR OPTIMIZATION ROUND 3
+Time: 5.7602667808532715
+Prompt: # Task
+For a given statement concerning professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.
+
+# Here are some examples:
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Jayson Tatum was called for the goal tend."
+Label: Yes
+Text: "Tyler Boyd hit the screen pass in the NFC divisional round."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6252522706138116
+Test accuracy: 0.8133333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 4
+Time: 9.556523323059082
+Prompt: # Task
+For a given statement concerning professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.
+
+# Here are some examples:
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Jayson Tatum was called for the goal tend."
+Label: Yes
+Text: "Tyler Boyd hit the screen pass in the NFC divisional round."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6252522706138116
+Test accuracy: 0.82
+======== EXEMPLAR OPTIMIZATION ROUND 5
+Time: 5.05535626411438
+Prompt: # Task
+For a given statement concerning professional sports, determine if it describes a usual occurrence or scenario that might happen in a game or match.
+
+# Here are some examples:
+Text: "Sonny Gray was out at second."
+Label: Yes
+Text: "Jayson Tatum was called for the goal tend."
+Label: Yes
+Text: "Tyler Boyd hit the screen pass in the NFC divisional round."
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.83 | Penalized score: 0.6252522706138116
+Test accuracy: 0.82

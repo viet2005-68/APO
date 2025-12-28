@@ -1,0 +1,150 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.7727789878845215
+Prompt: ('# Task\nAnalyze a sequence of related declarations concerning the veracity of individuals\' statements. Follow the logical progression of each person\'s claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.71),)
+Test accuracy: [0.66]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 46.38652729988098
+Prompt: # Task
+Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+
+# Here are some examples:
+Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.78
+Test accuracy: 0.7
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 90.17267274856567
+Prompt: # Task
+Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+
+# Here are some examples:
+Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.78
+Test accuracy: 0.7
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 130.58977603912354
+Prompt: # Task
+Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+
+# Here are some examples:
+Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.78
+Test accuracy: 0.7
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 170.4044930934906
+Prompt: # Task
+Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+
+# Here are some examples:
+Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.78
+Test accuracy: 0.7
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 210.29732203483582
+Prompt: # Task
+Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+
+# Here are some examples:
+Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.78
+Test accuracy: 0.7
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 249.7865674495697
+Prompt: # Task
+Analyze a sequence of related declarations concerning the veracity of individuals' statements. Follow the logical progression of each person's claims and counterclaims to ascertain whether the concluding assertion regarding the honesty or deception of the last individual in the sequence holds true.
+
+# Here are some examples:
+Text: Question: Sherrie tells the truth. Kandi says Sherrie tells the truth. Conception says Kandi tells the truth. Michael says Conception tells the truth. Christie says Michael tells the truth. Does Christie tell the truth?
+Label: Yes
+Text: Question: Ryan tells the truth. Sal says Ryan tells the truth. Leda says Sal tells the truth. Rashida says Leda tells the truth. Alejandro says Rashida tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Willian lies. Inga says Willian tells the truth. Fidel says Inga lies. Gwenn says Fidel tells the truth. Crista says Gwenn tells the truth. Does Crista tell the truth?
+Label: Yes
+Text: Question: Antwan tells the truth. Elanor says Antwan tells the truth. Bernita says Elanor tells the truth. Osvaldo says Bernita lies. Christie says Osvaldo tells the truth. Does Christie tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.78
+Test accuracy: 0.7

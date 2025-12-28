@@ -1,0 +1,162 @@
+{"task": "boolean_expressions", "data_dir": "data/boolean_expressions", "prompts": "prompts/boolean_expressions.md", "out": "experiments/boolean_expressions.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.150336265563965
+Prompt: ('# Task\nIs the result of the given boolean expression True? Respond with Yes if it evaluates to True, otherwise say No.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.9),)
+Test accuracy: [0.86]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 41.44665837287903
+Prompt: # Task
+Is the result of the given boolean expression True? Respond with Yes if it evaluates to True, otherwise say No.
+
+# Here are some examples:
+Text: False or ( False ) and not False is
+Label: No
+Text: False or ( not not not True ) is
+Label: No
+Text: ( not not True ) or not False is
+Label: Yes
+Text: False and not ( True ) or True is
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.93
+Test accuracy: 0.86
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 78.86771130561829
+Prompt: # Task
+Is the result of the given boolean expression True? Respond with Yes if it evaluates to True, otherwise say No.
+
+# Here are some examples:
+Text: True or True or not False or False is
+Label: Yes
+Text: ( not not True and not False ) is
+Label: Yes
+Text: True or ( ( not True ) ) is
+Label: Yes
+Text: False and not ( False and True ) is
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.91
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 115.94597578048706
+Prompt: # Task
+Is the result of the given boolean expression True? Respond with Yes if it evaluates to True, otherwise say No.
+
+# Here are some examples:
+Text: False or not ( True ) and False is
+Label: No
+Text: not not not False or False and False is
+Label: Yes
+Text: not False or True or True and False is
+Label: Yes
+Text: False or not not not False and True is
+Label: Yes
+Text: False or not True and not not False is
+Label: No
+Text: not ( True or False ) or True is
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.95
+Test accuracy: 0.8933333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 153.36366367340088
+Prompt: # Task
+Is the result of the given boolean expression True? Respond with Yes if it evaluates to True, otherwise say No.
+
+# Here are some examples:
+Text: False and False and not not not True is
+Label: No
+Text: not not not False or False and False is
+Label: Yes
+Text: ( ( not True ) or True ) is
+Label: Yes
+Text: not ( not not True ) or False is
+Label: No
+Text: not ( True or False ) or True is
+Label: Yes
+Text: True or ( ( not True ) ) is
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.92
+Test accuracy: 0.9133333333333333
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 190.84875464439392
+Prompt: # Task
+Is the result of the given boolean expression True? Respond with Yes if it evaluates to True, otherwise say No.
+
+# Here are some examples:
+Text: not not not not not not not False is
+Label: Yes
+Text: False and not ( True ) or True is
+Label: Yes
+Text: not ( False ) or not not True is
+Label: Yes
+Text: not not ( True ) and not False is
+Label: Yes
+Text: not not not not True and not True is
+Label: No
+Text: not False or True and False or False is
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.9
+Test accuracy: 0.8866666666666667
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 229.75331282615662
+Prompt: # Task
+Is the result of the given boolean expression True? Respond with Yes if it evaluates to True, otherwise say No.
+
+# Here are some examples:
+Text: ( ( not True ) or True ) is
+Label: Yes
+Text: not not False or not False or True is
+Label: Yes
+Text: not ( True ) and ( True ) is
+Label: No
+Text: True or False and not False and True is
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.9
+Test accuracy: 0.8933333333333333

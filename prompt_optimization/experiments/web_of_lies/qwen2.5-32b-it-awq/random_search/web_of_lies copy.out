@@ -1,0 +1,170 @@
+{"task": "web_of_lies", "data_dir": "data/web_of_lies", "prompts": "prompts/web_of_lies.md", "out": "experiments/web_of_lies.out", "max_threads": 48, "temperature": 0.0, "optimizer": "nl-gradient", "rounds": 0, "beam_size": 4, "n_test_exs": 400, "minibatch_size": 64, "n_gradients": 4, "errors_per_gradient": 4, "gradients_per_error": 1, "steps_per_gradient": 1, "mc_samples_per_step": 4, "max_expansion_factor": 8, "engine": "chatgpt", "evaluator": "bf", "scorer": "01", "eval_rounds": 8, "eval_prompts_per_round": 8, "samples_per_eval": 32, "c": 1.0, "knn_k": 2, "knn_t": 0.993, "reject_on_errors": true, "reflect_gradients": false, "reflect_candidates": false, "reflection_candidate_threshold": 0.5, "reflection_gradient_passes": 1, "reflection_candidate_passes": 1, "reflection_temperature": 0.0, "ea_samples_per_step": 4, "eval_budget": 2048}
+======== ROUND 0
+Time: 3.656012773513794
+Prompt: ('# Task\nDetermine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals\' honesty.\n\n# Output format\nAnswer ONLY "Yes" or "No".\nNO explanations.\nNo other words.\n\n# Prediction\nText: {{ text }}\nLabel:',)
+Training accuracy: (np.float64(0.71),)
+Test accuracy: [0.6733333333333333]
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 46.56795573234558
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Vernell tells the truth. Fidel says Vernell tells the truth. Amberly says Fidel lies. Lorine says Amberly lies. Elanor says Lorine lies. Does Elanor tell the truth?
+Label: No
+Text: Question: Shalonda lies. Teressa says Shalonda tells the truth. Tamika says Teressa lies. Lorine says Tamika tells the truth. Jaymie says Lorine lies. Does Jaymie tell the truth?
+Label: No
+Text: Question: Jaymie tells the truth. Millicent says Jaymie lies. Millie says Millicent tells the truth. Vina says Millie lies. Leda says Vina tells the truth. Does Leda tell the truth?
+Label: Yes
+Text: Question: Elanor tells the truth. Crista says Elanor lies. Vernell says Crista lies. Shalonda says Vernell lies. Teressa says Shalonda lies. Does Teressa tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.74
+Test accuracy: 0.6933333333333334
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 90.06006240844727
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Shalonda lies. Teressa says Shalonda tells the truth. Tamika says Teressa lies. Lorine says Tamika tells the truth. Jaymie says Lorine lies. Does Jaymie tell the truth?
+Label: No
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Conception lies. Shenna says Conception tells the truth. Maybelle says Shenna tells the truth. Michael says Maybelle lies. Amberly says Michael lies. Does Amberly tell the truth?
+Label: No
+Text: Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+Label: No
+Text: Question: Teressa lies. Kristian says Teressa lies. Sal says Kristian tells the truth. Audrie says Sal lies. Leda says Audrie lies. Does Leda tell the truth?
+Label: Yes
+Text: Question: Christie tells the truth. Ka says Christie tells the truth. Delbert says Ka lies. Leda says Delbert tells the truth. Lorine says Leda tells the truth. Does Lorine tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.76
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 133.64522457122803
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Shalonda lies. Teressa says Shalonda tells the truth. Tamika says Teressa lies. Lorine says Tamika tells the truth. Jaymie says Lorine lies. Does Jaymie tell the truth?
+Label: No
+Text: Question: Leda tells the truth. Alexis says Leda lies. Sal says Alexis lies. Phoebe says Sal tells the truth. Gwenn says Phoebe tells the truth. Does Gwenn tell the truth?
+Label: Yes
+Text: Question: Conception lies. Shenna says Conception tells the truth. Maybelle says Shenna tells the truth. Michael says Maybelle lies. Amberly says Michael lies. Does Amberly tell the truth?
+Label: No
+Text: Question: Raymond lies. Fletcher says Raymond lies. Amberly says Fletcher lies. Shenna says Amberly tells the truth. Dallas says Shenna tells the truth. Does Dallas tell the truth?
+Label: No
+Text: Question: Teressa lies. Kristian says Teressa lies. Sal says Kristian tells the truth. Audrie says Sal lies. Leda says Audrie lies. Does Leda tell the truth?
+Label: Yes
+Text: Question: Christie tells the truth. Ka says Christie tells the truth. Delbert says Ka lies. Leda says Delbert tells the truth. Lorine says Leda tells the truth. Does Lorine tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.75
+Test accuracy: 0.76
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 173.44936394691467
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Christie lies. Amberly says Christie tells the truth. Bernita says Amberly tells the truth. Kristian says Bernita lies. Delfina says Kristian lies. Does Delfina tell the truth?
+Label: No
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Ryan tells the truth. Amberly says Ryan tells the truth. Kristian says Amberly lies. Bernita says Kristian lies. Alejandro says Bernita tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Andree tells the truth. Audrie says Andree tells the truth. Jerry says Audrie lies. Helene says Jerry lies. Bernita says Helene tells the truth. Does Bernita tell the truth?
+Label: Yes
+Text: Question: Fletcher lies. Tamika says Fletcher tells the truth. Ka says Tamika lies. Sima says Ka tells the truth. Ryan says Sima tells the truth. Does Ryan tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.76
+Test accuracy: 0.7
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 216.9527518749237
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Christie lies. Amberly says Christie tells the truth. Bernita says Amberly tells the truth. Kristian says Bernita lies. Delfina says Kristian lies. Does Delfina tell the truth?
+Label: No
+Text: Question: Andree lies. Jamey says Andree lies. Shaunda says Jamey lies. Delfina says Shaunda lies. Christie says Delfina lies. Does Christie tell the truth?
+Label: No
+Text: Question: Ryan tells the truth. Amberly says Ryan tells the truth. Kristian says Amberly lies. Bernita says Kristian lies. Alejandro says Bernita tells the truth. Does Alejandro tell the truth?
+Label: Yes
+Text: Question: Andree tells the truth. Audrie says Andree tells the truth. Jerry says Audrie lies. Helene says Jerry lies. Bernita says Helene tells the truth. Does Bernita tell the truth?
+Label: Yes
+Text: Question: Fletcher lies. Tamika says Fletcher tells the truth. Ka says Tamika lies. Sima says Ka tells the truth. Ryan says Sima tells the truth. Does Ryan tell the truth?
+Label: Yes
+Text: Question: Jamey lies. Raymond says Jamey lies. Ka says Raymond lies. Bernita says Ka tells the truth. Teressa says Bernita lies. Does Teressa tell the truth?
+Label: Yes
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.76
+Test accuracy: 0.7
+======== EXEMPLAR OPTIMIZATION ROUND 0
+Time: 256.978643655777
+Prompt: # Task
+Determine the truthfulness of the last person mentioned by using logical reasoning based on the initial statement and the series of claims regarding other individuals' honesty.
+
+# Here are some examples:
+Text: Question: Audrie lies. Jerry says Audrie tells the truth. Alejandro says Jerry lies. Jaymie says Alejandro lies. Lorine says Jaymie tells the truth. Does Lorine tell the truth?
+Label: No
+Text: Question: Crista tells the truth. Shalonda says Crista lies. Millicent says Shalonda lies. Vernell says Millicent lies. Inga says Vernell tells the truth. Does Inga tell the truth?
+Label: No
+Text: Question: Osvaldo lies. Ryan says Osvaldo lies. Andree says Ryan tells the truth. Rashida says Andree tells the truth. Millie says Rashida tells the truth. Does Millie tell the truth?
+Label: Yes
+Text: Question: Sal tells the truth. Alejandro says Sal tells the truth. Raymond says Alejandro lies. Conception says Raymond lies. Elanor says Conception lies. Does Elanor tell the truth?
+Label: No
+Text: Question: Millie tells the truth. Millicent says Millie lies. Phoebe says Millicent tells the truth. Sherrie says Phoebe lies. Raymond says Sherrie tells the truth. Does Raymond tell the truth?
+Label: Yes
+Text: Question: Kristian tells the truth. Jamey says Kristian tells the truth. Millicent says Jamey lies. Fidel says Millicent lies. Tamika says Fidel lies. Does Tamika tell the truth?
+Label: No
+# Output format
+Answer ONLY "Yes" or "No".
+NO explanations.
+No other words.
+
+# Prediction
+Text: {{ text }}
+Label:
+Training accuracy: 0.78
+Test accuracy: 0.6666666666666666
